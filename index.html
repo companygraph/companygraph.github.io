@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyGraph — a meta-model for operating a company</title>
+<style>
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--ground); color:var(--ink);
+       font-family:"Instrument Sans", system-ui, sans-serif; line-height:1.5}
+  h1{font-family:"Bricolage Grotesque", system-ui, sans-serif}
+</style>
+</head>
+<body>
+<main>
+  <h1>CompanyGraph</h1>
+</main>
+</body>
+</html>
