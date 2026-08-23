@@ -42,6 +42,20 @@ that lived in another repository. No CI in *this* repository can catch drift in
 
 ## Constraints
 
+- **Everything lives in `.shell`** — `max-width:1180px; margin:0 auto; padding:0 7vw` — and the
+  header, the main content and the footer each get their own. That is what makes them line up
+  on the same two edges at every width, and it is the sibling sites' container verbatim. Without
+  the cap the content spreads to the viewport edge on a wide screen, and the language control
+  ends up against the browser frame where it reads as chrome rather than as part of the page.
+  Removing the cap from any one of the three is the failure mode: two of them still agree and
+  the third looks like a bug nobody can name.
+- **The language control is a nav item, not a floating badge.** It sits in `<nav>` beside the
+  links, because it belongs with the other things you can do to the page rather than on top of
+  the page. The nav is empty of links until the talk ships; it exists anyway to hold this.
+- **The footer is set in mono because every item in it is data** — a URL, a licence identifier,
+  a name that is really a link. `monoScope` deliberately does not reach the footer, so nothing
+  will stop you putting prose there; do not.
+
 - **The repository name is load-bearing.** `companygraph.github.io` makes this the org's
   Pages site, so the custom domain in `CNAME` cascades to every other Pages repository in the
   org — `companygraph/talks` will serve at `companygraph.io/talks/` with no configuration of

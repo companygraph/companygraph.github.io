@@ -14,7 +14,10 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     contains: ["Two companies", "The same shape", "CompanyGraph"],
-    links: ["https://github.com/companygraph/meta-model"],
+    links: ["https://github.com/companygraph/meta-model",
+            "https://github.com/companygraph",
+            "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
+            "https://blust.ch/"],
     internalLinks: true,
     card: true, cardBase: "https://companygraph.io" },
 ];
