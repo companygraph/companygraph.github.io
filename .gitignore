@@ -1,0 +1,4 @@
+node_modules/
+
+# package-lock.json is deliberately NOT ignored here (unlike the sibling repo):
+# CI runs `npm ci`, which requires a committed lockfile to work at all.
