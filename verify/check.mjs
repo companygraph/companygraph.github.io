@@ -11,8 +11,11 @@ const BASE = process.env.BASE || "http://localhost:8000";
 
 const PAGES = [
   { path: "/", title: /CompanyGraph/, lang: "en",
-    fontsLoaded: ["Bricolage Grotesque"],
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true },
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    contains: ["Two companies", "The same shape", "CompanyGraph"],
+    links: ["https://github.com/companygraph/meta-model"],
+    internalLinks: true },
 ];
 
 const CHECKS = {
@@ -26,6 +29,35 @@ const CHECKS = {
   async lang(page, spec) {
     const l = await page.evaluate(() => document.documentElement.lang);
     return l === spec.lang ? null : `lang=${l}, expected ${spec.lang}`;
+  },
+  async contains(page, spec) {
+    const text = await page.evaluate(() => document.body.innerText);
+    for (const s of spec.contains)
+      if (!text.includes(s)) return `body text is missing ${JSON.stringify(s)}`;
+    return null;
+  },
+  // An outbound link that steals the tab loses the visitor; one that opens a new tab
+  // without rel=noopener hands the opener a window reference. Both are invisible in review.
+  async links(page, spec) {
+    const found = await page.evaluate(() =>
+      [...document.querySelectorAll("a[href^='http']")].map(a =>
+        ({ href: a.href, target: a.target, rel: a.rel })));
+    for (const want of spec.links) {
+      const hit = found.find(l => l.href === want);
+      if (!hit) return `missing outbound link ${want}`;
+      if (hit.target !== "_blank" || !hit.rel.includes("noopener"))
+        return `${want} must open in a new tab with rel=noopener`;
+    }
+    return null;
+  },
+  // A root-absolute internal path works on the domain and breaks under file://, which is
+  // the one failure mode nobody opens a browser to find.
+  async internalLinks(page) {
+    const bad = await page.evaluate(() =>
+      [...document.querySelectorAll("[href], [src]")]
+        .map(el => el.getAttribute("href") || el.getAttribute("src"))
+        .filter(v => v && v.startsWith("/")));
+    return bad.length ? "root-absolute internal path: " + bad.join(", ") : null;
   },
 };
 

@@ -29,13 +29,77 @@
   /* ─── end design tokens ─────────────────────────────────────────────── */
   *{box-sizing:border-box; margin:0; padding:0}
   body{background:var(--ground); color:var(--ink);
-       font-family:"Instrument Sans", system-ui, sans-serif; line-height:1.5}
+       font-family:"Instrument Sans", system-ui, sans-serif; line-height:1.5;
+       min-height:100vh; display:flex; flex-direction:column}
   h1{font-family:"Bricolage Grotesque", system-ui, sans-serif}
+
+  /* No nav: there is nowhere else on the site to go yet. Just the wordmark, so Task 3 has
+     a lockup to set the mark beside. */
+  header{padding:2.4rem 7vw 0}
+  .brand{display:inline-block; color:var(--ink); text-decoration:none;
+         font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  main{flex:1; display:flex; align-items:center; padding:6vh 7vw}
+  .hero{max-width:900px}
+  /* One axis carries the argument: the setup arrives light and unresolved, the shape it
+     lands on arrives heavy. em marks the resolved word itself. */
+  .hero h1{letter-spacing:-.035em; line-height:1.0; font-size:clamp(2.4rem,7vw,5.4rem)}
+  .hero h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .hero h1 .rcl{display:block; font-weight:800}
+  .hero h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.5rem); color:var(--dim);
+           max-width:44ch; line-height:1.4}
+  .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
+  .btn{
+    font-size:.82rem; font-weight:500; letter-spacing:.07em;
+    text-decoration:none; padding:.9rem 1.25rem; border-radius:7px; border:1.5px solid var(--rule);
+    color:var(--ink); background:var(--raise); transition:border-color .18s ease, color .18s ease;
+  }
+  .btn:hover, .btn:focus-visible{border-color:var(--c-mid); color:var(--c-mid)}
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 </style>
 </head>
 <body>
+<header>
+  <a class="brand" href="./">CompanyGraph</a>
+</header>
 <main>
-  <h1>CompanyGraph</h1>
+  <section class="hero">
+    <h1 data-de="<span class='r70'>Zwei Unternehmen.</span><span class='rcl'>Dieselbe <em>Form</em>.</span>"><span class="r70">Two companies.</span><span class="rcl">The same <em>shape</em>.</span></h1>
+    <p class="tagline" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/companygraph/meta-model" target="_blank" rel="noopener"
+         data-de="Das Modell ansehen">Read the model</a>
+    </div>
+  </section>
 </main>
+<script>
+// English is the markup and German lives in data-de — the other way round from the decks,
+// and deliberately: this page is delivered, shared and indexed in English, so English is what
+// it should say before a single line of JS has run — no swap on load, no flash, and a crawler
+// without JS reads the same language the page promises. No nav ships until the talk lands (see
+// CLAUDE.md), so there is no visible control yet; the mechanism is the same swap the sibling
+// sites drive from a button, ready for one to attach here later. Every storage access is
+// guarded: file:// is an opaque origin in some browsers and throws, and the page must still
+// work with no remembered preference.
+(function(){
+  var KEY = "cg-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.addEventListener("keydown", function(e){ if (e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
 </body>
 </html>
