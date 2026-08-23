@@ -180,7 +180,11 @@
         <rect class="node an" style="--d:.30s" x="112" y="58" width="14" height="14"/>
       </g>
       <!-- A company with a payroll. Nothing new in the vocabulary: the same two edges, the
-           same nesting, ten entities instead of four. -->
+           same nesting — ten entities inside the container instead of three, two collections
+           instead of one, two references out instead of one. Both references leave the
+           container and land on a free filled node, because that is what a reference is; a
+           line drawn between two collections inside the same owner would be a reference to
+           something owned, which the model has no such thing as. -->
       <g>
         <rect class="box an"  style="--d:.22s" x="216" y="14" width="132" height="106" rx="8"/>
         <rect class="box an"  style="--d:.26s" x="226" y="24" width="62" height="52" rx="5"/>
@@ -190,14 +194,15 @@
         <rect class="node an" style="--d:.42s" x="234" y="52" width="14" height="14"/>
         <rect class="node an" style="--d:.46s" x="256" y="52" width="14" height="14"/>
         <rect class="node an" style="--d:.50s" x="312" y="34" width="14" height="14"/>
-        <path class="ref an"  style="--d:.54s" d="M288 41h12"/>
-        <rect class="node an" style="--d:.58s" x="234" y="90" width="14" height="14"/>
-        <rect class="node an" style="--d:.62s" x="256" y="90" width="14" height="14"/>
-        <rect class="node an" style="--d:.66s" x="278" y="90" width="14" height="14"/>
-        <rect class="node an" style="--d:.70s" x="300" y="90" width="14" height="14"/>
-        <rect class="node an" style="--d:.74s" x="322" y="90" width="14" height="14"/>
-        <path class="ref an"  style="--d:.78s" d="M348 67h18"/>
-        <rect class="node an" style="--d:.82s" x="366" y="60" width="14" height="14"/>
+        <rect class="node an" style="--d:.54s" x="234" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.58s" x="256" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.62s" x="278" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.66s" x="300" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.70s" x="322" y="90" width="14" height="14"/>
+        <path class="ref an"  style="--d:.74s" d="M348 51h18"/>
+        <rect class="node an" style="--d:.78s" x="366" y="44" width="14" height="14"/>
+        <path class="ref an"  style="--d:.82s" d="M348 83h18"/>
+        <rect class="node an" style="--d:.86s" x="366" y="76" width="14" height="14"/>
       </g>
       <!-- Neither tree is the answer. What they have in common is. -->
       <path class="join an trace" style="--d:.90s" pathLength="100" d="M71 104C71 152 200 148 200 194"/>
