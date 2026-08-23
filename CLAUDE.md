@@ -123,6 +123,20 @@ that lived in another repository. No CI in *this* repository can catch drift in
   now; do not pre-write a "talk coming soon" in the meantime, which is exactly the kind of
   status claim §3 above forbids.
 
+## CI
+
+- **`.github/workflows/ci.yml` runs the suite on push to `main` and on every pull request** —
+  the same `npm run verify` above, just run by something other than a person remembering to.
+- **The job is named `verify` because the status-check context a branch ruleset requires is
+  the job id, not the workflow name.** Rename the job and the ruleset keeps requiring the old
+  name, which will never report again — the branch looks protected and silently isn't.
+- **The suite drives a real browser against a served page, so the job has to serve one.** It
+  checks out, installs Node with the npm cache, `npm ci` (the reason `package-lock.json` is
+  committed above), installs Chromium with its system dependencies, starts
+  `python3 -m http.server 8000` in the background, and only then runs `npm run verify`. Started
+  in the foreground, the server step never returns and the job hangs until it times out. `npm
+  run og` never runs here — it would regenerate and overwrite the committed card.
+
 ## Process
 
 - Commits happen when the user asks; suggest a message, don't auto-commit.
