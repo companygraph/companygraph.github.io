@@ -4,8 +4,10 @@ The landing page for **CompanyGraph** — an open-source meta-model for operatin
 structure its knowledge takes, as a graph of Markdown files, so people and agents can both rely
 on it.
 
-**Live:** https://companygraph.io (once the domain is repointed at GitHub Pages — see
-`CLAUDE.md`; until then the site serves at `companygraph.github.io`).
+**Live:** https://companygraph.io, once the domain is repointed at GitHub Pages. Until it
+is, the site has no working URL at all — Pages redirects `companygraph.github.io` to the
+custom domain the moment `CNAME` is on `main`, and the custom domain still answers from the
+registrar. See `CLAUDE.md`.
 
 This is the organisation's GitHub Pages site, which is why the repository is named
 `companygraph.github.io`. That name matters: setting the custom domain here makes every other
@@ -53,12 +55,17 @@ No build step.
 ```bash
 npm install       # once, for Playwright
 npm run serve     # → http://localhost:8000
-npm run verify    # renders the served page and asserts it, both languages implied by the DOM
+npm run verify    # renders the served page and asserts the English DOM
 npm run og        # regenerates og.png after any visual change
 ```
 
 `verify` needs a server already running in another terminal (or `BASE=... npm run verify`
 against a different one). It exits non-zero on any failure, so `all checks pass` is the bar.
+
+It asserts the page as it first renders, which is English. **The language toggle is not
+asserted at all** — misspell a `data-de` attribute, or delete the toggle's click listener
+outright, and the suite still prints `all checks pass`. Adding that check is the obvious next
+commit; until someone writes it, nothing here defends the German half of the page.
 
 ## What this page deliberately does not say
 

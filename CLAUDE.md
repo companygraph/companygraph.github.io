@@ -48,10 +48,16 @@ that lived in another repository. No CI in *this* repository can catch drift in
   its own, the day it exists. Renaming this repository or removing `CNAME` silently breaks
   that URL before anyone has a reason to look for it.
 
-- **`companygraph.io` does not yet point at GitHub Pages.** The domain currently resolves
-  elsewhere at the registrar; until the four Pages A records are added, the live site is
-  `companygraph.github.io` and `CNAME` itself fails verification. Don't read that failure as
-  a bug in this repository.
+- **`companygraph.io` does not yet point at GitHub Pages, and there is no fallback URL.**
+  The domain resolves to the registrar's parking host, so `CNAME` fails verification — that
+  much is expected and is not a bug in this repository. What is *not* true is that
+  `companygraph.github.io` keeps serving in the meantime: Pages 301-redirects the `*.github.io`
+  URL to the custom domain as soon as one is configured, and Pages is enabled here on `main`.
+  The moment `CNAME` lands on `main`, both URLs are dead — the `github.io` one redirects to a
+  host the registrar answers — and `og:url` and `og:image` name that same dead host, so every
+  shared link unfurls blank. **The four Pages A records must be added before or with the
+  merge.** Until they are, the site is dark; whoever merges must not believe there is a URL to
+  fall back to.
 
 - **Self-contained. No external asset at all** — fonts are served from `fonts/`, referenced
   relatively (`fonts/…`, not `/fonts/…`). A root-absolute path works on the domain and breaks
