@@ -15,7 +15,8 @@ const PAGES = [
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     contains: ["Two companies", "The same shape", "CompanyGraph"],
     links: ["https://github.com/companygraph/meta-model"],
-    internalLinks: true },
+    internalLinks: true,
+    card: true, cardBase: "https://companygraph.io" },
 ];
 
 const CHECKS = {
@@ -58,6 +59,20 @@ const CHECKS = {
         .map(el => el.getAttribute("href") || el.getAttribute("src"))
         .filter(v => v && v.startsWith("/")));
     return bad.length ? "root-absolute internal path: " + bad.join(", ") : null;
+  },
+  // A card whose declared size does not match the file renders letterboxed or cropped on
+  // every platform that trusts the tags, and nothing on the page reveals it.
+  async card(page, spec) {
+    const meta = await page.evaluate(() =>
+      Object.fromEntries([...document.querySelectorAll("meta[property^='og:'], meta[name^='twitter:']")]
+        .map(m => [m.getAttribute("property") || m.getAttribute("name"), m.content])));
+    for (const k of ["og:title", "og:description", "og:image", "og:url", "og:type"])
+      if (!meta[k]) return `missing ${k}`;
+    if (!meta["og:image"].startsWith(spec.cardBase))
+      return `og:image is ${meta["og:image"]}, must be absolute under ${spec.cardBase}`;
+    if (meta["og:image:width"] !== "1200" || meta["og:image:height"] !== "630")
+      return `og:image declares ${meta["og:image:width"]}×${meta["og:image:height"]}, file is 1200×630`;
+    return null;
   },
 };
 
