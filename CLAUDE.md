@@ -28,7 +28,9 @@ it does say:
   this repository has no way to know when that commit lands.
 - **No status and no roadmap.** "The first release describes one person completely" is
   honest, but it is `meta-model`'s sentence, not this page's.
-- **No claim about packs.**
+- **No claim about packs.** The model's own spec admits the pack mechanism ships as prose
+  with nothing yet demonstrating it — so this page must not advertise a mechanism the model
+  has not earned by shipping one.
 - **Nothing identifying the source companies** the model was extracted from.
 - **No service and no price.** There is no hosted anything, and nothing here should imply
   there might be.
@@ -65,15 +67,28 @@ that lived in another repository. No CI in *this* repository can catch drift in
   has. The version marker is a habit with a tripwire, not a guarantee — it makes drift visible
   to a person who goes looking, not automatic.
 
-- **`package-lock.json` is committed here, although the sibling ignores its own.** CI runs
-  `npm ci`, which fails outright without a lockfile in the tree. `.gitignore` says so inline
-  rather than leaving the asymmetry to be rediscovered.
+- **`package-lock.json` is committed here, although the sibling ignores its own.** CI will
+  run `npm ci`, which fails outright without a lockfile in the tree — the workflow itself
+  doesn't exist yet (Task 7 adds it), but the lockfile is committed now so that landing it
+  later is not also a scramble to unignore a file. `.gitignore` says so inline rather than
+  leaving the asymmetry to be rediscovered.
 
 - **The og card is rendered with `reducedMotion: "reduce"` emulated.** The figure animates in
   over a chain that finishes past a second; a render that merely waits "long enough" catches
   it mid-draw. The page's own `@media (prefers-reduced-motion: reduce)` block is what the card
   shows — emulating the preference renders that settled state exactly, instead of racing a
   timer.
+
+- **The card's declared size must keep matching the file.** `og:image:width`/`height` say
+  1200×630; if a regenerated `og.png` ever comes out a different size and the tags aren't
+  updated to match, every platform that trusts the tags renders it letterboxed or cropped —
+  and nothing on the page itself reveals that, because the page never displays its own card.
+  You find out from a link someone else shared, which is the worst possible way to find out.
+  `verify/check.mjs`'s `card()` check exists specifically to catch this — but it only compares
+  the *declared* numbers against the literals `"1200"`/`"630"`; it never fetches or measures
+  `og.png` itself. A card regenerated at the wrong size, corrupted, truncated, or simply left
+  stale from an earlier design would all still pass. Treat the check as guarding the tags, not
+  the image — after running `npm run og`, look at the file.
 
 - **`.figure` is hidden from the card for an editorial reason, not a spatial one — and the
   comment saying so has already been wrong twice, both times by claiming something about fit
