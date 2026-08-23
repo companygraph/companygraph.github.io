@@ -4,11 +4,11 @@
 // 1. reducedMotion:"reduce" — the figure animates, and a render that merely waits "long
 //    enough" catches it mid-draw. Emulating reduced motion draws the settled state the
 //    page's own @media block defines, exactly, instead of racing a timer.
-// 2. .figure is hidden — the card carries the lockup, the headline and the call to action,
-//    and that is already a complete thought on its own. The figure is the page's argument,
-//    not the card's, and needs room the card does not have: at 1200 wide it runs beside
-//    the hero, not inside a 1.9:1 crop, so including it would cut the two trees off above
-//    the shape they arrive at, showing the argument's setup with no conclusion.
+// 2. .figure is hidden — not because it wouldn't fit; it would. The card's job is the
+//    headline and the call to action, the thing a reader takes in before they've decided
+//    to care. The figure is the argument that leads there, and an argument doesn't survive
+//    being glanced at in a feed — it needs a page and a reader who has already arrived. So
+//    the card leaves it out on purpose, regardless of whether the crop has room for it.
 import { chromium } from "playwright";
 const browser = await chromium.launch();
 const page = await browser.newPage({
