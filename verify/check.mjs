@@ -53,11 +53,25 @@ const CHECKS = {
   },
   // A root-absolute internal path works on the domain and breaks under file://, which is
   // the one failure mode nobody opens a browser to find.
+  //
+  // Attributes are only half of the surface. A CSS url() is not an element attribute, so
+  // querySelectorAll cannot see the @font-face rules — and those are where this mistake is
+  // most likely to hide, because every font still loads perfectly from a served copy. A
+  // reviewer made all four of them root-absolute and this check passed. So the stylesheets
+  // are read for the same mistake, separately.
   async internalLinks(page) {
-    const bad = await page.evaluate(() =>
-      [...document.querySelectorAll("[href], [src]")]
+    const bad = await page.evaluate(() => {
+      const out = [...document.querySelectorAll("[href], [src]")]
         .map(el => el.getAttribute("href") || el.getAttribute("src"))
-        .filter(v => v && v.startsWith("/")));
+        .filter(v => v && v.startsWith("/"));
+      for (const sheet of document.styleSheets) {
+        let rules;
+        try { rules = sheet.cssRules; } catch (e) { continue; }  // unreadable: not ours
+        const css = [...rules].map(r => r.cssText).join("\n");
+        for (const m of css.matchAll(/url\(\s*["']?(\/[^"')]*)/g)) out.push(`url(${m[1]})`);
+      }
+      return out;
+    });
     return bad.length ? "root-absolute internal path: " + bad.join(", ") : null;
   },
   // A card whose declared size does not match the file renders letterboxed or cropped on

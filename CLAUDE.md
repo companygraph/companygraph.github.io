@@ -56,7 +56,11 @@ that lived in another repository. No CI in *this* repository can catch drift in
 - **Self-contained. No external asset at all** — fonts are served from `fonts/`, referenced
   relatively (`fonts/…`, not `/fonts/…`). A root-absolute path works on the domain and breaks
   under `file://`, which is the one failure mode nobody opens a browser to find. `verify`
-  asserts the same for every internal link.
+  asserts the same for every internal path the rendered page carries — the `href`/`src`
+  attributes *and* the `url()`s inside the page's own stylesheet. The second half is not
+  padding: a CSS `url()` is not an element attribute, so a query over elements cannot see the
+  `@font-face` rules at all, and a root-absolute font path still loads perfectly from a served
+  copy. That gap was found by making all four rules root-absolute and watching the suite pass.
 
 - **The design tokens are a copy, fenced by `design tokens · vN` markers**, shared with
   sibling repositories (`blust.ch`, `guestgraph.io`, and its `talks` repo) that cannot import

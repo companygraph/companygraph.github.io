@@ -26,7 +26,7 @@ Pages site in the org inherit it, so `companygraph/talks` will serve at
   regenerates it (`npm run og`): headless Chromium, reduced motion emulated, the figure hidden.
 - `robots.txt`, `sitemap.xml` — one page, one URL.
 - `verify/check.mjs` — this page's own assertions (title, language, the outbound link, the
-  og card, that no internal path is root-absolute).
+  og card, that no internal path — attribute or CSS `url()` — is root-absolute).
 - `verify/design.mjs` — the shared design-system assertions, copied in byte-identical from the
   sibling repositories. Never edit it here — see `CLAUDE.md`.
 - `fonts/` — the four self-hosted `.woff2` files the page's `@font-face` rules point at.
