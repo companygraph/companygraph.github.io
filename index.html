@@ -33,11 +33,19 @@
        min-height:100vh; display:flex; flex-direction:column}
   h1{font-family:"Bricolage Grotesque", system-ui, sans-serif}
 
-  /* No nav: there is nowhere else on the site to go yet. Just the wordmark, so Task 3 has
-     a lockup to set the mark beside. */
+  /* No nav: there is nowhere else on the site to go yet. Just the wordmark and, beside
+     it, the language control — it needs no nav to live in. */
   header{padding:2.4rem 7vw 0}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
   .brand{display:inline-block; color:var(--ink); text-decoration:none;
          font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  /* Same control as the sibling sites: rests dim like any secondary text, brightens on
+     hover, and marks whichever language is active with --c-firm — the resolved thing. */
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
   main{flex:1; display:flex; align-items:center; padding:6vh 7vw}
   .hero{max-width:900px}
   /* One axis carries the argument: the setup arrives light and unresolved, the shape it
@@ -60,7 +68,11 @@
 </head>
 <body>
 <header>
-  <a class="brand" href="./">CompanyGraph</a>
+  <div class="bar">
+    <a class="brand" href="./">CompanyGraph</a>
+    <button class="langind" id="langind" type="button"
+            aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+  </div>
 </header>
 <main>
   <section class="hero">
@@ -76,11 +88,10 @@
 // English is the markup and German lives in data-de — the other way round from the decks,
 // and deliberately: this page is delivered, shared and indexed in English, so English is what
 // it should say before a single line of JS has run — no swap on load, no flash, and a crawler
-// without JS reads the same language the page promises. No nav ships until the talk lands (see
-// CLAUDE.md), so there is no visible control yet; the mechanism is the same swap the sibling
-// sites drive from a button, ready for one to attach here later. Every storage access is
-// guarded: file:// is an opaque origin in some browsers and throws, and the page must still
-// work with no remembered preference.
+// without JS reads the same language the page promises. The control lives in the header, not
+// a nav — there is no nav yet, but a switch nobody can see does not exist for the reader who
+// needs it. Every storage access is guarded: file:// is an opaque origin in some browsers and
+// throws, and the page must still work with no remembered preference.
 (function(){
   var KEY = "cg-lang";
   function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -92,10 +103,15 @@
 
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
     document.documentElement.lang = lang;
   }
   function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
 
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if (lang !== "de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if (lang !== "en") toggle(); });
   document.addEventListener("keydown", function(e){ if (e.key === "l" || e.key === "L") toggle(); });
 
   applyLang();
