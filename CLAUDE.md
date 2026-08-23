@@ -144,8 +144,10 @@ that lived in another repository. No CI in *this* repository can catch drift in
   checks out, installs Node with the npm cache, `npm ci` (the reason `package-lock.json` is
   committed above), installs Chromium with its system dependencies, starts
   `python3 -m http.server 8000` in the background, waits for it to answer, and only then runs
-  `npm run verify`. Started in the foreground, the server step never returns and the job hangs
-  until it times out. **Backgrounded without redirecting its output, it hangs the job the same
+  `npm run verify`. The job carries `timeout-minutes: 10`, because the two ways of hanging it
+  below are not hypothetical and the default is six hours, and `permissions: contents: read`,
+  because checking out and running a browser is the whole of what it does. Started in the
+  foreground, the server step never returns and the job hangs until it times out. **Backgrounded without redirecting its output, it hangs the job the same
   way** — a backgrounded process keeps the step's log pipe open, and the runner waits on a
   descriptor that never closes, so the step's output must be redirected away from that pipe
   (`> /dev/null 2>&1 &`), not just sent to the background. `npm run og` never runs here — it
