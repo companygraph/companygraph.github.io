@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CompanyGraph — a meta-model for operating a company</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 @font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -37,8 +38,9 @@
      it, the language control — it needs no nav to live in. */
   header{padding:2.4rem 7vw 0}
   .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
-  .brand{display:inline-block; color:var(--ink); text-decoration:none;
+  .brand{display:flex; align-items:center; gap:.6rem; color:var(--ink); text-decoration:none;
          font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand svg{width:26px; height:26px; color:var(--c-mid); flex:0 0 auto}
   /* Same control as the sibling sites: rests dim like any secondary text, brightens on
      hover, and marks whichever language is active with --c-firm — the resolved thing. */
   .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
@@ -69,7 +71,16 @@
 <body>
 <header>
   <div class="bar">
-    <a class="brand" href="./">CompanyGraph</a>
+    <a class="brand" href="./">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+           stroke-width="1.5" stroke-linecap="square">
+        <rect x="1.75" y="5.75" width="10.5" height="12.5" rx="1.5"/>
+        <rect x="4.5" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+        <path d="M12.25 12 h4.5"/>
+        <rect x="16.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+      </svg>
+      CompanyGraph
+    </a>
     <button class="langind" id="langind" type="button"
             aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
   </div>
