@@ -133,9 +133,13 @@ that lived in another repository. No CI in *this* repository can catch drift in
 - **The suite drives a real browser against a served page, so the job has to serve one.** It
   checks out, installs Node with the npm cache, `npm ci` (the reason `package-lock.json` is
   committed above), installs Chromium with its system dependencies, starts
-  `python3 -m http.server 8000` in the background, and only then runs `npm run verify`. Started
-  in the foreground, the server step never returns and the job hangs until it times out. `npm
-  run og` never runs here — it would regenerate and overwrite the committed card.
+  `python3 -m http.server 8000` in the background, waits for it to answer, and only then runs
+  `npm run verify`. Started in the foreground, the server step never returns and the job hangs
+  until it times out. **Backgrounded without redirecting its output, it hangs the job the same
+  way** — a backgrounded process keeps the step's log pipe open, and the runner waits on a
+  descriptor that never closes, so the step's output must be redirected away from that pipe
+  (`> /dev/null 2>&1 &`), not just sent to the background. `npm run og` never runs here — it
+  would regenerate and overwrite the committed card.
 
 ## Process
 

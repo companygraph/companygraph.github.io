@@ -17,6 +17,14 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
-        run: python3 -m http.server 8000 &
+        run: python3 -m http.server 8000 > /dev/null 2>&1 &
+      - name: Wait for the server
+        run: |
+          for i in $(seq 1 20); do
+            curl -sf http://localhost:8000/ > /dev/null && exit 0
+            sleep 0.5
+          done
+          echo "Server never came up on :8000" >&2
+          exit 1
       - name: Assert what it renders
         run: npm run verify
