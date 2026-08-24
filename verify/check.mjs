@@ -19,7 +19,8 @@ const PAGES = [
     sameTab: ["intro/", "./", "https://companygraph.io/"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
-    translates: { lang: "de", shows: ["Vortrag"], hides: ["Watch the talk"] },
+    translates: { lang: "de", shows: ["Vortrag"], hides: ["Watch the talk"],
+                  title: "Vorträge · CompanyGraph" },
     card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
 ];
 
@@ -133,6 +134,7 @@ const CHECKS = {
     const body = () => page.evaluate(() => document.body.innerText);
     const htmlLang = () => page.evaluate(() => document.documentElement.lang);
     const english = await body();
+    const englishTitle = await page.title();
 
     await page.click("#langind");
     const swapped = await htmlLang();
@@ -143,11 +145,20 @@ const CHECKS = {
       if (!german.includes(s)) return `German page is missing ${JSON.stringify(s)}`;
     for (const s of spec.translates.hides)
       if (german.includes(s)) return `German page still shows the English ${JSON.stringify(s)}`;
+    // The <title> and the meta description are the page's word to a crawler or a tab
+    // strip — nothing in `shows`/`hides` reaches either, since both assert body text.
+    // A visitor who picks German with an English title/description would sail past both.
+    if (spec.translates.title) {
+      const germanTitle = await page.title();
+      if (germanTitle !== spec.translates.title)
+        return `after the toggle title is ${JSON.stringify(germanTitle)}, expected ${JSON.stringify(spec.translates.title)}`;
+    }
 
     await page.click("#langind");
     const back = await htmlLang();
     if (back !== "en") return `toggling back left lang=${back}, expected en`;
     if (await body() !== english) return "toggling back did not restore the English text";
+    if (await page.title() !== englishTitle) return "toggling back did not restore the English title";
     return null;
   },
 };

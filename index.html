@@ -9,7 +9,7 @@
 <!-- The head is English while the body carries German in data-de — the source is English,
      so English is what a crawler without JS reads: no swap on load, no flash. -->
 <title>Talks · CompanyGraph</title>
-<meta name="description" content="Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English.">
+<meta id="metadesc" name="description" content="Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://companygraph.io/talks/">
@@ -194,8 +194,17 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
+  var UI = {
+    de:{ title:"Vorträge · CompanyGraph",
+         desc:"Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch." },
+    en:{ title:"Talks · CompanyGraph",
+         desc:"Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English." }
+  };
+
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").classList.toggle("on", lang === "de");
     document.getElementById("len").classList.toggle("on", lang === "en");
     document.documentElement.lang = lang;
