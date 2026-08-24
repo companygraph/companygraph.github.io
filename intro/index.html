@@ -447,6 +447,99 @@
     <p class="byline" data-de="Eine Einführung · <span>ein Vortrag von Robert Blust</span>">An introduction · <span>a talk by Robert Blust</span></p>
   </section>
 
+  <!-- 01 · The hook -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Ruhig eröffnen, ohne Eile.</em> Jede Firma läuft auf Wissen: wofür sie da ist, wie sie arbeitet, wer was entscheidet, was sie misst, welche Regeln gelten. Dieses Wissen ist da, und das meiste davon ist sogar aufgeschrieben — nur nicht an einem Ort. Es steckt in Köpfen, in Wiki-Seiten, in Tabellen, in Tickets, in Chat-Verläufen. <em class='cue'>Mein Aufhänger — danach eine kurze Pause.</em> Weder Menschen noch Agenten können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?"
+    data-notes-en="<em class='cue'>Open plainly, no hurry.</em> Every company runs on knowledge: what it is for, how it works, who decides what, what it measures, which rules hold. That knowledge exists, and most of it is even written down — just not in one place. It sits in people's heads, in wiki pages, in spreadsheets, in tickets, in chat threads. <em class='cue'>My hook — short pause after it.</em> Neither people nor agents can rely on it. What if all of it were one graph a machine could read?">
+    <div class="kicker mono" data-n="01" data-de="Der Haken">The hook</div>
+    <h1 data-de="Das Wissen einer Firma liegt überall — und nirgends.">A company's knowledge lives everywhere — and nowhere.</h1>
+    <p class="sub" data-de="Zweck, Strategie, Prozesse, Rollen, Kennzahlen, Regeln — verstreut über Wiki-Seiten, Tabellen, Tickets, Chat-Verläufe und Köpfe.">Purpose, strategy, processes, roles, metrics, rules — scattered across wiki pages, spreadsheets, tickets, chat threads and people's heads.</p>
+    <p class="note" data-de="Weder Menschen noch Agenten können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?">Neither people nor agents can rely on it. What if all of it were one graph a machine could read?</p>
+  </section>
+
+  <!-- 02 · The convergence — the spine of the talk. Neither company is named here or
+       anywhere else in the deck: the structural claim stands without it, and naming
+       them is forbidden by the model's own conventions. -->
+  <section class="slide"
+    data-time="1:15"
+    data-notes="<em class='cue'>Das ist das Rückgrat des Vortrags. Hier langsamer werden.</em> Dieses Modell wurde nicht am Reissbrett entworfen. Es wurde aus zwei Firmen herausgelöst, die nichts voneinander wussten. Die eine hat eine Lohnbuchhaltung und führt bewusst eine dünne Datei pro Person — der Rest der Geschichte einer Person steht auf einer öffentlichen Website und gehört nicht ins Modell. Die andere ist eine Ein-Personen-Firma und war gezwungen, eine Person richtig zu modellieren. Genau daher kommen profile, skill und experience. <em class='cue'>Betonen: keine hat bei der anderen abgeschaut.</em> Keine der beiden kannte die andere, und trotzdem sind beide am selben Ort gelandet: eine Markdown-Datei pro Entität, Frontmatter und ein Markdown-Text, Ordner, die nach dem Typ benannt sind, und ein eigener Ordner mit den Schemas. <em class='cue'>Kurze Pause, dann der Satz, auf den alles hinausläuft.</em> Deshalb ist das überhaupt veröffentlicht. Eine Form, die zwei Teams unabhängig voneinander erreichen, ist ein Beleg. Eine Form, die ein Team erfindet, ist eine Vorliebe."
+    data-notes-en="<em class='cue'>This is the spine of the talk. Slow down here.</em> This model was not designed on a drawing board. It was pulled out of two companies that knew nothing about each other. One of them has a payroll, and it keeps a deliberately thin file per person — the rest of a person's story lives on a public website and does not belong in the model. The other is a company of one, and that forced it to model a person properly. That is exactly where profile, skill and experience come from. <em class='cue'>Stress this: neither borrowed from the other.</em> Neither knew the other existed, and both still ended up in the same place: one Markdown file per entity, frontmatter and a Markdown body, folders named for the type, and a separate folder of schemas. <em class='cue'>Short pause, then the line the whole talk rests on.</em> That is why any of this is published. A shape two teams reach independently is evidence. A shape one team invents is a preference.">
+    <div class="kicker mono" data-n="02" data-de="Die Konvergenz">The convergence</div>
+    <h1 data-de="Zwei Firmen. Dieselbe Form.">Two companies. The same shape.</h1>
+    <div class="thennow">
+      <div class="col">
+        <h4 data-de="Eine mit Lohnbuchhaltung">One with a payroll</h4>
+        <p data-de="Bewusst eine dünne Datei pro Person.">A deliberately thin file per person.</p>
+        <p class="small" data-de="Der Rest der Geschichte einer Person steht auf einer öffentlichen Website.">The rest of a person's story lives on a public website.</p>
+      </div>
+      <div class="col now">
+        <h4 data-de="Eine Ein-Personen-Firma">One company of one</h4>
+        <p data-de="Gezwungen, eine Person richtig zu modellieren.">Forced to model a person properly.</p>
+        <p class="small" data-de="Daher kommen <b class='mono'>profile</b>, <b class='mono'>skill</b> und <b class='mono'>experience</b>.">That is where <b class="mono">profile</b>, <b class="mono">skill</b> and <b class="mono">experience</b> come from.</p>
+      </div>
+    </div>
+    <p class="verdict" data-de="Keine wusste von der anderen. <em>Eine Form, die zwei Teams unabhängig erreichen, ist ein Beleg — keine Vorliebe.</em>">Neither knew about the other. <em>A shape two teams reach independently is evidence — not a preference.</em></p>
+  </section>
+
+  <!-- 03 · The shape — the source deck's graph figure, re-aimed at the file model -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>Kurz auf die Grafik zeigen, dann sprechen.</em> Das ist die Form, bei der beide angekommen sind: eine Datei pro Entität. Im Frontmatter stehen die Fakten, die eine Maschine braucht, im Text darunter die Prosa, die ein Mensch braucht — in derselben Datei, damit die beiden nicht auseinanderlaufen können. <em class='cue'>Der eine Mechanismus, den ich wirklich langsam erkläre.</em> Eine Entität ist eine Datei, solange sie nichts besitzt, und ein Ordner, sobald sie eigene Sammlungen besitzt. Das sind nicht zwei Regeln, sondern eine: der Ordner ist der Überlauf. An der Entität ändert sich nichts, wenn sie wächst — nur ob ein Verzeichnis darum herum steht. <em class='cue'>Letzter Punkt, dann weiter.</em> Und der kanonische Name einer Entität ist ihr H1. Kein Feld im Frontmatter, nicht der Dateiname. Ein Ort, an dem der Name steht — und zwar der Ort, den ein Mensch ohnehin zuerst liest."
+    data-notes-en="<em class='cue'>Point at the figure briefly, then talk.</em> This is the shape both of them arrived at: one file per entity. The frontmatter carries the facts a machine needs, the body carries the prose a person needs — in the same file, so the two cannot drift apart. <em class='cue'>The one mechanism I explain really slowly.</em> An entity is a file while it owns nothing, and a folder as soon as it owns collections of its own. That is not two rules but one: the folder is the overflow. Nothing about the entity changes when it grows — only whether there is a directory around it. <em class='cue'>Last point, then move on.</em> And the canonical name of an entity is its H1. Not a field in the frontmatter, not the filename. One place a name is written — and it is the place a person reads first anyway.">
+    <div class="kicker mono" data-n="03" data-de="Die Form">The shape</div>
+    <h1 data-de="Eine Datei pro Entität.">One file per entity.</h1>
+    <div class="split">
+      <div class="diagram">
+        <svg viewBox="0 0 520 340" role="img" aria-label="Entities as files, each naming the others">
+          <line class="edge" x1="260" y1="170" x2="260" y2="52"></line>
+          <line class="edge" x1="260" y1="170" x2="412" y2="112"></line>
+          <line class="edge" x1="260" y1="170" x2="412" y2="228"></line>
+          <line class="edge" x1="260" y1="170" x2="260" y2="288"></line>
+          <line class="edge" x1="260" y1="170" x2="108" y2="228"></line>
+          <line class="edge" x1="260" y1="170" x2="108" y2="112"></line>
+          <line class="edge live" x1="260" y1="52" x2="412" y2="228"></line>
+          <line class="edge live" x1="412" y1="112" x2="260" y2="288"></line>
+          <line class="edge live" x1="108" y1="112" x2="108" y2="228"></line>
+          <rect class="node" x="212" y="30" width="96" height="40" rx="0"></rect>
+          <text class="nlabel" x="260" y="51">person</text>
+          <rect class="node" x="360" y="90" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="111">process</text>
+          <rect class="node" x="368" y="206" width="88" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="227">metric</text>
+          <rect class="node" x="210" y="266" width="100" height="40" rx="0"></rect>
+          <text class="nlabel" x="260" y="287">rule</text>
+          <rect class="node" x="58" y="206" width="100" height="40" rx="0"></rect>
+          <text class="nlabel" x="108" y="227">profile</text>
+          <rect class="node" x="56" y="90" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="108" y="111">role</text>
+          <rect class="node center" x="196" y="146" width="128" height="48" rx="0"></rect>
+          <text class="nlabel c" x="260" y="170">CompanyGraph</text>
+        </svg>
+      </div>
+      <ul class="blist">
+        <li><b data-de="Frontmatter und ein Text">Frontmatter and a body</b><span data-de="die Fakten für die Maschine, die Prosa für den Menschen">the facts for the machine, the prose for the person</span></li>
+        <li><b data-de="Eine Datei, solange sie nichts besitzt">A file while it owns nothing</b><span data-de="ein Ordner, sobald sie eigene Sammlungen besitzt">a folder as soon as it owns collections of its own</span></li>
+        <li><b data-de="Der H1 ist der Name">The H1 is the name</b><span data-de="kein Feld im Frontmatter, nicht der Dateiname">not a field in the frontmatter, not the filename</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 · References, not links -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>Der entscheidende Kniff — hier hören die Leute genau hin.</em> Die Entitäten stehen nicht nebeneinander, sie verweisen aufeinander. Und jede Referenz ist ein kanonischer Name — nie ein Pfad, nie ein Link. <em class='cue'>Zwei Folgen, und die zweite ist die gute.</em> Eine Datei verschieben bricht nichts, weil nichts auf ihren Ort gezeigt hat. Eine Entität umbenennen bricht laut, weil ein Name, der nicht mehr auflöst, sofort auffällt — bei der Änderung, die ihn gebrochen hat, und nicht ein halbes Jahr später bei einer Leserin. <em class='cue'>Konkret werden, was geprüft wird.</em> Eine Person ohne Rolle. Eine Regel ohne Owner. Eine Referenz auf etwas, das es nicht gibt. Das sind die Fehler, aus denen ein Ordner voller Dateien ein Widerspruch wird — und genau die findet ein Agent. So bleibt aus vielen Dateien ein zusammenhängender Graph."
+    data-notes-en="<em class='cue'>The decisive trick — this is where people lean in.</em> The entities do not sit side by side, they refer to each other. And every reference is a canonical name — never a path, never a link. <em class='cue'>Two consequences, and the second is the good one.</em> Moving a file breaks nothing, because nothing pointed at where it was. Renaming an entity breaks loudly, because a name that no longer resolves shows up immediately — on the change that broke it, not six months later on a reader. <em class='cue'>Get concrete about what is checked.</em> A person without a role. A rule without an owner. A reference to something that is not there. Those are the failures that turn a folder of files into a contradiction — and they are exactly the ones an agent finds. That is what keeps many files one connected graph.">
+    <div class="kicker mono" data-n="04" data-de="Referenzen">References</div>
+    <h1 data-de="Alles verweist aufeinander — <em>keine toten Links</em>.">Everything cross-references — <em>no dead links</em>.</h1>
+    <ul class="ask">
+      <li data-de="<b>Referenzen sind Namen</b> — der kanonische Name der Entität, nie ein Pfad."><b>References are names</b> — the canonical name of the entity, never a path.</li>
+      <li data-de="<b>Verschieben bricht nichts</b> — nichts hat auf den Ort der Datei gezeigt."><b>Moving breaks nothing</b> — nothing pointed at where the file was.</li>
+      <li data-de="<b>Umbenennen bricht laut</b> — ein Name, der nicht auflöst, wird gefunden statt ausgeliefert."><b>Renaming breaks loudly</b> — a name that does not resolve is caught, not shipped.</li>
+    </ul>
+    <p class="verdict" data-de="Keine toten Links — <em>weil es keine Links gibt.</em>">No dead links — <em>because there are no links.</em></p>
+  </section>
+
 </div>
 
 <div class="chrome" id="chrome">
