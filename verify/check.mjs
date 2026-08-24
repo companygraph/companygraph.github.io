@@ -23,6 +23,13 @@ const PAGES = [
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch." },
     card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
+  { path: "/intro/", title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    // The deck's German is the whole second half of the talk, including every speaker note.
+    // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
+    translates: { lang: "de", shows: ["Unternehmen"], hides: ["a talk by"], id: "langtoggle" },
+    card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
 ];
 
 const CHECKS = {
@@ -139,7 +146,11 @@ const CHECKS = {
     const englishTitle = await page.title();
     const englishDesc = await desc();
 
-    await page.click("#langind");
+    // The talks index's single toggle is #langind; a deck's transport bar carries its
+    // own control under its own id, so the spec names it rather than this check
+    // branching on which page it is.
+    const toggle = "#" + (spec.translates.id || "langind");
+    await page.click(toggle);
     const swapped = await htmlLang();
     if (swapped !== spec.translates.lang)
       return `after the toggle lang=${swapped}, expected ${spec.translates.lang}`;
@@ -162,7 +173,7 @@ const CHECKS = {
         return `after the toggle meta description is ${JSON.stringify(germanDesc)}, expected ${JSON.stringify(spec.translates.desc)}`;
     }
 
-    await page.click("#langind");
+    await page.click(toggle);
     const back = await htmlLang();
     if (back !== "en") return `toggling back left lang=${back}, expected en`;
     if (await body() !== english) return "toggling back did not restore the English text";

@@ -1,0 +1,11 @@
+{
+  "name": "companygraph-talk-intro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A 10-minute talk: CompanyGraph, the open-source meta-model for operating a company.",
+  "scripts": {
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": { "playwright": "^1.49.1" }
+}
