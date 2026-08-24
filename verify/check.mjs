@@ -24,6 +24,11 @@ const PAGES = [
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch." },
     card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
   { path: "/intro/", title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+    // The deck's one outbound link, on the closing slide. Asserted the same way the index
+    // asserts its own: `links` is the only check that fails when an href is simply wrong,
+    // so without this line a typo in the deck's single call to action would ship silently.
+    // It opens in a new tab because a deck a presenter navigates away from is gone.
+    links: ["https://companygraph.io/"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
