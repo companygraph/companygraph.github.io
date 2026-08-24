@@ -13,7 +13,21 @@ const PAGES = [
   { path: "/", title: /CompanyGraph/, lang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
-    contains: ["Two companies", "The same shape", "CompanyGraph"],
+    // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
+    // which requires target=_blank — wrong for chrome pointing at another page on this
+    // same domain, which should stay in the tab the reader is already in.
+    //
+    // Upper case because `contains` reads `body.innerText`, which is the RENDERED text:
+    // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
+    // "TALKS". Asserting the markup's casing fails against a page that is perfectly
+    // correct — which is exactly what happened when this line was first written.
+    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS",
+               // The talk's call to action and the one fact this page is allowed to
+               // restate: its length. A call to action needs it in the moment, not one
+               // click away. Both live in companygraph/talks — if the talk is ever
+               // recut, this page has no way to find out, so the number is checked
+               // against nothing here and must be updated by hand with the deck.
+               "Watch intro talk", "10 minutes · German or English"],
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
@@ -23,7 +37,7 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen"],
+                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "Einführungsvortrag ansehen", "10 Minuten · Deutsch oder Englisch"],
                   hides: ["Two companies", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
 ];
