@@ -194,11 +194,12 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
+  // The description is the lede's own sentence in both languages — read off the lede
+  // element rather than retyped here, so the two copies cannot drift apart.
+  var ledeEl = document.querySelector(".lede");
   var UI = {
-    de:{ title:"Vorträge · CompanyGraph",
-         desc:"Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch." },
-    en:{ title:"Talks · CompanyGraph",
-         desc:"Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English." }
+    de:{ title:"Vorträge · CompanyGraph", desc: ledeEl.getAttribute("data-de") },
+    en:{ title:"Talks · CompanyGraph",    desc: ledeEl.getAttribute("data-en") }
   };
 
   function applyLang(){

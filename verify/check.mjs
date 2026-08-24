@@ -20,7 +20,8 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     translates: { lang: "de", shows: ["Vortrag"], hides: ["Watch the talk"],
-                  title: "Vorträge · CompanyGraph" },
+                  title: "Vorträge · CompanyGraph",
+                  desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch." },
     card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
 ];
 
@@ -133,8 +134,10 @@ const CHECKS = {
   async translates(page, spec) {
     const body = () => page.evaluate(() => document.body.innerText);
     const htmlLang = () => page.evaluate(() => document.documentElement.lang);
+    const desc = () => page.evaluate(() => (document.getElementById("metadesc") || {}).content);
     const english = await body();
     const englishTitle = await page.title();
+    const englishDesc = await desc();
 
     await page.click("#langind");
     const swapped = await htmlLang();
@@ -153,12 +156,18 @@ const CHECKS = {
       if (germanTitle !== spec.translates.title)
         return `after the toggle title is ${JSON.stringify(germanTitle)}, expected ${JSON.stringify(spec.translates.title)}`;
     }
+    if (spec.translates.desc) {
+      const germanDesc = await desc();
+      if (germanDesc !== spec.translates.desc)
+        return `after the toggle meta description is ${JSON.stringify(germanDesc)}, expected ${JSON.stringify(spec.translates.desc)}`;
+    }
 
     await page.click("#langind");
     const back = await htmlLang();
     if (back !== "en") return `toggling back left lang=${back}, expected en`;
     if (await body() !== english) return "toggling back did not restore the English text";
     if (await page.title() !== englishTitle) return "toggling back did not restore the English title";
+    if (await desc() !== englishDesc) return "toggling back did not restore the English meta description";
     return null;
   },
 };
