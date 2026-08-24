@@ -19,6 +19,12 @@ const PAGES = [
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
             "https://blust.ch/"],
     internalLinks: true,
+    // The German half, named by what the reader must see and what must stop being
+    // visible. Strings, not element counts: a translation that never got applied leaves
+    // the English standing, and that is the failure worth naming.
+    translates: { lang: "de",
+                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen"],
+                  hides: ["Two companies", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
 ];
 
@@ -89,6 +95,36 @@ const CHECKS = {
       return `og:image is ${meta["og:image"]}, must be absolute under ${spec.cardBase}`;
     if (meta["og:image:width"] !== "1200" || meta["og:image:height"] !== "630")
       return `og:image declares ${meta["og:image:width"]}×${meta["og:image:height"]}, file is 1200×630`;
+    return null;
+  },
+  // Every check above sees the page as it first renders, which is English. That left the
+  // German half completely undefended: delete the toggle's click listener, misspell a
+  // data-de attribute, or break applyLang outright, and the suite still printed
+  // `all checks pass`. Nothing but clicking the control can see the other language.
+  //
+  // This runs last and puts the page back in English before it returns, because it is the
+  // only check that mutates what the others read. If you add a check after this one, keep
+  // that restore honest — the round trip is asserted here precisely so a later check
+  // cannot silently inherit a German page.
+  async translates(page, spec) {
+    const body = () => page.evaluate(() => document.body.innerText);
+    const htmlLang = () => page.evaluate(() => document.documentElement.lang);
+    const english = await body();
+
+    await page.click("#langind");
+    const swapped = await htmlLang();
+    if (swapped !== spec.translates.lang)
+      return `after the toggle lang=${swapped}, expected ${spec.translates.lang}`;
+    const german = await body();
+    for (const s of spec.translates.shows)
+      if (!german.includes(s)) return `German page is missing ${JSON.stringify(s)}`;
+    for (const s of spec.translates.hides)
+      if (german.includes(s)) return `German page still shows the English ${JSON.stringify(s)}`;
+
+    await page.click("#langind");
+    const back = await htmlLang();
+    if (back !== "en") return `toggling back left lang=${back}, expected en`;
+    if (await body() !== english) return "toggling back did not restore the English text";
     return null;
   },
 };

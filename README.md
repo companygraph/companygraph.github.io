@@ -27,8 +27,9 @@ Pages site in the org inherit it, so `companygraph/talks` will serve at
 - `og.png` — the page itself, rendered at 1200×630 for link previews. `export-og.mjs`
   regenerates it (`npm run og`): headless Chromium, reduced motion emulated, the figure hidden.
 - `robots.txt`, `sitemap.xml` — one page, one URL.
-- `verify/check.mjs` — this page's own assertions (title, language, the outbound link, the
-  og card, that no internal path — attribute or CSS `url()` — is root-absolute).
+- `verify/check.mjs` — this page's own assertions (title, language, the language toggle and
+  its round trip, the outbound link, the og card, that no internal path — attribute or CSS
+  `url()` — is root-absolute).
 - `verify/design.mjs` — the shared design-system assertions, copied in byte-identical from the
   sibling repositories. Never edit it here — see `CLAUDE.md`.
 - `fonts/` — the four self-hosted `.woff2` files the page's `@font-face` rules point at.
@@ -62,10 +63,16 @@ npm run og        # regenerates og.png after any visual change
 `verify` needs a server already running in another terminal (or `BASE=... npm run verify`
 against a different one). It exits non-zero on any failure, so `all checks pass` is the bar.
 
-It asserts the page as it first renders, which is English. **The language toggle is not
-asserted at all** — misspell a `data-de` attribute, or delete the toggle's click listener
-outright, and the suite still prints `all checks pass`. Adding that check is the obvious next
-commit; until someone writes it, nothing here defends the German half of the page.
+Most of it asserts the page as it first renders, which is English. The `translates` check is
+the one that clicks: it presses the language control, requires the German to be there and the
+English to be gone, then presses it again and requires the page to come back exactly as it
+was. It runs last for that reason — it is the only check that changes what the others read,
+and the round trip is what keeps a check added after it from inheriting a German page.
+
+It was written by breaking the page three ways and watching it catch each: the toggle's click
+listener deleted, the `<h1>`'s `data-de` attribute misspelled, and `applyLang` stopped from
+setting `document.documentElement.lang`. Before it existed, all three printed
+`all checks pass`.
 
 ## What this page deliberately does not say
 
