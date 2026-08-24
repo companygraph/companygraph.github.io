@@ -22,7 +22,7 @@ const PAGES = [
     // the href as delivered, and the swap happens only after a click on the toggle. What
     // this line catches is the path being wrong for everyone; the German half is checked
     // by `translates.dlHref` below.
-    sameTab: ["intro/", "./", "https://companygraph.io/", "intro/companygraph-en.pdf"],
+    sameTab: ["intro/", "./", "https://companygraph.io/", "https://companygraph.io/privacy/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
