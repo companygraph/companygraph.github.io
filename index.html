@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyGraph — a meta-model for operating a company</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://companygraph.io/">
+<meta property="og:title" content="CompanyGraph — a meta-model for operating a company">
+<meta property="og:description" content="A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.">
+<meta property="og:image" content="https://companygraph.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--ground); color:var(--ink);
+       font-family:"Instrument Sans", system-ui, sans-serif; line-height:1.5;
+       min-height:100vh; display:flex; flex-direction:column}
+  h1{font-family:"Bricolage Grotesque", system-ui, sans-serif}
+
+  /* One column, capped and centred, exactly as the sibling sites do it — the gutters are
+     the shell's, so header, main and footer line up on the same two edges at every width. */
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+  header{padding:2.4rem 0 0}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.6rem; color:var(--ink); text-decoration:none}
+  .brand svg{width:26px; height:26px; color:var(--c-mid); flex:0 0 auto}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  /* The nav is empty of links until the talk ships. It exists anyway, because the language
+     control is a nav item and not a floating badge: it belongs with the other things you can
+     do to the page rather than on top of the page. */
+  nav{display:flex; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  /* Same control as the sibling sites: rests dim like any secondary text, brightens on
+     hover, and marks whichever language is active with --c-firm — the resolved thing. */
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+  /* Hero and figure sit side by side while there is room for both, and stack when there is
+     not. The page's whole promise is one screen, and a figure the width of the text column,
+     under it, is taller than a laptop. */
+  main{flex:1; display:flex; align-items:center; padding:6vh 0}
+  main .shell{display:flex; flex-wrap:wrap; align-items:center; gap:clamp(2rem,5vw,4.5rem)}
+  /* Mono means data, and every item here is one: a URL, a licence identifier, a name that
+     is really a link. The check that guards mono deliberately does not reach the footer. */
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+  .hero{flex:1 1 500px; max-width:640px; container-type:inline-size}
+  /* One axis carries the argument: the setup arrives light and unresolved, the shape it
+     lands on arrives heavy. em marks the resolved word itself. */
+  /* The headline sizes to its own column, not to the viewport: once the figure sits beside
+     it the two stop being the same measurement, and a viewport-sized headline breaks "The
+     same shape." across two lines on any laptop around 1200px. The vw line is the fallback
+     for anything without container query units and is deliberately the more timid of the
+     two. */
+  .hero h1{letter-spacing:-.035em; line-height:1.0;
+           font-size:clamp(2.4rem,5.8vw,5.4rem);
+           font-size:clamp(2.4rem,12.8cqw,5.4rem)}
+  .hero h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .hero h1 .rcl{display:block; font-weight:800}
+  .hero h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.5rem); color:var(--dim);
+           max-width:44ch; line-height:1.4}
+  .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
+  .btn{
+    font-size:.82rem; font-weight:500; letter-spacing:.07em;
+    text-decoration:none; padding:.9rem 1.25rem; border-radius:7px; border:1.5px solid var(--rule);
+    color:var(--ink); background:var(--raise); transition:border-color .18s ease, color .18s ease;
+  }
+  .btn:hover, .btn:focus-visible{border-color:var(--c-mid); color:var(--c-mid)}
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  /* ─── The figure: the headline, drawn ─────────────────────────────────────────
+     Left, a company of one: one owner, one collection nested inside it, a handful of
+     entities, one reference out to something nothing owns. Right, a company with a
+     payroll: the same two edges and the same rhythm, with far more of everything. Read
+     either one closely and the shape is already in it — an outlined box holding a filled
+     one, a line out to a second. Below, that shape on its own, which is the mark.
+
+     Both trees are --c-weak deliberately: they are candidates, considered and not
+     accepted, because the answer is the shape and not either of them. --c-firm is the
+     shape. Nothing in the figure is interactive, so nothing in it is --c-mid, and there
+     is no reversal here, so there is no --c-flag. */
+  .figure{flex:1 1 300px; max-width:400px; margin:0}
+  .fig{display:block; width:100%; height:auto}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:.86rem; line-height:1.45;
+          text-align:center; text-wrap:balance}
+  .fig .box   {fill:none; stroke:var(--c-weak); stroke-width:2}
+  .fig .ref   {fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
+  .fig .node  {fill:var(--c-weak)}
+  /* The two lines down to the shape are not one of the model's edges — they are the
+     argument, not the data — so they are drawn thinner and softer than either. */
+  .fig .join  {fill:none; stroke:var(--c-weak); stroke-width:1.6; stroke-opacity:.72}
+  .fig .r-box {fill:none; stroke:var(--c-firm); stroke-width:3.5}
+  .fig .r-ref {fill:none; stroke:var(--c-firm); stroke-width:3.5; stroke-linecap:square}
+  .fig .r-node{fill:var(--c-firm)}
+
+  /* The animation is additive, and that is a rule here rather than a preference: no rule
+     outside a @keyframes block sets an opacity, a transform or a dash pattern on any part
+     of the figure, so everything above IS the settled state. Each element starts displaced
+     and returns to exactly what is written. Switch every animation off and the finished
+     drawing is what is left — which is what the reduced-motion block below relies on. */
+  .an   {animation:fig-in .42s cubic-bezier(.22,.7,.3,1) var(--d,0s) backwards}
+  .land {animation-name:fig-land; animation-duration:.5s;
+         transform-box:fill-box; transform-origin:50% 50%}
+  .trace{animation-name:fig-trace; animation-duration:.6s; animation-timing-function:ease-in-out}
+  @keyframes fig-in   {from{opacity:0; transform:translateY(7px)}}
+  @keyframes fig-land {from{opacity:0; transform:scale(.86)}}
+  @keyframes fig-trace{from{stroke-dasharray:0 100} to{stroke-dasharray:100 0}}
+
+  /* Not an accessibility afterthought: the og card is rendered with reduced motion
+     emulated, so this block is literally what the card shows. It has to be the settled
+     state exactly — every element present, at its final opacity and transform, nothing
+     left mid-draw. The additive rule above is what makes switching the animations off
+     sufficient; the three resets after it are belt and braces, and they are safe only
+     because nothing in the figure carries a static opacity, transform or dash pattern of
+     its own. (The join lines are dimmed with stroke-opacity, which opacity:1 cannot
+     touch.) Anything added to the figure must keep that true. */
+  @media (prefers-reduced-motion: reduce){
+    .figure, .figure *{
+      animation:none !important; transition:none !important;
+      opacity:1 !important; transform:none !important; stroke-dasharray:none !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="bar">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+           stroke-width="1.5" stroke-linecap="square">
+        <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+        <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+        <path d="M12.5 12 h4.5"/>
+        <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+      </svg>
+      <b>Company<span>Graph</span></b>
+    </a>
+    <nav>
+      <button class="langind" id="langind" type="button"
+              aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+    </nav>
+    </div>
+  </header>
+</div>
+<main>
+  <div class="shell">
+  <section class="hero">
+    <h1 data-de="<span class='r70'>Zwei Unternehmen.</span><span class='rcl'>Dieselbe <em>Form</em>.</span>"><span class="r70">Two companies.</span><span class="rcl">The same <em>shape</em>.</span></h1>
+    <p class="tagline" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/companygraph/meta-model" target="_blank" rel="noopener"
+         data-de="Das Modell ansehen">Read the model</a>
+    </div>
+  </section>
+  <figure class="figure">
+    <svg class="fig" viewBox="0 0 400 285" role="img" aria-labelledby="figcap">
+      <!-- A company of one. One owner, one collection nested inside it, three entities,
+           and one reference out to something nothing owns. -->
+      <g>
+        <rect class="box an"  style="--d:.02s" x="16" y="30" width="78" height="70" rx="8"/>
+        <rect class="box an"  style="--d:.07s" x="26" y="40" width="36" height="32" rx="5"/>
+        <rect class="node an" style="--d:.12s" x="36" y="49" width="14" height="14"/>
+        <rect class="node an" style="--d:.16s" x="70" y="49" width="14" height="14"/>
+        <rect class="node an" style="--d:.20s" x="36" y="78" width="14" height="14"/>
+        <path class="ref an"  style="--d:.25s" d="M94 65h18"/>
+        <rect class="node an" style="--d:.30s" x="112" y="58" width="14" height="14"/>
+      </g>
+      <!-- A company with a payroll. Nothing new in the vocabulary: the same two edges, the
+           same nesting — ten entities inside the container instead of three, two collections
+           instead of one, two references out instead of one. Both references leave the
+           container and land on a free filled node, because that is what a reference is; a
+           line drawn between two collections inside the same owner would be a reference to
+           something owned, which the model has no such thing as. -->
+      <g>
+        <rect class="box an"  style="--d:.22s" x="216" y="14" width="132" height="106" rx="8"/>
+        <rect class="box an"  style="--d:.26s" x="226" y="24" width="62" height="52" rx="5"/>
+        <rect class="box an"  style="--d:.30s" x="300" y="24" width="38" height="34" rx="5"/>
+        <rect class="node an" style="--d:.34s" x="234" y="32" width="14" height="14"/>
+        <rect class="node an" style="--d:.38s" x="256" y="32" width="14" height="14"/>
+        <rect class="node an" style="--d:.42s" x="234" y="52" width="14" height="14"/>
+        <rect class="node an" style="--d:.46s" x="256" y="52" width="14" height="14"/>
+        <rect class="node an" style="--d:.50s" x="312" y="34" width="14" height="14"/>
+        <rect class="node an" style="--d:.54s" x="234" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.58s" x="256" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.62s" x="278" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.66s" x="300" y="90" width="14" height="14"/>
+        <rect class="node an" style="--d:.70s" x="322" y="90" width="14" height="14"/>
+        <path class="ref an"  style="--d:.74s" d="M348 51h18"/>
+        <rect class="node an" style="--d:.78s" x="366" y="44" width="14" height="14"/>
+        <path class="ref an"  style="--d:.82s" d="M348 83h18"/>
+        <rect class="node an" style="--d:.86s" x="366" y="76" width="14" height="14"/>
+      </g>
+      <!-- Neither tree is the answer. What they have in common is. -->
+      <path class="join an trace" style="--d:.90s" pathLength="100" d="M71 104C71 152 200 148 200 194"/>
+      <path class="join an trace" style="--d:.90s" pathLength="100" d="M282 124C282 160 200 156 200 194"/>
+      <!-- The shape they arrive at, which is the mark: ownership carried by containment,
+           reference by canonical name, and nothing else. -->
+      <g>
+        <rect class="r-box an land"  style="--d:1.30s" x="140" y="205" width="63" height="63" rx="9"/>
+        <rect class="r-node an land" style="--d:1.40s" x="156.5" y="221.5" width="30" height="30"/>
+        <path class="r-ref an land"  style="--d:1.48s" d="M203 236.5h27"/>
+        <rect class="r-node an land" style="--d:1.55s" x="230" y="221.5" width="30" height="30"/>
+      </g>
+    </svg>
+    <figcaption class="figcap" id="figcap"
+       data-de="Ein Unternehmen aus einer Person, und eines mit Angestellten.">A company of one, and a company with a payroll.</figcaption>
+  </figure>
+  </div>
+</main>
+<div class="shell">
+  <footer>
+    <span><a target="_blank" rel="noopener" href="https://github.com/companygraph">github.com/companygraph</a></span>
+    <span><a target="_blank" rel="noopener" href="https://github.com/companygraph/meta-model/blob/HEAD/LICENSE">Apache 2.0</a></span>
+    <span><a target="_blank" rel="noopener" href="https://blust.ch/">Robert Blust</a></span>
+  </footer>
+</div>
+<script>
+// English is the markup and German lives in data-de — the other way round from the decks,
+// and deliberately: this page is delivered, shared and indexed in English, so English is what
+// it should say before a single line of JS has run — no swap on load, no flash, and a crawler
+// without JS reads the same language the page promises. The control lives in the header, not
+// a nav — there is no nav yet, but a switch nobody can see does not exist for the reader who
+// needs it. Every storage access is guarded: file:// is an opaque origin in some browsers and
+// throws, and the page must still work with no remembered preference.
+(function(){
+  var KEY = "cg-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if (lang !== "de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if (lang !== "en") toggle(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>
