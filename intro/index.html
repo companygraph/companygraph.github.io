@@ -169,6 +169,11 @@
     color:var(--dim); letter-spacing:.02em;
   }
   .stamp b{color:var(--c-mid); font-weight:600}
+  /* the deck's only in-slide link. It stays in this tab, matching how the talks index
+     treats the same destination, and it is styled here because nothing else in a slide
+     is an anchor — left alone it would render in the browser's default blue. */
+  .stamp a{color:var(--c-firm); text-decoration:none; border-bottom:1px solid var(--c-weak)}
+  .stamp a:hover, .stamp a:focus-visible{border-bottom-color:var(--c-mid)}
 
   /* breadth grid (domains overview) */
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 6cqmin; margin-top:4.4cqmin}
@@ -391,6 +396,19 @@
     .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
     .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
     .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
+    /* The title lockup was the one row that never reflowed: at 390px the wordmark alone
+       measured wider than the slide's content box, so 407px of lockup sat in a 390px
+       screen — 419px with the notes sheet open, and identical in both languages, because
+       the mark and the word are the same in each. Two reasons it survived the h1 rule
+       above: .title-slide h1 is (0,1,1) and outranks a bare h1 selector whatever the media
+       query says, so the display size has to be named again here; and a flex row with no
+       wrap has no way to give. Both are fixed — a vw-driven size that fits, and wrap as
+       the floor under it, so a future face that measures wider breaks the line instead of
+       spilling off the screen. The mark keeps its ratio to the wordmark (9/11 of the
+       headline, the same as the desktop clamps) so the lockup still reads as one thing. */
+    .titlelock{flex-wrap:wrap}
+    .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
+    .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
     .thennow, .split, .split.even, .grid, .grid.four{grid-template-columns:1fr; gap:5vw; max-width:100%}
     .kicker{margin-bottom:5vw}
   }
@@ -550,6 +568,112 @@
       <li data-de="<b>Umbenennen fällt sofort auf</b> — ein Name, der sich nicht mehr auflösen lässt, wird gefunden statt ausgeliefert."><b>Renaming breaks loudly</b> — a name that does not resolve is caught, not shipped.</li>
     </ul>
     <p class="verdict" data-de="Keine toten Links — <em>weil es keine Links gibt.</em>">No dead links — <em>because there are no links.</em></p>
+  </section>
+
+  <!-- 05 · The breadth. The six names here are the six on slide 03's figure, deliberately:
+       a talk about a vocabulary cannot use two words for one type. Nothing on the slide or
+       in either note states how many there are. -->
+  <section class="slide"
+    data-time="1:20"
+    data-notes="<em class='cue'>Ich zeige die Breite — vorlesen tue ich sie nicht.</em> Das ist das Vokabular, und ich greife heraus statt aufzuzählen. Ein Prozess ist hier kein Diagramm auf einer Wiki-Seite, sondern eine Datei mit Gates, und jedes Gate nennt, wer es freigibt. Ein KPI ist keine Zahl in einem Dashboard, sondern eine Datei, die sagt, was sie misst und wem sie gehört. Eine Regel ist eine Datei, die sagt, was sie verhindert. <em class='cue'>Die Breite ist der Punkt — ruhig aussprechen.</em> Rollen, und die Gruppen, in denen sie sitzen, sofern eine Firma welche hat. Was wir definieren, und was wir durchsetzen. Das reicht weit über das Organigramm hinaus, hinein in die Art, wie Arbeit tatsächlich läuft. <em class='cue'>Kurze Pause vor dem Schluss.</em> Dasselbe Vokabular beschreibt all das — und genau deshalb lässt es sich versionieren wie Code und prüfen wie Code."
+    data-notes-en="<em class='cue'>I show the breadth — I do not read it out.</em> This is the vocabulary, and I pick from it rather than reciting it. A process here is not a diagram on a wiki page; it is a file with gates, and every gate names who signs it off. A kpi is not a number on a dashboard; it is a file that says what it measures and who owns it. A rule is a file that says what it stops. <em class='cue'>The breadth is the point — say it plainly.</em> Roles, and the groups they sit in where a company has them. What we define, and what we enforce. It reaches well past the org chart, into the way work actually moves. <em class='cue'>Short pause before the close.</em> The same vocabulary describes all of it — which is exactly why it can be versioned like code and reviewed like code.">
+    <div class="kicker mono" data-n="05" data-de="Die Breite">The breadth</div>
+    <h1 data-de="Alles, was eine Firma ausmacht — <em>in einem Vokabular</em>.">Everything that makes a company — <em>in one vocabulary</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b class="mono">profile</b><span data-de="wer jemand ist">who someone is</span></div>
+      <div class="cell"><b class="mono">role</b><span data-de="wer was tut">who does what</span></div>
+      <div class="cell"><b class="mono">process</b><span data-de="wie Arbeit fliesst, Gate für Gate">how work flows, gate by gate</span></div>
+      <div class="cell"><b class="mono">rule</b><span data-de="was wir durchsetzen">what we enforce</span></div>
+      <div class="cell"><b class="mono">kpi</b><span data-de="was wir messen">what we measure</span></div>
+      <div class="cell"><b class="mono">concept</b><span data-de="was wir definieren">what we define</span></div>
+    </div>
+    <p class="stamp" data-de="Versioniert wie Code, geprüft wie Code — <b>ein Vokabular für alles davon.</b>">Versioned like code, reviewed like code — <b>one vocabulary for all of it.</b></p>
+  </section>
+
+  <!-- 06 · A gate, concrete. The example is invented for this deck: the source deck's
+       thresholds belonged to a real company and are deliberately not carried across.
+       No tool is named here or in either note. -->
+  <section class="slide"
+    data-time="1:20"
+    data-notes="<em class='cue'>Konkret werden — das ist die Folie, die sitzt.</em> Ein Prozessschritt, und in seiner Mitte ein Gate: der Moment, in dem aus einem Konzept etwas wird, das die Firma tatsächlich baut. <em class='cue'>Die vier Zeilen langsam durchgehen.</em> Im Modell steht, wer freigibt — eine benannte Rolle — und ist sie unbesetzt, gibt es keine Freigabe, und genau das steht dann da. Es steht da, was das Kriterium ist: Das Konzept muss die Regeln nennen, die es berührt. Es steht da, welche Regel hinter dem Gate sitzt — eine, die keine Regel ohne Owner durchlässt. Und es steht da, was die Arbeit wieder beenden würde, aufgeschrieben zusammen mit dem Konzept statt hinterher ausdiskutiert. <em class='cue'>Meine Pointe — davor eine Pause.</em> Nichts davon ist eine Folie, die jemand für ein Steuerungsgremium gebaut hat. Das sind Daten, in Dateien, neben der Arbeit — und deshalb kann ein Mensch sie lesen und ein Agent sie prüfen."
+    data-notes-en="<em class='cue'>Get concrete — this is the slide that lands.</em> One process step, with a gate in the middle of it: the moment a concept becomes something the company actually builds. <em class='cue'>Walk the four lines, slowly.</em> The model records who signs it off — a named role — and if that role is vacant there is no sign-off to be had, and the gate says exactly that. It records what the criterion is: the concept has to name the rules it touches. It records which rule sits behind the gate — one that lets no unowned rule through. And it records what would stop the work again, written down with the concept instead of argued about afterwards. <em class='cue'>My point — pause before it.</em> None of this is a slide somebody built for a steering committee. It is data, in files, next to the work — which is why a person can read it and an agent can check it.">
+    <div class="kicker mono" data-n="06" data-de="Ein Gate">A gate</div>
+    <h1 data-de="Governance als Daten — <em>nicht als Folie</em>.">Governance as data — <em>not as a slide</em>.</h1>
+    <div class="split even">
+      <div class="diagram">
+        <svg viewBox="0 0 300 300" role="img" aria-label="A gate between concept and build">
+          <rect class="flowbox" x="70" y="20" width="160" height="46"></rect>
+          <text class="flowlabel" x="150" y="43" data-de="Konzept">Concept</text>
+          <line class="arrow" x1="150" y1="66" x2="150" y2="104"></line>
+          <polygon class="gate" points="150,110 214,150 150,190 86,150"></polygon>
+          <text class="flowlabel" x="150" y="150" style="fill:#7aa0ff;font-weight:700">Gate</text>
+          <line class="arrow" x1="150" y1="190" x2="150" y2="228"></line>
+          <rect class="flowbox hot" x="70" y="232" width="160" height="46"></rect>
+          <text class="flowlabel" x="150" y="255" data-de="Umsetzung">Build</text>
+        </svg>
+      </div>
+      <ul class="blist">
+        <li><b data-de="Wer freigibt">Who signs it off</b><span data-de="eine benannte Rolle — ist sie unbesetzt, gibt es keine Freigabe">a named role — if it is vacant, there is no sign-off</span></li>
+        <li><b data-de="Das Kriterium">The criterion</b><span data-de="das Konzept nennt die Regeln, die es berührt">the concept names the rules it touches</span></li>
+        <li><b data-de="Die Regel dahinter">The rule behind it</b><span data-de="eine Regel ohne Owner kommt nicht durchs Gate">no unowned rule gets through the gate</span></li>
+        <li><b data-de="Was es wieder beendet">What stops it again</b><span data-de="mit dem Konzept geschrieben, nicht hinterher">written with the concept, not afterwards</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 07 · It pays twice -->
+  <section class="slide"
+    data-time="1:15"
+    data-notes="<em class='cue'>Der Kern, warum sich das lohnt — ruhig nehmen.</em> Dieselben Dateien bedienen zwei Leser, die sonst nichts gemeinsam haben. Wer neu anfängt, liest die Rollen und weiss am Ende des ersten Tages, was die Aufgabe wirklich ist. Wer etwas entscheiden muss, fragt „Wem gehört das?“ und bekommt eine Antwort statt drei. <em class='cue'>Jetzt die zweite Zielgruppe.</em> Ein Agent bekommt dieselben Dateien als Kontextschicht — kein Prompt, den jemand hineinkopiert hat, sondern die festgehaltene Vision, Strategie, Prozesse und Regeln der Firma, im Repository, neben der Arbeit. Er handelt innerhalb dieser Leitplanken, und ein Mensch schaut weiterhin drüber. <em class='cue'>Meine Pointe — kurze Pause.</em> Eine Quelle, zwei Zielgruppen. Niemand muss eine zweite Kopie nachführen, weil es keine zweite Kopie gibt."
+    data-notes-en="<em class='cue'>The core of why this is worth doing — take it slowly.</em> The same files serve two readers who have nothing else in common. Someone joining reads the roles and knows by the end of the first day what the job actually is. Someone deciding something asks who owns this, and gets one answer instead of three. <em class='cue'>Now the second audience.</em> An agent gets those same files as a context layer — not a prompt somebody pasted in, but the company's own stated vision, strategy, processes and rules, in the repository, next to the work. It acts inside those guardrails, and a person still reviews what it did. <em class='cue'>My point — short pause.</em> One source, two audiences. Nobody has to keep a second copy in step, because there is no second copy.">
+    <div class="kicker mono" data-n="07" data-de="Zwei Zielgruppen">Two audiences</div>
+    <h1 data-de="Es zahlt doppelt — <em>für Menschen und für Agenten</em>.">It pays twice — <em>for people, and for agents</em>.</h1>
+    <div class="thennow">
+      <div class="col">
+        <h4 data-de="Für Menschen">For people</h4>
+        <p data-de="Onboarding nach Rolle. Eine Antwort auf „Wem gehört das?“">Onboarding by role. An answer to “who owns this?”</p>
+        <p class="small" data-de="Und ein Ort, an dem die Antwort für alle dieselbe ist.">And one place where the answer is the same for everyone.</p>
+      </div>
+      <div class="col now">
+        <h4 data-de="Für Agenten">For agents</h4>
+        <p data-de="Eine Kontextschicht, in der sie handeln können.">A context layer they can act inside.</p>
+        <p class="small" data-de="Vision, Strategie, Prozess, Regeln — festgehalten, nicht erraten.">Vision, strategy, process, rules — stated, not inferred.</p>
+      </div>
+    </div>
+    <p class="verdict" data-de="Eine Quelle — <em>zwei Zielgruppen, und kein Auseinanderdriften.</em>">One source — <em>two audiences, and no drift between them.</em></p>
+  </section>
+
+  <!-- 08 · The thesis. New — no counterpart in the source deck. The published model has to
+       answer what checks the Markdown; the private one never did. The last line is the
+       deck's one claim about agents and is deliberately bounded: the space shrinks, the
+       guessing does not stop. -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Ein Punkt — und es ist der, den das veröffentlichte Modell verteidigen muss.</em> Wenn die Fakten Markdown sind, ist die naheliegende Frage: Was prüft sie? Die Antwort ist, dass auch die Schemas Markdown sind — eine Tabelle pro Typ, im selben Repository wie die Dateien, die sie beschreibt — und dass ein Agent sie durchsetzt. <em class='cue'>Sagen, warum das keine Abkürzung ist.</em> Das ist keine Zwischenstufe auf dem Weg zu JSON Schema. Eine formale Schemasprache würde genau der These widersprechen, unter der das Modell ausgeliefert wird: dass man mit dem richtigen Meta-Modell die Fakten als Markdown beschreibt. <em class='cue'>Der Satz, der es trägt.</em> Es hält, weil die Schema-Tabellen in fester Form geschrieben sind — dieselben Spalten, dieselben Typwörter, dasselbe Wort für „Pflicht“. Ein Agent prüft dadurch jedes Mal dasselbe. <em class='cue'>Hier aufpassen — nicht zu viel behaupten.</em> Das hindert einen Agenten nicht am Raten. Es verkleinert den Raum, in dem er raten muss, und benennt die Leitplanken, in denen er bleiben soll."
+    data-notes-en="<em class='cue'>One point, and it is the one the published model has to defend.</em> If the facts are Markdown, the obvious question is what checks them. The answer is that the schemas are Markdown as well — a table per type, in the same repository as the files it describes — and an agent enforces them. <em class='cue'>Say why that is not a shortcut.</em> This is not a stage on the way to JSON Schema. A formal schema language would contradict the very thesis the model ships under: that with the right meta-model you describe the facts as Markdown. <em class='cue'>The line that makes it hold.</em> It holds because the schema tables are written to a fixed shape — the same columns, the same type words, the same word for required — so what an agent checks is the same thing every time. <em class='cue'>Careful here — do not overclaim.</em> That does not stop an agent guessing. It shrinks the space it has to guess in, and it states the guardrails it is meant to stay inside.">
+    <div class="kicker mono" data-n="08" data-de="Die These">The thesis</div>
+    <h1 data-de="Markdown. <em>Von Agenten geprüft.</em>">Markdown. <em>Checked by agents.</em></h1>
+    <ul class="ask">
+      <li data-de="<b>Die Schemas sind auch Markdown</b> — eine Tabelle pro Typ, im selben Repository wie die Fakten."><b>The schemas are Markdown too</b> — a table per type, in the same repository as the facts.</li>
+      <li data-de="<b>In fester Form geschrieben</b> — dieselben Spalten, dieselben Typwörter, dasselbe Wort für „Pflicht“."><b>Written to a fixed shape</b> — the same columns, the same type words, the same word for required.</li>
+      <li data-de="<b>Keine Zwischenstufe auf dem Weg zu JSON Schema</b> — eine formale Schemasprache würde der These widersprechen."><b>Not a stage on the way to JSON Schema</b> — a formal schema language would contradict the thesis.</li>
+    </ul>
+    <p class="verdict" data-de="Es verkleinert den Raum, in dem ein Agent raten muss — <em>und benennt die Leitplanken.</em>">It shrinks the space an agent has to guess in — <em>and states the guardrails.</em></p>
+  </section>
+
+  <!-- 09 · Take it. The honesty line is one sentence and never says how much: a count or a
+       type list would be true the day it is recorded and wrong within a release, and a
+       recorded slide costs two clips and two PDF exports to correct. The roadmap moves on
+       its own; the deck points at it. -->
+  <section class="slide"
+    data-time="0:55"
+    data-notes="<em class='cue'>Mein Takeaway — bodenständig, kein Verkaufen.</em> Das Vokabular ist veröffentlicht. Apache 2.0, auf companygraph.io. Es gibt nichts zu installieren und nichts zu betreiben: Man kopiert die Konventionen in ein eigenes Repository und schreibt die Dateien. <em class='cue'>Der ehrliche Teil — klar aussprechen, nicht abschwächen.</em> Noch ist nicht alles davon geschrieben — die Roadmap sagt, was davon schon steht. <em class='cue'>Schlusssatz.</em> Zwei Firmen sind auf diese Form gekommen, ohne voneinander zu wissen. Wenn das der Ort ist, an dem das Wissen einer Firma leben will, ist es zehn Minuten von Ihrer Zeit wert. <em class='cue'>Kurze Pause, dann der Dank.</em> Danke."
+    data-notes-en="<em class='cue'>My takeaway — grounded, no selling.</em> The vocabulary is published. Apache 2.0, at companygraph.io. There is nothing to install and nothing to run: you copy the conventions into a repository of your own, and you write the files. <em class='cue'>The honest part — say it plainly, do not soften it.</em> Not all of it is written yet — the roadmap says what is. <em class='cue'>Closing line.</em> Two companies arrived at this shape without knowing about each other. If that is where a company's knowledge wants to live, it is worth ten minutes of yours. <em class='cue'>Short pause, then the thanks.</em> Thank you.">
+    <div class="kicker mono" data-n="09" data-de="Zum Mitnehmen">Take it</div>
+    <h1 data-de="Kopier es in ein eigenes Repository.">Copy it into a repository of your own.</h1>
+    <p class="sub" data-de="Nichts zu installieren, nichts zu betreiben. Ein Ordner mit Markdown-Dateien und die Konventionen, die sie zu einem Graphen zusammenhalten.">Nothing to install, nothing to run. A folder of Markdown files and the conventions that hold them together as one graph.</p>
+    <p class="note" data-de="Noch ist nicht alles davon geschrieben — die Roadmap sagt, was davon schon steht.">Not all of it is written yet — the roadmap says what is.</p>
+    <p class="stamp"><b>Apache 2.0</b> · <a href="https://companygraph.io/">companygraph.io</a></p>
   </section>
 
 </div>
