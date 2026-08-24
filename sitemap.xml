@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  The talk URLs, listed here because this repository owns the talks.
-
-  companygraph.io/sitemap.xml is an index that points at this file; it never names a talk
-  itself, so there is no second copy of the list to drift. Adding a talk means adding it
-  to README.md and to this file.
+  This file owns the talk URLs; nothing else in either repository names one. When the
+  talks ship, companygraph.io/sitemap.xml is meant to become an index pointing at this
+  file, so that list never carries a second copy of it to drift. That conversion is
+  companygraph.github.io's to make and has not happened yet — if you find that file still
+  flat and listing its own page directly, that is unfinished work, not a contradiction of
+  this comment. Adding a talk here means adding it to README.md and to this file.
 
   No <lastmod>: without a build step it could only be hand-maintained, and a date that
   lies is worse than no date — crawlers discount a lastmod they catch being wrong.
