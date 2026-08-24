@@ -45,3 +45,24 @@ carries the same item back. The seam this rule prevents is invisible from either
 alone.
 
 The decks are out of scope: a deck has a transport bar, not a nav.
+
+## "AI" in the deck, "agents" everywhere else — on purpose
+
+The deck says **AI** on slides 00 and 01 and **agents** from 07 on. Nobody has been given
+the narrower word at 0:00, and those opening slides are about who can *read* the thing; an
+agent is software that *acts* inside the stated rules, which is a claim slides 07 and 08
+earn. Do not level the two words.
+
+The same sentence appears in three other places and deliberately does **not** match:
+
+| Where | Says |
+|---|---|
+| this deck, slide 00 | "so people and **AI** can both rely on it" |
+| `companygraph.io` tagline and `og:description` | "so people and **agents** can both rely on it" |
+| `meta-model`'s `README.md` | "so that both people and **agents** can rely on it" |
+| `companygraph/.github` profile | "People can read it and **agents** can rely on it" |
+
+The deck is where a newcomer meets the idea; the repositories are read by someone already
+at the model, where `agents` is the word its schemas and conventions use throughout. This
+is a decision, not drift — if you are here because a reviewer flagged the mismatch, the
+answer is that it was flagged and kept.
