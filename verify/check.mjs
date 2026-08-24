@@ -40,10 +40,32 @@ const PAGES = [
                   shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "Einführungsvortrag ansehen", "10 Minuten · Deutsch oder Englisch"],
                   hides: ["Two companies", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
+  // The privacy page. Its claims are checkable, so verify checks them rather than trusting
+  // the prose: a page that says it makes no third-party request must make none, and
+  // `sameOrigin` is the only check that can see that.
+  { path: "/privacy/", title: /CompanyGraph/, lang: "en",
+    contains: ["This site collects", "There is no imprint yet"],
+    links: ["https://github.com/companygraph"],
+    sameTab: ["https://companygraph.io/talks/", "../", "./"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, cardBase: "https://companygraph.io", internalLinks: true },
 ];
 
 const CHECKS = {
   ...DESIGN_CHECKS,
+  // A page that says it makes no third-party request must make none. `links` and
+  // `internalLinks` cannot see this: they inspect markup, and a font, an analytics tag or
+  // an embed is a request. Copied from guestgraph.github.io, where the same claim is made.
+  async sameOrigin(page, spec) {
+    const seen = [];
+    page.on("request", r => seen.push(r.url()));
+    await page.reload({ waitUntil: "networkidle" });
+    const origin = new URL(spec.absolute).origin;
+    const foreign = [...new Set(seen.filter(u => /^https?:/.test(u) && !u.startsWith(origin)))];
+    return foreign.length ? "off-origin request(s): " + foreign.join(", ") : null;
+  },
   async title(page, spec) {
     const t = await page.title();
     if (!spec.title.test(t)) return `title ${JSON.stringify(t)} does not match ${spec.title}`;
