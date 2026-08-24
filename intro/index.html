@@ -214,6 +214,13 @@
   .title-slide{justify-content:center}
   .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:20ch; line-height:1.02}
   .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  /* Sits below the sub and reads quieter than it: the sub names the category, this names
+     the claim, and reversing that weighting would make the wordmark compete with a
+     sentence. `--c-firm` on the second half is the resolved thing — the two readers are
+     the point of the line. */
+  .title-slide .claim{margin-top:2.4cqmin; max-width:52ch; font-size:clamp(.95rem,2.1cqmin,1.5rem);
+                      line-height:1.45; color:var(--dim)}
+  .title-slide .claim em{font-style:normal; color:var(--c-firm)}
   .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
   .title-slide .byline span{color:var(--dim)}
 
@@ -222,7 +229,11 @@
   .node.center{fill:#1c2130; stroke-width:2.2}
   .edge{stroke:var(--rule); stroke-width:1.5; fill:none}
   .edge.live{stroke:var(--c-mid); stroke-width:1.5; opacity:.7}
-  .nlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:13px; text-anchor:middle; dominant-baseline:middle}
+  /* Not mono: these are ordinary words now, and mono in this design means data — record
+     values, lengths, language pairs, identifiers. Slide 05's type names keep the mono
+     treatment, because there the words really are identifiers. */
+  .nlabel{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+          font-size:13px; text-anchor:middle; dominant-baseline:middle}
   .nlabel.c{fill:var(--c-mid); font-weight:700; font-size:14px}
   .flowbox{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
   .flowbox.hot{stroke:var(--c-mid)}
@@ -462,26 +473,37 @@
   <section class="slide title-slide"
     data-say-title="no"
     data-time="0:00"
-    data-notes="<em class='cue'>Der Titel liegt an, während ich eröffne.</em> CompanyGraph ist das Meta-Modell für den Betrieb eines Unternehmens — quelloffen, nicht verkauft. Es beschreibt ein Unternehmen als Graph aus Markdown-Dateien, geprüft von Agenten statt von einem Schema. <em class='cue'>Kurze Pause.</em> Zehn Minuten darüber, was das heisst und warum es zusammenhält."
-    data-notes-en="<em class='cue'>The title stays up while I open.</em> CompanyGraph is the meta-model for operating a company — open source, not sold. It describes a company as a graph of Markdown files, checked by agents rather than a schema. <em class='cue'>Short pause.</em> Ten minutes on what that means and why it holds together.">
+    data-notes="<em class='cue'>Der Titel liegt an, während ich eröffne.</em> CompanyGraph ist das Meta-Modell für den Betrieb eines Unternehmens — quelloffen, nicht verkauft. Ein Ort für das, was eine Firma weiss: lesbar für Menschen, zugänglich für KI. <em class='cue'>Kurze Pause.</em> Zehn Minuten darüber, was diese Form ist — und warum zwei Unternehmen unabhängig voneinander bei ihr gelandet sind."
+    data-notes-en="<em class='cue'>The title stays up while I open.</em> CompanyGraph is the meta-model for operating a company — open source, not sold. One place for what a company knows: readable by humans, accessible to AI. <em class='cue'>Short pause.</em> Ten minutes on what that shape is — and why two companies arrived at it without knowing about each other.">
     <div class="kicker mono" data-n="00" data-de="Ein gemeinsames Vokabular, extrahiert">A shared vocabulary, extracted</div>
     <div class="titlelock">
       <span class="titlemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span>
       <h1 data-de="Company<em>Graph</em>.">Company<em>Graph</em>.</h1>
     </div>
     <p class="sub" data-de="Das Meta-Modell für den Betrieb eines Unternehmens.">The meta-model for operating a company.</p>
-    <p class="byline" data-de="Eine Einführung · <span>ein Vortrag von Robert Blust</span>">An introduction · <span>a talk by Robert Blust</span></p>
+    <!-- The claim, not the category. A viewer who only ever sees this slide — on the share
+         card, in a screenshot, in a feed — otherwise learns what CompanyGraph is filed
+         under and nothing about what it does. It says "written once", never "synced":
+         there is no importer and no connector, and the roadmap puts tooling in a later
+         phase.
+
+         "AI" here, "agents" from slide 07 on, and the difference is deliberate: nobody has
+         been given the narrower word yet at 0:00, and this slide is about who can *read*
+         the thing. An agent is software that *acts* inside the stated rules, which is a
+         claim slides 07 and 08 earn and this one has not. Do not level the two words. -->
+    <p class="claim" data-de="Ein Ort für das, was eine Firma weiss. <em>Für Menschen lesbar, für KI zugänglich.</em>">One place for what a company knows. <em>Readable by humans, accessible to AI.</em></p>
+    <p class="byline" data-de="Robert Blust · <span>Software Engineer &amp; Architekt</span>">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
   </section>
 
   <!-- 01 · The hook -->
   <section class="slide"
     data-time="1:00"
-    data-notes="<em class='cue'>Ruhig eröffnen, ohne Eile.</em> Jede Firma läuft auf Wissen: wofür sie da ist, wie sie arbeitet, wer was entscheidet, was sie misst, welche Regeln gelten. Dieses Wissen ist da, und das meiste davon ist sogar aufgeschrieben — nur nicht an einem Ort. Es steckt in Köpfen, in Wiki-Seiten, in Tabellen, in Tickets, in Chat-Verläufen. <em class='cue'>Mein Aufhänger — danach eine kurze Pause.</em> Weder Menschen noch Agenten können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?"
-    data-notes-en="<em class='cue'>Open plainly, no hurry.</em> Every company runs on knowledge: what it is for, how it works, who decides what, what it measures, which rules hold. That knowledge exists, and most of it is even written down — just not in one place. It sits in people's heads, in wiki pages, in spreadsheets, in tickets, in chat threads. <em class='cue'>My hook — short pause after it.</em> Neither people nor agents can rely on it. What if all of it were one graph a machine could read?">
+    data-notes="<em class='cue'>Ruhig eröffnen, ohne Eile.</em> Jede Firma läuft auf Wissen: wofür sie da ist, wie sie arbeitet, wer was entscheidet, was sie misst, welche Regeln gelten. Dieses Wissen ist da, und das meiste davon ist sogar aufgeschrieben — nur nicht an einem Ort. Es steckt in Köpfen, in Wiki-Seiten, in Tabellen, in Tickets, in Chat-Verläufen. <em class='cue'>Mein Aufhänger — danach eine kurze Pause.</em> Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?"
+    data-notes-en="<em class='cue'>Open plainly, no hurry.</em> Every company runs on knowledge: what it is for, how it works, who decides what, what it measures, which rules hold. That knowledge exists, and most of it is even written down — just not in one place. It sits in people's heads, in wiki pages, in spreadsheets, in tickets, in chat threads. <em class='cue'>My hook — short pause after it.</em> Neither humans nor AI can rely on it. What if all of it were one graph a machine could read?">
     <div class="kicker mono" data-n="01" data-de="Der Haken">The hook</div>
     <h1 data-de="Das Wissen einer Firma liegt überall — und nirgends.">A company's knowledge lives everywhere — and nowhere.</h1>
     <p class="sub" data-de="Zweck, Strategie, Prozesse, Rollen, Kennzahlen, Regeln — verstreut über Wiki-Seiten, Tabellen, Tickets, Chat-Verläufe und Köpfe.">Purpose, strategy, processes, roles, metrics, rules — scattered across wiki pages, spreadsheets, tickets, chat threads and people's heads.</p>
-    <p class="note" data-de="Weder Menschen noch Agenten können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?">Neither people nor agents can rely on it. What if all of it were one graph a machine could read?</p>
+    <p class="note" data-de="Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den beide lesen können?">Neither humans nor AI can rely on it. What if all of it were one graph both could read?</p>
   </section>
 
   <!-- 02 · The convergence — the spine of the talk. Neither company is named here or
@@ -496,23 +518,31 @@
     <div class="thennow">
       <div class="col">
         <h4 data-de="Eine mit Angestellten">One with a payroll</h4>
-        <p data-de="Bewusst eine dünne Datei pro Person.">A deliberately thin file per person.</p>
-        <p class="small" data-de="Der Rest der Geschichte einer Person steht auf einer öffentlichen Website.">The rest of a person's story lives on a public website.</p>
+        <p data-de="Menschen, Gruppen, Rollen, ein Prozess mit Gates.">People, groups, roles, a process with gates.</p>
       </div>
       <div class="col now">
         <h4 data-de="Eine Ein-Personen-Firma">One company of one</h4>
-        <p data-de="Gezwungen, eine Person richtig zu modellieren.">Forced to model a person properly.</p>
-        <p class="small" data-de="Daher kommen <b class='mono'>profile</b>, <b class='mono'>skill</b> und <b class='mono'>experience</b>.">That is where <b class="mono">profile</b>, <b class="mono">skill</b> and <b class="mono">experience</b> come from.</p>
+        <p data-de="Eine Person. Keine Gruppe. Keine Angestellten.">One person. No group. No employees.</p>
       </div>
     </div>
-    <p class="verdict" data-de="Keine wusste von der anderen. <em>Beide sind hier gelandet:</em>">Neither knew about the other. <em>Both ended up here:</em></p>
+    <p class="verdict" data-de="Nichts gemeinsam, ausser dass beide laufen müssen. Keine wusste von der anderen. <em>Beide sind hier gelandet:</em>">Nothing in common but needing to run. Neither knew about the other. <em>Both ended up here:</em></p>
     <div class="grid four">
-      <div class="cell"><b data-de="Eine Datei pro Entität">One file per entity</b><span data-de="eine Markdown-Datei">one Markdown file</span></div>
-      <div class="cell"><b data-de="Frontmatter und Fliesstext">Frontmatter and a body</b><span data-de="Fakten und Prosa beieinander">facts and prose together</span></div>
-      <div class="cell"><b data-de="Ordner, nach dem Typ benannt">Folders named for the type</b><span data-de="der Typ ist der Ort">the type is where it lives</span></div>
-      <div class="cell"><b data-de="Schemas im eigenen Ordner">Schemas in their own folder</b><span data-de="neben den Fakten, nicht in ihnen">beside the facts, not inside them</span></div>
+      <!-- Said in what it means, not in what it looks like on disk. The audience for this
+           deck is not technical: "one file per entity, frontmatter and a body, folders
+           named for the type" describes the mechanism to someone who already knows why it
+           matters, and describes nothing at all to everyone else. The mechanism is still
+           true and still in the notes — it just is not what the slide argues. -->
+      <div class="cell"><b data-de="Ein Ort pro Sache">One home per thing</b><span data-de="eine Rolle, eine Regel, eine Kennzahl — je genau einmal">a role, a rule, a metric — each in exactly one place</span></div>
+      <div class="cell"><b data-de="Fakten und Begründung zusammen">Facts and reasoning together</b><span data-de="was gilt und warum — nicht in zwei Systemen">what holds, and why — not in two systems</span></div>
+      <div class="cell"><b data-de="Abgelegt nach Art der Sache">Filed by what it is</b><span data-de="auffindbar, ohne jemanden zu fragen">findable without asking anyone</span></div>
+      <div class="cell"><b data-de="Jede Art hat eine feste Form">Every kind has a set shape</b><span data-de="damit nichts halb ausgefüllt bleibt">so nothing stays half filled in</span></div>
     </div>
-    <p class="verdict" data-de="<em>Eine Form, auf die zwei Teams unabhängig voneinander kommen, ist ein Beleg — keine Vorliebe.</em>"><em>A shape two teams reach independently is evidence — not a preference.</em></p>
+    <!-- The closing claim is deliberately about shape versus fill, not about what every
+         company needs. Two instances is not a survey, and "every company needs the same
+         things" is the one sentence an audience can simply refuse. Shape-versus-fill says
+         the same thing and can be checked against any instance — and it is word for word
+         the claim under companygraph.io's figure, so the deck and the site say it once. -->
+    <p class="verdict" data-de="Die Grösse ändert, wie viel ausgefüllt ist. <em>Die Form ändert sie nie.</em>">Size changed how much got filled in. <em>It never changed the shape.</em></p>
   </section>
 
   <!-- 03 · The shape — the source deck's graph figure, re-aimed at the file model -->
@@ -521,7 +551,7 @@
     data-notes="<em class='cue'>Der Grafik einen Moment geben, bevor ich etwas sage.</em> Jeder Kasten hier ist eine Datei. Keine Zeile in einer Datenbank, kein Datensatz in einem Werkzeug — eine Datei, die man aufmachen und lesen kann. <em class='cue'>Der eine Mechanismus, den ich wirklich langsam erkläre.</em> Interessant wird es, sobald eine davon wächst. Eine Entität bleibt eine Datei, solange sie nichts besitzt. Sobald sie eigene Sammlungen besitzt, wird sie zu einem Ordner — dieselbe Entität, derselbe Name, dasselbe Frontmatter, jetzt mit einem Verzeichnis darum herum. Das sind nicht zwei Regeln, sondern eine mit einem Überlauf. Und deshalb muss niemand vorher entscheiden, welche Dinge gross genug für einen eigenen Ordner sind. <em class='cue'>Letzter Punkt, dann weiter.</em> Der kanonische Name einer Entität ist ihre H1. Kein Feld im Frontmatter, nicht der Dateiname — etwas umzubenennen heisst also, die Zeile zu ändern, die ein Mensch ohnehin zuerst liest. Die Datei darf heissen, wie sie will."
     data-notes-en="<em class='cue'>Give the figure a moment before saying anything.</em> Every box on here is a file. Not a row in a database, not a record inside a tool — a file you can open and read. <em class='cue'>The one mechanism I explain really slowly.</em> It gets interesting the moment one of them grows. An entity stays a file for as long as it owns nothing. As soon as it owns collections of its own it becomes a folder — same entity, same name, same frontmatter, now with a directory around it. That is not two rules but one with an overflow. And it is why nobody has to decide up front which things are big enough to deserve a folder of their own. <em class='cue'>Last point, then move on.</em> The canonical name of an entity is its H1. Not a field in the frontmatter, not the filename — so renaming a thing means editing the line a person reads first anyway. The file it lives in can be called whatever you like.">
     <div class="kicker mono" data-n="03" data-de="Die Form">The shape</div>
-    <h1 data-de="Eine Datei pro Entität.">One file per entity.</h1>
+    <h1 data-de="Eine Seite pro Sache.">One page per thing.</h1>
     <div class="split">
       <div class="diagram">
         <svg viewBox="0 0 520 340" role="img" aria-label="Entities as files, each naming the others">
@@ -534,26 +564,35 @@
           <line class="edge live" x1="260" y1="52" x2="412" y2="228"></line>
           <line class="edge live" x1="412" y1="112" x2="260" y2="288"></line>
           <line class="edge live" x1="108" y1="112" x2="108" y2="228"></line>
+          <!-- Plain words, not the model's type names. The names themselves (`profile`,
+               `role`, `kpi` …) appear once, on slide 05, where the subject IS the
+               vocabulary; here the subject is the idea, and six identifiers in monospace
+               read as code to a room that does not write any. The German is carried in
+               data-de like every other string in the deck. -->
           <rect class="node" x="208" y="30" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="260" y="51">profile</text>
+          <text class="nlabel" x="260" y="51" data-de="Menschen">People</text>
           <rect class="node" x="360" y="90" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="412" y="111">process</text>
-          <rect class="node" x="376" y="206" width="72" height="40" rx="0"></rect>
-          <text class="nlabel" x="412" y="227">kpi</text>
+          <text class="nlabel" x="412" y="111" data-de="Prozesse">Processes</text>
+          <rect class="node" x="368" y="206" width="88" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="227" data-de="Kennzahlen">Metrics</text>
           <rect class="node" x="216" y="266" width="88" height="40" rx="0"></rect>
-          <text class="nlabel" x="260" y="287">rule</text>
+          <text class="nlabel" x="260" y="287" data-de="Regeln">Rules</text>
           <rect class="node" x="56" y="206" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="108" y="227">concept</text>
+          <text class="nlabel" x="108" y="227" data-de="Begriffe">Terms</text>
           <rect class="node" x="64" y="90" width="88" height="40" rx="0"></rect>
-          <text class="nlabel" x="108" y="111">role</text>
+          <text class="nlabel" x="108" y="111" data-de="Rollen">Roles</text>
           <rect class="node center" x="196" y="146" width="128" height="48" rx="0"></rect>
           <text class="nlabel c" x="260" y="170">CompanyGraph</text>
         </svg>
       </div>
       <ul class="blist">
-        <li><b data-de="Frontmatter und Fliesstext">Frontmatter and a body</b><span data-de="die Fakten für die Maschine, die Prosa für den Menschen">the facts for the machine, the prose for the person</span></li>
-        <li><b data-de="Eine Datei, solange sie nichts besitzt">A file while it owns nothing</b><span data-de="ein Ordner, sobald sie eigene Sammlungen besitzt">a folder as soon as it owns collections of its own</span></li>
-        <li><b data-de="Die H1 ist der Name">The H1 is the name</b><span data-de="kein Feld im Frontmatter, nicht der Dateiname">not a field in the frontmatter, not the filename</span></li>
+        <!-- Same three structural facts as before — plain text, the title as the canonical
+             name, and ownership deciding whether a thing is a page or a place — said in
+             what they buy rather than in what they are. The mechanism stays in the notes
+             for the one person in the room who will ask. -->
+        <li><b data-de="Klartext, keine Datenbank">Plain words, not a database</b><span data-de="nichts zu installieren, nichts, wo man sich anmelden muss">nothing to install, nothing to log into</span></li>
+        <li><b data-de="Der Titel ist der Name">Its title is its name</b><span data-de="man verweist darauf, wie man es ausspricht">you refer to it the way you say it out loud</span></li>
+        <li><b data-de="Es wächst mit der Firma">It grows with the company</b><span data-de="was eigene Teile bekommt, behält sie bei sich">a thing that gains parts of its own keeps them with it</span></li>
       </ul>
     </div>
   </section>

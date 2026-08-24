@@ -82,6 +82,11 @@
   h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
      font-weight:700; line-height:1.04; letter-spacing:-.032em; font-size:clamp(2.1rem,5vw,3.9rem); max-width:21ch}
   h1 em{font-style:normal; color:var(--c-mid)}
+  /* The wordmark's second half, wherever it appears: accent-coloured, never italic. `em`
+     is the only tag available inside a data-de attribute value — nested markup there must
+     use single quotes, and a <span class='...'> would be one more thing to keep in step
+     across two languages. The rule does the work instead. */
+  .t em{font-style:normal; color:var(--c-mid)}
   .lede{margin-top:1.6rem; font-size:clamp(1.05rem,1.6vw,1.35rem); color:var(--dim);
         max-width:44ch}
 
@@ -96,6 +101,7 @@
   .dl{margin:0 0 clamp(1.6rem,3vh,2.4rem); font-size:.78rem; letter-spacing:.06em}
   .dl a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
   .dl a:hover, .dl a:focus-visible{border-color:var(--c-mid)}
+  .sep{color:var(--dim); margin:0 .55rem}
   .talk:hover, .talk:focus-visible{border-color:var(--c-mid)}
   .talk:hover .t, .talk:focus-visible .t{color:var(--c-mid)}
   .t{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.32rem,2.65vw,2rem); font-weight:700; line-height:1.2;
@@ -145,7 +151,7 @@
         <b>Company<span>Graph</span></b>
       </a>
       <nav>
-        <a href="https://companygraph.io/" data-de="Modell">Model</a>
+        <a href="./" aria-current="page" data-de="Vorträge">Talks</a>
         <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
       </nav>
     </div>
@@ -155,15 +161,16 @@
 <main>
   <div class="shell">
     <h1 data-de="Vorträge über Company<em>Graph</em>.">Talks on Company<em>Graph</em>.</h1>
-    <p class="lede" data-de="Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch.">Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English.</p>
+    <p class="lede" data-de="Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens.">Talks on CompanyGraph, the open-source meta-model for operating a company.</p>
 
     <div class="talks">
       <div class="talkrow">
       <a class="talk" href="intro/">
         <span class="t" data-de="Company<em>Graph</em> — eine Einführung">Company<em>Graph</em> — an introduction</span>
         <span class="meta mono"><b>10 min</b></span>
+        <span class="d" data-de="Zwei Unternehmen, die nichts voneinander wussten, sind bei derselben Form gelandet: eine Markdown-Datei pro Entität, Referenzen über kanonische Namen, Schemas daneben. Was diese Form ist, warum sie für Menschen und Agenten zugleich trägt — und was davon heute schon geschrieben ist.">Two companies that knew nothing of each other arrived at the same shape: one Markdown file per entity, references by canonical name, schemas beside them. What that shape is, why it carries for people and agents at once — and what of it is written today.</span>
       </a>
-      <p class="dl mono"><a href="intro/" data-de="Vortrag ansehen">Watch the talk</a></p>
+      <p class="dl mono"><a href="intro/" data-de="Vortrag ansehen">Watch the talk</a><span class="sep">·</span><a href="intro/companygraph-en.pdf" data-de-href="intro/companygraph-de.pdf" data-de="PDF herunterladen">Download PDF</a></p>
       </div>
     </div>
   </div>
@@ -204,6 +211,12 @@
 
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    // The PDF exists in both languages; the link points at the one being read. Without
+    // this, a German reader downloads the English deck and nothing on the page says so.
+    Array.prototype.forEach.call(document.querySelectorAll("[data-de-href]"), function(a){
+      if (!a.hasAttribute("data-en-href")) a.setAttribute("data-en-href", a.getAttribute("href"));
+      a.setAttribute("href", a.getAttribute("data-" + lang + "-href"));
+    });
     document.title = UI[lang].title;
     document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").classList.toggle("on", lang === "de");

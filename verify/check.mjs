@@ -13,15 +13,22 @@ const PAGES = [
   { path: "/", title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
-    // The nav's Model item points at companygraph.github.io's own page — shared chrome, so
-    // it stays in the tab like the rest. verify can assert the link is here; it can never
-    // assert the page on the other side still carries an item back. See CLAUDE.md.
-    sameTab: ["intro/", "./", "https://companygraph.io/"],
+    // "https://companygraph.io/" is the wordmark, which is the only way back to the model
+    // from here now that the nav carries Talks alone. It is shared chrome, so it stays in
+    // the tab like the rest. verify can assert the link is here; it can never assert the
+    // page on the other side still carries an item back. See CLAUDE.md.
+    // "intro/companygraph-en.pdf" is the English deck the download link points at. The
+    // German one is reached by data-de-href, which no check here can see: `sameTab` reads
+    // the href as delivered, and the swap happens only after a click on the toggle. What
+    // this line catches is the path being wrong for everyone; the German half is checked
+    // by `translates.dlHref` below.
+    sameTab: ["intro/", "./", "https://companygraph.io/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
-    translates: { lang: "de", shows: ["Vortrag"], hides: ["Watch the talk"],
+    translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
+                  dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
-                  desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens — auf Deutsch und Englisch." },
+                  desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
   { path: "/intro/", title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's one outbound link, on the closing slide. Asserted the same way the index
@@ -33,7 +40,11 @@ const PAGES = [
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
-    translates: { lang: "de", shows: ["Unternehmen"], hides: ["a talk by"], id: "langtoggle" },
+    // `hides` named "a talk by" until the byline became `Robert Blust · Software Engineer
+    // & Architect`, matching every other deck. That string is gone from the slide now, so
+    // the assertion would have passed while checking nothing. "Architect"/"Architekt" is
+    // the replacement: one letter apart, present in exactly one language each.
+    translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langtoggle" },
     card: true, cardBase: "https://companygraph.io/talks", internalLinks: true },
 ];
 
@@ -172,6 +183,16 @@ const CHECKS = {
       if (germanTitle !== spec.translates.title)
         return `after the toggle title is ${JSON.stringify(germanTitle)}, expected ${JSON.stringify(spec.translates.title)}`;
     }
+    // The PDF exists in both languages, and the link swaps with the toggle. A German
+    // reader handed the English deck is a silent wrong answer: the page still looks
+    // right, the download still works, and only the file is in the wrong language.
+    if (spec.translates.dlHref) {
+      const href = () => page.evaluate(() =>
+        (document.querySelector("[data-de-href]") || {}).getAttribute?.("href"));
+      const germanHref = await href();
+      if (germanHref !== spec.translates.dlHref.de)
+        return `after the toggle the download points at ${JSON.stringify(germanHref)}, expected ${JSON.stringify(spec.translates.dlHref.de)}`;
+    }
     if (spec.translates.desc) {
       const germanDesc = await desc();
       if (germanDesc !== spec.translates.desc)
@@ -184,6 +205,12 @@ const CHECKS = {
     if (await body() !== english) return "toggling back did not restore the English text";
     if (await page.title() !== englishTitle) return "toggling back did not restore the English title";
     if (await desc() !== englishDesc) return "toggling back did not restore the English meta description";
+    if (spec.translates.dlHref) {
+      const backHref = await page.evaluate(() =>
+        (document.querySelector("[data-de-href]") || {}).getAttribute?.("href"));
+      if (backHref !== spec.translates.dlHref.en)
+        return `toggling back left the download at ${JSON.stringify(backHref)}, expected ${JSON.stringify(spec.translates.dlHref.en)}`;
+    }
     return null;
   },
 };
