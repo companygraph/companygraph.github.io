@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy — CompanyGraph</title>
-<meta id="metadesc" name="description" content="This site sets no cookies, runs no analytics and makes no third-party requests. What happens to what you write in the model, written down before anyone asks.">
+<title>Billing — CompanyGraph</title>
+<meta id="metadesc" name="description" content="The meta-model and its tooling are open source forever. What costs money is time: consulting, billed time and material.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://companygraph.io/privacy/">
+<link rel="canonical" href="https://companygraph.io/billing/">
 
-<meta property="og:title" content="Privacy — CompanyGraph">
-<meta property="og:description" content="This site sets no cookies, runs no analytics and makes no third-party requests. What happens to what you write in the model, written down before anyone asks.">
+<meta property="og:title" content="Billing — CompanyGraph">
+<meta property="og:description" content="The meta-model and its tooling are open source forever. What costs money is time: consulting, billed time and material.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CompanyGraph">
-<meta property="og:url" content="https://companygraph.io/privacy/">
+<meta property="og:url" content="https://companygraph.io/billing/">
 <meta property="og:image" content="https://companygraph.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,8 +20,9 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Publisher and page, nothing about the product. The same rule the other two pages
-     follow: structured data is not a back door for claims the prose does not make. -->
+<!-- Same rule as the landing page: the publisher and its other addresses, nothing about
+     what the software does or when it does it. An `Offer` here would be a price, and
+     this page deliberately quotes none. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -36,9 +37,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://companygraph.io/privacy/#webpage",
-      "name": "Privacy",
-      "url": "https://companygraph.io/privacy/",
+      "@id": "https://companygraph.io/billing/#webpage",
+      "name": "Billing",
+      "url": "https://companygraph.io/billing/",
       "inLanguage": "en",
       "isPartOf": { "@id": "https://companygraph.io/#website" },
       "publisher": { "@id": "https://companygraph.io/#organization" }
@@ -47,8 +48,9 @@
 }
 </script>
 <style>
-/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
-   Relative, because a root-absolute path breaks under file://. */
+/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
+   from file:// as well as from the domain. Relative, because this page sits one
+   directory down and a root-absolute path would break the file:// case. */
 @font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
@@ -95,12 +97,16 @@
       letter-spacing:.14em; text-transform:uppercase}
   nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
   nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  /* the page you are on is a resolved fact, so it takes the resolved colour */
+  nav a[aria-current="page"]{color:var(--c-firm)}
   .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
            border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
            color:var(--dim); white-space:nowrap}
   .langind:hover{color:var(--ink)}
   .langind .on{color:var(--c-firm); font-weight:700}
 
+  /* Not one screen: this page has an argument to make in order, so it scrolls and
+     starts at the top rather than centring itself the way the landing page does. */
   main{flex:1; padding:2vh 0 6vh}
 
   .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
@@ -112,9 +118,10 @@
   .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
            max-width:46ch; line-height:1.4}
 
-  /* The page's one reversal, and the only honest place for it: the headline says nothing
-     leaves, and one thing does — the request itself, to whoever serves the file. */
-  .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
+  /* The page's one reversal, and it earns the flag: everything below describes a
+     service you cannot buy yet. Said quietly at the bottom it would be small print;
+     said here it is part of the argument. */
+  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
   section{margin-top:clamp(3rem,8vh,5.5rem)}
@@ -123,10 +130,8 @@
      font-size:clamp(1.6rem,3vw,2.3rem)}
   h2 em{font-style:normal; color:var(--c-mid)}
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
-  .lede a{color:var(--c-mid)}
 
-  /* the same one-datum box the sibling site uses: one fact, stated plainly and
-     once, in the face this system reserves for data */
+  /* the billable unit, stated once, in the face this system reserves for data */
   .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
         background:var(--raise); border:1.5px solid var(--c-firm);
         font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
@@ -141,22 +146,20 @@
   .card li{font-size:.98rem; line-height:1.45}
   .card li b{font-weight:600}
   .card li i{font-style:normal; display:block; color:var(--dim); font-size:.88rem; margin-top:.2rem}
-  .card li i .mono{font-size:.95em; color:var(--ink)}
-  /* five short items across a full-width card read as a list, not a column of stubs */
-  .wide ul{grid-template-columns:repeat(auto-fit, minmax(255px, 1fr)); gap:1.3rem 1.8rem}
-  /* things a site could do and this one does not: considered, not accepted */
+  /* free: the settled half of the model */
+  .free{border-color:var(--c-firm)}
+  .free li b{color:var(--c-firm)}
+  /* rejected: considered, not accepted — the job --c-weak exists for */
   .never li b{color:var(--c-weak)}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
-  .rules p{color:var(--dim); font-size:1rem}
   .rules p b{font-weight:600; color:var(--ink)}
-  .rules p a{color:var(--c-mid)}
+  .rules p{color:var(--dim); font-size:1rem}
 
   footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
          font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
   footer a{color:var(--c-mid); text-decoration:none}
   footer a:hover, footer a:focus-visible{text-decoration:underline}
-  footer a[aria-current="page"]{color:var(--c-firm)}
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
@@ -183,7 +186,7 @@
       </a>
       <nav>
         <a href="https://companygraph.io/talks/" data-de="Vorträge">Talks</a>
-        <a href="../billing/" data-de="Abrechnung">Billing</a>
+        <a href="./" aria-current="page" data-de="Abrechnung">Billing</a>
         <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
       </nav>
     </div>
@@ -192,50 +195,58 @@
 
 <main>
   <div class="shell">
+
     <div class="title">
-      <h1 data-de="<span class='r70'>Diese Seite sammelt</span><span class='rcl'><em>nichts</em>.</span>"><span class="r70">This site collects</span><span class="rcl"><em>nothing</em>.</span></h1>
-      <p class="tagline" data-de="Keine Cookies, keine Statistik, keine Anfrage an Dritte. Die Liste dessen, was Ihren Browser verlässt, ist kurz genug, um sie hier abzudrucken.">No cookies, no analytics, no third-party requests. The list of what leaves your browser is short enough to print here.</p>
-      <p class="note" data-de="Eine Ausnahme, und sie steht uns nicht zu, sie zu entfernen: GitHub liefert diese Seiten aus und sieht dabei — wie jeder Hoster — die Anfrage, die sie holt.">One exception, and it is not ours to remove: GitHub serves these pages and, like any host, sees the request that fetches them.</p>
+      <h1 data-de="<span class='r70'>Nicht pro Sitzplatz.</span><span class='rcl'>Pro <em>Tag</em>.</span>"><span class="r70">Not per seat.</span><span class="rcl">Per <em>day</em>.</span></h1>
+      <p class="tagline" data-de="Das Modell ist quelloffen und bleibt es. Was kostet, ist Zeit — meine, wenn Sie sie wollen.">The model is open source and stays that way. What costs money is time — mine, if you want it.</p>
+      <p class="note" data-de="Es gibt keine Lizenz zu kaufen, keine Sitzplätze zu zählen und nichts zu hosten. Diese Seite sagt, wofür überhaupt eine Rechnung entstehen kann.">There is no licence to buy, no seats to count and nothing hosted. This page says what a bill could be for at all.</p>
     </div>
 
     <section>
-      <h2 data-de="Was diese Seite tut">What this site does</h2>
-      <p class="lede" data-de="Alles, was diese Seite braucht, kommt von companygraph.io — auch die Schriften. Nichts wird anderswo geholt, also erfährt kein Dritter, dass Sie hier waren.">Everything this page needs comes from companygraph.io, fonts included. Nothing is fetched from anywhere else, so no third party learns that you were here.</p>
-      <!-- no data-de: this is the value itself, and it says the same thing in either language.
-           Both cases are shown because pinning one would be wrong the moment you switch. -->
-      <p class="unit mono">localStorage: cg-lang = "de" | "en"</p>
-      <p class="lede" data-de="Das ist alles, was gespeichert wird: Ihre Sprachwahl, zwei Buchstaben, damit die nächste Seite sie kennt. Sie erreicht keinen Server und identifiziert niemanden.">That is everything that gets stored: your choice of language, two letters, so the next page knows it. It reaches no server and identifies nobody.</p>
+      <h2 data-de="Ein Zähler">One meter</h2>
+      <p class="lede" data-de="Beratung wird nach Aufwand abgerechnet: gearbeitete Zeit, plus Auslagen, die vorher vereinbart sind. Kein Paket, keine Bandbreite, keine Mindestabnahme.">Consulting is billed time and material: hours worked, plus expenses agreed in advance. No package, no band, no minimum.</p>
+      <p class="unit mono">1 Tag = 8 Stunden · 1 day = 8 hours</p>
+      <p class="lede" data-de="Halbe Tage gibt es, angefangene Stunden nicht. Was in einer Woche entsteht, steht in derselben Woche im Modell — Sie sehen die Arbeit dort, wo sie liegt, nicht in einem Statusbericht.">Half days exist; part-hours do not. Whatever gets built in a week is in the model that week — you see the work where it lives, not in a status report.</p>
+      <p class="lede" data-de="Der Satz kommt auf Anfrage und steht in der Offerte, nicht hier: Er hängt vom Umfang ab, und eine Zahl auf einer Website, die für jeden Fall gilt, gilt für keinen.">The rate comes on request and belongs in the proposal, not here: it depends on the scope, and a number on a website that fits every engagement fits none.</p>
+    </section>
+
+    <section>
+      <h2 data-de="Alles andere ist frei">Everything else is free</h2>
+      <p class="lede" data-de="Ein Meta-Modell nützt nur, wenn es übernommen wird. Alles, was die Übernahme teurer macht, arbeitet gegen den Zweck — also kostet nichts davon etwas.">A meta-model is only worth anything if it gets adopted. Anything that makes adoption more expensive works against the point, so none of it costs anything.</p>
       <div class="cols">
-        <div class="card never wide">
-          <h3 data-de="Gar nicht erst verwendet">Not used at all</h3>
+        <div class="card free">
+          <h3 data-de="Frei, für immer">Free, forever</h3>
           <ul>
-            <li><b data-de="Cookies">Cookies</b><i data-de="Keine, keiner Art. Es gibt kein Banner, weil es nichts zuzustimmen gibt.">None, of any kind. There is no banner because there is nothing to consent to.</i></li>
-            <li><b data-de="Statistik und Tracking">Analytics</b><i data-de="Nichts zählt Sie, und niemandem wird gemeldet, dass Sie hier waren.">Nothing counts you, and nobody is told that you were here.</i></li>
-            <li><b data-de="Anfragen an Dritte">Third-party requests</b><i data-de="Schriften, Bilder und Stile kommen alle von diesem Ursprung. Kein CDN sieht Ihre Adresse.">Fonts, images and styles all come from this origin. No CDN sees your address.</i></li>
-            <li><b data-de="Formulare und Konten">Forms and accounts</b><i data-de="Nichts auszufüllen, nichts anzumelden, nichts zu speichern.">Nothing to fill in, nothing to sign up for, nothing to store.</i></li>
-            <li><b data-de="Wiedererkennung">Fingerprinting</b><i data-de="Es wird nicht versucht, Sie über Besuche hinweg wiederzuerkennen. Der Sprachschlüssel ist kein Merkmal dafür.">No attempt is made to recognise you across visits. The language key is not an identifier.</i></li>
+            <li><b data-de="Das Vokabular">The vocabulary</b><i data-de="Typen, Schemas, Konventionen. Apache 2.0.">Types, schemas, conventions. Apache 2.0.</i></li>
+            <li><b data-de="Die Werkzeuge">The tooling</b><i data-de="Was je gebaut wird, um das Modell anzulegen und aktuell zu halten, ist quelloffen — nicht die zahlende Hälfte von etwas Freiem.">Whatever gets built to create the model and keep it current is open source — not the paid half of a free thing.</i></li>
+            <li><b data-de="Die Vorträge">The talks</b><i data-de="Deck, PDF und Tonspur, in beiden Sprachen.">Deck, PDF and audio, in both languages.</i></li>
+            <li><b data-de="Ihre Inhalte">Your content</b><i data-de="Was Sie beschreiben, gehört Ihnen. Dieses Projekt hat daran keinen Anteil.">What you describe is yours. This project claims no interest in it.</i></li>
+            <li><b data-de="Selbst betreiben">Doing it yourself</b><i data-de="Das ist der Normalfall, nicht die Sparvariante. Die meisten brauchen niemanden dafür.">That is the normal case, not the budget one. Most people need nobody for it.</i></li>
+          </ul>
+        </div>
+        <div class="card never">
+          <h3 data-de="Erwogen, nicht genommen">Considered, not accepted</h3>
+          <ul>
+            <li><b data-de="Lizenz pro Sitzplatz">A per-seat licence</b><i data-de="Zählt Leser. Ein Modell, das Menschen und KI zugleich dienen soll, darf nicht teurer werden, je mehr es lesen.">Counts readers. A model meant for people and AI at once must not cost more the more of them read it.</i></li>
+            <li><b data-de="Preis pro Eintrag">A per-entry price</b><i data-de="Bestraft Vollständigkeit. Ein halb ausgefülltes Modell ist genau das, was hier nicht entstehen soll.">Punishes completeness. A half-filled model is precisely what this is built to avoid.</i></li>
+            <li><b data-de="Eine bezahlte Fassung des Modells">A paid edition of the model</b><i data-de="Zwei Vokabulare, von denen eines besser ist, sind kein Meta-Modell mehr.">Two vocabularies, one of them better, stop being a meta-model.</i></li>
           </ul>
         </div>
       </div>
     </section>
 
     <section>
-      <h2 data-de="Ihr Modell, und was Sie hineinschreiben">Your model, and what you write in it</h2>
-      <p class="lede" data-de="Es gibt keinen gehosteten Dienst — nichts, worin Ihre Inhalte liegen könnten. Trotzdem aufgeschrieben, weil es die Frage ist, die vor der Frage nach dem Preis kommt.">There is no hosted service — nothing your content could sit in. Written down anyway, because it is the question that comes before the one about price.</p>
+      <h2 data-de="Wie sich die Rechnung verhält">How the bill behaves</h2>
       <div class="rules">
-        <p data-de="<b>Das Modell läuft dort, wo Sie laufen.</b> Sie kopieren das Vokabular in ein eigenes Repository. Es verlässt Ihr Haus nicht, und es gibt keinen Ort, an den es zurückmeldet."><b>The model runs where you run.</b> You copy the vocabulary into a repository of your own. It never leaves your building, and there is nowhere for it to report back to.</p>
-        <p data-de="<b>An Ihren Inhalten hat dieses Projekt keinen Anteil.</b> Das Vokabular steht unter Apache 2.0. Was Sie damit beschreiben, ist Ihre Arbeit — dass Sie es in dieser Form tun, ändert daran nichts."><b>This project claims no interest in your content.</b> The vocabulary is Apache 2.0. What you describe with it is your work, and describing it in this shape does not change whose it is.</p>
-        <p data-de="<b>Es gibt nichts zu installieren und nichts anzumelden.</b> Kein Konto, kein Import, kein Dienst dazwischen. Sollte sich das je ändern, steht es auf dieser Seite, bevor der erste Inhalt verarbeitet wird, nicht danach."><b>There is nothing to install and nothing to sign up for.</b> No account, no importer, no service in between. If that ever changes it will be named on this page before the first content is processed, not after.</p>
+        <p data-de="<b>Sie können jederzeit aufhören.</b> Keine Laufzeit, kein Retainer, keine Kündigungsfrist. Was bis dahin entstanden ist, liegt in Ihrem Repository und funktioniert ohne mich weiter — das ist der Sinn eines quelloffenen Modells.">
+          <b>You can stop at any time.</b> No term, no retainer, no notice period. What exists by then sits in your repository and keeps working without me — which is the point of an open model.</p>
+        <p data-de="<b>Es gibt nichts, worin Sie feststecken.</b> Kein Konto, kein Dienst, keine Datenhaltung bei mir. Wenn die Beratung endet, ändert sich an dem, was Sie haben, nichts.">
+          <b>There is nothing to be locked into.</b> No account, no service, no data held here. When the consulting ends, nothing about what you have changes.</p>
+        <p data-de="<b>Nichts davon läuft heute.</b> Es gibt noch keine Offerte und keinen Satz — diese Seite beschreibt das Modell, nach dem abgerechnet würde, damit die Frage beantwortet ist, bevor sie gestellt wird.">
+          <b>None of this is running today.</b> There is no proposal and no rate yet — this page describes the model a bill would follow, so that the question is answered before it is asked.</p>
       </div>
     </section>
 
-    <section>
-      <h2 data-de="Wer das betreibt">Who runs this</h2>
-      <div class="rules">
-        <p data-de="CompanyGraph wird von <a href='https://blust.ch/' target='_blank' rel='noopener'>Robert Blust</a> gebaut. Es ist keine Firma: eine Person, die offen arbeitet, mit dem Meta-Modell unter Apache 2.0 für alle, die nachlesen wollen, was es tatsächlich behauptet.">CompanyGraph is built by <a href="https://blust.ch/" target="_blank" rel="noopener">Robert Blust</a>. It is not a company: one person, working in the open, with the meta-model under Apache 2.0 for anyone who wants to read what it actually claims.</p>
-        <p data-de="Ein Impressum gibt es noch nicht, und das ist Absicht statt Versäumnis: Es gibt hier nichts zu kaufen, also gibt es kein Geschäft, an das eines gehören würde. Sollte sich das ändern, kommt es auf eine eigene Seite — ein Impressum ist kein Datenschutzhinweis.">There is no imprint yet, and that is deliberate rather than an omission: nothing here can be bought, so there is no transaction for one to belong to. If that changes it arrives on a page of its own, because an imprint is not a privacy note.</p>
-      </div>
-    </section>
   </div>
 </main>
 
@@ -244,14 +255,14 @@
     <span><a target="_blank" rel="noopener" href="https://github.com/companygraph">github.com/companygraph</a></span>
     <span><a target="_blank" rel="noopener" href="https://github.com/companygraph/meta-model/blob/HEAD/LICENSE">Apache 2.0</a></span>
     <span><a target="_blank" rel="noopener" href="https://blust.ch/">Robert Blust</a></span>
-    <span><a href="./" aria-current="page" data-de="Datenschutz">Privacy</a></span>
+    <span><a href="../privacy/" data-de="Datenschutz">Privacy</a></span>
   </footer>
 </div>
 
 <script>
-// Same mechanism as the other two pages: English is the markup so the page says the right
-// thing before any JS runs, and the choice is remembered per origin. This page describes
-// that key, which is the only reason it is worth pointing at the code from here.
+// Same mechanism as the landing page, and the same reason: English is the markup so the
+// page says the right thing before any JS runs, and the choice is remembered per origin —
+// so a visitor who switched to German on the landing page arrives here in German.
 (function(){
   var KEY = "cg-lang";
   function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -262,10 +273,10 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"Datenschutz — CompanyGraph",
-         desc:"Diese Seite setzt keine Cookies, führt keine Statistik und stellt keine Anfragen an Dritte. Was mit dem passiert, was Sie ins Modell schreiben — aufgeschrieben, bevor jemand fragt." },
-    en:{ title:"Privacy — CompanyGraph",
-         desc:"This site sets no cookies, runs no analytics and makes no third-party requests. What happens to what you write in the model, written down before anyone asks." }
+    de:{ title:"Abrechnung — CompanyGraph",
+         desc:"Das Meta-Modell und seine Werkzeuge sind für immer quelloffen. Was kostet, ist Zeit: Beratung, nach Aufwand abgerechnet." },
+    en:{ title:"Billing — CompanyGraph",
+         desc:"The meta-model and its tooling are open source forever. What costs money is time: consulting, billed time and material." }
   };
 
   function applyLang(){

@@ -21,7 +21,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS",
+    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. Both live in companygraph/talks — if the talk is ever
@@ -46,8 +46,20 @@ const PAGES = [
   { path: "/privacy/", title: /CompanyGraph/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["https://companygraph.io/talks/", "../", "./"],
+    sameTab: ["https://companygraph.io/talks/", "../billing/", "../", "./"],
     sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, cardBase: "https://companygraph.io", internalLinks: true },
+  // The billing page. It states a commercial model, so the two claims that make it
+  // trustworthy are asserted rather than trusted: that the tooling is free forever, and
+  // that nothing here is running yet. Drop either and the page starts selling something.
+  { path: "/billing/", title: /CompanyGraph/, lang: "en",
+    // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
+    // headings are uppercased in CSS — the same trap the nav assertion fell into.
+    contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
+    links: ["https://github.com/companygraph"],
+    sameTab: ["https://companygraph.io/talks/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
