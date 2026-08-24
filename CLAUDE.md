@@ -69,9 +69,21 @@ that lived in another repository. No CI in *this* repository can catch drift in
   URL to the custom domain as soon as one is configured, and Pages is enabled here on `main`.
   The moment `CNAME` lands on `main`, both URLs are dead — the `github.io` one redirects to a
   host the registrar answers — and `og:url` and `og:image` name that same dead host, so every
-  shared link unfurls blank. **The four Pages A records must be added before or with the
-  merge.** Until they are, the site is dark; whoever merges must not believe there is a URL to
-  fall back to.
+  shared link unfurls blank. **The Pages records must be added before or with the merge** —
+  all nine, the same set the sibling domain answers on:
+
+  ```
+  A     @     185.199.108.153  185.199.109.153  185.199.110.153  185.199.111.153
+  AAAA  @     2606:50c0:8000::153  2606:50c0:8001::153  2606:50c0:8002::153  2606:50c0:8003::153
+  CNAME www   companygraph.github.io.
+  ```
+
+  Until they are, the site is dark; whoever merges must not believe there is a URL to fall
+  back to. **The four AAAA records are not optional garnish.** This line said "the four Pages
+  A records" until someone checked `guestgraph.io`, which answers on all four AAAA records —
+  as does `companygraph.github.io` itself. Follow the old wording literally and the domain
+  ships v4-only while its own Pages host is dual-stack, which nobody on a v4 connection can
+  see and nothing in this repository can test.
 
 - **Self-contained. No external asset at all** — fonts are served from `fonts/`, referenced
   relatively (`fonts/…`, not `/fonts/…`). A root-absolute path works on the domain and breaks
