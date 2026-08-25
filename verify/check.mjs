@@ -380,7 +380,7 @@ const CHECKS = {
   // The click-through. Every name and count here is read out of the page's own data block,
   // so the check restates nothing about the example: it asserts that what the block says is
   // what the neighbourhood draws, at each step of moving the focus.
-  async graph(page) {
+  async graph(page, spec) {
     const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
     if (!data.entities) return "the data block is empty — run: npm run example";
     // The source link and its short commit are rewritten by the script from the block's own
@@ -420,12 +420,36 @@ const CHECKS = {
     await click(from.id); await page.waitForTimeout(500);
     const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
     if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    // The card, expanded: Expand opens the same content in a dialog, closed by Escape like
+    // every dialog. Nothing here is a literal from the example — the modal's h3 and file
+    // link are compared against the card's own, not against a name typed into this file.
+    if (!(await page.evaluate(() => !!document.getElementById("expand")))) return "#expand is missing";
+    await page.click("#expand");
+    const modalOpen = await page.evaluate(() => !!document.querySelector("dialog#cardmodal[open]"));
+    if (!modalOpen) return "clicking #expand did not open dialog#cardmodal";
+    const modalTitle = await page.evaluate(() => (document.querySelector("#cardmodal h3") || {}).textContent);
+    if (modalTitle !== name) return `modal h3 is ${JSON.stringify(modalTitle)}, expected the card's ${JSON.stringify(name)}`;
+    const cardHref = await page.evaluate(() => (document.querySelector("#card .cfoot a") || {}).getAttribute("href"));
+    const modalHref = await page.evaluate(() => (document.querySelector("#cardmodal .cfoot a") || {}).getAttribute("href"));
+    if (modalHref !== cardHref) return `modal file link is ${JSON.stringify(modalHref)}, expected the card's ${JSON.stringify(cardHref)}`;
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(200);
+    if (await page.evaluate(() => !!document.querySelector("dialog[open]"))) return "Escape did not close dialog#cardmodal";
     const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
     for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
     ns = await nodes();
     for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
     const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
-    return hash === from.id ? null : `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+    if (hash !== from.id) return `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+    // Root and folder have nothing to expand, checked on a fresh load rather than by
+    // navigating the still-focused page back to root, so this is what a visitor's first
+    // paint actually shows.
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    const expandVisible = await page.evaluate(() => {
+      const el = document.getElementById("expand");
+      return el ? el.offsetParent !== null : null;
+    });
+    return expandVisible === false ? null : `#expand at root focus: offsetParent check gave ${JSON.stringify(expandVisible)}, expected false`;
   },
 };
 

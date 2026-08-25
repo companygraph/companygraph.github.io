@@ -160,6 +160,11 @@ whose resolving cells are links that refocus. *View file* — the path at the pi
 GitHub, opened in the same tab like every link on this site — is pinned to the card's footer. When the root or a folder is focused the card is
 not empty: one line says what is focused and how many pages it holds, read from the block.
 
+**The card, expanded.** An *Expand* control on the card opens the same content in a modal —
+a large card over the page, closed by its × button, Escape or a click outside. Links inside
+it refocus the graph behind and update the modal in place. The URL does not change; the
+control is absent when the root or a folder is focused.
+
 **Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and
 anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lines dashed in
 `--c-mid` — every line drawn belongs to the focus. No `--c-flag`: nothing here is a
