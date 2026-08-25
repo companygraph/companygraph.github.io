@@ -32,13 +32,15 @@ it does say:
   with nothing yet demonstrating it — so this page must not advertise a mechanism the model
   has not earned by shipping one.
 - **Nothing identifying the source companies** the model was extracted from.
-- **No hosted service, and no rate.** `/billing/` states a commercial model — consulting,
-  billed time and material — and that is the only commercial claim this site may make. It
-  must keep saying that the model and its tooling are free forever, that nothing is running
-  today, and that there is no rate here: a number that fits every engagement fits none, and
-  it belongs in a proposal. Nothing on this site may imply a hosted product, a licence fee,
-  a seat count or a paid edition of the model — those are the four things the billing page
-  explicitly rejects, and advertising one elsewhere would contradict it.
+- **No hosted service, no rate, and no offer.** `/billing/` describes a model that *would*
+  be billed — consulting, time and material — and says plainly that nothing is sold today
+  and may never be: whether this becomes consulting at all is one of the things being
+  validated. Keep it in that mood. The page must go on saying that the model and its tooling
+  are free forever, that nothing is running, that there is no rate, and that there is nobody
+  to ask — **the absent contact is deliberate, not an oversight**, and adding one turns a
+  stated model into an offer. Nothing on this site may imply a hosted product, a licence fee,
+  a seat count or a paid edition of the model — the four things the billing page rejects by
+  name.
 
 This is not hypothetical caution: the sibling org's profile at `guestgraph/.github` once
 advertised "Core in development" while two slices had shipped, because it restated a roadmap
