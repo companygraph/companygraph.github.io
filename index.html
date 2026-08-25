@@ -5,14 +5,78 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CompanyGraph — a meta-model for operating a company</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/">
+<meta id="metadesc" name="description" content="A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="CompanyGraph">
 <meta property="og:url" content="https://companygraph.io/">
 <meta property="og:title" content="CompanyGraph — a meta-model for operating a company">
 <meta property="og:description" content="A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.">
 <meta property="og:image" content="https://companygraph.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CompanyGraph. Every role, every rule, written down once — a meta-model for operating a company.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
+<!-- The publisher, the site and this page — nothing about what the software does or when
+     it does it, which is the same rule the prose follows. Each page carries the whole graph
+     it references: Google resolves @graph within one document, so a bare { "@id": ... }
+     naming a node defined on another page resolves to nothing. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/#organization",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": [
+        "https://github.com/companygraph"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://companygraph.io/#website",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://companygraph.io/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://companygraph.io/#software",
+      "name": "CompanyGraph",
+      "description": "An open-source meta-model for operating a company: the structure its knowledge takes, so people and agents can both rely on it.",
+      "codeRepository": "https://github.com/companygraph",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "author": {
+        "@id": "https://companygraph.io/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/#webpage",
+      "name": "CompanyGraph \u2014 a meta-model for operating a company",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://companygraph.io/#website"
+      },
+      "publisher": {
+        "@id": "https://companygraph.io/#organization"
+      },
+      "about": {
+        "@id": "https://companygraph.io/#software"
+      }
+    }
+  ]
+}
+</script>
 <style>
 @font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}

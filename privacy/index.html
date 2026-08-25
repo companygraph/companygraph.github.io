@@ -18,10 +18,12 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="CompanyGraph. Every role, every rule, written down once — a meta-model for operating a company.">
 <meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
-
-<!-- Publisher and page, nothing about the product. The same rule the other two pages
-     follow: structured data is not a back door for claims the prose does not make. -->
+<!-- The publisher, the site and this page — nothing about what the software does or when
+     it does it, which is the same rule the prose follows. Each page carries the whole graph
+     it references: Google resolves @graph within one document, so a bare { "@id": ... }
+     naming a node defined on another page resolves to nothing. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -32,7 +34,19 @@
       "name": "CompanyGraph",
       "url": "https://companygraph.io/",
       "logo": "https://companygraph.io/logo.svg",
-      "sameAs": ["https://github.com/companygraph"]
+      "sameAs": [
+        "https://github.com/companygraph"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://companygraph.io/#website",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://companygraph.io/#organization"
+      }
     },
     {
       "@type": "WebPage",
@@ -40,12 +54,38 @@
       "name": "Privacy",
       "url": "https://companygraph.io/privacy/",
       "inLanguage": "en",
-      "isPartOf": { "@id": "https://companygraph.io/#website" },
-      "publisher": { "@id": "https://companygraph.io/#organization" }
+      "isPartOf": {
+        "@id": "https://companygraph.io/#website"
+      },
+      "publisher": {
+        "@id": "https://companygraph.io/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://companygraph.io/privacy/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://companygraph.io/privacy/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://companygraph.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Privacy",
+          "item": "https://companygraph.io/privacy/"
+        }
+      ]
     }
   ]
 }
 </script>
+
 <style>
 /* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
    Relative, because a root-absolute path breaks under file://. */
