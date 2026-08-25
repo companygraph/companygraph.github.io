@@ -10,7 +10,7 @@ import { DESIGN_CHECKS } from "./design.mjs";
 const BASE = process.env.BASE || "http://localhost:8000";
 
 const PAGES = [
-  { path: "/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -45,7 +45,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/privacy/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../", "./"],
@@ -56,7 +56,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/billing/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -68,7 +68,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/example/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../billing/", "../privacy/", "../", "./"],
@@ -166,6 +166,11 @@ const CHECKS = {
   // German and JS swapped it to English on load — which meant a crawler without JS read
   // German from a page whose og tags, share card and canonical content were all English.
   // The markup is English-first now, so this asserts the page tells the truth cold.
+  //
+  // `lang` is not this check. That one reads documentElement.lang *after* applyLang() has
+  // run, so a page whose source said `de` would be corrected on load and pass anyway, while
+  // a crawler that runs no JS still read German. Only this one is fetched cold, which is why
+  // it belongs on every page and not just the decks.
   async sourceLang(page, spec) {
     const html = await (await fetch(spec.absolute)).text();
     const m = html.match(/<html lang="([a-z]+)"/);
