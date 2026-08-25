@@ -30,6 +30,8 @@ language toggle, `verify` spec and share card. Its one figure is interactive.
   block; generality is the tooling's job. The figure shows a neighbourhood, never the whole
   graph, precisely because a real instance is too large to draw at once
 - translating entity content — it is data, shown as written
+- Type names from core's vocabulary — profile, experience — may appear in the prose; they are
+  the model's words, not the example's. Entity names, folder names as facts, and counts may not.
 
 The nav gains **Example** on every page. The talks live in this repository now, so there is
 no second repository to keep in step: one repo, five pages, one `verify` run.
@@ -160,7 +162,7 @@ not empty: one line says what is focused and how many pages it holds, read from 
 
 **Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and
 anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lines dashed in
-`--c-weak`, the focus's own references in `--c-mid`. No `--c-flag`: nothing here is a
+`--c-mid` — every line drawn belongs to the focus. No `--c-flag`: nothing here is a
 reversal. Mono for the path, folder names, field keys, eyebrows and the commit; prose for the
 name, tagline and text.
 
