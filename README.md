@@ -33,14 +33,18 @@ split had to be unwound. Do not recreate one.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
 - `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` (11 clips each), both PDFs,
-  `export-og.mjs` and `export-pdf.mjs`, and `tts/generate.py`, which reads the deck's speaker
-  notes as the single source for what is spoken.
+  `export-pdf.mjs`, and `tts/generate.py`, which reads the deck's speaker notes as the single
+  source for what is spoken. Its share card is rendered by the root `export-og.mjs`, with the
+  other two.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png` — 1200×630 share cards, each rendered from
-  the page it belongs to.
+  the page it belongs to, and an `og.sha` beside each one: a hash of everything that went into
+  the card, so `npm run og:check` can say whether it still shows its page. `og-recipe.mjs`
+  defines what goes into a card, `export-og.mjs` renders all three and writes the stamps, and
+  `og-check.mjs` reports which have drifted.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
 - `verify/check.mjs` — the suite, covering all five pages in one run. `verify/design.mjs` is
   the shared design-system copy, byte-identical across `blust.ch` and `guestgraph.io`; never
@@ -68,11 +72,18 @@ No build step.
 npm install                        # once, for Playwright
 npm run serve                      # → http://localhost:8000
 npm run verify                     # renders every page and asserts the DOM
-npm run og                         # regenerates og.png after a visual change
+npm run og:check                   # do the three share cards still show their pages?
+npm run test:og                    # the card check's own tests (node --test, no deps)
+npm run og                         # re-renders all three share cards after a visual change
 
-cd talks/intro && npm install      # pdf-lib, for the deck's exporters
-npm run og && npm run pdf          # the deck's card and both PDFs
+cd talks/intro && npm install      # pdf-lib, for the deck's PDF exporter
+npm run pdf                        # both language PDFs
 ```
+
+`og:check` needs no server and no browser — it re-derives each card's recipe and compares it
+with the `og.sha` committed beside it, which is why CI runs it before `npm ci`. `npm run og`
+needs no server either: it renders every card from `file://`, the same way the deck opens.
+Commit each `og.png` with its `og.sha`, in the commit that moved the page.
 
 `verify` needs a server already running in another terminal. It also runs against the live
 site — `BASE=https://companygraph.io npm run verify` — which is worth doing after a deploy,

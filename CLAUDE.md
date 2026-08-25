@@ -136,7 +136,8 @@ that lived in another repository. No CI in *this* repository can catch drift in
   swapped in a different geometric claim — that hiding it was necessary because the figure
   "needs room the card does not have" and would "cut the two trees off" — and that was
   disproved by literally rendering the card *without* hiding `.figure`: it fit inside the crop
-  fine. The comment now in `export-og.mjs` makes no claim about fit, cropping, or dimensions at
+  fine. The comment now sits beside `HOME_HIDE` in `og-recipe.mjs`, which is where the rule
+  itself moved, and it makes no claim about fit, cropping, or dimensions at
   all: the card's job is the headline and the call to action, the figure is the argument that
   leads there, and an argument doesn't survive being glanced at in a feed regardless of whether
   the crop has room for it. If you touch this comment again, keep it that way — a claim about
@@ -160,6 +161,52 @@ that lived in another repository. No CI in *this* repository can catch drift in
   now; do not pre-write a "talk coming soon" in the meantime, which is exactly the kind of
   status claim §3 above forbids.
 
+## Share cards go stale silently, and nothing on the page says so
+
+The three `og.png` files are not banners someone drew: `npm run og` renders each from the page
+it belongs to — the landing card is the landing page, the talks card is the talks index, the
+deck's card is its title slide — so a link preview shows what the visitor is about to land on.
+The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a
+stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every
+other check here passes the whole time it is wrong.
+
+- **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterise the same
+  text differently, so a card compared by its bytes reports which machine rendered it. The
+  check re-derives a hash of what went *into* the card and compares it with the `og.sha`
+  committed beside it. It renders nothing, needs no browser and no server, and runs in CI
+  before `npm ci`.
+- **The recipe is the page, plus every local file the page *draws*, plus the exporter's own
+  frame.** Fonts and images count: a font swap changes every card while no HTML changes at all.
+  Because `fonts/` is one copy at the root and every page reaches it relatively, perturbing a
+  font here marks **all three** cards stale — the sibling repositories, whose decks carry their
+  own `fonts/`, isolate theirs, and this repository deliberately does not.
+- **An `<a href>` is skipped: a link names somewhere to go, not something to draw.** The talks
+  index is why the exception exists — it links both multi-megabyte deck PDFs, so hashing link
+  targets reported that card stale on every `npm run pdf`, over a page that had not moved a
+  pixel. `<link>`, `<img>` and `url()` in the inline CSS all still count.
+- **The walk consumes quoted spans whole**, so a `>` inside an attribute value cannot end a tag
+  early and silently drop every reference after it. The deck keeps prose in `data-notes`, where
+  that character is ordinary.
+- **`og-recipe.mjs` holds the frame and the hide rules, and the exporter reads them from it.**
+  This is the point of the module, not tidiness. A second copy of a knob is a knob that can be
+  edited without the hash moving — a card reported current after the thing that renders it
+  changed, which is the one failure the whole mechanism exists to make impossible. It is also
+  what makes the module importable by a test: an exporter that renders on import cannot be.
+- **One exporter, one crop, and no server.** `npm run og` renders all three cards from
+  `file://` — the same way the deck opens — because every page here references its assets
+  relatively. The landing card was once cropped a pixel higher than the other two; that was an
+  accident of a separate exporter, not a choice, and there is now one constant.
+- **Both files are committed together** — `og.png` and the `og.sha` beside it, in the same
+  commit as the page that moved. The stamp is written after the screenshot, so an exporter that
+  dies half way leaves the card reported stale rather than reported current.
+- **It over-reports and never under-reports, deliberately.** Editing a comment in a page marks
+  its card stale even though the render would be identical. Clearing that is `npm run og` and a
+  commit — cheap, and the opposite error is a card nobody notices for days.
+- **`npm run test:og` is the check's own suite** (`node --test`, no dependencies). It drives
+  the recipe against fixture trees rather than against this site, so it still means something
+  after these pages change. A card added to the repository without an entry in `og-recipe.mjs`
+  fails it — otherwise the check would keep printing three ✓ while the fourth drifted.
+
 ## CI
 
 - **`.github/workflows/ci.yml` runs the suite on push to `main` and on every pull request** —
@@ -178,7 +225,11 @@ that lived in another repository. No CI in *this* repository can catch drift in
   way** — a backgrounded process keeps the step's log pipe open, and the runner waits on a
   descriptor that never closes, so the step's output must be redirected away from that pipe
   (`> /dev/null 2>&1 &`), not just sent to the background. `npm run og` never runs here — it
-  would regenerate and overwrite the committed card.
+  would regenerate and overwrite the committed cards.
+- **`npm run test:og` and `npm run og:check` run before `npm ci`**, because neither installs or
+  renders anything, and a stale share card is the one failure the browser suite cannot see: the
+  card is a valid PNG of a page that has since moved on. They are the cheapest steps in the job
+  and they fail fastest.
 
 ## Process
 
