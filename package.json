@@ -9,7 +9,9 @@
     "og": "node export-og.mjs",
     "og:check": "node og-check.mjs",
     "test:og": "node --test verify/og-recipe.test.mjs",
-    "test:example": "node --test verify/instance.test.mjs"
+    "test:example": "node --test verify/instance.test.mjs",
+    "example": "node example/build.mjs",
+    "example:check": "node example/build.mjs --check"
   },
   "devDependencies": { "playwright": "^1.49.1" }
 }
