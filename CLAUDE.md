@@ -1,7 +1,7 @@
 # companygraph.io — working conventions
 
-The site for CompanyGraph, the open-source meta-model for operating a company: one landing
-page, nothing else yet. What the files are and what the mark means is in `README.md`; this
+The site for CompanyGraph, the open-source meta-model for operating a company: the landing
+page, the billing and privacy notes, and the talks at `/talks/`. What the files are and what the mark means is in `README.md`; this
 file is about the constraints that are easy to break.
 
 ## Build & verify
@@ -64,10 +64,8 @@ that lived in another repository. No CI in *this* repository can catch drift in
   will stop you putting prose there; do not.
 
 - **The repository name is load-bearing.** `companygraph.github.io` makes this the org's
-  Pages site, so the custom domain in `CNAME` cascades to every other Pages repository in the
-  org — `companygraph/talks` will serve at `companygraph.io/talks/` with no configuration of
-  its own, the day it exists. Renaming this repository or removing `CNAME` silently breaks
-  that URL before anyone has a reason to look for it.
+  Pages site, which is what puts it on the custom domain in `CNAME`. Renaming it or removing
+  `CNAME` takes the whole domain down — every page here, the talks included.
 
 - **`companygraph.io` does not yet point at GitHub Pages, and there is no fallback URL.**
   The domain resolves to the registrar's parking host, so `CNAME` fails verification — that
@@ -148,12 +146,11 @@ that lived in another repository. No CI in *this* repository can catch drift in
   geometry is a claim a future layout change can quietly falsify; a claim about what the card
   is *for* can't be.
 
-- **The sitemap is flat, and that is a debt, not an oversight.** `sitemap.xml` lists this one
-  page. The sibling's is an index because two repositories share its domain; this domain has
-  only one, so an index pointing at a `/talks/sitemap.xml` that doesn't exist would 404. The
-  day `companygraph/talks` ships, this file becomes an index too — do that then, not before;
-  building it now would be exactly the kind of staleness this file's other rules exist to
-  prevent.
+- **The sitemap is flat, and stays flat.** It listed one page and carried a note saying it
+  would become an index the day `companygraph/talks` shipped, because two repositories were
+  going to share this domain. They no longer do: the talks live here, so one file lists every
+  URL and there is no second copy to drift.
+
 
 - **The avatar is uploaded by hand** — GitHub takes no SVG and offers no API for setting an
   org avatar. Upload `avatar.png` at Organisation → Settings → Profile after regenerating it
@@ -189,3 +186,56 @@ that lived in another repository. No CI in *this* repository can catch drift in
 ## Process
 
 - Commits happen when the user asks; suggest a message, don't auto-commit.
+
+## The deck and the talks index
+
+Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task's
+requirements implicitly include this section.
+
+- **English markup, German in `data-de`.** Static `lang="en"`, because the source is English.
+  `applyLang()` sets `de` when a visitor switches.
+- **Notes are `data-notes` (German) and `data-notes-en`.** They are attribute *values*:
+  nested markup uses single quotes (`<em class='cue'>`), German quotes must be typographic
+  (`„…“` — one straight `"` terminates the attribute and dumps the note onto the slide), and
+  an HTML comment never goes inside a start tag.
+- **`<em class='cue'>` is a stage direction and is never spoken.** `<em>` alone is emphasis.
+- **`<section class="slide` is a literal the narration generator splits on.** Nothing may come
+  between the tag name and `class`: `<section class="slide title-slide" data-say-title="no">`
+  is correct, the other order makes the slide invisible to the generator with no error.
+- **Slide numbers are zero-based everywhere a viewer can see them** — the kicker, the counter,
+  and the audio filename all say the same number.
+- **Mono means data.** Record values, lengths, language pairs, URLs, code. Never navigation,
+  buttons or prose. `verify` fails if mono appears outside data.
+- **The design token block is a copy**, fenced by `design tokens · v1` markers, shared with
+  `blust.ch`, `guestgraph.io`, `guestgraph/talks` and `companygraph.io`. Do not edit it here.
+  `verify/design.mjs` is byte-identical across all of them and is never edited in this repo.
+- **No type count, no type list read aloud, and no status claim that ages.** Slide 9 says "not
+  all of it is written yet, the roadmap says what is" and links. It never says how much.
+- **Never claim "no hallucinations".** The claim is that the model shrinks the space in which
+  an agent has to guess.
+- **Never print an environment variable's value**, and never use `${VAR:-UNSET}` — it prints
+  the value whenever the variable is set. Probe with `${VAR:+SET}`.
+- **Audio is committed, not LFS.** GitHub Pages serves the pointer text for LFS objects.
+- **Verify by rendering, never by reading the diff.**
+
+
+## "AI" in the deck, "agents" everywhere else — on purpose
+
+The deck says **AI** on slides 00 and 01 and **agents** from 07 on. Nobody has been given
+the narrower word at 0:00, and those opening slides are about who can *read* the thing; an
+agent is software that *acts* inside the stated rules, which is a claim slides 07 and 08
+earn. Do not level the two words.
+
+The same sentence appears in three other places and deliberately does **not** match:
+
+| Where | Says |
+|---|---|
+| this deck, slide 00 | "so people and **AI** can both rely on it" |
+| `companygraph.io` tagline and `og:description` | "so people and **agents** can both rely on it" |
+| `meta-model`'s `README.md` | "so that both people and **agents** can rely on it" |
+| `companygraph/.github` profile | "People can read it and **agents** can rely on it" |
+
+The deck is where a newcomer meets the idea; the repositories are read by someone already
+at the model, where `agents` is the word its schemas and conventions use throughout. This
+is a decision, not drift — if you are here because a reviewer flagged the mismatch, the
+answer is that it was flagged and kept.
