@@ -16,8 +16,8 @@
 <meta property="og:image" content="https://companygraph.io/example/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="One company, drawn: a fictional company at the centre of the folders its files form.">
-<meta property="og:locale" content="en_GB">
+<meta property="og:image:alt" content="One company, drawn: a fictional company at the center of the folders its files form.">
+<meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
 <!-- The publisher, the site and this page — nothing about what the software does or when
@@ -190,16 +190,16 @@
          grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
   .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
   .canvas svg{display:block; width:100%; height:100%}
-  .recentre{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
+  .recenter{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
             background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
             padding:.35rem .6rem; cursor:pointer}
-  .recentre:hover, .recentre:focus-visible{border-color:var(--c-mid)}
+  .recenter:hover, .recenter:focus-visible{border-color:var(--c-mid)}
   .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
   .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
   .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem;
          display:flex; align-items:center; justify-content:space-between; gap:1rem}
   .cfoot a{font-family:"Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; color:var(--c-mid); text-decoration:none}
-  /* A control, never mono — .expand sits at the end of the path line, styled like .recentre
+  /* A control, never mono — .expand sits at the end of the path line, styled like .recenter
      because both are things you can do to the stage, not things it reports. It is visible at
      every focus: the whole stage — path, canvas and card — is always worth expanding, unlike
      the card alone, which had nothing to show for the root or a folder. */
@@ -363,7 +363,7 @@
       <div class="stage" id="stage">
         <div class="canvas">
           <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recentre" id="recentre" type="button" data-de="zentrieren">recentre</button>
+          <button class="recenter" id="recenter" type="button" data-de="zentrieren">recenter</button>
         </div>
         <aside class="card" id="card" aria-live="polite">
           <div class="cbody" id="cbody"></div>
@@ -372,7 +372,7 @@
           </div>
         </aside>
       </div>
-      <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the centre.</p>
+      <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the center.</p>
 
       <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
            same #path, #fig and #card — and moves them back on close. The URL does not
@@ -918,7 +918,7 @@
     showCard(n);
   }
 
-  document.getElementById("recentre").addEventListener("click", function(){
+  document.getElementById("recenter").addEventListener("click", function(){
     var D = (reduce && reduce.matches) ? 0 : 400;
     if (D) svg.transition().duration(D).call(zoom.transform, home); else svg.call(zoom.transform, home);
   });
