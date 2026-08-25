@@ -42,7 +42,7 @@ split had to be unwound. Do not recreate one.
   at them relatively, so the deck still opens from `file://`.
 - `example/` — `index.html`, the page; `build.mjs`, which writes the data block into it (or
   checks it still matches, `--check`) by reading `meta-model/example` at the commit
-  `source.json` names; `instance.mjs`, the parser shared with the model's own build;
+  `source.json` names; `instance.mjs`, the parser;
   `source.json`, the one thing this page is allowed to name from the model — a repo and a
   commit; and its own vendored `d3.v7.min.js`, the same reason `fonts/` is self-hosted.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
