@@ -117,8 +117,14 @@ export function parseInstance(files) {
   const edges = [];
   for (const e of entities) {
     for (const [key, value] of Object.entries(e.fields)) {
-      if (!Array.isArray(value)) continue;
-      for (const v of value) edges.push({ from: e.id, to: resolve(v, e.path), via: key, attrs: {} });
+      // A list names entities and every item must resolve (R4). A scalar is a reference only
+      // when it happens to be a canonical name — `source: Local` is one, `location: Bergen` is
+      // not — so it becomes an edge when it resolves and stays a fact when it does not.
+      if (Array.isArray(value)) {
+        for (const v of value) edges.push({ from: e.id, to: resolve(v, e.path), via: key, attrs: {} });
+      } else if (byName.has(value)) {
+        edges.push({ from: e.id, to: byName.get(value), via: key, attrs: {} });
+      }
     }
     for (const s of e.sections) {
       if (!s.table) continue;

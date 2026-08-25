@@ -112,3 +112,14 @@ test("the vendored d3 is the pinned package's build, byte for byte", (t) => {
   const packaged = fs.readFileSync(packagedPath);
   assert.ok(vendored.equals(packaged), "example/d3.v7.min.js differs from node_modules/d3/dist/d3.min.js — copy it again");
 });
+
+test("a scalar frontmatter value that names an entity becomes an edge; one that does not stays a fact", () => {
+  const withSource = new Map(valid);
+  withSource.set("sources/local.md", "# Local\n\n> Kept in this repository.\n");
+  withSource.set("skills/java-programming.md", "---\nsource: Local\ngroup: Programming Languages\n---\n\n# Java Programming\n\n> JVM services.\n");
+  const { edges, entities } = parseInstance(withSource);
+  assert.deepEqual(edges.find(x => x.via === "source"),
+    { from: "skills/java-programming", to: "sources/local", via: "source", attrs: {} });
+  assert.equal(edges.filter(x => x.via === "group").length, 0);
+  assert.equal(entities.find(e => e.id === "skills/java-programming").fields.group, "Programming Languages");
+});
