@@ -76,9 +76,9 @@ function locate(path) {
     const name = isFile ? item.slice(0, -3) : item;
     const id = (ownerId ? ownerId + "/" : "") + folder + "/" + name;
     chain.push({ folder, name, ownerId, id, isFile });
-    if (isFile) return { chain, self: chain[chain.length - 1], own: false };
+    if (isFile) return { chain, self: chain[chain.length - 1] };
     if (i + 2 === parts.length - 1 && parts[i + 2] === name + ".md") {
-      return { chain, self: chain[chain.length - 1], own: true };
+      return { chain, self: chain[chain.length - 1] };
     }
     ownerId = id;
   }

@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://companygraph.io/example/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="One company, drawn: a tree from a fictional company to its folders and pages.">
+<meta property="og:image:alt" content="One company, drawn: a fictional company at the centre of the folders its files form.">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -118,9 +118,9 @@
   .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
            max-width:46ch; line-height:1.4}
 
-  /* The page's one reversal, and it earns the flag: everything below describes a
-     service you cannot buy yet. Said quietly at the bottom it would be small print;
-     said here it is part of the argument. */
+  /* The page's one reversal, and it earns the flag: a visitor's first assumption is that
+     they are looking at a real company, and this line says the opposite — nothing here is
+     real, and nothing here was written by hand. */
   .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
@@ -147,7 +147,7 @@
          grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
   .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
   .canvas svg{display:block; width:100%; height:100%}
-  .recentre{position:absolute; right:.8rem; bottom:.8rem; font-size:.72rem; letter-spacing:.08em;
+  .recentre{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
             background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
             padding:.35rem .6rem; cursor:pointer}
   .recentre:hover, .recentre:focus-visible{border-color:var(--c-mid)}
@@ -180,8 +180,7 @@
      the figure onto (0,0). Reduced motion is a transition duration of 0 ms in the script,
      which lands on exactly the same drawing. */
   #fig .own{fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
-  #fig .ref{fill:none; stroke:var(--c-weak); stroke-width:1.6; stroke-dasharray:5 5}
-  #fig .ref.hot{stroke:var(--c-mid)}
+  #fig .ref{fill:none; stroke:var(--c-mid); stroke-width:1.6; stroke-dasharray:5 5}
   #fig .box{fill:none; stroke:var(--c-weak); stroke-width:2}
   #fig .sq{fill:var(--c-firm)}
   #fig .n{cursor:pointer}
@@ -257,10 +256,10 @@
     </div>
 
     <section class="figure-section">
-      <p class="path mono" id="path" aria-live="polite"></p>
+      <p class="path mono" id="path"></p>
       <div class="stage">
         <div class="canvas">
-          <svg id="fig" role="img" aria-labelledby="figcap"></svg>
+          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
           <button class="recentre" id="recentre" type="button" data-de="zentrieren">recentre</button>
         </div>
         <aside class="card" id="card" aria-live="polite">
@@ -274,8 +273,8 @@
     <section>
       <h2 data-de="Wie man es liest">How to read it</h2>
       <div class="rules">
-        <p data-de="<b>Ein Ordner ist der Plural seines Typs.</b> Was in <span class='mono'>skills/</span> liegt, ist ein Skill. Es gibt keine Abkürzung, weil die eine Regel, die beide Namen vorhersagbar macht, keine Ausnahme verträgt.">
-          <b>A folder is the plural of its type.</b> What sits in <span class="mono">skills/</span> is a skill. Nothing is abbreviated, because the one rule that makes both names predictable cannot afford an exception.</p>
+        <p data-de="<b>Ein Ordner ist der Plural seines Typs.</b> Was in einem Ordner liegt, ist eine Seite von dessen Typ — nichts wird abgekürzt, weil die eine Regel, die beide Namen vorhersagbar macht, keine Ausnahme verträgt.">
+          <b>A folder is the plural of its type.</b> What sits in a folder is one page of that folder's type — nothing is abbreviated, because the one rule that makes both names predictable cannot afford an exception.</p>
         <p data-de="<b>Eine Seite ist eine Datei, wenn sie nichts besitzt, und ein Ordner, wenn sie eigene Sammlungen besitzt.</b> Das Profil ist das Beispiel für das Zweite: Es hält seine eigene Datei und daneben die Erfahrungen, die ihm gehören.">
           <b>A page is a file when it owns nothing, and a folder when it owns collections of its own.</b> The profile is the example of the second: it holds its own file and, beside it, the experiences that belong to it.</p>
         <p data-de="<b>Jede Linie ist ein Name, der in einer Datei steht.</b> Nichts hier ist ein Link, der kaputtgehen kann: Ein Name, der auf nichts zeigt, ist ein Fehler, keine Warnung.">
@@ -380,9 +379,9 @@
   function t(k){ return STR[k][lang()]; }
 
   // ── model ─────────────────────────────────────────────────────────────────────────────
-  // Node ids are paths, because that is what they are on disk: "skills" is a folder,
-  // "skills/java-programming" a page, "profiles/mira-halvorsen/experiences" a folder a page
-  // owns. The one invented id is "root", which has no path of its own.
+  // Node ids are paths, because that is what they are on disk: "<folder>" is a folder,
+  // "<folder>/<entity>" a page, "<folder>/<entity>/<owned folder>" a folder a page owns. The
+  // one invented id is "root", which has no path of its own.
   var byId = {}; data.entities.forEach(function(e){ byId[e.id] = e; });
   var rootTypes = data.types.filter(function(t){ return !t.owner; });
   function ownedTypes(type){ return data.types.filter(function(t){ return t.owner === type; }); }
@@ -409,8 +408,8 @@
   }
   function ancestorsOf(n){ var out = [], p = parentOf(n); while (p) { out.unshift(p); p = parentOf(p); } return out; }
   function pathOf(n){ return n.kind === "root" ? [] : n.id.split("/"); }
-  // Pages held: for the root every entity, for a folder everything filed beneath it — the
-  // profile and the experiences it owns both count as pages of profiles/.
+  // Pages held: for the root every entity, for a folder everything filed beneath it — an
+  // entity and the folder it owns both count as pages of the folder that holds the entity.
   function pagesUnder(n){
     if (n.kind === "root") return data.entities.length;
     return data.entities.filter(function(e){ return e.id.indexOf(n.id + "/") === 0; }).length;
@@ -583,7 +582,7 @@
     lsel.exit().classed("gone", true).style("pointer-events", "none")
         .transition().duration(D).style("opacity", 0).remove();
     lsel.enter().append("path")
-        .attr("class", function(d){ return d.kind === "own" ? "own" : "ref hot"; })
+        .attr("class", function(d){ return d.kind === "own" ? "own" : "ref"; })
         .attr("data-from", function(d){ return d.from; })
         .attr("data-to", function(d){ return d.to; })
         .attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); })
