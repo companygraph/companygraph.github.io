@@ -29,7 +29,7 @@ const PAGES = [
                // still not derived from the deck's own timings, so re-cut the talk and this
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
-               "Watch intro talk", "10 minutes · German or English"],
+               "Watch intro talk", "12 minutes · German or English"],
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
@@ -87,11 +87,14 @@ const PAGES = [
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
   { path: "/talks/intro/", title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
-    // The deck's one outbound link, on the closing slide. Asserted the same way the index
-    // asserts its own: `links` is the only check that fails when an href is simply wrong,
-    // so without this line a typo in the deck's single call to action would ship silently.
-    // It opens in a new tab because a deck a presenter navigates away from is gone.
-    links: ["https://companygraph.io/"],
+    // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
+    // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
+    // check that fails when an href is simply wrong, so without this line a typo in the
+    // deck's call to action would ship silently. Links open in a new tab because a deck a
+    // presenter navigates away from is gone.
+    links: ["https://companygraph.io/",
+            "https://github.com/companygraph/meta-model#roadmap"],
+    slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
@@ -106,6 +109,14 @@ const PAGES = [
 
 const CHECKS = {
   ...DESIGN_CHECKS,
+  // The deck's length in slides. The arc is twelve slides and the numbering is zero-based
+  // everywhere a viewer sees it, so a slide added without its neighbours renumbered — or
+  // one dropped by an unclosed attribute swallowing the next <section> — shows up here
+  // before it shows up as an audio file that does not exist.
+  async slides(page, spec) {
+    const n = await page.evaluate(() => document.querySelectorAll("section.slide").length);
+    return n === spec.slides ? null : `${n} slides, expected ${spec.slides}`;
+  },
   // A page that says it makes no third-party request must make none. `links` and
   // `internalLinks` cannot see this: they inspect markup, and a font, an analytics tag or
   // an embed is a request. Copied from guestgraph.github.io, where the same claim is made.
