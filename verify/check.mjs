@@ -81,7 +81,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL"], hides: ["One company", "How to read it"] },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
-    card: true, cardBase: "https://companygraph.io", internalLinks: true },
+    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: true },
 
   { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
@@ -302,6 +302,34 @@ const CHECKS = {
     if (real[0] !== declared[0] || real[1] !== declared[1])
       return `card is ${real.join("×")} but declared ${declared.join("×")}`;
     return null;
+  },
+  // The click-through. Every name and count here is read out of the page's own data block,
+  // so the check restates nothing about the example: it asserts that what the block says is
+  // what the figure draws, at each step of opening it.
+  async graph(page) {
+    const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
+    if (!data.entities) return "the data block is empty — run: npm run example";
+    const visible = () => page.evaluate(() => Array.from(document.querySelectorAll(".fig .n")).map(n => n.dataset.id));
+    const click = (id) => page.evaluate((id) => document.querySelector(`.fig .n[data-id="${id}"]`).dispatchEvent(new MouseEvent("click", { bubbles: true })), id);
+    let ids = await visible();
+    if (ids.length !== 1 || ids[0] !== "root") return `initially ${ids.length} node(s), expected the root alone`;
+    await click("root"); ids = await visible();
+    const roots = data.types.filter(t => !t.owner).map(t => t.folder);
+    for (const f of roots) if (!ids.includes(f)) return `root open, but folder ${f} is not drawn`;
+    if (ids.length !== roots.length + 1) return `root open: ${ids.length - 1} folders drawn, block has ${roots.length}`;
+    const withEdges = data.edges[0]; if (!withEdges) return null;
+    const from = data.entities.find(e => e.id === withEdges.from);
+    // open the folder chain down to the first edge's source, then the source itself
+    const chain = []; for (let e = from; e; e = e.owner ? data.entities.find(x => x.id === e.owner) : null) chain.unshift(e);
+    for (const e of chain) { await click(e.id.slice(0, e.id.lastIndexOf("/"))); if (e !== from) await click(e.id); }
+    await click(from.id);
+    const name = await page.evaluate(() => (document.querySelector("#panel h3") || {}).textContent);
+    if (name !== from.name) return `panel shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`.fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
+    const want = data.edges.filter(x => x.from === from.id).map(x => x.to);
+    for (const to of want) if (!drawn.includes(to)) return `reference ${from.id} → ${to} is in the block but not drawn`;
+    const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
+    return hash === from.id ? null : `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
   },
   async translates(page, spec) {
     const body = () => page.evaluate(() => document.body.innerText);
