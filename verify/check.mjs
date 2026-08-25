@@ -39,7 +39,7 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "Einführungsvortrag ansehen", "10 Minuten · Deutsch oder Englisch"],
+                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
                   hides: ["Two companies", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
