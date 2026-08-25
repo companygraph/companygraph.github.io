@@ -2,6 +2,7 @@
 // small maps of path → Markdown, and every rule the spec names has a fixture that breaks it.
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { parseInstance, ROOT_LABEL } from "../example/instance.mjs";
 
 const valid = new Map([
@@ -97,4 +98,17 @@ test("a root folder that is not a plural is an R7 error", () => {
 test("output is deterministic regardless of map order", () => {
   const shuffled = new Map([...valid.entries()].reverse());
   assert.deepEqual(parseInstance(shuffled), parseInstance(valid));
+});
+
+// The vendored copy is the deliverable — the page loads example/d3.v7.min.js, not the
+// package — so the only thing that can go wrong silently is the two drifting apart.
+// CI runs this suite before `npm ci`, so a missing node_modules skips rather than fails:
+// the check is real on every machine that has installed, which is every machine that could
+// have changed the vendored file.
+test("the vendored d3 is the pinned package's build, byte for byte", (t) => {
+  const packagedPath = new URL("../node_modules/d3/dist/d3.min.js", import.meta.url);
+  if (!fs.existsSync(packagedPath)) return t.skip("node_modules not installed");
+  const vendored = fs.readFileSync(new URL("../example/d3.v7.min.js", import.meta.url));
+  const packaged = fs.readFileSync(packagedPath);
+  assert.ok(vendored.equals(packaged), "example/d3.v7.min.js differs from node_modules/d3/dist/d3.min.js — copy it again");
 });

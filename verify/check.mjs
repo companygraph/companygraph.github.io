@@ -305,29 +305,35 @@ const CHECKS = {
   },
   // The click-through. Every name and count here is read out of the page's own data block,
   // so the check restates nothing about the example: it asserts that what the block says is
-  // what the figure draws, at each step of opening it.
+  // what the neighbourhood draws, at each step of moving the focus.
   async graph(page) {
     const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
     if (!data.entities) return "the data block is empty — run: npm run example";
-    const visible = () => page.evaluate(() => Array.from(document.querySelectorAll(".fig .n")).map(n => n.dataset.id));
-    const click = (id) => page.evaluate((id) => document.querySelector(`.fig .n[data-id="${id}"]`).dispatchEvent(new MouseEvent("click", { bubbles: true })), id);
-    let ids = await visible();
-    if (ids.length !== 1 || ids[0] !== "root") return `initially ${ids.length} node(s), expected the root alone`;
-    await click("root"); ids = await visible();
+    const nodes = () => page.evaluate(() => Array.from(document.querySelectorAll("#fig .n")).map(n => ({ id: n.dataset.id, focus: n.classList.contains("focus") })));
+    const click = (id) => page.evaluate((id) => document.querySelector(`#fig .n[data-id="${id}"]`).dispatchEvent(new MouseEvent("click", { bubbles: true })), id);
     const roots = data.types.filter(t => !t.owner).map(t => t.folder);
-    for (const f of roots) if (!ids.includes(f)) return `root open, but folder ${f} is not drawn`;
-    if (ids.length !== roots.length + 1) return `root open: ${ids.length - 1} folders drawn, block has ${roots.length}`;
-    const withEdges = data.edges[0]; if (!withEdges) return null;
-    const from = data.entities.find(e => e.id === withEdges.from);
-    // open the folder chain down to the first edge's source, then the source itself
-    const chain = []; for (let e = from; e; e = e.owner ? data.entities.find(x => x.id === e.owner) : null) chain.unshift(e);
-    for (const e of chain) { await click(e.id.slice(0, e.id.lastIndexOf("/"))); if (e !== from) await click(e.id); }
-    await click(from.id);
-    const name = await page.evaluate(() => (document.querySelector("#panel h3") || {}).textContent);
-    if (name !== from.name) return `panel shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
-    const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`.fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
-    const want = data.edges.filter(x => x.from === from.id).map(x => x.to);
-    for (const to of want) if (!drawn.includes(to)) return `reference ${from.id} → ${to} is in the block but not drawn`;
+    let ns = await nodes();
+    if (!ns.find(n => n.id === "root" && n.focus)) return "initially the root is not the focus";
+    if (ns.length !== roots.length + 1) return `initially ${ns.length} nodes, expected root + ${roots.length} folders`;
+    const edge = data.edges[0]; if (!edge) return null;
+    const from = data.entities.find(e => e.id === edge.from);
+    const folder = from.id.slice(0, from.id.lastIndexOf("/"));
+    // Walk down to that folder one click at a time. The canvas is a neighbourhood, not a
+    // tree, so a folder four levels down is not on it until its parent is the focus — and
+    // every prefix of an id IS a node here, because an id is the thing's path on disk.
+    const parts = folder.split("/");
+    for (let i = 1; i <= parts.length; i++) { await click(parts.slice(0, i).join("/")); await page.waitForTimeout(500); }
+    ns = await nodes();
+    if (!ns.find(n => n.id === folder && n.focus)) return `clicking ${folder} did not focus it`;
+    if (!ns.find(n => n.id === "root")) return `focused ${folder}, but its ancestor root is gone`;
+    if (!ns.find(n => n.id === from.id)) return `focused ${folder}, but its child ${from.id} is not drawn`;
+    await click(from.id); await page.waitForTimeout(500);
+    const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
+    if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
+    ns = await nodes();
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
     const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
     return hash === from.id ? null : `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
   },

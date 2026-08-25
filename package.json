@@ -13,5 +13,8 @@
     "example": "node example/build.mjs",
     "example:check": "node example/build.mjs --check"
   },
-  "devDependencies": { "playwright": "^1.49.1" }
+  "devDependencies": {
+    "d3": "7.9.0",
+    "playwright": "^1.49.1"
+  }
 }
