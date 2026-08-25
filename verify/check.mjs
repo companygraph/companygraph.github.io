@@ -24,9 +24,11 @@ const PAGES = [
     contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
-               // click away. Both live in companygraph/talks — if the talk is ever
-               // recut, this page has no way to find out, so the number is checked
-               // against nothing here and must be updated by hand with the deck.
+               // click away. The deck is in this repository now — `talks/intro/` — so the
+               // number and the thing it describes finally move in the same commit. It is
+               // still not derived from the deck's own timings, so re-cut the talk and this
+               // string has to be changed by hand; what changed is that nothing crosses a
+               // repository boundary to do it.
                "Watch intro talk", "10 minutes · German or English"],
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
