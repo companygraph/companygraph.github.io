@@ -1,40 +1,51 @@
-# CompanyGraph — Landing Page
+# companygraph.io
 
-The landing page for **CompanyGraph** — an open-source meta-model for operating a company: the
-structure its knowledge takes, as a graph of Markdown files, so people and agents can both rely
-on it.
+The site for **CompanyGraph** — an open-source meta-model for operating a company: the
+structure its knowledge takes, as a graph of Markdown files, so people and agents can both
+rely on it.
 
-**Live:** https://companygraph.io, once the domain is repointed at GitHub Pages. Until it
-is, the site has no working URL at all — Pages redirects `companygraph.github.io` to the
-custom domain the moment `CNAME` is on `main`, and the custom domain still answers from the
-registrar. See `CLAUDE.md`.
+**Live:** https://companygraph.io
 
-This is the organisation's GitHub Pages site, which is why the repository is named
-`companygraph.github.io`. That name matters: setting the custom domain here makes every other
-Pages site in the org inherit it, so `companygraph/talks` will serve at
-**companygraph.io/talks/** with no configuration of its own, the day that repository exists.
+One repository serves the whole domain. It was two — the talks had their own — and the split
+cost more than it saved: the talks index copies this site's shell, header and footer, so every
+nav change had to land in both repositories in the same breath, with no CI on either side able
+to see the seam. They were merged, history and all, in August 2026.
+
+| Path | |
+|---|---|
+| `/` | The landing page. One screen: what CompanyGraph is, and the way to the model. |
+| `/talks/` | The talks index. |
+| `/talks/intro/` | The introduction — eleven slides, English and German, narrated, with a PDF in each language. |
+| `/billing/` | What would cost money, if anything ever does. |
+| `/privacy/` | What this site collects, which is nothing. |
+
+The repository is named `companygraph.github.io` because that makes it the organisation's
+GitHub Pages site, which is what puts it on the custom domain in `CNAME`. **Renaming it or
+removing `CNAME` takes the whole domain down**, talks included.
+
+A repository named `talks` in this organisation would claim `companygraph.io/talks/` the
+moment its Pages were enabled — shadowing the folder in this repository, which is how the old
+split had to be unwound. Do not recreate one.
 
 ## Contents
 
-- `index.html` — the page. One screen, self-contained: even the fonts are served from
-  `fonts/`, referenced relatively so the file still works opened straight from disk.
-- `logo.svg` — the mark, described below. Uses `currentColor`, so it inherits whatever colour
-  it is placed in.
-- `favicon.svg` — the same mark at a size that has to survive 16px.
-- `avatar.svg` / `avatar.png` — the org avatar, 1024×1024, full-bleed square (GitHub rounds
-  org avatars itself).
-- `CNAME` — the custom domain.
-- `og.png` — the page itself, rendered at 1200×630 for link previews. `export-og.mjs`
-  regenerates it (`npm run og`): headless Chromium, reduced motion emulated, the figure hidden.
-- `robots.txt`, `sitemap.xml` — one page, one URL.
-- `verify/check.mjs` — this page's own assertions (title, language, the language toggle and
-  its round trip, the outbound link, the og card, that no internal path — attribute or CSS
-  `url()` — is root-absolute).
-- `verify/design.mjs` — the shared design-system assertions, copied in byte-identical from the
-  sibling repositories. Never edit it here — see `CLAUDE.md`.
-- `fonts/` — the four self-hosted `.woff2` files the page's `@font-face` rules point at.
-- `package.json` / `package-lock.json` — `serve`, `verify`, `og` scripts; Playwright as the
-  only dependency.
+- `index.html`, `billing/`, `privacy/` — the three prose pages, each self-contained.
+- `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
+  it meets no seam.
+- `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` (11 clips each), both PDFs,
+  `export-og.mjs` and `export-pdf.mjs`, and `tts/generate.py`, which reads the deck's speaker
+  notes as the single source for what is spoken.
+- `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
+  at them relatively, so the deck still opens from `file://`.
+- `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
+  survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
+- `og.png`, `talks/og.png`, `talks/intro/og.png` — 1200×630 share cards, each rendered from
+  the page it belongs to.
+- `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
+- `verify/check.mjs` — the suite, covering all five pages in one run. `verify/design.mjs` is
+  the shared design-system copy, byte-identical across `blust.ch` and `guestgraph.io`; never
+  edit it here.
+- `docs/superpowers/` — the design and the plan behind the landing page and the talk.
 
 ## The mark
 
@@ -54,32 +65,46 @@ destination, held still.
 No build step.
 
 ```bash
-npm install       # once, for Playwright
-npm run serve     # → http://localhost:8000
-npm run verify    # renders the served page and asserts the English DOM
-npm run og        # regenerates og.png after any visual change
+npm install                        # once, for Playwright
+npm run serve                      # → http://localhost:8000
+npm run verify                     # renders every page and asserts the DOM
+npm run og                         # regenerates og.png after a visual change
+
+cd talks/intro && npm install      # pdf-lib, for the deck's exporters
+npm run og && npm run pdf          # the deck's card and both PDFs
 ```
 
-`verify` needs a server already running in another terminal (or `BASE=... npm run verify`
-against a different one). It exits non-zero on any failure, so `all checks pass` is the bar.
+`verify` needs a server already running in another terminal. It also runs against the live
+site — `BASE=https://companygraph.io npm run verify` — which is worth doing after a deploy,
+and is how a bug was once found that could not appear locally: a check rewrote the share
+card's URL onto `location.origin`, which is only correct when the repository is the root of
+its host.
 
-Most of it asserts the page as it first renders, which is English. The `translates` check is
-the one that clicks: it presses the language control, requires the German to be there and the
-English to be gone, then presses it again and requires the page to come back exactly as it
-was. It runs last for that reason — it is the only check that changes what the others read,
-and the round trip is what keeps a check added after it from inheriting a German page.
+Most checks read the page as it first renders, which is English. `translates` is the one that
+clicks: it presses the language control, requires the German to be there and the English to be
+gone, then presses it again and requires the page to come back exactly as it was. It runs last
+because it is the only check that changes what the others read.
 
 It was written by breaking the page three ways and watching it catch each: the toggle's click
-listener deleted, the `<h1>`'s `data-de` attribute misspelled, and `applyLang` stopped from
-setting `document.documentElement.lang`. Before it existed, all three printed
-`all checks pass`.
+listener deleted, an `<h1>`'s `data-de` misspelled, and `applyLang` stopped from setting
+`document.documentElement.lang`. Before it existed, all three printed `all checks pass`.
 
-## What this page deliberately does not say
+`sameOrigin` guards the privacy page's central claim — that nothing is fetched from anywhere
+else. A font link or an analytics tag is a request, not markup, so no other check here can
+see one.
 
-One screen, one job: say what CompanyGraph is and send the visitor to the model. No type
-count, no type list, no status, no roadmap, no claim about packs, nothing identifying the
-companies the model was extracted from, no service and no price — there is no hosted
-anything. Every claim a reader could check lives in
-[`companygraph/meta-model`](https://github.com/companygraph/meta-model) and this page links
-to it rather than restating it. See `CLAUDE.md` for the reasons those constraints exist and
-what has already gone wrong when a page like this one didn't hold them.
+## What this site deliberately does not say
+
+No type count, no type list, no status and no roadmap — those live in
+[`companygraph/meta-model`](https://github.com/companygraph/meta-model), which ships them in
+the same commit as the thing they describe. No claim that a pack exists. Nothing identifying
+the companies the model was extracted from.
+
+`/billing/` is the one place a commercial model is stated, and it states one that is not
+running: consulting, time and material, no rate, nobody to ask, and it may never happen at
+all. **The absent contact is deliberate** — adding one turns a described model into an offer.
+Nothing anywhere may imply a hosted product, a licence fee, a seat count or a paid edition of
+the model; those are the four things the billing page rejects by name.
+
+See `CLAUDE.md` for why each of those constraints exists, and what has already gone wrong when
+a page like this one didn't hold them.
