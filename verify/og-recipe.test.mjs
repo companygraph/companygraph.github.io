@@ -32,7 +32,7 @@ const card = (over = {}) => ({
   dir: ".",
   hide: ".figure{display:none}",
   width: 1200, height: 630, renderHeight: 675, clipY: 22,
-  titleSlide: false, settle: "reduced-motion", from: "served",
+  titleSlide: false, settle: "reduced-motion",
   ...over,
 });
 
@@ -86,6 +86,48 @@ test("a subpage's ../fonts reference resolves back into the repository", () => {
 test("a reference climbing above the repository root is not a source", () => {
   const { root, base } = tree({ "index.html": '<img src="../outside.png">' }, { nest: true });
   fs.writeFileSync(path.join(base, "outside.png"), "x");   // it exists; the guard must still drop it
+  assert.deepEqual(sources(".", root), ["index.html"]);
+});
+
+// A link names somewhere to go, not something to draw. The talks index is why this exception
+// exists: it links both multi-megabyte deck PDFs, so hashing link targets reports that card
+// stale on every `npm run pdf`, over a page that has not moved a pixel.
+test("a file the page only links to is not a source", () => {
+  const { root } = tree({
+    "index.html": '<a href="talk.pdf">the talk</a>',
+    "talk.pdf": "%PDF",
+  });
+  assert.deepEqual(sources(".", root), ["index.html"]);
+});
+
+test("a file the page draws is a source even next to a link", () => {
+  const { root } = tree({
+    "index.html": '<a href="talk.pdf">the talk</a><img src="mark.svg">',
+    "talk.pdf": "%PDF",
+    "mark.svg": "<svg/>",
+  });
+  assert.deepEqual(sources(".", root), ["index.html", "mark.svg"]);
+});
+
+test("a stylesheet the page links with <link> is a source", () => {
+  const { root } = tree({ "index.html": '<link rel="icon" href="favicon.svg">', "favicon.svg": "<svg/>" });
+  assert.deepEqual(sources(".", root), ["favicon.svg", "index.html"]);
+});
+
+// The decks keep prose in `data-notes`, where `>` is an ordinary character. Ending a tag at
+// the first `>` regardless of quoting drops every reference after it, silently.
+test("a > inside an attribute value does not end the tag early", () => {
+  const { root } = tree({
+    "index.html": '<div data-notes="a > b"><img src="mark.svg"></div>',
+    "mark.svg": "<svg/>",
+  });
+  assert.deepEqual(sources(".", root), ["index.html", "mark.svg"]);
+});
+
+// The attribute is lowercase so it reaches the tag test; only lowercasing the tag name keeps
+// this out of the recipe.
+test("an uppercase link is still a link", () => {
+  const { root } = tree({ "index.html": '<A href="talk.pdf">x</A>', "talk.pdf": "%PDF" });
   assert.deepEqual(sources(".", root), ["index.html"]);
 });
 

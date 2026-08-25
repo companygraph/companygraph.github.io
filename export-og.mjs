@@ -1,47 +1,52 @@
-// The og card is the page itself, rendered. Two things must be right or it ships wrong in a
-// way that looks deliberate:
+// Render the 1200×630 share cards that link previews use (og:image).
 //
-// 1. reducedMotion:"reduce" — the figure animates, and a render that merely waits "long
-//    enough" catches it mid-draw. Emulating reduced motion draws the settled state the
-//    page's own @media block defines, exactly, instead of racing a timer.
-// 2. .figure is hidden — see og-recipe.mjs, which holds the rule and the reason. The frame and
-//    the hide rules live there rather than here because `npm run og:check` has to hash the
-//    same ones this renders with; a second copy is a knob that can be edited without the
-//    check noticing.
+// Each card is the page it belongs to: the landing card is the landing page, the talks card is
+// the talks index, and the deck's card is its own title slide — so a preview shows what the
+// visitor is about to land on rather than a banner kept in step with it by hand.
 //
-// The stamp beside the card is what makes staleness visible later — see og-recipe.mjs.
+// English, because the head metadata is English: a scraper never runs applyLang(), so a card
+// and the og:description it sits beside have to agree.
+//
+// Everything about what a card contains lives in og-recipe.mjs — the frame, the crop, the hide
+// rules, the card list — because `npm run og:check` has to hash the same ones this renders
+// with. A second copy is a knob that can be edited without the hash moving, which is the one
+// failure the check exists to make impossible. This file is the only one that needs playwright.
+//
+// Usage: npm run og
 import { chromium } from "playwright";
-import { cardFor, stamp } from "./og-recipe.mjs";
-
-const c = cardFor(".");
-if (c.settle !== "reduced-motion" || c.from !== "served") {
-  throw new Error(`og-recipe.mjs describes the landing card as ${c.settle}/${c.from}, which is not what this renders`);
-}
-
-// The recipe hashes the files in this repository. Rendering the deployed site and then
-// stamping would write a stamp describing sources the card was not made from — a card
-// reported current that nothing here produced.
-const BASE = process.env.BASE || "http://localhost:8000/";
-const local = /^https?:\/\/(localhost|127\.0\.0\.1)([:/]|$)/.test(BASE);
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { REPO_ROOT, cards, stamp } from "./og-recipe.mjs";
 
 const browser = await chromium.launch();
-const page = await browser.newPage({
-  viewport: { width: c.width, height: c.renderHeight },
-  deviceScaleFactor: 1,
-  reducedMotion: "reduce",
-});
-await page.goto(BASE, { waitUntil: "networkidle" });
-await page.evaluate(() => document.fonts.ready);
-await page.addStyleTag({ content: c.hide });
-await page.screenshot({ path: "og.png", clip: { x: 0, y: c.clipY, width: c.width, height: c.height } });
-await browser.close();
+for (const c of cards) {
+  const page = await browser.newPage({
+    viewport: { width: c.width, height: c.renderHeight },
+    deviceScaleFactor: 1,
+    // The landing page's figure animates, and a render that merely waits "long enough" catches
+    // it mid-draw. Emulating reduced motion draws the settled state the page's own @media block
+    // defines, exactly, instead of racing a timer.
+    ...(c.settle === "reduced-motion" ? { reducedMotion: "reduce" } : {}),
+  });
+  // file://, like the deck itself: every page here references its assets relatively for exactly
+  // this reason, so no card needs a server to render and `npm run og` needs no second terminal.
+  await page.goto(pathToFileURL(path.join(REPO_ROOT, c.dir, "index.html")).href, { waitUntil: "networkidle" });
+  await page.addStyleTag({ content: c.hide });
+  if (c.titleSlide) {
+    await page.evaluate(() => {
+      const s = Array.from(document.querySelectorAll(".slide"));
+      s.forEach((el, k) => el.classList.toggle("active", k === 0));
+    });
+  }
+  if (c.settle === "reduced-motion") await page.evaluate(() => document.fonts.ready);
+  else await page.waitForTimeout(900);              // let the rise animation settle
 
-// After the screenshot, so a run that dies half way leaves the card reported stale rather than
-// reported current on a file it never wrote.
-if (local) {
+  const out = path.join(REPO_ROOT, c.dir, "og.png");
+  await page.screenshot({ path: out, clip: { x: 0, y: c.clipY, width: c.width, height: c.height } });
+  // Stamped after the screenshot, so a run that dies half way leaves the card reported stale
+  // rather than reported current on a file it never wrote.
   stamp(c);
-  console.log(`wrote og.png ${c.width}×${c.height} and og.sha`);
-} else {
-  console.log(`wrote og.png ${c.width}×${c.height} from ${BASE}`);
-  console.log("did not stamp og.sha: the recipe describes this repository, and this card came from elsewhere");
+  console.log("  ✓ " + path.join(c.dir, "og.png"));
+  await page.close();
 }
+await browser.close();
