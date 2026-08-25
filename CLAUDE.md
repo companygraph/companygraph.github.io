@@ -270,7 +270,34 @@ requirements implicitly include this section.
 - **Slide numbers are zero-based everywhere a viewer can see them** — the kicker, the counter,
   and the audio filename all say the same number.
 - **Mono means data.** Record values, lengths, language pairs, URLs, code. Never navigation,
-  buttons or prose. `verify` fails if mono appears outside data.
+  buttons or prose. `verify` fails if mono appears outside data. That includes the deck's
+  footer, which is a row of links.
+- **Nothing opens in a new tab, except a link inside a slide.** A new tab takes away the
+  visitor's back button, and every deck carries its own way out, so nothing needs one.
+  `noNewTab` asserts it on every page.
+
+  The exception is real and this deck is the only place that needs it: a presenter who clicks
+  the roadmap link on slide 10 in the same tab loses the deck mid-sentence, in front of a room.
+  Note what it keys on — *where the link sits*, not where it points. That is why the check is
+  `.closest(".slide")` and not a list of hrefs somebody has to maintain.
+- **The deck's footer is three destinations, and two of them are brands.** The lockup goes to
+  the landing page (`../../`), `Robert Blust` to `https://blust.ch/`, and *Talks* / *Vorträge*
+  to the index (`../`) — the same place the transport control goes, which is the deliberate
+  duplicate: the corner offers every level of "out" and is the one corner nobody clicks by
+  accident.
+
+  `Robert Blust` is a full lockup, not a name in text — the `rb` plate from `blust.ch` inlined
+  beside the wordmark, in the colours `.name b` already defines. It is a brand with a mark of
+  its own and reads as a peer of this site's lockup. *Talks* stays `--dim`: the one nav item
+  among two brands, and that contrast is what makes the row legible at 15px.
+
+  Three checks share the row and none covers another's link. `wayOut` takes the index link,
+  `links` takes the absolute ones (presence only — it no longer asserts anything about tabs),
+  and `landing` takes the lockup, which nothing else can: a relative `../../` is invisible to
+  `links`, and a dead one looks like a working deck right up until somebody clicks it.
+
+  The same footer is on `guestgraph.io`, and on `blust.ch` in two parts rather than three:
+  there the brand and the person are the same name.
 - **The design token block is a copy**, fenced by `design tokens · v1` markers, shared with
   `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
   repository, as this one does. Do not edit it here.

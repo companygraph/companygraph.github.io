@@ -10,7 +10,7 @@ import { DESIGN_CHECKS } from "./design.mjs";
 const BASE = process.env.BASE || "http://localhost:8000";
 
 const PAGES = [
-  { path: "/", title: /CompanyGraph/, lang: "en",
+  { path: "/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -45,7 +45,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", title: /CompanyGraph/, lang: "en",
+  { path: "/privacy/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["https://companygraph.io/talks/", "../billing/", "../", "./"],
@@ -56,7 +56,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", title: /CompanyGraph/, lang: "en",
+  { path: "/billing/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -66,7 +66,7 @@ const PAGES = [
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
 
-  { path: "/talks/", title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -86,13 +86,15 @@ const PAGES = [
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
-  { path: "/talks/intro/", title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+  { path: "/talks/intro/", noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
     // check that fails when an href is simply wrong, so without this line a typo in the
     // deck's call to action would ship silently. Links open in a new tab because a deck a
     // presenter navigates away from is gone.
-    links: ["https://companygraph.io/",
+    landing: "../../",
+    links: ["https://blust.ch/",
+            "https://companygraph.io/",
             "https://github.com/companygraph/meta-model#roadmap"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
@@ -162,28 +164,53 @@ const CHECKS = {
       if (!text.includes(s)) return `body text is missing ${JSON.stringify(s)}`;
     return null;
   },
+  // Presence only. This used to assert `target="_blank" rel="noopener"` on every outbound link
+  // as well; that half moved to noNewTab and inverted, because nothing outside a slide opens
+  // in a new tab any more. What is left is the one thing no other check does: fail when an
+  // absolute href is simply wrong.
   async links(page, spec) {
     const found = await page.evaluate(() =>
-      [...document.querySelectorAll("a[href^='http']")].map(a =>
-        ({ href: a.href, target: a.target, rel: a.rel })));
-    for (const want of spec.links) {
-      const hit = found.find(l => l.href === want);
-      if (!hit) return `missing outbound link ${want}`;
-      if (hit.target !== "_blank" || !hit.rel.includes("noopener"))
-        return `${want} must open in a new tab with rel=noopener`;
-    }
+      [...document.querySelectorAll("a[href^='http']")].map(a => a.href));
+    for (const want of spec.links)
+      if (!found.includes(want)) return `missing outbound link ${want}`;
     return null;
   },
   // A deck opens in a new tab; navigation between prose pages does not. Neither rule is
   // visible to `links`, which only inspects absolute http hrefs — a relative one slips
   // straight past it, which is exactly how this regresses unnoticed.
-  async newTab(page, spec) {
-    const bad = await page.evaluate(hrefs =>
-      [...document.querySelectorAll("a[href]")]
-        .filter(a => hrefs.includes(a.getAttribute("href")))
-        .filter(a => a.target !== "_blank" || !a.rel.includes("noopener"))
-        .map(a => a.getAttribute("href")), spec.newTab);
-    return bad.length ? "must open in a new tab with rel=noopener: " + bad.join(", ") : null;
+  // Nothing opens in a new tab any more. The three sites are one ring — each links the other
+  // two, and every deck carries its own way out — so a new tab is a workaround for a problem
+  // that no longer exists, and it costs the visitor their back button.
+  //
+  // The exception is a link inside a slide, and this deck is the only place that has one. A
+  // presenter who clicks the roadmap link mid-talk in the same tab loses the deck, and no
+  // back-button muscle memory saves that in front of a room. The exception keys on *where* a
+  // link sits, not where it points — which is why it is `.closest(".slide")` and not a list
+  // of hrefs that would need maintaining.
+  async noNewTab(page) {
+    const bad = await page.evaluate(() =>
+      [...document.querySelectorAll('a[target="_blank"]')]
+        .filter(a => !a.closest(".slide"))
+        .map(a => a.getAttribute("href")));
+    return bad.length ? "must stay in this tab: " + bad.join(", ") : null;
+  },
+
+  // The footer carries three destinations: the lockup to this site's landing page, "Robert
+  // Blust" to blust.ch, and "Talks" to the index. wayOut covers only the last, and `links`
+  // cannot see a relative href at all — so without this the brand could point at a page that
+  // no longer exists and the deck would look healthy until somebody clicked it.
+  async landing(page, spec) {
+    const found = await page.evaluate(href =>
+      [...document.querySelectorAll("#chrome a[href]")]
+        .filter(a => a.getAttribute("href") === href)
+        .map(a => ({
+          named: !!(a.getAttribute("aria-label") || (a.textContent || "").trim()),
+          isLockup: !!a.querySelector(".namemark svg"),
+        })), spec.landing);
+    if (!found.length) return `no link to the landing page (${spec.landing}) in the transport bar`;
+    if (!found.some(l => l.isLockup)) return `the landing link is not the brand lockup`;
+    const unnamed = found.filter(l => !l.named).length;
+    return unnamed ? `${unnamed} landing link(s) without an accessible name` : null;
   },
   async sameTab(page, spec) {
     const bad = await page.evaluate(hrefs =>
