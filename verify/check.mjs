@@ -12,7 +12,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const PAGES = [
   { path: "/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
     // which requires target=_blank — wrong for chrome pointing at another page on this
     // same domain, which should stay in the tab the reader is already in.
@@ -34,6 +34,10 @@ const PAGES = [
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
             "https://blust.ch/"],
+    // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
+    // page whole; what `sameTab` adds is the name. The nav gained one item and the check
+    // that would have caught it opening elsewhere never mentioned it, so it is named here.
+    sameTab: ["model/"],
     internalLinks: true,
     // The German half, named by what the reader must see and what must stop being
     // visible. Strings, not element counts: a translation that never got applied leaves
@@ -51,7 +55,7 @@ const PAGES = [
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
@@ -63,7 +67,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
@@ -76,7 +80,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL", "Seiten"], hides: ["One company", "How to read it"],
                   title: "Beispiel — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: "example-data" },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
@@ -91,7 +95,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest", "MODELL"], hides: ["The model", "How to read it"],
                   title: "Modell — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: "model-data" },
 
   { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
@@ -108,7 +112,7 @@ const PAGES = [
     // by `translates.dlHref` below.
     sameTab: ["intro/", "./", "../", "../model/", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge", "MODELL", "BEISPIEL"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
@@ -477,6 +481,37 @@ const CHECKS = {
     const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
     if (hash !== from.id) return `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
     return null;
+  },
+  // A page must not scroll sideways on a phone. `.bar` wraps the nav below the lockup, but
+  // the nav itself was a non-wrapping flex row, so a fourth item pushed the row past the
+  // viewport and took the whole document with it — every page with a header, worse in
+  // German, and invisible to every other check in this file: the markup is correct, the
+  // links work, nothing fails to load, and the page is simply 90px too wide.
+  //
+  // 390px is the narrowest phone this site is drawn for. Both languages are measured,
+  // because German is the wider half and the half that broke first — asserting English
+  // alone would have passed over the worse of the two. Runs last, and puts the viewport
+  // back, so no earlier check ever sees a resized page.
+  async fits(page, spec) {
+    const before = page.viewportSize();
+    const overflow = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    const toggle = "#" + ((spec.translates && spec.translates.id) || "langind");
+    try {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.waitForTimeout(250);
+      const en = await overflow();
+      if (en > 0) return `at 390px the document is ${en}px wider than the viewport in English`;
+      if (!(await page.evaluate(sel => !!document.querySelector(sel), toggle))) return null;
+      await page.click(toggle);
+      await page.waitForTimeout(250);
+      const de = await overflow();
+      await page.click(toggle);
+      await page.waitForTimeout(250);
+      if (de > 0) return `at 390px the document is ${de}px wider than the viewport in German`;
+      return null;
+    } finally {
+      if (before) { await page.setViewportSize(before); await page.waitForTimeout(250); }
+    }
   },
 };
 

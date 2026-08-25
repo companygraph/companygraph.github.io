@@ -50,7 +50,8 @@ that lived in another repository. No CI in *this* repository can catch drift in
 - **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
   carry a data block generated from `meta-model` at the commit in `source.json` — the example
   from `example/`, the model from `core/`, one pin for both — and `npm run example:check`
-  fails when either drifts. Nothing else on either page names anything from the model.
+  fails when either drifts. Nothing else on the example page names anything from the example,
+  and nothing else on the model page names anything from the model.
 
 ## Constraints
 
@@ -142,11 +143,13 @@ that lived in another repository. No CI in *this* repository can catch drift in
   updated to match, every platform that trusts the tags renders it letterboxed or cropped —
   and nothing on the page itself reveals that, because the page never displays its own card.
   You find out from a link someone else shared, which is the worst possible way to find out.
-  `verify/check.mjs`'s `card()` check exists specifically to catch this — but it only compares
-  the *declared* numbers against the literals `"1200"`/`"630"`; it never fetches or measures
-  `og.png` itself. A card regenerated at the wrong size, corrupted, truncated, or simply left
-  stale from an earlier design would all still pass. Treat the check as guarding the tags, not
-  the image — after running `npm run og`, look at the file.
+  `verify/check.mjs`'s `card()` check exists specifically to catch this, and it does: it
+  fetches the card the tags name and reads the real width and height out of the PNG's IHDR
+  header, so a card whose pixels disagree with its tags fails, and so does one that cannot be
+  fetched at all. What it cannot see is *what the card shows*. A card of the right size,
+  rendered from a page three commits ago, passes every assertion here — that is what
+  `npm run og:check` is for, and why the two run together. After `npm run og`, look at the
+  file: neither check can tell you the picture is the right picture.
 
 - **`.figure` is hidden from the card for an editorial reason, not a spatial one — and the
   comment saying so has already been wrong twice, both times by claiming something about fit

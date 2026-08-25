@@ -183,6 +183,15 @@
     nav{gap:1.4rem}
     .tagline{max-width:100%}
   }
+
+  /* Four nav items and the language control do not fit on one row on a phone, in either
+     language, and a nav that cannot wrap takes the whole document sideways with it — the
+     page scrolls horizontally and every other check here still passes. Let it wrap and hang
+     off the right edge under the lockup; the language control stays last, which is where it
+     is at every other width. */
+  @media (max-width:560px){
+    nav{flex-wrap:wrap; justify-content:flex-end; gap:.6rem 1.2rem}
+  }
 </style>
 </head>
 <body>

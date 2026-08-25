@@ -48,10 +48,19 @@
      the page defines, and this rule for the size and the space above its table. */
   .cbody .caption{margin-top:1.1rem; font-size:.78rem; color:var(--dim); line-height:1.45}
   .cbody .caption + table{margin-top:.35rem}
+  /* Inline code is a string quoted out of a file, so it takes the data face the page defines
+     as .mono. Sized in em against whatever it sits in — a browser's default monospace is a
+     size smaller than the prose around it — and allowed to break, because a path is one long
+     unbreakable word and the card is one column wide on a phone. */
+  .cbody code{font-size:.92em; overflow-wrap:anywhere}
   .cbody a.go{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--c-weak); cursor:pointer}
   .cbody .empty{color:var(--dim); line-height:1.5}
   @media (max-width: 860px){
-    .stage{height:auto; grid-template-columns:1fr}
+    /* minmax(0,1fr), never a bare 1fr: a grid track sized `auto` at its floor takes the
+       widest min-content of the items in it, and the card's is a table of quoted field
+       names. On a phone that pushed the one column past the shell and scrolled the whole
+       document sideways. The card scrolls inside itself instead — .cbody already does. */
+    .stage{height:auto; grid-template-columns:minmax(0,1fr)}
     .canvas{height:52vh; min-height:360px}
     .card{height:44vh; min-height:300px}
   }

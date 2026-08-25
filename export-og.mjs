@@ -30,7 +30,9 @@ for (const c of cards) {
   });
   // file://, like the deck itself: every page here references its assets relatively for exactly
   // this reason, so no card needs a server to render and `npm run og` needs no second terminal.
-  await page.goto(pathToFileURL(path.join(REPO_ROOT, c.dir, "index.html")).href, { waitUntil: "networkidle" });
+  // A card may name the state it wants as a hash — the model page's stage reads one and
+  // focuses what it names, so the card renders that view instead of the page's opening one.
+  await page.goto(pathToFileURL(path.join(REPO_ROOT, c.dir, "index.html")).href + (c.hash || ""), { waitUntil: "networkidle" });
   // An empty style tag is rejected outright by Playwright, so a card with nothing to hide
   // skips the call rather than pass content it refuses.
   if (c.hide) await page.addStyleTag({ content: c.hide });

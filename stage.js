@@ -69,6 +69,24 @@
     return ownedTypes(n.entity.type).map(function(t){ return nFolder(n.id + "/" + t.folder, t.type, n.id); });
   }
   function ancestorsOf(n){ var out = [], p = parentOf(n); while (p) { out.unshift(p); p = parentOf(p); } return out; }
+  // The node an id names — a folder's or an entity's — found by walking down from the root
+  // through the same childrenOf() the canvas uses. An id is a path on disk, so every prefix
+  // of it is a node, and the walk needs no second index and no name from either page.
+  // Returns null for an id no page here holds, which is what a hand-edited hash looks like.
+  function nodeById(id){
+    if (!id) return null;
+    if (byId[id]) return nEntity(byId[id]);
+    var n = nRoot();
+    for (;;) {
+      var kids = childrenOf(n), next = null;
+      for (var i = 0; i < kids.length; i++) {
+        if (kids[i].id === id) return kids[i];
+        if (id.indexOf(kids[i].id + "/") === 0) { next = kids[i]; break; }
+      }
+      if (!next) return null;
+      n = next;
+    }
+  }
   function pathOf(n){ return n.kind === "root" ? [] : n.id.split("/"); }
   // Pages held: for the root every entity, for a folder everything filed beneath it — an
   // entity and the folder it owns both count as pages of the folder that holds the entity.
@@ -344,6 +362,21 @@
     return a;
   }
   function resolve(text){ for (var i = 0; i < data.entities.length; i++) if (data.entities[i].name === text) return data.entities[i].id; return null; }
+  // Markdown inline code — the one span-level mark the model's fixed shape uses. A field
+  // name, a file path, a `ref → type`: every one of them a string quoted out of a file,
+  // which is exactly what this system's mono face is for, so a card that printed the
+  // backticks was showing the markup instead of the data. Appended as text nodes and
+  // elements, never as innerHTML: these strings come out of the data block, and the day a
+  // name in the model contains a "<" an innerHTML assignment would start parsing it as
+  // markup. A backtick with no partner stays the character it is.
+  function inline(el, text){
+    String(text).split(/`([^`]+)`/).forEach(function(part, i){
+      if (!part) return;
+      el.appendChild(i % 2 ? h("code", part, "mono") : document.createTextNode(part));
+    });
+    return el;
+  }
+  function para(text, cls){ return inline(h("p", null, cls), text); }
 
   // Renders the focused node into the card's (body, foot) pair. Expand no longer copies this
   // into a second element — it moves the card itself into the dialog — so there is exactly
@@ -402,7 +435,7 @@
           var tr = h("tr");
           row.forEach(function(cell){
             var td = h("td"), id = resolve(cell);
-            if (id) td.appendChild(goLink(id)); else td.textContent = cell;
+            if (id) td.appendChild(goLink(id)); else inline(td, cell);
             tr.appendChild(td);
           });
           tb.appendChild(tr);
@@ -412,8 +445,8 @@
       // A block whose lines each open with "- " is a list in the file, so it is a line each
       // here too; anything else is a paragraph with its soft wraps closed up.
       if (s.text) s.text.split(/\n\n+/).forEach(function(par){
-        if (/^-\s/.test(par)) par.split(/\n(?=-\s)/).forEach(function(item){ bodyEl.appendChild(h("p", item.replace(/\n\s*/g, " "))); });
-        else bodyEl.appendChild(h("p", par.replace(/\n/g, " ")));
+        if (/^-\s/.test(par)) par.split(/\n(?=-\s)/).forEach(function(item){ bodyEl.appendChild(para(item.replace(/\n\s*/g, " "))); });
+        else bodyEl.appendChild(para(par.replace(/\n/g, " ")));
       });
     });
     // Mono, so it is data: the file and the commit it is pinned at, which is what the link
@@ -466,7 +499,11 @@
       var esc = s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
       return i === segs.length - 1 ? "<b>" + esc + "</b>" : esc;
     }).join(" / ");
-    var hash = n.kind === "entity" ? "#" + n.id : "";
+    // Every focus but the root is a place, so every focus but the root has a URL. It used to
+    // be entities only, which made a folder unlinkable and unshareable and left Back landing
+    // on the root from halfway down a path — and the share card, which asks for a state by
+    // URL and nothing else, had no way to ask for an opened folder at all.
+    var hash = n.kind === "root" ? "" : "#" + n.id;
     if (hash) location.hash = hash;
     else if (location.hash) { try { history.replaceState(null, "", location.pathname + location.search); } catch (err) { location.hash = ""; } }
     render();
@@ -485,14 +522,15 @@
   window.addEventListener("resize", function(){ if (focused) render(); });
   window.addEventListener("hashchange", function(){
     var id = decodeURIComponent(location.hash.slice(1));
-    // An empty hash — Back past the last entity, or one naming a folder rather than an
-    // entity — means the root, not "do nothing": focus() only ever sets a hash for an
-    // entity, so a bare or unrecognised hash is what the root and every folder look like.
-    if (!id || !byId[id]) { if (!focused || focused.kind !== "root") focus(nRoot()); return; }
-    if (!focused || focused.id !== id) focus(nEntity(byId[id]));
+    // An empty hash — Back past the last focus — means the root, not "do nothing", and so
+    // does one naming nothing this page holds: focus() writes a hash for every node but the
+    // root, so a bare or unrecognised hash is exactly what the root looks like.
+    var n = nodeById(id);
+    if (!n) { if (!focused || focused.kind !== "root") focus(nRoot()); return; }
+    if (!focused || focused.id !== id) focus(n);
   });
 
   var initial = decodeURIComponent(location.hash.slice(1));
-  focus(initial && byId[initial] ? nEntity(byId[initial]) : nRoot());
+  focus(nodeById(initial) || nRoot());
   first = false;
 })();

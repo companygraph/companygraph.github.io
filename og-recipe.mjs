@@ -56,7 +56,11 @@ export const cards = [
   // The two stage pages. Reduced motion makes every d3 transition 0 ms, so the root-focus
   // state the script draws on load is already settled by the time the exporter takes its
   // shot: the card renders that settled state.
-  { dir: "model", ...FRAME, hide: STAGE_HIDE, titleSlide: false, settle: "reduced-motion" },
+  // `hash` is the state to render, not just a page: the model's root view is two nodes and a
+  // line, which is a card of mostly empty canvas. #core opens the folder, so the card shows
+  // the six schemas fanned out — what the page is actually about, and a state the page
+  // reaches on its own from a URL rather than one the exporter poses by hand.
+  { dir: "model", ...FRAME, hide: STAGE_HIDE, hash: "#core", titleSlide: false, settle: "reduced-motion" },
   { dir: "example", ...FRAME, hide: STAGE_HIDE, titleSlide: false, settle: "reduced-motion" },
 ];
 
