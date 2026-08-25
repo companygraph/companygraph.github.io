@@ -128,17 +128,16 @@
     var per = p.node.kind === "root" ? CH_ROOT : p.node.kind === "folder" ? CH_MONO : CH_TEXT;
     return p.node.label.length * per;
   }
-  // What is written in mono beside a referenced node: the edge's own label first — the field
-  // the reference is written in, which is what the model page labels every line with — then
-  // whatever short attributes the edge carries, as an assessment's Level is drawn today. A
-  // block whose edges carry no label draws exactly what it drew before.
+  // What is written in mono beside a referenced node. An edge that carries a label draws the
+  // label and nothing else — the field the reference is written in, which is what the model
+  // page labels every line with, and which already names what the edge's attributes restate;
+  // its attributes stay in the card, where there is room to read them. An edge with no label
+  // draws its short attributes, as an assessment's Level is drawn today, so a block whose
+  // edges carry none draws exactly what it drew before.
   function attrOf(p){
     if (p.role !== "out" && p.role !== "in") return "";
-    var parts = [];
-    if (typeof p.label === "string" && p.label) parts.push(p.label);
-    var a = attrText(p.attrs);
-    if (a) parts.push(a);
-    return parts.join(" · ");
+    if (typeof p.label === "string" && p.label) return p.label;
+    return attrText(p.attrs);
   }
   function labelW(p){ var a = attrOf(p); return nameW(p) + (a ? GAP + a.length * CH_MONO : 0); }
 

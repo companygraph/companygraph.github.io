@@ -21,7 +21,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Every role, every rule", "Written down once", "CompanyGraph", "TALKS", "EXAMPLE", "BILLING",
+    contains: ["Every role, every rule", "Written down once", "CompanyGraph", "TALKS", "MODEL", "EXAMPLE", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. The deck is in this repository now — `talks/intro/` — so the
@@ -39,7 +39,7 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Jede Rolle", "aufgeschrieben", "Das Modell ansehen", "VORTRÄGE", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
+                  shows: ["Jede Rolle", "aufgeschrieben", "Das Modell ansehen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
                   hides: ["Every role", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
@@ -48,7 +48,7 @@ const PAGES = [
   { path: "/privacy/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["../talks/", "../example/", "../billing/", "../", "./"],
+    sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
@@ -61,7 +61,7 @@ const PAGES = [
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["../talks/", "../example/", "../privacy/", "../", "./"],
+    sameTab: ["../talks/", "../model/", "../example/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
@@ -71,13 +71,28 @@ const PAGES = [
   { path: "/example/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["../talks/", "../billing/", "../privacy/", "../", "./"],
+    sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
     translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL", "Seiten"], hides: ["One company", "How to read it"],
                   title: "Beispiel — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
-    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: true },
+    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: "example-data" },
+  // The model page. The same page in every respect the suite can see — one stage, one card,
+  // one generated block — so its spec is the example's with its own prose and its own block
+  // id. `graph` is what makes that possible: it reads the block the spec names, and every
+  // name it asserts comes out of that block, so one check serves both pages without either
+  // page's vocabulary appearing here.
+  { path: "/model/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+    contains: ["The model", "drawn", "A dashed line", "How to read it", "Where it comes from"],
+    links: ["https://github.com/companygraph"],
+    sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
+    sameOrigin: true,
+    translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest", "MODELL"], hides: ["The model", "How to read it"],
+                  title: "Modell — CompanyGraph" },
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: "model-data" },
 
   { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
@@ -91,10 +106,10 @@ const PAGES = [
     // the href as delivered, and the swap happens only after a click on the toggle. What
     // this line catches is the path being wrong for everyone; the German half is checked
     // by `translates.dlHref` below.
-    sameTab: ["intro/", "./", "../", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
+    sameTab: ["intro/", "./", "../", "../model/", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
-    translates: { lang: "de", shows: ["Vortrag", "Vorträge", "BEISPIEL"], hides: ["Watch the talk"],
+    translates: { lang: "de", shows: ["Vortrag", "Vorträge", "MODELL", "BEISPIEL"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
@@ -378,16 +393,22 @@ const CHECKS = {
     return null;
   },
   // The click-through. Every name and count here is read out of the page's own data block,
-  // so the check restates nothing about the example: it asserts that what the block says is
-  // what the neighbourhood draws, at each step of moving the focus.
+  // so the check restates nothing about either page: it asserts that what the block says is
+  // what the neighbourhood draws, at each step of moving the focus. `spec.graph` is the id of
+  // the block to read — the example page's instance or the model page's vocabulary — which is
+  // the only difference between the two pages this check can see.
   async graph(page, spec) {
-    const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
+    const data = await page.evaluate((id) => JSON.parse(document.getElementById(id).textContent), spec.graph);
     if (!data.entities) return "the data block is empty — run: npm run example";
     // The source link and its short commit are rewritten by the script from the block's own
     // commit, so a stale generator that leaves the markup's placeholder in place would pass
     // every other check here while pointing at the wrong tree.
+    // Which folder of the model repository the block came from is the page's to say, not
+    // this check's: `stage.js` reads it off #srclink's data-src, so the assertion reads it
+    // from the same place rather than carrying a second copy that could disagree.
+    const srcSub = await page.evaluate(() => document.getElementById("srclink").getAttribute("data-src"));
     const srcHref = await page.evaluate(() => document.getElementById("srclink").getAttribute("href"));
-    const wantHref = `/tree/${data.commit}/example`;
+    const wantHref = `/tree/${data.commit}/${srcSub}`;
     if (!srcHref.endsWith(wantHref)) return `source link is ${JSON.stringify(srcHref)}, expected it to end with ${JSON.stringify(wantHref)}`;
     const srcCommit = await page.evaluate(() => document.getElementById("srccommit").textContent);
     if (srcCommit !== data.commit.slice(0, 7)) return `source commit reads ${JSON.stringify(srcCommit)}, expected ${JSON.stringify(data.commit.slice(0, 7))}`;

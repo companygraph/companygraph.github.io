@@ -44,19 +44,20 @@ const HOME_HIDE = ".figure{display:none}";
 // bands are the same band, so there is one constant.
 const FRAME = { width: 1200, height: 630, renderHeight: 675, clipY: Math.round((675 - 630) / 2) };
 
-// The card shows what the page shows: the stage. The title block is the page's opening,
-// and a preview already prints og:title and og:description beside the image — repeating
-// them inside it spends the whole card on words the platform renders anyway.
-const EXAMPLE_HIDE = ".title{display:none}";
+// Both stage pages use this. The card shows what the page shows: the stage. The title block
+// is the page's opening, and a preview already prints og:title and og:description beside the
+// image — repeating them inside it spends the whole card on words the platform renders anyway.
+const STAGE_HIDE = ".title{display:none}";
 
 export const cards = [
   { dir: ".", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "talks", ...FRAME, hide: DECK_HIDE, titleSlide: false, settle: "wait:900" },
   { dir: "talks/intro", ...FRAME, hide: DECK_HIDE, titleSlide: true, settle: "wait:900" },
-  // Reduced motion makes every d3 transition on this page 0 ms, so the root-focus state the
-  // script draws on load is already settled by the time the exporter takes its shot: the
-  // card renders that settled state.
-  { dir: "example", ...FRAME, hide: EXAMPLE_HIDE, titleSlide: false, settle: "reduced-motion" },
+  // The two stage pages. Reduced motion makes every d3 transition 0 ms, so the root-focus
+  // state the script draws on load is already settled by the time the exporter takes its
+  // shot: the card renders that settled state.
+  { dir: "model", ...FRAME, hide: STAGE_HIDE, titleSlide: false, settle: "reduced-motion" },
+  { dir: "example", ...FRAME, hide: STAGE_HIDE, titleSlide: false, settle: "reduced-motion" },
 ];
 
 export const cardFor = (dir) => cards.find((c) => c.dir === dir);

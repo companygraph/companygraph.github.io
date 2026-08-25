@@ -47,9 +47,10 @@ advertised "Core in development" while two slices had shipped, because it restat
 that lived in another repository. No CI in *this* repository can catch drift in
 `companygraph/meta-model` — the only defence is never restating anything that lives there.
 
-- **The example page is the one mechanical exception:** its data block is generated from
-  `meta-model/example` at the commit in `source.json`, and `npm run example:check`
-  fails when it drifts. Nothing else on that page names anything from the example.
+- **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
+  carry a data block generated from `meta-model` at the commit in `source.json` — the example
+  from `example/`, the model from `core/`, one pin for both — and `npm run example:check`
+  fails when either drifts. Nothing else on either page names anything from the model.
 
 ## Constraints
 
@@ -182,10 +183,10 @@ that lived in another repository. No CI in *this* repository can catch drift in
 
 ## Share cards go stale silently, and nothing on the page says so
 
-The four `og.png` files are not banners someone drew: `npm run og` renders each from the page
+The five `og.png` files are not banners someone drew: `npm run og` renders each from the page
 it belongs to — the landing card is the landing page, the talks card is the talks index, the
-deck's card is its title slide, the example card is the example page — so a link preview shows
-what the visitor is about to land on.
+deck's card is its title slide, and the model and example cards are those two pages — so a
+link preview shows what the visitor is about to land on.
 The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a
 stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every
 other check here passes the whole time it is wrong.
@@ -198,7 +199,7 @@ other check here passes the whole time it is wrong.
 - **The recipe is the page, plus every local file the page *draws*, plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at all.
   Because `fonts/` is one copy at the root and every page reaches it relatively, perturbing a
-  font here marks **all four** cards stale — the sibling repositories, whose decks carry their
+  font here marks **all five** cards stale — the sibling repositories, whose decks carry their
   own `fonts/`, isolate theirs, and this repository deliberately does not.
 - **An `<a href>` is skipped: a link names somewhere to go, not something to draw.** The talks
   index is why the exception exists — it links both multi-megabyte deck PDFs, so hashing link
@@ -212,7 +213,7 @@ other check here passes the whole time it is wrong.
   edited without the hash moving — a card reported current after the thing that renders it
   changed, which is the one failure the whole mechanism exists to make impossible. It is also
   what makes the module importable by a test: an exporter that renders on import cannot be.
-- **One exporter, one crop, and no server.** `npm run og` renders all four cards from
+- **One exporter, one crop, and no server.** `npm run og` renders all five cards from
   `file://` — the same way the deck opens — because every page here references its assets
   relatively. The landing card was once cropped a pixel higher than the other two; that was an
   accident of a separate exporter, not a choice, and there is now one constant.
@@ -225,7 +226,7 @@ other check here passes the whole time it is wrong.
 - **`npm run test:og` is the check's own suite** (`node --test`, no dependencies). It drives
   the recipe against fixture trees rather than against this site, so it still means something
   after these pages change. A card added to the repository without an entry in `og-recipe.mjs`
-  fails it — otherwise the check would keep printing four ✓ while the fifth drifted.
+  fails it — otherwise the check would keep printing five ✓ while the sixth drifted.
 
 ## CI
 
