@@ -193,6 +193,13 @@
      because nothing in the figure carries a static opacity, transform or dash pattern of
      its own. (The join lines are dimmed with stroke-opacity, which opacity:1 cannot
      touch.) Anything added to the figure must keep that true. */
+  @media (prefers-reduced-motion: reduce){
+    .figure, .figure *{
+      animation:none !important; transition:none !important;
+      opacity:1 !important; transform:none !important; stroke-dasharray:none !important;
+    }
+  }
+
   @media (max-width:900px){
     nav{gap:1.4rem}
   }
@@ -204,13 +211,6 @@
      is at every other width. */
   @media (max-width:560px){
     nav{flex-wrap:wrap; justify-content:flex-end; gap:.6rem 1.2rem}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .figure, .figure *{
-      animation:none !important; transition:none !important;
-      opacity:1 !important; transform:none !important; stroke-dasharray:none !important;
-    }
   }
 </style>
 </head>
@@ -248,7 +248,7 @@
       <a class="btn primary" href="talks/intro/"
          data-de="Einführungsvortrag ansehen">Watch intro talk</a>
       <a class="btn" href="https://github.com/companygraph/meta-model"
-         data-de="Das Modell ansehen">Read the model</a>
+         data-de="Den Quelltext lesen">Read the source</a>
     </div>
     <p class="ctameta mono" data-de="12 Minuten · Deutsch oder Englisch">12 minutes · German or English</p>
   </section>

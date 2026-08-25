@@ -426,7 +426,7 @@
     e.sections.forEach(function(s){
       bodyEl.appendChild(h("h4", s.heading));
       (s.tables || []).forEach(function(tab){
-        if (tab.caption) bodyEl.appendChild(h("p", tab.caption, "caption mono"));
+        if (tab.caption) bodyEl.appendChild(para(tab.caption, "caption mono"));
         var tbl = h("table"), thead = h("thead"), hr = h("tr");
         tab.columns.forEach(function(c){ hr.appendChild(h("th", c)); });
         thead.appendChild(hr); tbl.appendChild(thead);

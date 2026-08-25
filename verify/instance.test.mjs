@@ -101,7 +101,7 @@ test("output is deterministic regardless of map order", () => {
   assert.deepEqual(parseInstance(shuffled), parseInstance(valid));
 });
 
-// The vendored copy is the deliverable — the pages load /d3.v7.min.js, not the package — so
+// The vendored copy is the deliverable — the pages load ../d3.v7.min.js, not the package — so
 // the only thing that can go wrong silently is the two drifting apart. It sits at the root
 // beside stage.css and stage.js, because more than one page loads it.
 // CI runs this suite before `npm ci`, so a missing node_modules skips rather than fails:

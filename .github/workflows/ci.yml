@@ -28,9 +28,9 @@ jobs:
         run: npm run test:og
       - name: Cards still show the page they render
         run: npm run og:check
-      - name: The instance parser still works
+      - name: The parsers still work
         run: npm run test:example
-      - name: The example page still shows the pinned commit
+      - name: The stage pages still show the pinned commit
         run: npm run example:check
         env:
           GITHUB_TOKEN: ${{ github.token }}

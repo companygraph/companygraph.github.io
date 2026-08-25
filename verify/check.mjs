@@ -43,8 +43,8 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Jede Rolle", "aufgeschrieben", "Das Modell ansehen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
-                  hides: ["Every role", "Read the model"] },
+                  shows: ["Jede Rolle", "aufgeschrieben", "Den Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
+                  hides: ["Every role", "Read the source"] },
     card: true, cardBase: "https://companygraph.io" },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and

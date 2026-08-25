@@ -51,8 +51,14 @@
   /* Inline code is a string quoted out of a file, so it takes the data face the page defines
      as .mono. Sized in em against whatever it sits in — a browser's default monospace is a
      size smaller than the prose around it — and allowed to break, because a path is one long
-     unbreakable word and the card is one column wide on a phone. */
-  .cbody code{font-size:.92em; overflow-wrap:anywhere}
+     unbreakable word and the card is one column wide on a phone. break-word only breaks at a
+     boundary the browser would already choose for prose, so a short word like "Evidence"
+     stays whole; a table cell that is one long unbreakable token still wraps because there is
+     nowhere else to put it. */
+  .cbody code{font-size:.92em; overflow-wrap:break-word}
+  /* Prose, not a table cell, is where a path or URL actually runs long enough to need the
+     anywhere break — back to that here. */
+  .cbody p code{overflow-wrap:anywhere}
   .cbody a.go{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--c-weak); cursor:pointer}
   .cbody .empty{color:var(--dim); line-height:1.5}
   @media (max-width: 860px){
