@@ -270,12 +270,10 @@ requirements implicitly include this section.
 - **Slide numbers are zero-based everywhere a viewer can see them** — the kicker, the counter,
   and the audio filename all say the same number.
 - **Mono means data.** Record values, lengths, language pairs, URLs, code. Never navigation,
-  buttons or prose. `verify` fails if mono appears outside data. The deck's footer was the
-  standing exception until it stopped being one: `.name` set mono, uppercase and `.14em`
-  tracking on what is a row of links, and only the wordmark had opted out.
-- **Nothing opens in a new tab, except a link inside a slide.** The three sites are one ring —
-  each links the other two, and every deck carries its own way out — so a new tab is a
-  workaround for a problem that no longer exists, and it costs the visitor their back button.
+  buttons or prose. `verify` fails if mono appears outside data. That includes the deck's
+  footer, which is a row of links.
+- **Nothing opens in a new tab, except a link inside a slide.** A new tab takes away the
+  visitor's back button, and every deck carries its own way out, so nothing needs one.
   `noNewTab` asserts it on every page.
 
   The exception is real and this deck is the only place that needs it: a presenter who clicks
@@ -286,8 +284,7 @@ requirements implicitly include this section.
   the landing page (`../../`), `Robert Blust` to `https://blust.ch/`, and *Talks* / *Vorträge*
   to the index (`../`) — the same place the transport control goes, which is the deliberate
   duplicate: the corner offers every level of "out" and is the one corner nobody clicks by
-  accident. It used to be a single link to the index with `· Robert Blust` as plain text that
-  went nowhere.
+  accident.
 
   `Robert Blust` is a full lockup, not a name in text — the `rb` plate from `blust.ch` inlined
   beside the wordmark, in the colours `.name b` already defines. It is a brand with a mark of
