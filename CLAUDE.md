@@ -298,6 +298,16 @@ requirements implicitly include this section.
 
   The same footer is on `guestgraph.io`, and on `blust.ch` in two parts rather than three:
   there the brand and the person are the same name.
+
+  It is fenced by a **`deck footer · vN` marker** and `footerVersion` asserts it — the same
+  habit-with-a-tripwire the token block gets, for the same reason: no suite can see a sibling.
+  What the marker covers is a contract, not a look — where each of the three links goes, and
+  that none opens in a new tab. Change any of that and bump `vN` in all three repositories,
+  then run all three suites. A suite fails both on a version it does not expect and on no
+  marker at all, so removing the fence is not a way around it.
+
+  `verify/design.mjs` is byte-identical across the three and holds both `TOKEN_VERSION` and
+  `FOOTER_VERSION`. Never edit it in one repo alone.
 - **The design token block is a copy**, fenced by `design tokens · v1` markers, shared with
   `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
   repository, as this one does. Do not edit it here.
