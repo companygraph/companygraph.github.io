@@ -8,7 +8,8 @@
     "verify": "node verify/check.mjs",
     "og": "node export-og.mjs",
     "og:check": "node og-check.mjs",
-    "test:og": "node --test verify/og-recipe.test.mjs"
+    "test:og": "node --test verify/og-recipe.test.mjs",
+    "test:example": "node --test verify/instance.test.mjs"
   },
   "devDependencies": { "playwright": "^1.49.1" }
 }
