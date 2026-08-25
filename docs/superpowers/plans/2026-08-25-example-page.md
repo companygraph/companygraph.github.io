@@ -592,7 +592,7 @@ git commit -m "Generate the example page from the model's own example, at a comm
 
 ---
 
-### Task 4: The figure and the panel
+### Task 4: The figure and the panel (shipped as a first cut — superseded by Task 4b)
 
 **Files:**
 - Modify: `example/index.html` — the page script and the motion CSS
@@ -804,6 +804,200 @@ git commit -m "Draw the example as the tree it is on disk, and open it on click"
 
 ---
 
+### Task 4b: The figure, again — d3, focus and context, a fixed stage
+
+Task 4 shipped a whole-tree figure with CSS keyframes (commit `5dcdf92`). After review the spec's §4 was rewritten: a fixed-height stage, a neighbourhood view (focus + ancestors + children + references) drawn with d3 transitions, and a card of fixed place and size. This task replaces Task 4's figure section, CSS and script; the data block, the prose sections and Task 3's generator are untouched. The frontend-design skill's process applies: plan the stage's composition against the site's existing tokens and type, build, screenshot, critique, adjust.
+
+**Files:**
+- Modify: `example/index.html` — the `.figure-section` markup, the figure/panel CSS, the page script
+- Create: `example/d3.v7.min.js` — copied from `node_modules/d3/dist/d3.min.js`
+- Modify: `package.json` — `"d3": "7.9.0"` in `devDependencies`; `npm install`, commit the lockfile change
+- Modify: `verify/instance.test.mjs` — the byte-identity test for the vendored file
+- Modify: `verify/check.mjs` — the `graph` check rewritten for the neighbourhood DOM
+
+**Interfaces:**
+- Consumes: the data block `#example-data` (Task 1's shape + `commit`).
+- Produces: DOM the check drives — nodes are `g.n[data-id][data-kind=root|folder|entity][role=button][tabindex=0]`; the focus carries class `focus`; reference lines are `path.ref[data-from][data-to]`; the card is `#card` with `#card h3` the focused entity's name and `#card .eyebrow` the type+path line; the path line above the canvas is `#path`.
+
+- [ ] **Step 1: Vendor d3 and test its identity**
+
+```bash
+npm install --save-dev --save-exact d3@7.9.0
+cp node_modules/d3/dist/d3.min.js example/d3.v7.min.js
+```
+
+Add to `verify/instance.test.mjs`:
+
+```js
+import fs from "node:fs";
+test("the vendored d3 is the pinned package's build, byte for byte", () => {
+  const vendored = fs.readFileSync(new URL("../example/d3.v7.min.js", import.meta.url));
+  const packaged = fs.readFileSync(new URL("../node_modules/d3/dist/d3.min.js", import.meta.url));
+  assert.ok(vendored.equals(packaged), "example/d3.v7.min.js differs from node_modules/d3/dist/d3.min.js — copy it again");
+});
+```
+
+Run `npm run test:example` — 11/11. (CI runs `test:example` before `npm ci`, so this one test must tolerate a missing `node_modules`: wrap the packaged read in `fs.existsSync` and `t.skip("node_modules not installed")` when absent — the check is real locally and on any machine that has installed.)
+
+- [ ] **Step 2: The stage markup** — replace the `.figure-section` block from Task 2/4 with:
+
+```html
+    <section class="figure-section">
+      <p class="path mono" id="path" aria-live="polite"></p>
+      <div class="stage">
+        <div class="canvas">
+          <svg id="fig" role="img" aria-labelledby="figcap"></svg>
+          <button class="recentre mono" id="recentre" type="button" data-de="zentrieren">recentre</button>
+        </div>
+        <aside class="card" id="card" aria-live="polite">
+          <div class="cbody" id="cbody"></div>
+          <div class="cfoot" id="cfoot"></div>
+        </aside>
+      </div>
+      <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the centre.</p>
+    </section>
+```
+
+and load the library before the page script: `<script src="d3.v7.min.js"></script>`.
+
+- [ ] **Step 3: The stage CSS** — replace the figure/panel rules from Task 2 and the motion rules from Task 4:
+
+```css
+  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
+  .path{min-height:1.4em; font-size:.8rem; letter-spacing:.06em; color:var(--dim)}
+  .path b{color:var(--c-firm); font-weight:600}
+  .stage{margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
+         grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
+  .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
+  .canvas svg{display:block; width:100%; height:100%}
+  .recentre{position:absolute; right:.8rem; bottom:.8rem; font-size:.72rem; letter-spacing:.08em;
+            background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
+            padding:.35rem .6rem; cursor:pointer}
+  .recentre:hover, .recentre:focus-visible{border-color:var(--c-mid)}
+  .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
+  .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
+  .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem}
+  .cfoot a{font-family:"Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; color:var(--c-mid); text-decoration:none}
+  .cbody .eyebrow{font-family:"Plex Mono",monospace; font-size:.72rem; letter-spacing:.08em; color:var(--dim); word-break:break-all}
+  .cbody h3{margin-top:.35rem; font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; letter-spacing:-.02em; font-size:1.45rem; line-height:1.1}
+  .cbody .tag{margin-top:.55rem; color:var(--dim); line-height:1.4}
+  .cbody dl{margin-top:1.1rem; display:grid; grid-template-columns:max-content 1fr; gap:.3rem .9rem; font-size:.9rem}
+  .cbody dt{font-family:"Plex Mono",monospace; font-size:.78rem; color:var(--dim); padding-top:.15rem}
+  .cbody h4{margin-top:1.2rem; font-family:"Plex Mono",monospace; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim)}
+  .cbody p{margin-top:.4rem; font-size:.93rem; line-height:1.5}
+  .cbody table{margin-top:.5rem; border-collapse:collapse; width:100%; font-size:.88rem}
+  .cbody th{text-align:left; font-family:"Plex Mono",monospace; font-weight:600; font-size:.72rem; letter-spacing:.06em; color:var(--dim); padding:.3rem .6rem .3rem 0; border-bottom:1px solid var(--rule)}
+  .cbody td{padding:.35rem .6rem .35rem 0; vertical-align:top; border-bottom:1px solid var(--rule)}
+  .cbody a.go{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--c-weak); cursor:pointer}
+  .cbody .empty{color:var(--dim); line-height:1.5}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
+  .figcap b{color:var(--ink); font-weight:600}
+  @media (max-width: 860px){
+    .stage{height:auto; grid-template-columns:1fr}
+    .canvas{height:52vh; min-height:360px}
+    .card{height:44vh; min-height:300px}
+  }
+  /* figure tokens */
+  #fig .own{fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
+  #fig .ref{fill:none; stroke:var(--c-weak); stroke-width:1.6; stroke-dasharray:5 5}
+  #fig .ref.hot{stroke:var(--c-mid)}
+  #fig .box{fill:none; stroke:var(--c-weak); stroke-width:2}
+  #fig .sq{fill:var(--c-firm)}
+  #fig .n{cursor:pointer}
+  #fig .n:hover .box, #fig .n:focus-visible .box, #fig .n.focus .box{stroke:var(--c-mid)}
+  #fig .n:hover .sq, #fig .n:focus-visible .sq, #fig .n.focus .sq{fill:var(--c-mid)}
+  #fig .n:focus{outline:none}
+  #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
+  #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
+  #fig text.eyebrow{fill:var(--dim); letter-spacing:.08em}
+  #fig text.attr{fill:var(--dim)}
+  #fig text.root{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:15px}
+```
+
+- [ ] **Step 4: The page script** — replace Task 4's script entirely. The shape it must have (write it out in full; nothing in it may know a name from the example):
+
+```js
+// Focus and context. The canvas never shows the whole instance: one focused node, its
+// ancestors to the left (its path on disk), its children to the right, and its references in
+// two dashed bands — targets below, sources above. Everything on the canvas is there because
+// of the focus, so no dashed line can land on nothing. d3 moves survivors and fades the rest
+// when the focus changes; under prefers-reduced-motion every transition is 0 ms, which is also
+// the state the share card renders.
+(function(){
+  var data = JSON.parse(document.getElementById("example-data").textContent);
+  if (!data.entities) return;
+  // --- model: the same node objects as Task 4 (root / folder / entity), plus:
+  //   parentOf(node)   root←folder←entity←owned folder←owned entity
+  //   childrenOf(node) as before
+  //   refsOut(entity)  data.edges.filter(from===id) → [{node, attrs}]
+  //   refsIn(entity)   data.edges.filter(to===id)   → [{node, attrs}]
+  //   pathOf(node)     ancestors' labels joined with " / ", the root omitted
+  // --- neighbourhood(focus) → { nodes:[{node, role:'ancestor'|'focus'|'child'|'out'|'in', i}], links:[{from,to,kind:'own'|'ref',attrs}] }
+  //   ancestors: the chain from the root to the parent, in order; children: childrenOf(focus);
+  //   out/in only when focus is an entity.
+  // --- layout(neigh, w, h): focus at (w*0.42, h*0.5); ancestors spaced 150px apart to the
+  //   left on the same y (the root furthest); children in a column at x+230, centred on the
+  //   focus y, 40px apart; out-references in a column at x+230, starting 60px below the last
+  //   child (or below the focus), with an eyebrow "refers to" above the first; in-references
+  //   in a column at x-230+… above the ancestors' row with an eyebrow "referred by". Attribute
+  //   values (e.g. Level) print as `text.attr` to the right of the target's label.
+  // --- render(focus): d3 data-join on g.n keyed by node id, path.own/path.ref keyed by
+  //   from+"→"+to; enter fades in, update transitions transform/d, exit fades out; duration
+  //   400 or 0 when matchMedia("(prefers-reduced-motion: reduce)").matches.
+  //   Links are drawn under nodes; d3.linkHorizontal() for both kinds.
+  // --- zoom: d3.zoom().scaleExtent([.5, 2]) on the svg, applied to a root <g>; #recentre
+  //   resets to identity with the same duration.
+  // --- focus(node): set location.hash for entities (empty for root/folders), update #path
+  //   (as `<b>` on the last segment), render, showCard.
+  // --- showCard: root/folder → one .empty line: `${label} · ${n} pages` computed from the
+  //   block (the count is data, so it is fine to show); entity → eyebrow (type · path),
+  //   h3 name, .tag tagline, dl of fields (list values become .go links when they resolve),
+  //   sections (h4 + p, or table with .go cells), #cfoot gets the view-file link.
+  // --- keyboard: Enter/Space on g.n → focus(node).
+  // --- initial: hash → that entity; else root. First render has duration 0 regardless.
+})();
+```
+
+`d3` is global from the vendored script. Keep every string the page shows out of this script except the eyebrows *refers to* / *referred by* / the root's empty line, which carry `data-de` equivalents through a tiny `t()` helper reading the current `cg-lang` value (`Verweist auf`, `Verwiesen von`, `Seiten`).
+
+- [ ] **Step 5: The `graph` check** — replace Task 4's:
+
+```js
+  async graph(page) {
+    const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
+    if (!data.entities) return "the data block is empty — run: npm run example";
+    const nodes = () => page.evaluate(() => Array.from(document.querySelectorAll("#fig .n")).map(n => ({ id: n.dataset.id, focus: n.classList.contains("focus") })));
+    const click = (id) => page.evaluate((id) => document.querySelector(`#fig .n[data-id="${id}"]`).dispatchEvent(new MouseEvent("click", { bubbles: true })), id);
+    const roots = data.types.filter(t => !t.owner).map(t => t.folder);
+    let ns = await nodes();
+    if (!ns.find(n => n.id === "root" && n.focus)) return "initially the root is not the focus";
+    if (ns.length !== roots.length + 1) return `initially ${ns.length} nodes, expected root + ${roots.length} folders`;
+    const edge = data.edges[0]; if (!edge) return null;
+    const from = data.entities.find(e => e.id === edge.from);
+    const folder = from.id.slice(0, from.id.lastIndexOf("/"));
+    await click(folder); await page.waitForTimeout(500);
+    ns = await nodes();
+    if (!ns.find(n => n.id === folder && n.focus)) return `clicking ${folder} did not focus it`;
+    if (!ns.find(n => n.id === "root")) return `focused ${folder}, but its ancestor root is gone`;
+    if (!ns.find(n => n.id === from.id)) return `focused ${folder}, but its child ${from.id} is not drawn`;
+    await click(from.id); await page.waitForTimeout(500);
+    const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
+    if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
+    ns = await nodes();
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
+    const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
+    return hash === from.id ? null : `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+  },
+```
+
+- [ ] **Step 6: Render, critique, adjust.** Screenshots at 1280: root focus; a folder focus; the profile focus (EN and DE); at 390: the profile focus; reduced-motion root focus. Look at each as a designer would: is the focus unmistakable, do the three bands read as three different relations, does the card feel fixed and calm, is nothing clipped. Adjust spacing constants and type sizes in the script/CSS; note what you changed and why.
+
+- [ ] **Step 7: Verify and commit.** `BASE=http://localhost:8010 npm run verify` — `/example/` passes everything but `card`; `npm run test:example` 11/11. Commit `example/index.html example/d3.v7.min.js package.json package-lock.json verify/instance.test.mjs verify/check.mjs` with: `Show the example as a neighbourhood, not a tree, on a stage that holds still`.
+
+---
+
 ### Task 5: Nav, card, the debts every page pays
 
 **Files:**
@@ -817,9 +1011,10 @@ git commit -m "Draw the example as the tree it is on disk, and open it on click"
   - `privacy/`, `billing/`: `<a href="../example/" data-de="Beispiel">Example</a>`
   - `talks/index.html`: `<a href="../example/" data-de="Beispiel">Example</a>`
 - [ ] **Step 2: Assertions.** In `verify/check.mjs`: landing `contains` gains `"EXAMPLE"` and `translates.shows` gains `"BEISPIEL"`; privacy/billing/talks `sameTab` gain `"../example/"`; `/talks/` `translates.shows` gains `"Beispiel"`.
-- [ ] **Step 3: The card.** In `og-recipe.mjs` add `{ dir: "example", ...FRAME, hide: ".panel{display:none}", titleSlide: false, settle: "reduced-motion" },` with a comment: the panel is hidden because the card shows the figure's settled initial state, and nothing is selected in it. Run `npm run test:og` (the "every og.png has a card" test needs the png — run `npm run og` first, then `test:og`, then `og:check`). Look at `example/og.png`: the title and the root-with-folders figure.
+- [ ] **Step 3: The card.** In `og-recipe.mjs` add `{ dir: "example", ...FRAME, hide: "", titleSlide: false, settle: "reduced-motion" },` with a comment: the stage is the page's argument and the card is part of the stage, so nothing is hidden; reduced motion makes d3's transitions 0 ms, so the root-focus state is settled on load. Run `npm run test:og` (the "every og.png has a card" test needs the png — run `npm run og` first, then `test:og`, then `og:check`). Look at `example/og.png`: the title and the root-with-folders figure.
 
   If the initial state draws only the root (it does — everything starts collapsed), decide: the card is more legible with the root *and* the four folders. Implement by having the page open the root when `prefers-reduced-motion` is on **and** there is no hash — a one-line `if (matchMedia("(prefers-reduced-motion: reduce)").matches && !initial) open.root = true;` before the first `draw()`. Note it in the script comment: the card renders that state. Re-run `og`, `og:check`, and `verify` (the `graph` check's "initially one node" must then only apply without reduced motion — the check does not emulate it, so it still holds).
+- [ ] **Step 3b: Two debts from Task 2's review.** Restore billing's `.unit` rule in `example/index.html` (the source line is `<p class="unit mono">` and should be the boxed mono unit billing has), and delete the duplicated `.mono{font-family:…; font-size:.9em}` rule, keeping one.
 - [ ] **Step 4: README and CLAUDE.md.** README's file table gains `example/` (page, `build.mjs`, `instance.mjs`, `source.json`) and the two scripts. CLAUDE.md "One screen, one job" section gains a bullet under the never-restate rule: *The example page is the one mechanical exception: its data block is generated from `meta-model/example` at the commit in `example/source.json`, and `npm run example:check` fails when it drifts. Nothing else on that page names anything from the example.* And in "Share cards": "three `og.png` files" → "four".
 - [ ] **Step 5: Everything green**
 

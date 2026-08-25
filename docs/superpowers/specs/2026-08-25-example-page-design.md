@@ -27,7 +27,8 @@ language toggle, `verify` spec and share card. Its one figure is interactive.
   with one mechanical exception, and that exception is checked
 - showing schemas, or types the example does not use
 - editing, search, or a viewer for arbitrary instances — the page renders one committed
-  block; generality is the tooling's job
+  block; generality is the tooling's job. The figure shows a neighbourhood, never the whole
+  graph, precisely because a real instance is too large to draw at once
 - translating entity content — it is data, shown as written
 
 The nav gains **Example** on every page. The talks live in this repository now, so there is
@@ -118,42 +119,54 @@ The page states no type count and no entity count. Those are read off the figure
 
 ## 4. The figure
 
-**Structure.** A tree drawn left to right, rooted at *Fictional Company*. Depth 1: one folder
-node per root type in the block — `values`, `skills`, `proficiency-levels`, `profiles` —
-labelled by folder name in mono, because a folder is what is on disk. Depth 2: the entities in
-that folder, labelled by canonical name. An entity that owns a collection (the profile) shows
-its owned folder — `experiences` — as a child node, faithful to disk, and that folder its
-entities. References are dashed lines between entity nodes, drawn only when both ends are
-visible.
+**The stage.** A band of fixed height — `clamp(520px, 62vh, 720px)` — across the content width,
+split into two regions that never change size: the graph canvas on the left, flexible in width,
+and the card on the right, 360px wide and the stage's height, its body scrolling internally.
+On a phone the two stack, each keeping a fixed height. Nothing on the page reflows when a
+node is clicked; the page never scrolls horizontally.
 
-**Interaction.** Everything starts collapsed except the root. Click a node → its children
-appear: the root opens the four folders; a folder opens its entities; an entity opens its
-owned folders, if any, *and* every folder one of its references points at, so a dashed line
-always lands on a drawn node. Click again → collapse. Clicking an entity also selects it: a
-panel beside the figure shows its type, canonical name, tagline, frontmatter fields as a
-two-column mono table, each section's heading and text, and a *view file* link to the path at
-the pinned commit. Table-backed references (the profile's Skills rows) appear in the panel as a
-small table — Skill · Level · Evidence — with the first two as links that select that node.
+**Focus and context, not the whole tree.** An instance can be hundreds of pages, so the canvas
+shows one focused node and its neighbourhood only:
 
-Keyboard: nodes are `<button>`s in the SVG's DOM order; Enter and Space toggle; the panel is
-`aria-live="polite"`. The URL hash names the selected entity (`#skills/java-programming`) so a
-state can be shared.
+- **Ancestors**, as a chain to the left — root, folder, owner, folder — which is the focused
+  node's path on disk. The same path is printed above the canvas in mono
+  (`profiles / mira-halvorsen / experiences`), because a folder chain is a location and a
+  location is data.
+- **Children** in a column to the right, joined by solid *owns* lines: the root's folders, a
+  folder's entities, an entity's owned folders.
+- **References** in two dashed bands, each with a small mono eyebrow: *refers to* below the
+  focus, the targets of its outgoing edges, with edge attributes (a Level) printed beside the
+  target in mono; *referred by* above the focus, the sources of incoming edges. A reference
+  is drawn only to a node that is on the canvas, and every node on the canvas is there
+  because of the focus, so no line ever lands on nothing.
 
-**Layout.** A tidy tree computed in JS: siblings stacked vertically per column, a parent
-centred on its children, fixed column x and row spacing — no physics. The SVG's `viewBox`
-grows with the tree; the container scrolls horizontally inside `overflow-x:auto`; the page
-never does. Phone width: the same drawing, scrollable; the panel moves below the figure.
+Clicking any node makes it the focus. Survivors move to their new places, newcomers fade in,
+the rest fade out — a d3 transition of about 400 ms, 0 ms under `prefers-reduced-motion`,
+which is also what the share card renders: the root focused, its folders to the right,
+nothing selected. Wheel and drag pan and zoom the canvas; a *recentre* control resets.
+Keyboard: nodes are focusable with Enter and Space; the card is `aria-live="polite"`. The URL
+hash names the focus (`#skills/java-programming`) so a state can be shared and is restored
+on load.
 
-**Motion.** Additive only — the landing figure's rule, copied with its comment: no rule outside
-a `@keyframes` block sets an opacity, transform or dash pattern on any part of the figure.
-New nodes animate with `fig-in`, new edges with `fig-trace`; collapse is immediate.
-`prefers-reduced-motion` switches all of it off and shows the settled state, which is what
-the share card renders — the initial state, root plus four folders, nothing selected.
+**The card.** A fixed place and a fixed size, and quiet: a mono eyebrow with the type and the
+path; the canonical name; the tagline. Then the frontmatter as a two-column list with mono
+keys; then each section as a mono eyebrow heading with its text; a table section as a table
+whose resolving cells are links that refocus. *View file* — the path at the pinned commit on
+GitHub — is pinned to the card's footer. When the root or a folder is focused the card is
+not empty: one line says what is focused and how many pages it holds, read from the block.
 
-**Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the selected
-entity, and anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference
-lines dashed in `--c-weak`, the selected entity's in `--c-mid`. No `--c-flag`: nothing here is
-a reversal. Mono for folder names, field keys and the commit; prose for everything else.
+**Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and
+anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lines dashed in
+`--c-weak`, the focus's own references in `--c-mid`. No `--c-flag`: nothing here is a
+reversal. Mono for the path, folder names, field keys, eyebrows and the commit; prose for the
+name, tagline and text.
+
+**The library.** d3 v7, vendored as `example/d3.v7.min.js` from the pinned npm package —
+`d3` in `devDependencies` — and loaded with a relative `<script src>`, so the page stays
+self-contained and the share-card recipe hashes it as a drawn asset. `npm run test:example`
+asserts the vendored file is byte-identical to the package's `dist/d3.min.js`, the way
+`design.mjs` is held identical across the sites. The full build is ~280 KB; a custom bundle
+would need a build step this repository does not have, and that was the trade taken.
 
 ---
 
@@ -163,19 +176,21 @@ a reversal. Mono for folder names, field keys and the commit; prose for everythi
   title and the legend words; `links` for the tree-at-commit link; `sameTab` for the nav;
   `translates`; `card`; `tokens`, `monoScope`, `contrast`, `tokenVersion`; `internalLinks`;
   `sameOrigin: true` — the data is inline, the page requests nothing beyond its own files.
-  Plus a page-specific `graph` check: after load exactly one node is visible; click it → the
-  folder nodes; click the profiles folder → its entity; click the profile → the panel names
-  it, its owned folder appears, and the folders its references point at open with dashed
-  lines drawn. Counts and names come from the data block the check reads out of the DOM,
+  Plus a page-specific `graph` check: after load the root is focused and its folders are the
+  only other nodes; click a folder → it is the focus, the root its ancestor, its entities the
+  children; click the first entity that has outgoing edges → the card names it, its
+  reference targets are on the canvas with dashed lines, and the hash names it. Counts and names come from the data block the check reads out of the DOM,
   never from literals, so the check does not restate the example either.
 - **Every other page's spec** gains the new nav item in `contains`/`sameTab` and its German in
   `translates.shows`.
 - **`npm run example:check`** as in §2. **`npm run test:example`** (`node --test`, no
-  dependencies) drives `build.mjs`'s parser against fixture instances: a valid one; one with
+  dependencies beyond the vendored-file comparison) drives `build.mjs`'s parser against
+  fixture instances, and asserts `example/d3.v7.min.js` equals the package's build: a valid one; one with
   a dangling reference, which must throw citing R4; one with a root folder that is not a
   plural; one whose local `HEAD` is not the pin.
-- **`og-recipe.mjs`** gains the fourth card, `{ dir: "example", settle: "reduced-motion" }`
-  with a hide rule for the panel; `test:og` already fails on a card without an entry.
+- **`og-recipe.mjs`** gains the fourth card, `{ dir: "example", settle: "reduced-motion" }`,
+  showing the stage with the root focused — the card region included, since it is part of the
+  stage; `test:og` already fails on a card without an entry.
   `sitemap.xml` gains the URL.
 - CI runs `test:example` and `example:check` before `npm ci`, beside the og steps.
 
