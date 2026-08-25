@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/talks/">
+
+<!-- The head is English while the body carries German in data-de — the source is English,
+     so English is what a crawler without JS reads: no swap on load, no flash. -->
+<title>Talks · CompanyGraph</title>
+<meta id="metadesc" name="description" content="Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://companygraph.io/talks/">
+<meta property="og:title" content="Talks · CompanyGraph">
+<meta property="og:description" content="Talks on CompanyGraph, the open-source meta-model for operating a company — in German and English.">
+<meta property="og:image" content="https://companygraph.io/talks/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* Self-hosted, same origin — no third party sees a visitor, and the files resolve
+   from file:// as well as from the domain. */
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+
+  /* Shell, header, brand and footer are companygraph.io's, deliberately: the domain is
+     served by two repositories and a visitor crossing between them should not meet a seam.
+     What only exists here is the talk list — and the language control, because this is the
+     only bilingual page under /talks/. See CLAUDE.md. */
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+  }
+  a{color:inherit}
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+
+  header{padding:2rem 0}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none}
+  .brand svg{width:26px; height:26px; color:var(--c-mid); flex:0 0 auto}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; align-items:center; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+
+  main{flex:1; display:flex; align-items:center; padding:2vh 0 5vh}
+
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+     font-weight:700; line-height:1.04; letter-spacing:-.032em; font-size:clamp(2.1rem,5vw,3.9rem); max-width:21ch}
+  h1 em{font-style:normal; color:var(--c-mid)}
+  /* The wordmark's second half, wherever it appears: accent-coloured, never italic. `em`
+     is the only tag available inside a data-de attribute value — nested markup there must
+     use single quotes, and a <span class='...'> would be one more thing to keep in step
+     across two languages. The rule does the work instead. */
+  .t em{font-style:normal; color:var(--c-mid)}
+  .lede{margin-top:1.6rem; font-size:clamp(1.05rem,1.6vw,1.35rem); color:var(--dim);
+        max-width:44ch}
+
+  .talks{margin-top:clamp(3rem,6vh,5rem)}
+  .talk{
+    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.5rem 2.5rem; align-items:baseline;
+    padding:clamp(1.6rem,3vh,2.4rem) 0;
+    text-decoration:none; color:inherit; transition:border-color .2s ease;
+  }
+  .talkrow{border-top:2px solid var(--rule)}
+  .talkrow:last-child{border-bottom:2px solid var(--rule)}
+  .dl{margin:0 0 clamp(1.6rem,3vh,2.4rem); font-size:.78rem; letter-spacing:.06em}
+  .dl a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
+  .dl a:hover, .dl a:focus-visible{border-color:var(--c-mid)}
+  .sep{color:var(--dim); margin:0 .55rem}
+  .talk:hover, .talk:focus-visible{border-color:var(--c-mid)}
+  .talk:hover .t, .talk:focus-visible .t{color:var(--c-mid)}
+  .t{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.32rem,2.65vw,2rem); font-weight:700; line-height:1.2;
+     letter-spacing:-.015em; transition:color .2s ease}
+  .d{grid-column:1; margin-top:.7rem; color:var(--dim);
+     font-size:clamp(1rem,1.35vw,1.15rem); line-height:1.5; max-width:62ch}
+  .meta{
+    font-family:"Plex Mono",monospace; font-size:.78rem;
+    color:var(--dim); letter-spacing:.1em; white-space:nowrap; text-align:right;
+  }
+  .meta b{color:var(--ink); font-weight:600}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    .lede{max-width:100%}
+    nav{gap:1.4rem}
+    .bar{flex-wrap:wrap; gap:1.1rem 1.4rem}
+    main{padding:1vh 0 4vh}
+    .talk{grid-template-columns:minmax(0,1fr); gap:.5rem}
+    .meta{grid-column:1; text-align:left; margin-top:.4rem}
+    .d{grid-column:1; max-width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .talk, .t, nav a{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="https://companygraph.io/">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="square">
+          <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+          <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+          <path d="M12.5 12 h4.5"/>
+          <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+        </svg>
+        <b>Company<span>Graph</span></b>
+      </a>
+      <nav>
+        <a href="./" aria-current="page" data-de="Vorträge">Talks</a>
+        <a href="https://companygraph.io/billing/" data-de="Abrechnung">Billing</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main>
+  <div class="shell">
+    <h1 data-de="Vorträge über Company<em>Graph</em>.">Talks on Company<em>Graph</em>.</h1>
+    <p class="lede" data-de="Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens.">Talks on CompanyGraph, the open-source meta-model for operating a company.</p>
+
+    <div class="talks">
+      <div class="talkrow">
+      <a class="talk" href="intro/">
+        <span class="t" data-de="Company<em>Graph</em> — eine Einführung">Company<em>Graph</em> — an introduction</span>
+        <span class="meta mono"><b>10 min</b></span>
+        <span class="d" data-de="Zwei Unternehmen, die nichts voneinander wussten, sind bei derselben Form gelandet: eine Markdown-Datei pro Entität, Referenzen über kanonische Namen, Schemas daneben. Was diese Form ist, warum sie für Menschen und Agenten zugleich trägt — und was davon heute schon geschrieben ist.">Two companies that knew nothing of each other arrived at the same shape: one Markdown file per entity, references by canonical name, schemas beside them. What that shape is, why it carries for people and agents at once — and what of it is written today.</span>
+      </a>
+      <p class="dl mono"><a href="intro/" data-de="Vortrag ansehen">Watch the talk</a><span class="sep">·</span><a href="intro/companygraph-en.pdf" data-de-href="intro/companygraph-de.pdf" data-de="PDF herunterladen">Download PDF</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="shell">
+  <footer>
+    <span><a target="_blank" rel="noopener" href="https://github.com/companygraph">github.com/companygraph</a></span>
+    <span><a target="_blank" rel="noopener" href="https://github.com/companygraph/meta-model/blob/HEAD/LICENSE">Apache 2.0</a></span>
+    <span><a target="_blank" rel="noopener" href="https://blust.ch/">Robert Blust</a></span>
+    <span><a href="https://companygraph.io/privacy/" data-de="Datenschutz">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// English is the markup and German lives in data-de — the other way round from the decks,
+// and deliberately: this page is delivered, shared and indexed in English, so English is what
+// it should say before a single line of JS has run — no swap on load, no flash, and a crawler
+// without JS reads the same language the page promises. The choice is remembered per origin
+// under the same key companygraph.io uses, so it carries between this page and the landing
+// page. Every storage access is guarded: file:// is an opaque origin in some browsers and
+// throws, and the page must still work with no remembered preference.
+(function(){
+  var KEY = "cg-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  // The description is the lede's own sentence in both languages — read off the lede
+  // element rather than retyped here, so the two copies cannot drift apart.
+  var ledeEl = document.querySelector(".lede");
+  var UI = {
+    de:{ title:"Vorträge · CompanyGraph", desc: ledeEl.getAttribute("data-de") },
+    en:{ title:"Talks · CompanyGraph",    desc: ledeEl.getAttribute("data-en") }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    // The PDF exists in both languages; the link points at the one being read. Without
+    // this, a German reader downloads the English deck and nothing on the page says so.
+    Array.prototype.forEach.call(document.querySelectorAll("[data-de-href]"), function(a){
+      if (!a.hasAttribute("data-en-href")) a.setAttribute("data-en-href", a.getAttribute("href"));
+      a.setAttribute("href", a.getAttribute("data-" + lang + "-href"));
+    });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if (lang !== "de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if (lang !== "en") toggle(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>

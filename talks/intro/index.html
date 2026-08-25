@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/talks/intro/">
+
+<!-- lang="de" is the truth about this file: the slides are German markup, and English
+     lives in data-en until applyLang() swaps it. A crawler that runs JS then sees English
+     under lang="en"; one that does not sees German under lang="de". Either way the page
+     is coherent, which it was not when the German source claimed to be English.
+
+     The head is English because it describes the page as delivered — the deck opens in
+     English — and applyLang() swaps the title and description when a visitor picks German. -->
+<title>CompanyGraph — an introduction · a talk by Robert Blust</title>
+<meta id="metadesc" name="description" content="A talk on the meta-model for operating a company — the vocabulary two independent companies converged on, and why it holds together as a graph of Markdown.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/talks/intro/">
+<meta property="og:title" content="CompanyGraph — an introduction">
+<meta property="og:description" content="The meta-model for operating a company — the vocabulary two independent companies converged on, and why it holds together as a graph of Markdown.">
+<meta property="og:image" content="https://companygraph.io/talks/intro/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CompanyGraph. The meta-model for operating a company.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Robert Blust">
+<style>
+/* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
+   unit that has to survive being copied to someone else's machine is the folder,
+   not the file. Before this the deck named a face it never shipped, so every slide
+   rendered in whatever system-ui the room's laptop happened to have. */
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+
+    /* deck-only, and deliberately outside the shared block: a warning red the
+       prose pages have no use for, and the transport's own two surfaces — the
+       slab it is milled from and the recessed window the track number sits in. */
+    --warn:#e0705e; --slab:#16181d; --lcd:#0a0b0e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at 1600×900 and the whole plane is scaled to
+     whatever the screen gives it, the way a presentation tool does it. Two
+     things follow, and both were previously things to re-test rather than
+     guarantees: a slide can never scroll, because the canvas always fits;
+     and the composition is identical on every screen, because there is only
+     one composition. Sizing by cqmin did the opposite — it derived width from
+     viewport height, so a wider screen only ever bought more empty margin. */
+  .deck{
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    background:radial-gradient(130% 85% at 50% 0%, var(--raise) 0%, var(--ground) 62%);
+  }
+
+  /* A slide can never be taller than the canvas, so anything that scales with
+     width needs a ceiling. A square 300×300 diagram in a half-width column was
+     780px tall on an ultrawide screen — inside a 900px frame that already held a
+     kicker and a headline. The cap is well above any inline icon, so it only ever
+     bites on a figure that was about to overflow. */
+  .slide svg, .slide img{max-height:60cqmin}
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  /* Every direct child of the active slide rises, in order. This used to require a
+     hand-applied .rise class, which meant a slide animated only if someone remembered —
+     one deck had it on all fifty-five children, another on nine, a third on two. The rule
+     now applies itself, so a new slide cannot be forgotten.
+     The stagger ran out at four children while slides carry up to six, and the fifth and
+     sixth inherited animation-delay:0 — firing before the first four rather than after.
+     Hence steps to six and a catch-all beyond. */
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
+  }
+  h1 em{font-style:normal; color:var(--c-mid)}
+  .sub{
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
+  }
+  .note{
+    margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
+    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
+  }
+
+  /* people / agents split */
+  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:8cqmin; margin-top:3cqmin}
+  .col h4{
+    font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-bottom:2cqmin;
+    padding-bottom:1.2cqmin; border-bottom:2px solid var(--rule);
+  }
+  .col.now h4{color:var(--c-mid); border-color:var(--c-mid)}
+  .col p{font-size:clamp(1.25rem,2.9cqmin,2rem); line-height:1.3; font-weight:500}
+  .col .small{font-size:clamp(1rem,2.1cqmin,1.45rem); color:var(--dim); font-weight:400; margin-top:1.4cqmin; line-height:1.4}
+  .verdict{margin-top:4cqmin; font-size:clamp(1.25rem,2.9cqmin,2.1rem); font-weight:600}
+  .verdict em{font-style:normal; color:var(--c-mid)}
+
+  /* breadth left, example diagram right */
+  .split{display:grid; grid-template-columns:0.9fr 1.1fr; gap:6cqmin; align-items:center; margin-top:2.4cqmin}
+  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8cqmin}
+  .blist li{border-top:2px solid var(--rule); padding-top:1.2cqmin}
+  .blist b{display:block; font-size:clamp(1.2rem,2.6cqmin,1.85rem); font-weight:600}
+  .blist span{font-size:clamp(.98rem,1.85cqmin,1.35rem); color:var(--dim)}
+  .diagram svg{width:100%; height:auto; display:block}
+  .caption{margin-top:1.6cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.82rem,1.6cqmin,1.15rem); color:var(--dim); letter-spacing:.02em}
+  .caption b{color:var(--c-mid); font-weight:600}
+  .stamp{
+    margin-top:3.4cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    color:var(--dim); letter-spacing:.02em;
+  }
+  .stamp b{color:var(--c-mid); font-weight:600}
+  /* the deck's only in-slide link, and the only outbound link on the page. It opens in a
+     new tab — the index may cross to companygraph.io in place, but a deck that navigates
+     away mid-talk is gone, and unlike the index it has no nav to come back through. That
+     also puts it under verify's `links` check, which asserts the href exists rather than
+     just that it behaves. Styled here because nothing else in a slide is an anchor, so
+     left alone it would render in the browser's default blue. */
+  .stamp a{color:var(--c-firm); text-decoration:none; border-bottom:1px solid var(--c-weak)}
+  .stamp a:hover, .stamp a:focus-visible{border-bottom-color:var(--c-mid)}
+
+  /* breadth grid (domains overview) */
+  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 6cqmin; margin-top:4.4cqmin}
+  /* Four across, as a class rather than an inline style: an inline declaration outranks
+     the mobile rule below whatever the media query says, and the fourth cell was being
+     clipped mid-word on a phone. The mobile reset names .grid.four explicitly so its
+     specificity matches and source order decides. */
+  .grid.four{grid-template-columns:repeat(4,1fr); gap:2.4cqmin 4cqmin; margin-top:2.6cqmin}
+  .cell{border-top:2px solid var(--rule); padding-top:1.4cqmin}
+  .cell b{display:block; font-size:clamp(1.1rem,2.3cqmin,1.65rem); font-weight:600}
+  .cell span{font-size:clamp(.88rem,1.6cqmin,1.15rem); color:var(--dim)}
+
+  /* example – diagram + list */
+  .split.even{grid-template-columns:1fr 1.05fr; gap:6cqmin}
+  .glossary{display:flex; flex-direction:column; gap:1.5cqmin; margin:0}
+  .glossary div{border-top:2px solid var(--rule); padding-top:1.1cqmin}
+  .glossary dt{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:600; font-size:clamp(1.05rem,2.1cqmin,1.5rem)}
+  .glossary dd{color:var(--dim); font-size:clamp(1rem,1.9cqmin,1.4rem); line-height:1.34; margin:.3cqmin 0 0}
+
+  .big-punch{font-size:clamp(2.3rem,7.2cqmin,5.8rem)}
+
+  /* title slide */
+  /* the mark, so the opening slide is the same lockup the site opens with —
+     on one line, sized so the mark's visual height sits at the wordmark's cap height */
+  .titlelock{display:flex; align-items:center; gap:.32em}
+  .titlemark{color:var(--c-mid); display:flex; flex:0 0 auto}
+  .titlemark svg{width:clamp(2.6rem,9cqmin,6.6rem); height:clamp(2.6rem,9cqmin,6.6rem); display:block}
+  .titlelock h1{margin:0}
+  .name{display:flex; align-items:center; gap:.6em}
+  .name .namemark{color:var(--c-mid); display:flex}
+  .name .namemark svg{width:15px; height:15px; display:block}
+  .name b{color:var(--ink); font-weight:600; letter-spacing:.01em; text-transform:none}
+  .name b em{font-style:normal; color:var(--c-mid)}
+
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:20ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  /* Sits below the sub and reads quieter than it: the sub names the category, this names
+     the claim, and reversing that weighting would make the wordmark compete with a
+     sentence. `--c-firm` on the second half is the resolved thing — the two readers are
+     the point of the line. */
+  .title-slide .claim{margin-top:2.4cqmin; max-width:52ch; font-size:clamp(.95rem,2.1cqmin,1.5rem);
+                      line-height:1.45; color:var(--dim)}
+  .title-slide .claim em{font-style:normal; color:var(--c-firm)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
+
+  /* SVG diagram tokens */
+  .node{fill:var(--raise); stroke:var(--c-mid); stroke-width:1.5}
+  .node.center{fill:#1c2130; stroke-width:2.2}
+  .edge{stroke:var(--rule); stroke-width:1.5; fill:none}
+  .edge.live{stroke:var(--c-mid); stroke-width:1.5; opacity:.7}
+  /* Not mono: these are ordinary words now, and mono in this design means data — record
+     values, lengths, language pairs, identifiers. Slide 05's type names keep the mono
+     treatment, because there the words really are identifiers. */
+  .nlabel{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+          font-size:13px; text-anchor:middle; dominant-baseline:middle}
+  .nlabel.c{fill:var(--c-mid); font-weight:700; font-size:14px}
+  .flowbox{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .flowbox.hot{stroke:var(--c-mid)}
+  .flowlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:14px; text-anchor:middle; dominant-baseline:middle}
+  .gate{fill:#1c2130; stroke:var(--c-mid); stroke-width:2}
+  .arrow{stroke:var(--c-mid); stroke-width:1.6; fill:none; marker-end:url(#ah)}
+  .arrow.dim{stroke:var(--rule); marker-end:url(#ahd)}
+  .node.warm{stroke:var(--c-flag)}
+  .node.bad{stroke:var(--warn)}
+  .nlabel.dim{fill:var(--dim); font-size:12px}
+  .nlabel.warm{fill:var(--c-flag)}
+  .band{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .band.merge{stroke:var(--c-mid)}
+  .band.review{stroke:var(--c-flag)}
+  .bandlabel{font-family:"Plex Mono",monospace; font-size:12.5px; dominant-baseline:middle}
+  .layers{display:flex; flex-direction:column; gap:1.5cqmin; margin-top:3cqmin; max-width:86%}
+  .layer{display:grid; grid-template-columns:auto 1fr; gap:1.6cqmin 2.2cqmin; align-items:baseline;
+         border-left:3px solid var(--rule); padding:1.1cqmin 0 1.1cqmin 2cqmin}
+  .layer.on{border-color:var(--c-mid)}
+  .layer.human{border-color:var(--c-flag)}
+  .layer .who{font-family:"Plex Mono",monospace; font-size:clamp(1rem,2cqmin,1.4rem); font-weight:600}
+  .layer.on .who{color:var(--c-mid)} .layer.human .who{color:var(--c-flag)}
+  .layer .what{font-size:clamp(.98rem,1.95cqmin,1.38rem); color:var(--dim); line-height:1.35}
+  .ask{display:flex; flex-direction:column; gap:2cqmin; margin-top:3.4cqmin; max-width:80%}
+  .ask li{list-style:none; border-top:2px solid var(--rule); padding-top:1.4cqmin;
+          font-size:clamp(1.1rem,2.4cqmin,1.7rem); line-height:1.35}
+  .ask li b{color:var(--c-mid)}
+  .status{display:grid; grid-template-columns:auto 1fr; gap:1.4cqmin 2.4cqmin; margin-top:3.2cqmin; max-width:84%;
+          font-size:clamp(1rem,2.1cqmin,1.45rem); line-height:1.4}
+  .status .tick{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:700}
+  .status .todo{font-family:"Plex Mono",monospace; color:var(--dim)}
+  .status .lbl b{font-weight:600}
+  .status .lbl span{color:var(--dim)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
+
+  /* ---------- transport ----------
+     One instrument along the bottom edge instead of four fixed corners competing for
+     the same pixels. The counter lives inside the transport's display window: on the
+     device this borrows from, the track number and the transport are one thing.
+     --chromeH is measured in JS, because the notes sheet and the mobile progress bar
+     both have to sit exactly on top of whatever height this row ends up at. */
+  .chrome{
+    position:fixed; left:0; right:0; bottom:0; z-index:21;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto}
+
+  .name{grid-column:1; justify-self:start;
+        font-family:"Plex Mono", ui-monospace, monospace; font-size:.72rem;
+        color:var(--dim); letter-spacing:.14em; text-transform:uppercase}
+
+  .transport{
+    grid-column:2; justify-self:center;
+    display:flex; align-items:center; gap:.45rem;
+    background:var(--slab); border:1px solid var(--rule); border-radius:14px;
+    padding:.45rem .55rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 12px 34px rgba(0,0,0,.5);
+  }
+
+  /* the display window. The hairline under the number is the position of the clip that
+     is speaking — how much of this slide is left — and is empty when nothing speaks. */
+  .lcd{
+    display:flex; flex-direction:column; align-items:center; gap:5px;
+    background:var(--lcd); border-radius:8px; padding:.44rem .62rem .38rem;
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.85), inset 0 0 0 1px rgba(122,160,255,.1);
+    font-family:"Plex Mono", ui-monospace, monospace; line-height:1;
+    margin-right:.2rem;
+  }
+  .lcd .n{font-size:.76rem; font-weight:600; letter-spacing:.09em; color:var(--c-mid); white-space:nowrap}
+  .lcd .n .sep, .lcd .n #tot{color:#4c566e}
+  .lcd .n.msg{color:var(--c-flag); font-size:.62rem; letter-spacing:.14em}
+  .lcd .clip{width:100%; height:2px; background:#1e2029; border-radius:2px; overflow:hidden}
+  .lcd .clip i{display:block; height:100%; width:0; background:var(--c-mid); transition:width .25s linear}
+
+  .tmain, .tside{display:flex; align-items:center; gap:.45rem}
+
+  .tbtn{
+    display:grid; place-items:center; width:34px; height:34px; flex:0 0 auto;
+    background:none; border:0; border-radius:9px; color:var(--dim); cursor:pointer;
+    transition:color .15s ease, background-color .15s ease, border-color .15s ease;
+  }
+  .tbtn svg{width:18px; height:18px; fill:currentColor; display:block}
+  .tbtn svg.stroked{fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+  .tbtn:hover{color:var(--ink); background:#20242e}
+  .tbtn:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px; color:var(--ink)}
+  .tbtn[aria-pressed="true"]{color:var(--c-mid); background:#1b2231}
+
+  .tbtn.play{width:44px; height:44px; border-radius:50%; border:1.5px solid #39435c; color:var(--c-mid)}
+  .tbtn.play svg{width:17px; height:17px}
+  .tbtn.play:hover{background:#1b2231; border-color:var(--c-mid); color:var(--c-mid)}
+  .tbtn .icontract{display:none}
+  .tbtn[aria-pressed="true"] .icontract{display:block}
+  .tbtn[aria-pressed="true"] .iexpand{display:none}
+  .tbtn.play .ipause{display:none}
+  .tbtn.play.on{background:var(--c-mid); border-color:var(--c-mid); color:var(--ground)}
+  .tbtn.play.on .iplay{display:none}
+  .tbtn.play.on .ipause{display:block}
+
+  /* the exit is an <a>, so it works with no JS and the browser treats it as
+     navigation — history, middle-click and "open in new tab" all behave. */
+  a.tbtn{text-decoration:none}
+  a.name{text-decoration:none; color:inherit; pointer-events:auto}
+  a.name:hover, a.name:focus-visible{color:var(--ink)}
+
+  .tdiv{width:1px; align-self:stretch; margin:.3rem .25rem; background:#333743; flex:0 0 auto}
+
+  .seg{display:flex; border:1px solid var(--rule); border-radius:8px; overflow:hidden; flex:0 0 auto}
+  .seg button{
+    background:none; border:0; cursor:pointer; padding:.44rem .48rem;
+    font-family:"Plex Mono", ui-monospace, monospace; font-size:.63rem; letter-spacing:.12em;
+    color:var(--dim); transition:color .15s ease, background-color .15s ease;
+  }
+  .seg button:hover{color:var(--ink)}
+  .seg button[aria-pressed="true"]{color:var(--c-mid); background:#1b2231; font-weight:600}
+  .seg button:focus-visible{outline:2px solid var(--c-mid); outline-offset:-2px}
+
+  @media (prefers-reduced-motion: reduce){
+    .tbtn, .seg button, .lcd .clip i{transition:none}
+  }
+
+  .notes{position:fixed; inset:auto 0 0 0; background:#17181c; color:#f1ede4; border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:#9db0ff; margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
+  /* Zwei Rollen, klar getrennt: eine Regie-Instruktion wird nicht gesprochen,
+     eine Betonung schon. Vorher war beides <em> und die Vertonung verschluckte Wörter. */
+  .notes em.cue{font-style:italic; color:#9a9dab}
+  .notes em{font-style:normal; font-weight:600; color:#f1ede4}
+  .notes .time{float:right; color:#9db0ff; font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
+                border:1px solid #33353d; border-radius:8px; padding:.5em .9em;
+                color:#b7b0a2; font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
+  .notes .close:hover{color:#f1ede4; border-color:#9db0ff}
+  .notes .close:focus-visible{outline:2px solid #9db0ff; outline-offset:2px}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+  .deck.notes-open .split{align-items:start; margin-top:1.6cqmin}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    /* the transport becomes the bottom edge itself: full width, flush, clear of the
+       home indicator. The name credit goes — at this width it is the first thing that
+       would push the controls off centre. */
+    .chrome{
+      grid-template-columns:1fr; padding:0;
+      background:var(--slab); border-top:1px solid var(--rule);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .name{display:none}
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
+           transform:translateY(calc(101% + var(--chromeH,0px)))}
+    .transport{
+      grid-column:1; justify-self:stretch; width:100%;
+      background:none; border:0; border-radius:0; box-shadow:none;
+      padding:.45rem .5rem; gap:.2rem; justify-content:space-between;
+    }
+    .tmain{gap:.1rem}
+    .tside{gap:.2rem}
+    .tbtn{width:44px; height:44px}
+    .tbtn svg{width:20px; height:20px}
+    .tbtn.play{width:46px; height:46px}
+    .tdiv{margin:.4rem .1rem}
+    .seg button{padding:0 .5rem; min-width:38px; min-height:44px}
+    .lcd{padding:.42rem .5rem .36rem; margin-right:0}
+    /* the deck progress bar sits on the transport's top edge, not behind it */
+    .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
+    .slide{justify-content:flex-start; overflow-y:auto;
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
+    /* The title lockup was the one row that never reflowed: at 390px the wordmark alone
+       measured wider than the slide's content box, so 407px of lockup sat in a 390px
+       screen — 419px with the notes sheet open, and identical in both languages, because
+       the mark and the word are the same in each. Two reasons it survived the h1 rule
+       above: .title-slide h1 is (0,1,1) and outranks a bare h1 selector whatever the media
+       query says, so the display size has to be named again here; and a flex row with no
+       wrap has no way to give. Both are fixed — a vw-driven size that fits, and wrap as
+       the floor under it, so a future face that measures wider breaks the line instead of
+       spilling off the screen. The mark keeps its ratio to the wordmark (9/11 of the
+       headline, the same as the desktop clamps) so the lockup still reads as one thing. */
+    .titlelock{flex-wrap:wrap}
+    .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
+    .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
+    .thennow, .split, .split.even, .grid, .grid.four{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .kicker{margin-bottom:5vw}
+  }
+  /* below this the seven controls need every pixel; the slide kicker and the progress
+     bar still say where you are */
+  @media (max-width: 400px){
+    .lcd{display:none}
+    .transport{padding:.45rem .35rem}
+    .tbtn{width:40px; height:40px}
+    .tside{gap:.1rem}
+    .tdiv{margin:.4rem .05rem}
+    .seg button{padding:0 .3rem; min-width:32px; min-height:40px; font-size:.6rem; letter-spacing:.08em}
+  }
+  /* the smallest phones still in use. body{overflow:hidden} hides a transport that is
+     wider than the screen instead of scrolling it, so this has to be measured, not assumed */
+  @media (max-width: 350px){
+    .transport{padding:.4rem .3rem}
+    .tbtn{width:36px; height:36px}
+    .tbtn svg{width:18px; height:18px}
+    .tbtn.play{width:42px; height:42px}
+    .tside{gap:.05rem}
+    .seg button{min-width:28px; min-height:36px; padding:0 .22rem}
+  }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. The slide headline carries the
+     same face the site's does; everything else on a slide is a label or a
+     value, and stays where it was. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7aa0ff"></path>
+  </marker>
+  <marker id="ahd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#282a30"></path>
+  </marker>
+</defs></svg>
+
+<div class="deck" id="deck">
+
+  <section class="slide title-slide" data-say-title="no"
+    data-time="0:00"
+    data-notes="<em class='cue'>Der Titel liegt an, während ich eröffne.</em> Zehn Minuten über eine Idee, der Sie widersprechen sollen. CompanyGraph ist ein Meta-Modell für den Betrieb eines Unternehmens: die Struktur, die sein Wissen annimmt, damit Menschen und KI sich darauf verlassen können. Quelloffen, und nicht fertig. <em class='cue'>Kurze Pause.</em> Ich sage Ihnen, woher es kommt, was es ist, und was ich noch nicht weiss."
+    data-notes-en="<em class='cue'>The title stays up while I open.</em> Ten minutes on an idea I would like you to argue with. CompanyGraph is a meta-model for operating a company: the structure its knowledge takes, so that people and AI can both rely on it. Open source, and not finished. <em class='cue'>Short pause.</em> I will tell you where it came from, what it is, and what I still do not know.">
+    <div class="kicker mono" data-n="00" data-de="Eine Idee, zur Prüfung gestellt">An idea, put up for scrutiny</div>
+    <div class="titlelock">
+      <span class="titlemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span>
+      <h1 data-de="Company<em>Graph</em>.">Company<em>Graph</em>.</h1>
+    </div>
+    <p class="sub" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und KI sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and AI can both rely on it.</p>
+    <p class="byline" data-de="Robert Blust · <span>Software Engineer &amp; Architekt</span>">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
+  </section>
+
+  <section class="slide"
+    data-time="0:50"
+    data-notes="<em class='cue'>Ruhig eröffnen.</em> Jede Firma läuft auf Wissen: wofür sie da ist, wohin sie will, wie die Arbeit fliesst, wer was verantwortet, was gemessen wird, welche Regeln gelten. Das steht auch alles irgendwo. <em class='cue'>Kurze Pause.</em> Nur würden keine zwei Leute am selben Ort nachschauen — und niemand weiss, welche Fassung heute gilt."
+    data-notes-en="<em class='cue'>Open plainly.</em> Every company runs on knowledge: what it is for, where it is going, how work flows, who owns what, what gets measured, which rules hold. All of it is written down somewhere. <em class='cue'>Short pause.</em> No two people would look in the same place — and nobody knows which version is true today.">
+    <div class="kicker mono" data-n="01" data-de="Das Problem">The problem</div>
+    <h1 data-de="Das Wissen einer Firma liegt überall — und nirgends.">A company's knowledge lives everywhere — and nowhere.</h1>
+    <p class="sub" data-de="Zweck, Strategie, wie die Arbeit fliesst, wer was verantwortet, was gemessen wird, welche Regeln gelten.">Purpose, strategy, how work flows, who owns what, what gets measured, which rules hold.</p>
+    <p class="note" data-de="Es steht geschrieben. Nur würden keine zwei Leute am selben Ort nachschauen.">It is written down. No two people would look in the same place.</p>
+  </section>
+
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Das ist der Einwand, den ich zuerst selbst hatte.</em> Aufschreiben kann jede Firma. Das Problem ist nicht das Aufschreiben — es ist, dass das Geschriebene altert und niemand merkt, wann. <em class='cue'>Die drei kurz antippen, nicht vorlesen.</em> Und weil man dem Geschriebenen nicht trauen kann, fragt man wieder eine Person. <em class='cue'>Pointe:</em> Genau das ist die Steuer, die eine Firma jeden Tag zahlt."
+    data-notes-en="<em class='cue'>This is the objection I had myself.</em> Any company can write things down. Writing is not the hard part — the hard part is that what you wrote ages, and nobody notices when. <em class='cue'>Touch the three, do not read them out.</em> And because you cannot trust it, you go and ask a person instead. <em class='cue'>The point:</em> that is the tax, and a company pays it every day.">
+    <div class="kicker mono" data-n="02" data-de="Warum es ungelöst ist">Why it is not solved</div>
+    <h1 data-de="Aufschreiben ist einfach. Wahr halten ist teuer.">Writing it down is easy. Keeping it true is expensive.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="Die Wiki-Seite">The wiki page</b><span data-de="einmal geschrieben, einen Monat lang wahr">written once, true for a month</span></div>
+      <div class="cell"><b data-de="Die Präsentation">The deck</b><span data-de="wahr an dem Tag, an dem sie gezeigt wurde">true on the day it was shown</span></div>
+      <div class="cell"><b data-de="Die Tabelle">The spreadsheet</b><span data-de="wahr für die Person, die zuletzt darin war">true for whoever was in it last</span></div>
+    </div>
+    <p class="verdict" data-de="Also fragt man doch wieder eine Person. <em>Das ist die Steuer.</em>">So you ask a person instead. <em>That is the tax.</em></p>
+  </section>
+
+  <section class="slide"
+    data-time="1:20"
+    data-notes="<em class='cue'>Das ist das Rückgrat des Vortrags. Langsamer werden.</em> Dieses Modell wurde nicht am Reissbrett entworfen. Es wurde aus zwei Firmen herausgezogen, die nichts voneinander wussten. Die eine hat Angestellte, Gruppen, Rollen, einen Prozess mit Gates. Die andere ist eine Person. <em class='cue'>Betonen:</em> Keine hat von der anderen abgeschaut — und beide sind bei derselben Form gelandet. <em class='cue'>Kurze Pause.</em> Eine Form, auf die zwei Teams unabhängig voneinander kommen, ist ein Beleg. Eine Form, die ein Team erfindet, ist eine Vorliebe."
+    data-notes-en="<em class='cue'>This is the spine of the talk. Slow down.</em> This model was not designed on a drawing board. It was pulled out of two companies that knew nothing about each other. One has employees, groups, roles, a process with gates. The other is one person. <em class='cue'>Stress this:</em> neither borrowed from the other — and both ended up with the same shape. <em class='cue'>Short pause.</em> A shape two teams reach independently is evidence. A shape one team invents is a preference.">
+    <div class="kicker mono" data-n="03" data-de="Die Idee">The idea</div>
+    <h1 data-de="Zwei Firmen. Dieselbe Form.">Two companies. The same shape.</h1>
+    <div class="thennow">
+      <div class="col">
+        <h4 data-de="Eine mit Angestellten">One with a payroll</h4>
+        <p data-de="Menschen, Gruppen, Rollen, ein Prozess mit Gates.">People, groups, roles, a process with gates.</p>
+      </div>
+      <div class="col now">
+        <h4 data-de="Eine Ein-Personen-Firma">One company of one</h4>
+        <p data-de="Eine Person. Keine Gruppe. Keine Angestellten.">One person. No group. No employees.</p>
+      </div>
+    </div>
+    <p class="verdict" data-de="Nichts gemeinsam, ausser dass beide laufen müssen. Keine wusste von der anderen. <em>Beide sind hier gelandet:</em>">Nothing in common but needing to run. Neither knew about the other. <em>Both ended up here:</em></p>
+    <div class="grid four">
+      <div class="cell"><b data-de="Ein Ort für jedes">One home each</b><span data-de="je genau einmal">each in exactly one place</span></div>
+      <div class="cell"><b data-de="Fakten und Begründung">Facts and reasoning together</b><span data-de="was gilt und warum">what holds, and why</span></div>
+      <div class="cell"><b data-de="Abgelegt nach Art der Sache">Filed by what it is</b><span data-de="auffindbar, ohne zu fragen">findable without asking</span></div>
+      <div class="cell"><b data-de="Jede Art hat eine feste Form">Every kind has a set shape</b><span data-de="nichts bleibt halb ausgefüllt">nothing stays half filled in</span></div>
+    </div>
+    <p class="verdict" data-de="Die Grösse ändert, wie viel ausgefüllt ist. <em>Die Form ändert sie nie.</em>">Size changed how much got filled in. <em>It never changed the shape.</em></p>
+  </section>
+
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>Jetzt konkret, aber ohne Technik.</em> Jeder Kasten hier ist eine Seite — eine Rolle, eine Regel, eine Kennzahl. Keine Zeile in einer Datenbank, kein Eintrag in einem Werkzeug, das jemand kaufen muss: Klartext, den ein Mensch liest. <em class='cue'>Die drei Punkte antippen.</em> Der Titel der Seite ist ihr Name — man verweist darauf, wie man es ausspricht. Und was eigene Teile bekommt, behält sie bei sich, statt sie über die Firma zu verteilen. <em class='cue'>Wenn jemand fragt, ob man das alles von Hand pflegt — hier zugeben, nicht ausweichen:</em> In meiner eigenen Instanz wird ein Teil davon aus den Systemen erzeugt, die wir ohnehin betreiben. Im veröffentlichten Modell macht das noch nichts für Sie."
+    data-notes-en="<em class='cue'>Concrete now, but no machinery.</em> Every box here is a page — a role, a rule, a metric. Not a row in a database, not an entry in a tool someone has to buy: plain words a person reads. <em class='cue'>Touch the three points.</em> The page's title is its name, so you refer to it the way you say it out loud. And anything that gains parts of its own keeps them with it, instead of scattering them across the company. <em class='cue'>If someone asks whether all of this is maintained by hand — concede it here, do not dodge:</em> in my own instance part of it is generated from the systems we already run. Nothing in the published model does that for you yet.">
+    <div class="kicker mono" data-n="04" data-de="Die Form">The shape</div>
+    <h1 data-de="Jede Rolle, jede Regel, jede Kennzahl — einmal aufgeschrieben.">Every role, every rule, every metric — written down once.</h1>
+    <div class="split">
+      <div class="diagram">
+        <svg viewBox="0 0 520 340" role="img" aria-label="Entities as files, each naming the others">
+          <line class="edge" x1="260" y1="170" x2="260" y2="52"></line>
+          <line class="edge" x1="260" y1="170" x2="412" y2="112"></line>
+          <line class="edge" x1="260" y1="170" x2="412" y2="228"></line>
+          <line class="edge" x1="260" y1="170" x2="260" y2="288"></line>
+          <line class="edge" x1="260" y1="170" x2="108" y2="228"></line>
+          <line class="edge" x1="260" y1="170" x2="108" y2="112"></line>
+          <line class="edge live" x1="260" y1="52" x2="412" y2="228"></line>
+          <line class="edge live" x1="412" y1="112" x2="260" y2="288"></line>
+          <line class="edge live" x1="108" y1="112" x2="108" y2="228"></line>
+          <!-- Plain words, not the model's type names. The names themselves (`profile`,
+               `role`, `kpi` …) appear once, on slide 05, where the subject IS the
+               vocabulary; here the subject is the idea, and six identifiers in monospace
+               read as code to a room that does not write any. The German is carried in
+               data-de like every other string in the deck. -->
+          <rect class="node" x="208" y="30" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="260" y="51" data-de="Menschen">People</text>
+          <rect class="node" x="360" y="90" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="111" data-de="Prozesse">Processes</text>
+          <rect class="node" x="368" y="206" width="88" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="227" data-de="Kennzahlen">Metrics</text>
+          <rect class="node" x="216" y="266" width="88" height="40" rx="0"></rect>
+          <text class="nlabel" x="260" y="287" data-de="Regeln">Rules</text>
+          <rect class="node" x="56" y="206" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="108" y="227" data-de="Begriffe">Terms</text>
+          <rect class="node" x="64" y="90" width="88" height="40" rx="0"></rect>
+          <text class="nlabel" x="108" y="111" data-de="Rollen">Roles</text>
+          <rect class="node center" x="196" y="146" width="128" height="48" rx="0"></rect>
+          <text class="nlabel c" x="260" y="170">CompanyGraph</text>
+        </svg>
+      </div>
+      <ul class="blist">
+        <li><b data-de="Klartext, keine Datenbank">Plain words, not a database</b><span data-de="nichts zu installieren, nichts, wo man sich anmelden muss">nothing to install, nothing to log into</span></li>
+        <li><b data-de="Versioniert wie Code">Stored and versioned like code</b><span data-de="jede Änderung hat Autor, Datum und Grund">every change has an author, a date and a reason</span></li>
+        <li><b data-de="Der Titel ist der Name">Its title is its name</b><span data-de="man verweist darauf, wie man es ausspricht">you refer to it the way you say it out loud</span></li>
+        <li><b data-de="Es wächst mit der Firma">It grows with the company</b><span data-de="was eigene Teile bekommt, behält sie bei sich">a thing that gains parts of its own keeps them with it</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Das ist der Unterschied zu einem Wiki, und er ist der wichtigste.</em> Die Seiten stehen nicht nebeneinander, sie verweisen aufeinander — und zwar mit dem Namen der Sache, nicht mit einem Link, der irgendwohin zeigt. <em class='cue'>Die drei Beispiele antippen.</em> Deshalb fällt sofort auf, was fehlt: eine Regel ohne Verantwortliche, eine Rolle, die niemand innehat, eine Kennzahl ohne Ziel. <em class='cue'>Pointe:</em> Man kann nichts still verlieren."
+    data-notes-en="<em class='cue'>This is the difference from a wiki, and it is the one that matters.</em> The pages do not sit side by side, they refer to each other — by the name of the thing, not by a link that points somewhere. <em class='cue'>Touch the three examples.</em> So what is missing shows up immediately: a rule with nobody accountable, a role nobody holds, a metric with no target. <em class='cue'>The point:</em> you cannot quietly lose anything.">
+    <div class="kicker mono" data-n="05" data-de="Was es zusammenhält">What holds it together</div>
+    <h1 data-de="Nichts zeigt ins Leere.">Nothing points at nothing.</h1>
+    <p class="sub" data-de="Seiten verweisen mit dem Namen der Sache aufeinander — nicht mit einem Link, der irgendwohin zeigt.">Pages refer to each other by the name of the thing — not by a link that points somewhere.</p>
+    <div class="grid">
+      <div class="cell"><b data-de="Eine Regel ohne Verantwortliche">A rule with nobody accountable</b><span data-de="fällt auf, sobald sie geschrieben ist">shows up the moment it is written</span></div>
+      <div class="cell"><b data-de="Eine Rolle, die niemand innehat">A role nobody holds</b><span data-de="fällt auf, sobald jemand geht">shows up the moment someone leaves</span></div>
+      <div class="cell"><b data-de="Eine Kennzahl ohne Ziel">A metric with no target</b><span data-de="fällt auf, bevor jemand sie berichtet">shows up before anyone reports it</span></div>
+    </div>
+    <p class="verdict" data-de="<em>Man kann nichts still verlieren.</em>"><em>You cannot quietly lose anything.</em></p>
+  </section>
+
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>Breite zeigen, nicht vorlesen. Zwei, drei herausgreifen.</em> Es geht nicht nur um Menschen und Rollen. Im selben Vokabular stehen die Prozesse mit ihren Gates, die Strategie und die Ziele, die Kennzahlen, die Regeln, die Begriffe, die eine Firma anders benutzt als alle anderen. <em class='cue'>Ehrlich bleiben:</em> Nicht jede Firma füllt alles aus — eine Ein-Personen-Firma hat keine Gruppen. Die Art bleibt trotzdem im Modell, leer."
+    data-notes-en="<em class='cue'>Show the breadth, do not recite it. Pick two or three.</em> This is not only people and roles. The same vocabulary holds the processes and their gates, the strategy and the goals, the metrics, the rules, and the terms a company uses differently from everyone else. <em class='cue'>Stay honest:</em> not every company fills all of it in — a company of one has no groups. The kind stays in the model anyway, empty.">
+    <div class="kicker mono" data-n="06" data-de="Die Breite">The breadth</div>
+    <h1 data-de="Alles, was eine Firma ausmacht — in einem Vokabular.">Everything that makes a company — in one vocabulary.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="Menschen und Rollen">People and roles</b><span data-de="wer da ist, wer was verantwortet">who is here, who owns what</span></div>
+      <div class="cell"><b data-de="Prozesse und Gates">Processes and gates</b><span data-de="wie Arbeit fliesst, und wo sie hält">how work flows, and where it stops</span></div>
+      <div class="cell"><b data-de="Strategie und Ziele">Strategy and goals</b><span data-de="wohin investiert wird">where the effort goes</span></div>
+      <div class="cell"><b data-de="Kennzahlen">Metrics</b><span data-de="was gemessen wird, und von wem">what is measured, and by whom</span></div>
+      <div class="cell"><b data-de="Regeln">Rules</b><span data-de="was durchgesetzt wird">what is enforced</span></div>
+      <div class="cell"><b data-de="Begriffe">Terms</b><span data-de="was diese Firma anders nennt als andere">what this company calls things</span></div>
+    </div>
+    <p class="verdict" data-de="Nicht jede Firma füllt alles aus. <em>Die Art bleibt trotzdem im Modell.</em>">Not every company fills all of it in. <em>The kind stays in the model anyway.</em></p>
+  </section>
+
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>Ein Beispiel, an dem man es anfassen kann.</em> Nehmen Sie den Übergang von einem Vorschlag zu gebauter Arbeit. In den meisten Firmen ist dieses Gate eine Folie: eine Liste, an die sich jemand erinnert. Im Modell steht es als Daten — wer freigibt, was wahr sein muss, welche Regel dahintersteht. <em class='cue'>Pointe, ruhig:</em> Vor der Freigabe wird nicht gebaut. Das ist keine Kultur, das ist nachprüfbar."
+    data-notes-en="<em class='cue'>One example you can hold.</em> Take the step from a proposal to work that gets built. In most companies that gate is a slide: a list somebody remembers. In the model it is data — who signs it off, what has to be true, which rule sits behind it. <em class='cue'>The point, calmly:</em> nothing gets built before the sign-off. That is not culture, it is checkable.">
+    <div class="kicker mono" data-n="07" data-de="Konkret">Concrete</div>
+    <h1 data-de="Governance als Daten — nicht als Folie.">Governance as data — not as a slide.</h1>
+    <div class="split even">
+      <div class="diagram">
+        <svg viewBox="0 0 300 300" role="img" aria-label="A gate between proposal and build">
+          <rect class="flowbox" x="70" y="20" width="160" height="46"></rect>
+          <text class="flowlabel" x="150" y="43" data-de="Vorschlag">Proposal</text>
+          <line class="arrow" x1="150" y1="66" x2="150" y2="104"></line>
+          <polygon class="gate" points="150,110 214,150 150,190 86,150"></polygon>
+          <text class="flowlabel" x="150" y="150" style="fill:#7aa0ff;font-weight:700">Gate</text>
+          <line class="arrow" x1="150" y1="190" x2="150" y2="228"></line>
+          <rect class="flowbox hot" x="70" y="232" width="160" height="46"></rect>
+          <text class="flowlabel" x="150" y="255" data-de="Umsetzung">Build</text>
+        </svg>
+      </div>
+      <ul class="blist">
+        <li><b data-de="Wer freigibt">Who signs it off</b><span data-de="eine benannte Rolle, keine Gewohnheit">a named role, not a habit</span></li>
+        <li><b data-de="Was wahr sein muss">What has to be true</b><span data-de="die Kriterien stehen an der Stelle, an der sie gelten">the criteria sit where they apply</span></li>
+        <li><b data-de="Welche Regel dahintersteht">Which rule sits behind it</b><span data-de="vor der Freigabe wird nicht gebaut">nothing gets built before the sign-off</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>Jetzt der Kern.</em> Dasselbe Modell bedient zwei Zielgruppen, und das ist der ganze Hebel. Menschen bekommen ein Onboarding nach Rolle, eine Antwort auf „wer verantwortet das?“ und einen Ort, an dem die Antwort für alle dieselbe ist. Eine KI bekommt dieselbe Seite zu lesen. <em class='cue'>Wichtig — nicht behaupten, Halluzinationen verschwänden:</em> Es macht eine KI nicht richtig. Es verkleinert, was sie raten muss, und hält sie in den Regeln, die Sie geschrieben haben, statt in denen, die sie sich denkt."
+    data-notes-en="<em class='cue'>Now the core.</em> The same model serves two audiences, and that is the whole leverage. People get onboarding by role, an answer to “who owns this?”, and one place where the answer is the same for everyone. An AI gets the same page to read. <em class='cue'>Important — do not claim hallucinations go away:</em> it does not make an AI right. It shrinks what it has to guess, and holds it inside the rules you wrote rather than the ones it invents.">
+    <div class="kicker mono" data-n="08" data-de="Warum es sich lohnt">Why it pays</div>
+    <h1 data-de="Für Menschen und für KI.">For people, and for AI.</h1>
+    <div class="thennow">
+      <div class="col">
+        <h4 data-de="Für Menschen">For people</h4>
+        <p data-de="Onboarding nach Rolle. Eine Antwort auf „wer verantwortet das?“">Onboarding by role. An answer to “who owns this?”</p>
+        <p class="small" data-de="Und ein Ort, an dem die Antwort für alle dieselbe ist.">And one place where the answer is the same for everyone.</p>
+      </div>
+      <div class="col now">
+        <h4 data-de="Für KI">For AI</h4>
+        <p data-de="Dieselbe Seite, ohne Übersetzung dazwischen.">The same page, with nothing in between.</p>
+        <p class="small" data-de="Sie handelt in den Regeln, die Sie geschrieben haben.">It acts inside the rules you wrote.</p>
+      </div>
+    </div>
+    <p class="verdict" data-de="Es macht eine KI nicht richtig. <em>Es verkleinert, was sie raten muss.</em>">It does not make an AI right. <em>It shrinks what it has to guess.</em></p>
+  </section>
+
+  <section class="slide"
+    data-time="0:50"
+    data-notes="<em class='cue'>Hier bin ich unbequem ehrlich, und das ist Absicht.</em> Veröffentlicht ist das Vokabular und die Regeln, nach denen es zusammenhält, mit einem durchgearbeiteten Beispiel. Der grössere Teil des Modells ist beschrieben, aber noch nicht geschrieben — was fertig ist, sagt die Roadmap. Werkzeuge gibt es keine. <em class='cue'>Pointe:</em> Nichts zu installieren, nichts zu kaufen, nichts fertig."
+    data-notes-en="<em class='cue'>This is where I am uncomfortably honest, deliberately.</em> What is published is the vocabulary and the rules that hold it together, with one worked example. Most of the model is described but not yet written — the roadmap says what is. There is no tooling. <em class='cue'>The point:</em> nothing to install, nothing to buy, nothing finished.">
+    <div class="kicker mono" data-n="09" data-de="Wo es steht">Where it stands</div>
+    <h1 data-de="Das Vokabular ist veröffentlicht. Fast nichts sonst.">The vocabulary is published. Almost nothing else is.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="Veröffentlicht">Published</b><span data-de="das Vokabular, die Regeln, ein durchgearbeitetes Beispiel">the vocabulary, the rules, one worked example</span></div>
+      <div class="cell"><b data-de="Beschrieben, nicht geschrieben">Described, not written</b><span data-de="der grössere Teil des Modells — was fertig ist, sagt die Roadmap">most of the model — the roadmap says what is done</span></div>
+      <div class="cell"><b data-de="Gibt es nicht">Does not exist</b><span data-de="Werkzeuge, Import, irgendetwas zu kaufen">tooling, importers, anything to buy</span></div>
+    </div>
+    <p class="verdict" data-de="Nichts zu installieren. Nichts zu kaufen. <em>Nichts fertig.</em>">Nothing to install. Nothing to buy. <em>Nothing finished.</em></p>
+  </section>
+
+  <section class="slide"
+    data-time="0:40"
+    data-notes="<em class='cue'>Langsam, und dann stehen lassen.</em> Ich verkaufe hier nichts. Ich habe eine Form, auf die zwei Firmen unabhängig gekommen sind, und ich möchte wissen, wo sie bricht. <em class='cue'>Die Frage direkt stellen und warten:</em> Wo passt Ihre Firma nicht in diese Form? Genau die Stelle interessiert mich — nicht die, an der es funktioniert."
+    data-notes-en="<em class='cue'>Slowly, then let it stand.</em> I am not selling anything here. I have a shape two companies arrived at independently, and I want to know where it breaks. <em class='cue'>Ask it straight, and wait:</em> where does your company not fit this shape? That is the part I want — not the part where it works.">
+    <div class="kicker mono" data-n="10" data-de="Worum ich bitte">What I am asking</div>
+    <h1 class="big-punch" data-de="Sagen Sie mir, wo das falsch ist.">Tell me where this is wrong.</h1>
+    <p class="sub" data-de="Wo passt Ihre Firma nicht in diese Form?">Where does your company not fit this shape?</p>
+    <p class="stamp"><b>Apache 2.0</b> · <a href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a></p>
+  </section>
+
+</div>
+
+<div class="chrome" id="chrome">
+
+  <a class="name" href="../" aria-label="Back to all talks"><span class="namemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><b>Company<em>Graph</em></b> · Robert Blust</a>
+
+  <div class="transport" id="transport" role="group" aria-label="Deck controls">
+
+    <div class="lcd" aria-hidden="true">
+      <div class="n" id="lcdn"><b id="cur">00</b><span class="sep">/</span><span id="tot">10</span></div>
+      <div class="clip"><i id="cliplen"></i></div>
+    </div>
+
+    <div class="tmain">
+
+    <button class="tbtn" id="tFirst" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="5" width="2.3" height="14" rx="1"/><path d="M13.2 5.4v13.2L7.6 12z"/><path d="M21 5.4v13.2L13.6 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tPrev" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.6v14.8L6 12z"/></svg>
+    </button>
+
+    <button class="tbtn play" id="tPlay" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="iplay"><path d="M7 4.4L19.2 12 7 19.6z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ipause"><rect x="6.4" y="4.8" width="3.7" height="14.4" rx="1.1"/><rect x="13.9" y="4.8" width="3.7" height="14.4" rx="1.1"/></svg>
+    </button>
+
+    <button class="tbtn" id="tNext" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 4.6v14.8L18 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tFull" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked iexpand"><path d="M9.5 4.5H4.5V9.5M14.5 4.5H19.5V9.5M14.5 19.5H19.5V14.5M9.5 19.5H4.5V14.5"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked icontract"><path d="M4.5 9.5H9.5V4.5M19.5 9.5H14.5V4.5M19.5 14.5H14.5V19.5M4.5 14.5H9.5V19.5"/></svg>
+    </button>
+
+    </div>
+
+    <div class="tside">
+    <div class="tdiv"></div>
+
+    <!-- id="langtoggle" is the container, not just a label: a click that lands on the
+         divider between the two buttons bubbles here and swaps the language wholesale,
+         mirroring the single-control #langind pattern the talks index uses — verify's
+         `translates` check clicks one id twice to round-trip, and a segmented DE/EN
+         pair has no such id on its own. Direct clicks on either button still pick that
+         language explicitly and stop the bubble, so a sighted mouse user never sees
+         the toggle fire twice. -->
+    <div class="seg" id="langtoggle" role="group" aria-label="Sprache wechseln — switch language">
+      <button type="button" id="langDe" aria-pressed="false">DE</button>
+      <div class="tdiv" aria-hidden="true"></div>
+      <button type="button" id="langEn" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
+    <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
+    </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <button class="close" type="button" id="notesclose">Notizen schliessen</button>
+</div>
+
+<script>
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  // slide numbering is zero-based everywhere the viewer can see it: the kicker on each
+  // slide, the transport's display window, and the audio filenames all say the same number.
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  // The language choice is shared with the other pages on this origin, so arriving from
+  // the talks index keeps the language the reader already picked. Storage is guarded:
+  // file:// is an opaque origin in some browsers and throws, and a deck that cannot read
+  // a preference must still open — in English, its default.
+  var LANG_KEY = 'cg-lang';
+  function langStored(){ try { return localStorage.getItem(LANG_KEY); } catch (e) { return null; } }
+  function langRemember(v){ try { localStorage.setItem(LANG_KEY, v); } catch (e) {} }
+
+  var i = 0, notesOpen = false, lang = langStored() === 'de' ? 'de' : 'en';
+  var deck = document.getElementById('deck');
+  var bar = document.getElementById('bar'), cur = document.getElementById('cur');
+  var notes = document.getElementById('notes'), ntext = document.getElementById('ntext'), ntime = document.getElementById('ntime');
+  var chrome = document.getElementById('chrome');
+  var lcdn = document.getElementById('lcdn'), cliplen = document.getElementById('cliplen');
+  var btn = { first:document.getElementById('tFirst'), prev:document.getElementById('tPrev'),
+              play:document.getElementById('tPlay'),  next:document.getElementById('tNext'),
+              full:document.getElementById('tFull'),  notes:document.getElementById('tNotes') };
+  var langDe = document.getElementById('langDe'), langEn = document.getElementById('langEn');
+  document.getElementById('tot').textContent = pad(slides.length - 1);
+
+  var i18n = Array.prototype.slice.call(document.querySelectorAll('[data-de]'));
+  i18n.forEach(function(el){ el.setAttribute('data-en', el.innerHTML); });
+
+  var UI = {
+    de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
+         title:'CompanyGraph — eine Einführung · ein Vortrag von Robert Blust',
+         desc:'Ein Vortrag über das Meta-Modell für den Betrieb eines Unternehmens — das Vokabular, auf das zwei unabhängige Unternehmen zusammenliefen, und warum es als Graph aus Markdown zusammenhält.',
+         play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
+         prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', novoice:'Keine Stimme', up:'Zurück zu allen Vorträgen' },
+    en:{ label:'Speaker note', close:'Close notes',
+         title:'CompanyGraph — an introduction · a talk by Robert Blust',
+         desc:'A talk on the meta-model for operating a company — the vocabulary two independent companies converged on, and why it holds together as a graph of Markdown.',
+         play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
+         prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
+         notes:'Speaker notes', de:'In German', en:'In English', novoice:'No voice', up:'Back to all talks' }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute('data-' + lang); });
+    var t = UI[lang];
+    document.title = t.title;
+    document.getElementById('metadesc').setAttribute('content', t.desc);
+    document.getElementById('noteslabel').textContent = t.label;
+    document.getElementById('notesclose').textContent = t.close;
+    langDe.setAttribute('aria-pressed', lang === 'de' ? 'true' : 'false');
+    langEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    langDe.setAttribute('aria-label', t.de);
+    langEn.setAttribute('aria-label', t.en);
+    btn.first.setAttribute('aria-label', t.first);
+    btn.prev.setAttribute('aria-label', t.prev);
+    btn.next.setAttribute('aria-label', t.next);
+    btn.notes.setAttribute('aria-label', t.notes);
+    var up = document.getElementById('tUp');
+    up.setAttribute('aria-label', t.up);
+    up.setAttribute('title', t.up);
+    labelPlay();
+    labelFull();
+    document.documentElement.lang = lang;
+    if (playing) {
+      if (synth) synth.cancel();
+      clip.pause();
+      setTimeout(narrateCurrent, 120);
+    }
+    render();
+  }
+
+  /* The transport is a real element with a measured height, and two other things have to
+     land exactly on top of it: the notes sheet, and the progress bar on mobile. */
+  function measureChrome(){
+    document.documentElement.style.setProperty('--chromeH', chrome.offsetHeight + 'px');
+  }
+
+  function fitNotes(){
+    var s = slides[i];
+    s.style.transform = '';
+    if(!notesOpen) return;
+    var avail = notes.getBoundingClientRect().top - 20;
+    var need  = s.scrollHeight;
+    if(need > avail){ s.style.transform = 'scale(' + Math.max(0.5, avail/need) + ')'; }
+  }
+
+  function render(){
+    slides.forEach(function(s,n){ if(n!==i) s.style.transform=''; s.classList.toggle('active', n===i); });
+    bar.style.width = ((i+1)/slides.length*100) + '%';
+    cur.textContent = pad(i);
+    if(notesOpen){
+      var d = slides[i].dataset;
+      ntext.innerHTML = (lang === 'en' && d.notesEn) ? d.notesEn : d.notes;
+      ntime.textContent = d.time || '';
+    }
+    fitNotes();
+  }
+  window.addEventListener('resize', function(){ measureChrome(); fitNotes(); });
+  function go(n){ i = Math.max(0, Math.min(slides.length-1, n)); render(); }
+
+  /* Turning the page by hand does not end the talk — the voice follows to the slide you
+     landed on. JUMP_MS is why: it lets someone click through five slides and hear only the
+     fifth, instead of a syllable of each one on the way. Back to the start is the exception,
+     because going back to slide zero is leaving the talk, not moving inside it. */
+  var JUMP_MS = 400;
+
+  function manual(n){
+    if (!playing) { go(n); return; }
+    stopVoice();
+    go(n);
+    gapTimer = setTimeout(function(){ if (playing) narrateCurrent(); }, JUMP_MS);
+  }
+
+  function restart(){ if (playing) stopNarration(); go(0); }
+
+  function setNotes(open){
+    notesOpen = open;
+    notes.classList.toggle('show', notesOpen);
+    // the closed sheet is only translated off-screen, so its close button would otherwise
+    // still be a tab stop for something nobody can see
+    notes.toggleAttribute('inert', !notesOpen);
+    deck.classList.toggle('notes-open', notesOpen);
+    btn.notes.setAttribute('aria-pressed', notesOpen ? 'true' : 'false');
+    render();
+  }
+
+  function labelFull(){
+    var on = !!document.fullscreenElement;
+    btn.full.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.full.setAttribute('aria-label', on ? UI[lang].unfull : UI[lang].full);
+  }
+  function toggleFull(){
+    if(!document.fullscreenElement){
+      var r = document.documentElement.requestFullscreen();
+      if (r && r.catch) r.catch(function(){});
+    } else { document.exitFullscreen(); }
+  }
+  document.addEventListener('fullscreenchange', function(){ labelFull(); measureChrome(); });
+
+  function setLang(next){ if (next === lang) return; lang = next; langRemember(next); applyLang(); }
+  function toggleLang(){ setLang(lang === 'de' ? 'en' : 'de'); }
+
+  btn.first.addEventListener('click', restart);
+  btn.prev .addEventListener('click', function(){ manual(i-1); });
+  btn.next .addEventListener('click', function(){ manual(i+1); });
+  btn.play .addEventListener('click', function(){ toggleNarration(); });
+  btn.full .addEventListener('click', toggleFull);
+  btn.notes.addEventListener('click', function(){ setNotes(!notesOpen); });
+  document.getElementById('notesclose').addEventListener('click', function(){ setNotes(false); });
+  // Each button picks its language directly and stops the click there, so it never
+  // also reaches #langtoggle's own listener below — a mouse user who clicks the
+  // already-active button sees nothing happen, same as before this control existed.
+  langDe.addEventListener('click', function(e){ e.stopPropagation(); setLang('de'); });
+  langEn.addEventListener('click', function(e){ e.stopPropagation(); setLang('en'); });
+  // A click that lands on the divider between the two buttons (or, from a script,
+  // on #langtoggle itself) is not aimed at either language specifically — it toggles,
+  // the same as the talks index's single #langind control does.
+  document.getElementById('langtoggle').addEventListener('click', toggleLang);
+
+  /* The deck is driven by the buttons. The navigation keys stay because a presenter
+     remote sends them — it is a clicker pretending to be a keyboard — and are
+     deliberately not advertised anywhere on screen. N and L are a second, unrelated
+     reason for the same handler: N mirrors the notes button and L mirrors the talks
+     index's #langind shortcut, so both habits carry over into the deck. */
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ manual(i+1); e.preventDefault(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ manual(i-1); e.preventDefault(); }
+    else if(e.key==='Home'){ restart(); e.preventDefault(); }
+    else if(e.key==='End'){ manual(slides.length-1); e.preventDefault(); }
+    else if(e.key==='n'||e.key==='N'){ setNotes(!notesOpen); e.preventDefault(); }
+    else if(e.key==='l'||e.key==='L'){ toggleLang(); e.preventDefault(); }
+  });
+
+  /* Swipe turns the page on touch. A mostly-vertical drag is someone scrolling a long
+     slide, which portrait layout makes routine, so only a decisively horizontal one counts. */
+  var tx = 0, ty = 0, tt = 0;
+  deck.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) { tt = 0; return; }
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY; tt = Date.now();
+  }, {passive:true});
+  deck.addEventListener('touchend', function(e){
+    if (!tt || Date.now() - tt > 700) return;
+    var t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+    manual(dx < 0 ? i + 1 : i - 1);
+  }, {passive:true});
+
+  measureChrome();
+  setNotes(false);
+  applyLang();
+
+  /* ---------- narration ----------
+     The speaker notes mix stage directions with what is actually said: the <em class='cue'>
+     spans are Regie-Instruktionen ("the title stays up while I greet"), the rest is
+     Sprechtext. Only the latter is spoken.
+
+     A recorded clip is played when one exists (audio/<lang>/<nn>.mp3), and the browser's own
+     voice reads the note when one does not — so a half-recorded deck still plays end to end.
+
+     Nothing is timed either way. Each slide advances on the end event of whichever source spoke,
+     so the deck follows the voice rather than a clock, and stays correct when a note is edited or
+     a clip is re-recorded. The data-time cues are untouched: they are the presenter's pacing for
+     the live talk, which runs about three times longer than the narration and is a different
+     timeline entirely. */
+  var synth = window.speechSynthesis;
+  var clip = new Audio();
+  clip.preload = 'auto';
+  var playing = false, utter = null, gapTimer = null, msgTimer = null;
+
+  // audio needs no speech synthesis, so the control stays even where synthesis is missing
+
+  function labelPlay(){
+    var l = playing ? UI[lang].pause : UI[lang].play;
+    btn.play.setAttribute('aria-label', l);
+    btn.play.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    btn.play.classList.toggle('on', !!playing);
+  }
+
+  /* The display window is where a player says NO DISC. A refusal that shows up there reads
+     as the machine answering, and needs no second label on the button. */
+  function lcdMessage(text){
+    clearTimeout(msgTimer);
+    lcdn.dataset.keep = lcdn.dataset.keep || lcdn.innerHTML;
+    lcdn.textContent = text;
+    lcdn.classList.add('msg');
+    msgTimer = setTimeout(function(){
+      lcdn.innerHTML = lcdn.dataset.keep;
+      lcdn.classList.remove('msg');
+      delete lcdn.dataset.keep;
+      cur = document.getElementById('cur');
+      render();
+    }, 2600);
+  }
+
+  // the hairline under the track number: how far into this slide's clip the voice is
+  function setClipProgress(f){ cliplen.style.width = Math.max(0, Math.min(1, f)) * 100 + '%'; }
+  clip.addEventListener('timeupdate', function(){
+    if (playing && clip.duration) setClipProgress(clip.currentTime / clip.duration);
+  });
+
+  /* The headline, read as the spoken lead-in. On screen it is the thing the eye lands on
+     first; in audio nothing announced it, so the argument arrived before its own point. */
+  function slideTitle(slide){
+    if (slide.dataset.sayTitle === 'no') return '';
+    var h = slide.querySelector('h1');
+    if (!h) return '';
+    var raw = (lang === 'en' && h.dataset.en) ? h.dataset.en : h.innerHTML;
+    var d = document.createElement('div'); d.innerHTML = raw;
+    return (d.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function spokenText(slide){
+    var raw = (lang === 'en' && slide.dataset.notesEn) ? slide.dataset.notesEn : slide.dataset.notes;
+    if (!raw) return '';
+    var d = document.createElement('div');
+    d.innerHTML = raw;
+    // only the directions: a bare <em> is emphasis inside the sentence and must be spoken,
+    // or the voice says "muss zuerst wissen, Gast" and loses the word the line turns on
+    d.querySelectorAll('em.cue').forEach(function(e){ e.remove(); });
+    var body = (d.textContent || '').replace(/\s+/g, ' ').trim();
+    var title = slideTitle(slide);
+    return title ? title + '\n\n' + body : body;
+  }
+
+  function pickVoice(){
+    var want = lang === 'de' ? 'de' : 'en';
+    var voices = synth.getVoices() || [];
+    var exact = voices.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf(want) === 0; });
+    if (!exact.length) return null;
+    // prefer a local voice: network voices stall the onend event the deck advances on
+    return exact.filter(function(v){ return v.localService; })[0] || exact[0];
+  }
+
+  function say(text, whenDone){
+    utter = new SpeechSynthesisUtterance(text);
+    var v = pickVoice();
+    if (v) utter.voice = v;
+    utter.lang = v ? v.lang : (lang === 'de' ? 'de-DE' : 'en-GB');
+    utter.rate = 0.98;
+    utter.onend = function(){ if (playing) whenDone(); };
+    utter.onerror = function(){ stopNarration(); };
+    // a throwing speak() would otherwise leave the deck stuck in a playing state that
+    // never advances, because onend can no longer fire
+    try { synth.speak(utter); } catch (e) { stopNarration(); }
+  }
+
+  function clipUrl(n){
+    var k = slides[n].querySelector('.kicker');
+    var id = k && k.dataset.n ? k.dataset.n : ('0' + n).slice(-2);
+    return 'audio/' + lang + '/' + id + '.mp3';
+  }
+
+  /* Fetch the next clip while this one plays, so the gap between slides is the pause we
+     intended rather than a download. */
+  function preloadNext(){
+    if (i + 1 >= slides.length) return;
+    var a = new Audio(); a.preload = 'auto'; a.src = clipUrl(i + 1);
+  }
+
+  function narrateCurrent(){
+    if (!playing) return;
+    setClipProgress(0);
+    var text = spokenText(slides[i]);
+    if (!text) { advanceOrStop(); return; }
+
+    clip.onended = function(){ if (playing) advanceOrStop(); };
+    clip.onerror = function(){
+      // no recording for this slide or this language — read the note instead
+      if (playing) say(text, advanceOrStop);
+    };
+    clip.src = clipUrl(i);
+    var started = clip.play();
+    if (started && started.catch) {
+      started.then(preloadNext).catch(function(){ if (playing) say(text, advanceOrStop); });
+    } else {
+      preloadNext();
+    }
+  }
+
+  /* Two pauses, doing different jobs. SETTLE sits on the slide that was just narrated, so the
+     point has a moment to land before it is taken away. READ sits on the new slide before the
+     voice starts, so it can be read first — a listener has no presenter to watch, and a slide
+     talked over from the first frame is a slide nobody reads. */
+  var SETTLE_MS = 5000;
+  var READ_MS   = 2000;
+
+  function advanceOrStop(){
+    if (!playing) return;
+    if (i >= slides.length - 1) { stopNarration(); return; }
+    gapTimer = setTimeout(function(){
+      if (!playing) return;
+      go(i + 1);
+      gapTimer = setTimeout(function(){ if (playing) narrateCurrent(); }, READ_MS);
+    }, SETTLE_MS);
+  }
+
+  function startNarration(){
+    // synthesis is only the fallback now, so its absence is not a reason to refuse
+    if (!synth) { playing = true; labelPlay(); narrateCurrent(); return; }
+    if (!pickVoice() && !hasClips()) {
+      lcdMessage(UI[lang].novoice);
+      return;
+    }
+    playing = true;
+    labelPlay();
+    narrateCurrent();
+  }
+
+  // silence whatever is speaking, without deciding whether the talk is over
+  function stopVoice(){
+    clearTimeout(gapTimer);
+    clip.pause();
+    clip.onended = clip.onerror = null;
+    if (synth) synth.cancel();
+    setClipProgress(0);
+  }
+
+  function stopNarration(){
+    playing = false;
+    stopVoice();
+    labelPlay();
+  }
+
+  /* Optimistic: if a clip exists we never need a voice installed. Checked lazily so the
+     deck makes no network request until someone actually presses play. */
+  var clipsSeen = null;
+  function hasClips(){
+    if (clipsSeen !== null) return clipsSeen;
+    clipsSeen = true;                       // assume yes; clip.onerror handles the truth
+    return clipsSeen;
+  }
+
+  function toggleNarration(){ playing ? stopNarration() : startNarration(); }
+
+  // voices load asynchronously in some browsers
+  if (synth && typeof synth.onvoiceschanged !== 'undefined') {
+    synth.addEventListener('voiceschanged', function(){ /* refresh list */ });
+  }
+  window.addEventListener('beforeunload', function(){ if (synth) synth.cancel(); });
+</script>
+
+<script>
+// Scale the 1600×900 canvas to the screen. Below the breakpoint the deck reflows
+// into a scrolling reading view instead, so the transform is cleared there.
+(function(){
+  var CH = 900;
+  var deck = document.getElementById("deck");
+  var small = window.matchMedia("(max-width: 860px), (max-aspect-ratio: 4/5)");
+  function fit(){
+    if (small.matches) { deck.style.transform = ""; deck.style.width = ""; return; }
+    // Height is the fixed dimension; width is whatever the screen's aspect asks
+    // for. The canvas then covers the viewport exactly — no bars, any aspect.
+    var s = window.innerHeight / CH;
+    deck.style.width = (window.innerWidth / s) + "px";
+    deck.style.transform = "scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+  if (small.addEventListener) small.addEventListener("change", fit);
+  fit();
+})();
+</script>
+</body>
+</html>

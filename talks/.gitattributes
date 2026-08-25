@@ -1,0 +1,3 @@
+# Audio is committed, not LFS: GitHub Pages does not resolve LFS objects — it would serve
+# the pointer text to anyone pressing play.
+*.mp3 -filter -diff -merge
