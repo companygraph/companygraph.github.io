@@ -185,7 +185,7 @@
   #fig .n{cursor:pointer}
   #fig .n:hover .box, #fig .n:focus-visible .box, #fig .n.focus .box{stroke:var(--c-mid)}
   #fig .n:hover .sq, #fig .n:focus-visible .sq, #fig .n.focus .sq{fill:var(--c-mid)}
-  #fig .n:focus{outline:none}
+  #fig .n:focus:not(:focus-visible){outline:none}
   #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
   #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
   #fig text.eyebrow{fill:var(--dim); letter-spacing:.08em}
@@ -244,7 +244,7 @@
       <div class="stage">
         <div class="canvas">
           <svg id="fig" role="img" aria-labelledby="figcap"></svg>
-          <button class="recentre mono" id="recentre" type="button" data-de="zentrieren">recentre</button>
+          <button class="recentre" id="recentre" type="button" data-de="zentrieren">recentre</button>
         </div>
         <aside class="card" id="card" aria-live="polite">
           <div class="cbody" id="cbody"></div>
@@ -338,8 +338,8 @@
 //
 // Nothing in this script knows a name from the example. It reads types, entities and edges
 // out of #example-data and derives every label, path and count from them; the only strings it
-// carries are the two band eyebrows and the root card's word for "pages", which the site's
-// language toggle swaps through t().
+// carries are the two band eyebrows, the root/folder card's word for "pages", and the file
+// link's aria-label, all of which the site's language toggle swaps through t().
 (function(){
   var block = document.getElementById("example-data");
   var data = JSON.parse(block.textContent);
@@ -349,7 +349,7 @@
   src.href = "https://github.com/companygraph/meta-model/tree/" + data.commit + "/example";
   document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
 
-  // ── the three strings this script owns ────────────────────────────────────────────────
+  // ── the four strings this script owns ─────────────────────────────────────────────────
   // The static markup carries its German in data-de and the page's own toggle applies it.
   // What the figure draws is built after that pass has run, so these travel with the script
   // and re-render when <html lang> changes.
@@ -439,10 +439,11 @@
   //   the path on disk climbs as a ladder on the left, the way a file tree is drawn;
   //   what the focus owns hangs as a column on the right;
   //   what refers, and what is referred to, sit in two dashed bands outside both.
-  var LEFT = 230, RIGHT = 210, STEP = 54, ROW = 54, BAND = 96, EYE = 28;
+  var STEP = 54, ROW = 54, BAND = 96, EYE = 28;
   var R_FOCUS = 16, R_NODE = 12;                    // half-widths of the marks
   var GAP = 12;                                     // mark to its label
   var CH_MONO = 6.9, CH_TEXT = 6.9, CH_ROOT = 8.6;  // width per character, for the fit only
+  var K_MIN = 0.5;                                  // the camera's floor, one with the zoom's
 
   function markW(p){ return p.role === "focus" ? R_FOCUS : R_NODE; }
   function nameW(p){
@@ -499,7 +500,7 @@
       y0 = Math.min(y0, b.y - 12);
       x0 = Math.min(x0, b.x - (b.anchor === "end" ? b.text.length * CH_MONO : 0));
     });
-    var k = Math.max(0.48, Math.min(1, (w * 0.92) / (x1 - x0), (h * 0.9) / (y1 - y0)));
+    var k = Math.max(K_MIN, Math.min(1, (w * 0.92) / (x1 - x0), (h * 0.9) / (y1 - y0)));
     return d3.zoomIdentity.translate(w / 2 - k * (x0 + x1) / 2, h / 2 - k * (y0 + y1) / 2).scale(k);
   }
 
@@ -513,7 +514,11 @@
   var first = true;
   function dur(){ return (first || (reduce && reduce.matches)) ? 0 : 400; }
 
-  var zoom = d3.zoom().scaleExtent([.5, 2]).on("zoom", function(ev){ scene.attr("transform", ev.transform); });
+  // A plain wheel over the canvas must keep scrolling the page — only ctrl/⌘+wheel zooms — and
+  // dblclick is left to the browser rather than jumping the camera to 2× on whatever it hit.
+  var zoom = d3.zoom().scaleExtent([K_MIN, 2])
+    .filter(function(ev){ return ev.type === "wheel" ? (ev.ctrlKey || ev.metaKey) : ev.type !== "dblclick"; })
+    .on("zoom", function(ev){ scene.attr("transform", ev.transform); });
   svg.call(zoom);
   var home = d3.zoomIdentity;
 
@@ -555,25 +560,33 @@
     var pos = {}; neigh.nodes.forEach(function(p){ pos[p.node.id] = p; });
 
     var links = neigh.links.filter(function(l){ return pos[l.from] && pos[l.to]; });
-    var lsel = gLink.selectAll("path").data(links, function(d){ return d.from + "→" + d.to; });
-    lsel.exit().style("pointer-events", "none").transition().duration(D).style("opacity", 0).remove();
+    // path:not(.gone) — an exiting path is marked .gone the moment it exits so a link that
+    // re-enters before its fade finishes is never re-bound to the still-fading exit copy.
+    var lsel = gLink.selectAll("path:not(.gone)").data(links, function(d){ return d.from + "→" + d.to; });
+    lsel.exit().classed("gone", true).style("pointer-events", "none")
+        .transition().duration(D).style("opacity", 0).remove();
     lsel.enter().append("path")
         .attr("class", function(d){ return d.kind === "own" ? "own" : "ref hot"; })
         .attr("data-from", function(d){ return d.from; })
         .attr("data-to", function(d){ return d.to; })
         .attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); })
         .style("opacity", 0).transition().duration(D).style("opacity", 1);
-    lsel.transition().duration(D).attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); });
+    // An update always drives opacity/pointer-events back to their settled state, so an enter
+    // fade interrupted by a second click within the transition window still finishes instead
+    // of leaving the survivor translucent and unclickable.
+    lsel.style("pointer-events", null).transition().duration(D)
+        .style("opacity", 1).attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); });
 
-    var bsel = gBand.selectAll("text").data(neigh.bands, function(d){ return d.key; });
-    bsel.exit().transition().duration(D).style("opacity", 0).remove();
+    var bsel = gBand.selectAll("text:not(.gone)").data(neigh.bands, function(d){ return d.key; });
+    bsel.exit().classed("gone", true).transition().duration(D).style("opacity", 0).remove();
     halo(bsel.enter().append("text")).attr("class", "eyebrow")
         .attr("x", function(d){ return d.x; }).attr("y", function(d){ return d.y; })
         .attr("text-anchor", function(d){ return d.anchor; })
         .text(function(d){ return d.text; })
         .style("opacity", 0).transition().duration(D).style("opacity", 1);
     bsel.text(function(d){ return d.text; }).attr("text-anchor", function(d){ return d.anchor; })
-        .transition().duration(D).attr("x", function(d){ return d.x; }).attr("y", function(d){ return d.y; });
+        .transition().duration(D).style("opacity", 1)
+        .attr("x", function(d){ return d.x; }).attr("y", function(d){ return d.y; });
 
     var nsel = gNode.selectAll("g.n").data(neigh.nodes, function(d){ return d.node.id; });
     // An exiting node keeps its marks so it can fade, but loses the class the page and the
@@ -617,7 +630,8 @@
        .attr("text-anchor", function(d){ return d.role === "in" ? "end" : null; })
        .attr("y", 0)
        .text(attrOf);
-    nsel.transition().duration(D).attr("transform", function(d){ return "translate(" + d.x + " " + d.y + ")"; });
+    nsel.transition().duration(D).style("opacity", 1)
+        .attr("transform", function(d){ return "translate(" + d.x + " " + d.y + ")"; });
 
     home = fit(neigh, dim.w, dim.h);
     if (D) svg.transition().duration(D).call(zoom.transform, home);
@@ -732,7 +746,11 @@
   window.addEventListener("resize", function(){ if (focused) render(); });
   window.addEventListener("hashchange", function(){
     var id = decodeURIComponent(location.hash.slice(1));
-    if (id && byId[id] && (!focused || focused.id !== id)) focus(nEntity(byId[id]));
+    // An empty hash — Back past the last entity, or one naming a folder rather than an
+    // entity — means the root, not "do nothing": focus() only ever sets a hash for an
+    // entity, so a bare or unrecognised hash is what the root and every folder look like.
+    if (!id || !byId[id]) { if (!focused || focused.kind !== "root") focus(nRoot()); return; }
+    if (!focused || focused.id !== id) focus(nEntity(byId[id]));
   });
 
   var initial = decodeURIComponent(location.hash.slice(1));

@@ -310,7 +310,11 @@ const CHECKS = {
     const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
     if (!data.entities) return "the data block is empty — run: npm run example";
     const nodes = () => page.evaluate(() => Array.from(document.querySelectorAll("#fig .n")).map(n => ({ id: n.dataset.id, focus: n.classList.contains("focus") })));
-    const click = (id) => page.evaluate((id) => document.querySelector(`#fig .n[data-id="${id}"]`).dispatchEvent(new MouseEvent("click", { bubbles: true })), id);
+    const click = (id) => page.evaluate((id) => {
+      const n = document.querySelector(`#fig .n[data-id="${id}"]`);
+      if (n) n.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      return !!n;
+    }, id);
     const roots = data.types.filter(t => !t.owner).map(t => t.folder);
     let ns = await nodes();
     if (!ns.find(n => n.id === "root" && n.focus)) return "initially the root is not the focus";
@@ -322,7 +326,11 @@ const CHECKS = {
     // tree, so a folder four levels down is not on it until its parent is the focus — and
     // every prefix of an id IS a node here, because an id is the thing's path on disk.
     const parts = folder.split("/");
-    for (let i = 1; i <= parts.length; i++) { await click(parts.slice(0, i).join("/")); await page.waitForTimeout(500); }
+    for (let i = 1; i <= parts.length; i++) {
+      const prefix = parts.slice(0, i).join("/");
+      if (!(await click(prefix))) return `${prefix} is not on the canvas at this point in the walk`;
+      await page.waitForTimeout(500);
+    }
     ns = await nodes();
     if (!ns.find(n => n.id === folder && n.focus)) return `clicking ${folder} did not focus it`;
     if (!ns.find(n => n.id === "root")) return `focused ${folder}, but its ancestor root is gone`;

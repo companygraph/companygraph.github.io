@@ -143,7 +143,8 @@ shows one focused node and its neighbourhood only:
 Clicking any node makes it the focus. Survivors move to their new places, newcomers fade in,
 the rest fade out — a d3 transition of about 400 ms, 0 ms under `prefers-reduced-motion`,
 which is also what the share card renders: the root focused, its folders to the right,
-nothing selected. Wheel and drag pan and zoom the canvas; a *recentre* control resets.
+nothing selected. Drag pans; ctrl/⌘ + wheel zooms, so a plain wheel still scrolls the page; a
+*recentre* control restores the fitted view.
 Keyboard: nodes are focusable with Enter and Space; the card is `aria-live="polite"`. The URL
 hash names the focus (`#skills/java-programming`) so a state can be shared and is restored
 on load.
