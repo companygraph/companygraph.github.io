@@ -1,5 +1,5 @@
-# Most npm dependencies here are devDependencies — playwright and the export scripts drive
-# `npm run verify`, `npm run og` and `npm run pdf`, and none of that reaches a visitor.
+# playwright is a devDependency and the export scripts drive `npm run verify`, `npm run og`
+# and `npm run pdf`, none of which reaches a visitor.
 #
 # d3 is the exception, and it is the reason this file matters more here than on the sibling
 # sites. `example/index.html` loads `example/d3.v7.min.js`, a vendored copy of the pinned
@@ -9,6 +9,13 @@
 # signal, not a nuisance to be silenced with an ignore rule: an ignored d3 is a shipped
 # asset that ages forever with nothing saying so. Clearing such a pull request is
 # re-vendoring the file and re-rendering the card that names it — `npm run og`.
+#
+# It is also why d3 sits in `dependencies` and not `devDependencies`, which is where it used
+# to be. The organisation runs GitHub's "dismiss low-impact alerts for development-scoped
+# dependencies" preset — correct for playwright, which no visitor ever runs — and under the
+# old scope it auto-dismissed low and medium d3 alerts on a file a browser executes. The
+# scope is load-bearing now, not cosmetic: moving d3 back silences those alerts again, and
+# nothing says so.
 #
 # The shape is copied from guestgraph/engine, deliberately — the same duplication the design
 # tokens and the deck footer have, and the same absence of a tripwire. Grouping minor and
