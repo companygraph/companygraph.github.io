@@ -48,7 +48,7 @@ that lived in another repository. No CI in *this* repository can catch drift in
 `companygraph/meta-model` — the only defence is never restating anything that lives there.
 
 - **The example page is the one mechanical exception:** its data block is generated from
-  `meta-model/example` at the commit in `example/source.json`, and `npm run example:check`
+  `meta-model/example` at the commit in `source.json`, and `npm run example:check`
   fails when it drifts. Nothing else on that page names anything from the example.
 
 ## Constraints

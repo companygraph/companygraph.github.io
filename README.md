@@ -42,9 +42,10 @@ split had to be unwound. Do not recreate one.
   at them relatively, so the deck still opens from `file://`.
 - `example/` — `index.html`, the page; `build.mjs`, which writes the data block into it (or
   checks it still matches, `--check`) by reading `meta-model/example` at the commit
-  `source.json` names; `instance.mjs`, the parser;
-  `source.json`, the one thing this page is allowed to name from the model — a repo and a
-  commit; and its own vendored `d3.v7.min.js`, the same reason `fonts/` is self-hosted.
+  `source.json` names; `instance.mjs`, the parser; and its own vendored `d3.v7.min.js`, the
+  same reason `fonts/` is self-hosted.
+- `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
+  the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png`, `example/og.png` — 1200×630 share cards, each
