@@ -39,7 +39,7 @@ test("an entity is its H1, tagline, fields, sections and path; a README is not o
   assert.deepEqual(java, {
     id: "skills/java-programming", type: "skill", name: "Java Programming",
     tagline: "JVM services.", fields: { group: "Programming Languages" },
-    sections: [{ heading: "In practice", text: "Reading the stack trace." }],
+    sections: [{ heading: "In practice", text: "Reading the stack trace.", tables: [] }],
     owner: null, path: "example/skills/java-programming.md",
   });
 });
@@ -58,6 +58,7 @@ test("a table section is kept as rows, and its body text is empty", () => {
   const mira = parseInstance(valid).entities.find(e => e.name === "Mira Halvorsen");
   const skills = mira.sections.find(s => s.heading === "Skills");
   assert.deepEqual(skills.table, {
+    caption: null,
     columns: ["Skill", "Level", "Evidence"],
     rows: [["Java Programming", "Proficient", "Owned the JVM services."]],
   });

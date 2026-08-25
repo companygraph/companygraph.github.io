@@ -67,16 +67,7 @@ function parseBody(lines) {
       const block = blocks[bi];
       if (block.isTable) {
         const { columns, rows } = parseTable(block.lines);
-        const entry = { columns, rows };
-        // `caption` reads back correctly either way (a real caption, or null when there is
-        // none), but it is only enumerable when real — so a table with no caption still
-        // serializes, spreads and deep-equals exactly as it did before captions existed, and
-        // `table` (the first table, kept below for compatibility) is indistinguishable from
-        // its pre-caption shape unless something asks for `.caption` by name.
-        Object.defineProperty(entry, "caption", {
-          value: block.caption ?? null, enumerable: !!block.caption, configurable: true, writable: true,
-        });
-        tables.push(entry);
+        tables.push({ caption: block.caption ?? null, columns, rows });
         continue;
       }
       let lines = block.lines;
@@ -93,8 +84,11 @@ function parseBody(lines) {
       }
       textLines.push(...lines);
     }
-    const section = { heading: cur.heading, text: textLines.join("\n").trim() };
-    if (tables.length) { section.tables = tables; section.table = tables[0]; }
+    // A section always carries its `tables` array (empty when it holds none); `table` — the
+    // first table — is a plain enumerable property added only when there is at least one, so
+    // it deep-equals and serializes as a normal object either way.
+    const section = { heading: cur.heading, text: textLines.join("\n").trim(), tables };
+    if (tables.length) section.table = tables[0];
     sections.push(section);
   };
   for (const line of lines) {
