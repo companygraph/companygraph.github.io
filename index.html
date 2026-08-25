@@ -66,9 +66,10 @@
   .langind:hover{color:var(--ink)}
   .langind .on{color:var(--c-firm); font-weight:700}
   /* The figure always sits on its own row under the hero, left-aligned with it, at every
-     width — never beside it. The page's whole promise is one screen, and this is what keeps
-     the hero, the figure and its caption inside one. */
-  main{flex:1; display:flex; align-items:center; padding:0vh 0}
+     width — never beside it. The page fits one screen at 1440×900 and scrolls slightly below
+     that; the vertical padding here is what keeps the hero clear of the header and the
+     caption clear of the footer at those smaller heights. */
+  main{flex:1; display:flex; align-items:center; padding:clamp(2rem,4vh,3.5rem) 0}
   /* No shell-level gap: the hero, the drawing and the caption need three different
      distances from one another, not one row gap repeated between all three, so each
      distance is that item's own margin-top instead — .hero's flex-basis is content, not a
