@@ -160,6 +160,11 @@ whose resolving cells are links that refocus. *View file* — the path at the pi
 GitHub, opened in the same tab like every link on this site — is pinned to the card's footer. When the root or a folder is focused the card is
 not empty: one line says what is focused and how many pages it holds, read from the block.
 
+**The stage, expanded.** An *Expand* control beside the path line opens the whole stage —
+path, canvas and card — in a modal that fills the window, closed by its × button, Escape or
+a click outside. It is the same stage moved, not a copy: clicks, links, the hash and
+*recentre* keep working, and the graph re-fits to the larger canvas.
+
 **Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and
 anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lines dashed in
 `--c-mid` — every line drawn belongs to the focus. No `--c-flag`: nothing here is a

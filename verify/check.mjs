@@ -380,7 +380,7 @@ const CHECKS = {
   // The click-through. Every name and count here is read out of the page's own data block,
   // so the check restates nothing about the example: it asserts that what the block says is
   // what the neighbourhood draws, at each step of moving the focus.
-  async graph(page) {
+  async graph(page, spec) {
     const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
     if (!data.entities) return "the data block is empty — run: npm run example";
     // The source link and its short commit are rewritten by the script from the block's own
@@ -420,12 +420,42 @@ const CHECKS = {
     await click(from.id); await page.waitForTimeout(500);
     const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
     if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    // The stage, expanded: Expand moves the whole stage — path, canvas and card — into
+    // dialog#stagemodal, closed by its ×, Escape or a backdrop click. It is the same stage
+    // moved, not a copy, so this checks the dialog actually contains #fig and #card (rather
+    // than a second rendering of them) and that the canvas really grew, then that the move
+    // back on close lands #fig inside .figure-section again — nothing here is a literal from
+    // the example, every name comes from the block or from the DOM itself.
+    if (!(await page.evaluate(() => !!document.getElementById("expand")))) return "#expand is missing";
+    const widthBefore = await page.evaluate(() => document.getElementById("fig").getBoundingClientRect().width);
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    const modalOpen = await page.evaluate(() => !!document.querySelector("dialog#stagemodal[open]"));
+    if (!modalOpen) return "clicking #expand did not open dialog#stagemodal";
+    const holds = await page.evaluate(() => {
+      const dialog = document.getElementById("stagemodal");
+      return dialog.contains(document.getElementById("fig")) && dialog.contains(document.getElementById("card"));
+    });
+    if (!holds) return "dialog#stagemodal does not contain #fig and #card — Expand should move the stage, not copy it";
+    const widthAfter = await page.evaluate(() => document.getElementById("fig").getBoundingClientRect().width);
+    if (!(widthAfter > widthBefore)) return `#fig width in the dialog is ${widthAfter}, expected more than ${widthBefore} before Expand`;
+    const stillFocused = await page.evaluate((id) => {
+      const n = document.querySelector(`#fig .n[data-id="${id}"]`);
+      return !!n && n.classList.contains("focus");
+    }, from.id);
+    if (!stillFocused) return `${from.id} is no longer the focus after Expand`;
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+    if (await page.evaluate(() => !!document.querySelector("dialog[open]"))) return "Escape did not close dialog#stagemodal";
+    const backInPlace = await page.evaluate(() => document.querySelector(".figure-section").contains(document.getElementById("fig")));
+    if (!backInPlace) return "closing the dialog did not move #fig back inside .figure-section";
     const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
     for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
     ns = await nodes();
     for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
     const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
-    return hash === from.id ? null : `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+    if (hash !== from.id) return `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+    return null;
   },
 };
 
