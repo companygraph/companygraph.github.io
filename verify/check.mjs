@@ -11,7 +11,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 
 const PAGES = [
   { path: "/", noNewTab: true, title: /CompanyGraph/, lang: "en",
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
     // which requires target=_blank — wrong for chrome pointing at another page on this
@@ -50,7 +50,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["https://companygraph.io/talks/", "../billing/", "../", "./"],
     sameOrigin: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
@@ -62,7 +62,7 @@ const PAGES = [
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
     links: ["https://github.com/companygraph"],
     sameTab: ["https://companygraph.io/talks/", "../privacy/", "../", "./"],
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
 
@@ -79,14 +79,14 @@ const PAGES = [
     // this line catches is the path being wrong for everyone; the German half is checked
     // by `translates.dlHref` below.
     sameTab: ["intro/", "./", "../", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
-  { path: "/talks/intro/", noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+  { path: "/talks/intro/", noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
     // check that fails when an href is simply wrong, so without this line a typo in the
@@ -97,7 +97,7 @@ const PAGES = [
             "https://companygraph.io/",
             "https://github.com/companygraph/meta-model#roadmap"],
     slides: 12,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
