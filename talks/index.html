@@ -31,7 +31,7 @@
      served by two repositories and a visitor crossing between them should not meet a seam.
      What only exists here is the talk list — and the language control, because this is the
      only bilingual page under /talks/. See CLAUDE.md. */
-  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+  /* ─── design tokens · v2 · keep in step across every repository that shares them ───
      These sites share no stylesheet by design — a deck has to open from
      file:// — so this block is a copy, and each repo's verify suite asserts
      the copy still matches. Change it here, then run the checks.
@@ -44,6 +44,7 @@
   */
   :root{
     --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --sky:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
     --ink:#EFEDE8;    --dim:#8A8B86;
     --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
   }
@@ -52,7 +53,7 @@
   body{
     font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
-    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    background-image:var(--sky); background-repeat:no-repeat;
     -webkit-font-smoothing:antialiased;
     display:flex; flex-direction:column;
   }
@@ -63,14 +64,16 @@
 
   header{padding:2rem 0}
   .bar{display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap}
-  .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none}
-  .brand svg{width:26px; height:26px; color:var(--c-mid); flex:0 0 auto}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; color:var(--c-mid); flex:0 0 auto}
   .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
   .brand b span{color:var(--c-mid)}
   nav{display:flex; align-items:center; gap:1.9rem; font-size:.76rem; font-weight:500;
       letter-spacing:.14em; text-transform:uppercase}
   nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
   nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  /* the page you are on is a resolved fact, so it takes the resolved colour */
+  nav a[aria-current="page"]{color:var(--c-firm)}
   .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
            border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
            color:var(--dim); white-space:nowrap}
