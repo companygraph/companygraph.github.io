@@ -110,7 +110,9 @@ in `data-de`, the `cg-lang` mechanism copied verbatim.
 - **Where it comes from** — one `.unit mono` line, `meta-model/example @ <short commit>`,
   linking to the tree at that commit on GitHub, and a sentence saying the example is
   fictional by design and that its README says why. Link, not restate.
-- Footer as billing's. `<title>` *Example — CompanyGraph*; description in both languages; the
+- Footer as billing's, including the `blust.ch` credit lockup. No link on the page opens a new tab
+  (`noNewTab` asserts it, as on every page); the source link and *view file* go to GitHub in
+  the same tab. `<title>` *Example — CompanyGraph*; description in both languages; the
   share card rendered from the settled figure.
 
 The page states no type count and no entity count. Those are read off the figure.
@@ -153,7 +155,7 @@ on load.
 path; the canonical name; the tagline. Then the frontmatter as a two-column list with mono
 keys; then each section as a mono eyebrow heading with its text; a table section as a table
 whose resolving cells are links that refocus. *View file* — the path at the pinned commit on
-GitHub — is pinned to the card's footer. When the root or a folder is focused the card is
+GitHub, opened in the same tab like every link on this site — is pinned to the card's footer. When the root or a folder is focused the card is
 not empty: one line says what is focused and how many pages it holds, read from the block.
 
 **Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and
@@ -176,7 +178,8 @@ would need a build step this repository does not have, and that was the trade ta
 - **`verify/check.mjs`** gains an `/example/` spec in the billing shape: `contains` for the
   title and the legend words; `links` for the tree-at-commit link; `sameTab` for the nav;
   `translates`; `card`; `tokens`, `monoScope`, `contrast`, `tokenVersion`; `internalLinks`;
-  `sameOrigin: true` — the data is inline, the page requests nothing beyond its own files.
+  `sameOrigin: true` — the data is inline, the page requests nothing beyond its own files;
+  `noNewTab: true`.
   Plus a page-specific `graph` check: after load the root is focused and its folders are the
   only other nodes; click a folder → it is the focus, the root its ancestor, its entities the
   children; click the first entity that has outgoing edges → the card names it, its
