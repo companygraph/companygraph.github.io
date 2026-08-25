@@ -1,5 +1,8 @@
 # CompanyGraph talks — design
 
+> **Partly superseded.** §2 and §3 — the arc and its rationale — are replaced by
+> [`2026-08-25-intro-talk-rework-design.md`](2026-08-25-intro-talk-rework-design.md). §4 onward stand.
+
 > The introduction talk, and the repository that serves it at `companygraph.io/talks/`.
 
 ## 1. Purpose

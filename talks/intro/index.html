@@ -14,13 +14,13 @@
      The head is English because it describes the page as delivered — the deck opens in
      English — and applyLang() swaps the title and description when a visitor picks German. -->
 <title>CompanyGraph — an introduction · a talk by Robert Blust</title>
-<meta id="metadesc" name="description" content="A talk on the meta-model for operating a company — the vocabulary two independent companies converged on, and why it holds together as a graph of Markdown.">
+<meta id="metadesc" name="description" content="A talk on the meta-model for operating a company — a company's knowledge as a graph of Markdown that people and agents can both rely on. An idea put up for scrutiny.">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CompanyGraph">
 <meta property="og:url" content="https://companygraph.io/talks/intro/">
 <meta property="og:title" content="CompanyGraph — an introduction">
-<meta property="og:description" content="The meta-model for operating a company — the vocabulary two independent companies converged on, and why it holds together as a graph of Markdown.">
+<meta property="og:description" content="A talk on the meta-model for operating a company — a company's knowledge as a graph of Markdown that people and agents can both rely on. An idea put up for scrutiny.">
 <meta property="og:image" content="https://companygraph.io/talks/intro/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -169,7 +169,7 @@
     color:var(--dim); letter-spacing:.02em;
   }
   .stamp b{color:var(--c-mid); font-weight:600}
-  /* the deck's only in-slide link, and the only outbound link on the page. It opens in a
+  /* the deck's two in-slide links, and the only outbound links on the page. It opens in a
      new tab — the index may cross to companygraph.io in place, but a deck that navigates
      away mid-talk is gone, and unlike the index it has no nav to come back through. That
      also puts it under verify's `links` check, which asserts the href exists rather than
@@ -180,11 +180,6 @@
 
   /* breadth grid (domains overview) */
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 6cqmin; margin-top:4.4cqmin}
-  /* Four across, as a class rather than an inline style: an inline declaration outranks
-     the mobile rule below whatever the media query says, and the fourth cell was being
-     clipped mid-word on a phone. The mobile reset names .grid.four explicitly so its
-     specificity matches and source order decides. */
-  .grid.four{grid-template-columns:repeat(4,1fr); gap:2.4cqmin 4cqmin; margin-top:2.6cqmin}
   .cell{border-top:2px solid var(--rule); padding-top:1.4cqmin}
   .cell b{display:block; font-size:clamp(1.1rem,2.3cqmin,1.65rem); font-weight:600}
   .cell span{font-size:clamp(.88rem,1.6cqmin,1.15rem); color:var(--dim)}
@@ -195,8 +190,6 @@
   .glossary div{border-top:2px solid var(--rule); padding-top:1.1cqmin}
   .glossary dt{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:600; font-size:clamp(1.05rem,2.1cqmin,1.5rem)}
   .glossary dd{color:var(--dim); font-size:clamp(1rem,1.9cqmin,1.4rem); line-height:1.34; margin:.3cqmin 0 0}
-
-  .big-punch{font-size:clamp(2.3rem,7.2cqmin,5.8rem)}
 
   /* title slide */
   /* the mark, so the opening slide is the same lockup the site opens with —
@@ -407,7 +400,6 @@
     .slide{justify-content:flex-start; overflow-y:auto;
            padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
     h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
-    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
     .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
     .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
     /* The title lockup was the one row that never reflowed: at 390px the wordmark alone
@@ -423,7 +415,7 @@
     .titlelock{flex-wrap:wrap}
     .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
     .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
-    .thennow, .split, .split.even, .grid, .grid.four{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
     .kicker{margin-bottom:5vw}
   }
   /* below this the seven controls need every pixel; the slide kicker and the progress
@@ -470,8 +462,8 @@
 
   <section class="slide title-slide" data-say-title="no"
     data-time="0:00"
-    data-notes="<em class='cue'>Der Titel liegt an, während ich eröffne.</em> Zehn Minuten über eine Idee, der Sie widersprechen sollen. CompanyGraph ist ein Meta-Modell für den Betrieb eines Unternehmens: die Struktur, die sein Wissen annimmt, damit Menschen und KI sich darauf verlassen können. Quelloffen, und nicht fertig. <em class='cue'>Kurze Pause.</em> Ich sage Ihnen, woher es kommt, was es ist, und was ich noch nicht weiss."
-    data-notes-en="<em class='cue'>The title stays up while I open.</em> Ten minutes on an idea I would like you to argue with. CompanyGraph is a meta-model for operating a company: the structure its knowledge takes, so that people and AI can both rely on it. Open source, and not finished. <em class='cue'>Short pause.</em> I will tell you where it came from, what it is, and what I still do not know.">
+    data-notes="<em class='cue'>Der Titel liegt an, während ich eröffne.</em> CompanyGraph ist keine fertige Sache. Es ist eine Idee: ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und KI sich darauf verlassen können. Quelloffen, und nicht fertig. <em class='cue'>Kurze Pause davor, im Ton wichtig:</em> Ich will Gegenwind, nicht Applaus. Zwölf Minuten, dann vier Fragen."
+    data-notes-en="<em class='cue'>The title stays up while I open.</em> CompanyGraph is not a finished thing. It is an idea: a meta-model for operating a company — the structure its knowledge takes, so people and AI can both rely on it. Open source, and not finished. <em class='cue'>A short pause first, important in tone:</em> I want pushback, not applause. Twelve minutes, then four questions.">
     <div class="kicker mono" data-n="00" data-de="Eine Idee, zur Prüfung gestellt">An idea, put up for scrutiny</div>
     <div class="titlelock">
       <span class="titlemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span>
@@ -506,29 +498,13 @@
   </section>
 
   <section class="slide"
-    data-time="1:20"
-    data-notes="<em class='cue'>Das ist das Rückgrat des Vortrags. Langsamer werden.</em> Dieses Modell wurde nicht am Reissbrett entworfen. Es wurde aus zwei Firmen herausgezogen, die nichts voneinander wussten. Die eine hat Angestellte, Gruppen, Rollen, einen Prozess mit Gates. Die andere ist eine Person. <em class='cue'>Betonen:</em> Keine hat von der anderen abgeschaut — und beide sind bei derselben Form gelandet. <em class='cue'>Kurze Pause.</em> Eine Form, auf die zwei Teams unabhängig voneinander kommen, ist ein Beleg. Eine Form, die ein Team erfindet, ist eine Vorliebe."
-    data-notes-en="<em class='cue'>This is the spine of the talk. Slow down.</em> This model was not designed on a drawing board. It was pulled out of two companies that knew nothing about each other. One has employees, groups, roles, a process with gates. The other is one person. <em class='cue'>Stress this:</em> neither borrowed from the other — and both ended up with the same shape. <em class='cue'>Short pause.</em> A shape two teams reach independently is evidence. A shape one team invents is a preference.">
+    data-time="1:15"
+    data-notes="<em class='cue'>Die Kernidee — ruhig und bestimmt.</em> Genau dafür ist CompanyGraph da: eine strukturierte Wissensbasis, das Gehirn der Firma. Die Fakten als Markdown, strukturiert durch ein Meta-Modell, versioniert wie Code. <em class='cue'>Betonen:</em> Das ist keine neue Dokumentation, die verstaubt — es ist eine Projektion davon, wie die Firma läuft. <em class='cue'>Herkunft, ein Satz, nicht mehr:</em> Gebaut in einer Firma mit Angestellten. Dann stellte sich heraus, dass eine Ein-Personen-Firma genau dieselbe Form braucht. <em class='cue'>Keine Namen. Weiter.</em>"
+    data-notes-en="<em class='cue'>The core idea — calm and firm.</em> This is what CompanyGraph is for: one structured knowledge base, the brain of the company. The facts as Markdown, structured by a meta-model, versioned like code. <em class='cue'>Stress:</em> Not new documentation that gathers dust — a projection of how the company runs. <em class='cue'>Provenance, one sentence and no more:</em> Built inside a company with a payroll. Then a company of one turned out to need exactly the same shape. <em class='cue'>No names. Move on.</em>">
     <div class="kicker mono" data-n="03" data-de="Die Idee">The idea</div>
-    <h1 data-de="Zwei Firmen. Dieselbe Form.">Two companies. The same shape.</h1>
-    <div class="thennow">
-      <div class="col">
-        <h4 data-de="Eine mit Angestellten">One with a payroll</h4>
-        <p data-de="Menschen, Gruppen, Rollen, ein Prozess mit Gates.">People, groups, roles, a process with gates.</p>
-      </div>
-      <div class="col now">
-        <h4 data-de="Eine Ein-Personen-Firma">One company of one</h4>
-        <p data-de="Eine Person. Keine Gruppe. Keine Angestellten.">One person. No group. No employees.</p>
-      </div>
-    </div>
-    <p class="verdict" data-de="Nichts gemeinsam, ausser dass beide laufen müssen. Keine wusste von der anderen. <em>Beide sind hier gelandet:</em>">Nothing in common but needing to run. Neither knew about the other. <em>Both ended up here:</em></p>
-    <div class="grid four">
-      <div class="cell"><b data-de="Ein Ort für jedes">One home each</b><span data-de="je genau einmal">each in exactly one place</span></div>
-      <div class="cell"><b data-de="Fakten und Begründung">Facts and reasoning together</b><span data-de="was gilt und warum">what holds, and why</span></div>
-      <div class="cell"><b data-de="Abgelegt nach Art der Sache">Filed by what it is</b><span data-de="auffindbar, ohne zu fragen">findable without asking</span></div>
-      <div class="cell"><b data-de="Jede Art hat eine feste Form">Every kind has a set shape</b><span data-de="nichts bleibt halb ausgefüllt">nothing stays half filled in</span></div>
-    </div>
-    <p class="verdict" data-de="Die Grösse ändert, wie viel ausgefüllt ist. <em>Die Form ändert sie nie.</em>">Size changed how much got filled in. <em>It never changed the shape.</em></p>
+    <h1 data-de="Eine strukturierte Wissensbasis — das <em>Gehirn</em> der Firma.">One structured knowledge base — the <em>brain</em> of the company.</h1>
+    <p class="sub" data-de="Die Fakten als Markdown, strukturiert durch ein Meta-Modell, versioniert wie Code.">The facts as Markdown, structured by a meta-model, versioned like code.</p>
+    <p class="verdict" data-de="Keine neue Dokumentation, sondern eine Projektion davon, wie die Firma läuft. <em>Gebaut in einer Firma — und eine Ein-Personen-Firma brauchte dieselbe Form.</em>">Not new documentation but a projection of how the company runs. <em>Built inside one company — and a company of one needed the same shape.</em></p>
   </section>
 
   <section class="slide"
@@ -539,35 +515,46 @@
     <h1 data-de="Jede Rolle, jede Regel, jede Kennzahl — einmal aufgeschrieben.">Every role, every rule, every metric — written down once.</h1>
     <div class="split">
       <div class="diagram">
-        <svg viewBox="0 0 520 340" role="img" aria-label="Entities as files, each naming the others">
-          <line class="edge" x1="260" y1="170" x2="260" y2="52"></line>
-          <line class="edge" x1="260" y1="170" x2="412" y2="112"></line>
-          <line class="edge" x1="260" y1="170" x2="412" y2="228"></line>
-          <line class="edge" x1="260" y1="170" x2="260" y2="288"></line>
-          <line class="edge" x1="260" y1="170" x2="108" y2="228"></line>
-          <line class="edge" x1="260" y1="170" x2="108" y2="112"></line>
-          <line class="edge live" x1="260" y1="52" x2="412" y2="228"></line>
-          <line class="edge live" x1="412" y1="112" x2="260" y2="288"></line>
-          <line class="edge live" x1="108" y1="112" x2="108" y2="228"></line>
-          <!-- Plain words, not the model's type names. The names themselves (`profile`,
-               `role`, `kpi` …) appear once, on slide 05, where the subject IS the
-               vocabulary; here the subject is the idea, and six identifiers in monospace
-               read as code to a room that does not write any. The German is carried in
-               data-de like every other string in the deck. -->
-          <rect class="node" x="208" y="30" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="260" y="51" data-de="Menschen">People</text>
-          <rect class="node" x="360" y="90" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="412" y="111" data-de="Prozesse">Processes</text>
-          <rect class="node" x="368" y="206" width="88" height="40" rx="0"></rect>
-          <text class="nlabel" x="412" y="227" data-de="Kennzahlen">Metrics</text>
-          <rect class="node" x="216" y="266" width="88" height="40" rx="0"></rect>
-          <text class="nlabel" x="260" y="287" data-de="Regeln">Rules</text>
-          <rect class="node" x="56" y="206" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="108" y="227" data-de="Begriffe">Terms</text>
-          <rect class="node" x="64" y="90" width="88" height="40" rx="0"></rect>
-          <text class="nlabel" x="108" y="111" data-de="Rollen">Roles</text>
-          <rect class="node center" x="196" y="146" width="128" height="48" rx="0"></rect>
-          <text class="nlabel c" x="260" y="170">CompanyGraph</text>
+        <svg viewBox="0 0 520 420" role="img" aria-label="A company as a tree of pages: four branches, nine kinds of page">
+          <!-- A folder tree, because that is what the model is on disk: a folder per kind of
+               page. The root is the company; the four branches are the clusters the design
+               names; the nine leaves are the same nine words slide 06 uses, so a reader who
+               meets "Processes and gates" here meets it again there. Connectors are drawn
+               first so the boxes sit on top of them. Plain words, not type names — the
+               German is carried in data-de like every other string in the deck. -->
+          <path class="edge" d="M120 205 H135 V50 H150 M135 140 H150 M135 205 V360 H150 M135 250 H150"></path>
+          <path class="edge" d="M280 50 H295 V30 H310 M295 50 V70 H310"></path>
+          <path class="edge" d="M280 140 H295 V120 H310 M295 140 V160 H310"></path>
+          <path class="edge" d="M280 250 H295 V210 H310 M295 250 H310 M295 250 V290 H310"></path>
+          <path class="edge" d="M280 360 H295 V340 H310 M295 360 V380 H310"></path>
+          <rect class="node center" x="20" y="185" width="100" height="40" rx="0"></rect>
+          <text class="nlabel c" x="70" y="206" data-de="Firma">Company</text>
+          <rect class="node" x="150" y="32" width="130" height="36" rx="0"></rect>
+          <text class="nlabel" x="215" y="51" data-de="Richtung">Direction</text>
+          <rect class="node" x="150" y="122" width="130" height="36" rx="0"></rect>
+          <text class="nlabel" x="215" y="141" data-de="Organisation">Organisation</text>
+          <rect class="node" x="150" y="232" width="130" height="36" rx="0"></rect>
+          <text class="nlabel" x="215" y="251" data-de="Betrieb">Operation</text>
+          <rect class="node" x="150" y="342" width="130" height="36" rx="0"></rect>
+          <text class="nlabel" x="215" y="361" data-de="Domäne">Domain</text>
+          <rect class="node" x="310" y="14" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="31" data-de="Werte">Values</text>
+          <rect class="node" x="310" y="54" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="71" data-de="Strategie und Ziele">Strategy and objectives</text>
+          <rect class="node" x="310" y="104" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="121" data-de="Menschen">People</text>
+          <rect class="node" x="310" y="144" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="161" data-de="Rollen und Teams">Roles and teams</text>
+          <rect class="node" x="310" y="194" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="211" data-de="Prozesse und Gates">Processes and gates</text>
+          <rect class="node" x="310" y="234" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="251" data-de="Regeln">Rules</text>
+          <rect class="node" x="310" y="274" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="291" data-de="Kennzahlen">Metrics</text>
+          <rect class="node" x="310" y="324" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="341" data-de="Begriffe">Concepts</text>
+          <rect class="node" x="310" y="364" width="190" height="32" rx="0"></rect>
+          <text class="nlabel" x="405" y="381" data-de="Entscheide">Decisions</text>
         </svg>
       </div>
       <ul class="blist">
@@ -596,17 +583,20 @@
 
   <section class="slide"
     data-time="1:10"
-    data-notes="<em class='cue'>Breite zeigen, nicht vorlesen. Zwei, drei herausgreifen.</em> Es geht nicht nur um Menschen und Rollen. Im selben Vokabular stehen die Prozesse mit ihren Gates, die Strategie und die Ziele, die Kennzahlen, die Regeln, die Begriffe, die eine Firma anders benutzt als alle anderen. <em class='cue'>Ehrlich bleiben:</em> Nicht jede Firma füllt alles aus — eine Ein-Personen-Firma hat keine Gruppen. Die Art bleibt trotzdem im Modell, leer."
-    data-notes-en="<em class='cue'>Show the breadth, do not recite it. Pick two or three.</em> This is not only people and roles. The same vocabulary holds the processes and their gates, the strategy and the goals, the metrics, the rules, and the terms a company uses differently from everyone else. <em class='cue'>Stay honest:</em> not every company fills all of it in — a company of one has no groups. The kind stays in the model anyway, empty.">
+    data-notes="<em class='cue'>Breite zeigen, nicht vorlesen. Zwei, drei herausgreifen.</em> Es geht nicht nur um Menschen und Rollen. Im selben Vokabular stehen die Prozesse mit ihren Gates, die Strategie und die Ziele, die Kennzahlen, die Regeln, die Begriffe, die eine Firma anders benutzt als alle anderen, die Entscheide — und die Werte. <em class='cue'>Ehrlich bleiben, ohne zu zählen:</em> Nicht jede Firma füllt alles aus. Eine Ein-Personen-Firma hat keine Teams. Die Art bleibt trotzdem im Modell, leer."
+    data-notes-en="<em class='cue'>Show the breadth, do not recite it. Pick two or three.</em> This is not only people and roles. The same vocabulary holds the processes and their gates, the strategy and the objectives, the metrics, the rules, the concepts a company uses differently from everyone else, the decisions — and the values. <em class='cue'>Stay honest, without counting:</em> Not every company fills all of it in. A company of one has no teams. The kind stays in the model anyway, empty.">
     <div class="kicker mono" data-n="06" data-de="Die Breite">The breadth</div>
     <h1 data-de="Alles, was eine Firma ausmacht — in einem Vokabular.">Everything that makes a company — in one vocabulary.</h1>
     <div class="grid">
-      <div class="cell"><b data-de="Menschen und Rollen">People and roles</b><span data-de="wer da ist, wer was verantwortet">who is here, who owns what</span></div>
-      <div class="cell"><b data-de="Prozesse und Gates">Processes and gates</b><span data-de="wie Arbeit fliesst, und wo sie hält">how work flows, and where it stops</span></div>
-      <div class="cell"><b data-de="Strategie und Ziele">Strategy and goals</b><span data-de="wohin investiert wird">where the effort goes</span></div>
-      <div class="cell"><b data-de="Kennzahlen">Metrics</b><span data-de="was gemessen wird, und von wem">what is measured, and by whom</span></div>
-      <div class="cell"><b data-de="Regeln">Rules</b><span data-de="was durchgesetzt wird">what is enforced</span></div>
-      <div class="cell"><b data-de="Begriffe">Terms</b><span data-de="was diese Firma anders nennt als andere">what this company calls things</span></div>
+      <div class="cell"><b data-de="Rollen und Teams">Roles and teams</b><span data-de="wer was tut">who does what</span></div>
+      <div class="cell"><b data-de="Prozesse und Gates">Processes and gates</b><span data-de="wie Arbeit fliesst">how work flows</span></div>
+      <div class="cell"><b data-de="Strategie und Ziele">Strategy and objectives</b><span data-de="wohin investiert wird">where we invest</span></div>
+      <div class="cell"><b data-de="Kennzahlen">Metrics</b><span data-de="was gemessen wird">what we measure</span></div>
+      <div class="cell"><b data-de="Regeln">Rules</b><span data-de="was durchgesetzt wird">what we enforce</span></div>
+      <div class="cell"><b data-de="Begriffe">Concepts</b><span data-de="was definiert wird">what we define</span></div>
+      <div class="cell"><b data-de="Entscheide">Decisions</b><span data-de="was entschieden wurde, und was verworfen">what we decided, and what we rejected</span></div>
+      <div class="cell"><b data-de="Werte">Values</b><span data-de="was wir glauben">what we believe</span></div>
+      <div class="cell"><b data-de="Menschen">People</b><span data-de="wer wir sind">who we are</span></div>
     </div>
     <p class="verdict" data-de="Nicht jede Firma füllt alles aus. <em>Die Art bleibt trotzdem im Modell.</em>">Not every company fills all of it in. <em>The kind stays in the model anyway.</em></p>
   </section>
@@ -660,27 +650,53 @@
   </section>
 
   <section class="slide"
-    data-time="0:50"
-    data-notes="<em class='cue'>Hier bin ich unbequem ehrlich, und das ist Absicht.</em> Veröffentlicht ist das Vokabular und die Regeln, nach denen es zusammenhält, mit einem durchgearbeiteten Beispiel. Der grössere Teil des Modells ist beschrieben, aber noch nicht geschrieben — was fertig ist, sagt die Roadmap. Werkzeuge gibt es keine. <em class='cue'>Pointe:</em> Nichts zu installieren, nichts zu kaufen, nichts fertig."
-    data-notes-en="<em class='cue'>This is where I am uncomfortably honest, deliberately.</em> What is published is the vocabulary and the rules that hold it together, with one worked example. Most of the model is described but not yet written — the roadmap says what is. There is no tooling. <em class='cue'>The point:</em> nothing to install, nothing to buy, nothing finished.">
-    <div class="kicker mono" data-n="09" data-de="Wo es steht">Where it stands</div>
-    <h1 data-de="Das Vokabular ist veröffentlicht. Fast nichts sonst.">The vocabulary is published. Almost nothing else is.</h1>
-    <div class="grid">
-      <div class="cell"><b data-de="Veröffentlicht">Published</b><span data-de="das Vokabular, die Regeln, ein durchgearbeitetes Beispiel">the vocabulary, the rules, one worked example</span></div>
-      <div class="cell"><b data-de="Beschrieben, nicht geschrieben">Described, not written</b><span data-de="der grössere Teil des Modells — was fertig ist, sagt die Roadmap">most of the model — the roadmap says what is done</span></div>
-      <div class="cell"><b data-de="Gibt es nicht">Does not exist</b><span data-de="Werkzeuge, Import, irgendetwas zu kaufen">tooling, importers, anything to buy</span></div>
+    data-time="1:00"
+    data-notes="<em class='cue'>Das ist die These, hinter der das Modell steht — hier nicht abschwächen.</em> Die Schemas sind selbst Markdown. Eine Tabelle sagt, welche Felder eine Rolle hat, welche Abschnitte, was Pflicht ist. Und wer das prüft, ist ein Agent, der die Regeln liest — kein Programm, das ein Schema-Format parst. <em class='cue'>Den Einwand selbst nennen:</em> Man könnte sagen, das ist eine Vorstufe, irgendwann kommt das richtige Schema. Nein. <em class='cue'>Pointe:</em> Mit dem richtigen Meta-Modell ist die Prosa das Schema. Genau das kann ein Agent heute, und genau das ist neu."
+    data-notes-en="<em class='cue'>This is the thesis the model ships under — do not soften it here.</em> The schemas are Markdown themselves. A table says which fields a role has, which sections, what is required. And what checks it is an agent reading the rules — not a program parsing a schema format. <em class='cue'>Name the objection yourself:</em> One could say this is a stage, the real schema comes later. No. <em class='cue'>The point:</em> With the right meta-model, the prose is the schema. That is what an agent can do today, and that is what is new.">
+    <div class="kicker mono" data-n="09" data-de="Die These">The thesis</div>
+    <h1 data-de="Markdown, geprüft von Agenten.">Markdown, checked by agents.</h1>
+    <div class="thennow">
+      <div class="col">
+        <h4 data-de="Eine Schema-Sprache">A schema language</h4>
+        <p data-de="Ein zweites Format, das niemand liest, gepflegt neben dem, das alle lesen.">A second format nobody reads, kept beside the one everybody does.</p>
+      </div>
+      <div class="col now">
+        <h4 data-de="Ein Schema in Prosa">A schema in prose</h4>
+        <p data-de="Eine Tabelle sagt, was eine Rolle hat. Ein Agent liest sie und prüft jede Seite dagegen.">A table says what a role has. An agent reads it and checks every page against it.</p>
+      </div>
     </div>
-    <p class="verdict" data-de="Nichts zu installieren. Nichts zu kaufen. <em>Nichts fertig.</em>">Nothing to install. Nothing to buy. <em>Nothing finished.</em></p>
+    <p class="verdict" data-de="Keine Vorstufe zu einem richtigen Schema. <em>Mit dem richtigen Meta-Modell ist die Prosa das Schema.</em>">Not a stage on the way to a real schema. <em>With the right meta-model, the prose is the schema.</em></p>
   </section>
 
   <section class="slide"
-    data-time="0:40"
-    data-notes="<em class='cue'>Langsam, und dann stehen lassen.</em> Ich verkaufe hier nichts. Ich habe eine Form, auf die zwei Firmen unabhängig gekommen sind, und ich möchte wissen, wo sie bricht. <em class='cue'>Die Frage direkt stellen und warten:</em> Wo passt Ihre Firma nicht in diese Form? Genau die Stelle interessiert mich — nicht die, an der es funktioniert."
-    data-notes-en="<em class='cue'>Slowly, then let it stand.</em> I am not selling anything here. I have a shape two companies arrived at independently, and I want to know where it breaks. <em class='cue'>Ask it straight, and wait:</em> where does your company not fit this shape? That is the part I want — not the part where it works.">
-    <div class="kicker mono" data-n="10" data-de="Worum ich bitte">What I am asking</div>
-    <h1 class="big-punch" data-de="Sagen Sie mir, wo das falsch ist.">Tell me where this is wrong.</h1>
-    <p class="sub" data-de="Wo passt Ihre Firma nicht in diese Form?">Where does your company not fit this shape?</p>
-    <p class="stamp"><b>Apache 2.0</b> · <a href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a></p>
+    data-time="1:15"
+    data-notes="<em class='cue'>Als Absicht sagen, nie als Stand. Was davon existiert, steht in der Roadmap — nicht auf dieser Folie.</em> Drei Dinge würden das brauchbar machen. Erstens: eine echte Firma, in diesem Vokabular beschrieben, öffentlich. Meine eigene — eine Person, und trotzdem eine Firma. Zweitens: ein Werkzeug in der Art von spec-kit. Ein Befehl legt eine Instanz an, einer fügt eine Seite nach Schema hinzu, einer prüft, einer bringt die Schemas auf den neuen Stand — und einer verpackt die Firma als Skill, den ein Agent lädt. Drittens, danach: ein Validator. <em class='cue'>Ehrlich, ohne zu zählen:</em> Welche davon es gibt, sagt die Roadmap. Der Link steht unten."
+    data-notes-en="<em class='cue'>State as intent, never as status. What exists is in the roadmap — not on this slide.</em> Three things would make this usable. First: a real company described in this vocabulary, in the open. My own — one person, and still a company. Second: a tool in the manner of spec-kit. One command sets up an instance, one adds a page from its schema, one checks, one brings the schemas up to date — and one packages the company as a skill an agent loads. Third, after that: a validator. <em class='cue'>Honest, without counting:</em> Which of these exist, the roadmap says. The link is at the bottom.">
+    <div class="kicker mono" data-n="10" data-de="Was es brauchbar macht">What would make it usable</div>
+    <h1 data-de="Drei Dinge, damit man es wirklich benutzen kann.">Three things before anyone can really use it.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="Eine echte Firma">A real company</b><span data-de="in diesem Vokabular beschrieben, öffentlich — meine eigene, eine Person">described in this vocabulary, in the open — my own, one person</span></div>
+      <div class="cell"><b data-de="Ein Werkzeug wie spec-kit">A tool like spec-kit</b><span data-de="Instanz anlegen, Seite nach Schema hinzufügen, prüfen, aktualisieren, als Skill verpacken">set up an instance, add a page from its schema, check, upgrade, package as a skill</span></div>
+      <div class="cell"><b data-de="Ein Validator">A validator</b><span data-de="danach — nicht davor">after that — not before</span></div>
+    </div>
+    <p class="verdict" data-de="Welche davon es gibt, sagt die Roadmap. <em>Nicht diese Folie.</em>">Which of these exist, the roadmap says. <em>Not this slide.</em></p>
+    <p class="stamp"><a href="https://github.com/companygraph/meta-model#roadmap" target="_blank" rel="noopener">github.com/companygraph/meta-model#roadmap</a></p>
+  </section>
+
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Das ist der eigentliche Zweck des Gesprächs — hier nicht hetzen.</em> Ich verkaufe hier nichts. Ich habe eine Form, und ich möchte wissen, wo sie bricht. Vier Fragen, und bei jeder ist ein Nein für mich mehr wert als ein höfliches Ja. <em class='cue'>Die vier vorlesen, langsam.</em> Wo passt Ihre Firma nicht in diese Form? Würden Sie das als Markdown behalten, das Agenten prüfen — oder brauchen Sie eine richtige Schema-Sprache, bevor Sie dem trauen? Würden Sie Ihre eigene Instanz mit einem Werkzeug wie spec-kit anlegen — oder reicht es, einen Ordner mit Schemas zu kopieren? Und: Würden Sie für Hilfe beim Aufbau bezahlen, nach Aufwand, nichts gehostet — oder ist das etwas, das Sie nur selbst machen? <em class='cue'>Die vierte Frage ist eine Frage, kein Angebot: kein Satz, kein Kontakt. Wer Ja sagt, dem wird nichts verkauft — es wird notiert.</em> <em class='cue'>Danach: Pause. Zuhören, nicht verteidigen.</em>"
+    data-notes-en="<em class='cue'>This is the actual purpose of the conversation — do not rush it.</em> I am not selling anything here. I have a shape, and I want to know where it breaks. Four questions, and on each one a no is worth more to me than a polite yes. <em class='cue'>Read the four, slowly.</em> Where does your company not fit this shape? Would you keep this as Markdown checked by agents — or do you need a real schema language before you trust it? Would you set up your own instance with a tool like spec-kit — or is copying a folder of schemas enough? And: would you pay for help building one, time and material, nothing hosted — or is that something you only do yourselves? <em class='cue'>The fourth is a question, not an offer: no rate, no contact. A yes is not sold to — it is noted.</em> <em class='cue'>Then: pause. Listen, do not defend.</em>">
+    <div class="kicker mono" data-n="11" data-de="Worum ich bitte">What I am asking</div>
+    <h1 data-de="Sagen Sie mir, wo das <em>falsch</em> ist.">Tell me where this is <em>wrong</em>.</h1>
+    <ul class="ask">
+      <li><b>1 ·</b> <span data-de="Wo passt Ihre Firma nicht in diese Form?">Where does your company not fit this shape?</span></li>
+      <li><b>2 ·</b> <span data-de="Würden Sie das als Markdown behalten, das Agenten prüfen — oder brauchen Sie zuerst eine richtige Schema-Sprache?">Would you keep this as Markdown checked by agents — or do you need a real schema language before you trust it?</span></li>
+      <li><b>3 ·</b> <span data-de="Würden Sie Ihre Instanz mit einem Werkzeug wie spec-kit anlegen — oder reicht ein kopierter Ordner mit Schemas?">Would you set up your own instance with a tool like spec-kit — or is copying a folder of schemas enough?</span></li>
+      <li><b>4 ·</b> <span data-de="Würden Sie für Hilfe beim Aufbau bezahlen — nach Aufwand, nichts gehostet — oder machen Sie das nur selbst?">Would you pay for help building one — time and material, nothing hosted — or is that something you only do yourselves?</span></li>
+    </ul>
+    <p class="verdict" data-de="Ein Nein ist mir mehr wert als ein höfliches Ja.">A no is worth more to me than a polite yes.</p>
+    <p class="stamp" data-de="<b>Apache 2.0</b> · <a href='https://companygraph.io/' target='_blank' rel='noopener'>companygraph.io</a>"><b>Apache 2.0</b> · <a href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a></p>
   </section>
 
 </div>
@@ -692,7 +708,7 @@
   <div class="transport" id="transport" role="group" aria-label="Deck controls">
 
     <div class="lcd" aria-hidden="true">
-      <div class="n" id="lcdn"><b id="cur">00</b><span class="sep">/</span><span id="tot">10</span></div>
+      <div class="n" id="lcdn"><b id="cur">00</b><span class="sep">/</span><span id="tot">11</span></div>
       <div class="clip"><i id="cliplen"></i></div>
     </div>
 
@@ -791,13 +807,13 @@
   var UI = {
     de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
          title:'CompanyGraph — eine Einführung · ein Vortrag von Robert Blust',
-         desc:'Ein Vortrag über das Meta-Modell für den Betrieb eines Unternehmens — das Vokabular, auf das zwei unabhängige Unternehmen zusammenliefen, und warum es als Graph aus Markdown zusammenhält.',
+         desc:'Ein Vortrag über das Meta-Modell für den Betrieb eines Unternehmens — das Wissen einer Firma als Graph aus Markdown, auf den sich Menschen und Agenten verlassen können. Eine Idee, zur Prüfung gestellt.',
          play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
          prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
          notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', novoice:'Keine Stimme', up:'Zurück zu allen Vorträgen' },
     en:{ label:'Speaker note', close:'Close notes',
          title:'CompanyGraph — an introduction · a talk by Robert Blust',
-         desc:'A talk on the meta-model for operating a company — the vocabulary two independent companies converged on, and why it holds together as a graph of Markdown.',
+         desc:'A talk on the meta-model for operating a company — a company\'s knowledge as a graph of Markdown that people and agents can both rely on. An idea put up for scrutiny.',
          play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
          prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
          notes:'Speaker notes', de:'In German', en:'In English', novoice:'No voice', up:'Back to all talks' }

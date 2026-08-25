@@ -275,8 +275,7 @@ requirements implicitly include this section.
   `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
   repository, as this one does. Do not edit it here.
   `verify/design.mjs` is byte-identical across all of them and is never edited in this repo.
-- **No type count, no type list read aloud, and no status claim that ages.** Slide 9 says "not
-  all of it is written yet, the roadmap says what is" and links. It never says how much.
+- **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.
 - **Never claim "no hallucinations".** The claim is that the model shrinks the space in which
   an agent has to guess.
 - **Never print an environment variable's value**, and never use `${VAR:-UNSET}` — it prints
@@ -287,9 +286,9 @@ requirements implicitly include this section.
 
 ## "AI" in the deck, "agents" everywhere else — on purpose
 
-The deck says **AI** on slides 00 and 01 and **agents** from 07 on. Nobody has been given
+The deck says **AI** on slides 00 and 08 and **agents** from 09 on. Nobody has been given
 the narrower word at 0:00, and those opening slides are about who can *read* the thing; an
-agent is software that *acts* inside the stated rules, which is a claim slides 07 and 08
+agent is software that *acts* inside the stated rules, which is a claim slides 09 and 10
 earn. Do not level the two words.
 
 The same sentence appears in three other places and deliberately does **not** match:
