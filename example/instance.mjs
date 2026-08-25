@@ -13,6 +13,9 @@
 // fictional company", which is why this is the word.
 export const ROOT_LABEL = "Fictional Company";
 
+// The one invented string of the model page — nothing in core/ names the vocabulary itself.
+export const CORE_LABEL = "Core";
+
 const singular = (folder) => {
   if (folder.endsWith("ies")) return folder.slice(0, -3) + "y";
   if (folder.endsWith("s")) return folder.slice(0, -1);
@@ -47,10 +50,51 @@ function parseBody(lines) {
   let cur = null;
   const flush = () => {
     if (!cur) return;
-    const tableLines = cur.lines.filter(l => l.trim().startsWith("|"));
-    const textLines = cur.lines.filter(l => !l.trim().startsWith("|"));
+    // Split the section's lines into alternating runs of table lines and non-table lines.
+    // A non-table run whose last non-blank line ends with ":" and is immediately followed by
+    // a table run is that table's caption; the caption line is pulled out of the text.
+    const blocks = [];
+    let i = 0;
+    while (i < cur.lines.length) {
+      const isTable = cur.lines[i].trim().startsWith("|");
+      const start = i;
+      while (i < cur.lines.length && cur.lines[i].trim().startsWith("|") === isTable) i++;
+      blocks.push({ isTable, lines: cur.lines.slice(start, i) });
+    }
+    const tables = [];
+    const textLines = [];
+    for (let bi = 0; bi < blocks.length; bi++) {
+      const block = blocks[bi];
+      if (block.isTable) {
+        const { columns, rows } = parseTable(block.lines);
+        const entry = { columns, rows };
+        // `caption` reads back correctly either way (a real caption, or null when there is
+        // none), but it is only enumerable when real — so a table with no caption still
+        // serializes, spreads and deep-equals exactly as it did before captions existed, and
+        // `table` (the first table, kept below for compatibility) is indistinguishable from
+        // its pre-caption shape unless something asks for `.caption` by name.
+        Object.defineProperty(entry, "caption", {
+          value: block.caption ?? null, enumerable: !!block.caption, configurable: true, writable: true,
+        });
+        tables.push(entry);
+        continue;
+      }
+      let lines = block.lines;
+      const next = blocks[bi + 1];
+      if (next && next.isTable) {
+        let idx = -1;
+        for (let j = lines.length - 1; j >= 0; j--) {
+          if (lines[j].trim() !== "") { idx = j; break; }
+        }
+        if (idx >= 0 && lines[idx].trim().endsWith(":")) {
+          next.caption = lines[idx].trim();
+          lines = lines.slice(0, idx).concat(lines.slice(idx + 1));
+        }
+      }
+      textLines.push(...lines);
+    }
     const section = { heading: cur.heading, text: textLines.join("\n").trim() };
-    if (tableLines.length) section.table = parseTable(tableLines);
+    if (tables.length) { section.tables = tables; section.table = tables[0]; }
     sections.push(section);
   };
   for (const line of lines) {
@@ -145,4 +189,79 @@ export function parseInstance(files) {
 
   const types = [...typeMap.values()].sort((a, b) => (a.type < b.type ? -1 : 1));
   return { commit: null, root: ROOT_LABEL, types, entities, edges };
+}
+
+// Turns core/ — the vocabulary itself, one *-schema.md file per type — into the same shape.
+// A schema file is read by the fixed shape an instance is read by: H1, tagline, `##` sections,
+// a `**Owner:**` line before the first section. No schema is consulted to read a schema; R9
+// is the floor every schema must clear (Frontmatter and Sections present) for the rest to make
+// sense. Edges come only from the tables: a ref → cell in Frontmatter, a ref → cell in a
+// captioned column table under Sections, and the Owner line itself.
+export function parseSchemas(files) {
+  const entities = [];
+  for (const [file, text] of [...files.entries()].sort(([a], [b]) => (a < b ? -1 : 1))) {
+    if (!file.endsWith("-schema.md")) continue;
+    const type = file.replace(/-schema\.md$/, "");
+    const path = "core/" + file;
+    const lines = text.split("\n");
+    const [, body] = parseFrontmatter(lines); // core/ files carry no YAML frontmatter
+    const ownerLine = body.find(l => l.startsWith("**Owner:**"));
+    const owner = ownerLine ? ownerLine.slice("**Owner:**".length).trim() : null;
+    const { name, tagline, sections } = parseBody(body);
+    const bySection = new Map(sections.map(s => [s.heading, s]));
+    if (!bySection.has("Frontmatter") || !bySection.has("Sections")) {
+      throw new Error(`R9: ${path} lacks ## Frontmatter or ## Sections`);
+    }
+    const fields = {};
+    if (owner) fields.owner = owner;
+    entities.push({ id: "core/" + type, type: "schema", name, tagline, fields, sections,
+                    owner: null, path });
+  }
+  entities.sort((a, b) => (a.id < b.id ? -1 : 1));
+
+  const byType = new Map(entities.map(e => [e.id.slice("core/".length), e.id]));
+  const resolveType = (t, where) => {
+    if (!byType.has(t)) throw new Error(`R4: "${t}" in ${where} names no schema`);
+    return byType.get(t);
+  };
+
+  const refPattern = /^(?:array of )?ref → (.+)$/;
+  const edges = [];
+  for (const e of entities) {
+    const frontmatter = e.sections.find(s => s.heading === "Frontmatter");
+    if (frontmatter?.table) {
+      const { columns, rows } = frontmatter.table;
+      const fieldIdx = columns.indexOf("Field"), typeIdx = columns.indexOf("Type");
+      for (const row of rows) {
+        const cell = row[typeIdx];
+        const m = cell.match(refPattern);
+        if (!m) continue;
+        const to = resolveType(m[1], e.path);
+        const via = row[fieldIdx].replace(/`/g, "");
+        edges.push({ from: e.id, to, via, attrs: { type: cell } });
+      }
+    }
+    const sectionsSection = e.sections.find(s => s.heading === "Sections");
+    for (const t of sectionsSection?.tables ?? []) {
+      if (!t.caption) continue; // the section's own index table, not a column table
+      const heading = t.caption.match(/^`##\s*([^`]+)`/);
+      if (!heading) continue;
+      const colIdx = t.columns.indexOf("Column"), typeIdx = t.columns.indexOf("Type");
+      for (const row of t.rows) {
+        const cell = row[typeIdx];
+        const m = cell.match(refPattern);
+        if (!m) continue;
+        const to = resolveType(m[1], e.path);
+        const via = `${heading[1]}.${row[colIdx].replace(/`/g, "")}`;
+        edges.push({ from: e.id, to, via, attrs: { type: cell } });
+      }
+    }
+    if (e.fields.owner) {
+      edges.push({ from: e.id, to: resolveType(e.fields.owner, e.path), via: "owner", attrs: {} });
+    }
+  }
+  edges.sort((a, b) => (a.from + a.via + a.to < b.from + b.via + b.to ? -1 : 1));
+
+  return { commit: null, root: CORE_LABEL,
+           types: [{ type: "schema", folder: "core", owner: null }], entities, edges };
 }
