@@ -65,11 +65,17 @@
            color:var(--dim); white-space:nowrap}
   .langind:hover{color:var(--ink)}
   .langind .on{color:var(--c-firm); font-weight:700}
-  /* Hero and figure sit side by side while there is room for both, and stack when there is
-     not. The page's whole promise is one screen, and a figure the width of the text column,
-     under it, is taller than a laptop. */
-  main{flex:1; display:flex; align-items:center; padding:6vh 0}
-  main .shell{display:flex; flex-wrap:wrap; align-items:center; gap:clamp(2rem,5vw,4.5rem)}
+  /* The figure always sits on its own row under the hero, left-aligned with it, at every
+     width — never beside it. The page fits one screen at 1440×900 and scrolls slightly below
+     that; the vertical padding here is what keeps the hero clear of the header and the
+     caption clear of the footer at those smaller heights. */
+  main{flex:1; display:flex; align-items:center; padding:clamp(2rem,4vh,3.5rem) 0}
+  /* No shell-level gap: the hero, the drawing and the caption need three different
+     distances from one another, not one row gap repeated between all three, so each
+     distance is that item's own margin-top instead — .hero's flex-basis is content, not a
+     row-layout width hint, or it would stretch to fill the leftover main-axis space that
+     used to be beside the figure and reopen the gap this exists to close. */
+  main .shell{display:flex; flex-direction:column; align-items:stretch; gap:0}
   /* Mono means data, and every item here is one: a URL, a licence identifier, a name that
      is really a link. The check that guards mono deliberately does not reach the footer. */
   footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
@@ -91,17 +97,19 @@
   footer .credit b em{font-style:normal; color:var(--c-mid)}
   footer .credit:hover, footer .credit:focus-visible{text-decoration:none}
   footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
-  .hero{flex:1 1 500px; max-width:640px; container-type:inline-size}
+  .hero{flex:0 0 auto; max-width:640px; container-type:inline-size}
   /* One axis carries the argument: the setup arrives light and unresolved, the shape it
      lands on arrives heavy. em marks the resolved word itself. */
-  /* The headline sizes to its own column, not to the viewport: once the figure sits beside
-     it the two stop being the same measurement, and a viewport-sized headline breaks "The
-     same shape." across two lines on any laptop around 1200px. The vw line is the fallback
-     for anything without container query units and is deliberately the more timid of the
-     two. */
+  /* The headline sizes to its own column, not to the viewport: the hero caps at 640px well
+     short of the viewport on anything wider than a phone, so a viewport-sized headline keeps
+     growing past that cap and breaks "Written down once." across two lines on any laptop
+     around 1200px. The cqw coefficient is tuned to the German line, not the English one —
+     "Einmal aufgeschrieben." is the longer of the two and wraps first as the coefficient
+     climbs. The vw line is the fallback for anything without container query units and is
+     deliberately the more timid of the two. */
   .hero h1{letter-spacing:-.035em; line-height:1.0;
-           font-size:clamp(2.4rem,5.8vw,5.4rem);
-           font-size:clamp(2.4rem,12.8cqw,5.4rem)}
+           font-size:clamp(2.4rem,4vw,4.4rem);
+           font-size:clamp(2.4rem,8.9cqw,4.4rem)}
   .hero h1 .r70{display:block; font-weight:300; color:var(--dim)}
   .hero h1 .rcl{display:block; font-weight:800}
   .hero h1 em{font-style:normal; color:var(--c-firm)}
@@ -133,19 +141,19 @@
      shape. Nothing in the figure is interactive, so nothing in it is --c-mid, and there
      is no reversal here, so there is no --c-flag. */
   /* `display:contents` puts the drawing and its caption into `main .shell`'s flex row as
-     two independent items: the drawing keeps its column beside the hero, and the caption
-     takes a full-width row of its own beneath both. The figcaption stays inside <figure>
-     in the markup — which is what makes it a caption rather than a stray paragraph — and
-     the svg still names it through aria-labelledby. Sizing that lived on .figure has to
-     move to .fig, because a display:contents box has no geometry of its own. */
+     two independent items, each taking a full-width row of its own beneath the hero — the
+     drawing first, the caption under it. The figcaption stays inside <figure> in the
+     markup — which is what makes it a caption rather than a stray paragraph — and the svg
+     still names it through aria-labelledby. Sizing that lived on .figure has to move to
+     .fig, because a display:contents box has no geometry of its own. */
   .figure{display:contents}
-  .fig{display:block; flex:1 1 300px; max-width:400px; width:100%; height:auto}
+  .fig{display:block; flex:1 1 100%; max-width:400px; width:100%; height:auto; margin-top:1.5rem}
   /* Left-aligned and set at the sibling's caption size, not smaller: this is the figure's
      argument in words, not a label under a picture. Centring it and shrinking it made it
      read as a credit line — the one place on the page where the claim is stated plainly
      was the quietest thing on it. `balance` is gone with the centring; it only ever
      helped a short centred line. */
-  .figcap{flex:1 1 100%; margin-top:1.4rem; color:var(--dim);
+  .figcap{flex:1 1 100%; margin-top:1rem; color:var(--dim);
           font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; text-wrap:pretty}
   .fig .box   {fill:none; stroke:var(--c-weak); stroke-width:2}
   .fig .ref   {fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
@@ -213,7 +221,7 @@
 <main>
   <div class="shell">
   <section class="hero">
-    <h1 data-de="<span class='r70'>Zwei Unternehmen.</span><span class='rcl'>Dieselbe <em>Form</em>.</span>"><span class="r70">Two companies.</span><span class="rcl">The same <em>shape</em>.</span></h1>
+    <h1 data-de="<span class='r70'>Jede Rolle, jede Regel.</span><span class='rcl'>Einmal <em>aufgeschrieben</em>.</span>"><span class="r70">Every role, every rule.</span><span class="rcl">Written down <em>once</em>.</span></h1>
     <p class="tagline" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
     <div class="cta">
       <a class="btn primary" href="talks/intro/"
@@ -274,7 +282,7 @@
       </g>
     </svg>
     <figcaption class="figcap" id="figcap"
-       data-de="Ein Unternehmen aus einer Person, und eines mit Angestellten. Die Grösse ändert die Form nicht: dieselben Typen, dieselben Referenzen, dieselben Regeln. Sie ändert nur, wie viel davon ausgefüllt ist.">A company of one, and a company with a payroll. Size does not change the shape: the same types, the same references, the same rules. It changes only how much of it is filled in.</figcaption>
+       data-de="Es wurde nicht entworfen, sondern herausgezogen. Eine Ein-Personen-Firma und eine mit Angestellten, die nichts voneinander wussten, hatten dieselbe Form — die Grösse ändert nur, wie viel davon ausgefüllt ist.">It was not designed; it was extracted. A company of one and a company with a payroll, which never knew of each other, turned out to have the same shape — size changes only how much of it is filled in.</figcaption>
   </figure>
   </div>
 </main>
