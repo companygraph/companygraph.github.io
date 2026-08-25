@@ -15,7 +15,7 @@ to see the seam. They were merged, history and all, in August 2026.
 |---|---|
 | `/` | The landing page. One screen: what CompanyGraph is, and the way to the model. |
 | `/talks/` | The talks index. |
-| `/talks/intro/` | The introduction — eleven slides, English and German, narrated, with a PDF in each language. |
+| `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
 | `/billing/` | What would cost money, if anything ever does. |
 | `/privacy/` | What this site collects, which is nothing. |
 
@@ -32,7 +32,8 @@ split had to be unwound. Do not recreate one.
 - `index.html`, `billing/`, `privacy/` — the three prose pages, each self-contained.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
-- `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` (11 clips each), both PDFs,
+- `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` — one narrated clip per slide and
+  language — both PDFs,
   `export-pdf.mjs`, and `tts/generate.py`, which reads the deck's speaker notes as the single
   source for what is spoken. Its share card is rendered by the root `export-og.mjs`, with the
   other two.
