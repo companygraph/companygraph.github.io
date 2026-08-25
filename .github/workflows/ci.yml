@@ -35,6 +35,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - run: npm ci
+      - name: The vendored d3 is the pinned build
+        run: npm run test:example
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
         run: python3 -m http.server 8000 > /dev/null 2>&1 &
