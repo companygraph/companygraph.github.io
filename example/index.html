@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example — CompanyGraph</title>
+<meta id="metadesc" name="description" content="A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/example/">
+
+<meta property="og:title" content="Example — CompanyGraph">
+<meta property="og:description" content="A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/example/">
+<meta property="og:image" content="https://companygraph.io/example/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One company, drawn: a tree from a fictional company to its folders and pages.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Same rule as the landing page: the publisher and its other addresses, nothing about
+     what the software does or when it does it. An `Offer` here would be a price, and
+     this page deliberately quotes none. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/#organization",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": ["https://github.com/companygraph"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/example/#webpage",
+      "name": "Example",
+      "url": "https://companygraph.io/example/",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://companygraph.io/#website" },
+      "publisher": { "@id": "https://companygraph.io/#organization" }
+    }
+  ]
+}
+</script>
+<style>
+/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
+   from file:// as well as from the domain. Relative, because this page sits one
+   directory down and a root-absolute path would break the file:// case. */
+@font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  a{color:inherit}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+
+  header{padding:2rem 0}
+  /* three nav items plus the language control no longer fit beside the lockup on a
+     phone: let the row wrap rather than clip the control off the right edge. */
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; color:var(--c-mid); flex:0 0 auto}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  /* the page you are on is a resolved fact, so it takes the resolved colour */
+  nav a[aria-current="page"]{color:var(--c-firm)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+
+  /* Not one screen: this page has an argument to make in order, so it scrolls and
+     starts at the top rather than centring itself the way the landing page does. */
+  main{flex:1; padding:2vh 0 6vh}
+
+  .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            letter-spacing:-.035em; line-height:1.0;
+            font-size:clamp(2.2rem,6vw,4.6rem)}
+  .title h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .title h1 .rcl{display:block; font-weight:800}
+  .title h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
+           max-width:46ch; line-height:1.4}
+
+  /* The page's one reversal, and it earns the flag: everything below describes a
+     service you cannot buy yet. Said quietly at the bottom it would be small print;
+     said here it is part of the argument. */
+  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
+
+  section{margin-top:clamp(3rem,8vh,5.5rem)}
+  h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+     font-weight:700; letter-spacing:-.025em; line-height:1.06;
+     font-size:clamp(1.6rem,3vw,2.3rem)}
+  h2 em{font-style:normal; color:var(--c-mid)}
+  .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p{color:var(--dim); font-size:1rem}
+
+  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
+  .figwrap{display:grid; grid-template-columns:minmax(0,1fr); gap:1.4rem; align-items:start}
+  @media (min-width: 900px){ .figwrap.has-panel{grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr)} }
+  .figscroll{overflow-x:auto; overflow-y:hidden; border:1.5px solid var(--rule); border-radius:12px;
+             background:var(--raise); padding:1rem}
+  .fig{display:block; height:auto; min-width:100%}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
+  .figcap b{color:var(--ink); font-weight:600}
+  .panel:empty{display:none}
+  .panel{background:var(--raise); border:1.5px solid var(--c-mid); border-radius:12px; padding:1.3rem 1.4rem}
+  .panel .ptype{font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  .panel h3{margin-top:.3rem; font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            font-weight:700; letter-spacing:-.02em; font-size:1.5rem}
+  .panel .ptag{margin-top:.5rem; color:var(--dim)}
+  .panel table{margin-top:1rem; border-collapse:collapse; width:100%; font-size:.9rem}
+  .panel th{text-align:left; font-weight:600; color:var(--dim); padding:.3rem .6rem .3rem 0; border-bottom:1px solid var(--rule)}
+  .panel td{padding:.35rem .6rem .35rem 0; vertical-align:top; border-bottom:1px solid var(--rule)}
+  .panel td.k, .panel td .mono{font-family:"Plex Mono",monospace; font-size:.82rem; color:var(--dim)}
+  .panel h4{margin-top:1.1rem; font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .panel p{margin-top:.4rem; font-size:.95rem; line-height:1.5}
+  .panel a.sel{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--c-weak); cursor:pointer}
+  .panel .view{display:inline-block; margin-top:1.1rem; font-family:"Plex Mono",monospace; font-size:.8rem; color:var(--c-mid); text-decoration:none}
+  .mono{font-family:"Plex Mono",monospace; font-size:.9em}
+  /* figure tokens — settled state; Task 4 adds the additive motion */
+  .fig .own{fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
+  .fig .ref{fill:none; stroke:var(--c-weak); stroke-width:1.6; stroke-dasharray:5 5}
+  .fig .ref.hot{stroke:var(--c-mid)}
+  .fig .box{fill:none; stroke:var(--c-weak); stroke-width:2}
+  .fig .sq{fill:var(--c-firm)}
+  .fig .n{cursor:pointer}
+  .fig .n:hover .box, .fig .n:focus-visible .box, .fig .n.open .box{stroke:var(--c-mid)}
+  .fig .n:hover .sq, .fig .n:focus-visible .sq, .fig .n.sel .sq{fill:var(--c-mid)}
+  .fig .n:focus{outline:none}
+  .fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
+  .fig text.folder{font-family:"Plex Mono",monospace; font-size:12px}
+  .fig text.root{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:15px}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    nav{gap:1.4rem}
+    .tagline{max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="../">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="square">
+          <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+          <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+          <path d="M12.5 12 h4.5"/>
+          <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+        </svg>
+        <b>Company<span>Graph</span></b>
+      </a>
+      <nav>
+        <a href="https://companygraph.io/talks/" data-de="Vorträge">Talks</a>
+        <a href="./" aria-current="page" data-de="Beispiel">Example</a>
+        <a href="../billing/" data-de="Abrechnung">Billing</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main>
+  <div class="shell">
+
+    <div class="title">
+      <h1 data-de="<span class='r70'>Eine Firma,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">One company,</span><span class="rcl"><em>drawn</em>.</span></h1>
+      <p class="tagline" data-de="Eine fiktive Firma, in CompanyGraph beschrieben — genau so, wie ihre Dateien es sagen, und gezeichnet als der Graph, den diese Dateien bilden.">A fictional company described in CompanyGraph — exactly as its files say, drawn as the graph those files form.</p>
+      <p class="note" data-de="Nichts hier ist echt, und nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Beispiel des Modells erzeugt, beim Commit, der neben der Zeichnung steht.">Nothing here is real, and nothing here was written by hand: the page is generated from the model's example, at the commit named beside the figure.</p>
+    </div>
+
+    <section class="figure-section">
+      <div class="figwrap">
+        <div class="figscroll"><svg id="fig" class="fig" role="img" aria-labelledby="figcap"></svg></div>
+        <aside id="panel" class="panel" aria-live="polite"></aside>
+      </div>
+      <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken öffnet.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to open.</p>
+    </section>
+
+    <section>
+      <h2 data-de="Wie man es liest">How to read it</h2>
+      <div class="rules">
+        <p data-de="<b>Ein Ordner ist der Plural seines Typs.</b> Was in <span class='mono'>skills/</span> liegt, ist ein Skill. Es gibt keine Abkürzung, weil die eine Regel, die beide Namen vorhersagbar macht, keine Ausnahme verträgt.">
+          <b>A folder is the plural of its type.</b> What sits in <span class="mono">skills/</span> is a skill. Nothing is abbreviated, because the one rule that makes both names predictable cannot afford an exception.</p>
+        <p data-de="<b>Eine Seite ist eine Datei, wenn sie nichts besitzt, und ein Ordner, wenn sie eigene Sammlungen besitzt.</b> Das Profil ist das Beispiel für das Zweite: Es hält seine eigene Datei und daneben die Erfahrungen, die ihm gehören.">
+          <b>A page is a file when it owns nothing, and a folder when it owns collections of its own.</b> The profile is the example of the second: it holds its own file and, beside it, the experiences that belong to it.</p>
+        <p data-de="<b>Jede Linie ist ein Name, der in einer Datei steht.</b> Nichts hier ist ein Link, der kaputtgehen kann: Ein Name, der auf nichts zeigt, ist ein Fehler, keine Warnung.">
+          <b>Every line is a name written in a file.</b> Nothing here is a link that can break: a name that points at nothing is an error, not a warning.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-de="Woher es kommt">Where it comes from</h2>
+      <p class="unit mono"><a id="srclink" href="https://github.com/companygraph/meta-model/tree/HEAD/example" target="_blank" rel="noopener">meta-model/example @ <span id="srccommit">HEAD</span></a></p>
+      <p class="lede" data-de="Das Beispiel ist absichtlich erfunden, und sein README sagt, warum. Diese Seite sagt es nicht noch einmal — sie verlinkt.">The example is fictional by design, and its README says why. This page does not say it again — it links.</p>
+    </section>
+
+  </div>
+</main>
+
+<div class="shell">
+  <footer>
+    <span><a href="https://github.com/companygraph">github.com/companygraph</a></span>
+    <span><a href="https://github.com/companygraph/meta-model/blob/HEAD/LICENSE">Apache 2.0</a></span>
+    <span><a href="https://blust.ch/">Robert Blust</a></span>
+    <span><a href="../privacy/" data-de="Datenschutz">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// Same mechanism as the landing page, and the same reason: English is the markup so the
+// page says the right thing before any JS runs, and the choice is remembered per origin —
+// so a visitor who switched to German on the landing page arrives here in German.
+(function(){
+  var KEY = "cg-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  var UI = {
+    de:{ title:"Beispiel — CompanyGraph",
+         desc:"Eine fiktive Firma, in CompanyGraph beschrieben, gezeichnet als der Graph, den ihre Dateien bilden — erzeugt aus dem Beispiel des Modells, nichts von Hand geschrieben." },
+    en:{ title:"Example — CompanyGraph",
+         desc:"A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand." }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="en") toggle(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+
+<!-- example data · none -->
+<script type="application/json" id="example-data">{}</script>
+<!-- /example data -->
+</body>
+</html>

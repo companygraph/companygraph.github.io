@@ -65,6 +65,23 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
+  // The example page. Its one promise is that nothing about the example was written by hand,
+  // so the strings asserted here are the page's own prose, never a name from the model —
+  // those are asserted by `graph`, which reads them out of the data block.
+  //
+  // `noNewTab` is omitted rather than set `false`: the runner skips a check whose key is
+  // `undefined` on the spec (see the loop below — `if (spec[name] === undefined) continue`),
+  // but `false` is not `undefined`, so a literal `false` would still run the check — and it
+  // would fail, because the source link and the view-file link both open GitHub in a new tab.
+  { path: "/example/", title: /CompanyGraph/, lang: "en",
+    contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
+    links: ["https://github.com/companygraph"],
+    sameTab: ["https://companygraph.io/talks/", "../billing/", "../privacy/", "../", "./"],
+    sameOrigin: true,
+    translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL"], hides: ["One company", "How to read it"] },
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, cardBase: "https://companygraph.io", internalLinks: true },
 
   { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
