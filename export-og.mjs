@@ -31,7 +31,9 @@ for (const c of cards) {
   // file://, like the deck itself: every page here references its assets relatively for exactly
   // this reason, so no card needs a server to render and `npm run og` needs no second terminal.
   await page.goto(pathToFileURL(path.join(REPO_ROOT, c.dir, "index.html")).href, { waitUntil: "networkidle" });
-  await page.addStyleTag({ content: c.hide });
+  // An empty style tag is rejected outright by Playwright, so a card with nothing to hide
+  // skips the call rather than pass content it refuses.
+  if (c.hide) await page.addStyleTag({ content: c.hide });
   if (c.titleSlide) {
     await page.evaluate(() => {
       const s = Array.from(document.querySelectorAll(".slide"));

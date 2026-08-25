@@ -21,7 +21,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "BILLING",
+    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "EXAMPLE", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. The deck is in this repository now — `talks/intro/` — so the
@@ -39,7 +39,7 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
+                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
                   hides: ["Two companies", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
@@ -48,7 +48,7 @@ const PAGES = [
   { path: "/privacy/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["https://companygraph.io/talks/", "../billing/", "../", "./"],
+    sameTab: ["../talks/", "../example/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
@@ -61,10 +61,23 @@ const PAGES = [
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["https://companygraph.io/talks/", "../privacy/", "../", "./"],
+    sameTab: ["../talks/", "../example/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
+  // The example page. Its one promise is that nothing about the example was written by hand,
+  // so the strings asserted here are the page's own prose, never a name from the model —
+  // those are asserted by `graph`, which reads them out of the data block.
+  { path: "/example/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+    contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
+    links: ["https://github.com/companygraph"],
+    sameTab: ["../talks/", "../billing/", "../privacy/", "../", "./"],
+    sameOrigin: true,
+    translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL", "Seiten"], hides: ["One company", "How to read it"],
+                  title: "Beispiel — CompanyGraph" },
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: true },
 
   { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
@@ -78,10 +91,10 @@ const PAGES = [
     // the href as delivered, and the swap happens only after a click on the toggle. What
     // this line catches is the path being wrong for everyone; the German half is checked
     // by `translates.dlHref` below.
-    sameTab: ["intro/", "./", "../", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
+    sameTab: ["intro/", "./", "../", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
-    translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
+    translates: { lang: "de", shows: ["Vortrag", "Vorträge", "BEISPIEL"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
@@ -300,6 +313,11 @@ const CHECKS = {
       return `card is ${real.join("×")} but declared ${declared.join("×")}`;
     return null;
   },
+  // Run before `graph`: that check walks the figure to an entity and leaves it focused
+  // there, and the root/folder card's "N pages" line — where `shows: ["Seiten"]` lives for
+  // the example page — only renders while a root or a folder is focused. Toggling the
+  // language first, on the page exactly as it loaded, is what keeps this check honest about
+  // what a visitor sees before they have clicked anything.
   async translates(page, spec) {
     const body = () => page.evaluate(() => document.body.innerText);
     const htmlLang = () => page.evaluate(() => document.documentElement.lang);
@@ -358,6 +376,56 @@ const CHECKS = {
         return `toggling back left the download at ${JSON.stringify(backHref)}, expected ${JSON.stringify(spec.translates.dlHref.en)}`;
     }
     return null;
+  },
+  // The click-through. Every name and count here is read out of the page's own data block,
+  // so the check restates nothing about the example: it asserts that what the block says is
+  // what the neighbourhood draws, at each step of moving the focus.
+  async graph(page) {
+    const data = await page.evaluate(() => JSON.parse(document.getElementById("example-data").textContent));
+    if (!data.entities) return "the data block is empty — run: npm run example";
+    // The source link and its short commit are rewritten by the script from the block's own
+    // commit, so a stale generator that leaves the markup's placeholder in place would pass
+    // every other check here while pointing at the wrong tree.
+    const srcHref = await page.evaluate(() => document.getElementById("srclink").getAttribute("href"));
+    const wantHref = `/tree/${data.commit}/example`;
+    if (!srcHref.endsWith(wantHref)) return `source link is ${JSON.stringify(srcHref)}, expected it to end with ${JSON.stringify(wantHref)}`;
+    const srcCommit = await page.evaluate(() => document.getElementById("srccommit").textContent);
+    if (srcCommit !== data.commit.slice(0, 7)) return `source commit reads ${JSON.stringify(srcCommit)}, expected ${JSON.stringify(data.commit.slice(0, 7))}`;
+    const nodes = () => page.evaluate(() => Array.from(document.querySelectorAll("#fig .n")).map(n => ({ id: n.dataset.id, focus: n.classList.contains("focus") })));
+    const click = (id) => page.evaluate((id) => {
+      const n = document.querySelector(`#fig .n[data-id="${id}"]`);
+      if (n) n.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      return !!n;
+    }, id);
+    const roots = data.types.filter(t => !t.owner).map(t => t.folder);
+    let ns = await nodes();
+    if (!ns.find(n => n.id === "root" && n.focus)) return "initially the root is not the focus";
+    if (ns.length !== roots.length + 1) return `initially ${ns.length} nodes, expected root + ${roots.length} folders`;
+    const edge = data.edges[0]; if (!edge) return null;
+    const from = data.entities.find(e => e.id === edge.from);
+    const folder = from.id.slice(0, from.id.lastIndexOf("/"));
+    // Walk down to that folder one click at a time. The canvas is a neighbourhood, not a
+    // tree, so a folder four levels down is not on it until its parent is the focus — and
+    // every prefix of an id IS a node here, because an id is the thing's path on disk.
+    const parts = folder.split("/");
+    for (let i = 1; i <= parts.length; i++) {
+      const prefix = parts.slice(0, i).join("/");
+      if (!(await click(prefix))) return `${prefix} is not on the canvas at this point in the walk`;
+      await page.waitForTimeout(500);
+    }
+    ns = await nodes();
+    if (!ns.find(n => n.id === folder && n.focus)) return `clicking ${folder} did not focus it`;
+    if (!ns.find(n => n.id === "root")) return `focused ${folder}, but its ancestor root is gone`;
+    if (!ns.find(n => n.id === from.id)) return `focused ${folder}, but its child ${from.id} is not drawn`;
+    await click(from.id); await page.waitForTimeout(500);
+    const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
+    if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
+    ns = await nodes();
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
+    const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
+    return hash === from.id ? null : `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
   },
 };
 

@@ -16,6 +16,7 @@ to see the seam. They were merged, history and all, in August 2026.
 | `/` | The landing page. One screen: what CompanyGraph is, and the way to the model. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
+| `/example/` | One instance of the model, drawn as the graph its own files form — generated, never written by hand. |
 | `/billing/` | What would cost money, if anything ever does. |
 | `/privacy/` | What this site collects, which is nothing. |
 
@@ -36,18 +37,23 @@ split had to be unwound. Do not recreate one.
   language — both PDFs,
   `export-pdf.mjs`, and `tts/generate.py`, which reads the deck's speaker notes as the single
   source for what is spoken. Its share card is rendered by the root `export-og.mjs`, with the
-  other two.
+  other three.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
+- `example/` — `index.html`, the page; `build.mjs`, which writes the data block into it (or
+  checks it still matches, `--check`) by reading `meta-model/example` at the commit
+  `source.json` names; `instance.mjs`, the parser;
+  `source.json`, the one thing this page is allowed to name from the model — a repo and a
+  commit; and its own vendored `d3.v7.min.js`, the same reason `fonts/` is self-hosted.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
-- `og.png`, `talks/og.png`, `talks/intro/og.png` — 1200×630 share cards, each rendered from
-  the page it belongs to, and an `og.sha` beside each one: a hash of everything that went into
-  the card, so `npm run og:check` can say whether it still shows its page. `og-recipe.mjs`
-  defines what goes into a card, `export-og.mjs` renders all three and writes the stamps, and
-  `og-check.mjs` reports which have drifted.
+- `og.png`, `talks/og.png`, `talks/intro/og.png`, `example/og.png` — 1200×630 share cards, each
+  rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
+  that went into the card, so `npm run og:check` can say whether it still shows its page.
+  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all four and writes
+  the stamps, and `og-check.mjs` reports which have drifted.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
-- `verify/check.mjs` — the suite, covering all five pages in one run. `verify/design.mjs` is
+- `verify/check.mjs` — the suite, covering all six pages in one run. `verify/design.mjs` is
   the shared design-system copy, byte-identical across `blust.ch` and `guestgraph.io`; never
   edit it here.
 - `docs/superpowers/` — the design and the plan behind the landing page and the talk.
@@ -73,9 +79,11 @@ No build step.
 npm install                        # once, for Playwright
 npm run serve                      # → http://localhost:8000
 npm run verify                     # renders every page and asserts the DOM
-npm run og:check                   # do the three share cards still show their pages?
+npm run og:check                   # do the four share cards still show their pages?
 npm run test:og                    # the card check's own tests (node --test, no deps)
-npm run og                         # re-renders all three share cards after a visual change
+npm run og                         # re-renders all four share cards after a visual change
+npm run example                    # writes the example page's data block from meta-model/example
+npm run example:check              # fails if the data block has drifted from source.json's commit
 
 cd talks/intro && npm install      # pdf-lib, for the deck's PDF exporter
 npm run pdf                        # both language PDFs

@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example — CompanyGraph</title>
+<meta id="metadesc" name="description" content="A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/example/">
+
+<meta property="og:title" content="Example — CompanyGraph">
+<meta property="og:description" content="A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/example/">
+<meta property="og:image" content="https://companygraph.io/example/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One company, drawn: a fictional company at the centre of the folders its files form.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Same rule as the landing page: the publisher and its other addresses, nothing about
+     what the software does or when it does it. An `Offer` here would be a price, and
+     this page deliberately quotes none. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/#organization",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": ["https://github.com/companygraph"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/example/#webpage",
+      "name": "Example",
+      "url": "https://companygraph.io/example/",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://companygraph.io/#website" },
+      "publisher": { "@id": "https://companygraph.io/#organization" }
+    }
+  ]
+}
+</script>
+<style>
+/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
+   from file:// as well as from the domain. Relative, because this page sits one
+   directory down and a root-absolute path would break the file:// case. */
+@font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  a{color:inherit}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+
+  header{padding:2rem 0}
+  /* three nav items plus the language control no longer fit beside the lockup on a
+     phone: let the row wrap rather than clip the control off the right edge. */
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; color:var(--c-mid); flex:0 0 auto}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  /* the page you are on is a resolved fact, so it takes the resolved colour */
+  nav a[aria-current="page"]{color:var(--c-firm)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+
+  /* Not one screen: this page has an argument to make in order, so it scrolls and
+     starts at the top rather than centring itself the way the landing page does. */
+  main{flex:1; padding:2vh 0 6vh}
+
+  .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            letter-spacing:-.035em; line-height:1.0;
+            font-size:clamp(2.2rem,6vw,4.6rem)}
+  .title h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .title h1 .rcl{display:block; font-weight:800}
+  .title h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
+           max-width:46ch; line-height:1.4}
+
+  /* The page's one reversal, and it earns the flag: a visitor's first assumption is that
+     they are looking at a real company, and this line says the opposite — nothing here is
+     real, and nothing here was written by hand. */
+  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
+
+  section{margin-top:clamp(3rem,8vh,5.5rem)}
+  h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+     font-weight:700; letter-spacing:-.025em; line-height:1.06;
+     font-size:clamp(1.6rem,3vw,2.3rem)}
+  h2 em{font-style:normal; color:var(--c-mid)}
+  .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+
+  /* the source commit, stated once, in the face this system reserves for data */
+  .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
+        background:var(--raise); border:1.5px solid var(--c-firm);
+        font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
+
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p{color:var(--dim); font-size:1rem}
+
+  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
+  .path{min-height:1.4em; font-size:.8rem; letter-spacing:.06em; color:var(--dim)}
+  .path b{color:var(--c-firm); font-weight:600}
+  .stage{margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
+         grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
+  .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
+  .canvas svg{display:block; width:100%; height:100%}
+  .recentre{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
+            background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
+            padding:.35rem .6rem; cursor:pointer}
+  .recentre:hover, .recentre:focus-visible{border-color:var(--c-mid)}
+  .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
+  .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
+  .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem}
+  .cfoot a{font-family:"Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; color:var(--c-mid); text-decoration:none}
+  .cbody .eyebrow{font-family:"Plex Mono",monospace; font-size:.72rem; letter-spacing:.08em; color:var(--dim); word-break:break-all}
+  .cbody h3{margin-top:.35rem; font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; letter-spacing:-.02em; font-size:1.45rem; line-height:1.1}
+  .cbody .tag{margin-top:.55rem; color:var(--dim); line-height:1.4}
+  .cbody dl{margin-top:1.1rem; display:grid; grid-template-columns:max-content 1fr; gap:.3rem .9rem; font-size:.9rem}
+  .cbody dt{font-family:"Plex Mono",monospace; font-size:.78rem; color:var(--dim); padding-top:.15rem}
+  .cbody h4{margin-top:1.2rem; font-family:"Plex Mono",monospace; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim)}
+  .cbody p{margin-top:.4rem; font-size:.93rem; line-height:1.5}
+  .cbody table{margin-top:.5rem; border-collapse:collapse; width:100%; font-size:.88rem}
+  .cbody th{text-align:left; font-family:"Plex Mono",monospace; font-weight:600; font-size:.72rem; letter-spacing:.06em; color:var(--dim); padding:.3rem .6rem .3rem 0; border-bottom:1px solid var(--rule)}
+  .cbody td{padding:.35rem .6rem .35rem 0; vertical-align:top; border-bottom:1px solid var(--rule)}
+  .cbody a.go{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--c-weak); cursor:pointer}
+  .cbody .empty{color:var(--dim); line-height:1.5}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
+  .figcap b{color:var(--ink); font-weight:600}
+  @media (max-width: 860px){
+    .stage{height:auto; grid-template-columns:1fr}
+    .canvas{height:52vh; min-height:360px}
+    .card{height:44vh; min-height:300px}
+  }
+  /* figure tokens. No @media (prefers-reduced-motion) block here on purpose: every node is
+     placed by its own transform attribute, and a blanket `transform:none !important` would
+     not cancel a displacement, it would replace the attribute-derived position and collapse
+     the figure onto (0,0). Reduced motion is a transition duration of 0 ms in the script,
+     which lands on exactly the same drawing. */
+  #fig .own{fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
+  #fig .ref{fill:none; stroke:var(--c-mid); stroke-width:1.6; stroke-dasharray:5 5}
+  #fig .box{fill:none; stroke:var(--c-weak); stroke-width:2}
+  #fig .sq{fill:var(--c-firm)}
+  #fig .n{cursor:pointer}
+  #fig .n:hover .box, #fig .n:focus-visible .box, #fig .n.focus .box{stroke:var(--c-mid)}
+  #fig .n:hover .sq, #fig .n:focus-visible .sq, #fig .n.focus .sq{fill:var(--c-mid)}
+  #fig .n:focus:not(:focus-visible){outline:none}
+  #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
+  #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
+  #fig text.eyebrow{fill:var(--dim); letter-spacing:.08em}
+  #fig text.attr{fill:var(--dim)}
+  #fig text.root{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:15px}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+  /* The blust.ch credit is a brand, not a record value, so it leaves the footer's mono and
+     takes the lockup it has on every deck: the rb plate inlined, wordmark with the second
+     word in --c-mid. The rest of the row stays mono because the rest of the row is data —
+     a repository URL and a licence. */
+  footer .credit{display:inline-flex; align-items:center; gap:.5em; vertical-align:-.25em;
+                 font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+                 font-size:.84rem; letter-spacing:0; color:var(--ink)}
+  footer .credit .rbmark{display:flex}
+  footer .credit .rbmark svg{width:14px; height:14px; display:block}
+  footer .credit .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  footer .credit .rb{fill:var(--c-mid)}
+  footer .credit b{font-weight:600}
+  footer .credit b em{font-style:normal; color:var(--c-mid)}
+  footer .credit:hover, footer .credit:focus-visible{text-decoration:none}
+  footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
+
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    nav{gap:1.4rem}
+    .tagline{max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="../">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="square">
+          <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+          <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+          <path d="M12.5 12 h4.5"/>
+          <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+        </svg>
+        <b>Company<span>Graph</span></b>
+      </a>
+      <nav>
+        <a href="../talks/" data-de="Vorträge">Talks</a>
+        <a href="./" aria-current="page" data-de="Beispiel">Example</a>
+        <a href="../billing/" data-de="Abrechnung">Billing</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main>
+  <div class="shell">
+
+    <div class="title">
+      <h1 data-de="<span class='r70'>Eine Firma,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">One company,</span><span class="rcl"><em>drawn</em>.</span></h1>
+      <p class="tagline" data-de="Eine fiktive Firma, in CompanyGraph beschrieben — genau so, wie ihre Dateien es sagen, und gezeichnet als der Graph, den diese Dateien bilden.">A fictional company described in CompanyGraph — exactly as its files say, drawn as the graph those files form.</p>
+      <p class="note" data-de="Nichts hier ist echt, und nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Beispiel des Modells erzeugt, beim Commit, der neben der Zeichnung steht.">Nothing here is real, and nothing here was written by hand: the page is generated from the model's example, at the commit named beside the figure.</p>
+    </div>
+
+    <section class="figure-section">
+      <p class="path mono" id="path"></p>
+      <div class="stage">
+        <div class="canvas">
+          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
+          <button class="recentre" id="recentre" type="button" data-de="zentrieren">recentre</button>
+        </div>
+        <aside class="card" id="card" aria-live="polite">
+          <div class="cbody" id="cbody"></div>
+          <div class="cfoot" id="cfoot"></div>
+        </aside>
+      </div>
+      <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the centre.</p>
+    </section>
+
+    <section>
+      <h2 data-de="Wie man es liest">How to read it</h2>
+      <div class="rules">
+        <p data-de="<b>Ein Ordner ist der Plural seines Typs.</b> Was in einem Ordner liegt, ist eine Seite von dessen Typ — nichts wird abgekürzt, weil die eine Regel, die beide Namen vorhersagbar macht, keine Ausnahme verträgt.">
+          <b>A folder is the plural of its type.</b> What sits in a folder is one page of that folder's type — nothing is abbreviated, because the one rule that makes both names predictable cannot afford an exception.</p>
+        <p data-de="<b>Eine Seite ist eine Datei, wenn sie nichts besitzt, und ein Ordner, wenn sie eigene Sammlungen besitzt.</b> Das Profil ist das Beispiel für das Zweite: Es hält seine eigene Datei und daneben die Erfahrungen, die ihm gehören.">
+          <b>A page is a file when it owns nothing, and a folder when it owns collections of its own.</b> The profile is the example of the second: it holds its own file and, beside it, the experiences that belong to it.</p>
+        <p data-de="<b>Jede Linie ist ein Name, der in einer Datei steht.</b> Nichts hier ist ein Link, der kaputtgehen kann: Ein Name, der auf nichts zeigt, ist ein Fehler, keine Warnung.">
+          <b>Every line is a name written in a file.</b> Nothing here is a link that can break: a name that points at nothing is an error, not a warning.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-de="Woher es kommt">Where it comes from</h2>
+      <p class="unit mono"><a id="srclink" href="https://github.com/companygraph/meta-model/tree/HEAD/example">meta-model/example @ <span id="srccommit">HEAD</span></a></p>
+      <p class="lede" data-de="Das Beispiel ist absichtlich erfunden, und sein README sagt, warum. Diese Seite sagt es nicht noch einmal — sie verlinkt.">The example is fictional by design, and its README says why. This page does not say it again — it links.</p>
+    </section>
+
+  </div>
+</main>
+
+<div class="shell">
+  <footer>
+    <span><a href="https://github.com/companygraph">github.com/companygraph</a></span>
+    <span><a href="https://github.com/companygraph/meta-model/blob/HEAD/LICENSE">Apache 2.0</a></span>
+    <span><a class="credit" href="https://blust.ch/"><span class="rbmark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a></span>
+    <span><a href="../privacy/" data-de="Datenschutz">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// Same mechanism as the landing page, and the same reason: English is the markup so the
+// page says the right thing before any JS runs, and the choice is remembered per origin —
+// so a visitor who switched to German on the landing page arrives here in German.
+(function(){
+  var KEY = "cg-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  var UI = {
+    de:{ title:"Beispiel — CompanyGraph",
+         desc:"Eine fiktive Firma, in CompanyGraph beschrieben, gezeichnet als der Graph, den ihre Dateien bilden — erzeugt aus dem Beispiel des Modells, nichts von Hand geschrieben." },
+    en:{ title:"Example — CompanyGraph",
+         desc:"A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand." }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="en") toggle(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+
+<!-- example data · 400ab2b1278a584cd59930e95c3e68a7b9f20090 -->
+<script type="application/json" id="example-data">{"commit":"400ab2b1278a584cd59930e95c3e68a7b9f20090","root":"Fictional Company","types":[{"type":"experience","folder":"experiences","owner":"profile"},{"type":"proficiency-level","folder":"proficiency-levels","owner":null},{"type":"profile","folder":"profiles","owner":null},{"type":"skill","folder":"skills","owner":null},{"type":"value","folder":"values","owner":null}],"entities":[{"id":"proficiency-levels/competent","type":"proficiency-level","name":"Competent","tagline":"Reliable alone. Unsupervised work with a predictable result.","fields":{"rank":"20"},"sections":[{"heading":"What it means","text":"Someone at this level works with it unsupervised and the result is predictable. They recognise\nthe common failure modes, having run into them."}],"owner":null,"path":"example/proficiency-levels/competent.md"},{"id":"proficiency-levels/expert","type":"proficiency-level","name":"Expert","tagline":"Knows the limits. Has worked below the surface, shaped it, or taught it.","fields":{"rank":"40"},"sections":[{"heading":"What it means","text":"Someone at this level knows where it breaks down and where it is simply wrong. They have worked\nbelow its surface, shaped it, or taught it."}],"owner":null,"path":"example/proficiency-levels/expert.md"},{"id":"proficiency-levels/familiar","type":"proficiency-level","name":"Familiar","tagline":"Needs support. Real use, with guidance or frequent reference.","fields":{"rank":"10"},"sections":[{"heading":"What it means","text":"Someone at this level has used it on real work, with guidance or frequent reference. They can\nfollow a conversation about it and make sense of other people's work in it."}],"owner":null,"path":"example/proficiency-levels/familiar.md"},{"id":"proficiency-levels/proficient","type":"proficiency-level","name":"Proficient","tagline":"Exercises judgment. Chooses between alternatives and can say why.","fields":{"rank":"30"},"sections":[{"heading":"What it means","text":"Someone at this level makes judgment calls in it and can explain why the alternatives are\nworse. Other people bring them their questions."}],"owner":null,"path":"example/proficiency-levels/proficient.md"},{"id":"profiles/mira-halvorsen","type":"profile","name":"Mira Halvorsen","tagline":"Backend engineer who ended up owning the parts nobody else wanted to.","fields":{"email":"mira@example.invalid","location":"Bergen"},"sections":[{"heading":"Skills","text":"","table":{"columns":["Skill","Level","Evidence"],"rows":[["Java Programming","Proficient","Owned the JVM services two other teams built on for four years, and was the one called when they stopped."],["Domain-Driven Design","Competent","Split the billing domain into two bounded contexts; the seams have held under two years of change."]]}},{"heading":"Summary","text":"Eight years across two companies, both of them small enough that the boundary between\nbuilding a thing and running it never really existed."}],"owner":null,"path":"example/profiles/mira-halvorsen/mira-halvorsen.md"},{"id":"profiles/mira-halvorsen/experiences/2018-northwind-atelier","type":"experience","name":"Rebuilding the order pipeline","tagline":"Four years replacing a nightly batch with something that ran when the order did.","fields":{"start":"2018-03","end":"2022-01","organisation":"Northwind Atelier","skills":["Java Programming"]},"sections":[{"heading":"Achievements","text":"- Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from\n  the next morning to seconds.\n- Established that the speed-up mattered less than anyone expected, and why — which set the\n  direction for the work that followed."}],"owner":"profiles/mira-halvorsen","path":"example/profiles/mira-halvorsen/experiences/2018-northwind-atelier.md"},{"id":"profiles/mira-halvorsen/experiences/2022-beacon-systems","type":"experience","name":"Splitting the billing domain","tagline":"Ongoing. Taking one service that three teams edited and making it two, each owned by one team.","fields":{"start":"2022-02","organisation":"Beacon Systems","skills":["Java Programming","Domain-Driven Design"]},"sections":[{"heading":"Achievements","text":"- Split one service that three teams edited into two that one team each owns, so the second\n  team stopped waiting on the first to merge.\n- Not finished: the third team is still waiting."}],"owner":"profiles/mira-halvorsen","path":"example/profiles/mira-halvorsen/experiences/2022-beacon-systems.md"},{"id":"skills/domain-driven-design","type":"skill","name":"Domain-Driven Design","tagline":"Modelling software around the language the business already speaks.","fields":{"group":"Software Design"},"sections":[{"heading":"In practice","text":"Refusing a name that only makes sense inside the codebase, and holding the boundary when a\nsecond team wants to reach across it."}],"owner":null,"path":"example/skills/domain-driven-design.md"},{"id":"skills/java-programming","type":"skill","name":"Java Programming","tagline":"Building and maintaining server-side systems on the JVM.","fields":{"group":"Programming Languages"},"sections":[{"heading":"In practice","text":"Writing services that other teams depend on, and being the person who reads the stack trace\nwhen one of them stops."}],"owner":null,"path":"example/skills/java-programming.md"},{"id":"values/craftsmanship","type":"value","name":"Craftsmanship","tagline":"We would rather ship one thing that holds up than three that need watching.","fields":{},"sections":[{"heading":"In practice","text":"Following it looks like refusing a deadline that can only be met by leaving something\nhalf-built, and saying so early enough that the date can move.\n\nBreaking it looks like shipping on time and privately knowing which part will be rewritten\nwithin the quarter."}],"owner":null,"path":"example/values/craftsmanship.md"},{"id":"values/say-the-hard-thing","type":"value","name":"Say The Hard Thing","tagline":"Disagreement that arrives after the decision is not disagreement, it is commentary.","fields":{},"sections":[{"heading":"In practice","text":"Following it looks like naming the objection in the room where the choice is being made, once\nand plainly, and then committing to whatever is decided.\n\nBreaking it looks like agreeing in the meeting and reopening the question in a side channel\nafterwards."}],"owner":null,"path":"example/values/say-the-hard-thing.md"}],"edges":[{"from":"profiles/mira-halvorsen/experiences/2018-northwind-atelier","to":"skills/java-programming","via":"skills","attrs":{}},{"from":"profiles/mira-halvorsen/experiences/2022-beacon-systems","to":"skills/domain-driven-design","via":"skills","attrs":{}},{"from":"profiles/mira-halvorsen/experiences/2022-beacon-systems","to":"skills/java-programming","via":"skills","attrs":{}},{"from":"profiles/mira-halvorsen","to":"skills/domain-driven-design","via":"Skills.Skill","attrs":{"Level":"proficiency-levels/competent","Evidence":"Split the billing domain into two bounded contexts; the seams have held under two years of change."}},{"from":"profiles/mira-halvorsen","to":"skills/java-programming","via":"Skills.Skill","attrs":{"Level":"proficiency-levels/proficient","Evidence":"Owned the JVM services two other teams built on for four years, and was the one called when they stopped."}}]}</script>
+<!-- /example data -->
+
+<script src="d3.v7.min.js"></script>
+<script>
+// Focus and context. The canvas never shows the whole instance: one focused node, its
+// ancestors to the left (its path on disk), its children to the right, and its references in
+// two dashed bands — targets below, sources above. Everything on the canvas is there because
+// of the focus, so no dashed line can land on nothing. d3 moves survivors and fades the rest
+// when the focus changes; under prefers-reduced-motion every transition is 0 ms, which is also
+// the state the share card renders.
+//
+// Nothing in this script knows a name from the example. It reads types, entities and edges
+// out of #example-data and derives every label, path and count from them; the only strings it
+// carries are the two band eyebrows, the root/folder card's word for "pages", and the file
+// link's aria-label, all of which the site's language toggle swaps through t().
+(function(){
+  var block = document.getElementById("example-data");
+  var data = JSON.parse(block.textContent);
+  if (!data.entities) return;                       // the block is empty until npm run example
+
+  var src = document.getElementById("srclink");
+  src.href = "https://github.com/companygraph/meta-model/tree/" + data.commit + "/example";
+  document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
+
+  // ── the four strings this script owns ─────────────────────────────────────────────────
+  // The static markup carries its German in data-de and the page's own toggle applies it.
+  // What the figure draws is built after that pass has run, so these travel with the script
+  // and re-render when <html lang> changes.
+  var STR = {
+    out:   { en:"refers to",   de:"Verweist auf" },
+    "in":  { en:"referred by", de:"Verwiesen von" },
+    pages: { en:"pages",       de:"Seiten" },
+    view:  { en:"View this file on GitHub", de:"Diese Datei auf GitHub ansehen" }
+  };
+  function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
+  function t(k){ return STR[k][lang()]; }
+
+  // ── model ─────────────────────────────────────────────────────────────────────────────
+  // Node ids are paths, because that is what they are on disk: "<folder>" is a folder,
+  // "<folder>/<entity>" a page, "<folder>/<entity>/<owned folder>" a folder a page owns. The
+  // one invented id is "root", which has no path of its own.
+  var byId = {}; data.entities.forEach(function(e){ byId[e.id] = e; });
+  var rootTypes = data.types.filter(function(t){ return !t.owner; });
+  function ownedTypes(type){ return data.types.filter(function(t){ return t.owner === type; }); }
+
+  var cache = {};
+  function keep(n){ return cache[n.id] || (cache[n.id] = n); }
+  function nRoot(){ return keep({ kind:"root", id:"root", label:data.root }); }
+  function nFolder(id, type, ownerId){ return keep({ kind:"folder", id:id, type:type, ownerId:ownerId, label:id.slice(id.lastIndexOf("/") + 1) }); }
+  function nEntity(e){ return keep({ kind:"entity", id:e.id, label:e.name, entity:e }); }
+  function folderIdOf(id){ return id.slice(0, id.lastIndexOf("/")); }
+
+  function parentOf(n){
+    if (n.kind === "root") return null;
+    if (n.kind === "folder") return n.ownerId ? nEntity(byId[n.ownerId]) : nRoot();
+    var e = n.entity;
+    return nFolder(folderIdOf(e.id), e.type, e.owner);
+  }
+  function childrenOf(n){
+    if (n.kind === "root") return rootTypes.map(function(t){ return nFolder(t.folder, t.type, null); });
+    if (n.kind === "folder") return data.entities
+      .filter(function(e){ return e.type === n.type && e.owner === n.ownerId; })
+      .map(nEntity);
+    return ownedTypes(n.entity.type).map(function(t){ return nFolder(n.id + "/" + t.folder, t.type, n.id); });
+  }
+  function ancestorsOf(n){ var out = [], p = parentOf(n); while (p) { out.unshift(p); p = parentOf(p); } return out; }
+  function pathOf(n){ return n.kind === "root" ? [] : n.id.split("/"); }
+  // Pages held: for the root every entity, for a folder everything filed beneath it — an
+  // entity and the folder it owns both count as pages of the folder that holds the entity.
+  function pagesUnder(n){
+    if (n.kind === "root") return data.entities.length;
+    return data.entities.filter(function(e){ return e.id.indexOf(n.id + "/") === 0; }).length;
+  }
+  function refsOut(n){ return n.kind !== "entity" ? [] : data.edges.filter(function(x){ return x.from === n.id; })
+    .map(function(x){ return { node:nEntity(byId[x.to]), attrs:x.attrs, edge:x }; }); }
+  function refsIn(n){ return n.kind !== "entity" ? [] : data.edges.filter(function(x){ return x.to === n.id; })
+    .map(function(x){ return { node:nEntity(byId[x.from]), attrs:x.attrs, edge:x }; }); }
+
+  // An attribute value is worth putting on the canvas only if it is short enough to read
+  // beside a label — a Level is, a paragraph of evidence is not. The card carries the rest.
+  function attrText(attrs){
+    var out = [];
+    Object.keys(attrs || {}).forEach(function(k){
+      var v = attrs[k];
+      if (typeof v !== "string") return;
+      var shown = byId[v] ? byId[v].name : v;
+      if (shown.length <= 24) out.push(shown);
+    });
+    return out.join(" · ");
+  }
+
+  function neighbourhood(f){
+    var nodes = [], links = [];
+    var anc = ancestorsOf(f);
+    anc.forEach(function(a, i){ nodes.push({ node:a, role:"ancestor", i:i }); });
+    nodes.push({ node:f, role:"focus", i:0 });
+    childrenOf(f).forEach(function(c, i){ nodes.push({ node:c, role:"child", i:i }); });
+    refsOut(f).forEach(function(r, i){ nodes.push({ node:r.node, role:"out", i:i, attrs:r.attrs }); });
+    refsIn(f).forEach(function(r, i){ nodes.push({ node:r.node, role:"in", i:i, attrs:r.attrs }); });
+    anc.concat([f]).forEach(function(n, i, all){ if (i) links.push({ from:all[i-1].id, to:n.id, kind:"own", spine:true }); });
+    nodes.filter(function(p){ return p.role === "child"; })
+         .forEach(function(p){ links.push({ from:f.id, to:p.node.id, kind:"own" }); });
+    nodes.filter(function(p){ return p.role === "out"; })
+         .forEach(function(p){ links.push({ from:f.id, to:p.node.id, kind:"ref", attrs:p.attrs }); });
+    nodes.filter(function(p){ return p.role === "in"; })
+         .forEach(function(p){ links.push({ from:p.node.id, to:f.id, kind:"ref", attrs:p.attrs }); });
+    return { nodes:nodes, links:links };
+  }
+
+  // ── geometry ──────────────────────────────────────────────────────────────────────────
+  // Three relations, three shapes, so the eye separates them before it reads a word:
+  //   the path on disk climbs as a ladder on the left, the way a file tree is drawn;
+  //   what the focus owns hangs as a column on the right;
+  //   what refers, and what is referred to, sit in two dashed bands outside both.
+  var STEP = 54, ROW = 54, BAND = 96, EYE = 28;
+  var R_FOCUS = 16, R_NODE = 12;                    // half-widths of the marks
+  var GAP = 12;                                     // mark to its label
+  var CH_MONO = 6.9, CH_TEXT = 6.9, CH_ROOT = 8.6;  // width per character, for the fit only
+  var K_MIN = 0.5;                                  // the camera's floor, one with the zoom's
+
+  function markW(p){ return p.role === "focus" ? R_FOCUS : R_NODE; }
+  function nameW(p){
+    var per = p.node.kind === "root" ? CH_ROOT : p.node.kind === "folder" ? CH_MONO : CH_TEXT;
+    return p.node.label.length * per;
+  }
+  function attrOf(p){ return (p.role === "out" || p.role === "in") ? attrText(p.attrs) : ""; }
+  function labelW(p){ var a = attrOf(p); return nameW(p) + (a ? GAP + a.length * CH_MONO : 0); }
+
+  function layout(neigh, w){
+    // The two arms narrow with the canvas. A phone's canvas is a third of a desktop's, and
+    // holding the desktop offsets there would either run the path off the left edge or shrink
+    // the whole drawing past reading size — both of which the fixed stage exists to prevent.
+    var LEFT = Math.min(230, Math.max(118, w * 0.36));
+    var RIGHT = Math.min(210, Math.max(106, w * 0.33));
+    var anc = neigh.nodes.filter(function(p){ return p.role === "ancestor"; });
+    var kids = neigh.nodes.filter(function(p){ return p.role === "child"; });
+    var out  = neigh.nodes.filter(function(p){ return p.role === "out"; });
+    var inn  = neigh.nodes.filter(function(p){ return p.role === "in"; });
+    var n = anc.length;
+    // The path climbs the left edge and turns in at the bottom, the way a file tree is
+    // drawn. Every ancestor sits above the focus's row, so the segment that carries the
+    // eye back into the focus runs under the labels rather than through them.
+    anc.forEach(function(p){ p.x = -LEFT; p.y = -(n - p.i) * STEP; });
+    neigh.nodes.filter(function(p){ return p.role === "focus"; }).forEach(function(p){ p.x = 0; p.y = 0; });
+    var top = n ? -n * STEP : 0;
+    kids.forEach(function(p){ p.x = RIGHT; p.y = (p.i - (kids.length - 1) / 2) * ROW; });
+    var below = kids.length ? kids[kids.length - 1].y : 0;
+    var outTop = below + BAND;
+    out.forEach(function(p){ p.x = RIGHT; p.y = outTop + p.i * ROW; });
+    var inTop = top - BAND - (inn.length - 1) * ROW;
+    inn.forEach(function(p){ p.x = -LEFT; p.y = inTop + p.i * ROW; });
+    var bands = [];
+    if (out.length) bands.push({ key:"out", x:RIGHT - R_NODE, y:outTop - EYE, anchor:"start", text:t("out") });
+    if (inn.length) bands.push({ key:"in",  x:-LEFT - R_NODE - GAP, y:inTop - EYE, anchor:"end", text:t("in") });
+    neigh.bands = bands;
+    return neigh;
+  }
+
+  // The camera. Everything above is laid out around the focus at (0,0) and knows nothing
+  // about the canvas; this is what makes it fit. A neighbourhood four folders deep with a
+  // long page name is wider than the stage, so the view scales down to hold it rather than
+  // letting the far end of the path run off the edge — the one thing the fixed stage must
+  // never do. Shallow neighbourhoods sit at 1:1 and never grow to fill the frame.
+  function fit(neigh, w, h){
+    var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    neigh.nodes.forEach(function(p){
+      var m = markW(p), w = GAP + labelW(p);
+      x0 = Math.min(x0, p.x - m - (p.role === "in" ? w : 0));
+      x1 = Math.max(x1, p.x + m + (p.role === "in" ? 0 : w));
+      y0 = Math.min(y0, p.y - m - (p.role === "focus" ? 34 : 0)); y1 = Math.max(y1, p.y + m);
+    });
+    neigh.bands.forEach(function(b){
+      y0 = Math.min(y0, b.y - 12);
+      x0 = Math.min(x0, b.x - (b.anchor === "end" ? b.text.length * CH_MONO : 0));
+    });
+    var k = Math.max(K_MIN, Math.min(1, (w * 0.92) / (x1 - x0), (h * 0.9) / (y1 - y0)));
+    return d3.zoomIdentity.translate(w / 2 - k * (x0 + x1) / 2, h / 2 - k * (y0 + y1) / 2).scale(k);
+  }
+
+  // ── the stage ─────────────────────────────────────────────────────────────────────────
+  var svg = d3.select("#fig");
+  var scene = svg.append("g");
+  var gLink = scene.append("g"), gBand = scene.append("g"), gNode = scene.append("g");
+  var pathLine = document.getElementById("path");
+  var cbody = document.getElementById("cbody"), cfoot = document.getElementById("cfoot");
+  var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  var first = true;
+  function dur(){ return (first || (reduce && reduce.matches)) ? 0 : 400; }
+
+  // A plain wheel over the canvas must keep scrolling the page — only ctrl/⌘+wheel zooms — and
+  // dblclick is left to the browser rather than jumping the camera to 2× on whatever it hit.
+  var zoom = d3.zoom().scaleExtent([K_MIN, 2])
+    .filter(function(ev){ return ev.type === "wheel" ? (ev.ctrlKey || ev.metaKey) : ev.type !== "dblclick"; })
+    .on("zoom", function(ev){ scene.attr("transform", ev.transform); });
+  svg.call(zoom);
+  var home = d3.zoomIdentity;
+
+  var focused = null;
+
+  function size(){
+    var r = document.getElementById("fig").getBoundingClientRect();
+    return { w: r.width || 620, h: r.height || 520 };
+  }
+
+  // Every label is painted with a halo of the canvas's own colour behind it, so a line that
+  // has to pass under a name does not cut through it. Inline styles rather than attributes,
+  // because a presentation attribute cannot carry a var() and the colour is a token.
+  function halo(sel){
+    return sel.style("paint-order", "stroke").style("stroke", "var(--raise)")
+              .style("stroke-width", "3.5px").style("stroke-linejoin", "round");
+  }
+
+  var linkH = d3.linkHorizontal().x(function(d){ return d[0]; }).y(function(d){ return d[1]; });
+  // Two line shapes, because two of the three relations are not the same kind of thing.
+  // Owning downward and referring both fan out of the focus, so they are curves that leave
+  // and arrive horizontally, trimmed to the marks so nothing is drawn inside a box. The
+  // path climbs as a right angle instead: a ladder is what a folder chain looks like.
+  function shape(l, a, b){
+    if (l.spine) {
+      var x = a.x;
+      if (a.x === b.x) return "M" + x + " " + (a.y + R_NODE) + "V" + (b.y - R_NODE);
+      return "M" + x + " " + (a.y + R_NODE) + "V" + (b.y - 10) +
+             "Q" + x + " " + b.y + " " + (x + 10) + " " + b.y +
+             "H" + (b.x - markW(b));
+    }
+    var s = [a.x + markW(a), a.y], e = [b.x - markW(b), b.y];
+    return linkH({ source:s, target:e });
+  }
+
+  function render(){
+    var dim = size(), D = dur();
+    var neigh = layout(neighbourhood(focused), dim.w);
+    var pos = {}; neigh.nodes.forEach(function(p){ pos[p.node.id] = p; });
+
+    var links = neigh.links.filter(function(l){ return pos[l.from] && pos[l.to]; });
+    // path:not(.gone) — an exiting path is marked .gone the moment it exits so a link that
+    // re-enters before its fade finishes is never re-bound to the still-fading exit copy.
+    var lsel = gLink.selectAll("path:not(.gone)").data(links, function(d){ return d.from + "→" + d.to; });
+    lsel.exit().classed("gone", true).style("pointer-events", "none")
+        .transition().duration(D).style("opacity", 0).remove();
+    lsel.enter().append("path")
+        .attr("class", function(d){ return d.kind === "own" ? "own" : "ref"; })
+        .attr("data-from", function(d){ return d.from; })
+        .attr("data-to", function(d){ return d.to; })
+        .attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); })
+        .style("opacity", 0).transition().duration(D).style("opacity", 1);
+    // An update always drives opacity/pointer-events back to their settled state, so an enter
+    // fade interrupted by a second click within the transition window still finishes instead
+    // of leaving the survivor translucent and unclickable.
+    lsel.style("pointer-events", null).transition().duration(D)
+        .style("opacity", 1).attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); });
+
+    var bsel = gBand.selectAll("text:not(.gone)").data(neigh.bands, function(d){ return d.key; });
+    bsel.exit().classed("gone", true).transition().duration(D).style("opacity", 0).remove();
+    halo(bsel.enter().append("text")).attr("class", "eyebrow")
+        .attr("x", function(d){ return d.x; }).attr("y", function(d){ return d.y; })
+        .attr("text-anchor", function(d){ return d.anchor; })
+        .text(function(d){ return d.text; })
+        .style("opacity", 0).transition().duration(D).style("opacity", 1);
+    bsel.text(function(d){ return d.text; }).attr("text-anchor", function(d){ return d.anchor; })
+        .transition().duration(D).style("opacity", 1)
+        .attr("x", function(d){ return d.x; }).attr("y", function(d){ return d.y; });
+
+    var nsel = gNode.selectAll("g.n").data(neigh.nodes, function(d){ return d.node.id; });
+    // An exiting node keeps its marks so it can fade, but loses the class the page and the
+    // suite select on: a node that is on its way out is no longer on the canvas.
+    nsel.exit().classed("n", false).attr("tabindex", null).style("pointer-events", "none")
+        .transition().duration(D).style("opacity", 0).remove();
+
+    var enter = nsel.enter().append("g")
+      .attr("class", "n").attr("role", "button").attr("tabindex", 0)
+      .attr("data-id", function(d){ return d.node.id; })
+      .attr("data-kind", function(d){ return d.node.kind; })
+      .attr("transform", function(d){ return "translate(" + d.x + " " + d.y + ")"; })
+      .style("opacity", 0)
+      .on("click", function(ev, d){ focus(d.node); })
+      .on("keydown", function(ev, d){ if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); focus(d.node); } });
+    enter.append("rect");
+    halo(enter.append("text")).attr("class", "label");
+    halo(enter.append("text")).attr("class", "attr");
+    enter.transition().duration(D).style("opacity", 1);
+
+    var all = enter.merge(nsel);
+    all.classed("focus", function(d){ return d.role === "focus"; })
+       .attr("aria-current", function(d){ return d.role === "focus" ? "true" : null; });
+    all.select("rect")
+       .attr("class", function(d){ return d.node.kind === "entity" ? "sq" : "box"; })
+       .attr("x", function(d){ return -markW(d); })
+       .attr("y", function(d){ return -markW(d) - (d.node.kind === "entity" ? 0 : 2); })
+       .attr("width", function(d){ return markW(d) * 2; })
+       .attr("height", function(d){ return markW(d) * 2 + (d.node.kind === "entity" ? 0 : 4); })
+       .attr("rx", function(d){ return d.node.kind === "entity" ? 0 : 4; });
+    // The focus is the one node whose name also fills the card, so it carries its label
+    // above the mark: nothing then sits between it and the column it owns.
+    all.select("text.label")
+       .attr("class", function(d){ return "label " + (d.node.kind === "root" ? "root" : d.node.kind === "folder" ? "folder" : ""); })
+       .attr("x", function(d){ return d.role === "focus" ? -markW(d) : d.role === "in" ? -markW(d) - GAP : markW(d) + GAP; })
+       .attr("y", function(d){ return d.role === "focus" ? -markW(d) - 16 : 0; })
+       .attr("text-anchor", function(d){ return d.role === "in" ? "end" : null; })
+       .text(function(d){ return d.node.label; });
+    all.select("text.attr")
+       .attr("x", function(d){ return d.role === "in" ? -markW(d) - GAP - nameW(d) - GAP : markW(d) + GAP + nameW(d) + GAP; })
+       .attr("text-anchor", function(d){ return d.role === "in" ? "end" : null; })
+       .attr("y", 0)
+       .text(attrOf);
+    nsel.transition().duration(D).style("opacity", 1)
+        .attr("transform", function(d){ return "translate(" + d.x + " " + d.y + ")"; });
+
+    home = fit(neigh, dim.w, dim.h);
+    if (D) svg.transition().duration(D).call(zoom.transform, home);
+    else svg.call(zoom.transform, home);
+  }
+
+  // ── the card ──────────────────────────────────────────────────────────────────────────
+  function h(tag, text, cls){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function clear(el){ while (el.firstChild) el.removeChild(el.firstChild); }
+  function goLink(id){
+    var a = h("a", byId[id].name, "go");
+    a.href = "#" + id;
+    a.addEventListener("click", function(ev){ ev.preventDefault(); focus(nEntity(byId[id])); });
+    return a;
+  }
+  function resolve(text){ for (var i = 0; i < data.entities.length; i++) if (data.entities[i].name === text) return data.entities[i].id; return null; }
+
+  function showCard(n){
+    clear(cbody); clear(cfoot);
+    if (n.kind !== "entity") {
+      // Not empty, and the same shape as an entity's card so the panel never jumps: the
+      // path in mono where the entity puts its type and path, then one line of what is
+      // focused and how many pages are filed under it. Both come out of the block.
+      if (n.kind === "folder") {
+        cbody.appendChild(h("div", n.id, "eyebrow"));
+        cbody.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
+      } else {
+        // The root's label is a name, not a path, so it is set in prose and carries the card.
+        cbody.appendChild(h("h3", n.label));
+        cbody.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
+      }
+      return;
+    }
+    var e = n.entity;
+    cbody.appendChild(h("div", e.type + " · " + e.id, "eyebrow"));
+    cbody.appendChild(h("h3", e.name));
+    if (e.tagline) cbody.appendChild(h("p", e.tagline, "tag"));
+    var keys = Object.keys(e.fields);
+    if (keys.length) {
+      var dl = h("dl");
+      keys.forEach(function(k){
+        dl.appendChild(h("dt", k));
+        var dd = h("dd"), v = e.fields[k];
+        if (Array.isArray(v)) v.forEach(function(name, i){
+          if (i) dd.appendChild(document.createTextNode(", "));
+          var id = resolve(name);
+          dd.appendChild(id ? goLink(id) : document.createTextNode(name));
+        });
+        else dd.textContent = v;
+        dl.appendChild(dd);
+      });
+      cbody.appendChild(dl);
+    }
+    e.sections.forEach(function(s){
+      cbody.appendChild(h("h4", s.heading));
+      if (s.table) {
+        var tbl = h("table"), thead = h("thead"), hr = h("tr");
+        s.table.columns.forEach(function(c){ hr.appendChild(h("th", c)); });
+        thead.appendChild(hr); tbl.appendChild(thead);
+        var tb = h("tbody");
+        s.table.rows.forEach(function(row){
+          var tr = h("tr");
+          row.forEach(function(cell){
+            var td = h("td"), id = resolve(cell);
+            if (id) td.appendChild(goLink(id)); else td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tb.appendChild(tr);
+        });
+        tbl.appendChild(tb); cbody.appendChild(tbl);
+      }
+      // A block whose lines each open with "- " is a list in the file, so it is a line each
+      // here too; anything else is a paragraph with its soft wraps closed up.
+      if (s.text) s.text.split(/\n\n+/).forEach(function(par){
+        if (/^-\s/.test(par)) par.split(/\n(?=-\s)/).forEach(function(item){ cbody.appendChild(h("p", item.replace(/\n\s*/g, " "))); });
+        else cbody.appendChild(h("p", par.replace(/\n/g, " ")));
+      });
+    });
+    // Mono, so it is data: the file and the commit it is pinned at, which is what the link
+    // resolves to. The phrasing a reader needs is on the label, not in the row.
+    var a = h("a", e.path.slice(e.path.lastIndexOf("/") + 1) + " @ " + data.commit.slice(0, 7));
+    a.href = "https://github.com/companygraph/meta-model/blob/" + data.commit + "/" + e.path;
+    a.setAttribute("aria-label", t("view"));
+    cfoot.appendChild(a);
+  }
+
+  // ── focus ─────────────────────────────────────────────────────────────────────────────
+  function focus(n){
+    focused = n;
+    var segs = pathOf(n);
+    pathLine.innerHTML = segs.map(function(s, i){
+      var esc = s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+      return i === segs.length - 1 ? "<b>" + esc + "</b>" : esc;
+    }).join(" / ");
+    var hash = n.kind === "entity" ? "#" + n.id : "";
+    if (hash) location.hash = hash;
+    else if (location.hash) { try { history.replaceState(null, "", location.pathname + location.search); } catch (err) { location.hash = ""; } }
+    render();
+    showCard(n);
+  }
+
+  document.getElementById("recentre").addEventListener("click", function(){
+    var D = (reduce && reduce.matches) ? 0 : 400;
+    if (D) svg.transition().duration(D).call(zoom.transform, home); else svg.call(zoom.transform, home);
+  });
+
+  // The site's language toggle rewrites every [data-de] node and sets <html lang>; the two
+  // eyebrows and the folder card are built here, after that pass, so they follow the flag.
+  new MutationObserver(function(){ if (focused) { render(); showCard(focused); } })
+    .observe(document.documentElement, { attributes:true, attributeFilter:["lang"] });
+  window.addEventListener("resize", function(){ if (focused) render(); });
+  window.addEventListener("hashchange", function(){
+    var id = decodeURIComponent(location.hash.slice(1));
+    // An empty hash — Back past the last entity, or one naming a folder rather than an
+    // entity — means the root, not "do nothing": focus() only ever sets a hash for an
+    // entity, so a bare or unrecognised hash is what the root and every folder look like.
+    if (!id || !byId[id]) { if (!focused || focused.kind !== "root") focus(nRoot()); return; }
+    if (!focused || focused.id !== id) focus(nEntity(byId[id]));
+  });
+
+  var initial = decodeURIComponent(location.hash.slice(1));
+  focus(initial && byId[initial] ? nEntity(byId[initial]) : nRoot());
+  first = false;
+})();
+</script>
+</body>
+</html>
