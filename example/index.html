@@ -153,8 +153,15 @@
   .recentre:hover, .recentre:focus-visible{border-color:var(--c-mid)}
   .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
   .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
-  .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem}
+  .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem;
+         display:flex; align-items:center; justify-content:space-between; gap:1rem}
   .cfoot a{font-family:"Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; color:var(--c-mid); text-decoration:none}
+  /* A control, never mono — .expand sits beside the data-faced view-file link, styled like
+     .recentre because both are things you can do to the figure, not things it reports. */
+  .expand{font:inherit; font-size:.72rem; letter-spacing:.08em; background:var(--raise);
+          color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
+          padding:.35rem .6rem; cursor:pointer; white-space:nowrap}
+  .expand:hover, .expand:focus-visible{border-color:var(--c-mid)}
   .cbody .eyebrow{font-family:"Plex Mono",monospace; font-size:.72rem; letter-spacing:.08em; color:var(--dim); word-break:break-all}
   .cbody h3{margin-top:.35rem; font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; letter-spacing:-.02em; font-size:1.45rem; line-height:1.1}
   .cbody .tag{margin-top:.55rem; color:var(--dim); line-height:1.4}
@@ -174,6 +181,25 @@
     .canvas{height:52vh; min-height:360px}
     .card{height:44vh; min-height:300px}
   }
+
+  /* The card, expanded. Same content, same .cbody/.cfoot rules, just large — a dialog in the
+     browser's own top layer, so it needs no z-index and Escape closes it for free. */
+  dialog.modal{width:min(960px,92vw); max-height:88vh; padding:0; margin:auto;
+               border:1.5px solid var(--c-mid); border-radius:12px;
+               background:var(--raise); color:var(--ink); flex-direction:column}
+  dialog.modal[open]{display:flex}
+  dialog.modal::backdrop{background:rgba(0,0,0,.6)}
+  @keyframes modalIn{ from{opacity:0} to{opacity:1} }
+  dialog.modal[open]{animation:modalIn .15s ease-out}
+  @media (prefers-reduced-motion: reduce){
+    dialog.modal[open]{animation:none}
+  }
+  .modal .close{position:absolute; top:.6rem; right:.6rem; width:2.2rem; height:2.2rem;
+                display:flex; align-items:center; justify-content:center;
+                font:inherit; font-size:1.3rem; line-height:1; background:none; border:0;
+                border-radius:6px; color:var(--dim); cursor:pointer}
+  .modal .close:hover, .modal .close:focus-visible{color:var(--c-mid)}
+  .modal .cbody{padding:2.2rem 1.6rem 1.4rem}
   /* figure tokens. No @media (prefers-reduced-motion) block here on purpose: every node is
      placed by its own transform attribute, and a blanket `transform:none !important` would
      not cancel a displacement, it would replace the attribute-derived position and collapse
@@ -264,10 +290,21 @@
         </div>
         <aside class="card" id="card" aria-live="polite">
           <div class="cbody" id="cbody"></div>
-          <div class="cfoot" id="cfoot"></div>
+          <div class="cfoot" id="cfoot">
+            <span id="cfootlink"></span>
+            <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
+          </div>
         </aside>
       </div>
       <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the centre.</p>
+
+      <!-- The card, full size. Same rendering, larger container — a dialog so Escape and the
+           browser's own top layer come for free; the URL does not change when it opens. -->
+      <dialog id="cardmodal" class="modal" aria-labelledby="modal-title">
+        <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
+        <div class="cbody" id="mbody"></div>
+        <div class="cfoot" id="mfoot"></div>
+      </dialog>
     </section>
 
     <section>
@@ -313,6 +350,11 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
+  // The close button's × never changes, so it carries no [data-de] — but its aria-label
+  // does need German, and that lives in the label, not the innerHTML the loop above swaps.
+  var modalClose = document.getElementById("modalclose");
+  var modalCloseEnAria = modalClose ? modalClose.getAttribute("aria-label") : null;
+
   var UI = {
     de:{ title:"Beispiel — CompanyGraph",
          desc:"Eine fiktive Firma, in CompanyGraph beschrieben, gezeichnet als der Graph, den ihre Dateien bilden — erzeugt aus dem Beispiel des Modells, nichts von Hand geschrieben." },
@@ -326,6 +368,7 @@
     document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").classList.toggle("on", lang === "de");
     document.getElementById("len").classList.toggle("on", lang === "en");
+    if (modalClose) modalClose.setAttribute("aria-label", lang === "de" ? modalClose.getAttribute("data-de-aria") : modalCloseEnAria);
     document.documentElement.lang = lang;
   }
   function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
@@ -525,7 +568,12 @@
   var scene = svg.append("g");
   var gLink = scene.append("g"), gBand = scene.append("g"), gNode = scene.append("g");
   var pathLine = document.getElementById("path");
-  var cbody = document.getElementById("cbody"), cfoot = document.getElementById("cfoot");
+  // cfoot is the link-only span beside the persistent #expand button, not the whole footer
+  // row — a render clears and refills it, and the button next to it is not the render's to
+  // touch. The modal has no such button, so its own foot div is the whole clearable target.
+  var cbody = document.getElementById("cbody"), cfoot = document.getElementById("cfootlink");
+  var mbody = document.getElementById("mbody"), mfoot = document.getElementById("mfoot");
+  var modal = document.getElementById("cardmodal"), expandBtn = document.getElementById("expand");
   var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
   var first = true;
   function dur(){ return (first || (reduce && reduce.matches)) ? 0 : 400; }
@@ -665,26 +713,34 @@
   }
   function resolve(text){ for (var i = 0; i < data.entities.length; i++) if (data.entities[i].name === text) return data.entities[i].id; return null; }
 
-  function showCard(n){
-    clear(cbody); clear(cfoot);
+  // Renders the focused node into a given (body, foot) pair — the card's own, and, when the
+  // modal is open, the modal's — so a .go link clicked inside either updates both in place.
+  // titleId, when given, is set on the h3 that carries the focus's name: only the modal
+  // passes one, since it is the one heading the dialog's aria-labelledby points at.
+  function renderInto(n, bodyEl, footEl, titleId){
+    clear(bodyEl); clear(footEl);
     if (n.kind !== "entity") {
       // Not empty, and the same shape as an entity's card so the panel never jumps: the
       // path in mono where the entity puts its type and path, then one line of what is
       // focused and how many pages are filed under it. Both come out of the block.
       if (n.kind === "folder") {
-        cbody.appendChild(h("div", n.id, "eyebrow"));
-        cbody.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
+        bodyEl.appendChild(h("div", n.id, "eyebrow"));
+        bodyEl.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
       } else {
         // The root's label is a name, not a path, so it is set in prose and carries the card.
-        cbody.appendChild(h("h3", n.label));
-        cbody.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
+        var rh3 = h("h3", n.label);
+        if (titleId) rh3.id = titleId;
+        bodyEl.appendChild(rh3);
+        bodyEl.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
       }
       return;
     }
     var e = n.entity;
-    cbody.appendChild(h("div", e.type + " · " + e.id, "eyebrow"));
-    cbody.appendChild(h("h3", e.name));
-    if (e.tagline) cbody.appendChild(h("p", e.tagline, "tag"));
+    bodyEl.appendChild(h("div", e.type + " · " + e.id, "eyebrow"));
+    var eh3 = h("h3", e.name);
+    if (titleId) eh3.id = titleId;
+    bodyEl.appendChild(eh3);
+    if (e.tagline) bodyEl.appendChild(h("p", e.tagline, "tag"));
     var keys = Object.keys(e.fields);
     if (keys.length) {
       var dl = h("dl");
@@ -699,10 +755,10 @@
         else dd.textContent = v;
         dl.appendChild(dd);
       });
-      cbody.appendChild(dl);
+      bodyEl.appendChild(dl);
     }
     e.sections.forEach(function(s){
-      cbody.appendChild(h("h4", s.heading));
+      bodyEl.appendChild(h("h4", s.heading));
       if (s.table) {
         var tbl = h("table"), thead = h("thead"), hr = h("tr");
         s.table.columns.forEach(function(c){ hr.appendChild(h("th", c)); });
@@ -717,13 +773,13 @@
           });
           tb.appendChild(tr);
         });
-        tbl.appendChild(tb); cbody.appendChild(tbl);
+        tbl.appendChild(tb); bodyEl.appendChild(tbl);
       }
       // A block whose lines each open with "- " is a list in the file, so it is a line each
       // here too; anything else is a paragraph with its soft wraps closed up.
       if (s.text) s.text.split(/\n\n+/).forEach(function(par){
-        if (/^-\s/.test(par)) par.split(/\n(?=-\s)/).forEach(function(item){ cbody.appendChild(h("p", item.replace(/\n\s*/g, " "))); });
-        else cbody.appendChild(h("p", par.replace(/\n/g, " ")));
+        if (/^-\s/.test(par)) par.split(/\n(?=-\s)/).forEach(function(item){ bodyEl.appendChild(h("p", item.replace(/\n\s*/g, " "))); });
+        else bodyEl.appendChild(h("p", par.replace(/\n/g, " ")));
       });
     });
     // Mono, so it is data: the file and the commit it is pinned at, which is what the link
@@ -731,8 +787,30 @@
     var a = h("a", e.path.slice(e.path.lastIndexOf("/") + 1) + " @ " + data.commit.slice(0, 7));
     a.href = "https://github.com/companygraph/meta-model/blob/" + data.commit + "/" + e.path;
     a.setAttribute("aria-label", t("view"));
-    cfoot.appendChild(a);
+    footEl.appendChild(a);
   }
+
+  // The card always renders. The modal only renders when it is already open — a .go link or
+  // a language switch reaches it through here, never by opening it. If the focus stops being
+  // an entity while the modal is open (only a hashchange can do that; a .go link cannot),
+  // there is nothing left to expand, so the modal closes itself.
+  function showCard(n){
+    renderInto(n, cbody, cfoot, null);
+    expandBtn.style.display = n.kind === "entity" ? "" : "none";
+    if (n.kind !== "entity") { if (modal.open) modal.close(); return; }
+    if (modal.open) renderInto(n, mbody, mfoot, "modal-title");
+  }
+
+  expandBtn.addEventListener("click", function(){
+    renderInto(focused, mbody, mfoot, "modal-title");
+    modal.showModal();
+  });
+  document.getElementById("modalclose").addEventListener("click", function(){ modal.close(); });
+  // Escape is native to <dialog> and needs no handler here. A click on the backdrop lands
+  // with the dialog itself as the event target — nothing else is there to hit — which is
+  // what tells it apart from a click on the content the dialog contains.
+  modal.addEventListener("click", function(ev){ if (ev.target === modal) modal.close(); });
+  modal.addEventListener("close", function(){ expandBtn.focus(); });
 
   // ── focus ─────────────────────────────────────────────────────────────────────────────
   function focus(n){
