@@ -313,6 +313,18 @@ requirements implicitly include this section.
   repository, as this one does. Do not edit it here.
   `verify/design.mjs` is byte-identical across all of them and is never edited in this repo.
 - **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.
+- **The `blust.ch` credit in the page footer is a lockup, not a footer link.** It leaves the
+  footer's mono for the same treatment it has on every deck — the `rb` plate inlined, wordmark
+  with the second word in `--c-mid`. The rest of the row stays mono because the rest of the row
+  is data: a repository URL and a licence. A prose mention of the name inside a sentence stays
+  a plain link — the mark belongs in the footer row, not mid-paragraph.
+- **A link check that trusts the DOM inspects half the site.** The rendered DOM is only ever
+  one language; German lives in `data-de` as markup that does not exist until a visitor
+  switches. The privacy page's German credit kept `target='_blank'` — in single quotes, because
+  it is nested inside an attribute — and survived both a source-wide strip and the check.
+  `noNewTab` now parses every `[data-de]` value and reports what it finds with a `[de]` suffix;
+  any new link check must do the same. A translated link and its English original are two
+  separate attributes and nothing pairs them.
 - **Never claim "no hallucinations".** The claim is that the model shrinks the space in which
   an agent has to guess.
 - **Never print an environment variable's value**, and never use `${VAR:-UNSET}` — it prints
