@@ -67,15 +67,8 @@ that lived in another repository. No CI in *this* repository can catch drift in
   Pages site, which is what puts it on the custom domain in `CNAME`. Renaming it or removing
   `CNAME` takes the whole domain down — every page here, the talks included.
 
-- **`companygraph.io` does not yet point at GitHub Pages, and there is no fallback URL.**
-  The domain resolves to the registrar's parking host, so `CNAME` fails verification — that
-  much is expected and is not a bug in this repository. What is *not* true is that
-  `companygraph.github.io` keeps serving in the meantime: Pages 301-redirects the `*.github.io`
-  URL to the custom domain as soon as one is configured, and Pages is enabled here on `main`.
-  The moment `CNAME` lands on `main`, both URLs are dead — the `github.io` one redirects to a
-  host the registrar answers — and `og:url` and `og:image` name that same dead host, so every
-  shared link unfurls blank. **The Pages records must be added before or with the merge** —
-  all nine, the same set the sibling domain answers on:
+- **`companygraph.io` answers on nine DNS records, and all nine matter.** The domain is live
+  and pointed at GitHub Pages:
 
   ```
   A     @     185.199.108.153  185.199.109.153  185.199.110.153  185.199.111.153
@@ -83,12 +76,16 @@ that lived in another repository. No CI in *this* repository can catch drift in
   CNAME www   companygraph.github.io.
   ```
 
-  Until they are, the site is dark; whoever merges must not believe there is a URL to fall
-  back to. **The four AAAA records are not optional garnish.** This line said "the four Pages
-  A records" until someone checked `guestgraph.io`, which answers on all four AAAA records —
-  as does `companygraph.github.io` itself. Follow the old wording literally and the domain
-  ships v4-only while its own Pages host is dual-stack, which nobody on a v4 connection can
-  see and nothing in this repository can test.
+  **The four AAAA records are not optional garnish.** This entry said "the four Pages A
+  records" until someone checked `guestgraph.io`, which answers on all four AAAA records — as
+  does `companygraph.github.io` itself. Follow that wording and the domain ships v4-only while
+  its own Pages host is dual-stack: invisible to anyone on a v4 connection, and untestable
+  from inside this repository.
+
+  If the records are ever removed, there is **no fallback URL**. Pages 301-redirects
+  `companygraph.github.io` to the custom domain while `CNAME` is on `main`, so both URLs die
+  together, and `og:url` and `og:image` name the dead host — every shared link unfurls blank.
+
 
 - **Self-contained. No external asset at all** — fonts are served from `fonts/`, referenced
   relatively (`fonts/…`, not `/fonts/…`). A root-absolute path works on the domain and breaks
@@ -207,7 +204,8 @@ requirements implicitly include this section.
 - **Mono means data.** Record values, lengths, language pairs, URLs, code. Never navigation,
   buttons or prose. `verify` fails if mono appears outside data.
 - **The design token block is a copy**, fenced by `design tokens · v1` markers, shared with
-  `blust.ch`, `guestgraph.io`, `guestgraph/talks` and `companygraph.io`. Do not edit it here.
+  `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
+  repository, as this one does. Do not edit it here.
   `verify/design.mjs` is byte-identical across all of them and is never edited in this repo.
 - **No type count, no type list read aloud, and no status claim that ages.** Slide 9 says "not
   all of it is written yet, the roadmap says what is" and links. It never says how much.
