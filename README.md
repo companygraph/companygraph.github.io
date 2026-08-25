@@ -67,9 +67,9 @@ canonical name, to something nothing owns — is the line out to the square besi
 else is in the glyph; a mark that needs a third element to make its point is not this one.
 
 The hero figure animates two unlike trees toward that same shape — one small, one much
-larger — because the shape is what both converge on, not a diagram either tree drew on its
-own. The mark is where the animation lands; `logo.svg` and `favicon.svg` are that same
-destination, held still.
+larger — because that convergence is where the model came from, not a diagram either tree
+drew on its own. The mark is where the animation lands; `logo.svg` and `favicon.svg` are that
+same destination, held still.
 
 ## Running it
 

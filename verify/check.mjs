@@ -21,7 +21,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "EXAMPLE", "BILLING",
+    contains: ["Every role, every rule", "Written down once", "CompanyGraph", "TALKS", "EXAMPLE", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. The deck is in this repository now — `talks/intro/` — so the
@@ -39,8 +39,8 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
-                  hides: ["Two companies", "Read the model"] },
+                  shows: ["Jede Rolle", "aufgeschrieben", "Das Modell ansehen", "VORTRÄGE", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
+                  hides: ["Every role", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and

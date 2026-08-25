@@ -1,5 +1,7 @@
 # companygraph.io — landing page design
 
+> **Partly superseded.** The page no longer leads with the convergence claim, the headline is set smaller, and the figure sits under the hero at every width; the reasoning is in [`2026-08-25-intro-talk-rework-design.md`](2026-08-25-intro-talk-rework-design.md) §2. The tagline, the links and every rule in §3 stand.
+
 > One screen that says what CompanyGraph is and sends the visitor to the code.
 
 **Status:** design agreed, not yet built.
