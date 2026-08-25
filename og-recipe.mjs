@@ -48,6 +48,12 @@ export const cards = [
   { dir: ".", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "talks", ...FRAME, hide: DECK_HIDE, titleSlide: false, settle: "wait:900" },
   { dir: "talks/intro", ...FRAME, hide: DECK_HIDE, titleSlide: true, settle: "wait:900" },
+  // The example page's stage — the neighbourhood figure and the card beside it — is the
+  // page's argument, not chrome the way a deck's transport bar or the talks index's header
+  // bar are, so nothing is hidden from it. Reduced motion makes every d3 transition on this
+  // page 0 ms, so the root-focus state the script draws on load is already settled by the
+  // time the exporter takes its shot: the card renders that settled state.
+  { dir: "example", ...FRAME, hide: "", titleSlide: false, settle: "reduced-motion" },
 ];
 
 export const cardFor = (dir) => cards.find((c) => c.dir === dir);

@@ -21,7 +21,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "BILLING",
+    contains: ["Two companies", "The same shape", "CompanyGraph", "TALKS", "EXAMPLE", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. The deck is in this repository now — `talks/intro/` — so the
@@ -39,7 +39,7 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
-                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
+                  shows: ["Zwei Unternehmen", "Dieselbe", "Das Modell ansehen", "VORTRÄGE", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
                   hides: ["Two companies", "Read the model"] },
     card: true, cardBase: "https://companygraph.io" },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
@@ -48,7 +48,7 @@ const PAGES = [
   { path: "/privacy/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["https://companygraph.io/talks/", "../billing/", "../", "./"],
+    sameTab: ["https://companygraph.io/talks/", "../example/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
@@ -61,19 +61,14 @@ const PAGES = [
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["https://companygraph.io/talks/", "../privacy/", "../", "./"],
+    sameTab: ["https://companygraph.io/talks/", "../example/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://companygraph.io", internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  //
-  // `noNewTab` is omitted rather than set `false`: the runner skips a check whose key is
-  // `undefined` on the spec (see the loop below — `if (spec[name] === undefined) continue`),
-  // but `false` is not `undefined`, so a literal `false` would still run the check — and it
-  // would fail, because the source link and the view-file link both open GitHub in a new tab.
-  { path: "/example/", title: /CompanyGraph/, lang: "en",
+  { path: "/example/", noNewTab: true, title: /CompanyGraph/, lang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["https://companygraph.io/talks/", "../billing/", "../privacy/", "../", "./"],
@@ -95,10 +90,10 @@ const PAGES = [
     // the href as delivered, and the swap happens only after a click on the toggle. What
     // this line catches is the path being wrong for everyone; the German half is checked
     // by `translates.dlHref` below.
-    sameTab: ["intro/", "./", "../", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
+    sameTab: ["intro/", "./", "../", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
-    translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
+    translates: { lang: "de", shows: ["Vortrag", "Vorträge", "BEISPIEL"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
