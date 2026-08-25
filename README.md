@@ -40,10 +40,19 @@ split had to be unwound. Do not recreate one.
   other three.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
-- `example/` — `index.html`, the page; `build.mjs`, which writes the data block into it (or
-  checks it still matches, `--check`) by reading `meta-model/example` at the commit
-  `source.json` names; `instance.mjs`, the parser; and its own vendored `d3.v7.min.js`, the
-  same reason `fonts/` is self-hosted.
+- `stage.css`, `stage.js`, `d3.v7.min.js` — **the stage**: the figure, the card and the expand
+  dialog that draw a page's data block. The one component two pages share, so they are three
+  files at the root that each page links relatively (`../stage.css`, `../stage.js`,
+  `../d3.v7.min.js`) rather than a copy inside each page. `stage.js` knows no name from either
+  page: it reads whichever `<script type="application/json">` the page marks `data-stage`, and
+  takes the folder for its source link from `#srclink`'s `data-src`. Edit them here and both
+  pages get it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
+  one copy, reached relatively — and `npm run test:example` asserts it is still the pinned
+  package's build, byte for byte.
+- `example/` — `index.html`, the page: its own prose and inline `<style>`, and the stage above
+  linked in. `build.mjs` writes the data block into it (or checks it still matches, `--check`)
+  by reading `meta-model/example` at the commit `source.json` names; `instance.mjs` is the
+  parser.
 - `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
   the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to

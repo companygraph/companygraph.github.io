@@ -88,9 +88,13 @@ for (const target of TARGETS) {
   const data = { ...target.parse(files), commit };
   if (target.finish) target.finish(data);
 
-  const START = new RegExp(`<!-- ${target.marker} · (?:[0-9a-f]+|none) -->\\n<script type="application\\/json" id="${target.id}">`);
+  // `data-stage` is how the shared stage script finds the block — it queries the attribute,
+  // not an id, so one script serves both pages. The START pattern tolerates a block written
+  // before the attribute existed so the first run after the move still finds it to replace;
+  // what is written back always carries it.
+  const START = new RegExp(`<!-- ${target.marker} · (?:[0-9a-f]+|none) -->\\n<script type="application\\/json" id="${target.id}"(?: data-stage)?>`);
   const END = `</script>\n<!-- /${target.marker} -->`;
-  const block = `<!-- ${target.marker} · ${commit} -->\n<script type="application/json" id="${target.id}">${JSON.stringify(data)}${END}`;
+  const block = `<!-- ${target.marker} · ${commit} -->\n<script type="application/json" id="${target.id}" data-stage>${JSON.stringify(data)}${END}`;
 
   const PAGE = path.join(here, "..", target.dir, "index.html");
   const page = fs.readFileSync(PAGE, "utf8");

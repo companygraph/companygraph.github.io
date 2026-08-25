@@ -101,17 +101,18 @@ test("output is deterministic regardless of map order", () => {
   assert.deepEqual(parseInstance(shuffled), parseInstance(valid));
 });
 
-// The vendored copy is the deliverable — the page loads example/d3.v7.min.js, not the
-// package — so the only thing that can go wrong silently is the two drifting apart.
+// The vendored copy is the deliverable — the pages load /d3.v7.min.js, not the package — so
+// the only thing that can go wrong silently is the two drifting apart. It sits at the root
+// beside stage.css and stage.js, because more than one page loads it.
 // CI runs this suite before `npm ci`, so a missing node_modules skips rather than fails:
 // the check is real on every machine that has installed, which is every machine that could
 // have changed the vendored file.
 test("the vendored d3 is the pinned package's build, byte for byte", (t) => {
   const packagedPath = new URL("../node_modules/d3/dist/d3.min.js", import.meta.url);
   if (!fs.existsSync(packagedPath)) return t.skip("node_modules not installed");
-  const vendored = fs.readFileSync(new URL("../example/d3.v7.min.js", import.meta.url));
+  const vendored = fs.readFileSync(new URL("../d3.v7.min.js", import.meta.url));
   const packaged = fs.readFileSync(packagedPath);
-  assert.ok(vendored.equals(packaged), "example/d3.v7.min.js differs from node_modules/d3/dist/d3.min.js — copy it again");
+  assert.ok(vendored.equals(packaged), "d3.v7.min.js differs from node_modules/d3/dist/d3.min.js — copy it again");
 });
 
 test("a scalar frontmatter value that names an entity becomes an edge; one that does not stays a fact", () => {

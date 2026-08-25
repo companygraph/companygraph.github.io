@@ -100,6 +100,21 @@ that lived in another repository. No CI in *this* repository can catch drift in
   `@font-face` rules at all, and a root-absolute font path still loads perfectly from a served
   copy. That gap was found by making all four rules root-absolute and watching the suite pass.
 
+- **The stage is the one component two pages share, and it is a file, not a copy.**
+  `stage.css`, `stage.js` and `d3.v7.min.js` sit at the root and every page that draws a data
+  block links all three relatively — `../stage.css`, `../stage.js`, `../d3.v7.min.js` — which
+  keeps each page self-contained in the sense the rule above means: nothing off-origin, and it
+  still opens from `file://`. Edit the stage in that one place and both pages get it. Every
+  other page here is a single self-contained file and stays that way; this is the deliberate
+  exception, because a copied stage drifts the first time one page's figure is fixed and
+  nothing in this repository can see the two halves disagree. `stage.js` knows no name from
+  either page — it reads whichever `<script type="application/json">` carries `data-stage`
+  (`example/build.mjs` writes that attribute into every block it generates) and takes its
+  source link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
+  drawn assets of every page that links them**, so touching the stage marks each of those
+  cards stale — `npm run og` and commit the `og.png`/`og.sha` pair with the change, the same
+  as for a font.
+
 - **The design tokens are a copy, fenced by `design tokens · vN` markers**, shared with
   sibling repositories (`blust.ch`, `guestgraph.io`, and its `talks` repo) that cannot import
   a stylesheet because a deck has to open from `file://` — there is nothing to `import` in
