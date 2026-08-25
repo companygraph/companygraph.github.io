@@ -112,10 +112,19 @@ const CHECKS = {
   // The deck's length in slides. The arc is twelve slides and the numbering is zero-based
   // everywhere a viewer sees it, so a slide added without its neighbours renumbered — or
   // one dropped by an unclosed attribute swallowing the next <section> — shows up here
-  // before it shows up as an audio file that does not exist.
+  // before it shows up as an audio file that does not exist. The audio filename is derived
+  // from the kicker's data-n, so a duplicate number does not just misnumber a slide — it
+  // silently plays the wrong clip, with no error anywhere in that path. Checking the count
+  // alone cannot catch a duplicate (two slides sharing one number still sum to the right
+  // total, with a number missing elsewhere to balance it), so this also asserts the kicker
+  // numbers are exactly the zero-padded sequence 00..spec.slides-1, in order.
   async slides(page, spec) {
-    const n = await page.evaluate(() => document.querySelectorAll("section.slide").length);
-    return n === spec.slides ? null : `${n} slides, expected ${spec.slides}`;
+    const ns = await page.evaluate(() =>
+      Array.from(document.querySelectorAll("section.slide .kicker")).map(k => k.dataset.n));
+    if (ns.length !== spec.slides) return `${ns.length} slides, expected ${spec.slides}`;
+    const want = Array.from({ length: spec.slides }, (_, i) => String(i).padStart(2, "0"));
+    const off = want.filter((n, i) => ns[i] !== n);
+    return off.length ? `kicker numbers ${JSON.stringify(ns)} are not ${JSON.stringify(want)}` : null;
   },
   // A page that says it makes no third-party request must make none. `links` and
   // `internalLinks` cannot see this: they inspect markup, and a font, an analytics tag or
