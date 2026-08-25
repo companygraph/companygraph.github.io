@@ -269,9 +269,9 @@ requirements implicitly include this section.
 
 ## "AI" in the deck, "agents" everywhere else — on purpose
 
-The deck says **AI** on slides 00 and 01 and **agents** from 07 on. Nobody has been given
+The deck says **AI** on slides 00 and 08 and **agents** from 09 on. Nobody has been given
 the narrower word at 0:00, and those opening slides are about who can *read* the thing; an
-agent is software that *acts* inside the stated rules, which is a claim slides 07 and 08
+agent is software that *acts* inside the stated rules, which is a claim slides 09 and 10
 earn. Do not level the two words.
 
 The same sentence appears in three other places and deliberately does **not** match:
