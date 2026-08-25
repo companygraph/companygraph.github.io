@@ -169,7 +169,7 @@
     color:var(--dim); letter-spacing:.02em;
   }
   .stamp b{color:var(--c-mid); font-weight:600}
-  /* the deck's only in-slide link, and the only outbound link on the page. It opens in a
+  /* the deck's two in-slide links, and the only outbound links on the page. It opens in a
      new tab — the index may cross to companygraph.io in place, but a deck that navigates
      away mid-talk is gone, and unlike the index it has no nav to come back through. That
      also puts it under verify's `links` check, which asserts the href exists rather than
@@ -180,11 +180,6 @@
 
   /* breadth grid (domains overview) */
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 6cqmin; margin-top:4.4cqmin}
-  /* Four across, as a class rather than an inline style: an inline declaration outranks
-     the mobile rule below whatever the media query says, and the fourth cell was being
-     clipped mid-word on a phone. The mobile reset names .grid.four explicitly so its
-     specificity matches and source order decides. */
-  .grid.four{grid-template-columns:repeat(4,1fr); gap:2.4cqmin 4cqmin; margin-top:2.6cqmin}
   .cell{border-top:2px solid var(--rule); padding-top:1.4cqmin}
   .cell b{display:block; font-size:clamp(1.1rem,2.3cqmin,1.65rem); font-weight:600}
   .cell span{font-size:clamp(.88rem,1.6cqmin,1.15rem); color:var(--dim)}
@@ -195,8 +190,6 @@
   .glossary div{border-top:2px solid var(--rule); padding-top:1.1cqmin}
   .glossary dt{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:600; font-size:clamp(1.05rem,2.1cqmin,1.5rem)}
   .glossary dd{color:var(--dim); font-size:clamp(1rem,1.9cqmin,1.4rem); line-height:1.34; margin:.3cqmin 0 0}
-
-  .big-punch{font-size:clamp(2.3rem,7.2cqmin,5.8rem)}
 
   /* title slide */
   /* the mark, so the opening slide is the same lockup the site opens with —
@@ -407,7 +400,6 @@
     .slide{justify-content:flex-start; overflow-y:auto;
            padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
     h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
-    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
     .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
     .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
     /* The title lockup was the one row that never reflowed: at 390px the wordmark alone
@@ -423,7 +415,7 @@
     .titlelock{flex-wrap:wrap}
     .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
     .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
-    .thennow, .split, .split.even, .grid, .grid.four{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
     .kicker{margin-bottom:5vw}
   }
   /* below this the seven controls need every pixel; the slide kicker and the progress
@@ -593,7 +585,7 @@
       <div class="cell"><b data-de="Begriffe">Concepts</b><span data-de="was definiert wird">what we define</span></div>
       <div class="cell"><b data-de="Entscheide">Decisions</b><span data-de="was entschieden wurde, und was verworfen">what we decided, and what we rejected</span></div>
       <div class="cell"><b data-de="Werte">Values</b><span data-de="was wir glauben">what we believe</span></div>
-      <div class="cell"><b data-de="Menschen">People</b><span data-de="wer da ist">who we are</span></div>
+      <div class="cell"><b data-de="Menschen">People</b><span data-de="wer wir sind">who we are</span></div>
     </div>
     <p class="verdict" data-de="Nicht jede Firma füllt alles aus. <em>Die Art bleibt trotzdem im Modell.</em>">Not every company fills all of it in. <em>The kind stays in the model anyway.</em></p>
   </section>
@@ -682,17 +674,18 @@
 
   <section class="slide"
     data-time="1:00"
-    data-notes="<em class='cue'>Das ist der eigentliche Zweck des Gesprächs — hier nicht hetzen.</em> Ich verkaufe hier nichts. Ich habe eine Form, und ich möchte wissen, wo sie bricht. Vier Fragen, und bei jeder ist ein Nein für mich mehr wert als ein höfliches Ja. <em class='cue'>Die vier vorlesen, langsam.</em> Wo passt Ihre Firma nicht in diese Form? Würden Sie das als Markdown behalten, das Agenten prüfen — oder brauchen Sie eine richtige Schema-Sprache, bevor Sie dem trauen? Würden Sie Ihre eigene Instanz mit einem Werkzeug wie spec-kit anlegen — oder reicht es, einen Ordner mit Schemas zu kopieren? Und: Würden Sie sich beim Aufbau helfen lassen, nach Aufwand, nichts gehostet — oder ist das etwas, das Sie nur selbst machen? <em class='cue'>Die vierte Frage ist eine Frage, kein Angebot: kein Satz, kein Kontakt. Wer Ja sagt, dem wird nichts verkauft — es wird notiert.</em> <em class='cue'>Danach: Pause. Zuhören, nicht verteidigen.</em>"
-    data-notes-en="<em class='cue'>This is the actual purpose of the conversation — do not rush it.</em> I am not selling anything here. I have a shape, and I want to know where it breaks. Four questions, and on each one a no is worth more to me than a polite yes. <em class='cue'>Read the four, slowly.</em> Where does your company not fit this shape? Would you keep this as Markdown checked by agents — or do you need a real schema language before you trust it? Would you set up your own instance with a tool like spec-kit — or is copying a folder of schemas enough? And: would you take help building one, time and material, nothing hosted — or is that something you only do yourselves? <em class='cue'>The fourth is a question, not an offer: no rate, no contact. A yes is not sold to — it is noted.</em> <em class='cue'>Then: pause. Listen, do not defend.</em>">
+    data-notes="<em class='cue'>Das ist der eigentliche Zweck des Gesprächs — hier nicht hetzen.</em> Ich verkaufe hier nichts. Ich habe eine Form, und ich möchte wissen, wo sie bricht. Vier Fragen, und bei jeder ist ein Nein für mich mehr wert als ein höfliches Ja. <em class='cue'>Die vier vorlesen, langsam.</em> Wo passt Ihre Firma nicht in diese Form? Würden Sie das als Markdown behalten, das Agenten prüfen — oder brauchen Sie eine richtige Schema-Sprache, bevor Sie dem trauen? Würden Sie Ihre eigene Instanz mit einem Werkzeug wie spec-kit anlegen — oder reicht es, einen Ordner mit Schemas zu kopieren? Und: Würden Sie für Hilfe beim Aufbau bezahlen, nach Aufwand, nichts gehostet — oder ist das etwas, das Sie nur selbst machen? <em class='cue'>Die vierte Frage ist eine Frage, kein Angebot: kein Satz, kein Kontakt. Wer Ja sagt, dem wird nichts verkauft — es wird notiert.</em> <em class='cue'>Danach: Pause. Zuhören, nicht verteidigen.</em>"
+    data-notes-en="<em class='cue'>This is the actual purpose of the conversation — do not rush it.</em> I am not selling anything here. I have a shape, and I want to know where it breaks. Four questions, and on each one a no is worth more to me than a polite yes. <em class='cue'>Read the four, slowly.</em> Where does your company not fit this shape? Would you keep this as Markdown checked by agents — or do you need a real schema language before you trust it? Would you set up your own instance with a tool like spec-kit — or is copying a folder of schemas enough? And: would you pay for help building one, time and material, nothing hosted — or is that something you only do yourselves? <em class='cue'>The fourth is a question, not an offer: no rate, no contact. A yes is not sold to — it is noted.</em> <em class='cue'>Then: pause. Listen, do not defend.</em>">
     <div class="kicker mono" data-n="11" data-de="Worum ich bitte">What I am asking</div>
     <h1 data-de="Sagen Sie mir, wo das <em>falsch</em> ist.">Tell me where this is <em>wrong</em>.</h1>
     <ul class="ask">
       <li><b>1 ·</b> <span data-de="Wo passt Ihre Firma nicht in diese Form?">Where does your company not fit this shape?</span></li>
       <li><b>2 ·</b> <span data-de="Würden Sie das als Markdown behalten, das Agenten prüfen — oder brauchen Sie zuerst eine richtige Schema-Sprache?">Would you keep this as Markdown checked by agents — or do you need a real schema language before you trust it?</span></li>
       <li><b>3 ·</b> <span data-de="Würden Sie Ihre Instanz mit einem Werkzeug wie spec-kit anlegen — oder reicht ein kopierter Ordner mit Schemas?">Would you set up your own instance with a tool like spec-kit — or is copying a folder of schemas enough?</span></li>
-      <li><b>4 ·</b> <span data-de="Würden Sie sich beim Aufbau helfen lassen — nach Aufwand, nichts gehostet — oder machen Sie das nur selbst?">Would you take help building one — time and material, nothing hosted — or is that something you only do yourselves?</span></li>
+      <li><b>4 ·</b> <span data-de="Würden Sie für Hilfe beim Aufbau bezahlen — nach Aufwand, nichts gehostet — oder machen Sie das nur selbst?">Would you pay for help building one — time and material, nothing hosted — or is that something you only do yourselves?</span></li>
     </ul>
-    <p class="stamp" data-de="<b>Apache 2.0</b> · <a href='https://companygraph.io/' target='_blank' rel='noopener'>companygraph.io</a> · ein Nein ist mir mehr wert als ein höfliches Ja"><b>Apache 2.0</b> · <a href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a> · a no is worth more to me than a polite yes</p>
+    <p class="verdict" data-de="Ein Nein ist mir mehr wert als ein höfliches Ja.">A no is worth more to me than a polite yes.</p>
+    <p class="stamp" data-de="<b>Apache 2.0</b> · <a href='https://companygraph.io/' target='_blank' rel='noopener'>companygraph.io</a>"><b>Apache 2.0</b> · <a href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a></p>
   </section>
 
 </div>
