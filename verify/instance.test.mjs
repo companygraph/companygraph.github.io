@@ -232,6 +232,18 @@ test("a ref → a type with no schema is an R4 error", () => {
   assert.throws(() => parseSchemas(broken), /^Error: R4: .*team/);
 });
 
+test("an Owner-shaped line inside a section's prose is not the Owner line", () => {
+  const withOwnerLookalike = new Map(core);
+  withOwnerLookalike.set("skill-schema.md",
+    "# Skill Schema\n\n> Skills.\n\n## File Location\n\n`skills/*.md`\n\nThe `**Owner:**` line says which type.\n\n## Frontmatter\n\n| Field | Required | Type | Description |\n| --- | --- | --- | --- |\n| `source` | Yes | ref → source | Where |\n\n## Sections\n\n| Section | Required | Description |\n| --- | --- | --- |\n| `# [Skill]` | Yes | Name |\n");
+  const { entities, edges } = parseSchemas(withOwnerLookalike);
+  const skill = entities.find(e => e.id === "core/skill");
+  assert.equal(skill.fields.owner, undefined);
+  assert.equal(edges.find(x => x.from === "core/skill" && x.via === "owner"), undefined);
+  const location = skill.sections.find(s => s.heading === "File Location");
+  assert.ok(location.text.includes("The `**Owner:**` line says which type."));
+});
+
 test("the example instance still parses with tables, one per section", () => {
   const mira = parseInstance(valid).entities.find(e => e.name === "Mira Halvorsen");
   const skills = mira.sections.find(s => s.heading === "Skills");

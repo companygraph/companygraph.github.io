@@ -199,7 +199,12 @@ export function parseSchemas(files) {
     const path = "core/" + file;
     const lines = text.split("\n");
     const [, body] = parseFrontmatter(lines); // core/ files carry no YAML frontmatter
-    const ownerLine = body.find(l => l.startsWith("**Owner:**"));
+    // Only the preamble — before the first "## " heading — is searched for the Owner line, so
+    // a later section's prose that merely mentions "**Owner:**" is never mistaken for one; it
+    // stays untouched, ordinary text in that section.
+    const headingIdx = body.findIndex(l => l.startsWith("## "));
+    const preamble = headingIdx === -1 ? body : body.slice(0, headingIdx);
+    const ownerLine = preamble.find(l => l.startsWith("**Owner:**"));
     const owner = ownerLine ? ownerLine.slice("**Owner:**".length).trim() : null;
     const { name, tagline, sections } = parseBody(body);
     const bySection = new Map(sections.map(s => [s.heading, s]));
