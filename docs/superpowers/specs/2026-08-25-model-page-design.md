@@ -112,9 +112,10 @@ Two things the model page needs that the example page did not, both generic:
   these columns: ``) stays mono, as data.
 
 The card for a schema shows: eyebrow *schema · core/profile-schema.md*, the name, the tagline,
-the `owner` field when present, then File Location (its code path in mono and its prose),
-Frontmatter (the table, or the sentence *No YAML frontmatter.*), Sections (the sections table,
-then each column table under its caption). *View file* pinned to the footer, as before.
+the `owner` field when present, then Frontmatter (the table, or the sentence *No YAML
+frontmatter.*), Sections (the sections table, then each column table under its caption), and
+last File Location (its code path in mono and its prose) — the generator moves it to the end
+for the card; in the file R9 keeps it first. *View file* pinned to the footer, as before.
 
 Everything else — focus and context, ancestors to the left, children to the right, references
 below and above, the fitted camera, ctrl/⌘+wheel zoom, keyboard, hash, reduced motion, the

@@ -26,13 +26,24 @@ const { repo, commit } = JSON.parse(fs.readFileSync(path.join(here, "..", "sourc
 // target reads; `readLocal`/`readRemote` return its files with that prefix stripped, so the
 // two parsers see the same shape of map regardless of where the files came from. `finish`,
 // when present, adjusts the parsed data before it is written — the model target uses it to
-// turn each edge's field name into the label the shared stage draws (spec §4); the example
-// target needs no such step, so it carries none.
+// turn each edge's field name into the label the shared stage draws (spec §4), and to read
+// each schema in the card's order rather than the file's: R9 fixes `## File Location` first
+// in a schema file, because the path is what lets a type be singular while its folder is
+// plural — a contract for the agent that checks the file. On the card it is the technical
+// footnote, so it goes last. The content is untouched; only the order the card reads it in
+// changes, and the schema files keep the shape the conventions require. The example target
+// needs no such step, so it carries none.
 const TARGETS = [
   { dir: "example", id: "example-data", marker: "example data", parse: parseInstance, sub: "example/" },
   {
     dir: "model", id: "model-data", marker: "model data", parse: parseSchemas, sub: "core/",
-    finish(data) { for (const e of data.edges) e.label = e.via; },
+    finish(data) {
+      for (const e of data.edges) e.label = e.via;
+      for (const en of data.entities) {
+        const i = en.sections.findIndex((s) => s.heading === "File Location");
+        if (i >= 0) en.sections.push(...en.sections.splice(i, 1));
+      }
+    },
   },
 ];
 
