@@ -276,6 +276,23 @@ other check here passes the whole time it is wrong.
   `~/git/3ap-ag`. A clone made outside those three directories gets the global default and
   no warning, so check `git config user.email` before the first commit in a fresh clone.
 
+### The deck has no package.json of its own
+
+`npm run pdf` is a **root** script and `pdf-lib` is a **root** devDependency. Until
+2026-08-26 both lived in `talks/intro/package.json`, which is why that file and its lockfile
+existed at all — the root had neither, so building the deck's PDFs meant
+`cd talks/intro && npm install` first, exactly as the README used to say.
+
+That second manifest cost more than the `cd`. CI only ever runs `npm ci` at the root, so
+nothing under `talks/intro` was ever installed or exercised by a check, and a Dependabot bump
+there arrived green having proved nothing about the directory it changed. `blust.ch` has had
+the single-manifest shape all along; this is the two sibling sites catching up.
+
+`export-pdf.mjs` resolves its own paths from `import.meta.url`, so it does not care where it
+is invoked from — the deck still opens from `file://`, and moving the script changed nothing
+about the file it renders. Verified by rebuilding both PDFs from the root: same page counts,
+and the only bytes that moved were pdf-lib's `CreationDate` and `ModDate`.
+
 ## The deck and the talks index
 
 Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task's

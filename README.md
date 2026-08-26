@@ -97,7 +97,6 @@ npm run og                         # re-renders all five share cards after a vis
 npm run example                    # writes both pages' data blocks from meta-model at the pin
 npm run example:check              # fails if either block has drifted from source.json's commit
 
-cd talks/intro && npm install      # pdf-lib, for the deck's PDF exporter
 npm run pdf                        # both language PDFs
 ```
 
