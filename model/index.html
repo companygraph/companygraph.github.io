@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model — CompanyGraph</title>
+<meta id="metadesc" name="description" content="The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/model/">
+
+<meta property="og:title" content="Model — CompanyGraph">
+<meta property="og:description" content="The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/model/">
+<meta property="og:image" content="https://companygraph.io/model/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The model, drawn: the core vocabulary with its folder and its schemas.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Same rule as the landing page: the publisher and its other addresses, nothing about
+     what the software does or when it does it. An `Offer` here would be a price, and
+     this page deliberately quotes none. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/#organization",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": ["https://github.com/companygraph"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/model/#webpage",
+      "name": "Model",
+      "url": "https://companygraph.io/model/",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://companygraph.io/#website" },
+      "publisher": { "@id": "https://companygraph.io/#organization" }
+    }
+  ]
+}
+</script>
+<style>
+/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
+   from file:// as well as from the domain. Relative, because this page sits one
+   directory down and a root-absolute path would break the file:// case. */
+@font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v2 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --sky:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:var(--sky); background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  a{color:inherit}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+
+  header{padding:2rem 0}
+  /* four nav items plus the language control no longer fit beside the lockup on a
+     phone: let the row wrap rather than clip the control off the right edge. */
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; color:var(--c-mid); flex:0 0 auto}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  /* the page you are on is a resolved fact, so it takes the resolved colour */
+  nav a[aria-current="page"]{color:var(--c-firm)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+
+  /* Not one screen: this page has an argument to make in order, so it scrolls and
+     starts at the top rather than centring itself the way the landing page does. */
+  main{flex:1; padding:2vh 0 6vh}
+
+  .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            letter-spacing:-.035em; line-height:1.0;
+            font-size:clamp(2.2rem,6vw,4.6rem)}
+  .title h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .title h1 .rcl{display:block; font-weight:800}
+  .title h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
+           max-width:46ch; line-height:1.4}
+
+  /* The page's one reversal, and it earns the flag: a visitor's first assumption is that a
+     page describing the model was written by someone, and this line says the opposite —
+     nothing here was written by hand; it was generated. */
+  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
+
+  section{margin-top:clamp(3rem,8vh,5.5rem)}
+  h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+     font-weight:700; letter-spacing:-.025em; line-height:1.06;
+     font-size:clamp(1.6rem,3vw,2.3rem)}
+  h2 em{font-style:normal; color:var(--c-mid)}
+  .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+
+  /* the source commit, stated once, in the face this system reserves for data */
+  .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
+        background:var(--raise); border:1.5px solid var(--c-firm);
+        font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
+
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p{color:var(--dim); font-size:1rem}
+
+  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
+  .figcap b{color:var(--ink); font-weight:600}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+  /* The blust.ch credit is a brand, not a record value, so it leaves the footer's mono and
+     takes the lockup it has on every deck: the rb plate inlined, wordmark with the second
+     word in --c-mid. The rest of the row stays mono because the rest of the row is data —
+     a repository URL and a licence. */
+  footer .credit{display:inline-flex; align-items:center; gap:.5em; vertical-align:-.25em;
+                 font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+                 font-size:.84rem; letter-spacing:0; color:var(--ink)}
+  footer .credit .rbmark{display:flex}
+  footer .credit .rbmark svg{width:14px; height:14px; display:block}
+  footer .credit .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  footer .credit .rb{fill:var(--c-mid)}
+  footer .credit b{font-weight:600}
+  footer .credit b em{font-style:normal; color:var(--c-mid)}
+  footer .credit:hover, footer .credit:focus-visible{text-decoration:none}
+  footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
+
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    nav{gap:1.4rem}
+    .tagline{max-width:100%}
+  }
+
+  /* Four nav items and the language control do not fit on one row on a phone, in either
+     language, and a nav that cannot wrap takes the whole document sideways with it — the
+     page scrolls horizontally and every other check here still passes. Let it wrap and hang
+     off the right edge under the lockup; the language control stays last, which is where it
+     is at every other width. */
+  @media (max-width:560px){
+    nav{flex-wrap:wrap; justify-content:flex-end; gap:.6rem 1.2rem}
+  }
+</style>
+<!-- The stage — figure, card, expand dialog — is the one component two pages share, so
+     it is a file, not a copy in each page. Relative, like every other asset here: the
+     page stays self-contained in the sense the rule means, nothing off-origin. It comes
+     after the inline block above so the tokens it names are already defined. -->
+<link rel="stylesheet" href="../stage.css">
+</head>
+<body>
+
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="../">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="square">
+          <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+          <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+          <path d="M12.5 12 h4.5"/>
+          <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+        </svg>
+        <b>Company<span>Graph</span></b>
+      </a>
+      <nav>
+        <a href="../talks/" data-de="Vorträge">Talks</a>
+        <a href="./" aria-current="page" data-de="Modell">Model</a>
+        <a href="../example/" data-de="Beispiel">Example</a>
+        <a href="../billing/" data-de="Abrechnung">Billing</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main>
+  <div class="shell">
+
+    <div class="title">
+      <h1 data-de="<span class='r70'>Das Modell,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">The model,</span><span class="rcl"><em>drawn</em>.</span></h1>
+      <p class="tagline" data-de="Das Vokabular, in dem eine Firma beschrieben wird — ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist.">The vocabulary a company is described in — one schema per type, drawn as the graph of what references what.</p>
+      <p class="note" data-de="Nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Kern des Modells erzeugt, beim Commit, der neben der Zeichnung steht.">Nothing here was written by hand: the page is generated from the model's own core, at the commit named beside the figure.</p>
+    </div>
+
+    <section class="figure-section">
+      <div class="stagehead" id="stagehead">
+        <p class="path mono" id="path"></p>
+        <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
+      </div>
+      <div class="stage" id="stage">
+        <div class="canvas">
+          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
+          <button class="recentre" id="recentre" type="button" data-de="zentrieren">recentre</button>
+        </div>
+        <aside class="card" id="card" aria-live="polite">
+          <div class="cbody" id="cbody"></div>
+          <div class="cfoot" id="cfoot">
+            <span id="cfootlink"></span>
+          </div>
+        </aside>
+      </div>
+      <p class="figcap" id="figcap" data-de="Ein umrandeter Kasten ist der Ordner, in dem die Schemas liegen. Ein gefülltes Quadrat ist ein Schema. Ein gestrichelter Strich ist ein Feld, das auf einen anderen Typ verweist, beschriftet mit dem Namen des Felds. Anklicken rückt in die Mitte.">An outlined box is the folder the schemas live in. A filled square is a schema. A dashed line is a field that references another type, labelled with the field's name. Click to bring it to the centre.</p>
+
+      <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
+           same #path, #fig and #card — and moves them back on close. The URL does not
+           change when it opens. -->
+      <dialog id="stagemodal" class="modal" aria-label="The model, expanded" data-de-aria="Das Modell, vergrössert">
+        <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
+      </dialog>
+    </section>
+
+    <section>
+      <h2 data-de="Wie man es liest">How to read it</h2>
+      <div class="rules">
+        <p data-de="<b>Ein Typ ist eine Schema-Datei, benannt nach dem Typ.</b> Ihre Überschrift ist der kanonische Name, und genau diese Zeichenkette wird überall sonst referenziert — es gibt also einen Ort, an dem steht, wie ein Typ heisst, und einen Ort, an dem man es ändert.">
+          <b>A type is one schema file, named for the type.</b> Its heading is the canonical name, and that string is what everything else references — so there is one place that says what a type is called, and one place to change it.</p>
+        <p data-de="<b>Ein Strich zwischen zwei Schemas ist ein Feld, kein Link.</b> Das Feld ist so typisiert, dass es auf einen anderen Typ verweist, und der Strich trägt den Namen des Felds — ein Verweis auf einen Typ, den kein Schema erklärt, ist ein Fehler und nicht ein Link, der irgendwann kaputt ist.">
+          <b>A line between two schemas is a field, not a link.</b> The field is typed as a reference to another type, and the line carries the field's name — so a reference to a type no schema declares is an error, rather than a link that breaks later.</p>
+        <p data-de="<b>Ein Typ, der besessen wird, sagt es in einer Zeile.</b> Sein Schema nennt den Besitzer, und im Dateisystem liegen seine Dateien im Ordner des Besitzers — der Besitz steht einmal im Vokabular, und die Ablage folgt daraus.">
+          <b>A type that is owned says so in one line.</b> Its schema names the owner, and on disk its files nest inside the owner's folder — the ownership is stated once, in the vocabulary, and the layout follows from it.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-de="Woher es kommt">Where it comes from</h2>
+      <p class="unit mono"><a id="srclink" data-src="core" href="https://github.com/companygraph/meta-model/tree/HEAD/core">meta-model/core @ <span id="srccommit">HEAD</span></a></p>
+      <p class="lede" data-de="Welche Typen es gibt und warum, ist Sache der Design-Spezifikation, und die sagt es ausführlich. Diese Seite sagt es nicht noch einmal — sie zeichnet es.">Which types exist and why is the design spec's business, and it says so at length. This page does not say it again — it draws it.</p>
+    </section>
+
+  </div>
+</main>
+
+<div class="shell">
+  <footer>
+    <span><a href="https://github.com/companygraph">github.com/companygraph</a></span>
+    <span><a href="https://github.com/companygraph/meta-model/blob/HEAD/LICENSE">Apache 2.0</a></span>
+    <span><a class="credit" href="https://blust.ch/"><span class="rbmark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a></span>
+    <span><a href="../privacy/" data-de="Datenschutz">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// Same mechanism as the landing page, and the same reason: English is the markup so the
+// page says the right thing before any JS runs, and the choice is remembered per origin —
+// so a visitor who switched to German on the landing page arrives here in German.
+(function(){
+  var KEY = "cg-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  // The close button's × never changes, so it carries no [data-de] — but its aria-label
+  // does need German, and that lives in the label, not the innerHTML the loop above swaps.
+  var modalClose = document.getElementById("modalclose");
+  var modalCloseEnAria = modalClose ? modalClose.getAttribute("aria-label") : null;
+  // Same reasoning for the dialog itself: its aria-label names the whole stage, not markup
+  // the loop above ever sees.
+  var stageModal = document.getElementById("stagemodal");
+  var stageModalEnAria = stageModal ? stageModal.getAttribute("aria-label") : null;
+
+  var UI = {
+    de:{ title:"Modell — CompanyGraph",
+         desc:"Das Vokabular, in dem eine Firma beschrieben wird — ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist. Erzeugt aus dem Kern des Modells, nichts von Hand geschrieben." },
+    en:{ title:"Model — CompanyGraph",
+         desc:"The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand." }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    if (modalClose) modalClose.setAttribute("aria-label", lang === "de" ? modalClose.getAttribute("data-de-aria") : modalCloseEnAria);
+    if (stageModal) stageModal.setAttribute("aria-label", lang === "de" ? stageModal.getAttribute("data-de-aria") : stageModalEnAria);
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="en") toggle(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+
+<!-- model data · feb9e7fe7951d123be3cf5bf5d36221a5244b96d -->
+<script type="application/json" id="model-data" data-stage>{"commit":"feb9e7fe7951d123be3cf5bf5d36221a5244b96d","root":"Core","types":[{"type":"schema","folder":"core","owner":null}],"entities":[{"id":"core/experience","type":"schema","name":"Experience Schema","tagline":"Required structure for experience files.","fields":{"owner":"profile"},"sections":[{"heading":"Frontmatter","text":"","tables":[{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`start`","Yes","date","`YYYY-MM`, when the period began"],["`end`","No","date","`YYYY-MM`. Absent means the period is ongoing."],["`organisation`","No","string","Where the period was spent"],["`skills`","No","array of ref → skill","Each entry is the H1 of a file in `skills/`"]]}],"table":{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`start`","Yes","date","`YYYY-MM`, when the period began"],["`end`","No","date","`YYYY-MM`. Absent means the period is ongoing."],["`organisation`","No","string","Where the period was spent"],["`skills`","No","array of ref → skill","Each entry is the H1 of a file in `skills/`"]]}},{"heading":"Sections","text":"","tables":[{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Title]`","Yes","The canonical name of this period"],["`> [Tagline]`","Yes","Single-line summary of the period"],["`## Achievements`","No","What was accomplished in this period"]]}],"table":{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Title]`","Yes","The canonical name of this period"],["`> [Tagline]`","Yes","Single-line summary of the period"],["`## Achievements`","No","What was accomplished in this period"]]}},{"heading":"File Location","text":"`profiles/<profile>/experiences/*.md`\n\nAn experience is owned by a profile and cannot exist without it, so it nests inside the\nprofile's folder rather than sitting at the root with a `profile:` field pointing back.\nFilenames are prefixed with the start year so the folder sorts chronologically:\n`2018-northwind-atelier.md`.","tables":[]}],"owner":null,"path":"core/experience-schema.md"},{"id":"core/proficiency-level","type":"schema","name":"Proficiency Level Schema","tagline":"Required structure for proficiency level files.","fields":{},"sections":[{"heading":"Frontmatter","text":"","tables":[{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`rank`","Yes","number","Position on the ladder. Spaced in tens so a rung can be added without renumbering the others."]]}],"table":{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`rank`","Yes","number","Position on the ladder. Spaced in tens so a rung can be added without renumbering the others."]]}},{"heading":"Sections","text":"","tables":[{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Label]`","Yes","The canonical name. Every assessment references this exact string."],["`> [Summary]`","Yes","Single-line summary of what the level claims"],["`## What it means`","Yes","What someone at this level can actually do"]]}],"table":{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Label]`","Yes","The canonical name. Every assessment references this exact string."],["`> [Summary]`","Yes","Single-line summary of what the level claims"],["`## What it means`","Yes","What someone at this level can actually do"]]}},{"heading":"File Location","text":"`proficiency-levels/*.md`\n\nA level owns nothing and nothing owns it: many profiles claim the same few, and the definition\nof each lives here rather than being restated on every assessment. Changing what a level means\nis then one edit, in one file.","tables":[]}],"owner":null,"path":"core/proficiency-level-schema.md"},{"id":"core/profile","type":"schema","name":"Profile Schema","tagline":"Required structure for profile files.","fields":{},"sections":[{"heading":"Frontmatter","text":"","tables":[{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`email`","No","string","Contact address"],["`location`","No","string","Where the person works from"]]}],"table":{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`email`","No","string","Contact address"],["`location`","No","string","Where the person works from"]]}},{"heading":"Sections","text":"An assessment is a table row rather than a frontmatter field because it is a claim with prose\nattached, not a short fact. A table renders where a reader looks, has no quoting hazard around\na colon or a wrapped line, and declares its columns here exactly as a frontmatter field does.","tables":[{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Name]`","Yes","The person's canonical name. Everything references the profile by this exact string."],["`> [Tagline]`","Yes","Single-line summary of the person"],["`## Skills`","No","Table. One row per skill claimed; its columns are declared below."],["`## Summary`","No","A paragraph of context"]]},{"caption":"`## Skills` is a table with these columns:","columns":["Column","Required","Type","Description"],"rows":[["`Skill`","Yes","ref → skill","Must match the H1 of a file in `skills/` exactly"],["`Level`","Yes","ref → proficiency-level","Must match the H1 of a file in `proficiency-levels/` exactly"],["`Evidence`","Yes","string","A concrete fact the level can be weighed against. Required, because the adjective on its own measures confidence rather than skill."]]}],"table":{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Name]`","Yes","The person's canonical name. Everything references the profile by this exact string."],["`> [Tagline]`","Yes","Single-line summary of the person"],["`## Skills`","No","Table. One row per skill claimed; its columns are declared below."],["`## Summary`","No","A paragraph of context"]]}},{"heading":"File Location","text":"`profiles/<profile>/<profile>.md`\n\nA profile owns experiences, so it is a folder rather than a file: `profiles/<profile>/` holds\nthe profile's own file and an `experiences/` folder beside it. Removing a person is then one\noperation and an orphaned experience is unrepresentable.","tables":[]}],"owner":null,"path":"core/profile-schema.md"},{"id":"core/skill","type":"schema","name":"Skill Schema","tagline":"Required structure for skill files.","fields":{},"sections":[{"heading":"Frontmatter","text":"","tables":[{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`group`","No","string","Free-text grouping, e.g. `Testing`. Whether a group becomes an entity of its own is deliberately open."]]}],"table":{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."],["`group`","No","string","Free-text grouping, e.g. `Testing`. Whether a group becomes an entity of its own is deliberately open."]]}},{"heading":"Sections","text":"","tables":[{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Skill]`","Yes","The canonical name. Profiles and experiences reference this exact string."],["`> [Definition]`","Yes","Single-line definition of what the skill is"],["`## In practice`","No","What someone using this skill actually does"]]}],"table":{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Skill]`","Yes","The canonical name. Profiles and experiences reference this exact string."],["`> [Definition]`","Yes","Single-line definition of what the skill is"],["`## In practice`","No","What someone using this skill actually does"]]}},{"heading":"File Location","text":"`skills/*.md`\n\nA skill owns nothing, so it is a file. Nothing owns a skill either: a profile claims one and\na role requires one, and it outlives both.","tables":[]}],"owner":null,"path":"core/skill-schema.md"},{"id":"core/source","type":"schema","name":"Source Schema","tagline":"Required structure for source files.","fields":{},"sections":[{"heading":"Frontmatter","text":"","tables":[{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`url`","No","string","Where the source lives, for a person or a sync to open"]]}],"table":{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`url`","No","string","Where the source lives, for a person or a sync to open"]]}},{"heading":"Sections","text":"","tables":[{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Name]`","Yes","The canonical name. Everything references the source by this exact string."],["`> [Description]`","No","Single-line description of what the source holds"]]}],"table":{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Name]`","Yes","The canonical name. Everything references the source by this exact string."],["`> [Description]`","No","Single-line description of what the source holds"]]}},{"heading":"File Location","text":"`sources/*.md`\n\nA source is where a page's facts come from: the repository itself, or a system the company\nalready runs that a sync writes from. One file per source, so a page can name where it was\nmastered by canonical name rather than restating a system's name and address on every entry.\nNothing owns a source and a source owns nothing. Every other core type carries a required\n`source` field naming one, so no page is of unknown origin, and an optional `source-id` —\nthe page's identifier inside that source — so a sync can find it again.","tables":[]}],"owner":null,"path":"core/source-schema.md"},{"id":"core/value","type":"schema","name":"Value Schema","tagline":"Required structure for value files.","fields":{},"sections":[{"heading":"Frontmatter","text":"","tables":[{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."]]}],"table":{"caption":null,"columns":["Field","Required","Type","Description"],"rows":[["`source`","Yes","ref → source","Where this page's facts are mastered — the H1 of a file in `sources/`"],["`source-id`","No","string","The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."]]}},{"heading":"Sections","text":"","tables":[{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Value]`","Yes","The canonical name. Everything references the value by this exact string."],["`> [Statement]`","Yes","Single-line statement of the value"],["`## In practice`","Yes","What following this value looks like, and what breaking it looks like"]]}],"table":{"caption":null,"columns":["Section","Required","Description"],"rows":[["`# [Value]`","Yes","The canonical name. Everything references the value by this exact string."],["`> [Statement]`","Yes","Single-line statement of the value"],["`## In practice`","Yes","What following this value looks like, and what breaking it looks like"]]}},{"heading":"File Location","text":"`values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a\nheading per value, and a heading has no canonical name — so no strategy, role or process\ncould cite the value it serves, which is the one thing a company's values are for.","tables":[]}],"owner":null,"path":"core/value-schema.md"}],"edges":[{"from":"core/experience","to":"core/profile","via":"owner","attrs":{},"label":"owner"},{"from":"core/experience","to":"core/skill","via":"skills","attrs":{"type":"array of ref → skill"},"label":"skills"},{"from":"core/experience","to":"core/source","via":"source","attrs":{"type":"ref → source"},"label":"source"},{"from":"core/proficiency-level","to":"core/source","via":"source","attrs":{"type":"ref → source"},"label":"source"},{"from":"core/profile","to":"core/proficiency-level","via":"Skills.Level","attrs":{"type":"ref → proficiency-level"},"label":"Skills.Level"},{"from":"core/profile","to":"core/skill","via":"Skills.Skill","attrs":{"type":"ref → skill"},"label":"Skills.Skill"},{"from":"core/profile","to":"core/source","via":"source","attrs":{"type":"ref → source"},"label":"source"},{"from":"core/skill","to":"core/source","via":"source","attrs":{"type":"ref → source"},"label":"source"},{"from":"core/value","to":"core/source","via":"source","attrs":{"type":"ref → source"},"label":"source"}]}</script>
+<!-- /model data -->
+
+<script src="../d3.v7.min.js"></script>
+<script src="../stage.js"></script>
+</body>
+</html>

@@ -2,13 +2,14 @@
 # and `npm run pdf`, none of which reaches a visitor.
 #
 # d3 is the exception, and it is the reason this file matters more here than on the sibling
-# sites. `example/index.html` loads `example/d3.v7.min.js`, a vendored copy of the pinned
-# package's build — so d3 is the one dependency in this repository that a visitor executes.
+# sites. The shared stage — `stage.js`, linked by every page that draws a data block — loads
+# `d3.v7.min.js` beside it at the root, a vendored copy of the pinned package's build, so d3
+# is the one dependency in this repository that a visitor executes, now on more than one page.
 # `verify/instance.test.mjs` asserts the two are byte-identical, which means a Dependabot
 # bump of d3 lands red on purpose, with the message "copy it again". That is the correct
 # signal, not a nuisance to be silenced with an ignore rule: an ignored d3 is a shipped
 # asset that ages forever with nothing saying so. Clearing such a pull request is
-# re-vendoring the file and re-rendering the card that names it — `npm run og`.
+# re-vendoring the file and re-rendering every card that names it — `npm run og`.
 #
 # It is also why d3 sits in `dependencies` and not `devDependencies`, which is where it used
 # to be. The organisation runs GitHub's "dismiss low-impact alerts for development-scoped

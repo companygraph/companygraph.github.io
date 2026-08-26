@@ -171,7 +171,8 @@ anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lin
 reversal. Mono for the path, folder names, field keys, eyebrows and the commit; prose for the
 name, tagline and text.
 
-**The library.** d3 v7, vendored as `example/d3.v7.min.js` from the pinned npm package —
+**The library.** d3 v7, vendored as `example/d3.v7.min.js` (moved to the site root by the
+model page spec §4) from the pinned npm package —
 `d3` in `devDependencies` — and loaded with a relative `<script src>`, so the page stays
 self-contained and the share-card recipe hashes it as a drawn asset. `npm run test:example`
 asserts the vendored file is byte-identical to the package's `dist/d3.min.js`, the way
@@ -196,7 +197,8 @@ would need a build step this repository does not have, and that was the trade ta
   `translates.shows`.
 - **`npm run example:check`** as in §2. **`npm run test:example`** (`node --test`, no
   dependencies beyond the vendored-file comparison) drives `build.mjs`'s parser against
-  fixture instances, and asserts `example/d3.v7.min.js` equals the package's build: a valid one; one with
+  fixture instances, and asserts `example/d3.v7.min.js` (moved to the site root by the model
+  page spec §4) equals the package's build: a valid one; one with
   a dangling reference, which must throw citing R4; one with a root folder that is not a
   plural; one whose local `HEAD` is not the pin.
 - **`og-recipe.mjs`** gains the fourth card, `{ dir: "example", settle: "reduced-motion" }`,

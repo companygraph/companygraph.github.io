@@ -148,6 +148,15 @@
     .meta{grid-column:1; text-align:left; margin-top:.4rem}
     .d{grid-column:1; max-width:100%}
   }
+
+  /* Four nav items and the language control do not fit on one row on a phone, in either
+     language, and a nav that cannot wrap takes the whole document sideways with it — the
+     page scrolls horizontally and every other check here still passes. Let it wrap and hang
+     off the right edge under the lockup; the language control stays last, which is where it
+     is at every other width. */
+  @media (max-width:560px){
+    nav{flex-wrap:wrap; justify-content:flex-end; gap:.6rem 1.2rem}
+  }
   @media (prefers-reduced-motion:reduce){
     .talk, .t, nav a{transition:none}
   }
@@ -170,6 +179,7 @@
       </a>
       <nav>
         <a href="./" aria-current="page" data-de="Vorträge">Talks</a>
+        <a href="../model/" data-de="Modell">Model</a>
         <a href="../example/" data-de="Beispiel">Example</a>
         <a href="../billing/" data-de="Abrechnung">Billing</a>
         <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
