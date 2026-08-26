@@ -52,7 +52,7 @@
       "@id": "https://companygraph.io/#software",
       "name": "CompanyGraph",
       "description": "An open-source meta-model for operating a company: the structure its knowledge takes, so people and agents can both rely on it.",
-      "codeRepository": "https://github.com/companygraph",
+      "codeRepository": "https://github.com/companygraph/meta-model",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "author": {
         "@id": "https://companygraph.io/#organization"
@@ -382,10 +382,22 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
+  // The head is translated too, the way the other five pages do it. This page carried an
+  // id="metadesc" with nothing acting on it, so a German visitor got lang="de" on a document
+  // whose title and description were still English — and `translates` could not see it,
+  // because this page's spec declared neither a title nor a desc to compare.
+  var UI = {
+    de:{ title:"CompanyGraph — ein Meta-Modell für den Betrieb eines Unternehmens",
+         desc:"Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können." },
+    en:{ title:"CompanyGraph — a meta-model for operating a company",
+         desc:"A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it." }
+  };
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
     document.getElementById("lde").classList.toggle("on", lang === "de");
     document.getElementById("len").classList.toggle("on", lang === "en");
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.documentElement.lang = lang;
   }
   function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }

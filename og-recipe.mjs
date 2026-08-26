@@ -57,6 +57,11 @@ export const cards = [
   // script draws on load is already settled by the time the exporter takes its shot: the
   // card renders that settled state.
   { dir: "example", ...FRAME, hide: EXAMPLE_HIDE, titleSlide: false, settle: "reduced-motion" },
+  // /billing/ and /privacy/ advertised the landing card until 2026-08-26 — a paste of either
+  // URL previewed the landing hero under the pasted page's title. The seo check now asserts a
+  // page points at its own card, which is what surfaced these two.
+  { dir: "billing", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
+  { dir: "privacy", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
 ];
 
 export const cardFor = (dir) => cards.find((c) => c.dir === dir);
