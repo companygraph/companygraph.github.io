@@ -52,9 +52,9 @@ split had to be unwound. Do not recreate one.
   package's build, byte for byte.
 - `example/` and `model/` — `index.html` each, the two stage pages: their own prose and inline
   `<style>`, and the stage above linked in. One generator drives both from one pin —
-  `example/build.mjs` writes each page's data block (or checks both still match, `--check`) by
+  `build/build.mjs` writes each page's data block (or checks both still match, `--check`) by
   reading `meta-model/example` and `meta-model/core` at the commit `source.json` names;
-  `example/instance.mjs` is the parser for both.
+  `build/instance.mjs` is the parser for both.
 - `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
   the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
