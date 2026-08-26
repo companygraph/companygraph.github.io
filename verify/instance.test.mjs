@@ -3,7 +3,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { parseInstance, ROOT_LABEL, parseSchemas, CORE_LABEL } from "../example/instance.mjs";
+import { parseInstance, ROOT_LABEL, parseSchemas, CORE_LABEL } from "../build/instance.mjs";
 
 const valid = new Map([
   ["README.md", "# Example instance\n\nIgnored: a README is never an entity.\n"],

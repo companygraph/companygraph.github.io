@@ -11,8 +11,8 @@
     "og:check": "node og-check.mjs",
     "test:og": "node --test verify/og-recipe.test.mjs",
     "test:example": "node --test verify/instance.test.mjs",
-    "example": "node example/build.mjs",
-    "example:check": "node example/build.mjs --check"
+    "example": "node build/build.mjs",
+    "example:check": "node build/build.mjs --check"
   },
   "dependencies": {
     "d3": "7.9.0"

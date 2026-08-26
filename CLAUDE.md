@@ -111,7 +111,7 @@ that lived in another repository. No CI in *this* repository can catch drift in
   exception, because a copied stage drifts the first time one page's figure is fixed and
   nothing in this repository can see the two halves disagree. `stage.js` knows no name from
   either page — it reads whichever `<script type="application/json">` carries `data-stage`
-  (`example/build.mjs` writes that attribute into every block it generates) and takes its
+  (`build/build.mjs` writes that attribute into every block it generates) and takes its
   source link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
   drawn assets of every page that links them**, so touching the stage marks each of those
   cards stale — `npm run og` and commit the `og.png`/`og.sha` pair with the change, the same
