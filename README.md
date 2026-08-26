@@ -16,6 +16,7 @@ to see the seam. They were merged, history and all, in August 2026.
 | `/` | The landing page. One screen: what CompanyGraph is, and the way to the model. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
+| `/model/` | The model's own vocabulary, drawn as the graph of what references what — one schema per type. |
 | `/example/` | One instance of the model, drawn as the graph its own files form — generated, never written by hand. |
 | `/billing/` | What would cost money, if anything ever does. |
 | `/privacy/` | What this site collects, which is nothing. |
@@ -40,20 +41,31 @@ split had to be unwound. Do not recreate one.
   other three.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
-- `example/` — `index.html`, the page; `build.mjs`, which writes the data block into it (or
-  checks it still matches, `--check`) by reading `meta-model/example` at the commit
-  `source.json` names; `instance.mjs`, the parser;
-  `source.json`, the one thing this page is allowed to name from the model — a repo and a
-  commit; and its own vendored `d3.v7.min.js`, the same reason `fonts/` is self-hosted.
+- `stage.css`, `stage.js`, `d3.v7.min.js` — **the stage**: the figure, the card and the expand
+  dialog that draw a page's data block. The one component two pages share, so they are three
+  files at the root that each page links relatively (`../stage.css`, `../stage.js`,
+  `../d3.v7.min.js`) rather than a copy inside each page. `stage.js` knows no name from either
+  page: it reads whichever `<script type="application/json">` the page marks `data-stage`, and
+  takes the folder for its source link from `#srclink`'s `data-src`. Edit them here and both
+  pages get it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
+  one copy, reached relatively — and `npm run test:example` asserts it is still the pinned
+  package's build, byte for byte.
+- `example/` and `model/` — `index.html` each, the two stage pages: their own prose and inline
+  `<style>`, and the stage above linked in. One generator drives both from one pin —
+  `example/build.mjs` writes each page's data block (or checks both still match, `--check`) by
+  reading `meta-model/example` and `meta-model/core` at the commit `source.json` names;
+  `example/instance.mjs` is the parser for both.
+- `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
+  the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
-- `og.png`, `talks/og.png`, `talks/intro/og.png`, `example/og.png` — 1200×630 share cards, each
+- `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
-  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all four and writes
+  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all five and writes
   the stamps, and `og-check.mjs` reports which have drifted.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
-- `verify/check.mjs` — the suite, covering all six pages in one run. `verify/design.mjs` is
+- `verify/check.mjs` — the suite, covering all seven pages in one run. `verify/design.mjs` is
   the shared design-system copy, byte-identical across `blust.ch` and `guestgraph.io`; never
   edit it here.
 - `docs/superpowers/` — the design and the plan behind the landing page and the talk.
@@ -79,11 +91,11 @@ No build step.
 npm install                        # once, for Playwright
 npm run serve                      # → http://localhost:8000
 npm run verify                     # renders every page and asserts the DOM
-npm run og:check                   # do the four share cards still show their pages?
+npm run og:check                   # do the five share cards still show their pages?
 npm run test:og                    # the card check's own tests (node --test, no deps)
-npm run og                         # re-renders all four share cards after a visual change
-npm run example                    # writes the example page's data block from meta-model/example
-npm run example:check              # fails if the data block has drifted from source.json's commit
+npm run og                         # re-renders all five share cards after a visual change
+npm run example                    # writes both pages' data blocks from meta-model at the pin
+npm run example:check              # fails if either block has drifted from source.json's commit
 
 cd talks/intro && npm install      # pdf-lib, for the deck's PDF exporter
 npm run pdf                        # both language PDFs

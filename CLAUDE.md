@@ -47,9 +47,11 @@ advertised "Core in development" while two slices had shipped, because it restat
 that lived in another repository. No CI in *this* repository can catch drift in
 `companygraph/meta-model` — the only defence is never restating anything that lives there.
 
-- **The example page is the one mechanical exception:** its data block is generated from
-  `meta-model/example` at the commit in `example/source.json`, and `npm run example:check`
-  fails when it drifts. Nothing else on that page names anything from the example.
+- **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
+  carry a data block generated from `meta-model` at the commit in `source.json` — the example
+  from `example/`, the model from `core/`, one pin for both — and `npm run example:check`
+  fails when either drifts. Nothing else on the example page names anything from the example,
+  and nothing else on the model page names anything from the model.
 
 ## Constraints
 
@@ -100,6 +102,21 @@ that lived in another repository. No CI in *this* repository can catch drift in
   `@font-face` rules at all, and a root-absolute font path still loads perfectly from a served
   copy. That gap was found by making all four rules root-absolute and watching the suite pass.
 
+- **The stage is the one component two pages share, and it is a file, not a copy.**
+  `stage.css`, `stage.js` and `d3.v7.min.js` sit at the root and every page that draws a data
+  block links all three relatively — `../stage.css`, `../stage.js`, `../d3.v7.min.js` — which
+  keeps each page self-contained in the sense the rule above means: nothing off-origin, and it
+  still opens from `file://`. Edit the stage in that one place and both pages get it. Every
+  other page here is a single self-contained file and stays that way; this is the deliberate
+  exception, because a copied stage drifts the first time one page's figure is fixed and
+  nothing in this repository can see the two halves disagree. `stage.js` knows no name from
+  either page — it reads whichever `<script type="application/json">` carries `data-stage`
+  (`example/build.mjs` writes that attribute into every block it generates) and takes its
+  source link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
+  drawn assets of every page that links them**, so touching the stage marks each of those
+  cards stale — `npm run og` and commit the `og.png`/`og.sha` pair with the change, the same
+  as for a font.
+
 - **The design tokens are a copy, fenced by `design tokens · vN` markers**, shared with
   sibling repositories (`blust.ch`, `guestgraph.io`, and its `talks` repo) that cannot import
   a stylesheet because a deck has to open from `file://` — there is nothing to `import` in
@@ -126,11 +143,13 @@ that lived in another repository. No CI in *this* repository can catch drift in
   updated to match, every platform that trusts the tags renders it letterboxed or cropped —
   and nothing on the page itself reveals that, because the page never displays its own card.
   You find out from a link someone else shared, which is the worst possible way to find out.
-  `verify/check.mjs`'s `card()` check exists specifically to catch this — but it only compares
-  the *declared* numbers against the literals `"1200"`/`"630"`; it never fetches or measures
-  `og.png` itself. A card regenerated at the wrong size, corrupted, truncated, or simply left
-  stale from an earlier design would all still pass. Treat the check as guarding the tags, not
-  the image — after running `npm run og`, look at the file.
+  `verify/check.mjs`'s `card()` check exists specifically to catch this, and it does: it
+  fetches the card the tags name and reads the real width and height out of the PNG's IHDR
+  header, so a card whose pixels disagree with its tags fails, and so does one that cannot be
+  fetched at all. What it cannot see is *what the card shows*. A card of the right size,
+  rendered from a page three commits ago, passes every assertion here — that is what
+  `npm run og:check` is for, and why the two run together. After `npm run og`, look at the
+  file: neither check can tell you the picture is the right picture.
 
 - **`.figure` is hidden from the card for an editorial reason, not a spatial one — and the
   comment saying so has already been wrong twice, both times by claiming something about fit
@@ -167,10 +186,10 @@ that lived in another repository. No CI in *this* repository can catch drift in
 
 ## Share cards go stale silently, and nothing on the page says so
 
-The four `og.png` files are not banners someone drew: `npm run og` renders each from the page
+The five `og.png` files are not banners someone drew: `npm run og` renders each from the page
 it belongs to — the landing card is the landing page, the talks card is the talks index, the
-deck's card is its title slide, the example card is the example page — so a link preview shows
-what the visitor is about to land on.
+deck's card is its title slide, and the model and example cards are those two pages — so a
+link preview shows what the visitor is about to land on.
 The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a
 stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every
 other check here passes the whole time it is wrong.
@@ -183,7 +202,7 @@ other check here passes the whole time it is wrong.
 - **The recipe is the page, plus every local file the page *draws*, plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at all.
   Because `fonts/` is one copy at the root and every page reaches it relatively, perturbing a
-  font here marks **all four** cards stale — the sibling repositories, whose decks carry their
+  font here marks **all five** cards stale — the sibling repositories, whose decks carry their
   own `fonts/`, isolate theirs, and this repository deliberately does not.
 - **An `<a href>` is skipped: a link names somewhere to go, not something to draw.** The talks
   index is why the exception exists — it links both multi-megabyte deck PDFs, so hashing link
@@ -197,7 +216,7 @@ other check here passes the whole time it is wrong.
   edited without the hash moving — a card reported current after the thing that renders it
   changed, which is the one failure the whole mechanism exists to make impossible. It is also
   what makes the module importable by a test: an exporter that renders on import cannot be.
-- **One exporter, one crop, and no server.** `npm run og` renders all four cards from
+- **One exporter, one crop, and no server.** `npm run og` renders all five cards from
   `file://` — the same way the deck opens — because every page here references its assets
   relatively. The landing card was once cropped a pixel higher than the other two; that was an
   accident of a separate exporter, not a choice, and there is now one constant.
@@ -210,7 +229,7 @@ other check here passes the whole time it is wrong.
 - **`npm run test:og` is the check's own suite** (`node --test`, no dependencies). It drives
   the recipe against fixture trees rather than against this site, so it still means something
   after these pages change. A card added to the repository without an entry in `og-recipe.mjs`
-  fails it — otherwise the check would keep printing four ✓ while the fifth drifted.
+  fails it — otherwise the check would keep printing five ✓ while the sixth drifted.
 
 ## The head is a contract, and `seo` is what holds it
 

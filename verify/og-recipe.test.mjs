@@ -182,6 +182,15 @@ test("changing how the render settles changes the recipe", () => {
   assert.notEqual(recipe(card({ settle: "wait:900" }), root), recipe(card(), root));
 });
 
+// The state a card renders is part of what it shows. `hash` is the model card's: the same
+// page at #core is a different picture, and a card left reported current across that change
+// would advertise the wrong one.
+test("changing the state the card renders changes the recipe", () => {
+  const { root } = tree({ "index.html": "<p>one</p>" });
+  assert.notEqual(recipe(card({ hash: "#core" }), root), recipe(card(), root));
+  assert.notEqual(recipe(card({ hash: "#core" }), root), recipe(card({ hash: "#other" }), root));
+});
+
 test("rendering the title slide instead of the page changes the recipe", () => {
   const { root } = tree({ "index.html": "<p>one</p>" });
   assert.notEqual(recipe(card({ titleSlide: true }), root), recipe(card(), root));

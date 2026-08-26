@@ -263,6 +263,19 @@
       opacity:1 !important; transform:none !important; stroke-dasharray:none !important;
     }
   }
+
+  @media (max-width:900px){
+    nav{gap:1.4rem}
+  }
+
+  /* Four nav items and the language control do not fit on one row on a phone, in either
+     language, and a nav that cannot wrap takes the whole document sideways with it — the
+     page scrolls horizontally and every other check here still passes. Let it wrap and hang
+     off the right edge under the lockup; the language control stays last, which is where it
+     is at every other width. */
+  @media (max-width:560px){
+    nav{flex-wrap:wrap; justify-content:flex-end; gap:.6rem 1.2rem}
+  }
 </style>
 </head>
 <body>
@@ -281,6 +294,7 @@
     </a>
     <nav>
       <a href="talks/" data-de="Vorträge">Talks</a>
+      <a href="model/" data-de="Modell">Model</a>
       <a href="example/" data-de="Beispiel">Example</a>
       <a href="billing/" data-de="Abrechnung">Billing</a>
       <button class="langind" id="langind" type="button"
@@ -298,7 +312,7 @@
       <a class="btn primary" href="talks/intro/"
          data-de="Einführungsvortrag ansehen">Watch intro talk</a>
       <a class="btn" href="https://github.com/companygraph/meta-model"
-         data-de="Das Modell ansehen">Read the model</a>
+         data-de="Den Quelltext lesen">Read the source</a>
     </div>
     <p class="ctameta mono" data-de="12 Minuten · Deutsch oder Englisch">12 minutes · German or English</p>
   </section>
