@@ -8,9 +8,15 @@ import { chromium } from "playwright";
 import { DESIGN_CHECKS } from "./design.mjs";
 
 const BASE = process.env.BASE || "http://localhost:8000";
+// The public origin, in one place. It was hardcoded in `card`, in the sitemap's expected
+// list, and in the seo fetch rewrite — and *derived* in the seo origin filter, by rewriting
+// a literal "http://localhost:8000". Run with BASE=http://127.0.0.1:8000 and that derivation
+// produced a filter nothing matched, so every URL in every graph was skipped and the check
+// printed ✓ having fetched none of them.
+const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -43,24 +49,29 @@ const PAGES = [
     // visible. Strings, not element counts: a translation that never got applied leaves
     // the English standing, and that is the failure worth naming.
     translates: { lang: "de",
+      // The head, not just the body: this page carried an id="metadesc" that nothing acted
+      // on, so a German visitor read an English title and description under lang="de".
+      // Declared here so the swap cannot quietly go away again.
+      title: "CompanyGraph — ein Meta-Modell für den Betrieb eines Unternehmens",
+      desc: "Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
                   shows: ["Jede Rolle", "aufgeschrieben", "Den Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
                   hides: ["Every role", "Read the source"] },
-    card: true, cardBase: "https://companygraph.io" },
+    card: true, cardBase: SITE },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/privacy/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
-    card: true, cardBase: "https://companygraph.io", internalLinks: true },
+    card: true, cardBase: SITE, internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/billing/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -68,11 +79,11 @@ const PAGES = [
     sameTab: ["../talks/", "../model/", "../example/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
-    card: true, cardBase: "https://companygraph.io", internalLinks: true },
+    card: true, cardBase: SITE, internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/example/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -81,13 +92,13 @@ const PAGES = [
                   title: "Beispiel — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
-    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: "example-data" },
+    card: true, cardBase: SITE, internalLinks: true, graph: "example-data" },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", noNewTab: true, title: /CompanyGraph/, lang: "en",
+  { path: "/model/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Where it comes from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -96,9 +107,9 @@ const PAGES = [
                   title: "Modell — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
-    card: true, cardBase: "https://companygraph.io", internalLinks: true, graph: "model-data" },
+    card: true, cardBase: SITE, internalLinks: true, graph: "model-data" },
 
-  { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -117,8 +128,8 @@ const PAGES = [
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
-    card: true, cardBase: "https://companygraph.io", internalLinks: true },
-  { path: "/talks/intro/", noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+    card: true, cardBase: SITE, internalLinks: true },
+  { path: "/talks/intro/", seo: true, noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
     // check that fails when an href is simply wrong, so without this line a typo in the
@@ -138,7 +149,7 @@ const PAGES = [
     // the assertion would have passed while checking nothing. "Architect"/"Architekt" is
     // the replacement: one letter apart, present in exactly one language each.
     translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langtoggle" },
-    card: true, cardBase: "https://companygraph.io", internalLinks: true },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {
@@ -185,6 +196,11 @@ const CHECKS = {
   // German and JS swapped it to English on load — which meant a crawler without JS read
   // German from a page whose og tags, share card and canonical content were all English.
   // The markup is English-first now, so this asserts the page tells the truth cold.
+  //
+  // `lang` is not this check. That one reads documentElement.lang *after* applyLang() has
+  // run, so a page whose source said `de` would be corrected on load and pass anyway, while
+  // a crawler that runs no JS still read German. Only this one is fetched cold, which is why
+  // it belongs on every page and not just the decks.
   async sourceLang(page, spec) {
     const html = await (await fetch(spec.absolute)).text();
     const m = html.match(/<html lang="([a-z]+)"/);
@@ -305,10 +321,106 @@ const CHECKS = {
     });
     return bad.length ? "root-absolute internal path: " + bad.join(", ") : null;
   },
-  // The card is fetched back to compare its real pixel size with the declared tags.
-  // `cardBase` is the production prefix to strip: this repository is served under
-  // /talks/ on the domain but at / locally, so stripping the origin alone would ask
-  // for a path that does not exist here — which looked like a broken card and was not.
+  // The head Google reads, asserted as a contract rather than page by page. Three of these
+  // were live failures before the check existed: a logo.svg blust.ch has never served, an
+  // isPartOf naming a #website node defined on another document, and this site's landing page
+  // shipped with no head at all. All three had shipped green.
+  //
+  // The canonical is compared against the page's own URL, not merely against og:url. Agreeing
+  // with og:url proves only that two tags say the same thing; both can say the same wrong
+  // thing, and a canonical pointing at another page removes this one from the index and hands
+  // its signals over — quietly, and worse than anything above.
+  async seo(page, spec) {
+    const problems = [];
+    const want = SITE + spec.path;
+    const m = await page.evaluate(() => {
+      const meta = (sel) => (document.querySelector(sel) || {}).content || null;
+      return {
+        canonical: (document.querySelector('link[rel="canonical"]') || {}).getAttribute?.("href") ?? null,
+        ogUrl: meta('meta[property="og:url"]'),
+        ogTitle: meta('meta[property="og:title"]'),
+        ogDesc: meta('meta[property="og:description"]'),
+        ogType: meta('meta[property="og:type"]'),
+        image: meta('meta[property="og:image"]'),
+        desc: meta('meta[name="description"]'),
+        site: meta('meta[property="og:site_name"]'),
+        locale: meta('meta[property="og:locale"]'),
+        alt: meta('meta[property="og:image:alt"]'),
+        twitter: meta('meta[name="twitter:card"]'),
+        ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => s.textContent),
+      };
+    });
+
+    if (!m.canonical) problems.push("no canonical");
+    else if (m.canonical !== want) problems.push(`canonical ${JSON.stringify(m.canonical)} should be ${want}`);
+    if (m.ogUrl !== m.canonical) problems.push(`og:url ${m.ogUrl} != canonical ${m.canonical}`);
+
+    // Every page renders its own card. A page pointing at another's previews the wrong page
+    // on every share, looks perfectly healthy, and is what `card` below cannot see: it only
+    // asks whether the image resolves at its declared size, and a borrowed card does.
+    if (!m.image) problems.push("no og:image");
+    else if (m.image !== want + "og.png") problems.push(`og:image ${m.image} is not this page's own card (${want}og.png)`);
+
+    if (!m.desc) problems.push("no meta description");
+    else if (m.desc.length > 200) problems.push(`description is ${m.desc.length} chars, over 200`);
+
+    for (const [k, v] of [["og:site_name", m.site], ["og:locale", m.locale],
+                          ["og:image:alt", m.alt], ["twitter:card", m.twitter],
+                          ["og:title", m.ogTitle], ["og:description", m.ogDesc],
+                          ["og:type", m.ogType]])
+      if (!v) problems.push(`no ${k}`);
+    if (m.ogType && !["website", "article"].includes(m.ogType))
+      problems.push(`og:type ${m.ogType} is neither website nor article`);
+
+    // Structured data has to resolve, not merely parse. Google reads @graph within one
+    // document, so an @id referenced but defined elsewhere is a pointer to nothing — and a
+    // URL inside it is a promise the site either keeps or does not.
+    if (!m.ld.length) problems.push("no application/ld+json");
+    const defined = new Set(), referenced = [], urls = new Set();
+    for (const block of m.ld) {
+      let data;
+      try { data = JSON.parse(block); }
+      catch (e) { problems.push("ld+json does not parse: " + e.message); continue; }
+      const nodes = data["@graph"] || (Array.isArray(data) ? data : [data]);
+      const walk = (o) => {
+        if (Array.isArray(o)) {
+          for (const v of o)
+            if (typeof v === "string" && /^https?:\/\//.test(v)) urls.add(v); else walk(v);
+          return;
+        }
+        if (!o || typeof o !== "object") return;
+        for (const [k, v] of Object.entries(o)) {
+          // A bare { "@id": ... } is a pointer; the same key alongside an @type defines the
+          // thing pointed at. Both are registered here as well as from the top-level @graph
+          // members, so a node inlined under a property satisfies references to it instead of
+          // being reported dangling.
+          if (k === "@id" && typeof v === "string") {
+            if (o["@type"]) defined.add(v);   // a node inlined under a property still defines one
+            else referenced.push(v);          // a bare { "@id": … } is a pointer that must land
+          }
+          else if (typeof v === "string" && /^https?:\/\//.test(v) && k !== "@context") urls.add(v);
+          else walk(v);
+        }
+      };
+      nodes.forEach(n => { if (n && n["@id"]) defined.add(n["@id"]); });
+      nodes.forEach(walk);
+    }
+    for (const r of referenced)
+      if (!defined.has(r)) problems.push(`ld+json references ${r}, which no node on this page defines`);
+
+    // Fetched from Node against BASE, not in-page against location.origin: an origin carries
+    // no path, and a BASE can (the sibling sites are served under one). Nothing about these
+    // URLs needs a browser.
+    for (const u of urls) {
+      if (!u.startsWith(SITE)) continue;              // off-site URLs are not ours to keep
+      let status = 0;
+      try { status = (await fetch(u.replace(SITE, BASE))).status; } catch { status = 0; }
+      if (status !== 200) problems.push(`ld+json names ${u} → HTTP ${status}`);
+    }
+
+    return problems.length ? problems.join("; ") : null;
+  },
+
   async card(page, spec) {
     const img = await page.evaluate(() =>
       (document.querySelector('meta[property="og:image"]') || {}).content);
@@ -518,6 +630,16 @@ const CHECKS = {
 const browser = await chromium.launch();
 let failures = 0;
 
+// Two things the page loop cannot say about itself.
+//
+// Every page must opt into `seo`. The runner skips any check whose key is undefined, so
+// deleting one line from PAGES turns the contract off for that page and changes no output.
+{
+  const off = PAGES.filter(p => !p.seo).map(p => p.path);
+  if (off.length) { console.log("✗ PAGES  seo is not enabled on: " + off.join(", ")); failures++; }
+}
+
+
 for (const spec of PAGES) {
   const page = await browser.newPage();
   const jsErrors = [];
@@ -544,5 +666,48 @@ for (const spec of PAGES) {
   await page.close();
 }
 await browser.close();
+// The crawl map is not a page, so it is checked separately, and this suite never checked
+// it at all. Two promises live here: every URL a sitemap claims must resolve, and every
+// sitemap robots.txt names must exist. guestgraph.io named three and two were 404 in
+// production for months; the same block is now in all three suites so it cannot happen
+// quietly here either.
+{
+  const res = await fetch(BASE + "/sitemap.xml");
+  if (!res.ok) { console.log(`✗ /sitemap.xml  HTTP ${res.status}`); failures++; }
+  else {
+    const xml = await res.text();
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+    const expected = PAGES.map(p => SITE + p.path);
+    const missing = expected.filter(u => !locs.includes(u));
+    const extra = locs.filter(u => !expected.includes(u));
+    if (missing.length || extra.length) {
+      console.log(`✗ /sitemap.xml  missing: ${missing} unexpected: ${extra}`); failures++;
+    } else {
+      let unreachable = 0;
+      for (const u of locs) {
+        const r = await fetch(u.replace(SITE, BASE));
+        if (!r.ok) { console.log(`✗ sitemap URL ${u} → ${r.status}`); failures++; unreachable++; }
+      }
+      if (!unreachable) console.log("✓ /sitemap.xml  " + locs.length + " urls, all reachable");
+    }
+  }
+
+  const rb = await fetch(BASE + "/robots.txt");
+  if (!rb.ok) { console.log(`✗ /robots.txt  HTTP ${rb.status}`); failures++; }
+  else {
+    const named = [...(await rb.text()).matchAll(/^\s*Sitemap:\s*(\S+)/gim)].map(m => m[1]);
+    if (!named.length) { console.log("✗ /robots.txt  names no sitemap"); failures++; }
+    else {
+      const dead = [];
+      for (const u of named) {
+        const r = await fetch(u.replace(SITE, BASE));
+        if (!r.ok) dead.push(`${u} → ${r.status}`);
+      }
+      if (dead.length) { console.log("✗ /robots.txt  names sitemap(s) that do not exist: " + dead.join(", ")); failures++; }
+      else console.log(`✓ /robots.txt  ${named.length} sitemap(s), all reachable`);
+    }
+  }
+}
+
 console.log(failures ? `\n${failures} page(s) FAILED` : "\nall checks pass");
 process.exit(failures ? 1 : 0);

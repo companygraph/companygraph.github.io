@@ -17,12 +17,15 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The model, drawn: the core vocabulary with its folder and its schemas.">
-<meta property="og:locale" content="en_GB">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
-
-<!-- Same rule as the landing page: the publisher and its other addresses, nothing about
-     what the software does or when it does it. An `Offer` here would be a price, and
-     this page deliberately quotes none. -->
+<!-- The publisher, the site and this page — nothing about what the software does or when
+     it does it, which is the same rule the prose follows. Each page carries the whole graph
+     it references: Google resolves @graph within one document, so a bare { "@id": ... }
+     naming a node defined on another page resolves to nothing. This page was written from
+     the pre-contract template while that fix was in flight, and shipped with exactly that
+     dangling isPartOf. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +36,19 @@
       "name": "CompanyGraph",
       "url": "https://companygraph.io/",
       "logo": "https://companygraph.io/logo.svg",
-      "sameAs": ["https://github.com/companygraph"]
+      "sameAs": [
+        "https://github.com/companygraph"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://companygraph.io/#website",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://companygraph.io/#organization"
+      }
     },
     {
       "@type": "WebPage",
@@ -41,12 +56,38 @@
       "name": "Model",
       "url": "https://companygraph.io/model/",
       "inLanguage": "en",
-      "isPartOf": { "@id": "https://companygraph.io/#website" },
-      "publisher": { "@id": "https://companygraph.io/#organization" }
+      "isPartOf": {
+        "@id": "https://companygraph.io/#website"
+      },
+      "publisher": {
+        "@id": "https://companygraph.io/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://companygraph.io/model/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://companygraph.io/model/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://companygraph.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Model",
+          "item": "https://companygraph.io/model/"
+        }
+      ]
     }
   ]
 }
 </script>
+
 <style>
 /* Self-hosted, same origin: no third party sees a visitor, and the files resolve
    from file:// as well as from the domain. Relative, because this page sits one
@@ -230,7 +271,7 @@
       <div class="stage" id="stage">
         <div class="canvas">
           <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recentre" id="recentre" type="button" data-de="zentrieren">recentre</button>
+          <button class="recenter" id="recenter" type="button" data-de="zentrieren">recenter</button>
         </div>
         <aside class="card" id="card" aria-live="polite">
           <div class="cbody" id="cbody"></div>
@@ -239,7 +280,7 @@
           </div>
         </aside>
       </div>
-      <p class="figcap" id="figcap" data-de="Ein umrandeter Kasten ist der Ordner, in dem die Schemas liegen. Ein gefülltes Quadrat ist ein Schema. Ein gestrichelter Strich ist ein Feld, das auf einen anderen Typ verweist, beschriftet mit dem Namen des Felds. Anklicken rückt in die Mitte.">An outlined box is the folder the schemas live in. A filled square is a schema. A dashed line is a field that references another type, labelled with the field's name. Click to bring it to the centre.</p>
+      <p class="figcap" id="figcap" data-de="Ein umrandeter Kasten ist der Ordner, in dem die Schemas liegen. Ein gefülltes Quadrat ist ein Schema. Ein gestrichelter Strich ist ein Feld, das auf einen anderen Typ verweist, beschriftet mit dem Namen des Felds. Anklicken rückt in die Mitte.">An outlined box is the folder the schemas live in. A filled square is a schema. A dashed line is a field that references another type, labeled with the field's name. Click to bring it to the center.</p>
 
       <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
            same #path, #fig and #card — and moves them back on close. The URL does not

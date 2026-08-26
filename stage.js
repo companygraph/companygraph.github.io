@@ -510,7 +510,7 @@
     showCard(n);
   }
 
-  document.getElementById("recentre").addEventListener("click", function(){
+  document.getElementById("recenter").addEventListener("click", function(){
     var D = (reduce && reduce.matches) ? 0 : 400;
     if (D) svg.transition().duration(D).call(zoom.transform, home); else svg.call(zoom.transform, home);
   });

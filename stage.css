@@ -16,16 +16,16 @@
          grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
   .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
   .canvas svg{display:block; width:100%; height:100%}
-  .recentre{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
+  .recenter{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
             background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
             padding:.35rem .6rem; cursor:pointer}
-  .recentre:hover, .recentre:focus-visible{border-color:var(--c-mid)}
+  .recenter:hover, .recenter:focus-visible{border-color:var(--c-mid)}
   .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
   .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
   .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem;
          display:flex; align-items:center; justify-content:space-between; gap:1rem}
   .cfoot a{font-family:"Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; color:var(--c-mid); text-decoration:none}
-  /* A control, never mono — .expand sits at the end of the path line, styled like .recentre
+  /* A control, never mono — .expand sits at the end of the path line, styled like .recenter
      because both are things you can do to the stage, not things it reports. It is visible at
      every focus: the whole stage — path, canvas and card — is always worth expanding, unlike
      the card alone, which had nothing to show for the root or a folder. */
