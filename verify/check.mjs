@@ -534,11 +534,28 @@ const CHECKS = {
       if (n) n.dispatchEvent(new MouseEvent("click", { bubbles: true }));
       return !!n;
     }, id);
-    const roots = data.types.filter(t => !t.owner).map(t => t.folder);
+    // A singular type has no folder (core 0.4.0, R6/R13): its one entity hangs off the root
+    // beside the folders, so it is counted here and never walked down to.
+    const singular = new Set(data.types.filter(t => !t.owner && !t.folder).map(t => t.type));
+    const roots = data.types.filter(t => !t.owner && t.folder).map(t => t.folder);
+    // The root is the identity entity where an instance has one, drawn as one node rather
+    // than two carrying the same name; the rest of the singular entities hang beside the
+    // folders.
+    const loose = data.entities.filter(e => singular.has(e.type) && e.id !== data.rootId);
     let ns = await nodes();
     if (!ns.find(n => n.id === "root" && n.focus)) return "initially the root is not the focus";
-    if (ns.length !== roots.length + 1) return `initially ${ns.length} nodes, expected root + ${roots.length} folders`;
-    const edge = data.edges[0]; if (!edge) return null;
+    if (ns.length !== roots.length + loose.length + 1)
+      return `initially ${ns.length} nodes, expected root + ${roots.length} folders + ${loose.length} singular entities`;
+    for (const e of loose)
+      if (!ns.find(n => n.id === e.id)) return `${e.id} is a singular type's entity and is not drawn at the root`;
+    if (data.rootId && ns.find(n => n.id === data.rootId))
+      return `${data.rootId} is drawn beside the root it is`;
+    // The walk below descends to a folder, so it needs an edge that starts inside one.
+    const edge = data.edges.find(e => {
+      const f = data.entities.find(x => x.id === e.from);
+      return f && !singular.has(f.type);
+    });
+    if (!edge) return null;
     const from = data.entities.find(e => e.id === edge.from);
     const folder = from.id.slice(0, from.id.lastIndexOf("/"));
     // Walk down to that folder one click at a time. The canvas is a neighbourhood, not a

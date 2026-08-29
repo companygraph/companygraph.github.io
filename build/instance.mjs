@@ -9,8 +9,11 @@
 //
 // Pure: no filesystem, no network, so verify/instance.test.mjs can feed it fixture maps.
 
-// The one string that is not in the instance. The example's own README calls itself "a
-// fictional company", which is why this is the word.
+// The fallback when an instance names no company. Core 0.4.0 gave it a way to: `identity` is
+// one entity in the container whose H1 is the company's name, so the root reads it and this
+// string is used only by an instance that predates the type or leaves it out. Before that,
+// nothing in an instance named the company — the name lived in a repository folder, which is
+// what R2 and R3 exist to keep out of a path.
 export const ROOT_LABEL = "Fictional Company";
 
 // The one invented string of the model page — nothing in core/ names the vocabulary itself.
@@ -107,6 +110,13 @@ function parseBody(lines) {
 function locate(path) {
   const parts = path.split("/");
   const chain = [];              // [{ folder, name, ownerId }]
+  // A singular type is one file directly in the container (core 0.4.0, R6/R13): the type is
+  // the filename, there is no folder to pluralise, and nothing owns it.
+  if (parts.length === 1 && parts[0].endsWith(".md")) {
+    const type = parts[0].slice(0, -3);
+    const self = { folder: null, name: type, ownerId: null, id: type, isFile: true, type };
+    return { chain: [self], self };
+  }
   let ownerId = null;
   for (let i = 0; i + 1 < parts.length; i += 2) {
     const folder = parts[i], item = parts[i + 1];
@@ -130,15 +140,15 @@ export function parseInstance(files) {
     const loc = locate(path);
     if (!loc) continue;
     const { self, chain } = loc;
-    const type = singular(self.folder);
+    const type = self.type ?? singular(self.folder);
     if (!type) throw new Error(`R7: folder "${self.folder}" is not the plural of a type (${path})`);
     const ownerType = self.ownerId ? singular(chain[chain.length - 2].folder) : null;
-    typeMap.set(type, { type, folder: self.folder, owner: ownerType });
+    typeMap.set(type, { type, folder: self.folder, owner: ownerType, singular: !self.folder });
     const lines = text.split("\n");
     const [fields, body] = parseFrontmatter(lines);
     const { name, tagline, sections } = parseBody(body);
     entities.push({ id: self.id, type, name, tagline, fields, sections,
-                    owner: self.ownerId, path: "example/" + path });
+                    owner: self.ownerId, path: "example/model/" + path });
   }
   entities.sort((a, b) => (a.id < b.id ? -1 : 1));
 
@@ -182,7 +192,13 @@ export function parseInstance(files) {
   edges.sort((a, b) => (a.from + a.via + a.to < b.from + b.via + b.to ? -1 : 1));
 
   const types = [...typeMap.values()].sort((a, b) => (a.type < b.type ? -1 : 1));
-  return { commit: null, root: ROOT_LABEL, types, entities, edges };
+  // The root of an instance is the company, and core 0.4.0 has an entity for it: `identity`.
+  // The page names the root after it and draws the two as one node, so `rootId` travels for
+  // the stage to find — which keeps the type's name here, where core's vocabulary is already
+  // known, rather than in a renderer that should not have to know it.
+  const identity = entities.find(e => e.type === "identity");
+  return { commit: null, root: identity ? identity.name : ROOT_LABEL,
+           rootId: identity ? identity.id : null, types, entities, edges };
 }
 
 // Turns core/ — the vocabulary itself, one *-schema.md file per type — into the same shape.
@@ -261,6 +277,6 @@ export function parseSchemas(files) {
   }
   edges.sort((a, b) => (a.from + a.via + a.to < b.from + b.via + b.to ? -1 : 1));
 
-  return { commit: null, root: CORE_LABEL,
+  return { commit: null, root: CORE_LABEL, rootId: null,
            types: [{ type: "schema", folder: "core", owner: null }], entities, edges };
 }

@@ -45,12 +45,20 @@
   // "<folder>/<entity>" a page, "<folder>/<entity>/<owned folder>" a folder a page owns. The
   // one invented id is "root", which has no path of its own.
   var byId = {}; data.entities.forEach(function(e){ byId[e.id] = e; });
-  var rootTypes = data.types.filter(function(t){ return !t.owner; });
+  // The root and the identity entity are one thing: the company. Drawing both would put the
+  // same name on the canvas twice, and the root would carry a page count where the entity has
+  // a tagline, contact and prose to show.
+  var rootEntity = data.rootId ? byId[data.rootId] : null;
+  // A singular type is one entity in the container and has no folder (core 0.4.0, R6/R13),
+  // so it hangs off the root directly. Everything else reaches the root through its folder.
+  var rootTypes = data.types.filter(function(t){ return !t.owner && t.folder; });
+  var singularTypes = data.types.filter(function(t){ return !t.owner && !t.folder; });
+  function isSingular(type){ return singularTypes.some(function(t){ return t.type === type; }); }
   function ownedTypes(type){ return data.types.filter(function(t){ return t.owner === type; }); }
 
   var cache = {};
   function keep(n){ return cache[n.id] || (cache[n.id] = n); }
-  function nRoot(){ return keep({ kind:"root", id:"root", label:data.root }); }
+  function nRoot(){ return keep({ kind:"root", id:"root", label:data.root, entity:rootEntity }); }
   function nFolder(id, type, ownerId){ return keep({ kind:"folder", id:id, type:type, ownerId:ownerId, label:id.slice(id.lastIndexOf("/") + 1) }); }
   function nEntity(e){ return keep({ kind:"entity", id:e.id, label:e.name, entity:e }); }
   function folderIdOf(id){ return id.slice(0, id.lastIndexOf("/")); }
@@ -59,10 +67,14 @@
     if (n.kind === "root") return null;
     if (n.kind === "folder") return n.ownerId ? nEntity(byId[n.ownerId]) : nRoot();
     var e = n.entity;
+    if (isSingular(e.type)) return nRoot();
     return nFolder(folderIdOf(e.id), e.type, e.owner);
   }
   function childrenOf(n){
-    if (n.kind === "root") return rootTypes.map(function(t){ return nFolder(t.folder, t.type, null); });
+    if (n.kind === "root") return data.entities
+      .filter(function(e){ return isSingular(e.type) && e !== rootEntity; })
+      .map(nEntity)
+      .concat(rootTypes.map(function(t){ return nFolder(t.folder, t.type, null); }));
     if (n.kind === "folder") return data.entities
       .filter(function(e){ return e.type === n.type && e.owner === n.ownerId; })
       .map(nEntity);
@@ -75,6 +87,7 @@
   // Returns null for an id no page here holds, which is what a hand-edited hash looks like.
   function nodeById(id){
     if (!id) return null;
+    if (rootEntity && id === rootEntity.id) return nRoot();
     if (byId[id]) return nEntity(byId[id]);
     var n = nRoot();
     for (;;) {
@@ -384,7 +397,9 @@
   // dialog is open or not.
   function renderInto(n, bodyEl, footEl){
     clear(bodyEl); clear(footEl);
-    if (n.kind !== "entity") {
+    // The root carries an entity where the instance names its company, so it renders as one:
+    // a tagline, the fields and the prose, rather than a name over a page count.
+    if (n.kind !== "entity" && !n.entity) {
       // Not empty, and the same shape as an entity's card so the panel never jumps: the
       // path in mono where the entity puts its type and path, then one line of what is
       // focused and how many pages are filed under it. Both come out of the block.
@@ -402,6 +417,9 @@
     bodyEl.appendChild(h("div", e.type + " · " + e.id, "eyebrow"));
     bodyEl.appendChild(h("h3", e.name));
     if (e.tagline) bodyEl.appendChild(h("p", e.tagline, "tag"));
+    // The root is the company and the container both, so its card keeps the count the folder
+    // cards carry: what this is, and how much is filed under it.
+    if (n.kind === "root") bodyEl.appendChild(h("p", pagesUnder(n) + " " + t("pages"), "empty"));
     var keys = Object.keys(e.fields);
     if (keys.length) {
       var dl = h("dl");

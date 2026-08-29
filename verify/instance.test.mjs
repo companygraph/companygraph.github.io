@@ -24,11 +24,11 @@ test("the root label is the one invented string", () => {
 test("types come from folders, singular by R7, with their owner", () => {
   const { types } = parseInstance(valid);
   assert.deepEqual(types, [
-    { type: "experience", folder: "experiences", owner: "profile" },
-    { type: "proficiency-level", folder: "proficiency-levels", owner: null },
-    { type: "profile", folder: "profiles", owner: null },
-    { type: "skill", folder: "skills", owner: null },
-    { type: "value", folder: "values", owner: null },
+    { type: "experience", folder: "experiences", owner: "profile", singular: false },
+    { type: "proficiency-level", folder: "proficiency-levels", owner: null, singular: false },
+    { type: "profile", folder: "profiles", owner: null, singular: false },
+    { type: "skill", folder: "skills", owner: null, singular: false },
+    { type: "value", folder: "values", owner: null, singular: false },
   ]);
 });
 
@@ -40,7 +40,7 @@ test("an entity is its H1, tagline, fields, sections and path; a README is not o
     id: "skills/java-programming", type: "skill", name: "Java Programming",
     tagline: "JVM services.", fields: { group: "Programming Languages" },
     sections: [{ heading: "In practice", text: "Reading the stack trace.", tables: [] }],
-    owner: null, path: "example/skills/java-programming.md",
+    owner: null, path: "example/model/skills/java-programming.md",
   });
 });
 
@@ -48,7 +48,7 @@ test("the folder form names the entity by its folder and owns what nests inside 
   const { entities } = parseInstance(valid);
   const mira = entities.find(e => e.name === "Mira Halvorsen");
   assert.equal(mira.id, "profiles/mira-halvorsen");
-  assert.equal(mira.path, "example/profiles/mira-halvorsen/mira-halvorsen.md");
+  assert.equal(mira.path, "example/model/profiles/mira-halvorsen/mira-halvorsen.md");
   const exp = entities.find(e => e.type === "experience");
   assert.equal(exp.owner, "profiles/mira-halvorsen");
   assert.equal(exp.id, "profiles/mira-halvorsen/experiences/2022-beacon-systems");
