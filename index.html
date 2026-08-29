@@ -211,6 +211,12 @@
   .clarify{margin-top:1.5rem; font-size:clamp(.95rem,1.2vw,1.05rem); color:var(--dim);
            max-width:62ch; line-height:1.5}
   .clarify b{color:var(--ink); font-weight:600}
+  /* No generic a{} rule here — every link is styled where it sits. This is the inline
+     treatment the other sites use for a link inside a sentence: the ink of the text it
+     is part of, a rule under it, and the accent only on hover. */
+  .clarify a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rule);
+             transition:color .18s ease, border-color .18s ease}
+  .clarify a:hover, .clarify a:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
   .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.5rem); color:var(--dim);
            max-width:44ch; line-height:1.4}
   .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
