@@ -169,6 +169,8 @@
      font-weight:700; letter-spacing:-.025em; line-height:1.06;
      font-size:clamp(1.6rem,3vw,2.3rem)}
   h2 em{font-style:normal; color:var(--c-mid)}
+  .derived{margin-top:2.4rem; font-size:.92rem; color:var(--dim); max-width:66ch}
+  .derived a, .derived #srccommit{font-family:"Plex Mono",monospace; font-size:.84rem}
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
 
   /* the source commit, stated once, in the face this system reserves for data */
@@ -300,11 +302,7 @@
       </div>
     </section>
 
-    <section>
-      <h2 data-de="Woher es kommt">Where it comes from</h2>
-      <p class="unit mono"><a id="srclink" data-src="example" href="https://github.com/companygraph/meta-model/tree/HEAD/example">meta-model/example @ <span id="srccommit">HEAD</span></a></p>
-      <p class="lede" data-de="Das Beispiel ist absichtlich erfunden, und sein README sagt, warum. Diese Seite sagt es nicht noch einmal — sie verlinkt.">The example is fictional by design, and its README says why. This page does not say it again — it links.</p>
-    </section>
+    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="example/model" href="https://github.com/companygraph/meta-model/tree/HEAD/example/model">companygraph/meta-model</a>@<span id="srccommit">HEAD</span> — <span data-de="das Unternehmen ist bewusst erfunden, und sein README sagt warum.">the company is fictional by design, and its README says why.</span></p>
 
   </div>
 </main>

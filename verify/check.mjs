@@ -84,7 +84,7 @@ const PAGES = [
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
   { path: "/example/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
-    contains: ["One company", "drawn", "A solid line means", "How to read it", "Where it comes from"],
+    contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
@@ -99,7 +99,7 @@ const PAGES = [
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
   { path: "/model/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
-    contains: ["The model", "drawn", "A dashed line", "How to read it", "Where it comes from"],
+    contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
