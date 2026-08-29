@@ -69,18 +69,7 @@
       },
       "publisher": {
         "@id": "https://companygraph.io/#organization"
-      },
-      "isRelatedTo": {
-        "@id": "https://guestgraph.io/#software"
       }
-    },
-    {
-      "@type": "SoftwareSourceCode",
-      "@id": "https://guestgraph.io/#software",
-      "name": "GuestGraph",
-      "url": "https://guestgraph.io/",
-      "description": "An open-source guest identity graph for hospitality: one explainable, reversible guest profile derived from records scattered across every system in the hotel.",
-      "author": { "@id": "https://blust.ch/#person" }
     },
     {
       "@type": "WebPage",
@@ -211,12 +200,6 @@
   .clarify{margin-top:1.5rem; font-size:clamp(.95rem,1.2vw,1.05rem); color:var(--dim);
            max-width:62ch; line-height:1.5}
   .clarify b{color:var(--ink); font-weight:600}
-  /* No generic a{} rule here — every link is styled where it sits. This is the inline
-     treatment the other sites use for a link inside a sentence: the ink of the text it
-     is part of, a rule under it, and the accent only on hover. */
-  .clarify a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rule);
-             transition:color .18s ease, border-color .18s ease}
-  .clarify a:hover, .clarify a:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
   .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.5rem); color:var(--dim);
            max-width:44ch; line-height:1.4}
   .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
@@ -341,7 +324,7 @@
   <section class="hero">
     <h1 data-de="<span class='r70'>Jede Rolle, jede Regel.</span><span class='rcl'>Einmal <em>aufgeschrieben</em>.</span>"><span class="r70">Every role, every rule.</span><span class="rcl">Written down <em>once</em>.</span></h1>
     <p class="tagline" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
-    <p class="clarify" data-de="<b>Kein Identity-Graph.</b> CompanyGraph gleicht keine Datensätze ab und führt keine zusammen; es ist das Vokabular, in dem das Wissen eines Unternehmens geschrieben steht. Identitäten aufzulösen ist die Aufgabe des Schwesterprojekts <a href=&quot;https://guestgraph.io/&quot;>GuestGraph</a> — für Gäste."><b>Not an identity graph.</b> CompanyGraph does not match or deduplicate records; it is the vocabulary a company's own knowledge is written in. Resolving identities is what its sibling project <a href="https://guestgraph.io/">GuestGraph</a> does, for guests.</p>
+    <p class="clarify" data-de="<b>Es ist ein Vokabular.</b> CompanyGraph ist das Vokabular, in dem das Wissen eines Unternehmens geschrieben steht — die Form, die seine Dateien annehmen, kein Speicher für Datensätze und kein Verfahren, sie abzugleichen."><b>It is a vocabulary.</b> CompanyGraph is the vocabulary a company’s own knowledge is written in — the shape its files take, not a store of records or a way of matching them.</p>
     <div class="cta">
       <a class="btn primary" href="talks/intro/"
          data-de="Einführungsvortrag ansehen">Watch intro talk</a>

@@ -35,11 +35,15 @@ const PAGES = [
                // still not derived from the deck's own timings, so re-cut the talk and this
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
-               "Watch intro talk", "12 minutes · German or English"],
+               "Watch intro talk", "12 minutes · German or English",
+               // The sentence exists because a reader who arrives from the word
+               // "graph" guesses the wrong thing. Pin its claim: this is a
+               // vocabulary. Only the words that carry the claim, so rewording the
+               // rest of the sentence does not fail the check.
+               "It is a vocabulary", "written in"],
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
-            "https://guestgraph.io/",
             "https://blust.ch/"],
     // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
     // page whole; what `sameTab` adds is the name. The nav gained one item and the check
