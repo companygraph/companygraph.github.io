@@ -16,7 +16,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -65,7 +65,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -76,7 +76,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -88,7 +88,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -103,7 +103,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -114,7 +114,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data" },
 
-  { path: "/talks/", navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -257,6 +257,50 @@ const CHECKS = {
   // This function is a fourth copy, kept identical in all three suites the way the head
   // contract and the no-new-tab check are. A rule that is one row for a visitor is worth
   // asserting the same way everywhere.
+  // One line runs through the middle of every word in the header — the wordmark, each nav
+  // item, and both language segments. It did not before: nav is a flex row, its links
+  // stretched to the row's height with their text at the top, and the language control sat
+  // 5px lower than the words beside it.
+  //
+  // Measured on the text, not the boxes. A box can be centred while the text inside it is
+  // not — that is exactly the bug this replaced, and a check comparing boxes would have
+  // called it aligned.
+  //
+  // Two tolerances, because there are two fonts. The nav items and the language segments
+  // are the same face at the same size, so they must agree to within half a pixel; that is
+  // the pair the fix was about, and a loose bound there proved useless — with the link box
+  // already symmetric, undoing `align-items:center` still landed inside 1px. The wordmark
+  // is a different face, and where a line box falls inside its em box is the font's
+  // business and the platform's, so it gets 1.5px and is judged against the row, not
+  // against a single item of it.
+  async headerBaseline(page) {
+    return await page.evaluate(() => {
+      const mid = el => {
+        const n = [...el.childNodes].find(x => x.nodeType === 3 && x.textContent.trim());
+        const r = document.createRange(); r.selectNodeContents(n || el);
+        const b = r.getBoundingClientRect(); return (b.top + b.bottom) / 2;
+      };
+      const row = [];
+      document.querySelectorAll("nav a").forEach(a => row.push([a.textContent.trim(), mid(a)]));
+      for (const id of ["lde", "len"]) {
+        const el = document.getElementById(id);
+        if (el) row.push([el.textContent.trim(), mid(el)]);
+      }
+      if (row.length < 2) return "the nav row has fewer texts than a row";
+      const vals = row.map(r => r[1]);
+      const base = vals.reduce((a, b) => a + b, 0) / vals.length;
+      const spread = Math.max(...vals) - Math.min(...vals);
+      if (spread > 0.5)
+        return `nav texts are ${spread.toFixed(2)}px apart: ` +
+          row.map(([n, v]) => `${n} ${(v - base >= 0 ? "+" : "") + (v - base).toFixed(2)}`).join(", ");
+      const mark = document.querySelector(".brand b");
+      if (mark) {
+        const d = mid(mark) - base;
+        if (Math.abs(d) > 1.5) return `the wordmark sits ${d.toFixed(2)}px off the nav row`;
+      }
+      return null;
+    });
+  },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
     return await page.evaluate(order => {
@@ -498,10 +542,22 @@ const CHECKS = {
     const englishTitle = await page.title();
     const englishDesc = await desc();
 
-    // The talks index's single toggle is #langind; a deck's transport bar carries its
-    // own control under its own id, so the spec names it rather than this check
-    // branching on which page it is.
-    const toggle = "#" + (spec.translates.id || "langind");
+    // Press the DE segment — the control that means "switch to German", which is what
+    // this check is asserting. It used to click #langind, and #langind used to be the
+    // button itself; it is now the box holding both segments, so that click landed on
+    // the container and did nothing. Two pages still passed, because the box's centre
+    // falls on the seam between DE and EN and the click sometimes caught a button. A
+    // check that passes by a rounding accident is worse than one that fails.
+    //
+    // A deck's transport carries its own control under its own id, so the spec names it
+    // rather than this check branching on which page it is.
+    const toggle = "#" + (spec.translates.id || "lde");
+    // Going back is a different control now, not the same one pressed twice: a segmented
+    // control has one button per language, and pressing DE while already in German is
+    // correctly a no-op. `back` is what returns the page to English.
+    // A page whose spec names its own control — the deck, whose transport carries a single
+    // toggle that flips both ways — returns by pressing that same one again.
+    const back = "#" + (spec.translates.backId || spec.translates.id || "len");
     await page.click(toggle);
     const swapped = await htmlLang();
     if (swapped !== spec.translates.lang)
@@ -535,9 +591,9 @@ const CHECKS = {
         return `after the toggle meta description is ${JSON.stringify(germanDesc)}, expected ${JSON.stringify(spec.translates.desc)}`;
     }
 
-    await page.click(toggle);
-    const back = await htmlLang();
-    if (back !== "en") return `toggling back left lang=${back}, expected en`;
+    await page.click(back);
+    const returned = await htmlLang();
+    if (returned !== "en") return `toggling back left lang=${returned}, expected en`;
     if (await body() !== english) return "toggling back did not restore the English text";
     if (await page.title() !== englishTitle) return "toggling back did not restore the English title";
     if (await desc() !== englishDesc) return "toggling back did not restore the English meta description";
@@ -665,7 +721,7 @@ const CHECKS = {
   async fits(page, spec) {
     const before = page.viewportSize();
     const overflow = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-    const toggle = "#" + ((spec.translates && spec.translates.id) || "langind");
+    const toggle = "#" + ((spec.translates && spec.translates.id) || "lde");
     try {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.waitForTimeout(250);
