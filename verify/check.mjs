@@ -35,7 +35,12 @@ const PAGES = [
                // still not derived from the deck's own timings, so re-cut the talk and this
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
-               "Watch intro talk", "12 minutes · German or English"],
+               "Watch intro talk", "12 minutes · German or English",
+               // The sentence exists because a reader who arrives from the word
+               // "graph" guesses the wrong thing. Pin its claim: this is a
+               // vocabulary. Only the words that carry the claim, so rewording the
+               // rest of the sentence does not fail the check.
+               "Nothing here matches or merges records", "vocabulary"],
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
