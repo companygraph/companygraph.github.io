@@ -16,7 +16,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -65,7 +65,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -76,7 +76,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -88,7 +88,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -103,7 +103,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -114,7 +114,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data" },
 
-  { path: "/talks/", seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -240,6 +240,42 @@ const CHECKS = {
   // back-button muscle memory saves that in front of a room. The exception keys on *where* a
   // link sits, not where it points — which is why it is `.closest(".slide")` and not a list
   // of hrefs that would need maintaining.
+  // The nav is one row across three sites, and it is written by hand on every page, so it
+  // drifted: blust.ch put Principles after Talks on four pages and before it on the fifth,
+  // and companygraph.io led with Talks while its siblings did not. Nothing caught it — the
+  // items were all present, and `contains` does not see order.
+  //
+  // The family's order, left to right, is Ideas, Principles, Model, Example, Talks, Billing,
+  // Privacy, then the language switcher. Read right to left it is the reverse, which is how
+  // the rule was given: the switcher sits at the edge, and the further left an item is, the
+  // more it is the site's own subject. A site skips what it does not have; no site may
+  // reorder what it does have, and nothing outside the list may appear in the row.
+  //
+  // Privacy is on the list but lives in the footer on all three sites today. That is a
+  // placement, not an exception: if it ever moves into the nav, this is where it goes.
+  //
+  // This function is a fourth copy, kept identical in all three suites the way the head
+  // contract and the no-new-tab check are. A rule that is one row for a visitor is worth
+  // asserting the same way everywhere.
+  async navOrder(page) {
+    const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
+    return await page.evaluate(order => {
+      const nav = document.querySelector("nav");
+      if (!nav) return "there is no nav";
+      const items = [...nav.querySelectorAll("a")].map(a => a.textContent.trim());
+      const unknown = items.filter(i => !order.includes(i));
+      if (unknown.length) return "not named by the order rule: " + unknown.join(", ");
+      const want = order.filter(i => items.includes(i));
+      if (items.join(" ") !== want.join(" "))
+        return `order is ${items.join(" · ")}; the rule is ${want.join(" · ")}`;
+      // The switcher is the right-hand edge of the row, so nothing may follow it.
+      const kids = [...nav.children];
+      const sw = kids.findIndex(el => el.id === "langind" || el.classList.contains("langind"));
+      if (sw === -1) return "the language switcher is not in the nav";
+      if (sw !== kids.length - 1) return "something sits to the right of the language switcher";
+      return null;
+    }, ORDER);
+  },
   async noNewTab(page) {
     const bad = await page.evaluate(() => {
       const live = [...document.querySelectorAll('a[target="_blank"]')]
