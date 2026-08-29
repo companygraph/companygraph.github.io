@@ -16,7 +16,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -65,7 +65,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -76,7 +76,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -88,7 +88,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -103,7 +103,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -114,7 +114,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data" },
 
-  { path: "/talks/", headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -134,7 +134,7 @@ const PAGES = [
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: SITE, internalLinks: true },
-  { path: "/talks/intro/", seo: true, noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+  { path: "/talks/intro/", carriesLang: true, seo: true, noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
     // check that fails when an href is simply wrong, so without this line a typo in the
@@ -300,6 +300,57 @@ const CHECKS = {
       }
       return null;
     });
+  },
+  // Three domains, three localStorages, one preference. A visitor reading German on one
+  // site and following a link to a sibling used to arrive in English, because an origin
+  // cannot see what another origin stored. The language travels in the link instead.
+  //
+  // Three things have to hold, and the middle one is the reason the implementation looks
+  // the way it does. A family link can live inside a data-de attribute, and switching
+  // language replaces that element whole, so an href decorated at load would be thrown
+  // away by the first toggle; decorating on mousedown survives it, and keeps the param
+  // out of the served markup — nothing crawlable or copyable carries it.
+  //
+  // Driven with mousedown rather than click on purpose: it is the event that fires before
+  // the browser follows a link, so it can be dispatched without navigating away.
+  async carriesLang(page, spec) {
+    const problems = [];
+    await page.goto(spec.absolute + "?lang=de", { waitUntil: "networkidle" });
+    const arrived = await page.evaluate(() => ({
+      lang: document.documentElement.lang, search: location.search,
+    }));
+    if (arrived.lang !== "de")
+      problems.push(`arriving with ?lang=de left the page in ${arrived.lang}`);
+    if (/lang=/.test(arrived.search))
+      problems.push(`the param stayed in the address bar as ${JSON.stringify(arrived.search)}`);
+
+    const probe = await page.evaluate(() => {
+      const pick = test => [...document.querySelectorAll("a[href]")].find(a => {
+        try { return test(new URL(a.href, location.href)); } catch (e) { return false; }
+      });
+      const press = a => {
+        const before = a.getAttribute("href");
+        a.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+        return { before, after: a.getAttribute("href") };
+      };
+      const FAMILY = /^(www\.)?(blust\.ch|companygraph\.io|guestgraph\.io)$/;
+      const out = { away: null, home: null };
+      const away = pick(u => u.origin !== location.origin && FAMILY.test(u.hostname));
+      if (away) out.away = press(away);
+      const home = pick(u => u.origin === location.origin);
+      if (home) out.home = press(home);
+      return out;
+    });
+    // A page with no link to a sibling domain simply has nothing to carry.
+    if (probe.away && !/[?&]lang=de(&|$)/.test(probe.away.after))
+      problems.push(`a link to ${probe.away.before} did not pick the language up: ${probe.away.after}`);
+    if (probe.home && probe.home.after !== probe.home.before)
+      problems.push(`a same-origin link was rewritten to ${probe.home.after}; it shares this storage already`);
+
+    // Leave the page as this check found it, for whatever runs next.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return problems.length ? problems.join("; ") : null;
   },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
