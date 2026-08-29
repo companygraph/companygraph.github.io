@@ -39,6 +39,7 @@ const PAGES = [
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
+            "https://guestgraph.io/",
             "https://blust.ch/"],
     // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
     // page whole; what `sameTab` adds is the name. The nav gained one item and the check
