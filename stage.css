@@ -134,5 +134,7 @@
   #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
   #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
   #fig text.eyebrow{fill:var(--dim); letter-spacing:.08em}
+  #fig text.typelab{font-family:"Plex Mono",monospace; font-size:11.5px; fill:var(--dim);
+                    letter-spacing:.08em}
   #fig text.attr{fill:var(--dim)}
   #fig text.root{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:15px}

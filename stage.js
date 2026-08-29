@@ -54,6 +54,13 @@
   var rootTypes = data.types.filter(function(t){ return !t.owner && t.folder; });
   var singularTypes = data.types.filter(function(t){ return !t.owner && !t.folder; });
   function isSingular(type){ return singularTypes.some(function(t){ return t.type === type; }); }
+  // A folder node is named for its type, so what kind of thing it is reads off the canvas. A
+  // singular entity is named for itself and sits among those folders, so its type would be the
+  // one thing on the level nothing states — this puts it back.
+  function typeOf(d){
+    var e = d.node.entity;
+    return e && isSingular(e.type) ? e.type : "";
+  }
   function ownedTypes(type){ return data.types.filter(function(t){ return t.owner === type; }); }
 
   var cache = {};
@@ -331,6 +338,7 @@
       .on("keydown", function(ev, d){ if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); focus(d.node); } });
     enter.append("rect");
     halo(enter.append("text")).attr("class", "label");
+    halo(enter.append("text")).attr("class", "typelab");
     halo(enter.append("text")).attr("class", "attr");
     enter.transition().duration(D).style("opacity", 1);
 
@@ -352,6 +360,12 @@
        .attr("y", function(d){ return d.role === "focus" ? -markW(d) - 16 : 0; })
        .attr("text-anchor", function(d){ return d.role === "in" ? "end" : null; })
        .text(function(d){ return d.node.label; });
+    // Rides above the label, at the label's own x and anchor, so it reads as one block.
+    all.select("text.typelab")
+       .attr("x", function(d){ return d.role === "focus" ? -markW(d) : d.role === "in" ? -markW(d) - GAP : markW(d) + GAP; })
+       .attr("y", function(d){ return (d.role === "focus" ? -markW(d) - 16 : 0) - 14; })
+       .attr("text-anchor", function(d){ return d.role === "in" ? "end" : null; })
+       .text(typeOf);
     all.select("text.attr")
        .attr("x", function(d){ return d.role === "in" ? -markW(d) - GAP - nameW(d) - GAP : markW(d) + GAP + nameW(d) + GAP; })
        .attr("text-anchor", function(d){ return d.role === "in" ? "end" : null; })
