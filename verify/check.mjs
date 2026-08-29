@@ -40,7 +40,7 @@ const PAGES = [
                // "graph" guesses the wrong thing. Pin its claim: this is a
                // vocabulary. Only the words that carry the claim, so rewording the
                // rest of the sentence does not fail the check.
-               "It is a vocabulary", "written in"],
+               "Nothing here matches or merges records", "vocabulary"],
     links: ["https://github.com/companygraph/meta-model",
             "https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",

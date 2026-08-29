@@ -197,9 +197,11 @@
   .hero h1 .r70{display:block; font-weight:300; color:var(--dim)}
   .hero h1 .rcl{display:block; font-weight:800}
   .hero h1 em{font-style:normal; color:var(--c-firm)}
-  .clarify{margin-top:1.5rem; font-size:clamp(.95rem,1.2vw,1.05rem); color:var(--dim);
-           max-width:62ch; line-height:1.5}
-  .clarify b{color:var(--ink); font-weight:600}
+  /* The page's one reversal, flagged the way the model page flags its own: a visitor who
+     reads "graph" assumes records being matched, and this line says the opposite. Same rule,
+     same colour, same slot under the tagline — a reader who has seen one recognises the other. */
+  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
   .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.5rem); color:var(--dim);
            max-width:44ch; line-height:1.4}
   .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
@@ -225,8 +227,8 @@
 
      Both trees are --c-weak deliberately: they are candidates, considered and not
      accepted, because the answer is the shape and not either of them. --c-firm is the
-     shape. Nothing in the figure is interactive, so nothing in it is --c-mid, and there
-     is no reversal here, so there is no --c-flag. */
+     shape. Nothing in the figure is interactive, so nothing in it is --c-mid, and the
+     page's one reversal is the note above, so there is no --c-flag in the figure either. */
   /* `display:contents` puts the drawing and its caption into `main .shell`'s flex row as
      two independent items, each taking a full-width row of its own beneath the hero — the
      drawing first, the caption under it. The figcaption stays inside <figure> in the
@@ -324,7 +326,7 @@
   <section class="hero">
     <h1 data-de="<span class='r70'>Jede Rolle, jede Regel.</span><span class='rcl'>Einmal <em>aufgeschrieben</em>.</span>"><span class="r70">Every role, every rule.</span><span class="rcl">Written down <em>once</em>.</span></h1>
     <p class="tagline" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens — die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
-    <p class="clarify" data-de="<b>Es ist ein Vokabular.</b> CompanyGraph ist das Vokabular, in dem das Wissen eines Unternehmens geschrieben steht — die Form, die seine Dateien annehmen, kein Speicher für Datensätze und kein Verfahren, sie abzugleichen."><b>It is a vocabulary.</b> CompanyGraph is the vocabulary a company’s own knowledge is written in — the shape its files take, not a store of records or a way of matching them.</p>
+    <p class="note" data-de="Nichts hier gleicht Datensätze ab oder führt sie zusammen: CompanyGraph ist das Vokabular, in dem das Wissen eines Unternehmens geschrieben steht.">Nothing here matches or merges records: CompanyGraph is the vocabulary a company’s own knowledge is written in.</p>
     <div class="cta">
       <a class="btn primary" href="talks/intro/"
          data-de="Einführungsvortrag ansehen">Watch intro talk</a>
