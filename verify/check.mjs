@@ -16,7 +16,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -65,7 +65,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -76,7 +76,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -88,7 +88,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -103,7 +103,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -114,7 +114,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data" },
 
-  { path: "/talks/", carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -350,6 +350,64 @@ const CHECKS = {
     // Leave the page as this check found it, for whatever runs next.
     await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
     await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return problems.length ? problems.join("; ") : null;
+  },
+  // The row at phone widths. Every page in the three sites used to answer this its own way
+  // — some wrapped the bar, some wrapped the nav, and the two whose `.bar` carried no
+  // `flex-wrap` let the wordmark itself break, so "rb Robert Blust" arrived on two lines.
+  //
+  // Checked at 360px, which is narrower than the phones in the analytics and wide enough
+  // that nothing here is a special case. The wordmark is measured against its own mark: if
+  // the name has dropped below it the brand is twice the mark's height, and no tolerance is
+  // needed to see it.
+  //
+  // The switcher is asserted visible on purpose. It would be easy to sweep it into the menu
+  // with everything else, and for a bilingual audience that is the wrong trade — a language
+  // control someone cannot find costs more than the tap it saves.
+  async mobileNav(page, spec) {
+    const problems = [];
+    await page.setViewportSize({ width: 360, height: 640 });
+    try {
+      await page.goto(spec.absolute, { waitUntil: "networkidle" });
+      const shut = await page.evaluate(() => {
+        const q = s => document.querySelector(s);
+        const seen = el => el && getComputedStyle(el).display !== "none";
+        const brand = q(".brand").getBoundingClientRect().height;
+        const mark = q(".brand svg").getBoundingClientRect().height;
+        return {
+          brand: Math.round(brand), mark: Math.round(mark),
+          wide: document.documentElement.scrollWidth > window.innerWidth,
+          links: seen(q("#navlinks")), burger: seen(q("#burger")), seg: seen(q("#langind")),
+        };
+      });
+      if (shut.brand > shut.mark)
+        problems.push(`the wordmark broke: the brand is ${shut.brand}px against a ${shut.mark}px mark`);
+      if (shut.wide) problems.push("the page scrolls sideways");
+      if (shut.links) problems.push("the links are still in the row at 360px");
+      if (!shut.burger) problems.push("there is no menu button");
+      if (!shut.seg) problems.push("the language control is not on the bar");
+
+      // Only drive the button if it is there to be driven: clicking a hidden one waits the
+      // full timeout and reports that instead of the thing actually wrong.
+      if (shut.burger) {
+      await page.click("#burger");
+      const open = await page.evaluate(() => ({
+        links: getComputedStyle(document.getElementById("navlinks")).display !== "none",
+        flag: document.getElementById("burger").getAttribute("aria-expanded"),
+      }));
+      if (!open.links) problems.push("pressing the button did not open the menu");
+      if (open.flag !== "true") problems.push(`the button reports aria-expanded=${open.flag} while open`);
+
+      await page.keyboard.press("Escape");
+      const closed = await page.evaluate(() =>
+        getComputedStyle(document.getElementById("navlinks")).display === "none");
+      if (!closed) problems.push("Escape did not close the menu");
+      }
+    } finally {
+      // Every other check runs at the desktop size; leave the page as they expect it.
+      await page.setViewportSize({ width: 1280, height: 720 });
+      await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    }
     return problems.length ? problems.join("; ") : null;
   },
   async navOrder(page) {
