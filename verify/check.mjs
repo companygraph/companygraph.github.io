@@ -16,7 +16,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -65,7 +65,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -76,7 +76,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -88,7 +88,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -97,13 +97,13 @@ const PAGES = [
                   title: "Beispiel — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
-    card: true, cardBase: SITE, internalLinks: true, graph: "example-data" },
+    card: true, cardBase: SITE, internalLinks: true, graph: "example-data", divider: true },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -112,9 +112,9 @@ const PAGES = [
                   title: "Modell — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
-    card: true, cardBase: SITE, internalLinks: true, graph: "model-data" },
+    card: true, cardBase: SITE, internalLinks: true, graph: "model-data", divider: true },
 
-  { path: "/talks/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -409,6 +409,121 @@ const CHECKS = {
       await page.goto(spec.absolute, { waitUntil: "networkidle" });
     }
     return problems.length ? problems.join("; ") : null;
+  },
+  // The details pane is draggable, because 360px is right for a folder's card and wrong for a
+  // profile claiming fifty-eight skills. Asserted through the behaviour a reader has, not the
+  // implementation: drag it, and the pane is wider and the width is remembered; double-click,
+  // and it is back to the default with nothing stored; and no drag may push the canvas under
+  // its floor, which is the failure that arithmetic ignoring the grid's gaps produced.
+  async divider(page, spec) {
+    const CANVAS_MIN = 320;
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    await page.evaluate(() => { try { localStorage.removeItem("stage-card"); localStorage.removeItem("stage-card-modal"); } catch (e) {} });
+    await page.reload({ waitUntil: "networkidle" });
+    const width = () => page.evaluate(() => Math.round(document.querySelector(".card").getBoundingClientRect().width));
+    const canvas = () => page.evaluate(() => Math.round(document.querySelector(".canvas").getBoundingClientRect().width));
+    const g = await page.$("#gutter");
+    if (!g) return "there is no divider between the canvas and the card";
+    const before = await width();
+    // With nothing stored the two panes start equal — the reader is shown both halves of the
+    // stage and decides from there, rather than being given a details column sized for the
+    // narrowest thing it ever has to hold.
+    if (Math.abs((await canvas()) - before) > 2)
+      return `the stage does not open even: canvas ${await canvas()}, card ${before}`;
+
+    // The stage is taller than the window the suite runs at, so the handle's midpoint can sit
+    // below the fold — a press aimed there lands on nothing and the drag silently does not
+    // happen. Bring it into view and aim at a point that is certainly on screen.
+    await page.$eval(".stage", (el) => el.scrollIntoView({ block: "center" }));
+    await page.waitForTimeout(150);
+    const box = await g.boundingBox();
+    const y = Math.min(box.y + box.height / 2, box.y + 60);
+    await page.mouse.move(box.x + box.width / 2, y);
+    await page.mouse.down();
+    await page.mouse.move(box.x - 160, y, { steps: 8 });
+    await page.mouse.up();
+    const dragged = await width();
+    if (!(dragged > before)) return `dragging the divider left did not widen the card: ${before} → ${dragged}`;
+    const stored = await page.evaluate(() => localStorage.getItem("stage-card"));
+    if (!stored) return "the width was not remembered after a drag";
+
+    await page.reload({ waitUntil: "networkidle" });
+    if (Math.abs((await width()) - dragged) > 2) return `the remembered width did not survive a reload: ${await width()} vs ${dragged}`;
+
+    // A stored width wider than the box must clamp, and the canvas keeps its floor.
+    await page.evaluate(() => localStorage.setItem("stage-card", "9000"));
+    await page.reload({ waitUntil: "networkidle" });
+    if ((await canvas()) < CANVAS_MIN)
+      return `a stored width of 9000 left the canvas at ${await canvas()}px, under its ${CANVAS_MIN}px floor`;
+
+    await page.dblclick("#gutter");
+    if (Math.abs((await width()) - before) > 2) return `double-click did not restore the even split: ${await width()} vs ${before}`;
+    if (Math.abs((await canvas()) - (await width())) > 2)
+      return `double-click left the panes uneven: canvas ${await canvas()}, card ${await width()}`;
+    if (await page.evaluate(() => localStorage.getItem("stage-card")))
+      return "double-click restored the default but left the old width stored";
+
+    // Drag is not the only way in: a control that needs a pointer is unreachable without one.
+    await page.focus("#gutter");
+    await page.keyboard.press("ArrowLeft");
+    if (!((await width()) > before)) return "the divider does not respond to the keyboard";
+    const onPage = await width();
+
+    // Two boxes, two memories. The page gives the stage a column and the dialog gives it most
+    // of the window, so one number would be clamped to the page's maximum every time the
+    // dialog closed and the reader's choice in the wider box would be lost coming back.
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    const dialogDefault = await width();
+    if (dialogDefault === onPage)
+      return "the dialog opened at the page's width, so the two boxes share one memory";
+    await page.focus("#gutter");
+    await page.keyboard.press("ArrowLeft");
+    const inDialog = await width();
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+    if (Math.abs((await width()) - onPage) > 2)
+      return `closing the dialog left the page at ${await width()}, expected its own ${onPage}`;
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    if (Math.abs((await width()) - inDialog) > 2)
+      return `the dialog forgot its own width: ${await width()}, expected ${inDialog}`;
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+
+    await page.evaluate(() => { try { localStorage.removeItem("stage-card"); localStorage.removeItem("stage-card-modal"); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return null;
+  },
+  // The privacy page says "that is everything that gets stored" and then lists the keys. It
+  // was true until the divider started remembering its width, and nothing noticed — the claim
+  // is prose and the keys are in a script, so the two could only be compared by hand.
+  //
+  // This drives the page instead of reading it: every write to localStorage is recorded, the
+  // page is then made to do the things that write — switch language, move the divider — and
+  // each key that turns up must be named on the privacy page. A key the page does not declare
+  // is the failure; a key it declares and never writes is not, because a claim to store
+  // something is not a claim anyone is harmed by.
+  async storageKeys(page, spec) {
+    const declared = await (await fetch(new URL("/privacy/", spec.absolute).href)).text();
+    await page.addInitScript(() => {
+      window.__keys = [];
+      const real = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { window.__keys.push(k); return real.call(this, k, v); };
+    });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    // The two things on any page that write: the language control, and the divider where the
+    // page has one.
+    if (await page.$("#lde")) { await page.click("#lde"); await page.click("#len"); }
+    if (await page.$("#gutter")) { await page.focus("#gutter"); await page.keyboard.press("ArrowLeft"); }
+    const written = await page.evaluate(() => [...new Set(window.__keys)]);
+    const undeclared = written.filter((k) => !declared.includes(k));
+    // Leave the page as the rest of the suite expects it, storage included.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return undeclared.length
+      ? `writes ${undeclared.join(", ")}, which /privacy/ does not name`
+      : null;
   },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
@@ -780,6 +895,27 @@ const CHECKS = {
     await click(from.id); await page.waitForTimeout(500);
     const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
     if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    // Where you are and how you got here, in the drawing rather than only in the breadcrumb.
+    // `spine` was set on the ancestor chain and dropped before it reached the DOM, and the
+    // focused node wore the same colour as a hovered one, so the canvas said neither.
+    const context = await page.evaluate(() => ({
+      spines: document.querySelectorAll("#fig .own.spine").length,
+      ancestors: document.querySelectorAll("#fig .n.ancestor").length,
+      focusRing: (() => {
+        const f = document.querySelector("#fig .n.focus .sq, #fig .n.focus .box");
+        return f ? getComputedStyle(f).stroke : null;
+      })(),
+      hoverShares: (() => {
+        // the focus must not simply be what a pointer already does
+        const css = [...document.styleSheets].flatMap(s => { try { return [...s.cssRules]; } catch (e) { return []; } });
+        return css.some(r => r.selectorText && /\.n:hover .*\.n\.focus|\.n\.focus.*:hover/.test(r.selectorText));
+      })(),
+    }));
+    if (!context.spines) return "the path from the root to the focus is not drawn — no .own.spine";
+    if (!context.ancestors) return "no ancestor node is marked, so the path shows only as a line";
+    if (!context.focusRing || context.focusRing === "none")
+      return "the focused node carries no stroke of its own, so it reads as one more square";
+    if (context.hoverShares) return "the focus is styled in the same rule as :hover, so it cannot be told from a pointer";
     // The stage, expanded: Expand moves the whole stage — path, canvas and card — into
     // dialog#stagemodal, closed by its ×, Escape or a backdrop click. It is the same stage
     // moved, not a copy, so this checks the dialog actually contains #fig and #card (rather
@@ -870,6 +1006,38 @@ let failures = 0;
 {
   const off = PAGES.filter(p => !p.seo).map(p => p.path);
   if (off.length) { console.log("✗ PAGES  seo is not enabled on: " + off.join(", ")); failures++; }
+}
+
+// The token block is a copy on every page, and until now only its version was checked. That
+// is how three of them came to be in circulation at once: the ideas page had lost its
+// indentation and sat at column zero, and two more wordings arrived minutes apart from the
+// same edit run twice. A version says which release a page claims to be on; it cannot say
+// whether the page actually carries that release.
+//
+// Compared against each other rather than a recorded hash, because a hash is a second thing
+// to keep in step and would drift the same way. What this cannot see is a sibling repository
+// — that is what the version is for, and the two together are the whole guarantee.
+//
+// The slice stops at the last shared declaration. A deck's `:root` continues with tokens of
+// its own, so the brace after it belongs to the file and not to the block.
+{
+  const START = /[ \t]*\/\* ─── design tokens · v\d+[\s\S]*?--c-path:#[0-9A-Fa-f]{6};\n/;
+  const seen = new Map();
+  for (const spec of PAGES) {
+    const res = await fetch(BASE + spec.path);
+    const html = res.ok ? await res.text() : "";
+    const m = html.match(START);
+    if (!m) { console.log(`✗ ${spec.path}  carries no design token block`); failures++; continue; }
+    const key = m[0];
+    if (!seen.has(key)) seen.set(key, []);
+    seen.get(key).push(spec.path);
+  }
+  if (seen.size > 1) {
+    const groups = [...seen.values()].sort((a, b) => b.length - a.length);
+    console.log(`✗ PAGES  ${seen.size} different token blocks are in circulation:`);
+    for (const g of groups) console.log(`    ${g.join(", ")}`);
+    failures++;
+  }
 }
 
 
