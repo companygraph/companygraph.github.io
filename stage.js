@@ -23,7 +23,12 @@
   // so on #srclink, because the page is the thing that knows: the example page reads
   // `example/`, the model page `core/`, and the script only pins the commit.
   var src = document.getElementById("srclink");
-  src.href = "https://github.com/companygraph/meta-model/tree/" + data.commit + "/" +
+  // Which repository the block came from is the data's business, not this file's: the same
+  // stage draws companygraph.io's example and vocabulary and blust.ch's own model, and they
+  // are different repositories. The fallback is the one page whose builder does not emit
+  // `repo` yet; remove it when it does.
+  var repo = data.repo || "companygraph/meta-model";
+  src.href = "https://github.com/" + repo + "/tree/" + data.commit + "/" +
              (src.getAttribute("data-src") || "example");
   document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
 
@@ -132,6 +137,29 @@
     return out.join(" · ");
   }
 
+  // What a band points at, counted and named: "refers to · 58 skills · 1 source". The model
+  // supplies both words — the type is the singular and its folder is the plural (R7), which
+  // is why a count of one reads "1 source" and not "1 sources", and why these are the same
+  // words the canvas prints on the folders themselves.
+  //
+  // Broken down by type rather than totalled, because the honest answer usually is mixed: a
+  // profile refers to its skills and to the source that masters it, and "59" alone tells the
+  // reader neither what is down there nor that the last one is a different kind of thing.
+  // Past three types the breakdown is longer than the thing it labels, so it gives up and
+  // says how many.
+  var folderOf = {};
+  data.types.forEach(function(ty){ folderOf[ty.type] = ty.folder || ty.type; });
+  function noun(list){
+    var counts = {};
+    list.forEach(function(p){
+      if (p.node && p.node.entity) counts[p.node.entity.type] = (counts[p.node.entity.type] || 0) + 1;
+    });
+    var ks = Object.keys(counts).sort();
+    if (!ks.length) return String(list.length);
+    if (ks.length > 3) return String(list.length);
+    return ks.map(function(k){ return counts[k] + " " + (counts[k] === 1 ? k : folderOf[k]); }).join(" · ");
+  }
+
   function neighbourhood(f){
     var nodes = [], links = [];
     var anc = ancestorsOf(f);
@@ -159,7 +187,12 @@
   var R_FOCUS = 16, R_NODE = 12;                    // half-widths of the marks
   var GAP = 12;                                     // mark to its label
   var CH_MONO = 6.9, CH_TEXT = 6.9, CH_ROOT = 8.6;  // width per character, for the fit only
-  var K_MIN = 0.5;                                  // the camera's floor, one with the zoom's
+  // The camera's floor, shared with the zoom's scaleExtent. It is a legibility limit, not a
+  // fitting one: a profile that claims 59 skills has a reference band taller than any frame,
+  // and scaling until it fits produced labels too small to read AND a neighbourhood still
+  // running off the edge — the worst of both. Below this the drawing stops being worth
+  // looking at, so the camera stops here and the reader moves instead.
+  var K_MIN = 0.8;                                  // the camera's floor, one with the zoom's
 
   function markW(p){ return p.role === "focus" ? R_FOCUS : R_NODE; }
   function nameW(p){
@@ -203,8 +236,17 @@
     var inTop = top - BAND - (inn.length - 1) * ROW;
     inn.forEach(function(p){ p.x = -LEFT; p.y = inTop + p.i * ROW; });
     var bands = [];
-    if (out.length) bands.push({ key:"out", x:RIGHT - R_NODE, y:outTop - EYE, anchor:"start", text:t("out") });
-    if (inn.length) bands.push({ key:"in",  x:-LEFT - R_NODE - GAP, y:inTop - EYE, anchor:"end", text:t("in") });
+    // The eyebrow carries the count and, when it can, the word for what is being pointed at:
+    // "refers to · 59 skills". A band can be taller than the canvas — a profile claiming 59
+    // skills has one — and a bare number leaves the reader unable to tell whether two more
+    // sit below the edge or fifty, while a number with a noun says what the drag is for.
+    //
+    // The noun is the type's folder, which R7 makes the plural of the type, so it is the same
+    // word the canvas already prints on the folder itself. A band whose targets are of more
+    // than one type gets the bare count: naming them all would be a list, and naming one
+    // would be wrong.
+    if (out.length) bands.push({ key:"out", x:RIGHT - R_NODE, y:outTop - EYE, anchor:"start", text:t("out") + " · " + noun(out) });
+    if (inn.length) bands.push({ key:"in",  x:-LEFT - R_NODE - GAP, y:inTop - EYE, anchor:"end", text:t("in") + " · " + noun(inn) });
     neigh.bands = bands;
     return neigh;
   }
@@ -224,10 +266,30 @@
     });
     neigh.bands.forEach(function(b){
       y0 = Math.min(y0, b.y - 12);
+      // Both eyebrows, both directions. Only the left one was measured, which was harmless
+      // while the right one read "refers to" and started running off the canvas as soon as
+      // it read "refers to · 58 skills · 1 source".
       x0 = Math.min(x0, b.x - (b.anchor === "end" ? b.text.length * CH_MONO : 0));
+      x1 = Math.max(x1, b.x + (b.anchor === "start" ? b.text.length * CH_MONO : 0));
     });
     var k = Math.max(K_MIN, Math.min(1, (w * 0.92) / (x1 - x0), (h * 0.9) / (y1 - y0)));
-    return d3.zoomIdentity.translate(w / 2 - k * (x0 + x1) / 2, h / 2 - k * (y0 + y1) / 2).scale(k);
+    // Centre what fits; anchor on the focus what does not. Centring the whole bounding box is
+    // right until one band is taller than any frame — a profile claiming 59 skills has one —
+    // and then the box's middle is somewhere inside that band and the focused node itself is
+    // off the canvas. The reader is left looking at a list with nothing to say what it hangs
+    // from. Per axis, because the overflow is usually vertical and the horizontal path still
+    // deserves centring. The layout puts the focus at (0,0), which is what makes this a
+    // translate to the middle of the frame and nothing more.
+    var overflowX = k * (x1 - x0) > w, overflowY = k * (y1 - y0) > h;
+    // Horizontally, hold the left edge: the path climbs in from the left and the focus sits
+    // after it, so reading order is what should survive the clip, and the focus is never the
+    // thing that falls off. Centring instead pushed the right-hand eyebrow past the edge —
+    // the canvas is only as wide as the card leaves it.
+    // Vertically, hold the focus: a band overflows in both directions at once and there is no
+    // edge worth preferring, only the node the band hangs from.
+    var tx = overflowX ? w * 0.04 - k * x0 : w / 2 - k * (x0 + x1) / 2;
+    var ty = overflowY ? h / 2 : h / 2 - k * (y0 + y1) / 2;
+    return d3.zoomIdentity.translate(tx, ty).scale(k);
   }
 
   // ── the stage ─────────────────────────────────────────────────────────────────────────
@@ -250,9 +312,18 @@
 
   // A plain wheel over the canvas must keep scrolling the page — only ctrl/⌘+wheel zooms — and
   // dblclick is left to the browser rather than jumping the camera to 2× on whatever it hit.
+  // The closed hand appears when the drawing actually moves and not before: on the pointer
+  // move that pans, never on the press. A press that does not move is a click on a node, and
+  // showing a grab for it would promise the wrong thing. Wheel and programmatic transitions
+  // carry no source event, so neither touches the cursor.
   var zoom = d3.zoom().scaleExtent([K_MIN, 2])
     .filter(function(ev){ return ev.type === "wheel" ? (ev.ctrlKey || ev.metaKey) : ev.type !== "dblclick"; })
-    .on("zoom", function(ev){ scene.attr("transform", ev.transform); });
+    .on("zoom", function(ev){
+      scene.attr("transform", ev.transform);
+      var src = ev.sourceEvent;
+      if (src && /move/.test(src.type)) svg.classed("panning", true);
+    })
+    .on("end", function(){ svg.classed("panning", false); });
   svg.call(zoom);
   var home = d3.zoomIdentity;
 
@@ -484,7 +555,7 @@
     // Mono, so it is data: the file and the commit it is pinned at, which is what the link
     // resolves to. The phrasing a reader needs is on the label, not in the row.
     var a = h("a", e.path.slice(e.path.lastIndexOf("/") + 1) + " @ " + data.commit.slice(0, 7));
-    a.href = "https://github.com/companygraph/meta-model/blob/" + data.commit + "/" + e.path;
+    a.href = "https://github.com/" + repo + "/blob/" + data.commit + "/" + e.path;
     a.setAttribute("aria-label", t("view"));
     footEl.appendChild(a);
   }

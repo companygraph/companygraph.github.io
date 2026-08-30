@@ -152,14 +152,43 @@ export function parseInstance(files) {
   }
   entities.sort((a, b) => (a.id < b.id ? -1 : 1));
 
+  // A canonical name identifies an entity within its type, not across all of them. Every
+  // schema declares its references as `ref → <type>`, so a reference always names a type as
+  // well as a name; two entities of different types may therefore share one. This matters
+  // for the case the fictional example cannot show: a company of one, where the company and
+  // the only person in it are the same human and carry the same name.
+  //
+  // This parser does not read the schemas, so it cannot see the declared type of a field —
+  // it recognises a reference by the value happening to be a canonical name. It therefore
+  // cannot use the type to disambiguate, and instead refuses to guess: a name shared inside
+  // one type is an error at parse time, and a reference to a name carried by more than one
+  // type is an error where it is used. Nothing resolves to the wrong entity quietly.
+  const byId = (list, id) => list.find((x) => x.id === id);
   const byName = new Map();
   for (const e of entities) {
-    if (byName.has(e.name)) throw new Error(`R2: two entities share the name "${e.name}"`);
-    byName.set(e.name, e.id);
+    const same = byName.get(e.name);
+    if (same) {
+      const clash = same.find((id) => byId(entities, id).type === e.type);
+      if (clash) throw new Error(`R2: two ${e.type} entities share the name "${e.name}"`);
+      same.push(e.id);
+    } else {
+      byName.set(e.name, [e.id]);
+    }
   }
+  const one = (value, where) => {
+    const ids = byName.get(value);
+    if (!ids) return null;
+    if (ids.length > 1) {
+      const types = ids.map((id) => byId(entities, id).type).join(", ");
+      throw new Error(`"${value}" in ${where} is carried by more than one type (${types}); ` +
+                      `this parser resolves by name alone and will not guess between them`);
+    }
+    return ids[0];
+  };
   const resolve = (value, where) => {
-    if (!byName.has(value)) throw new Error(`R4: "${value}" in ${where} names no entity`);
-    return byName.get(value);
+    const id = one(value, where);
+    if (!id) throw new Error(`R4: "${value}" in ${where} names no entity`);
+    return id;
   };
 
   const edges = [];
@@ -170,8 +199,9 @@ export function parseInstance(files) {
       // not — so it becomes an edge when it resolves and stays a fact when it does not.
       if (Array.isArray(value)) {
         for (const v of value) edges.push({ from: e.id, to: resolve(v, e.path), via: key, attrs: {} });
-      } else if (byName.has(value)) {
-        edges.push({ from: e.id, to: byName.get(value), via: key, attrs: {} });
+      } else {
+        const to = one(value, e.path);
+        if (to) edges.push({ from: e.id, to, via: key, attrs: {} });
       }
     }
     for (const s of e.sections) {
@@ -180,7 +210,7 @@ export function parseInstance(files) {
         let to = null; const attrs = {}; let via = "";
         s.table.columns.forEach((col, i) => {
           const cell = row[i] ?? "";
-          const resolved = byName.get(cell);
+          const resolved = one(cell, e.path);
           if (resolved && !to) { to = resolved; via = `${s.heading}.${col}`; }
           else attrs[col] = resolved ?? cell;
         });
