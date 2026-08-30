@@ -16,7 +16,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const SITE = "https://companygraph.io";
 
 const PAGES = [
-  { path: "/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -65,7 +65,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -76,7 +76,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -88,7 +88,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -103,7 +103,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -114,7 +114,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true, fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data", divider: true },
 
-  { path: "/talks/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -418,7 +418,7 @@ const CHECKS = {
   async divider(page, spec) {
     const CANVAS_MIN = 320;
     await page.goto(spec.absolute, { waitUntil: "networkidle" });
-    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); localStorage.removeItem("cg-stage-card-modal"); } catch (e) {} });
+    await page.evaluate(() => { try { localStorage.removeItem("stage-card"); localStorage.removeItem("stage-card-modal"); } catch (e) {} });
     await page.reload({ waitUntil: "networkidle" });
     const width = () => page.evaluate(() => Math.round(document.querySelector(".card").getBoundingClientRect().width));
     const canvas = () => page.evaluate(() => Math.round(document.querySelector(".canvas").getBoundingClientRect().width));
@@ -444,14 +444,14 @@ const CHECKS = {
     await page.mouse.up();
     const dragged = await width();
     if (!(dragged > before)) return `dragging the divider left did not widen the card: ${before} → ${dragged}`;
-    const stored = await page.evaluate(() => localStorage.getItem("cg-stage-card"));
+    const stored = await page.evaluate(() => localStorage.getItem("stage-card"));
     if (!stored) return "the width was not remembered after a drag";
 
     await page.reload({ waitUntil: "networkidle" });
     if (Math.abs((await width()) - dragged) > 2) return `the remembered width did not survive a reload: ${await width()} vs ${dragged}`;
 
     // A stored width wider than the box must clamp, and the canvas keeps its floor.
-    await page.evaluate(() => localStorage.setItem("cg-stage-card", "9000"));
+    await page.evaluate(() => localStorage.setItem("stage-card", "9000"));
     await page.reload({ waitUntil: "networkidle" });
     if ((await canvas()) < CANVAS_MIN)
       return `a stored width of 9000 left the canvas at ${await canvas()}px, under its ${CANVAS_MIN}px floor`;
@@ -460,7 +460,7 @@ const CHECKS = {
     if (Math.abs((await width()) - before) > 2) return `double-click did not restore the even split: ${await width()} vs ${before}`;
     if (Math.abs((await canvas()) - (await width())) > 2)
       return `double-click left the panes uneven: canvas ${await canvas()}, card ${await width()}`;
-    if (await page.evaluate(() => localStorage.getItem("cg-stage-card")))
+    if (await page.evaluate(() => localStorage.getItem("stage-card")))
       return "double-click restored the default but left the old width stored";
 
     // Drag is not the only way in: a control that needs a pointer is unreachable without one.
@@ -491,9 +491,39 @@ const CHECKS = {
     await page.keyboard.press("Escape");
     await page.waitForTimeout(300);
 
-    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); localStorage.removeItem("cg-stage-card-modal"); } catch (e) {} });
+    await page.evaluate(() => { try { localStorage.removeItem("stage-card"); localStorage.removeItem("stage-card-modal"); } catch (e) {} });
     await page.goto(spec.absolute, { waitUntil: "networkidle" });
     return null;
+  },
+  // The privacy page says "that is everything that gets stored" and then lists the keys. It
+  // was true until the divider started remembering its width, and nothing noticed — the claim
+  // is prose and the keys are in a script, so the two could only be compared by hand.
+  //
+  // This drives the page instead of reading it: every write to localStorage is recorded, the
+  // page is then made to do the things that write — switch language, move the divider — and
+  // each key that turns up must be named on the privacy page. A key the page does not declare
+  // is the failure; a key it declares and never writes is not, because a claim to store
+  // something is not a claim anyone is harmed by.
+  async storageKeys(page, spec) {
+    const declared = await (await fetch(new URL("/privacy/", spec.absolute).href)).text();
+    await page.addInitScript(() => {
+      window.__keys = [];
+      const real = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { window.__keys.push(k); return real.call(this, k, v); };
+    });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    // The two things on any page that write: the language control, and the divider where the
+    // page has one.
+    if (await page.$("#lde")) { await page.click("#lde"); await page.click("#len"); }
+    if (await page.$("#gutter")) { await page.focus("#gutter"); await page.keyboard.press("ArrowLeft"); }
+    const written = await page.evaluate(() => [...new Set(window.__keys)]);
+    const undeclared = written.filter((k) => !declared.includes(k));
+    // Leave the page as the rest of the suite expects it, storage included.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return undeclared.length
+      ? `writes ${undeclared.join(", ")}, which /privacy/ does not name`
+      : null;
   },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
