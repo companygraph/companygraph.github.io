@@ -252,3 +252,44 @@ test("the example instance still parses with tables, one per section", () => {
   assert.equal(skills.tables[0].caption, null);
   assert.equal(skills.table, skills.tables[0]);
 });
+
+// A company of one: the company and the only person in it are the same human and carry the
+// same name. The fictional example cannot show this — its company is Beacon Systems and its
+// people are not — so the rule it exercises is the one that matters here: a canonical name
+// identifies an entity within its type, because every schema declares its references as
+// `ref → <type>` and so a reference always names a type as well as a name.
+test("two entities of different types may share a name", () => {
+  const files = new Map([
+    ["identity.md", "# Robert Blust\n\n> A company of one.\n\n## What it is\n\nOne person.\n"],
+    ["profiles/robert-blust/robert-blust.md",
+     "# Robert Blust\n\n> The person.\n\n## Summary\n\nTwenty-five years.\n"],
+  ]);
+  const data = parseInstance(files);
+  assert.equal(data.entities.filter((e) => e.name === "Robert Blust").length, 2);
+  assert.deepEqual(
+    data.entities.filter((e) => e.name === "Robert Blust").map((e) => e.type).sort(),
+    ["identity", "profile"]);
+});
+
+test("two entities of the same type sharing a name is still an R2 error", () => {
+  const files = new Map([
+    ["identity.md", "# One\n\n> A company.\n\n## What it is\n\nText.\n"],
+    ["skills/a.md", "# Same Name\n\n> A skill.\n\n## In practice\n\nText.\n"],
+    ["skills/b.md", "# Same Name\n\n> Another skill.\n\n## In practice\n\nText.\n"],
+  ]);
+  assert.throws(() => parseInstance(files), /R2: two skill entities share the name "Same Name"/);
+});
+
+// The parser reads no schema, so it cannot use a declared type to choose between two
+// entities that share a name. It refuses rather than guessing — the failure names both types
+// and the file the reference sits in.
+test("a reference to a name carried by two types is an error where it is used", () => {
+  const files = new Map([
+    ["identity.md", "# Robert Blust\n\n> A company of one.\n\n## What it is\n\nOne person.\n"],
+    ["profiles/robert-blust/robert-blust.md",
+     "# Robert Blust\n\n> The person.\n\n## Summary\n\nText.\n"],
+    ["profiles/robert-blust/experiences/2026-now.md",
+     "---\nstart: 2026-06\norganisation: Robert Blust\n---\n\n# Now\n\n> Ongoing.\n\n## Achievements\n\n- Text.\n"],
+  ]);
+  assert.throws(() => parseInstance(files), /carried by more than one type \(identity, profile\)/);
+});

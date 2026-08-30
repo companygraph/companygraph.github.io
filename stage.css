@@ -15,7 +15,14 @@
   .stage{margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
          grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
   .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
+  /* No cursor at rest. The primary act on this canvas is clicking a node, not dragging the
+     space between them, and a permanent grab hand advertises the wrong one — every canvas a
+     visitor already knows (Figma, Miro, tldraw, a map) shows an arrow until a pan actually
+     begins, and reserves the hand for the moment the thing is moving.
+     `.panning` is set by the stage on the first pointer move that pans, and cleared on
+     release, so the closed hand is feedback rather than an invitation. */
   .canvas svg{display:block; width:100%; height:100%}
+  .canvas svg.panning{cursor:grabbing}
   .recenter{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
             background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
             padding:.35rem .6rem; cursor:pointer}
