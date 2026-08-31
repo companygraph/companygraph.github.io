@@ -123,13 +123,19 @@ that lived in another repository. No CI in *this* repository can catch drift in
   as for a font.
 
 - **The design tokens are a copy, fenced by `design tokens · vN` markers**, shared with
-  sibling repositories (`blust.ch`, `guestgraph.io`, and its `talks` repo) that cannot import
-  a stylesheet because a deck has to open from `file://` — there is nothing to `import` in
-  that context. Bumping the version means editing the block and bumping the marker in every
-  repository that carries it, then running every one of their suites. `npm run verify` will
-  tell you if a page in *this* repository has fallen behind; it cannot tell you that a sibling
-  has. The version marker is a habit with a tripwire, not a guarantee — it makes drift visible
-  to a person who goes looking, not automatic.
+  `blust.ch` and `guestgraph.io`, which cannot import a stylesheet because a deck has to open
+  from `file://` — there is nothing to `import` in that context.
+
+  **They are generated now, and this bullet used to say the opposite.** It said bumping the
+  version means editing the block in every repository that carries it and running every suite —
+  a habit with a tripwire rather than a guarantee. Six blocks now come from
+  `@robertblust/design`, pinned here by tag: `design tokens`, `header contract`,
+  `stage contract`, `language`, `prose reset` and `prose footer`. Editing one in place does
+  nothing; the next `npm run design` overwrites it. Change it in the package, tag a release, then
+  run `npm run design && npm run og` here. `npm run design:check` runs in CI before the browser
+  suite, so a page that drifts from the pinned release goes red without anyone going looking —
+  which is the guarantee the habit never was. The deck footer and the `<head>` contract are still
+  hand-maintained copies; for those two the old discipline applies in full.
 
 - **`package-lock.json` is committed here, although the sibling ignores its own.** CI will
   run `npm ci`, which fails outright without a lockfile in the tree — the workflow itself
@@ -194,8 +200,9 @@ that lived in another repository. No CI in *this* repository can catch drift in
 The row across the top — wordmark, links, language control — is one design on three sites,
 and like the tokens it is a copy, because a deck opens from `file://` and there is no
 stylesheet to share. It is fenced in every page as `header contract · vN` and is
-**byte-identical on all fifteen pages** in the three repositories. Check it the way you
-check the tokens: change it here, run this repo's suite, and bump `vN` in all three.
+**byte-identical on all sixteen pages** in the three repositories. It is generated, like the
+tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing
+it in this file does nothing — the next sync overwrites it.
 
 What the contract says:
 
@@ -445,9 +452,11 @@ requirements implicitly include this section.
 
   `verify/design.mjs` is byte-identical across the three and holds both `TOKEN_VERSION` and
   `FOOTER_VERSION`. Never edit it in one repo alone.
-- **The design token block is a copy**, fenced by `design tokens · v1` markers, shared with
+- **The design token block is generated**, fenced by `design tokens · vN` markers, shared with
   `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
-  repository, as this one does. Do not edit it here.
+  repository, as this one does. Do not edit it here: it comes from `@robertblust/design` and
+  `npm run design` writes it. This bullet named `v1` for a long time after the block had moved
+  past it, which is the argument for naming the mechanism rather than the number.
   `verify/design.mjs` is byte-identical across all of them and is never edited in this repo.
 - **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.
 - **The `blust.ch` credit in the page footer is a lockup, not a footer link.** It leaves the
