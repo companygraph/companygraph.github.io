@@ -106,7 +106,12 @@ that lived in another repository. No CI in *this* repository can catch drift in
   `stage.css`, `stage.js` and `d3.v7.min.js` sit at the root and every page that draws a data
   block links all three relatively — `../stage.css`, `../stage.js`, `../d3.v7.min.js` — which
   keeps each page self-contained in the sense the rule above means: nothing off-origin, and it
-  still opens from `file://`. Edit the stage in that one place and both pages get it. Every
+  still opens from `file://`. `stage.js` and `stage.css` are now generated from
+  `@robertblust/design`, not edited directly: edit them there, tag a release, then run
+  `npm run design && npm run og` here — that is what "one place" means now. Taking
+  `"stage"` out of this repository's `design.config.json` would also clear a red
+  `design:check`, but that is not a build fix; it is this site deciding to own the file and
+  diverge, a real decision and not the correct way to make the check pass. Every
   other page here is a single self-contained file and stays that way; this is the deliberate
   exception, because a copied stage drifts the first time one page's figure is fixed and
   nothing in this repository can see the two halves disagree. `stage.js` knows no name from
