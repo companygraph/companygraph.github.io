@@ -35,6 +35,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - run: npm ci
+      # After npm ci because it needs the package; before the browser because a file that is
+      # not what the package ships should fail on the cheap step, not on a rendered page.
+      - name: The shared files are still what the package ships
+        run: npm run design:check
       - name: The vendored d3 is the pinned build
         run: npm run test:example
       - run: npx playwright install --with-deps chromium
