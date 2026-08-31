@@ -6,10 +6,25 @@
 # `d3.v7.min.js` beside it at the root, a vendored copy of the pinned package's build, so d3
 # is the one dependency in this repository that a visitor executes, now on more than one page.
 # `verify/instance.test.mjs` asserts the two are byte-identical, which means a Dependabot
-# bump of d3 lands red on purpose, with the message "copy it again". That is the correct
-# signal, not a nuisance to be silenced with an ignore rule: an ignored d3 is a shipped
-# asset that ages forever with nothing saying so. Clearing such a pull request is
-# re-vendoring the file and re-rendering every card that names it — `npm run og`.
+# bump of d3 lands red on purpose. That is the correct signal, not a nuisance to be
+# silenced with an ignore rule: an ignored d3 is a shipped asset that ages forever with
+# nothing saying so. But this file now has a second owner: `design:check` asserts the same
+# committed copy matches `@robertblust/design`, which vendors its own `assets/d3.v7.min.js`.
+# Re-vendoring from `node_modules/d3` alone — the old fix — clears `verify/instance.test.mjs`
+# and turns `design:check` red on the very next run, because the package's copy hasn't
+# moved. There is no state of this file, edited only here, that clears both.
+#
+# A d3 bump is therefore a two-repository, ordered change: bump and re-vendor d3 in
+# `robertblust/design` first and tag the release, then take the resulting design Dependabot
+# pull request together with this repository's own d3 pull request, on one branch, and run
+# `npm run design && npm run og` — never `npm run og` alone. Under the package's own semver
+# rule a change needing a site edit beyond `npm run design` is a major, so this makes every
+# d3 bump a major, not a minor, no matter how small the upstream release.
+#
+# Mind the trap: `robertblust/design` declares only the `github-actions` Dependabot
+# ecosystem below and has no d3 dependency of its own, so it will never be told a new d3
+# exists. The only repository Dependabot notifies is the one that can no longer clear the
+# pull request alone.
 #
 # It is also why d3 sits in `dependencies` and not `devDependencies`, which is where it used
 # to be. The organisation runs GitHub's "dismiss low-impact alerts for development-scoped
