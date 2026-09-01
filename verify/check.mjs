@@ -157,7 +157,7 @@ const PAGES = [
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: SITE, internalLinks: true },
-  { path: "/talks/intro/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+  { path: "/talks/intro/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
     // check that fails when an href is simply wrong, so without this line a typo in the
@@ -169,7 +169,7 @@ const PAGES = [
             "https://github.com/companygraph/meta-model#roadmap"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true, fences: ["design tokens", "language"],
+    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true, fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit"],
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
     // `hides` named "a talk by" until the byline became `Robert Blust · Software Engineer
