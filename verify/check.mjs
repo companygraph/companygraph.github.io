@@ -169,7 +169,11 @@ const PAGES = [
             "https://github.com/companygraph/meta-model#roadmap"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true, fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit"],
+    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
+    // fences is presence-only and order-blind — deck runtime landing last here while
+    // fenceOrder places it third, two lines down, is not the pair disagreeing.
+    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
+    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
     lockupCollapses: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
@@ -177,7 +181,7 @@ const PAGES = [
     // & Architect`, matching every other deck. That string is gone from the slide now, so
     // the assertion would have passed while checking nothing. "Architect"/"Architekt" is
     // the replacement: one letter apart, present in exactly one language each.
-    translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langtoggle" },
+    translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
 ];
 
@@ -732,8 +736,10 @@ const CHECKS = {
     // Going back is a different control now, not the same one pressed twice: a segmented
     // control has one button per language, and pressing DE while already in German is
     // correctly a no-op. `back` is what returns the page to English.
-    // A page whose spec names its own control — the deck, whose transport carries a single
-    // toggle that flips both ways — returns by pressing that same one again.
+    // The deck used to be the exception here: its transport carried a single toggle that
+    // flipped both ways, so pressing the same control again was how it went back. That
+    // toggle is gone. The deck's spec now names `backId: "langEn"`, a segmented DE/EN
+    // control like every other page, so it needs no exception left in this comment.
     const back = "#" + (spec.translates.backId || spec.translates.id || "len");
     await page.click(toggle);
     const swapped = await htmlLang();
