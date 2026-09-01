@@ -65,9 +65,11 @@ split had to be unwound. Do not recreate one.
   `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all five and writes
   the stamps, and `og-check.mjs` reports which have drifted.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
-- `verify/check.mjs` — the suite, covering all seven pages in one run. `verify/design.mjs` is
-  the shared design-system copy, byte-identical across `blust.ch` and `guestgraph.io`; never
-  edit it here.
+- `verify/check.mjs` — the suite, covering all seven pages in one run. Its shared page checks
+  and `verify/design.mjs` come from `@robertblust/design`, imported by package specifier; edit
+  them there, tag a release, and re-pin the tag in `package.json`. A `verify/design.mjs`
+  created in this repo would never be resolved by that import, so editing one here does
+  nothing — not even fail loudly.
 - `docs/superpowers/` — the design and the plan behind the landing page and the talk.
 
 ## The mark

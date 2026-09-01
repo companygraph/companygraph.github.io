@@ -138,6 +138,8 @@ const PAGES = [
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: SITE, internalLinks: true },
+  // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
+  // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
   { path: "/talks/intro/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only

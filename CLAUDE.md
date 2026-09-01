@@ -443,21 +443,27 @@ requirements implicitly include this section.
   The same footer is on `guestgraph.io`, and on `blust.ch` in two parts rather than three:
   there the brand and the person are the same name.
 
-  It is fenced by a **`deck footer · vN` marker** and `footerVersion` asserts it — the same
-  habit-with-a-tripwire the token block gets, for the same reason: no suite can see a sibling.
-  What the marker covers is a contract, not a look — where each of the three links goes, and
-  that none opens in a new tab. Change any of that and bump `vN` in all three repositories,
-  then run all three suites. A suite fails both on a version it does not expect and on no
-  marker at all, so removing the fence is not a way around it.
+  It used to be fenced by its own `deck footer · vN` marker with a `footerVersion` check — the
+  same habit-with-a-tripwire the token block gets, for the same reason: no suite can see a
+  sibling. Both are gone now, not retargeted: retired in a previous plan and replaced by the
+  deck's chrome fences — `deck transport`, `deck lockup`, `deck fit` and `deck runtime` —
+  generated like the tokens. What the old marker covered is still a contract, not a look —
+  where each of the three links goes, and that none opens in a new tab — and `design:check`
+  is what enforces it now, comparing each fence's bytes against the pinned release.
 
-  `verify/design.mjs` is byte-identical across the three and holds both `TOKEN_VERSION` and
-  `FOOTER_VERSION`. Never edit it in one repo alone.
+  `verify/design.mjs` now lives in `@robertblust/design`, alongside the nineteen shared page
+  checks — edited there, released as a tag, and taken here by re-pinning that tag in
+  `package.json`, exactly like the token block below. `verify/check.mjs` imports it by package
+  specifier, `@robertblust/design/verify/design`; a `verify/design.mjs` created in this
+  repository is never resolved by that import and would be silently ignored — the suite would
+  still report green, having run the pinned release's code instead of the one just edited.
 - **The design token block is generated**, fenced by `design tokens · vN` markers, shared with
   `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
   repository, as this one does. Do not edit it here: it comes from `@robertblust/design` and
   `npm run design` writes it. This bullet named `v1` for a long time after the block had moved
   past it, which is the argument for naming the mechanism rather than the number.
-  `verify/design.mjs` is byte-identical across all of them and is never edited in this repo.
+  `verify/design.mjs`, which holds `TOKEN_VERSION`, lives in that same package now — see
+  the footer bullet above for where it moved and what importing it by specifier means.
 - **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.
 - **The `blust.ch` credit in the page footer is a lockup, not a footer link.** It leaves the
   footer's mono for the same treatment it has on every deck — the `rb` plate inlined, wordmark
