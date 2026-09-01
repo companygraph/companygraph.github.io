@@ -157,7 +157,7 @@ const PAGES = [
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
     card: true, cardBase: SITE, internalLinks: true },
-  { path: "/talks/intro/", carriesLang: true, seo: true, noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
+  { path: "/talks/intro/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, footerVersion: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", wayOut: "../",
     // The deck's outbound links: closing slide points to companygraph.io, slide 10 points
     // to the roadmap. Asserted the same way the index asserts its own: `links` is the only
     // check that fails when an href is simply wrong, so without this line a typo in the
