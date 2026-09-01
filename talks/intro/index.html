@@ -908,16 +908,8 @@
     <div class="tside">
     <div class="tdiv"></div>
 
-    <!-- id="langtoggle" is the container, not just a label: a click that lands on the
-         divider between the two buttons bubbles here and swaps the language wholesale,
-         mirroring the single-control #langind pattern the talks index uses — verify's
-         `translates` check clicks one id twice to round-trip, and a segmented DE/EN
-         pair has no such id on its own. Direct clicks on either button still pick that
-         language explicitly and stop the bubble, so a sighted mouse user never sees
-         the toggle fire twice. -->
-    <div class="seg" id="langtoggle" role="group" aria-label="Sprache wechseln — switch language">
+    <div class="seg" id="lang" role="group" aria-label="Sprache wechseln — switch language">
       <button type="button" id="langDe" aria-pressed="false">DE</button>
-      <div class="tdiv" aria-hidden="true"></div>
       <button type="button" id="langEn" aria-pressed="true">EN</button>
     </div>
 
@@ -1135,7 +1127,6 @@
   document.addEventListener('fullscreenchange', function(){ labelFull(); measureChrome(); });
 
   function setLang(next){ if (next === lang) return; lang = next; langRemember(next); applyLang(); }
-  function toggleLang(){ setLang(lang === 'de' ? 'en' : 'de'); }
 
   btn.first.addEventListener('click', restart);
   btn.prev .addEventListener('click', function(){ manual(i-1); });
@@ -1144,28 +1135,17 @@
   btn.full .addEventListener('click', toggleFull);
   btn.notes.addEventListener('click', function(){ setNotes(!notesOpen); });
   document.getElementById('notesclose').addEventListener('click', function(){ setNotes(false); });
-  // Each button picks its language directly and stops the click there, so it never
-  // also reaches #langtoggle's own listener below — a mouse user who clicks the
-  // already-active button sees nothing happen, same as before this control existed.
-  langDe.addEventListener('click', function(e){ e.stopPropagation(); setLang('de'); });
-  langEn.addEventListener('click', function(e){ e.stopPropagation(); setLang('en'); });
-  // A click that lands on the divider between the two buttons (or, from a script,
-  // on #langtoggle itself) is not aimed at either language specifically — it toggles,
-  // the same as the talks index's single #langind control does.
-  document.getElementById('langtoggle').addEventListener('click', toggleLang);
+  langDe.addEventListener('click', function(){ setLang('de'); });
+  langEn.addEventListener('click', function(){ setLang('en'); });
 
-  /* The deck is driven by the buttons. The navigation keys stay because a presenter
-     remote sends them — it is a clicker pretending to be a keyboard — and are
-     deliberately not advertised anywhere on screen. N and L are a second, unrelated
-     reason for the same handler: N mirrors the notes button and L mirrors the talks
-     index's #langind shortcut, so both habits carry over into the deck. */
+  /* The deck is driven by the buttons. These keys stay because a presenter remote sends
+     them — it is a clicker pretending to be a keyboard — and are deliberately not
+     advertised anywhere on screen. */
   document.addEventListener('keydown', function(e){
     if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ manual(i+1); e.preventDefault(); }
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){ manual(i-1); e.preventDefault(); }
     else if(e.key==='Home'){ restart(); e.preventDefault(); }
     else if(e.key==='End'){ manual(slides.length-1); e.preventDefault(); }
-    else if(e.key==='n'||e.key==='N'){ setNotes(!notesOpen); e.preventDefault(); }
-    else if(e.key==='l'||e.key==='L'){ toggleLang(); e.preventDefault(); }
   });
 
   /* Swipe turns the page on touch. A mostly-vertical drag is someone scrolling a long
@@ -1358,14 +1338,12 @@
     labelPlay();
   }
 
-  /* Optimistic: if a clip exists we never need a voice installed. Checked lazily so the
-     deck makes no network request until someone actually presses play. */
-  var clipsSeen = null;
-  function hasClips(){
-    if (clipsSeen !== null) return clipsSeen;
-    clipsSeen = true;                       // assume yes; clip.onerror handles the truth
-    return clipsSeen;
-  }
+  /* Optimistic, and correct now that this deck has recorded clips: if a clip exists we
+     never need a voice installed, and clip.onerror handles the case where one is missing
+     by falling back to the browser voice. Reporting false here would refuse to play for
+     a viewer with no installed voice even though the recordings would play fine. */
+  var clipsSeen = true;
+  function hasClips(){ return clipsSeen; }
 
   function toggleNarration(){ playing ? stopNarration() : startNarration(); }
 

@@ -177,7 +177,7 @@ const PAGES = [
     // & Architect`, matching every other deck. That string is gone from the slide now, so
     // the assertion would have passed while checking nothing. "Architect"/"Architekt" is
     // the replacement: one letter apart, present in exactly one language each.
-    translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langtoggle" },
+    translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
 ];
 
