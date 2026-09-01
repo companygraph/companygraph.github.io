@@ -38,8 +38,13 @@ async function httpStatus(url) {
   return res.status;
 }
 
+// What every prose footer reads, left to right. The check compares this to the rendered DOM,
+// so it is the one place that decides the order — and the German labels never appear here
+// because the suite loads each page in its source language.
+const FOOTER = ["Robert Blust", "GitHub", "Licence", "Privacy"];
+
 const PAGES = [
-  { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -88,7 +93,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -99,7 +104,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -111,7 +116,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the data block.
-  { path: "/example/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -126,7 +131,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -137,7 +142,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data", divider: true },
 
-  { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -596,6 +601,52 @@ const CHECKS = {
   // with og:url proves only that two tags say the same thing; both can say the same wrong
   // thing, and a canonical pointing at another page removes this one from the index and hands
   // its signals over — quietly, and worse than anything above.
+  // The footer's entries, in the order the page renders them. `prose footer` in the package
+  // owns this footer's CSS and design:check compares those bytes — but nothing looked at the
+  // markup, so a rewrite that truncated the credit lockup at the nested </span> of .rbmark
+  // passed design:check, verify, og:check and the og suite together: it dropped "Robert Blust"
+  // and left an unclosed <a>, and the browser reparented every entry after it inside that <a>.
+  // Direct children are therefore what this counts — nesting collapses the list to one.
+  //
+  // The mark's <svg> carries the letters "rb" as <text>, so svg is stripped before reading a
+  // label. Otherwise the credit reads "rbRobert Blust" and the expected value has to encode a
+  // rendering detail of the logo.
+  async footer(page, spec) {
+    const bad = await page.evaluate((want) => {
+      const f = document.querySelector("footer");
+      if (!f) return ["there is no footer"];
+      const out = [];
+      if (!f.closest(".shell")) out.push("footer is not inside .shell — it will not line up with the page");
+      const spans = [...f.children].filter((el) => el.tagName === "SPAN");
+      const label = (el) => {
+        const c = el.cloneNode(true);
+        c.querySelectorAll("svg").forEach((s) => s.remove());
+        return c.textContent.replace(/\s+/g, " ").trim();
+      };
+      const got = spans.map(label);
+      if (got.join(" · ") !== want.join(" · "))
+        out.push(`reads "${got.join(" · ")}", expected "${want.join(" · ")}"`);
+      // One link per entry: an unclosed anchor swallows its neighbours rather than dropping
+      // them, so a correct-looking label list can still hide a broken entry.
+      for (const el of spans) {
+        const n = el.querySelectorAll("a").length;
+        if (n !== 1) out.push(`entry "${label(el)}" holds ${n} links, expected exactly 1`);
+      }
+      const priv = [...f.querySelectorAll("a")]
+        .find((a) => /^(privacy|datenschutz)$/i.test(a.textContent.trim()));
+      if (!priv) out.push("footer has no privacy link");
+      else {
+        const here = new URL(location.href).pathname.replace(/\/+$/, "/");
+        const to = new URL(priv.getAttribute("href"), location.href).pathname.replace(/\/+$/, "/");
+        if (to !== "/privacy/") out.push(`privacy link goes to ${to}, not /privacy/`);
+        const current = priv.hasAttribute("aria-current");
+        if (current && here !== "/privacy/") out.push("privacy link claims aria-current on a page that is not /privacy/");
+        if (!current && here === "/privacy/") out.push("privacy link is the current page and does not say so");
+      }
+      return out;
+    }, spec.footer);
+    return bad.length ? bad.join("; ") : null;
+  },
   async seo(page, spec) {
     const problems = [];
     const want = SITE + spec.path;
