@@ -170,6 +170,7 @@ const PAGES = [
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true, fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit"],
+    fenceOrder: ["design tokens", "deck lockup", "deck transport", "language", "deck fit"],
     lockupCollapses: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
