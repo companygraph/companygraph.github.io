@@ -28,6 +28,9 @@ for (const c of cards) {
     // defines, exactly, instead of racing a timer.
     ...(c.settle === "reduced-motion" ? { reducedMotion: "reduce" } : {}),
   });
+  // Spec decision 5: cards are always dark, and pinned rather than inherited — a later change
+  // to the default must not silently restyle twenty committed PNGs.
+  await page.addInitScript(() => { try { localStorage.removeItem("rb-theme"); } catch (e) {} });
   // file://, like the deck itself: every page here references its assets relatively for exactly
   // this reason, so no card needs a server to render and `npm run og` needs no second terminal.
   // A card may name the state it wants as a hash — the model page's stage reads one and

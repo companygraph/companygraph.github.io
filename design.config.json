@@ -3,5 +3,6 @@
     "fonts",
     "stage"
   ],
-  "langKey": "cg-lang"
+  "langKey": "cg-lang",
+  "themeKey": "rb-theme"
 }
