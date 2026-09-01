@@ -224,7 +224,7 @@ const CHECKS = {
   async title(page, spec) {
     const t = await page.title();
     if (!spec.title.test(t)) return `title ${JSON.stringify(t)} does not match ${spec.title}`;
-    if (t.length > 70) return `title is ${t.length} chars, over 70`;
+    if (t.length > 65) return `title is ${t.length} chars, over 65`;
     return null;
   },
   async lang(page, spec) {
@@ -550,7 +550,8 @@ const CHECKS = {
       [...document.querySelectorAll("a[href]")]
         .filter(a => hrefs.includes(a.getAttribute("href")))
         .filter(a => a.target === "_blank")
-        .map(a => a.getAttribute("href")), spec.sameTab);
+        .map(a => a.getAttribute("href")),
+      spec.sameTab);
     return bad.length ? "must stay in this tab: " + bad.join(", ") : null;
   },
   // `links` only sees a[href^='http'], so a root-absolute internal link — which breaks
@@ -746,10 +747,9 @@ const CHECKS = {
       (document.querySelector('meta[property="og:image:width"]')  || {}).content,
       (document.querySelector('meta[property="og:image:height"]') || {}).content]);
     // Rewrite the card's absolute URL onto whatever is being tested — BASE, not
-    // location.origin. An origin has no path, and this repository is served under one:
-    // locally it is the root of http://localhost:8000, live it is companygraph.io/talks/.
-    // Using the origin dropped the /talks prefix, so a card that was serving perfectly
-    // reported "not fetchable" the first time the suite was pointed at production.
+    // location.origin. An origin carries no path, and a site served under one (a talks
+    // subdirectory, say) loses that prefix: a card that serves perfectly then reports
+    // "not fetchable" the first time the suite is pointed at production.
     const real = await page.evaluate(async ({ u, base, testBase }) => {
       const r = await fetch(base ? u.replace(base, testBase) : u.replace(/^https:\/\/[^/]+/, testBase));
       if (!r.ok) return null;
