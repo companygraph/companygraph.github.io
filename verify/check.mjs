@@ -22,7 +22,7 @@ const FOOTER = ["Robert Blust", "GitHub", "Licence", "Privacy"];
 const PAGES = [
   { path: "/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
     // which requires target=_blank — wrong for chrome pointing at another page on this
     // same domain, which should stay in the tab the reader is already in.
@@ -75,7 +75,7 @@ const PAGES = [
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
@@ -87,7 +87,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
@@ -100,7 +100,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL", "Seiten"], hides: ["One company", "How to read it"],
                   title: "Beispiel — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "example-data", divider: true },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
@@ -115,7 +115,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest", "MODELL"], hides: ["The model", "How to read it"],
                   title: "Modell — CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: "model-data", divider: true },
 
   { path: "/talks/", footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
@@ -132,7 +132,7 @@ const PAGES = [
     // by `translates.dlHref` below.
     sameTab: ["intro/", "./", "../", "../model/", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge", "MODELL", "BEISPIEL"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
@@ -147,12 +147,13 @@ const PAGES = [
     // deck's call to action would ship silently. Links open in a new tab because a deck a
     // presenter navigates away from is gone.
     landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
     links: ["https://blust.ch/",
             "https://companygraph.io/",
             "https://github.com/companygraph/meta-model#roadmap"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "rb-theme", tokenVersion: true,
     // fences is presence-only and order-blind — deck runtime landing last here while
     // fenceOrder places it third, two lines down, is not the pair disagreeing.
     fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
