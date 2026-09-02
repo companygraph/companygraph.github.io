@@ -9,54 +9,13 @@
 //
 // Everything about what a card contains lives in og-recipe.mjs — the frame, the crop, the hide
 // rules, the card list — because `npm run og:check` has to hash the same ones this renders
-// with. A second copy is a knob that can be edited without the hash moving, which is the one
-// failure the check exists to make impossible. This file is the only one that needs playwright.
+// with. How they are rendered is `@robertblust/design/cards/export`, shared with the sibling
+// sites. This file is the only one that needs playwright, and the package never imports it:
+// the site owns the browser and hands it in.
 //
 // Usage: npm run og
 import { chromium } from "playwright";
-import path from "node:path";
-import { pathToFileURL } from "node:url";
-import { REPO_ROOT, cards, stamp } from "./og-recipe.mjs";
+import { exportCards } from "@robertblust/design/cards/export";
+import * as recipe from "./og-recipe.mjs";
 
-const browser = await chromium.launch();
-for (const c of cards) {
-  const page = await browser.newPage({
-    viewport: { width: c.width, height: c.renderHeight },
-    deviceScaleFactor: 1,
-    // The landing page's figure animates, and a render that merely waits "long enough" catches
-    // it mid-draw. Emulating reduced motion draws the settled state the page's own @media block
-    // defines, exactly, instead of racing a timer.
-    ...(c.settle === "reduced-motion" ? { reducedMotion: "reduce" } : {}),
-  });
-  // Spec decision 5: cards are always dark, and pinned rather than inherited — a later change
-  // to the default must not silently restyle twenty committed PNGs. `removeItem` clears the
-  // key, which *inherits* whatever the boot script's default happens to be rather than pinning
-  // anything — it only ever looked pinned because the default was already dark. `setItem` is
-  // what actually pins it.
-  await page.addInitScript(() => { try { localStorage.setItem("rb-theme", "dark"); } catch (e) {} });
-  // file://, like the deck itself: every page here references its assets relatively for exactly
-  // this reason, so no card needs a server to render and `npm run og` needs no second terminal.
-  // A card may name the state it wants as a hash — the model page's stage reads one and
-  // focuses what it names, so the card renders that view instead of the page's opening one.
-  await page.goto(pathToFileURL(path.join(REPO_ROOT, c.dir, "index.html")).href + (c.hash || ""), { waitUntil: "networkidle" });
-  // An empty style tag is rejected outright by Playwright, so a card with nothing to hide
-  // skips the call rather than pass content it refuses.
-  if (c.hide) await page.addStyleTag({ content: c.hide });
-  if (c.titleSlide) {
-    await page.evaluate(() => {
-      const s = Array.from(document.querySelectorAll(".slide"));
-      s.forEach((el, k) => el.classList.toggle("active", k === 0));
-    });
-  }
-  if (c.settle === "reduced-motion") await page.evaluate(() => document.fonts.ready);
-  else await page.waitForTimeout(900);              // let the rise animation settle
-
-  const out = path.join(REPO_ROOT, c.dir, "og.png");
-  await page.screenshot({ path: out, clip: { x: 0, y: c.clipY, width: c.width, height: c.height } });
-  // Stamped after the screenshot, so a run that dies half way leaves the card reported stale
-  // rather than reported current on a file it never wrote.
-  stamp(c);
-  console.log("  ✓ " + path.join(c.dir, "og.png"));
-  await page.close();
-}
-await browser.close();
+await exportCards({ chromium, recipe });
