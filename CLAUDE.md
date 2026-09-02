@@ -243,8 +243,10 @@ other check here passes the whole time it is wrong.
 - **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterise the same
   text differently, so a card compared by its bytes reports which machine rendered it. The
   check re-derives a hash of what went *into* the card and compares it with the `og.sha`
-  committed beside it. It renders nothing, needs no browser and no server, and runs in CI
-  before `npm ci`.
+  committed beside it. It renders nothing and needs no browser and no server, so CI runs it
+  before `npx playwright install` — but after `npm ci`, because it now imports the shared
+  harness. Ordered before `npm ci`, as it used to be, every push fails with
+  `ERR_MODULE_NOT_FOUND`, and no local run can catch that: `node_modules` exists here.
 - **The recipe is the page, plus every local file the page *draws*, plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at all.
   Because `fonts/` is one copy at the root and every page reaches it relatively, perturbing a
@@ -253,29 +255,47 @@ other check here passes the whole time it is wrong.
 - **An `<a href>` is skipped: a link names somewhere to go, not something to draw.** The talks
   index is why the exception exists — it links both multi-megabyte deck PDFs, so hashing link
   targets reported that card stale on every `npm run pdf`, over a page that had not moved a
-  pixel. `<link>`, `<img>` and `url()` in the inline CSS all still count.
+  pixel. `<link>`, `<img>` and `url()` in the inline CSS all still count. The rule now lives in
+  the package and its comment is written for the family rather than for this repository: every
+  site here has a talks index that links a deck, so the case was never local to this one.
 - **The walk consumes quoted spans whole**, so a `>` inside an attribute value cannot end a tag
   early and silently drop every reference after it. The deck keeps prose in `data-notes`, where
   that character is ordinary.
-- **`og-recipe.mjs` holds the frame and the hide rules, and the exporter reads them from it.**
+- **`og-recipe.mjs` holds the frame, the hide rules and the card list, and nothing else does.**
   This is the point of the module, not tidiness. A second copy of a knob is a knob that can be
   edited without the hash moving — a card reported current after the thing that renders it
   changed, which is the one failure the whole mechanism exists to make impossible. It is also
   what makes the module importable by a test: an exporter that renders on import cannot be.
+- **The knobs are local; the machinery is not.** `og-recipe.mjs` is one file of data that binds
+  `@robertblust/design/cards/recipe` to this repository's root, and `export-og.mjs`,
+  `og-check.mjs` and `verify/og-recipe.test.mjs` are each a handful of lines over
+  `cards/export`, `cards/check` and `cards/recipe-tests`. The three sites each kept their own
+  copy of all four files and the copies drifted: three source walks with three different sets
+  of rules, and three test suites of 29, 30 and 30 tests with no one of them a superset of
+  another — so a case one site had proven was a case the other two only happened to satisfy.
+  The shared harness is the *union*, never the intersection; the site keeps exactly what only
+  the site can know. `root` is passed in rather than derived, because a module that works out
+  where it is from its own location points inside `node_modules` once it ships as a dependency.
 - **One exporter, one crop, and no server.** `npm run og` renders all five cards from
   `file://` — the same way the deck opens — because every page here references its assets
   relatively. The landing card was once cropped a pixel higher than the other two; that was an
-  accident of a separate exporter, not a choice, and there is now one constant.
+  accident of a separate exporter, not a choice, and there is now one constant. The shared
+  exporter awaits `document.fonts.ready` on *every* card. This repository used to await it only
+  in the `reduced-motion` branch, which made it the settle mechanism rather than a font guard
+  and left the two `wait:900` deck cards racing font loading against a timer — a card rendered
+  in the fallback face is a silent failure: nothing errors, and the type is simply not the type
+  the page declares.
 - **Both files are committed together** — `og.png` and the `og.sha` beside it, in the same
   commit as the page that moved. The stamp is written after the screenshot, so an exporter that
   dies half way leaves the card reported stale rather than reported current.
 - **It over-reports and never under-reports, deliberately.** Editing a comment in a page marks
   its card stale even though the render would be identical. Clearing that is `npm run og` and a
   commit — cheap, and the opposite error is a card nobody notices for days.
-- **`npm run test:og` is the check's own suite** (`node --test`, no dependencies). It drives
-  the recipe against fixture trees rather than against this site, so it still means something
-  after these pages change. A card added to the repository without an entry in `og-recipe.mjs`
-  fails it — otherwise the check would keep printing five ✓ while the sixth drifted.
+- **`npm run test:og` is the check's own suite** (`node --test`). It drives the recipe against
+  fixture trees rather than against this site, so it still means something after these pages
+  change. A card added to the repository without an entry in `og-recipe.mjs` fails it —
+  otherwise the check would keep printing ✓ for the others while the new one drifted. The
+  assertions are the family's, so this site now gates on cases it never wrote itself.
 
 ## The head is a contract, and `seo` is what holds it
 
