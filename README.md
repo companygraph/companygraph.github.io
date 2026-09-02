@@ -35,10 +35,9 @@ split had to be unwound. Do not recreate one.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
 - `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` — one narrated clip per slide and
-  language — both PDFs,
-  `export-pdf.mjs`, and `tts/generate.py`, which reads the deck's speaker notes as the single
-  source for what is spoken. Its share card is rendered by the root `export-og.mjs`, with the
-  other three.
+  language — both PDFs, and `tts/generate.py`, which reads the deck's speaker notes as the
+  single source for what is spoken. Its share card is rendered by the root `export-og.mjs`,
+  with the other three.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
 - `stage.css`, `stage.js`, `d3.v7.min.js` — **the stage**: the figure, the card and the expand
@@ -63,7 +62,8 @@ split had to be unwound. Do not recreate one.
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
   `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all five and writes
-  the stamps, and `og-check.mjs` reports which have drifted.
+  the stamps, and `og-check.mjs` reports which have drifted. `export-pdf.mjs`, alongside it at
+  the root, renders the deck's two PDFs into `talks/intro/`.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
 - `verify/check.mjs` — the suite, covering all seven pages in one run. Its shared page checks
   and `verify/design.mjs` come from `@robertblust/design`, imported by package specifier; edit
