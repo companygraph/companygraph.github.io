@@ -21,13 +21,16 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - name: The parsers still work
-        run: npm run test:example
+      - run: npm ci
+      # After npm ci, and this is not cosmetic: build/build.mjs imports the instance parser
+      # from companygraph-meta-model, which is not on disk until then. Left where it used to
+      # sit — above npm ci, beside the parser tests that have now moved to that repository —
+      # every push fails with ERR_MODULE_NOT_FOUND, and a local run cannot catch it, because
+      # node_modules is already on the machine.
       - name: The stage pages still show the pinned commit
         run: npm run example:check
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - run: npm ci
       # After npm ci because both now import @robertblust/design, which is not on disk until
       # then; before the browser because neither renders a page. A stale card is the one
       # failure the browser suite cannot see — the card is a valid PNG of a page that has
@@ -41,7 +44,7 @@ jobs:
       - name: The shared files are still what the package ships
         run: npm run design:check
       - name: The vendored d3 is the pinned build
-        run: npm run test:example
+        run: npm run test:d3
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
         run: python3 -m http.server 8000 > /dev/null 2>&1 &
