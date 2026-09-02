@@ -147,6 +147,7 @@ const PAGES = [
     // deck's call to action would ship silently. Links open in a new tab because a deck a
     // presenter navigates away from is gone.
     landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
     links: ["https://blust.ch/",
             "https://companygraph.io/",
             "https://github.com/companygraph/meta-model#roadmap"],
