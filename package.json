@@ -12,7 +12,7 @@
     "og": "node export-og.mjs",
     "og:check": "node og-check.mjs",
     "test:og": "node --test verify/og-recipe.test.mjs",
-    "test:example": "node --test verify/instance.test.mjs",
+    "test:d3": "node --test verify/d3-vendoring.test.mjs",
     "example": "node build/build.mjs",
     "example:check": "node build/build.mjs --check"
   },
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@robertblust/design": "github:robertblust/design#v0.13.0",
+    "companygraph-meta-model": "github:companygraph/meta-model#v0.5.0",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.49.1"
   }

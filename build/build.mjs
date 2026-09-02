@@ -13,11 +13,19 @@
 // The block is fenced by markers that name the commit, the way the token block is fenced by
 // its version: a reader of the HTML can see which state of the model the page shows, and the
 // check can find the block without parsing the page.
+//
+// The parser comes from `companygraph-meta-model`, pinned by tag — the same repository this
+// script fetches `core/` and `example/` from, and the repository that defines the conventions
+// the parser implements. That is the point of it living there: its CI fails if it cites a rule
+// `core/CONVENTIONS.md` does not define, which nothing could check while the two were apart.
+// (The data above is still pinned separately, by commit SHA in `source.json`. Moving that onto
+// the package too is a change of its own — a SHA is invisible to Dependabot, so a model change
+// reaches this site with no tripwire at all.)
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { parseInstance, parseSchemas } from "./instance.mjs";
+import { parseInstance, parseSchemas } from "companygraph-meta-model/instance";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const { repo, commit } = JSON.parse(fs.readFileSync(path.join(here, "..", "source.json"), "utf8"));
