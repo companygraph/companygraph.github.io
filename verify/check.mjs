@@ -190,84 +190,9 @@ const CHECKS = {
     const off = want.filter((n, i) => ns[i] !== n);
     return off.length ? `kicker numbers ${JSON.stringify(ns)} are not ${JSON.stringify(want)}` : null;
   },
-  // Run before `graph`: that check walks the figure to an entity and leaves it focused
-  // there, and the root/folder card's "N pages" line — where `shows: ["Seiten"]` lives for
-  // the example page — only renders while a root or a folder is focused. Toggling the
-  // language first, on the page exactly as it loaded, is what keeps this check honest about
-  // what a visitor sees before they have clicked anything.
-  async translates(page, spec) {
-    const body = () => page.evaluate(() => document.body.innerText);
-    const htmlLang = () => page.evaluate(() => document.documentElement.lang);
-    const desc = () => page.evaluate(() => (document.getElementById("metadesc") || {}).content);
-    const english = await body();
-    const englishTitle = await page.title();
-    const englishDesc = await desc();
-
-    // Press the DE segment — the control that means "switch to German", which is what
-    // this check is asserting. It used to click #langind, and #langind used to be the
-    // button itself; it is now the box holding both segments, so that click landed on
-    // the container and did nothing. Two pages still passed, because the box's center
-    // falls on the seam between DE and EN and the click sometimes caught a button. A
-    // check that passes by a rounding accident is worse than one that fails.
-    //
-    // A deck's transport carries its own control under its own id, so the spec names it
-    // rather than this check branching on which page it is.
-    const toggle = "#" + (spec.translates.id || "lde");
-    // Going back is a different control now, not the same one pressed twice: a segmented
-    // control has one button per language, and pressing DE while already in German is
-    // correctly a no-op. `back` is what returns the page to English.
-    // The deck used to be the exception here: its transport carried a single toggle that
-    // flipped both ways, so pressing the same control again was how it went back. That
-    // toggle is gone. The deck's spec now names `backId: "langEn"`, a segmented DE/EN
-    // control like every other page, so it needs no exception left in this comment.
-    const back = "#" + (spec.translates.backId || spec.translates.id || "len");
-    await page.click(toggle);
-    const swapped = await htmlLang();
-    if (swapped !== spec.translates.lang)
-      return `after the toggle lang=${swapped}, expected ${spec.translates.lang}`;
-    const german = await body();
-    for (const s of spec.translates.shows)
-      if (!german.includes(s)) return `German page is missing ${JSON.stringify(s)}`;
-    for (const s of spec.translates.hides)
-      if (german.includes(s)) return `German page still shows the English ${JSON.stringify(s)}`;
-    // The <title> and the meta description are the page's word to a crawler or a tab
-    // strip — nothing in `shows`/`hides` reaches either, since both assert body text.
-    // A visitor who picks German with an English title/description would sail past both.
-    if (spec.translates.title) {
-      const germanTitle = await page.title();
-      if (germanTitle !== spec.translates.title)
-        return `after the toggle title is ${JSON.stringify(germanTitle)}, expected ${JSON.stringify(spec.translates.title)}`;
-    }
-    // The PDF exists in both languages, and the link swaps with the toggle. A German
-    // reader handed the English deck is a silent wrong answer: the page still looks
-    // right, the download still works, and only the file is in the wrong language.
-    if (spec.translates.dlHref) {
-      const href = () => page.evaluate(() =>
-        (document.querySelector("[data-de-href]") || {}).getAttribute?.("href"));
-      const germanHref = await href();
-      if (germanHref !== spec.translates.dlHref.de)
-        return `after the toggle the download points at ${JSON.stringify(germanHref)}, expected ${JSON.stringify(spec.translates.dlHref.de)}`;
-    }
-    if (spec.translates.desc) {
-      const germanDesc = await desc();
-      if (germanDesc !== spec.translates.desc)
-        return `after the toggle meta description is ${JSON.stringify(germanDesc)}, expected ${JSON.stringify(spec.translates.desc)}`;
-    }
-
-    await page.click(back);
-    const returned = await htmlLang();
-    if (returned !== "en") return `toggling back left lang=${returned}, expected en`;
-    if (await body() !== english) return "toggling back did not restore the English text";
-    if (await page.title() !== englishTitle) return "toggling back did not restore the English title";
-    if (await desc() !== englishDesc) return "toggling back did not restore the English meta description";
-    if (spec.translates.dlHref) {
-      const backHref = await page.evaluate(() =>
-        (document.querySelector("[data-de-href]") || {}).getAttribute?.("href"));
-      if (backHref !== spec.translates.dlHref.en)
-        return `toggling back left the download at ${JSON.stringify(backHref)}, expected ${JSON.stringify(spec.translates.dlHref.en)}`;
-    }
-    return null;
-  },
+  // `translates` used to live here — written for this site, by breaking the page three ways and
+  // watching it catch each. It is in `@robertblust/design/verify/pages` now, last among the shared
+  // checks, so blust.ch and guestgraph.io run the same code; the specs above are what stays.
   // A page must not scroll sideways on a phone. `.bar` wraps the nav below the lockup, but
   // the nav itself was a non-wrapping flex row, so a fourth item pushed the row past the
   // viewport and took the whole document with it — every page with a header, worse in
