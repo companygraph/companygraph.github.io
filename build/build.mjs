@@ -104,7 +104,11 @@ let allMatch = true;
 
 for (const target of TARGETS) {
   const files = process.env.META_MODEL ? await readLocal(target.sub) : await readRemote(target.sub);
-  const data = { ...target.parse(files), commit };
+  // `sub` goes to the parser too: an entity's `path` is what the page turns into a link to
+  // the file on GitHub, and it has to be the path in the repository the files came from. The
+  // parser used to hardcode `example/model/`, which happened to be right here and was a 404 on
+  // every sibling site.
+  const data = { ...target.parse(files, { sub: target.sub }), commit };
   if (target.finish) target.finish(data);
 
   // `data-stage` is how the shared stage script finds the block — it queries the attribute,
