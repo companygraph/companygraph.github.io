@@ -21,11 +21,11 @@ to see the seam. They were merged, history and all, in August 2026.
 | `/billing/` | What would cost money, if anything ever does. |
 | `/privacy/` | What this site collects, which is nothing. |
 
-The repository is named `companygraph.github.io` because that makes it the organisation's
+The repository is named `companygraph.github.io` because that makes it the organization's
 GitHub Pages site, which is what puts it on the custom domain in `CNAME`. **Renaming it or
 removing `CNAME` takes the whole domain down**, talks included.
 
-A repository named `talks` in this organisation would claim `companygraph.io/talks/` the
+A repository named `talks` in this organization would claim `companygraph.io/talks/` the
 moment its Pages were enabled — shadowing the folder in this repository, which is how the old
 split had to be unwound. Do not recreate one.
 
@@ -136,7 +136,7 @@ the companies the model was extracted from.
 `/billing/` is the one place a commercial model is stated, and it states one that is not
 running: consulting, time and material, no rate, nobody to ask, and it may never happen at
 all. **The absent contact is deliberate** — adding one turns a described model into an offer.
-Nothing anywhere may imply a hosted product, a licence fee, a seat count or a paid edition of
+Nothing anywhere may imply a hosted product, a license fee, a seat count or a paid edition of
 the model; those are the four things the billing page rejects by name.
 
 See `CLAUDE.md` for why each of those constraints exists, and what has already gone wrong when
