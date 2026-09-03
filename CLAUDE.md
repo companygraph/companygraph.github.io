@@ -195,11 +195,16 @@ that lived in another repository. No CI in *this* repository can catch drift in
   now; do not pre-write a "talk coming soon" in the meantime, which is exactly the kind of
   status claim §3 above forbids.
 
-## A page is en-US; `data-de` and `data-notes` are de-CH
+## A page is en-US; a `-de` attribute is de-CH
 
 One rule, positional, with no exceptions to remember: every word of a page is American
-English, and the values of `data-de` — and in a deck, `data-notes` — are Swiss German.
-`data-notes-en` is English and follows the page.
+English, and the value of any attribute whose name ends `-de` is Swiss German — `data-de`,
+and in a deck `data-notes-de`.
+
+It reads as one line now because the attributes were made to agree. Notes used to invert the
+page's convention: `data-notes` held German and English was the suffixed `data-notes-en`, so
+the base attribute meant a different language depending on which pair you were reading.
+Design v0.25.0 swapped them, which is what leaves nothing here to remember.
 
 It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is
 correct German, not a British spelling left behind, and renaming it produces German that is
@@ -456,7 +461,7 @@ requirements implicitly include this section.
 
 - **English markup, German in `data-de`.** Static `lang="en"`, because the source is English.
   `applyLang()` sets `de` when a visitor switches.
-- **Notes are `data-notes` (German) and `data-notes-en`.** They are attribute *values*:
+- **Notes are `data-notes` (English) and `data-notes-de` (German).** They are attribute *values*:
   nested markup uses single quotes (`<em class='cue'>`), German quotes must be typographic
   (`„…“` — one straight `"` terminates the attribute and dumps the note onto the slide), and
   an HTML comment never goes inside a start tag.
