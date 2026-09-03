@@ -22,6 +22,15 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      # How far the model pin has fallen behind what it points at. Non-blocking on purpose:
+      # the pin is editorial — it says which state of the model these pages publish — so a pin
+      # behind its upstream is either deliberate or waiting to be looked at, and no script can
+      # tell those apart. It reports and passes; a red check here would be ignored by the
+      # second week. The token is only for the rate limit.
+      - name: How far the model pin has fallen behind
+        run: npm run pin:check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # After npm ci, and this is not cosmetic: build/build.mjs imports the instance parser
       # from companygraph-meta-model, which is not on disk until then. Left where it used to
       # sit — above npm ci, beside the parser tests that have now moved to that repository —
