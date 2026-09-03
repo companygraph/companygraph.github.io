@@ -45,7 +45,7 @@ it does say:
 This is not hypothetical caution: the sibling org's profile at `guestgraph/.github` once
 advertised "Core in development" while two slices had shipped, because it restated a roadmap
 that lived in another repository. No CI in *this* repository can catch drift in
-`companygraph/meta-model` — the only defence is never restating anything that lives there.
+`companygraph/meta-model` — the only defense is never restating anything that lives there.
 
 - **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
   carry a data block generated from `meta-model` at the commit in `source.json` — the example
@@ -185,7 +185,7 @@ that lived in another repository. No CI in *this* repository can catch drift in
 
 
 - **The avatar is uploaded by hand** — GitHub takes no SVG and offers no API for setting an
-  org avatar. Upload `avatar.png` at Organisation → Settings → Profile after regenerating it
+  org avatar. Upload `avatar.png` at Organization → Settings → Profile after regenerating it
   from `avatar.svg`.
 
 - **When the talk ships**, the page gains a nav item and a second button — the header markup
@@ -194,6 +194,21 @@ that lived in another repository. No CI in *this* repository can catch drift in
   moment, not one click away. That obligation begins the day the talk repository exists, not
   now; do not pre-write a "talk coming soon" in the meantime, which is exactly the kind of
   status claim §3 above forbids.
+
+## A page is en-US; `data-de` and `data-notes` are de-CH
+
+One rule, positional, with no exceptions to remember: every word of a page is American
+English, and the values of `data-de` — and in a deck, `data-notes` — are Swiss German.
+`data-notes-en` is English and follows the page.
+
+It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is
+correct German, not a British spelling left behind, and renaming it produces German that is
+wrong in a way nothing here can catch: every DOM check reads the rendered page, and the
+rendered page is only ever one language. A sweep masks those two attributes and touches
+nothing else.
+
+This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says
+where it applies.
 
 ## The header is a contract, and its copy carries a version
 
@@ -211,13 +226,13 @@ What the contract says:
   switcher is at the edge and each step left is more the site's own subject.
 - **One baseline.** A single line runs through the middle of every text in the row. The
   links carry equal space above and below: the hover underline hangs below the word, and
-  centring the boxes instead would ride the text high — which it did, by 5px, until the
+  centering the boxes instead would ride the text high — which it did, by 5px, until the
   language control sat next to it and made it visible.
 - **States are different things.** Hover is an underline and nothing else. The current page
   is brighter ink and carries no line. When both drew the same line, the page you were on
   read as permanently hovered.
 - **The wordmark never breaks.** It is `white-space:nowrap` and does not shrink. This one
-  sits *outside* the fence, because each site's mark has its own colours; the rule is the
+  sits *outside* the fence, because each site's mark has its own colors; the rule is the
   outcome, not the declaration, and `mobileNav` asserts it.
 - **Under 640px the links collapse behind a button.** The language control stays on the bar
   — two characters, reached for constantly by a bilingual audience, and one a visitor
@@ -227,7 +242,7 @@ What the contract says:
 
 `navOrder`, `headerBaseline` and `mobileNav` assert all of it, per repository. What they
 cannot do is see a sibling — that is the whole reason the block carries a version. Before
-this was written down there were five different mobile behaviours across the family and
+this was written down there were five different mobile behaviors across the family and
 eight different wordings of the same CSS, and nothing failed anywhere.
 
 ## Share cards go stale silently, and nothing on the page says so
@@ -469,7 +484,7 @@ requirements implicitly include this section.
   accident.
 
   `Robert Blust` is a full lockup, not a name in text — the `rb` plate from `blust.ch` inlined
-  beside the wordmark, in the colours `.name b` already defines. It is a brand with a mark of
+  beside the wordmark, in the colors `.name b` already defines. It is a brand with a mark of
   its own and reads as a peer of this site's lockup. *Talks* stays `--dim`: the one nav item
   among two brands, and that contrast is what makes the row legible at 15px.
 
