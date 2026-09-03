@@ -114,9 +114,11 @@ card's URL onto `location.origin`, which is only correct when the repository is 
 its host.
 
 Most checks read the page as it first renders, which is English. `translates` is the one that
-clicks: it presses the language control, requires the German to be there and the English to be
-gone, then presses it again and requires the page to come back exactly as it was. It runs last
-because it is the only check that changes what the others read.
+clicks: it presses DE, requires the German to be there and the English to be gone, then presses
+EN and requires the page to come back exactly as it was. It runs last among the shared checks
+because it is the only one that changes what the others read. It was written here and now lives
+in `@robertblust/design` with the other shared checks, so blust.ch and guestgraph.io run the same
+code; what stays here is each page's spec.
 
 It was written by breaking the page three ways and watching it catch each: the toggle's click
 listener deleted, an `<h1>`'s `data-de` misspelled, and `applyLang` stopped from setting
