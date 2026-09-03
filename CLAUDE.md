@@ -10,10 +10,10 @@ No build. `npm run serve` (`python3 -m http.server 8000`), then `npm run verify`
 terminal — it renders the served page in headless Chromium and asserts against the DOM, not
 the source.
 
-**Verify by rendering, not by reading the diff.** Check both OS colour-scheme preferences and
+**Verify by rendering, not by reading the diff.** Check both OS color-scheme preferences and
 at least a phone width. The page's own palette is fixed — it does not redraw for
 `prefers-color-scheme: light` — but the browser's native chrome (scrollbar, form control,
-selection colour) still follows the OS setting where the page states no opinion, and that gap
+selection color) still follows the OS setting where the page states no opinion, and that gap
 is invisible in a source diff; it only shows up in a rendered window.
 
 ## One screen, one job
@@ -38,7 +38,7 @@ it does say:
   validated. Keep it in that mood. The page must go on saying that the model and its tooling
   are free forever, that nothing is running, that there is no rate, and that there is nobody
   to ask — **the absent contact is deliberate, not an oversight**, and adding one turns a
-  stated model into an offer. Nothing on this site may imply a hosted product, a licence fee,
+  stated model into an offer. Nothing on this site may imply a hosted product, a license fee,
   a seat count or a paid edition of the model — the four things the billing page rejects by
   name.
 
@@ -65,7 +65,7 @@ that lived in another repository. No CI in *this* repository can catch drift in
 - **The language control is a nav item, not a floating badge.** It sits in `<nav>` beside the
   links, because it belongs with the other things you can do to the page rather than on top of
   the page. The nav is empty of links until the talk ships; it exists anyway to hold this.
-- **The footer is set in mono because every item in it is data** — a URL, a licence identifier,
+- **The footer is set in mono because every item in it is data** — a URL, a license identifier,
   a name that is really a link. `monoScope` deliberately does not reach the footer, so nothing
   will stop you putting prose there; do not.
 
@@ -358,9 +358,15 @@ nothing acted on, so a German visitor read an English title under `lang="de"`. I
 second failure impossible to reintroduce quietly.
 
 **`/example/`'s entity data is fetched from `companygraph/meta-model` at a pinned commit.**
-It still contains British spellings — *recognise*, *organisation*, *Modelling* — which
-surface when a node is clicked. Hand-editing them here is wrong: `npm run example` would
-overwrite it and `example:check` guards the pin. The fix belongs upstream.
+Nothing in it is editable here: `npm run example` would overwrite the edit and `example:check`
+guards the pin, so a change to what a node shows is a change upstream and a re-pin.
+
+This paragraph used to name three British spellings the example data carried — they surfaced
+when a node was clicked — and say the fix belonged upstream. It did, and it took a while to get
+there: core 0.13.0 made American English a rule (R14) and renamed `organisation`, and 0.13.1
+caught the two the sweep had missed, because R14 binds an instance's content and the reference
+example is instance content. What the note got right was refusing the local fix; what it could
+not do was make the upstream one happen.
 
 ## CI
 
@@ -500,7 +506,7 @@ requirements implicitly include this section.
 - **The `blust.ch` credit in the page footer is a lockup, not a footer link.** It leaves the
   footer's mono for the same treatment it has on every deck — the `rb` plate inlined, wordmark
   with the second word in `--c-mid`. The rest of the row stays mono because the rest of the row
-  is data: a repository URL and a licence. A prose mention of the name inside a sentence stays
+  is data: a repository URL and a license. A prose mention of the name inside a sentence stays
   a plain link — the mark belongs in the footer row, not mid-paragraph.
 - **A link check that trusts the DOM inspects half the site.** The rendered DOM is only ever
   one language; German lives in `data-de` as markup that does not exist until a visitor

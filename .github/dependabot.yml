@@ -27,7 +27,7 @@
 # pull request alone.
 #
 # It is also why d3 sits in `dependencies` and not `devDependencies`, which is where it used
-# to be. The organisation runs GitHub's "dismiss low-impact alerts for development-scoped
+# to be. The organization runs GitHub's "dismiss low-impact alerts for development-scoped
 # dependencies" preset — correct for playwright, which no visitor ever runs — and under the
 # old scope it auto-dismissed low and medium d3 alerts on a file a browser executes. The
 # scope is load-bearing now, not cosmetic: moving d3 back silences those alerts again, and

@@ -206,7 +206,7 @@ const CHECKS = {
     // Press the DE segment — the control that means "switch to German", which is what
     // this check is asserting. It used to click #langind, and #langind used to be the
     // button itself; it is now the box holding both segments, so that click landed on
-    // the container and did nothing. Two pages still passed, because the box's centre
+    // the container and did nothing. Two pages still passed, because the box's center
     // falls on the seam between DE and EN and the click sometimes caught a button. A
     // check that passes by a rounding accident is worse than one that fails.
     //
