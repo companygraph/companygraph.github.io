@@ -148,6 +148,12 @@ const PAGES = [
     // presenter navigates away from is gone.
     landing: "../../",
     transportFits: [320, 350, 360, 390, 393, 414, 430],
+    // One width per tier of the transport's own breakpoints, plus two above them. The
+    // desktop pair is where the language and theme controls actually disagreed before
+    // design v0.27.0; the three narrow widths hold for free today, because each tier
+    // restates `min-height` on `.seg button` — they are named so a change to the theme
+    // control's padding cannot break one of them unseen.
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
     links: ["https://blust.ch/",
             "https://companygraph.io/",
             "https://github.com/companygraph/meta-model#roadmap"],
