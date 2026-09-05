@@ -489,9 +489,10 @@ requirements implicitly include this section.
 - **English markup, German in `data-de`.** Static `lang="en"`, because the source is English.
   `applyLang()` sets `de` when a visitor switches.
 - **Notes are `data-notes` (English) and `data-notes-de` (German).** They are attribute *values*:
-  nested markup uses single quotes (`<em class='cue'>`), German quotes must be typographic
-  (`„…“` — one straight `"` terminates the attribute and dumps the note onto the slide), and
-  an HTML comment never goes inside a start tag.
+  nested markup uses single quotes (`<em class='cue'>`), German quotes are guillemets
+  (`«…»` with `‹…›` inside, the Swiss form WRITING.md sets; they also cannot end an attribute,
+  where one straight `"` terminates it and dumps the note onto the slide), and an HTML comment
+  never goes inside a start tag.
 - **`<em class='cue'>` is a stage direction and is never spoken.** `<em>` alone is emphasis.
 - **`<section class="slide` is a literal the narration generator splits on.** Nothing may come
   between the tag name and `class`: `<section class="slide title-slide" data-say-title="no">`
