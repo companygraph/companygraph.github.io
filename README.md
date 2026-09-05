@@ -141,5 +141,5 @@ all. **The absent contact is deliberate** — adding one turns a described model
 Nothing anywhere may imply a hosted product, a license fee, a seat count or a paid edition of
 the model; those are the four things the billing page rejects by name.
 
-See `CLAUDE.md` for why each of those constraints exists, and what has already gone wrong when
+See `AGENTS.md` for why each of those constraints exists, and what has already gone wrong when
 a page like this one didn't hold them.
