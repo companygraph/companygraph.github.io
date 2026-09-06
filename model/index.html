@@ -594,7 +594,7 @@
     <div class="title">
       <h1 data-de="<span class='r70'>Das Modell,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">The model,</span><span class="rcl"><em>drawn</em>.</span></h1>
       <p class="tagline" data-de="Das Vokabular, in dem eine Firma beschrieben wird – ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist.">The vocabulary a company is described in — one schema per type, drawn as the graph of what references what.</p>
-      <p class="note" data-de="Nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Kern des Modells erzeugt, beim Commit, der neben der Zeichnung steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">Nothing here was written by hand: the page is generated from the model's own core, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
+      <p class="note" data-de="Nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Kern des Modells erzeugt, beim Commit, der neben dem Diagramm steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">Nothing here was written by hand: the page is generated from the model's own core, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
     </div>
 
     <section class="figure-section">
@@ -605,7 +605,7 @@
       <div class="stage" id="stage">
         <div class="canvas">
           <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recenter" id="recenter" type="button" data-de="zentrieren">recenter</button>
+          <button class="recenter" id="recenter" type="button" data-de="neu zentrieren">recenter</button>
         </div>
         <button class="gutter" id="gutter" type="button"
                 aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
@@ -616,7 +616,7 @@
           </div>
         </aside>
       </div>
-      <p class="stagehint" data-de="Ziehen bewegt die Zeichnung · ⌘- oder Strg-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
+      <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
       <p class="figcap" id="figcap" data-de="Ein umrandeter Kasten ist der Ordner, in dem die Schemas liegen. Ein gefülltes Quadrat ist ein Schema. Ein gestrichelter Strich ist ein Feld, das auf einen anderen Typ verweist, beschriftet mit dem Namen des Felds. Anklicken rückt in die Mitte.">An outlined box is the folder the schemas live in. A filled square is a schema. A dashed line is a field that references another type, labeled with the field's name. Click to bring it to the center.</p>
 
       <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
@@ -632,9 +632,9 @@
       <div class="rules">
         <p data-de="<b>Ein Typ ist eine Schema-Datei, benannt nach dem Typ.</b> Ihre Überschrift ist der kanonische Name, und genau diese Zeichenkette wird überall sonst referenziert – es gibt also einen Ort, an dem steht, wie ein Typ heisst, und einen Ort, an dem man es ändert.">
           <b>A type is one schema file, named for the type.</b> Its heading is the canonical name, and that string is what everything else references — so there is one place that says what a type is called, and one place to change it.</p>
-        <p data-de="<b>Ein Strich zwischen zwei Schemas ist ein Feld, kein Link.</b> Das Feld ist so typisiert, dass es auf einen anderen Typ verweist, und der Strich trägt den Namen des Felds – ein Verweis auf einen Typ, den kein Schema erklärt, ist ein Fehler und nicht ein Link, der irgendwann kaputt ist.">
+        <p data-de="<b>Ein Strich zwischen zwei Schemas ist ein Feld, kein Link.</b> Das Feld ist so typisiert, dass es auf einen anderen Typ verweist, und der Strich trägt den Namen des Felds – ein Verweis auf einen Typ, den kein Schema erklärt, ist ein Fehler und kein Link, der irgendwann kaputtgeht.">
           <b>A line between two schemas is a field, not a link.</b> The field is typed as a reference to another type, and the line carries the field's name — so a reference to a type no schema declares is an error, rather than a link that breaks later.</p>
-        <p data-de="<b>Ein Typ, der besessen wird, sagt es in einer Zeile.</b> Sein Schema nennt den Besitzer, und im Dateisystem liegen seine Dateien im Ordner des Besitzers – der Besitz steht einmal im Vokabular, und die Ablage folgt daraus.">
+        <p data-de="<b>Ein Typ mit einem Besitzer sagt es in einer Zeile.</b> Sein Schema nennt den Besitzer, und im Dateisystem liegen seine Dateien im Ordner des Besitzers – der Besitz steht einmal im Vokabular, und die Ablage folgt daraus.">
           <b>A type that is owned says so in one line.</b> Its schema names the owner, and on disk its files nest inside the owner's folder — the ownership is stated once, in the vocabulary, and the layout follows from it.</p>
       </div>
     </section>

@@ -230,12 +230,14 @@ nothing else.
 This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says
 where it applies.
 
-Three more places carry German, and none of their names ends in `-de`. The `UI.de` object on
+Four more places carry German, and none of their names ends in `-de`. The `UI.de` object on
 every prose page and `TALK.de` in every deck hold the German `<title>` and description; a deck's
 `UI.de` also holds its control labels; and `data-de-href` on a talks index holds the German
 PDF's path, a URL rather than a sentence. A sweep that masks only the two attributes rewrites
-the first two, so mask the `de:` branches of those objects as well. The `translates` specs in
-`verify/check.mjs` quote German too, and are the one place it is quoted on purpose.
+the first two, so mask the `de:` branches of those objects as well. The model and example
+pages also carry German in `data-de-aria` beside an `aria-label`, which the language switch
+applies, so a sweep masks it like the others. The `translates` specs in `verify/check.mjs`
+quote German too, and are the one place it is quoted on purpose.
 
 `<html lang>` carries the bare language, `en` in the source and `de` after a switch, and the
 region rides in `og:locale` alone. The rule's name says where the spelling and the grammar come
