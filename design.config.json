@@ -1,8 +1,1 @@
-{
-  "groups": [
-    "fonts",
-    "stage"
-  ],
-  "langKey": "cg-lang",
-  "themeKey": "rb-theme"
-}
+{ "groups": ["fonts", "stage"] }
