@@ -442,16 +442,24 @@
 
   main{flex:1; display:flex; align-items:center; padding:2vh 0 5vh}
 
-  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-     font-weight:700; line-height:1.04; letter-spacing:-.032em; font-size:clamp(2.1rem,5vw,3.9rem); max-width:21ch}
+  /* The title block every prose page in the family carries: the first clause light and dim,
+     the completion heavy under it, and a tagline at one measure below. The page's subject is
+     what changes between pages, never the shape. */
+  .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            letter-spacing:-.035em; line-height:1.0;
+            font-size:clamp(2.2rem,6vw,4.6rem)}
+  .title h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .title h1 .rcl{display:block; font-weight:800}
+  /* The accent word in that block is --c-firm elsewhere. Here the em is not a word being
+     emphasized but the wordmark's second half, so it keeps the wordmark's own rule below. */
   h1 em{font-style:normal; color:var(--c-mid)}
   /* The wordmark's second half, wherever it appears: accent-colored, never italic. `em`
      is the only tag available inside a data-de attribute value — nested markup there must
      use single quotes, and a <span class='...'> would be one more thing to keep in step
      across two languages. The rule does the work instead. */
   .t em{font-style:normal; color:var(--c-mid)}
-  .lede{margin-top:1.6rem; font-size:clamp(1.05rem,1.6vw,1.35rem); color:var(--dim);
-        max-width:44ch}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
+           max-width:46ch; line-height:1.4}
 
   .talks{margin-top:clamp(3rem,6vh,5rem)}
   .talk{
@@ -510,7 +518,7 @@
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
   @media (max-width:900px){
-    .lede{max-width:100%}
+    .tagline{max-width:100%}
     main{padding:1vh 0 4vh}
     .talk{grid-template-columns:minmax(0,1fr); gap:.5rem}
     .meta{grid-column:1; text-align:left; margin-top:.4rem}
@@ -564,8 +572,10 @@
 
 <main>
   <div class="shell">
-    <h1 data-de="Vorträge über Company<em>Graph</em>.">Talks on Company<em>Graph</em>.</h1>
-    <p class="lede" data-de="Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens.">Talks on CompanyGraph, the open-source meta-model for operating a company.</p>
+    <div class="title">
+      <h1 data-de="<span class='r70'>Vorträge über</span><span class='rcl'>Company<em>Graph</em>.</span>"><span class="r70">Talks on</span><span class="rcl">Company<em>Graph</em>.</span></h1>
+      <p class="tagline" data-de="Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens.">Talks on CompanyGraph, the open-source meta-model for operating a company.</p>
+    </div>
 
     <div class="talks">
       <div class="talkrow">
@@ -753,12 +763,12 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
-  // The description is the lede's own sentence in both languages — read off the lede
+  // The description is the tagline's own sentence in both languages — read off the tagline
   // element rather than retyped here, so the two copies cannot drift apart.
-  var ledeEl = document.querySelector(".lede");
+  var taglineEl = document.querySelector(".tagline");
   var UI = {
-    de:{ title:"Vorträge · CompanyGraph", desc: ledeEl.getAttribute("data-de") },
-    en:{ title:"Talks · CompanyGraph",    desc: ledeEl.getAttribute("data-en") }
+    de:{ title:"Vorträge · CompanyGraph", desc: taglineEl.getAttribute("data-de") },
+    en:{ title:"Talks · CompanyGraph",    desc: taglineEl.getAttribute("data-en") }
   };
 
   function applyLang(){
