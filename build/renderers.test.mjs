@@ -107,6 +107,22 @@ test("writeJsonLd appends its node and leaves the four existing ones untouched",
   assert.equal(example[4].distribution.contentUrl, "https://companygraph.io/example.json");
 });
 
+test("writeJsonLd is idempotent: a second run is byte-identical and check reports nothing", () => {
+  // The guard's one-trailing-node case rests on this: a rerun's own previous node must be
+  // recognized by @id and replaced, not mistaken for someone else's hand-written node. If it
+  // were, either this would throw on the second run, or the file would drift on every render.
+  const { dir } = ldScratch();
+  writeJsonLd(SCHEMAS, { check: false, root: dir, repo: "example/meta" });
+  const before = {
+    example: fs.readFileSync(path.join(dir, "example", "index.html"), "utf8"),
+    model: fs.readFileSync(path.join(dir, "model", "index.html"), "utf8"),
+  };
+  assert.deepEqual(writeJsonLd(SCHEMAS, { check: false, root: dir, repo: "example/meta" }), []);
+  assert.equal(fs.readFileSync(path.join(dir, "example", "index.html"), "utf8"), before.example);
+  assert.equal(fs.readFileSync(path.join(dir, "model", "index.html"), "utf8"), before.model);
+  assert.deepEqual(writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }), []);
+});
+
 test("writeJsonLd refuses a graph whose head is not the four it passes through", () => {
   // The guard exists so a differently shaped page is refused rather than having four
   // hand-written nodes silently replaced by one. A graph missing its BreadcrumbList is the
@@ -124,4 +140,61 @@ test("writeJsonLd refuses a graph whose head is not the four it passes through",
   }
   assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
     /must begin with/);
+});
+
+function ldBadScratch(graph) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cg-ld-bad-"));
+  const doc = { "@context": "https://schema.org", "@graph": graph };
+  for (const d of ["example", "model"]) {
+    fs.mkdirSync(path.join(dir, d), { recursive: true });
+    fs.writeFileSync(path.join(dir, d, "index.html"),
+      `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  }
+  return dir;
+}
+
+test("writeJsonLd refuses a graph whose head is the right length but the wrong order", () => {
+  // Four nodes, all of them expected types, just not in the order this site always writes
+  // them — the length check alone would let this through.
+  const dir = ldBadScratch([
+    { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
+    { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
+    { "@type": "BreadcrumbList", "@id": "https://companygraph.io/model/#breadcrumb", itemListElement: [] },
+    { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
+  ]);
+  assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
+    /must begin with/);
+});
+
+test("writeJsonLd refuses a single trailing node it does not own, rather than replacing it", () => {
+  // The case that matters: not two or more trailing nodes, but exactly one that is not this
+  // renderer's own — the shape a page gets the moment someone hand-adds a fifth node after
+  // the four. Identity, not count, is what tells this apart from a rerun's own previous
+  // output, so the guard has to compare @id rather than just measuring the tail.
+  const dir = ldBadScratch([
+    { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
+    { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
+    { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
+    { "@type": "BreadcrumbList", "@id": "https://companygraph.io/model/#breadcrumb", itemListElement: [] },
+    { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone hand-written" },
+  ]);
+  assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
+    /does not own — https:\/\/blust\.ch\/#person/);
+});
+
+test("writeJsonLd refuses a graph carrying more than one node after the four it owns, rather than deleting the rest", () => {
+  // Two trailing nodes, one of them carrying this renderer's own @id and one not: even the
+  // node that would ordinarily be a safe rerun-replacement is refused here, because it is not
+  // alone — the guard does not try to sort the trailing nodes into "mine" and "not mine" and
+  // silently drop only the ones it doesn't recognize.
+  const dir = ldBadScratch([
+    { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
+    { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
+    { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
+    { "@type": "BreadcrumbList", "@id": "https://companygraph.io/model/#breadcrumb", itemListElement: [] },
+    { "@type": "DefinedTermSet", "@id": "https://companygraph.io/model/#vocabulary", name: "Prior run" },
+    { "@type": "Person", "@id": "https://companygraph.io/#person", name: "Someone hand-written" },
+  ]);
+  assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
+    /does not own — .*#person/);
 });

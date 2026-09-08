@@ -94,14 +94,25 @@ export function writeJsonLd(data, { check = false, root = HERE, repo } = {}) {
     if (!m) throw new Error(`${rel} carries no JSON-LD block`);
     const doc = JSON.parse(m[2]);
     if (!Array.isArray(doc["@graph"])) throw new Error(`${rel}'s JSON-LD has no @graph`);
-    // The head is this site's and the tail is this renderer's. A graph that does not begin with
-    // the four hand-written nodes is one this renderer would corrupt by appending to, so it
-    // refuses rather than guessing which entries are its own.
+    // A graph that does not begin with the four hand-written nodes is a shape this renderer
+    // does not recognize — refused outright rather than quietly rewritten.
     const head = doc["@graph"].slice(0, HEAD.length).map((n) => n && n["@type"]);
     if (head.join() !== HEAD.join()) {
       throw new Error(`${rel}: @graph must begin with ${HEAD.join(", ")}, not ${head.join(", ") || "nothing"}`);
     }
-    doc["@graph"] = [...doc["@graph"].slice(0, HEAD.length), nodeFor(dir, data, repo)];
+    const node = nodeFor(dir, data, repo);
+    const tail = doc["@graph"].slice(HEAD.length);
+    // The head is this site's and is passed through; the tail is this renderer's and is
+    // replaced. A single node carrying this renderer's own @id is its previous output, so a
+    // second run overwrites it rather than appending — that is what makes the render
+    // idempotent. Anything else after the head is someone's own work, and the remedy for the
+    // stale check it would cause is `npm run pages`, which would delete it without a word. So
+    // a graph carrying a node this renderer does not own is refused rather than rewritten.
+    const foreign = tail.filter((n) => !n || n["@id"] !== node["@id"]);
+    if (foreign.length) {
+      throw new Error(`${rel}: @graph carries ${foreign.length} node(s) after ${HEAD.join(", ")} that this renderer does not own — ${foreign.map((n) => (n && n["@id"]) || "an untyped node").join(", ")}`);
+    }
+    doc["@graph"] = [...doc["@graph"].slice(0, HEAD.length), node];
     const text = JSON.stringify(doc, null, 2);
     const next = page.replace(RE, (all, open, _body, close) => open + text + close);
     // It has to parse after the write as well as before it: this rewrites a region inside a
