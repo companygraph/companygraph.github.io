@@ -50,10 +50,11 @@ split had to be unwound. Do not recreate one.
   one copy, reached relatively — and `npm run test:example` asserts it is still the pinned
   package's build, byte for byte.
 - `example/` and `model/` — `index.html` each, the two stage pages: their own prose and inline
-  `<style>`, and the stage above linked in. One generator drives both from one pin —
-  `build/build.mjs` writes each page's data block (or checks both still match, `--check`) by
-  reading `meta-model/example` and `meta-model/core` at the commit `source.json` names;
-  `build/instance.mjs` is the parser for both.
+  `<style>`, and the stage above linked in. One pin drives both, in two steps —
+  `build/build.mjs` writes `example.json` and `model.json` (or checks both still match,
+  `--check`) by reading `meta-model/example` and `meta-model/core` at the commit `source.json`
+  names, and `build/pages.mjs` renders each artifact's data block and JSON-LD graph into its
+  page (or checks both still match, `--check`), touching neither the network nor the parser.
 - `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
   the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
@@ -96,11 +97,16 @@ npm run verify                     # renders every page and asserts the DOM
 npm run og:check                   # do the five share cards still show their pages?
 npm run test:og                    # the card check's own tests (node --test, no deps)
 npm run og                         # re-renders all five share cards after a visual change
-npm run example                    # writes both pages' data blocks from meta-model at the pin
-npm run example:check              # fails if either block has drifted from source.json's commit
+npm run build                      # writes example.json and model.json from meta-model at the pin
+npm run build:check                # fails if either artifact has drifted from source.json's commit
+npm run pages                      # renders both pages' data blocks and JSON-LD from the artifacts
+npm run pages:check                # fails if either page has drifted from the artifacts
 
 npm run pdf                        # both language PDFs
 ```
+
+`example.json` and `model.json` are committed files, and moving the pin means `npm run build`
+then `npm run pages`.
 
 `og:check` needs no server and no browser — it re-derives each card's recipe and compares it
 with the `og.sha` committed beside it, which is why CI runs it before `npm ci`. `npm run og`

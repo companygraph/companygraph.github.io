@@ -34,6 +34,13 @@ jobs:
         with:
           node-version: "22"
           cache: npm
+      # Every region this site derives from the model, held against the artifacts it derives
+      # them from. Before npm ci because it installs nothing: pages.mjs and its renderers are
+      # node built-ins and two committed files, with no network. That is the whole reason the
+      # artifacts are committed — the check that catches a page edited by hand is also the
+      # cheapest step in this job.
+      - name: The derived regions still match the artifacts
+        run: npm run pages:check
       - run: npm ci
       # How far the model pin has fallen behind what it points at. Non-blocking on purpose:
       # the pin is editorial — it says which state of the model these pages publish — so a pin
@@ -44,13 +51,12 @@ jobs:
         run: npm run pin:check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # After npm ci, and this is not cosmetic: build/build.mjs imports the instance parser
-      # from companygraph-meta-model, which is not on disk until then. Left where it used to
-      # sit — above npm ci, beside the parser tests that have now moved to that repository —
-      # every push fails with ERR_MODULE_NOT_FOUND, and a local run cannot catch it, because
+      # After npm ci, and this is not cosmetic: build/build.mjs imports the parser from
+      # companygraph-meta-model, which is not on disk until then. Left above npm ci it fails
+      # every push with ERR_MODULE_NOT_FOUND, and a local run cannot catch that, because
       # node_modules is already on the machine.
-      - name: The stage pages still show the pinned commit
-        run: npm run example:check
+      - name: The artifacts still match the pinned commit
+        run: npm run build:check
         env:
           GITHUB_TOKEN: ${{ github.token }}
       # After npm ci because both now import @robertblust/design, which is not on disk until
