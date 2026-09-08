@@ -1,18 +1,16 @@
-// Writes the example instance and the model vocabulary into their pages as data blocks, or
-// checks that the blocks there still match — `npm run example` and `npm run example:check`.
-// One script for both: one pin (`source.json`, at the repository root) names one commit of
-// `companygraph/meta-model`, and both `example/index.html` and `model/index.html` are drawn
-// from that same commit — the instance from `example/`, the vocabulary from `core/`.
+// Writes the example instance and the model vocabulary out as two committed artifacts,
+// `example.json` and `model.json`, or checks that those files still match what the pin
+// parses to — `npm run build` and `npm run build:check`. This is the only script in this
+// repository that reaches the network or the parser; everything derived from the two files
+// it writes is rendered by `build/pages.mjs` without touching either. One pin (`source.json`,
+// at the repository root) names one commit of `companygraph/meta-model`, and both artifacts
+// are drawn from that same commit — the instance from `example/`, the vocabulary from `core/`.
 //
 // Each is read at exactly the commit source.json names: from a local checkout when
 // META_MODEL points at one whose HEAD is that commit, otherwise from GitHub — one call to the
 // git trees API for the whole file list, shared by both targets, then the raw files each
 // target needs. No tarball, so nothing to untar, and no dependency. GITHUB_TOKEN is sent if
 // present and never printed.
-//
-// The block is fenced by markers that name the commit, the way the token block is fenced by
-// its version: a reader of the HTML can see which state of the model the page shows, and the
-// check can find the block without parsing the page.
 //
 // The parser comes from `companygraph-meta-model`, pinned by tag — the same repository this
 // script fetches `core/` and `example/` from, and the repository that defines the conventions
@@ -111,31 +109,21 @@ for (const target of TARGETS) {
   const data = { ...target.parse(files, { sub: target.sub }), commit };
   if (target.finish) target.finish(data);
 
-  // `data-stage` is how the shared stage script finds the block — it queries the attribute,
-  // not an id, so one script serves both pages. The START pattern tolerates a block written
-  // before the attribute existed so the first run after the move still finds it to replace;
-  // what is written back always carries it.
-  const START = new RegExp(`<!-- ${target.marker} · (?:[0-9a-f]+|none) -->\\n<script type="application\\/json" id="${target.id}"(?: data-stage)?>`);
-  const END = `</script>\n<!-- /${target.marker} -->`;
-  const block = `<!-- ${target.marker} · ${commit} -->\n<script type="application/json" id="${target.id}" data-stage>${JSON.stringify(data)}${END}`;
-
-  const PAGE = path.join(here, "..", target.dir, "index.html");
-  const page = fs.readFileSync(PAGE, "utf8");
-  const start = page.search(START), end = page.indexOf(END);
-  if (start < 0 || end < 0) throw new Error(`${target.dir}/index.html has no data block markers`);
-  const current = page.slice(start, end + END.length);
+  const OUT = path.join(here, "..", `${target.dir}.json`);
+  const text = JSON.stringify(data, null, 2) + "\n";
 
   if (check) {
-    if (current === block) {
-      console.log(`  ✓ ${target.dir}/index.html shows ${repo}@${commit.slice(0, 7)}`);
+    const current = fs.existsSync(OUT) ? fs.readFileSync(OUT, "utf8") : "";
+    if (current === text) {
+      console.log(`  ✓ ${target.dir}.json is ${repo}@${commit.slice(0, 7)}: ${data.entities.length} entities, ${data.edges.length} edges`);
     } else {
-      console.log(`  ✗ ${target.dir}/index.html no longer matches ${repo}@${commit.slice(0, 7)} — run: npm run example`);
+      console.log(`  ✗ ${target.dir}.json is not what ${repo}@${commit.slice(0, 7)} parses to — run: npm run build`);
       allMatch = false;
     }
     continue;
   }
-  fs.writeFileSync(PAGE, page.slice(0, start) + block + page.slice(end + END.length));
-  console.log(`  wrote ${target.dir}/index.html: ${data.entities.length} entities, ${data.edges.length} edges from ${repo}@${commit.slice(0, 7)}`);
+  fs.writeFileSync(OUT, text);
+  console.log(`  wrote ${target.dir}.json: ${data.entities.length} entities, ${data.edges.length} edges from ${repo}@${commit.slice(0, 7)}`);
 }
 
 if (check && !allMatch) process.exit(1);

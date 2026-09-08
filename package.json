@@ -13,8 +13,8 @@
     "og:check": "node og-check.mjs",
     "test:og": "node --test verify/og-recipe.test.mjs",
     "test:d3": "node --test verify/d3-vendoring.test.mjs",
-    "example": "node build/build.mjs",
-    "example:check": "node build/build.mjs --check",
+    "build": "node build/build.mjs",
+    "build:check": "node build/build.mjs --check",
     "pin:check": "node pin-check.mjs"
   },
   "dependencies": {
