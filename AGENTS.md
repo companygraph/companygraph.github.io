@@ -65,10 +65,14 @@ that lived in another repository. No CI in *this* repository can catch drift in
 `companygraph/meta-model` — the only defense is never restating anything that lives there.
 
 - **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
-  carry a data block generated from `meta-model` at the commit in `source.json` — the example
-  from `example/`, the model from `core/`, one pin for both — and `npm run example:check`
-  fails when either drifts. Nothing else on the example page names anything from the example,
-  and nothing else on the model page names anything from the model.
+  carry a data block and a JSON-LD graph generated from two committed artifacts, `example.json`
+  and `model.json` — `npm run build` writes them from `meta-model` at the commit in
+  `source.json`, the example from `example/` and the model from `core/`, and `npm run pages`
+  renders all four regions from them. Each artifact carries the commit it was built from, so
+  `pages.mjs` refuses to render against a missing or stale one rather than needing this
+  document to say which command runs first; `pages:check` fails when any region drifts.
+  Nothing else on the example page names anything from the example, and nothing else on the
+  model page names anything from the model.
 
 ## Constraints
 
@@ -133,7 +137,7 @@ that lived in another repository. No CI in *this* repository can catch drift in
   exception, because a copied stage drifts the first time one page's figure is fixed and
   nothing in this repository can see the two halves disagree. `stage.js` knows no name from
   either page — it reads whichever `<script type="application/json">` carries `data-stage`
-  (`build/build.mjs` writes that attribute into every block it generates) and takes its
+  (`build/block.mjs` writes that attribute into every block it generates) and takes its
   source link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
   drawn assets of every page that links them**, so touching the stage marks each of those
   cards stale — `npm run og` and commit the `og.png`/`og.sha` pair with the change, the same
@@ -421,7 +425,7 @@ nothing acted on, so a German visitor read an English title under `lang="de"`. I
 second failure impossible to reintroduce quietly.
 
 **`/example/`'s entity data is fetched from `companygraph/meta-model` at a pinned commit.**
-Nothing in it is editable here: `npm run example` would overwrite the edit and `example:check`
+Nothing in it is editable here: `npm run pages` would overwrite the edit and `pages:check`
 guards the pin, so a change to what a node shows is a change upstream and a re-pin.
 
 This paragraph used to name three British spellings the example data carried — they surfaced

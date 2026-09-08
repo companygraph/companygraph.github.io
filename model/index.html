@@ -83,6 +83,123 @@
           "item": "https://companygraph.io/model/"
         }
       ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://companygraph.io/model/#vocabulary",
+      "name": "CompanyGraph core vocabulary",
+      "description": "The schemas a company is described in: one per type, each stating the structure its files must carry and how they refer to one another.",
+      "url": "https://companygraph.io/model/",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "creator": {
+        "@id": "https://companygraph.io/#organization"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "contentUrl": "https://companygraph.io/model.json",
+        "encodingFormat": "application/json"
+      },
+      "hasDefinedTerm": [
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-experience",
+          "name": "Experience Schema",
+          "description": "Required structure for experience files.",
+          "termCode": "experience",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/experience-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-experience-kind",
+          "name": "Experience Kind Schema",
+          "description": "Required structure for experience kind files.",
+          "termCode": "experience-kind",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/experience-kind-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-identity",
+          "name": "Identity Schema",
+          "description": "Required structure for the identity file — who the company is.",
+          "termCode": "identity",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/identity-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-proficiency-level",
+          "name": "Proficiency Level Schema",
+          "description": "Required structure for proficiency level files.",
+          "termCode": "proficiency-level",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/proficiency-level-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-profile",
+          "name": "Profile Schema",
+          "description": "Required structure for profile files.",
+          "termCode": "profile",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/profile-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-skill",
+          "name": "Skill Schema",
+          "description": "Required structure for skill files.",
+          "termCode": "skill",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/skill-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-source",
+          "name": "Source Schema",
+          "description": "Required structure for source files.",
+          "termCode": "source",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/source-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-value",
+          "name": "Value Schema",
+          "description": "Required structure for value files.",
+          "termCode": "value",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/value-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://companygraph.io/model/#term-vision",
+          "name": "Vision Schema",
+          "description": "Required structure for the vision file — the future the company is working toward.",
+          "termCode": "vision",
+          "url": "https://github.com/companygraph/meta-model/blob/7f58f5e57952620b14cbb5063f3262b93239ed0f/core/vision-schema.md",
+          "inDefinedTermSet": {
+            "@id": "https://companygraph.io/model/#vocabulary"
+          }
+        }
+      ]
     }
   ]
 }
