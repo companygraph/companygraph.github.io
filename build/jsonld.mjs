@@ -51,7 +51,9 @@ function nodeFor(dir, data, repo) {
     return {
       "@type": "Dataset",
       "@id": `${SITE}/example/#dataset`,
-      name: "Beacon Systems — an example CompanyGraph instance",
+      // The company's name comes from the instance, not from here, so a re-pin that renames it
+      // upstream carries the new name onto the page instead of leaving a claim nothing checks.
+      name: `${data.example.root} — an example CompanyGraph instance`,
       description: "A fictional company described in CompanyGraph: its identity, profiles, experiences, skills, values and vision.",
       url: `${SITE}/example/`,
       license: LICENSE,
@@ -114,7 +116,12 @@ export function writeJsonLd(data, { check = false, root = HERE, repo } = {}) {
       throw new Error(`${rel}: @graph carries ${foreign.length} node(s) after ${HEAD.join(", ")} that this renderer does not own — ${foreign.map((n) => (n && n["@id"]) || "an untyped node").join(", ")}`);
     }
     doc["@graph"] = [...doc["@graph"].slice(0, HEAD.length), node];
-    const text = JSON.stringify(doc, null, 2);
+    // The terms carry upstream `name` and `description` text into a script element, and a
+    // `</` inside a JSON string would end that element early in the browser while the JSON
+    // still parses. The re-parse below cannot see it: it re-extracts on a newline before
+    // `</script>`, which an injection inside a string would not carry. `\u003c` is a valid
+    // JSON escape for `<`, so the block still parses to identical data.
+    const text = JSON.stringify(doc, null, 2).replace(/</g, "\\u003c");
     const next = page.replace(RE, (all, open, _body, close) => open + text + close);
     // It has to parse after the write as well as before it: this rewrites a region inside a
     // document that the rest of the site, and every crawler, reads as JSON. Re-extracted from
