@@ -47,7 +47,7 @@ split had to be unwound. Do not recreate one.
   page: it reads whichever `<script type="application/json">` the page marks `data-stage`, and
   takes the folder for its source link from `#srclink`'s `data-src`. Edit them here and both
   pages get it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
-  one copy, reached relatively — and `npm run test:example` asserts it is still the pinned
+  one copy, reached relatively — and `npm run test:d3` asserts it is still the pinned
   package's build, byte for byte.
 - `example/` and `model/` — `index.html` each, the two stage pages: their own prose and inline
   `<style>`, and the stage above linked in. One pin drives both, in two steps —
@@ -59,10 +59,11 @@ split had to be unwound. Do not recreate one.
   the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
-- `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png` — 1200×630 share cards, each
+- `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png`,
+  `billing/og.png`, `privacy/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
-  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all five and writes
+  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all seven and writes
   the stamps, and `og-check.mjs` reports which have drifted. `export-pdf.mjs`, alongside it at
   the root, renders the deck's two PDFs into `talks/intro/`.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
@@ -94,9 +95,9 @@ No build step.
 npm install                        # once, for Playwright
 npm run serve                      # → http://localhost:8000
 npm run verify                     # renders every page and asserts the DOM
-npm run og:check                   # do the five share cards still show their pages?
+npm run og:check                   # do the seven share cards still show their pages?
 npm run test:og                    # the card check's own tests (node --test, no deps)
-npm run og                         # re-renders all five share cards after a visual change
+npm run og                         # re-renders all seven share cards after a visual change
 npm run build                      # writes example.json and model.json from meta-model at the pin
 npm run build:check                # fails if either artifact has drifted from source.json's commit
 npm run pages                      # renders both pages' data blocks and JSON-LD from the artifacts

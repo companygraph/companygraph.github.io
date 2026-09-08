@@ -7,6 +7,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { writeBlock } from "./block.mjs";
+import { writeJsonLd, terms } from "./jsonld.mjs";
 
 const FIXTURE = {
   example: { commit: "0".repeat(40), root: "Someone", rootId: "identity", types: [], entities: [], edges: [] },
@@ -52,8 +53,6 @@ test("writeBlock reports nothing once the pages are written", () => {
   writeBlock(FIXTURE, { check: false, root: dir });
   assert.deepEqual(writeBlock(FIXTURE, { check: true, root: dir }), []);
 });
-
-import { writeJsonLd, terms } from "./jsonld.mjs";
 
 const SCHEMAS = {
   ...FIXTURE,
@@ -182,11 +181,11 @@ test("writeJsonLd refuses a single trailing node it does not own, rather than re
     /does not own — https:\/\/blust\.ch\/#person/);
 });
 
-test("writeJsonLd refuses a graph carrying more than one node after the four it owns, rather than deleting the rest", () => {
-  // Two trailing nodes, one of them carrying this renderer's own @id and one not: even the
-  // node that would ordinarily be a safe rerun-replacement is refused here, because it is not
-  // alone — the guard does not try to sort the trailing nodes into "mine" and "not mine" and
-  // silently drop only the ones it doesn't recognize.
+test("writeJsonLd refuses a graph carrying more than one node after the four it passes through, rather than deleting the rest", () => {
+  // Two trailing nodes, one of them carrying this renderer's own @id and one not. The guard
+  // reads every node after the head and calls foreign any whose @id is not the one about to be
+  // written, so one foreign node is enough to refuse the page — the node that would ordinarily
+  // be a safe rerun-replacement is kept out of the count and refuses nothing on its own.
   const dir = ldBadScratch([
     { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
     { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },

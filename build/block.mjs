@@ -19,6 +19,10 @@ export function writeBlock(data, { check = false, root = HERE } = {}) {
   for (const t of TARGETS) {
     const d = data[t.dir];
     if (!d) throw new Error(`no artifact for ${t.dir}`);
+    // `data-stage` is optional in START and required in the block written back: a block from
+    // before the attribute existed still has to be found once, so that the first run can put
+    // the attribute there. Dropping the group would make that page unfindable rather than
+    // rewritten.
     const START = new RegExp(`<!-- ${t.marker} · (?:[0-9a-f]+|none) -->\\n<script type="application\\/json" id="${t.id}"(?: data-stage)?>`);
     const END = `</script>\n<!-- /${t.marker} -->`;
     const block = `<!-- ${t.marker} · ${d.commit} -->\n<script type="application/json" id="${t.id}" data-stage>${JSON.stringify(d)}${END}`;

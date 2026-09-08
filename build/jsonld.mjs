@@ -87,6 +87,7 @@ export function writeJsonLd(data, { check = false, root = HERE, repo } = {}) {
   if (!repo) throw new Error("writeJsonLd needs the repo from source.json");
   const stale = [];
   for (const dir of ["example", "model"]) {
+    if (!data[dir]) throw new Error(`no artifact for ${dir}`);
     const rel = `${dir}/index.html`;
     const file = path.join(root, rel);
     const page = fs.readFileSync(file, "utf8");

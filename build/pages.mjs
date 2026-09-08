@@ -26,7 +26,11 @@ for (const name of ["example", "model"]) {
   }
   data[name] = JSON.parse(fs.readFileSync(file, "utf8"));
   if (data[name].commit !== commit) {
-    console.error(`  ✗ ${name}.json is at ${data[name].commit.slice(0, 7)}, source.json pins ${commit.slice(0, 7)} — run: npm run build`);
+    // An artifact with no commit at all is the same failure as one at the wrong commit, and
+    // the remedy is the same, so it prints rather than throwing on the slice inside its own
+    // message.
+    const at = typeof data[name].commit === "string" ? data[name].commit.slice(0, 7) : "no commit";
+    console.error(`  ✗ ${name}.json is at ${at}, source.json pins ${commit.slice(0, 7)} — run: npm run build`);
     process.exit(1);
   }
 }

@@ -40,9 +40,9 @@ const { repo, commit } = JSON.parse(fs.readFileSync(path.join(here, "..", "sourc
 // changes, and the schema files keep the shape the conventions require. The example target
 // needs no such step, so it carries none.
 const TARGETS = [
-  { dir: "example", id: "example-data", marker: "example data", parse: parseInstance, sub: "example/model/" },
+  { dir: "example", parse: parseInstance, sub: "example/model/" },
   {
-    dir: "model", id: "model-data", marker: "model data", parse: parseSchemas, sub: "core/",
+    dir: "model", parse: parseSchemas, sub: "core/",
     finish(data) {
       for (const e of data.edges) e.label = e.via;
       for (const en of data.entities) {
