@@ -52,3 +52,76 @@ test("writeBlock reports nothing once the pages are written", () => {
   writeBlock(FIXTURE, { check: false, root: dir });
   assert.deepEqual(writeBlock(FIXTURE, { check: true, root: dir }), []);
 });
+
+import { writeJsonLd, terms } from "./jsonld.mjs";
+
+const SCHEMAS = {
+  ...FIXTURE,
+  model: { ...FIXTURE.model, entities: [
+    { id: "core/experience", type: "schema", name: "Experience Schema",
+      tagline: "Required structure for experience files.", path: "core/experience-schema.md", sections: [] },
+    { id: "core/skill", type: "schema", name: "Skill Schema",
+      tagline: "Required structure for skill files.", path: "core/skill-schema.md", sections: [] },
+  ] },
+};
+
+test("terms takes its code from the id and its url from the path", () => {
+  const [first] = terms(SCHEMAS.model, "example/meta");
+  assert.equal(first.name, "Experience Schema");
+  assert.equal(first.description, "Required structure for experience files.");
+  assert.equal(first.termCode, "experience");
+  assert.equal(first.url,
+    `https://github.com/example/meta/blob/${SCHEMAS.model.commit}/core/experience-schema.md`);
+  assert.deepEqual(first.inDefinedTermSet, { "@id": "https://companygraph.io/model/#vocabulary" });
+});
+
+function ldScratch() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cg-ld-"));
+  const doc = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
+    { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
+    { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
+    { "@type": "BreadcrumbList", "@id": "https://companygraph.io/model/#breadcrumb", itemListElement: [] },
+  ] };
+  for (const d of ["example", "model"]) {
+    fs.mkdirSync(path.join(dir, d), { recursive: true });
+    fs.writeFileSync(path.join(dir, d, "index.html"),
+      `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  }
+  return { dir, doc };
+}
+
+test("writeJsonLd appends its node and leaves the four existing ones untouched", () => {
+  const { dir, doc } = ldScratch();
+  writeJsonLd(SCHEMAS, { check: false, root: dir, repo: "example/meta" });
+  const read = (d) => JSON.parse(fs.readFileSync(path.join(dir, d, "index.html"), "utf8")
+    .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
+  const model = read("model");
+  assert.equal(model.length, 5, "four kept plus one appended");
+  assert.deepEqual(model.slice(0, 4), doc["@graph"], "the existing nodes are untouched");
+  assert.equal(model[4]["@type"], "DefinedTermSet");
+  assert.equal(model[4].hasDefinedTerm.length, 2);
+  assert.equal(model[4].encoding.contentUrl, "https://companygraph.io/model.json");
+  const example = read("example");
+  assert.equal(example[4]["@type"], "Dataset");
+  assert.equal(example[4].distribution.contentUrl, "https://companygraph.io/example.json");
+});
+
+test("writeJsonLd refuses a graph whose head is not the four it passes through", () => {
+  // The guard exists so a differently shaped page is refused rather than having four
+  // hand-written nodes silently replaced by one. A graph missing its BreadcrumbList is the
+  // case that matters: the slice would keep three of them and drop the fourth.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cg-ld-bad-"));
+  const doc = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
+    { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
+    { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
+  ] };
+  for (const d of ["example", "model"]) {
+    fs.mkdirSync(path.join(dir, d), { recursive: true });
+    fs.writeFileSync(path.join(dir, d, "index.html"),
+      `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  }
+  assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
+    /must begin with/);
+});
