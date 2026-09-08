@@ -1,5 +1,5 @@
 {
-  "commit": "7f58f5e57952620b14cbb5063f3262b93239ed0f",
+  "commit": "7175e1127dd6c68ac691a20c78b2150d9c259ccf",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -65,8 +65,8 @@
                 [
                   "`organization`",
                   "No",
-                  "string",
-                  "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which."
+                  "ref? → identity",
+                  "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
                 ],
                 [
                   "`url`",
@@ -125,8 +125,8 @@
               [
                 "`organization`",
                 "No",
-                "string",
-                "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which."
+                "ref? → identity",
+                "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
               ],
               [
                 "`url`",
@@ -884,7 +884,7 @@
                 [
                   "`Level`",
                   "Yes",
-                  "ref → proficiency-level",
+                  "qualifier → proficiency-level",
                   "Must match the H1 of a file in `proficiency-levels/` exactly"
                 ],
                 [
@@ -1522,6 +1522,15 @@
     },
     {
       "from": "core/experience",
+      "to": "core/identity",
+      "via": "organization",
+      "attrs": {
+        "type": "ref? → identity"
+      },
+      "label": "organization"
+    },
+    {
+      "from": "core/experience",
       "to": "core/profile",
       "via": "owner",
       "attrs": {},
@@ -1568,7 +1577,7 @@
       "to": "core/proficiency-level",
       "via": "Skills.Level",
       "attrs": {
-        "type": "ref → proficiency-level"
+        "type": "qualifier → proficiency-level"
       },
       "label": "Skills.Level"
     },
