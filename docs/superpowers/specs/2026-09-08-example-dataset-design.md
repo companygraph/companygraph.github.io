@@ -111,7 +111,7 @@ absent names a vocabulary without naming a word of it, so each schema becomes a 
   "name": "Experience Schema",
   "description": "Required structure for experience files.",
   "termCode": "experience",
-  "url": "https://github.com/companygraph/meta-model/blob/7f58f5e/core/experience.md",
+  "url": "https://github.com/companygraph/meta-model/blob/7f58f5e/core/experience-schema.md",
   "inDefinedTermSet": { "@id": "https://companygraph.io/model/#vocabulary" }
 }
 ```
@@ -119,9 +119,22 @@ absent names a vocabulary without naming a word of it, so each schema becomes a 
 `name` and `description` are the entity's `name` and `tagline` unchanged. The obvious
 alternative is to strip the word Schema and call the term `Experience`, which reads better and
 is a transformation the model never authorized; the page shows nine schemas, so the schemas are
-the terms. `termCode` is the last segment of the entity's `id`, which is the machine name the
-conventions already use, and `url` is built from `path`, `repo` and `commit` exactly as the
-stage builds its own file links.
+the terms. `termCode` is the last segment of the entity's `id` — `experience`, not the file name, which
+is `core/experience-schema.md` — and it is the machine name the conventions already use. `url`
+is `repo + "/blob/" + commit + "/" + path`, the same expression `card.js` already builds for
+every entity it draws, so no new way of naming a file enters the family.
+
+**What a re-pin regenerates, and what it does not.** The terms follow the pin, not the
+upstream repository. A change in `companygraph/meta-model` reaches this site only when
+`source.json` moves, because a pin is editorial and moves when the owner decides it does;
+`pin:check` reports how far behind it has fallen and never fails the build. When the pin does
+move, `npm run build` rewrites both artifacts and `npm run pages` rewrites all four regions
+from them, so a schema whose tagline changed carries new words into its term, and a tenth
+schema becomes a tenth term with nothing edited by hand. Forgetting the second command is not
+a way to ship a stale page: `pages` refuses to run against an artifact that names a different
+commit, and `pages:check` holds every region in CI. Each term's `url` carries the commit, so a
+re-pin moves nine URLs as well as any words that changed — the link points at the state the
+page actually shows, which is the same choice `card.js` makes.
 
 **The parse is written to `example.json` and `model.json` at the repository root, and both are
 committed.** Two files rather than one, because each page's pointer must name a file holding
