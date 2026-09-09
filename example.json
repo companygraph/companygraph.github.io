@@ -1,5 +1,5 @@
 {
-  "commit": "7175e1127dd6c68ac691a20c78b2150d9c259ccf",
+  "commit": "7b94d6dbde8b36c25e4b83b0176d0a23a700bd35",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -42,6 +42,12 @@
     {
       "type": "source",
       "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "surface",
+      "folder": "surfaces",
       "owner": null,
       "singular": false
     },
@@ -744,6 +750,35 @@
       "path": "example/model/sources/local.md"
     },
     {
+      "id": "surfaces/partner-directory",
+      "type": "surface",
+      "name": "Partner directory",
+      "tagline": "The listing a buyer reaches from the directory's search, maintained by hand because the",
+      "fields": {
+        "source": "Local",
+        "url": "https://directory.example.invalid/beacon-systems"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Company name and one-line description** — the identity's H1 and its tagline, unchanged.\n- **The long description** — the identity's `## What it is`, cut to the directory's limit.\n- **Capabilities** — the skills held at Proficient or Expert, under their own names.\n- **Contact** — the identity's `email` and `url`.",
+          "tables": []
+        },
+        {
+          "heading": "Projection rules",
+          "text": "- The long description is the identity's `## What it is` up to the limit below, cut at a\n  paragraph and never mid-sentence. Nothing is written for the directory that is not in the\n  model first.\n- Capabilities carry no proficiency level. The directory shows a flat list and a level beside\n  a name it does not explain reads as a grade, so the level decides which skills appear rather\n  than appearing itself.\n- Skills held at Familiar or Competent are left out. The listing is what the company sells, and\n  a capability still being learned is not.\n- No profile is named. The directory lists companies, and a person named here would be a fact\n  about the company that the company's own identity does not carry.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- The long description is at most 600 characters, the directory's limit, read from its editor\n  on 2026-01-05.\n- Every capability named is a skill in the model, spelled as that skill's H1.\n- The contact address resolves to the company and not to a person.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/surfaces/partner-directory.md"
+    },
+    {
       "id": "values/craftsmanship",
       "type": "value",
       "name": "Craftsmanship",
@@ -1038,6 +1073,12 @@
     },
     {
       "from": "skills/product-discovery",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/partner-directory",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
