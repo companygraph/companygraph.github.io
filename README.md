@@ -41,20 +41,21 @@ split had to be unwound. Do not recreate one.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
 - `stage.css`, `stage.js`, `d3.v7.min.js` — **the stage**: the figure, the card and the expand
-  dialog that draw a page's data block. The one component two pages share, so they are three
+  dialog that draw the artifact a page names. The one component two pages share, so they are three
   files at the root that each page links relatively (`../stage.css`, `../stage.js`,
   `../d3.v7.min.js`) rather than a copy inside each page. `stage.js` knows no name from either
-  page: it reads whichever `<script type="application/json">` the page marks `data-stage`, and
-  takes the folder for its source link from `#srclink`'s `data-src`. Edit them here and both
+  page: it fetches whichever `<link>` the page marks `data-stage`, and takes the folder for
+  its source link from `#srclink`'s `data-src`. Edit them here and both
   pages get it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
   one copy, reached relatively — and `npm run test:d3` asserts it is still the pinned
   package's build, byte for byte.
 - `example/` and `model/` — `index.html` each, the two stage pages: their own prose and inline
-  `<style>`, and the stage above linked in. One pin drives both, in two steps —
-  `build/build.mjs` writes `example.json` and `model.json` (or checks both still match,
-  `--check`) by reading `meta-model/example` and `meta-model/core` at the commit `source.json`
-  names, and `build/pages.mjs` renders each artifact's data block and JSON-LD graph into its
-  page (or checks both still match, `--check`), touching neither the network nor the parser.
+  `<style>`, the stage above linked in, and a preload link naming the artifact the stage
+  draws. One pin drives both, in two steps — `build/build.mjs` writes `example.json` and
+  `model.json` (or checks both still match, `--check`) by reading `meta-model/example` and
+  `meta-model/core` at the commit `source.json` names, and `build/pages.mjs` renders each
+  artifact's JSON-LD graph into its page (or checks both still match, `--check`), touching
+  neither the network nor the parser.
 - `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
   the one thing the generated pages are allowed to name from the model.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
@@ -100,8 +101,8 @@ npm run test:og                    # the card check's own tests (node --test, no
 npm run og                         # re-renders all seven share cards after a visual change
 npm run build                      # writes example.json and model.json from meta-model at the pin
 npm run build:check                # fails if either artifact has drifted from source.json's commit
-npm run pages                      # renders both pages' data blocks and JSON-LD from the artifacts
-npm run pages:check                # fails if either page has drifted from the artifacts
+npm run pages                      # renders both pages' JSON-LD graphs from the artifacts
+npm run pages:check                # fails if either graph has drifted from the artifacts
 
 npm run pdf                        # both language PDFs
 ```

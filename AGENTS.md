@@ -65,14 +65,20 @@ that lived in another repository. No CI in *this* repository can catch drift in
 `companygraph/meta-model` — the only defense is never restating anything that lives there.
 
 - **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
-  carry a data block and a JSON-LD graph generated from two committed artifacts, `example.json`
-  and `model.json` — `npm run build` writes them from `meta-model` at the commit in
-  `source.json`, the example from `example/` and the model from `core/`, and `npm run pages`
-  renders all four regions from them. Each artifact carries the commit it was built from, so
-  `pages.mjs` refuses to render against a missing or stale one rather than needing this
-  document to say which command runs first; `pages:check` fails when any region drifts.
-  Nothing else on the example page names anything from the example, and nothing else on the
-  model page names anything from the model.
+  draw one of two committed artifacts, `example.json` and `model.json` — `npm run build` writes
+  them from `meta-model` at the commit in `source.json`, the example from `example/` and the
+  model from `core/`. A page names its artifact rather than carrying it: one `<link
+  rel="preload" as="fetch" href="../example.json" data-stage crossorigin>` in the head, which
+  the stage finds by the attribute and fetches. Nothing derives that link — its href and its
+  marker never vary — so it is ordinary markup, and the page holds no commit at all; what holds
+  it to the pin is that only one copy exists, the artifact, which `build:check` holds against
+  `source.json`. A page that names no data does not fail quietly: the stage throws, and the
+  suite reports it on every page through the listener it already has. The JSON-LD graph is the
+  one region still rendered into each page, by `npm run pages`; each artifact carries the
+  commit it was built from, so `pages.mjs` refuses to render against a missing or stale one
+  rather than needing this document to say which command runs first, and `pages:check` fails
+  when a graph drifts. Nothing else on the example page names anything from the example, and
+  nothing else on the model page names anything from the model.
 
 ## Constraints
 
@@ -136,9 +142,8 @@ that lived in another repository. No CI in *this* repository can catch drift in
   other page here is a single self-contained file and stays that way; this is the deliberate
   exception, because a copied stage drifts the first time one page's figure is fixed and
   nothing in this repository can see the two halves disagree. `stage.js` knows no name from
-  either page — it reads whichever `<script type="application/json">` carries `data-stage`
-  (`build/block.mjs` writes that attribute into every block it generates) and takes its
-  source link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
+  either page — it fetches whichever `<link>` carries `data-stage` and takes its source
+  link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
   drawn assets of every page that links them**, so touching the stage marks each of those
   cards stale — `npm run og` and commit the `og.png`/`og.sha` pair with the change, the same
   as for a font.
