@@ -11,7 +11,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { writeBlock } from "./block.mjs";
 import { writeJsonLd } from "./jsonld.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -36,7 +35,7 @@ for (const name of ["example", "model"]) {
 }
 
 const check = process.argv.includes("--check");
-const RENDERERS = [writeBlock, (d, o) => writeJsonLd(d, { ...o, repo })];
+const RENDERERS = [(d, o) => writeJsonLd(d, { ...o, repo })];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
 

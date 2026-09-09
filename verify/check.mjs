@@ -91,7 +91,7 @@ const PAGES = [
     card: true, cardBase: SITE, internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
-  // those are asserted by `graph`, which reads them out of the data block.
+  // those are asserted by `graph`, which reads them out of the artifact the page names.
   { path: "/example/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
@@ -101,7 +101,7 @@ const PAGES = [
                   title: "Beispiel – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
-    card: true, cardBase: SITE, internalLinks: true, graph: "example-data", divider: true },
+    card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
@@ -116,7 +116,7 @@ const PAGES = [
                   title: "Modell – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
-    card: true, cardBase: SITE, internalLinks: true, graph: "model-data", divider: true },
+    card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
 
   { path: "/talks/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
