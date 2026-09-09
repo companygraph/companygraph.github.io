@@ -1,5 +1,5 @@
 {
-  "commit": "7175e1127dd6c68ac691a20c78b2150d9c259ccf",
+  "commit": "7b94d6dbde8b36c25e4b83b0176d0a23a700bd35",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -1233,6 +1233,172 @@
       "path": "core/source-schema.md"
     },
     {
+      "id": "core/surface",
+      "type": "schema",
+      "name": "Surface Schema",
+      "tagline": "Required structure for surface files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a record key, an entry id. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`url`",
+                  "No",
+                  "string",
+                  "Where the surface is published. Absent where it has no address, as a document does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a record key, an entry id. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`url`",
+                "No",
+                "string",
+                "Where the surface is published. Absent where it has no address, as a document does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Surface]`",
+                  "Yes",
+                  "The canonical name. Everything references the surface by this exact string."
+                ],
+                [
+                  "`> [Description]`",
+                  "Yes",
+                  "Single-line description of what this surface is and who reaches it"
+                ],
+                [
+                  "`## What it shows`",
+                  "Yes",
+                  "One line per unit the surface presents, naming the unit and what fills it"
+                ],
+                [
+                  "`## Projection rules`",
+                  "Yes",
+                  "How the model becomes this surface: what is carried, what is left out and why"
+                ],
+                [
+                  "`## Constraints`",
+                  "No",
+                  "What the published result must satisfy, each written so a reader can pass or fail it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Surface]`",
+                "Yes",
+                "The canonical name. Everything references the surface by this exact string."
+              ],
+              [
+                "`> [Description]`",
+                "Yes",
+                "Single-line description of what this surface is and who reaches it"
+              ],
+              [
+                "`## What it shows`",
+                "Yes",
+                "One line per unit the surface presents, naming the unit and what fills it"
+              ],
+              [
+                "`## Projection rules`",
+                "Yes",
+                "How the model becomes this surface: what is carried, what is left out and why"
+              ],
+              [
+                "`## Constraints`",
+                "No",
+                "What the published result must satisfy, each written so a reader can pass or fail it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A surface is a place the company publishes that no script writes, and this file is what\nsomebody needs in order to write it: which of the model's facts reach it, in what shape and\nwhat the result has to satisfy. It answers \"if I had to rebuild this from the model today, what\nwould I have to know?\" — for a person, and for an agent producing the content. It is not a\nrecord of what the surface currently shows, which is R17's business and belongs in a validation\nreport.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- A line of `## What it shows` names a unit the surface itself has, in the words the surface\n  uses for it, and then what fills it. A reader has to be able to find that unit by that name\n  while looking at the surface. It names the unit as the place a rule lands, never what that\n  unit currently holds — not a count, not a sample, not its present wording.\n- A projection rule states what the surface does with the model, not what the model contains. A\n  rule that could be read off an entity is a fact restated, and the entity is where it lives.\n- Every omission is a rule with a reason. Silence about something the model holds and the\n  surface does not show cannot be told apart from drift, which is the one thing this type is\n  for.\n- A constraint is written as a check: something a reader looking at the published result can\n  pass or fail. \"Every unit that can appear alone pairs the name with a role or a domain\" can\n  be failed; \"the tone is professional\" cannot.\n- Where the surface imposes a limit, the constraint names the number and where it was read. A\n  limit quoted from memory is a claim like any other.\n- The file never states what the surface currently shows. That is an observation, true on the\n  day it was written and unfalsifiable here afterwards (R17).\n- A surface a script writes has no file here. The script is the projection, and a second copy\n  of a rule is what this model exists to end.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/surfaces/*.md`\n\nA surface is a place the company publishes that no script writes. One file per surface, so the\nrules that turn the model into it are held by name rather than in whoever last rebuilt it.\nNothing owns a surface and a surface owns nothing. Where a build writes the surface, the build\nis the projection and there is no file here: a rule that already executes does not want a\nsecond copy.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/surface-schema.md"
+    },
+    {
       "id": "core/value",
       "type": "schema",
       "name": "Value Schema",
@@ -1601,6 +1767,15 @@
     },
     {
       "from": "core/skill",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/surface",
       "to": "core/source",
       "via": "source",
       "attrs": {
