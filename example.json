@@ -1,5 +1,5 @@
 {
-  "commit": "238ee3542246d3b0bb496d2226b4287b0816865f",
+  "commit": "e93ed4c3c76c12f8000ba6f93deddb457b9d1979",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -375,6 +375,7 @@
         "kind": "Role",
         "start": "2018-03",
         "end": "2022-01",
+        "role": "Backend engineer",
         "organization": "Northwind Atelier",
         "skills": [
           "Java Programming"
@@ -588,6 +589,7 @@
         "start": "2021-09",
         "end": "2021-09",
         "url": "https://orbit.example/2021/talks/the-speed-up",
+        "role": "Speaker",
         "organization": "Orbit Conference",
         "skills": [
           "Product Discovery"
