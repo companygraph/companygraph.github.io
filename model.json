@@ -1,5 +1,5 @@
 {
-  "commit": "7b94d6dbde8b36c25e4b83b0176d0a23a700bd35",
+  "commit": "238ee3542246d3b0bb496d2226b4287b0816865f",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -847,7 +847,7 @@
                 [
                   "`> [Tagline]`",
                   "Yes",
-                  "Single-line summary of the person"
+                  "Single-line summary of the person: what they do, or the claim their work makes"
                 ],
                 [
                   "`## Skills`",
@@ -935,7 +935,7 @@
               [
                 "`> [Tagline]`",
                 "Yes",
-                "Single-line summary of the person"
+                "Single-line summary of the person: what they do, or the claim their work makes"
               ],
               [
                 "`## Skills`",
@@ -962,7 +962,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- An Evidence cell states a fact that can be checked — a system, an organization, a number, a\n  named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the\n  evidence is describing confidence rather than the work.\n- A level is weighed against the evidence beside it and the rung's own definition, not against\n  how long the person has done it. Evidence that names one engagement supports a lower rung\n  than evidence that names three.\n- One row per skill claimed. A skill the person can name but not evidence has no row: the\n  table is the claim, and a claim needs something under it.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.",
+          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- An Evidence cell states a fact that can be checked — a system, an organization, a number, a\n  named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the\n  evidence is describing confidence rather than the work.\n- A level is weighed against the evidence beside it and the rung's own definition, not against\n  how long the person has done it. Evidence that names one engagement supports a lower rung\n  than evidence that names three.\n- One row per skill claimed. A skill the person can name but not evidence has no row: the\n  table is the claim, and a claim needs something under it.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.",
           "tables": []
         },
         {
