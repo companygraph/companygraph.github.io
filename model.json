@@ -1,5 +1,5 @@
 {
-  "commit": "238ee3542246d3b0bb496d2226b4287b0816865f",
+  "commit": "e93ed4c3c76c12f8000ba6f93deddb457b9d1979",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -69,6 +69,12 @@
                   "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
                 ],
                 [
+                  "`role`",
+                  "No",
+                  "string",
+                  "The part the subject played, where the H1 does not already name it"
+                ],
+                [
                   "`url`",
                   "No",
                   "string",
@@ -127,6 +133,12 @@
                 "No",
                 "ref? → identity",
                 "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
+              ],
+              [
+                "`role`",
+                "No",
+                "string",
+                "The part the subject played, where the H1 does not already name it"
               ],
               [
                 "`url`",
@@ -249,7 +261,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- A period still running has no `end`, and the tagline says so — a reader sees a tagline and\n  does not see an absent field.\n- A one-off is not a period: a talk, a certification, an award or a publication sets `end`\n  equal to `start`. Left absent it would read as still running, and no other field says\n  otherwise. The two being equal is what makes it a one-off, and the interval that shared\n  value denotes is how precisely it is placed: `2012-05-04 .. 2012-05-04` is a day,\n  `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its year. A period that\n  genuinely ran a whole year is not written `2002 .. 2002` — it takes the months it ran,\n  `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- For a one-off, `organization` is whoever hosted, awarded or published it. The field is a\n  stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
+          "text": "- `role` is filled where the H1 does not already name the part the subject played, and left\n  absent where it does. An entry named for what it delivered, or for the event it happened at,\n  does not say who the subject was on it. An entry named for a position does, and repeating it\n  in the field would be the same fact twice. Which of those an instance writes is the instance's\n  own convention and no rule here fixes it; the field is what carries the part when the H1 does\n  not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- A period still running has no `end`, and the tagline says so — a reader sees a tagline and\n  does not see an absent field.\n- A one-off is not a period: a talk, a certification, an award or a publication sets `end`\n  equal to `start`. Left absent it would read as still running, and no other field says\n  otherwise. The two being equal is what makes it a one-off, and the interval that shared\n  value denotes is how precisely it is placed: `2012-05-04 .. 2012-05-04` is a day,\n  `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its year. A period that\n  genuinely ran a whole year is not written `2002 .. 2002` — it takes the months it ran,\n  `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- For a one-off, `organization` is whoever hosted, awarded or published it. The field is a\n  stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
           "tables": []
         },
         {
