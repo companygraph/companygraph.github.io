@@ -156,7 +156,9 @@ const PAGES = [
     transportBaseline: [320, 360, 430, 500, 900, 1280],
     links: ["https://blust.ch/",
             "https://companygraph.io/",
-            "https://github.com/companygraph/meta-model#roadmap"],
+            // The roadmap the slide points at is owned by the organization profile, not by a
+            // repository README: the deck says which of these exist, the profile says when.
+            "https://github.com/companygraph"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
