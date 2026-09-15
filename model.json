@@ -1,5 +1,5 @@
 {
-  "commit": "d0a7d14abbbd37b5e0472fe09a3a684e54010bcc",
+  "commit": "9212994b9934f2547491a87fbc1fbd7b40d0aea2",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -789,6 +789,18 @@
                   "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
                 ],
                 [
+                  "`nature`",
+                  "Yes",
+                  "enum",
+                  "`human` or `agent`. What holds this profile: a person, or an agent that runs under rulebooks and stands for whichever model runs it."
+                ],
+                [
+                  "`roles`",
+                  "No",
+                  "array of ref → role",
+                  "The seats this profile holds, each the H1 of a file in `roles/`. Absent for a profile without a seat."
+                ],
+                [
                   "`email`",
                   "No",
                   "string",
@@ -823,6 +835,18 @@
                 "No",
                 "string",
                 "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`nature`",
+                "Yes",
+                "enum",
+                "`human` or `agent`. What holds this profile: a person, or an agent that runs under rulebooks and stands for whichever model runs it."
+              ],
+              [
+                "`roles`",
+                "No",
+                "array of ref → role",
+                "The seats this profile holds, each the H1 of a file in `roles/`. Absent for a profile without a seat."
               ],
               [
                 "`email`",
@@ -969,12 +993,12 @@
         },
         {
           "heading": "Purpose",
-          "text": "A profile is the one page that says who a person is and what they claim — the entity every\nexperience is owned by and every skill claim is made from. It answers \"who is this, what can\nthey do, and what is that judgment resting on?\" for someone deciding whether to work with\nthem. It is not a curriculum vitae: what happened, when and where lives in the experiences the\nprofile owns, and what a capability *is* lives in the skill. What only the profile can hold is\nthe claim — this person, this skill, at this level, on this evidence.",
+          "text": "A profile is the one page that says who a person or an agent is and what they claim — the\nentity every experience is owned by, every skill claim is made from and every role is held by.\nIt answers \"who is this, what can they do, and what is that judgment resting on?\" for\nsomeone deciding whether to work with them. It is not a curriculum vitae: what happened, when\nand where lives in the experiences the profile owns, and what a capability *is* lives in the\nskill. What only the profile can hold is the claim — this person, this skill, at this level,\non this evidence.",
           "tables": []
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- An Evidence cell states a fact that can be checked — a system, an organization, a number, a\n  named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the\n  evidence is describing confidence rather than the work.\n- A level is weighed against the evidence beside it and the rung's own definition, not against\n  how long the person has done it. Evidence that names one engagement supports a lower rung\n  than evidence that names three.\n- One row per skill claimed. A skill the person can name but not evidence has no row: the\n  table is the claim, and a claim needs something under it.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.",
+          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- An Evidence cell states a fact that can be checked — a system, an organization, a number, a\n  named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the\n  evidence is describing confidence rather than the work.\n- A level is weighed against the evidence beside it and the rung's own definition, not against\n  how long the person has done it. Evidence that names one engagement supports a lower rung\n  than evidence that names three.\n- One row per skill claimed. A skill the person can name but not evidence has no row: the\n  table is the claim, and a claim needs something under it.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.\n- A profile that holds a role claims the skills the role requires in its Skills table, with\n  evidence. Where it cannot, the gap stays visible: the validation pass reports it and nothing\n  here invents a row to close it.\n- `nature` says what holds the profile, never how well. An agent's evidence is the rulebook it\n  runs under and the work it has produced under it, on the same terms as a person's.",
           "tables": []
         },
         {
@@ -985,6 +1009,205 @@
       ],
       "owner": null,
       "path": "core/profile-schema.md"
+    },
+    {
+      "id": "core/role",
+      "type": "schema",
+      "name": "Role Schema",
+      "tagline": "Required structure for role files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`requires`",
+                  "No",
+                  "array of ref → skill",
+                  "The skills the seat needs, each the H1 of a file in `skills/`. Absent while nobody has said what the seat needs."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`requires`",
+                "No",
+                "array of ref → skill",
+                "The skills the seat needs, each the H1 of a file in `skills/`. Absent while nobody has said what the seat needs."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Seat]`",
+                  "Yes",
+                  "The canonical name of the seat. Profiles reference the role by this exact string."
+                ],
+                [
+                  "`> [Purpose]`",
+                  "Yes",
+                  "Single-line statement of what the seat is for"
+                ],
+                [
+                  "`## What it takes`",
+                  "Yes",
+                  "What the holder is handed, and what the seat refuses to start without"
+                ],
+                [
+                  "`## What it produces`",
+                  "Yes",
+                  "What leaves the seat, and in what form"
+                ],
+                [
+                  "`## What it never does`",
+                  "Yes",
+                  "A list, one sentence each, of what the seat refuses whoever holds it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The documents the seat works by — a rulebook, a mandate; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a rulebook, a glossary, a mandate"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Seat]`",
+                "Yes",
+                "The canonical name of the seat. Profiles reference the role by this exact string."
+              ],
+              [
+                "`> [Purpose]`",
+                "Yes",
+                "Single-line statement of what the seat is for"
+              ],
+              [
+                "`## What it takes`",
+                "Yes",
+                "What the holder is handed, and what the seat refuses to start without"
+              ],
+              [
+                "`## What it produces`",
+                "Yes",
+                "What leaves the seat, and in what form"
+              ],
+              [
+                "`## What it never does`",
+                "Yes",
+                "A list, one sentence each, of what the seat refuses whoever holds it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The documents the seat works by — a rulebook, a mandate; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A role is a seat the company needs filled — one file, named once, held by whichever profile\nlists it. It answers \"what does this seat take, produce and refuse, and what must whoever holds\nit be able to do?\" for someone filling it, holding it or handing work to it. It is not a\nperson's history in the seat, which lives on the profile and in its experiences, and it is not\na process, which says when the seat acts.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- Person-neutral: no name, employer, date or number from any profile, and never who holds\n  the seat. Who holds it is the profile's fact.\n- Named for the seat, so a second holder would still be called that: `Owner`, not\n  `Entrepreneur`; `Reviewer`, not the reviewer's name.\n- Each line under `## What it never does` is a sentence an agent can hold an output against.\n  \"Never merges\" can fail; \"acts responsibly\" cannot.\n- `requires` lists what the seat needs, not what its current holder happens to have.\n- A skill the role requires that the holding profile does not claim is a gap the validation\n  pass reports, never an error. It says what the holder has to learn or the company has to\n  hire, which is information about the person and not a defect in the model.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/roles/*.md`\n\nA role owns nothing and nothing owns it, so it is a file. A profile holds one by listing it,\nwhich is the only edge that reaches a role from the company's side; a role reaches out to the\nskills it requires and to nothing else.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/role-schema.md"
     },
     {
       "id": "core/skill",
@@ -1072,7 +1295,7 @@
                 [
                   "`# [Skill]`",
                   "Yes",
-                  "The canonical name. Profiles and experiences reference this exact string."
+                  "The canonical name. Profiles, experiences and roles reference this exact string."
                 ],
                 [
                   "`> [Definition]`",
@@ -1098,7 +1321,7 @@
               [
                 "`# [Skill]`",
                 "Yes",
-                "The canonical name. Profiles and experiences reference this exact string."
+                "The canonical name. Profiles, experiences and roles reference this exact string."
               ],
               [
                 "`> [Definition]`",
@@ -1115,7 +1338,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A skill is a capability a person can claim and an experience can evidence — one file, named\nonce, referenced by every profile that claims it. It answers \"what is this, and what does doing\nit look like?\" for a reader who may claim it, assess it or hire for it. It is not any one\nperson's history with the capability: that lives in the profile's Skills table, as a level and\nan evidence cell, and in the experiences that list the skill.",
+          "text": "A skill is a capability a person can claim, an experience can evidence and a role can require —\none file, named once, referenced by every profile that claims it. It answers \"what is this, and\nwhat does doing it look like?\" for a reader who may claim it, assess it or hire for it. It is\nnot any one person's history with the capability: that lives in the profile's Skills table, as\na level and an evidence cell, and in the experiences that list the skill.",
           "tables": []
         },
         {
@@ -2118,6 +2341,33 @@
     },
     {
       "from": "core/profile",
+      "to": "core/role",
+      "via": "roles",
+      "attrs": {
+        "type": "array of ref → role"
+      },
+      "label": "roles"
+    },
+    {
+      "from": "core/profile",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/role",
+      "to": "core/skill",
+      "via": "requires",
+      "attrs": {
+        "type": "array of ref → skill"
+      },
+      "label": "requires"
+    },
+    {
+      "from": "core/role",
       "to": "core/source",
       "via": "source",
       "attrs": {
