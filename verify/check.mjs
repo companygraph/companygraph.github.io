@@ -31,7 +31,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Every role, every rule", "Written down once", "CompanyGraph", "TALKS", "MODEL", "EXAMPLE", "BILLING",
+    contains: ["Everything a company knows", "One graph", "CompanyGraph", "TALKS", "MODEL", "EXAMPLE", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. The deck is in this repository now — `talks/intro/` — so the
@@ -63,8 +63,8 @@ const PAGES = [
       // Declared here so the swap cannot quietly go away again.
       title: "CompanyGraph – ein Meta-Modell für den Betrieb eines Unternehmens",
       desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
-                  shows: ["Jede Rolle", "aufgeschrieben", "Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
-                  hides: ["Every role", "Read the source"] },
+                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
+                  hides: ["Everything a company", "Read the source"] },
     card: true, cardBase: SITE },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
