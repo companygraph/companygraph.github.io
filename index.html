@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://companygraph.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="CompanyGraph. Every role, every rule, written down once — a meta-model for operating a company.">
+<meta property="og:image:alt" content="CompanyGraph. Everything a company knows, one graph — a meta-model for operating a company.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -489,15 +489,17 @@
      lands on arrives heavy. em marks the resolved word itself. */
   /* The headline sizes to its own column, not to the viewport: the hero caps at 640px well
      short of the viewport on anything wider than a phone, so a viewport-sized headline keeps
-     growing past that cap and breaks "Written down once." across two lines on any laptop
-     around 1200px. The cqw coefficient is tuned to the German line, not the English one —
-     "Einmal aufgeschrieben." is the longer of the two and wraps first as the coefficient
-     climbs. The vw line is the fallback for anything without container query units and is
-     deliberately the more timid of the two. */
+     growing past that cap. The heavy line is the one that must never wrap, and "One graph."
+     and "Ein Graph." are short enough that it holds at every width. The light sentence is
+     longer than the column in both languages and wraps by design; balance is what keeps its
+     break even, because left to the browser it leaves "knows." alone on a laptop. On a
+     390px phone the German light sentence takes three lines: "Unternehmen weiss." is wider
+     than the column at the 2.4rem floor. The vw line is the fallback for anything without
+     container query units and is deliberately the more timid of the two. */
   .hero h1{letter-spacing:-.035em; line-height:1.0;
            font-size:clamp(2.4rem,4vw,4.4rem);
            font-size:clamp(2.4rem,8.9cqw,4.4rem)}
-  .hero h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .hero h1 .r70{display:block; font-weight:300; color:var(--dim); text-wrap:balance}
   .hero h1 .rcl{display:block; font-weight:800}
   .hero h1 em{font-style:normal; color:var(--c-firm)}
   /* The page's one reversal, flagged the way the model page flags its own: a visitor who
@@ -631,7 +633,7 @@
 <main>
   <div class="shell">
   <section class="hero">
-    <h1 data-de="<span class='r70'>Jede Rolle, jede Regel.</span><span class='rcl'>Einmal <em>aufgeschrieben</em>.</span>"><span class="r70">Every role, every rule.</span><span class="rcl">Written down <em>once</em>.</span></h1>
+    <h1 data-de="<span class='r70'>Alles, was ein Unternehmen weiss.</span><span class='rcl'>Ein <em>Graph</em>.</span>"><span class="r70">Everything a company knows.</span><span class="rcl">One <em>graph</em>.</span></h1>
     <p class="tagline" data-de="Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
     <p class="note" data-de="Nichts hier gleicht Datensätze ab oder führt sie zusammen: CompanyGraph ist das Vokabular, in dem das eigene Wissen eines Unternehmens geschrieben steht.">Nothing here matches or merges records: CompanyGraph is the vocabulary a company’s own knowledge is written in.</p>
     <div class="cta">
