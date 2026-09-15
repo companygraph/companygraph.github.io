@@ -40,7 +40,7 @@ const { repo, commit } = JSON.parse(fs.readFileSync(path.join(here, "..", "sourc
 // changes, and the schema files keep the shape the conventions require. The example target
 // needs no such step, so it carries none.
 const TARGETS = [
-  { dir: "example", parse: parseInstance, sub: "example/model/" },
+  { dir: "example", parse: parseInstance, sub: "example/model/", schemas: "core/" },
   {
     dir: "model", parse: parseSchemas, sub: "core/",
     finish(data) {
@@ -101,12 +101,17 @@ const check = process.argv.includes("--check");
 let allMatch = true;
 
 for (const target of TARGETS) {
-  const files = process.env.META_MODEL ? await readLocal(target.sub) : await readRemote(target.sub);
+  const read = process.env.META_MODEL ? readLocal : readRemote;
+  const files = await read(target.sub);
+  // The example is read beside the core it is written against: at 0.22.0 the parser resolves
+  // a reference by the type its schema declares, so the schemas travel with the pages. The
+  // model target parses the schemas themselves and names none.
+  const schemas = target.schemas ? await read(target.schemas) : undefined;
   // `sub` goes to the parser too: an entity's `path` is what the page turns into a link to
   // the file on GitHub, and it has to be the path in the repository the files came from. The
   // parser used to hardcode `example/model/`, which happened to be right here and was a 404 on
   // every sibling site.
-  const data = { ...target.parse(files, { sub: target.sub }), commit };
+  const data = { ...target.parse(files, { sub: target.sub, schemas }), commit };
   if (target.finish) target.finish(data);
 
   const OUT = path.join(here, "..", `${target.dir}.json`);
