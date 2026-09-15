@@ -1,5 +1,5 @@
 {
-  "commit": "238ee3542246d3b0bb496d2226b4287b0816865f",
+  "commit": "e6808946c6de8ffd3375c8627d37ac60928b3deb",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -42,6 +42,18 @@
     {
       "type": "source",
       "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "strategic-objective",
+      "folder": "strategic-objectives",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "strategy",
+      "folder": "strategies",
       "owner": null,
       "singular": false
     },
@@ -375,6 +387,7 @@
         "kind": "Role",
         "start": "2018-03",
         "end": "2022-01",
+        "role": "Backend engineer",
         "organization": "Northwind Atelier",
         "skills": [
           "Java Programming"
@@ -588,6 +601,7 @@
         "start": "2021-09",
         "end": "2021-09",
         "url": "https://orbit.example/2021/talks/the-speed-up",
+        "role": "Speaker",
         "organization": "Orbit Conference",
         "skills": [
           "Product Discovery"
@@ -748,6 +762,61 @@
       "sections": [],
       "owner": null,
       "path": "example/model/sources/local.md"
+    },
+    {
+      "id": "strategic-objectives/support-stops-explaining-invoices",
+      "type": "strategic-objective",
+      "name": "Support stops explaining invoices",
+      "tagline": "A customer who opens an invoice gets the same explanation support would have given, without the call.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-01",
+        "horizon": "2027-06"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "A customer looking at an invoice can tell how each number was reached, in the words their own\ncontract uses, so the question \"why is this line 4,200\" is answered where it is asked. Support\nstill hears from customers, and what it hears about is their pricing rather than our arithmetic.\n\nWe would know it holds by what stops arriving. An explanation ticket is one where the customer\nasks how a number was reached and nothing about the number is wrong; those are countable today\nand they are the measure. The invoice being correct is not what is in question and never was.\n\nWhat falls outside: a disagreement about what the contract says. An invoice that explains itself\nperfectly can still bill something the customer believes they did not buy, and that is a\nquestion for the contract, not for the page.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/strategic-objectives/support-stops-explaining-invoices.md"
+    },
+    {
+      "id": "strategies/invoicing-strategy",
+      "type": "strategy",
+      "name": "Invoicing Strategy",
+      "tagline": "The invoice is rendered from the pricing rules themselves, so its explanation is generated rather than written.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-01",
+        "serves": [
+          "Support stops explaining invoices"
+        ],
+        "upholds": [
+          "Craftsmanship"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The approach",
+          "text": "We keep the pricing rules as data the billing run reads, rather than code it executes: one rule\nper pricing term, named in the words the contract uses, versioned with the contract it belongs\nto. A line on an invoice carries the id of the rule that produced it, and the explanation a\ncustomer reads is rendered from that rule and the inputs it saw. One run produces both the\nnumber and the sentence about the number, which is what keeps them from drifting apart.\n\nWhere a rule cannot express a term, we renegotiate the term or we grow the rule language.\nNeither is quick, and choosing that over a manual adjustment is the whole of this strategy.",
+          "tables": []
+        },
+        {
+          "heading": "What it rules out",
+          "text": "We never add a manual adjustment line. An invoice that anyone can add a number to is an invoice\nthat cannot explain itself, and every exception granted teaches the next team to ask for one. We\nnever write the explanation by hand after the fact, however well written it would be: a sentence\nmaintained beside a number is a second copy of a rule, and it goes stale on the first pricing\nchange nobody remembers to follow. And we keep no per-customer pricing code, which is the fast\nway to win one deal and the slow way to lose the ability to explain anything.",
+          "tables": []
+        },
+        {
+          "heading": "What would show it is working",
+          "text": "We watch the share of invoice lines whose rule id is missing, which is countable on every run and\nshould fall to nothing. Then the share of explanation tickets in support's queue, which moves\nlater and is read monthly. The first number moves within a sprint of any pricing change, which is\nwhat makes it worth watching — by the time the second one moves, the change that broke it is\nmonths old.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/strategies/invoicing-strategy.md"
     },
     {
       "id": "surfaces/partner-directory",
@@ -1075,6 +1144,30 @@
       "from": "skills/product-discovery",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/support-stops-explaining-invoices",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/invoicing-strategy",
+      "to": "strategic-objectives/support-stops-explaining-invoices",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/invoicing-strategy",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/invoicing-strategy",
+      "to": "values/craftsmanship",
+      "via": "upholds",
       "attrs": {}
     },
     {

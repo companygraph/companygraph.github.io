@@ -1,5 +1,5 @@
 {
-  "commit": "238ee3542246d3b0bb496d2226b4287b0816865f",
+  "commit": "e6808946c6de8ffd3375c8627d37ac60928b3deb",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -69,6 +69,12 @@
                   "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
                 ],
                 [
+                  "`role`",
+                  "No",
+                  "string",
+                  "The part the subject played, where the H1 does not already name it"
+                ],
+                [
                   "`url`",
                   "No",
                   "string",
@@ -127,6 +133,12 @@
                 "No",
                 "ref? → identity",
                 "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
+              ],
+              [
+                "`role`",
+                "No",
+                "string",
+                "The part the subject played, where the H1 does not already name it"
               ],
               [
                 "`url`",
@@ -249,7 +261,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- A period still running has no `end`, and the tagline says so — a reader sees a tagline and\n  does not see an absent field.\n- A one-off is not a period: a talk, a certification, an award or a publication sets `end`\n  equal to `start`. Left absent it would read as still running, and no other field says\n  otherwise. The two being equal is what makes it a one-off, and the interval that shared\n  value denotes is how precisely it is placed: `2012-05-04 .. 2012-05-04` is a day,\n  `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its year. A period that\n  genuinely ran a whole year is not written `2002 .. 2002` — it takes the months it ran,\n  `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- For a one-off, `organization` is whoever hosted, awarded or published it. The field is a\n  stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
+          "text": "- `role` is filled where the H1 does not already name the part the subject played, and left\n  absent where it does. An entry named for what it delivered, or for the event it happened at,\n  does not say who the subject was on it. An entry named for a position does, and repeating it\n  in the field would be the same fact twice. Which of those an instance writes is the instance's\n  own convention and no rule here fixes it; the field is what carries the part when the H1 does\n  not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- A period still running has no `end`, and the tagline says so — a reader sees a tagline and\n  does not see an absent field.\n- A one-off is not a period: a talk, a certification, an award or a publication sets `end`\n  equal to `start`. Left absent it would read as still running, and no other field says\n  otherwise. The two being equal is what makes it a one-off, and the interval that shared\n  value denotes is how precisely it is placed: `2012-05-04 .. 2012-05-04` is a day,\n  `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its year. A period that\n  genuinely ran a whole year is not written `2002 .. 2002` — it takes the months it ran,\n  `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- For a one-off, `organization` is whoever hosted, awarded or published it. The field is a\n  stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
           "tables": []
         },
         {
@@ -378,12 +390,12 @@
         },
         {
           "heading": "Purpose",
-          "text": "A kind answers \"what sort of period is this?\" — the question a reader cannot otherwise ask of a\nfolder that holds a degree, a conference talk and a decade of employment side by side. Its\nvalue is that the answer is a reference rather than a word: two experiences of the same kind\nmean the same thing, the kinds are visible in the graph as nodes, and changing what a kind\ncovers is one edit rather than a scan of every period.\n\nIt carries no dates and governs none. A one-off period writes `end` equal to `start` whatever\nkind it is, and an absent `end` means ongoing whatever kind it is. Letting a kind decide how to\nread a date would make an absence mean two things and resolve it by a label.",
+          "text": "A kind answers \"what sort of period is this?\" — the question a reader cannot otherwise ask of a\nfolder that holds a degree, a conference talk and a decade of employment side by side. Its\nvalue is that the answer is a reference rather than a word: two experiences of the same kind\nmean the same thing, the kinds are visible in the graph as nodes, and changing what a kind\ncovers is one edit rather than a scan of every period.",
           "tables": []
         },
         {
           "heading": "Writing rules",
-          "text": "- `## What it means` is written so that two readers filing the same period would file it the\n  same way. A kind that cannot do that is not yet a kind.\n- It says what the kind excludes as well as what it covers. The boundary between a role and a\n  project, or a project and a community entry, is where every disagreement will be.\n- A kind is about the sort of period, never about how it went, how long it lasted or how\n  senior it was. Those belong to the period.\n- Name it for what the period *is*, not for the type it belongs to: `Role`, not `Experience`.\n- `organization` means a different thing under each kind — an employer, a client, a host, an\n  awarding body — and each kind says which one it means. That sentence has nowhere else to live.",
+          "text": "- `## What it means` is written so that two readers filing the same period would file it the\n  same way. A kind that cannot do that is not yet a kind.\n- It says what the kind excludes as well as what it covers. The boundary between a role and a\n  project, or a project and a community entry, is where every disagreement will be.\n- A kind is about the sort of period, never about how it went, how long it lasted or how\n  senior it was. Those belong to the period.\n- Name it for what the period *is*, not for the type it belongs to: `Role`, not `Experience`.\n- `organization` means a different thing under each kind — an employer, a client, a host, an\n  awarding body — and each kind says which one it means. That sentence has nowhere else to live.\n- A kind carries no dates and governs none. How a date on an experience reads is the\n  experience's business whatever kind it is, and a kind claiming otherwise would make an absent\n  `end` mean two things and resolve it by a label.",
           "tables": []
         },
         {
@@ -581,7 +593,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "Identity is the company itself: the entity every other file in the instance is about. It\nanswers \"whose model is this?\" — which nothing else does, because a repository folder's name is\na path, and R2 and R3 exist to keep a canonical name out of a path. Without it an instance\ndescribes a company it never names.\n\nIt is the one entity nothing references. Everything else in the graph is a reference target;\nidentity is the root, and a reader arriving at a bare name searches for it rather than being\nsent to it.",
+          "text": "Identity is the company itself: the entity every other file in the instance is about. It\nanswers \"whose model is this?\" — which nothing else does, because a repository folder's name is\na path, and R2 and R3 exist to keep a canonical name out of a path. Without it an instance\ndescribes a company it never names.",
           "tables": []
         },
         {
@@ -591,7 +603,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/identity.md`\n\nA company has one identity, so the type is a file directly in the container rather than a\nfolder (R6, R13). The filesystem carries the cardinality: there is nowhere to put a second one.\nThe file is named for the type, not for the slug of its H1 (R12), which leaves the H1 free to\nbe the company's name.",
+          "text": "`model/identity.md`\n\nA company has one identity, so the type is a file directly in the container rather than a\nfolder (R6, R13). The filesystem carries the cardinality: there is nowhere to put a second one.\nThe file is named for the type, not for the slug of its H1 (R12), which leaves the H1 free to\nbe the company's name.\n\nThe file is the graph's root as well as its subject. Identity is the one entity nothing\nreferences — every other one is a reference target — so a reader arriving at a bare name\nsearches for it rather than being sent to it.",
           "tables": []
         }
       ],
@@ -1233,6 +1245,354 @@
       "path": "core/source-schema.md"
     },
     {
+      "id": "core/strategic-objective",
+      "type": "schema",
+      "name": "Strategic Objective Schema",
+      "tagline": "Required structure for strategic objective files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`adopted`",
+                  "Yes",
+                  "date",
+                  "When this objective began directing the work"
+                ],
+                [
+                  "`horizon`",
+                  "No",
+                  "date",
+                  "By when it should hold. Absent where the objective is a standing one."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`adopted`",
+                "Yes",
+                "date",
+                "When this objective began directing the work"
+              ],
+              [
+                "`horizon`",
+                "No",
+                "date",
+                "By when it should hold. Absent where the objective is a standing one."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Objective]`",
+                  "Yes",
+                  "The canonical name, the objective stated as a phrase. Everything references the objective by this exact string."
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "Single-line statement of what must become true"
+                ],
+                [
+                  "`## What it makes true`",
+                  "Yes",
+                  "What is concretely different when it holds, and what falls outside it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Objective]`",
+                "Yes",
+                "The canonical name, the objective stated as a phrase. Everything references the objective by this exact string."
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "Single-line statement of what must become true"
+              ],
+              [
+                "`## What it makes true`",
+                "Yes",
+                "What is concretely different when it holds, and what falls outside it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A strategic objective is what must become true for the vision to be reached — the layer between\na direction that holds still and the strategies that change under it. It answers \"what are we\ntrying to make true, that we are not sure of yet?\" for someone weighing whether a piece of work\nis worth doing at all.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- It says what must become true, never by what means. A means is a strategy, and an objective\n  that names one has already chosen a route the model cannot then see being chosen.\n- It names something the company could fail at. An objective no outcome could contradict is the\n  vision restated in longer words.\n- `## What it makes true` is concrete enough that a reader could tell whether it holds today,\n  and it states what falls outside it, because an objective silent on its boundary is read as\n  covering everything.\n- `horizon` is written only where a real date exists. A standing objective leaves it absent\n  rather than inventing one, and an invented horizon is a claim like any other.\n- Written in the company's own first person — \"I\" for a company of one, \"we\" otherwise — and the\n  same one throughout the instance.\n- An objective that has been reached is deleted, as a replaced strategy is — the model states\n  what the company is currently trying to make true, and git holds what it used to be.\n- A `horizon` that passes with the objective unmet is a decision and not a fact: the objective\n  is restated, re-dated or deleted, and leaving it to age is none of those.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/strategic-objectives/*.md`\n\nOne file per objective. Nothing owns an objective and an objective owns nothing, as with\n`value` — and a strategy cites the objective it serves by name, which a heading in a shared\ndocument could not offer.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/strategic-objective-schema.md"
+    },
+    {
+      "id": "core/strategy",
+      "type": "schema",
+      "name": "Strategy Schema",
+      "tagline": "Required structure for strategy files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`adopted`",
+                  "Yes",
+                  "date",
+                  "When this strategy began deciding things"
+                ],
+                [
+                  "`serves`",
+                  "Yes",
+                  "array of ref → strategic-objective",
+                  "The objectives this strategy pursues — the H1 of a file in `strategic-objectives/`"
+                ],
+                [
+                  "`upholds`",
+                  "No",
+                  "array of ref → value",
+                  "The values that constrain the route chosen — the H1 of a file in `values/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`adopted`",
+                "Yes",
+                "date",
+                "When this strategy began deciding things"
+              ],
+              [
+                "`serves`",
+                "Yes",
+                "array of ref → strategic-objective",
+                "The objectives this strategy pursues — the H1 of a file in `strategic-objectives/`"
+              ],
+              [
+                "`upholds`",
+                "No",
+                "array of ref → value",
+                "The values that constrain the route chosen — the H1 of a file in `values/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Topic] Strategy`",
+                  "Yes",
+                  "The canonical name, ending in \"Strategy\". Everything references the strategy by this exact string."
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "Single-line statement of the approach"
+                ],
+                [
+                  "`## The approach`",
+                  "Yes",
+                  "How, concretely enough that someone could follow it"
+                ],
+                [
+                  "`## What it rules out`",
+                  "Yes",
+                  "The options this choice forecloses"
+                ],
+                [
+                  "`## What would show it is working`",
+                  "Yes",
+                  "What is observable, early enough to change course"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Topic] Strategy`",
+                "Yes",
+                "The canonical name, ending in \"Strategy\". Everything references the strategy by this exact string."
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "Single-line statement of the approach"
+              ],
+              [
+                "`## The approach`",
+                "Yes",
+                "How, concretely enough that someone could follow it"
+              ],
+              [
+                "`## What it rules out`",
+                "Yes",
+                "The options this choice forecloses"
+              ],
+              [
+                "`## What would show it is working`",
+                "Yes",
+                "What is observable, early enough to change course"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A strategy is how an objective gets reached — one route among routes that could all have been\ntaken, written so that the choice is visible as a choice. It answers \"why this way and not the\nother way?\" for someone who arrives after the decision and would otherwise re-open it.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The statement is a choice a reasonable company could have made differently. If no company\n  would choose the opposite, it describes the work rather than choosing a route.\n- `## The approach` names what is actually done, in the terms the route actually turns on:\n  tools where it turns on tools, timing where it turns on timing, what is automated and what\n  deliberately is not. A strategy that could be pursued by any means at all has chosen nothing.\n- `## What it rules out` names specific foreclosed options, not their absence. \"We do not do bad\n  work\" rules nothing out; an option a reader can imagine the company taking does.\n- `## What would show it is working` states something observable while there is still time to\n  change course. A measure that only arrives at the horizon is a verdict rather than an\n  instrument, and the objective is where a verdict belongs.\n- It says how, never where. A strategy restating the vision has skipped the objective that was\n  supposed to sit between them.\n- `serves` names at least one objective. A strategy serving none is either an objective nobody\n  wrote down or work nothing in the model asked for.\n- `upholds` names the values that actually constrained the route, where any did. A citation that\n  would be equally true of any strategy the company might have chosen instead tells a reader\n  nothing.\n- Written in the company's own first person — \"I\" for a company of one, \"we\" otherwise — and the\n  same one throughout the instance.\n- A strategy that has been replaced is deleted rather than marked, because the model states the\n  route currently being taken and git holds the ones that were.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/strategies/*.md`\n\nOne file per strategy. Nothing owns a strategy and a strategy owns nothing, as with\n`strategic-objective`.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/strategy-schema.md"
+    },
+    {
       "id": "core/surface",
       "type": "schema",
       "name": "Surface Schema",
@@ -1525,7 +1885,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a\nheading per value, and a heading has no canonical name — so no strategy, role or process\ncould cite the value it serves, which is the one thing a company's values are for.",
+          "text": "`model/values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a\nheading per value, and a heading has no canonical name — so no strategy, role or process\ncould cite the value it upholds, which is the one thing a company's values are for.",
           "tables": []
         }
       ],
@@ -1649,12 +2009,12 @@
         },
         {
           "heading": "Purpose",
-          "text": "A vision is the future state the company is working toward, stated so that a decision can be\nweighed against it. It is not a plan and not a strategy: it says where, never how, and it holds\nstill while the ways of getting there change.\n\nIt earns its place in the graph because values and vision answer different questions. A value\nsays what we hold to whatever happens; a vision says what we are trying to make happen. An\ninstance with values and no vision describes a company's character and not its direction.",
+          "text": "A vision is the future state the company is working toward, stated so that a decision can be\nweighed against it. It is not a plan and not a strategy: it says where, never how, and it holds\nstill while the ways of getting there change.",
           "tables": []
         },
         {
           "heading": "Writing rules",
-          "text": "- The statement is one someone could work toward and could fail at. If no decision could\n  contradict it, it is a slogan and not a vision.\n- It says where, not how. A named tool, a named surface or a dated milestone is a plan, and\n  plans move faster than a vision should.\n- `## What it means` says what is true when it holds — concretely enough that a reader could\n  tell whether it does — and what falls outside it. What is out of scope is stated, because a\n  vision silent on its boundary is read as covering everything.\n- Written in the company's own first person, as values are: \"I\" for a company of one, \"we\"\n  otherwise.",
+          "text": "- The statement is one someone could work toward and could fail at. If no decision could\n  contradict it, it is a slogan and not a vision.\n- A vision that could be written as a value has not said where it is going: a value says what\n  we hold to whatever happens, a vision says what we are trying to make happen.\n- It says where, not how. A named tool, a named surface or a dated milestone is a plan, and\n  plans move faster than a vision should.\n- What must become true on the way there is a strategic objective and not the vision. There is\n  one vision and it carries no date; objectives are several, carry the dates they were set and\n  aimed at, and are deleted once reached.\n- `## What it means` says what is true when it holds — concretely enough that a reader could\n  tell whether it does — and what falls outside it. What is out of scope is stated, because a\n  vision silent on its boundary is read as covering everything.\n- Written in the company's own first person, as values are: \"I\" for a company of one, \"we\"\n  otherwise.",
           "tables": []
         },
         {
@@ -1773,6 +2133,42 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "core/strategic-objective",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/strategy",
+      "to": "core/strategic-objective",
+      "via": "serves",
+      "attrs": {
+        "type": "array of ref → strategic-objective"
+      },
+      "label": "serves"
+    },
+    {
+      "from": "core/strategy",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/strategy",
+      "to": "core/value",
+      "via": "upholds",
+      "attrs": {
+        "type": "array of ref → value"
+      },
+      "label": "upholds"
     },
     {
       "from": "core/surface",
