@@ -1,5 +1,5 @@
 {
-  "commit": "d0a7d14abbbd37b5e0472fe09a3a684e54010bcc",
+  "commit": "9212994b9934f2547491a87fbc1fbd7b40d0aea2",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -30,6 +30,12 @@
     {
       "type": "profile",
       "folder": "profiles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "role",
+      "folder": "roles",
       "owner": null,
       "singular": false
     },
@@ -279,6 +285,28 @@
       "path": "example/model/proficiency-levels/proficient.md"
     },
     {
+      "id": "profiles/ai-agent",
+      "type": "profile",
+      "name": "AI Agent",
+      "tagline": "Whichever agent reviews a change at Beacon Systems today, held to the same seat whichever model it is.",
+      "fields": {
+        "source": "Local",
+        "nature": "agent",
+        "roles": [
+          "Reviewer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Summary",
+          "text": "One profile for every agent the company runs, so the seat has a holder. It claims no skill\nyet: a claim needs evidence, and the first review has not been read.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/profiles/ai-agent/ai-agent.md"
+    },
+    {
       "id": "profiles/mira-halvorsen",
       "type": "profile",
       "name": "Mira Halvorsen",
@@ -286,6 +314,10 @@
       "fields": {
         "source": "Google Workspace",
         "source-id": "104857613902",
+        "nature": "human",
+        "roles": [
+          "Backend Engineer"
+        ],
         "email": "mira@example.invalid",
         "location": "Bergen"
       },
@@ -491,6 +523,7 @@
       "fields": {
         "source": "Google Workspace",
         "source-id": "104857613947",
+        "nature": "human",
         "email": "tomas@example.invalid",
         "location": "Lisbon"
       },
@@ -683,6 +716,100 @@
         "start": "2022-02",
         "end": null
       }
+    },
+    {
+      "id": "roles/backend-engineer",
+      "type": "role",
+      "name": "Backend Engineer",
+      "tagline": "The seat that keeps the services the product runs on correct, and answers for them when they are not.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Java Programming"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A bounded context with a name and the invoices it has to get right. A change request that\nsays what is wrong for a customer, not which class to edit. A turn on the pager, because the\nseat answers for what it ships.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A service that stays up, and a change small enough that a reviewer reads it in one sitting,\nwith the tests that show the invoice is still right.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never merges its own change.\n- Never moves a seam between contexts on its own; where a seam sits is the domain's decision.\n- Never ships a change the invoice tests do not cover.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/roles/backend-engineer.md"
+    },
+    {
+      "id": "roles/reviewer",
+      "type": "role",
+      "name": "Reviewer",
+      "tagline": "The seat that reads one change against what was asked, returns findings with a severity and changes nothing.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Domain-Driven Design"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The change as a diff, the request it answers and the report of whoever made it, read as a\nclaim rather than a fact.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "Findings, each with a file, a line, what is wrong, why it matters and how to fix it, ranked\nby severity, and the strengths named first. A finding is an input to whoever merges.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never edits the change it reviews.\n- Never re-runs a suite to confirm a report; it runs one focused test on a doubt the report\n  does not answer.\n- Never calls polish critical.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook",
+                  "https://docs.example.invalid/beacon/review"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook",
+                "https://docs.example.invalid/beacon/review"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/roles/reviewer.md"
     },
     {
       "id": "skills/domain-driven-design",
@@ -958,6 +1085,18 @@
       "attrs": {}
     },
     {
+      "from": "profiles/ai-agent",
+      "to": "roles/reviewer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
       "to": "experience-kinds/role",
       "via": "kind",
@@ -1022,6 +1161,12 @@
         "Level": "proficiency-levels/proficient",
         "Evidence": "Owned the JVM services two other teams built on for four years, and was the one called when they stopped."
       }
+    },
+    {
+      "from": "profiles/mira-halvorsen",
+      "to": "roles/backend-engineer",
+      "via": "roles",
+      "attrs": {}
     },
     {
       "from": "profiles/mira-halvorsen",
@@ -1125,6 +1270,30 @@
     {
       "from": "profiles/tomas-reyes",
       "to": "sources/google-workspace",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/backend-engineer",
+      "to": "skills/java-programming",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/backend-engineer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/reviewer",
+      "to": "skills/domain-driven-design",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/reviewer",
+      "to": "sources/local",
       "via": "source",
       "attrs": {}
     },
