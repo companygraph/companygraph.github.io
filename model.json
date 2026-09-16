@@ -1,5 +1,5 @@
 {
-  "commit": "c29e8cee9264d096b85a7ad3983ce6a3e73b75f8",
+  "commit": "0d6a001db14c05d660239d11eb4840320e584d13",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -609,6 +609,511 @@
       ],
       "owner": null,
       "path": "core/identity-schema.md"
+    },
+    {
+      "id": "core/phase",
+      "type": "schema",
+      "name": "Phase Schema",
+      "tagline": "Required structure for phase files.",
+      "fields": {
+        "owner": "process"
+      },
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`owner`",
+                  "Yes",
+                  "ref → role",
+                  "The seat accountable for the phase's outcome, the H1 of a file in `roles/`. Distinct from the **Owner:** line above, which names the type that owns a phase; this field names the seat."
+                ],
+                [
+                  "`executed-by`",
+                  "Yes",
+                  "array of ref → role",
+                  "The seats that do the phase's work"
+                ],
+                [
+                  "`supported-by`",
+                  "No",
+                  "array of ref → role",
+                  "The seats consulted in the phase, producing nothing it is graded on"
+                ],
+                [
+                  "`gate-approvers`",
+                  "Yes",
+                  "array of ref → role",
+                  "The seats that approve passage out of the phase. At least one; a phase nobody approves is an activity inside another phase."
+                ],
+                [
+                  "`escalation-authority`",
+                  "Yes",
+                  "ref → role",
+                  "The seat that decides when the gate's criteria cannot be met"
+                ],
+                [
+                  "`gate-to`",
+                  "No",
+                  "ref → phase",
+                  "The phase this gate leads to. Absent on the last phase, and only there."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`owner`",
+                "Yes",
+                "ref → role",
+                "The seat accountable for the phase's outcome, the H1 of a file in `roles/`. Distinct from the **Owner:** line above, which names the type that owns a phase; this field names the seat."
+              ],
+              [
+                "`executed-by`",
+                "Yes",
+                "array of ref → role",
+                "The seats that do the phase's work"
+              ],
+              [
+                "`supported-by`",
+                "No",
+                "array of ref → role",
+                "The seats consulted in the phase, producing nothing it is graded on"
+              ],
+              [
+                "`gate-approvers`",
+                "Yes",
+                "array of ref → role",
+                "The seats that approve passage out of the phase. At least one; a phase nobody approves is an activity inside another phase."
+              ],
+              [
+                "`escalation-authority`",
+                "Yes",
+                "ref → role",
+                "The seat that decides when the gate's criteria cannot be met"
+              ],
+              [
+                "`gate-to`",
+                "No",
+                "ref → phase",
+                "The phase this gate leads to. Absent on the last phase, and only there."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Phase]`",
+                  "Yes",
+                  "The canonical name of the phase. The owning process's `## Phases` list and the previous phase's `gate-to` reference it by this exact string."
+                ],
+                [
+                  "`> [Goal]`",
+                  "Yes",
+                  "Single-line statement of what the phase is for"
+                ],
+                [
+                  "`## What it takes`",
+                  "Yes",
+                  "What enters the phase, and what it refuses to start without"
+                ],
+                [
+                  "`## Activities`",
+                  "Yes",
+                  "A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
+                ],
+                [
+                  "`## What it produces`",
+                  "Yes",
+                  "Table. What leaves the phase; its columns are declared below."
+                ],
+                [
+                  "`## What it never does`",
+                  "Yes",
+                  "A list, one sentence each, of what the phase refuses"
+                ],
+                [
+                  "`## Gate`",
+                  "Yes",
+                  "The criteria that must be satisfied to leave the phase, as a list, and what happens when they cannot be"
+                ]
+              ]
+            },
+            {
+              "caption": "`## What it produces` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Deliverable`",
+                  "Yes",
+                  "string",
+                  "The thing that leaves the phase"
+                ],
+                [
+                  "`Description`",
+                  "Yes",
+                  "string",
+                  "What it is, and what makes it finished"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Phase]`",
+                "Yes",
+                "The canonical name of the phase. The owning process's `## Phases` list and the previous phase's `gate-to` reference it by this exact string."
+              ],
+              [
+                "`> [Goal]`",
+                "Yes",
+                "Single-line statement of what the phase is for"
+              ],
+              [
+                "`## What it takes`",
+                "Yes",
+                "What enters the phase, and what it refuses to start without"
+              ],
+              [
+                "`## Activities`",
+                "Yes",
+                "A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
+              ],
+              [
+                "`## What it produces`",
+                "Yes",
+                "Table. What leaves the phase; its columns are declared below."
+              ],
+              [
+                "`## What it never does`",
+                "Yes",
+                "A list, one sentence each, of what the phase refuses"
+              ],
+              [
+                "`## Gate`",
+                "Yes",
+                "The criteria that must be satisfied to leave the phase, as a list, and what happens when they cannot be"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A phase is one step of a process and the gate at its end — what enters, what is done, what\nleaves, and what must be true for it to leave. It answers \"am I done, and who says so?\" for\nwhoever is in it. The gate is the part the model enforces: the document a phase produces scales\nwith the size of the change and may be a conversation rather than a file, and the approval at\nits end does not scale at all.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A `### [Track]` heading under `## Activities` names a track the owning process declares, spelled\n  as that track's `Track` cell spells it.\n- A phase whose activities are the same for every track carries no track headings at all.\n- `gate-to` names the next phase and the owning process's `## Phases` list says the same thing;\n  where the two disagree the model is wrong, not the reader.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique across every phase in the instance, not merely within its process,\n  because R2 scopes a name to its type rather than to its owner. Two processes cannot each call\n  a phase `Review`; name a phase for what it does in the process it belongs to. A phase and a\n  role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/processes/<process>/phases/*.md`\n\nA phase is owned by a process and cannot exist without it, so it nests inside the process's\nfolder rather than sitting at the root with a `process:` field pointing back. The filename is\nR12's default, the slug of the H1. It carries no position prefix: the order is the owning\nprocess's `## Phases` list and the `gate-to` chain, and a third copy on the filename would have\nto be renamed through the whole folder whenever a phase was inserted.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/phase-schema.md"
+    },
+    {
+      "id": "core/process",
+      "type": "schema",
+      "name": "Process Schema",
+      "tagline": "Required structure for process files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`owner`",
+                  "Yes",
+                  "ref → role",
+                  "The seat accountable for the process as a whole, the H1 of a file in `roles/`"
+                ],
+                [
+                  "`supported-by`",
+                  "No",
+                  "array of ref → role",
+                  "The seats that keep the process working without being accountable for it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`owner`",
+                "Yes",
+                "ref → role",
+                "The seat accountable for the process as a whole, the H1 of a file in `roles/`"
+              ],
+              [
+                "`supported-by`",
+                "No",
+                "array of ref → role",
+                "The seats that keep the process working without being accountable for it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Process]`",
+                  "Yes",
+                  "The canonical name of the process. Phases and readers reference it by this exact string."
+                ],
+                [
+                  "`> [Purpose]`",
+                  "Yes",
+                  "Single-line statement of what the process is for"
+                ],
+                [
+                  "`## Tracks`",
+                  "Yes",
+                  "Table. The kinds of thing this process makes; its columns are declared below."
+                ],
+                [
+                  "`## Phases`",
+                  "Yes",
+                  "An ordered list, one entry per phase, in the order the work passes through them, each linking the phase's file"
+                ],
+                [
+                  "`## What it never does`",
+                  "Yes",
+                  "A list, one sentence each, of what the process refuses in every phase"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The rulebooks the process is run by; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Tracks` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Track`",
+                  "Yes",
+                  "string",
+                  "The kind of thing this track makes"
+                ],
+                [
+                  "`Produces`",
+                  "Yes",
+                  "string",
+                  "What this track leaves behind when a change runs down it"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a rulebook, a checklist, a mandate"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Process]`",
+                "Yes",
+                "The canonical name of the process. Phases and readers reference it by this exact string."
+              ],
+              [
+                "`> [Purpose]`",
+                "Yes",
+                "Single-line statement of what the process is for"
+              ],
+              [
+                "`## Tracks`",
+                "Yes",
+                "Table. The kinds of thing this process makes; its columns are declared below."
+              ],
+              [
+                "`## Phases`",
+                "Yes",
+                "An ordered list, one entry per phase, in the order the work passes through them, each linking the phase's file"
+              ],
+              [
+                "`## What it never does`",
+                "Yes",
+                "A list, one sentence each, of what the process refuses in every phase"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The rulebooks the process is run by; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A process is the path work takes through the company's seats — one folder, the phases in the\norder they are passed through, and the gate between each pair — and it answers \"what happens\nnext, who does it, and what has to be true before it moves on?\" for someone doing the work or\nwaiting on it. It is not a seat, which says what one role takes and produces whenever it acts,\nand it is not a record of work that happened, which is an experience.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- Person-neutral, as a role is: a process names seats and never who holds them.\n- Named for the work rather than for the tool that carries it: `Delivery`, not `The board`.\n- A track is named for what it makes, not for who makes it.\n- Tracks run together in one pass rather than instead of one another. A change that is both\n  code and prose runs down both, so a phase's `### [Track]` headings are strands of one step\n  and never alternative routes through it, and a phase may produce a deliverable per track in\n  the same pass.\n- Each line under `## What it never does` is a sentence an agent can hold a change against.\n  \"Never merges without the Owner\" can fail; \"works carefully\" cannot.\n- `## Phases` lists every phase in the folder and nothing else, in the order the work passes\n  through them. It is the authority on that order, and each phase's `gate-to` agrees with it.\n- In `## Phases`, the phase's name is the reference (R3); the path beside it is a convenience\n  for a reader clicking through, not the reference itself.\n- A process with one track says so and names it; a track table is not omitted because there\n  happens to be only one kind of work today.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/processes/<process>/<process>.md`\n\nA process owns its phases and cannot be read without them, so it is a folder rather than a\nfile, as a profile is. The folder is named for the process and holds its own file under that\nsame name, plus the `phases/` collection the phases nest in.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/process-schema.md"
     },
     {
       "id": "core/proficiency-level",
@@ -2311,6 +2816,103 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/role",
+      "via": "escalation-authority",
+      "attrs": {
+        "type": "ref → role"
+      },
+      "label": "escalation-authority"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/role",
+      "via": "executed-by",
+      "attrs": {
+        "type": "array of ref → role"
+      },
+      "label": "executed-by"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/role",
+      "via": "gate-approvers",
+      "attrs": {
+        "type": "array of ref → role"
+      },
+      "label": "gate-approvers"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/phase",
+      "via": "gate-to",
+      "attrs": {
+        "type": "ref → phase"
+      },
+      "label": "gate-to"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/process",
+      "via": "owner",
+      "attrs": {},
+      "label": "owner"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/role",
+      "via": "owner",
+      "attrs": {
+        "type": "ref → role"
+      },
+      "label": "owner"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/phase",
+      "to": "core/role",
+      "via": "supported-by",
+      "attrs": {
+        "type": "array of ref → role"
+      },
+      "label": "supported-by"
+    },
+    {
+      "from": "core/process",
+      "to": "core/role",
+      "via": "owner",
+      "attrs": {
+        "type": "ref → role"
+      },
+      "label": "owner"
+    },
+    {
+      "from": "core/process",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/process",
+      "to": "core/role",
+      "via": "supported-by",
+      "attrs": {
+        "type": "array of ref → role"
+      },
+      "label": "supported-by"
     },
     {
       "from": "core/proficiency-level",
