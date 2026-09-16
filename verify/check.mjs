@@ -20,7 +20,7 @@ const SITE = "https://companygraph.io";
 const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy"];
 
 const PAGES = [
-  { path: "/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
@@ -69,7 +69,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
@@ -80,7 +80,7 @@ const PAGES = [
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
@@ -92,7 +92,7 @@ const PAGES = [
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the artifact the page names.
-  { path: "/example/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -107,7 +107,7 @@ const PAGES = [
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -118,7 +118,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
 
-  { path: "/talks/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
