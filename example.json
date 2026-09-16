@@ -1,5 +1,5 @@
 {
-  "commit": "c29e8cee9264d096b85a7ad3983ce6a3e73b75f8",
+  "commit": "0d6a001db14c05d660239d11eb4840320e584d13",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -20,6 +20,18 @@
       "folder": null,
       "owner": null,
       "singular": true
+    },
+    {
+      "type": "phase",
+      "folder": "phases",
+      "owner": "process",
+      "singular": false
+    },
+    {
+      "type": "process",
+      "folder": "processes",
+      "owner": null,
+      "singular": false
     },
     {
       "type": "proficiency-level",
@@ -207,6 +219,350 @@
       ],
       "owner": null,
       "path": "example/model/identity.md"
+    },
+    {
+      "id": "processes/delivery",
+      "type": "process",
+      "name": "Delivery",
+      "tagline": "How a change to the platform is specified, built and released.",
+      "fields": {
+        "source": "Local",
+        "owner": "Backend Engineer",
+        "supported-by": [
+          "Reviewer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track",
+                "Produces"
+              ],
+              "rows": [
+                [
+                  "Code",
+                  "A merged change to the platform"
+                ],
+                [
+                  "Docs",
+                  "A published page on the customer site"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track",
+              "Produces"
+            ],
+            "rows": [
+              [
+                "Code",
+                "A merged change to the platform"
+              ],
+              [
+                "Docs",
+                "A published page on the customer site"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "1. [Specify](phases/specify.md)\n2. [Build](phases/build.md)\n3. [Release](phases/release.md)",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never begins a phase whose predecessor's gate has not been approved.\n- Never releases a change that no reviewer has read.\n- Never counts a check nobody ran as a check that passed.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Engineering handbook",
+                  "https://example.com/handbook"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Engineering handbook",
+                "https://example.com/handbook"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/processes/delivery/delivery.md"
+    },
+    {
+      "id": "processes/delivery/phases/build",
+      "type": "phase",
+      "name": "Build",
+      "tagline": "Make the change and have it read, one track at a time.",
+      "fields": {
+        "source": "Local",
+        "owner": "Backend Engineer",
+        "executed-by": [
+          "Backend Engineer",
+          "Reviewer"
+        ],
+        "gate-approvers": [
+          "Reviewer"
+        ],
+        "escalation-authority": "Reviewer",
+        "gate-to": "Release"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "An approved specification, and a branch off the platform's main line.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. Write the failing test, then the change that passes it.\n2. Hand the diff to the Reviewer with the specification beside it.\n3. Resolve every finding, or record why it stands.\n\n### Docs\n\n1. Draft the page from the specification.\n2. Have the Reviewer read it against what the change actually does.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Reviewed change",
+                  "Commits on a branch, with the suite passing and every finding resolved"
+                ],
+                [
+                  "Draft page",
+                  "The customer-facing description of what changed, unpublished"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Reviewed change",
+                "Commits on a branch, with the suite passing and every finding resolved"
+              ],
+              [
+                "Draft page",
+                "The customer-facing description of what changed, unpublished"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never changes a test's expectation to make it pass.\n- Never publishes the page before the change is released.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Build, all of these hold:\n\n- The suite passes on the branch.\n- Every review finding is resolved or recorded with a reason.\n- The branch does what the specification said, and nothing else.\n\nWhere they cannot be met, the Reviewer decides whether the branch is reworked or abandoned.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "example/model/processes/delivery/phases/build.md"
+    },
+    {
+      "id": "processes/delivery/phases/release",
+      "type": "phase",
+      "name": "Release",
+      "tagline": "Put the change in front of the platform's users, and the page with it.",
+      "fields": {
+        "source": "Local",
+        "owner": "Reviewer",
+        "executed-by": [
+          "Reviewer"
+        ],
+        "supported-by": [
+          "Backend Engineer"
+        ],
+        "gate-approvers": [
+          "Reviewer",
+          "Backend Engineer"
+        ],
+        "escalation-authority": "Reviewer"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A branch that left Build, and the draft page written beside it.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. Merge the branch and tag the release.\n2. Publish the page.\n3. Watch the platform until the change has been exercised by real traffic.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Released change",
+                  "Merged, tagged, and running for users"
+                ],
+                [
+                  "Published page",
+                  "The page describing the change, live on the customer site"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Released change",
+                "Merged, tagged, and running for users"
+              ],
+              [
+                "Published page",
+                "The page describing the change, live on the customer site"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never releases and publishes in the opposite order.\n- Never leaves a release untagged.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "Release is the last phase. The work is done when all of these hold:\n\n- The change is merged and tagged.\n- The page is live.\n- The change has been exercised in production without incident.\n\nWhere they cannot be met, the Reviewer decides whether the release is rolled back.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "example/model/processes/delivery/phases/release.md"
+    },
+    {
+      "id": "processes/delivery/phases/specify",
+      "type": "phase",
+      "name": "Specify",
+      "tagline": "Write down what the change must do, before anyone writes how it does it.",
+      "fields": {
+        "source": "Local",
+        "owner": "Backend Engineer",
+        "executed-by": [
+          "Backend Engineer"
+        ],
+        "supported-by": [
+          "Reviewer"
+        ],
+        "gate-approvers": [
+          "Reviewer"
+        ],
+        "escalation-authority": "Reviewer",
+        "gate-to": "Build"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A request from the platform's users, and the part of the system it will touch, read rather than\nremembered.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. State the request as one sentence.\n2. Name the approaches worth considering, and recommend one.\n3. Write down what the change must do, and what it is explicitly not doing.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Specification",
+                  "What the change must do, the approach chosen, and what was left out"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Specification",
+                "What the change must do, the approach chosen, and what was left out"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change it specifies.\n- Never leaves a question unasked because an assumption would be convenient.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Specify, all of these hold:\n\n- The request is stated as one sentence.\n- The approach is chosen and the rejected ones are named.\n- What the change will not do is written down.\n\nWhere they cannot be met, the Reviewer decides whether the request is reshaped or dropped.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "example/model/processes/delivery/phases/specify.md"
     },
     {
       "id": "proficiency-levels/competent",
@@ -1058,6 +1414,150 @@
       "from": "identity",
       "to": "sources/google-workspace",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "roles/reviewer",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "roles/backend-engineer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "roles/reviewer",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "processes/delivery/phases/release",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "roles/backend-engineer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "roles/reviewer",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "roles/backend-engineer",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "roles/reviewer",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "roles/reviewer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/release",
+      "to": "roles/backend-engineer",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "roles/reviewer",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "roles/backend-engineer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "roles/reviewer",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "processes/delivery/phases/build",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "roles/backend-engineer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "roles/reviewer",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "roles/backend-engineer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "roles/reviewer",
+      "via": "supported-by",
       "attrs": {}
     },
     {
