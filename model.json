@@ -1,5 +1,5 @@
 {
-  "commit": "4c65e247957009743e5f5fb8a374ac15704f125d",
+  "commit": "f6b212b792037548723fb3598a920838e5e789e5",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -10,6 +10,152 @@
     }
   ],
   "entities": [
+    {
+      "id": "core/achievement-kind",
+      "type": "schema",
+      "name": "Achievement Kind Schema",
+      "tagline": "Required structure for achievement kind files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The kind's position within an entry. Spaced in tens so a kind can be added without renumbering the others."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The kind's position within an entry. Spaced in tens so a kind can be added without renumbering the others."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every heading that groups achievements references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the kind covers"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "Which achievements belong to this kind, and which do not"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every heading that groups achievements references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the kind covers"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "Which achievements belong to this kind, and which do not"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "An achievement kind answers \"what sort of claim is this bullet?\" — the question a reader cannot\notherwise ask of a list that holds a decision, a delivery and an outcome side by side. Its value\nis that the answer is a reference rather than a word: two bullets under the same kind mean the\nsame sort of thing across every entry, the kinds are visible in the graph as nodes, and changing\nwhat a kind covers is one edit rather than a pass over every period.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` is written so that two readers filing the same bullet would file it under\n  the same kind. A kind that cannot do that is not yet a kind.\n- It says what the kind excludes as well as what it covers, since the boundary with the kind\n  beside it is where every disagreement will be. How to decide between two kinds is written\n  here, in the instance, and nowhere else.\n- A kind is about the sort of claim, never about how important it is. Importance is not an order\n  the model can hold.\n- Name it for what the claims are — `Architecture`, `Results` — and never for the section they\n  sit in.\n- `rank` orders kinds within an entry and nothing else, and two kinds never share one.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/achievement-kinds/*.md`\n\nA kind owns nothing and nothing owns it: many experiences group their achievements under the\nsame few, and what each kind covers lives here rather than being restated in every entry. It\nsits at the container root beside `experience-kinds/` rather than inside a profile, because\nevery profile's experiences group by the same set.\n\nThe set is deliberately the instance's own. Which groups a career needs is a fact about that\ncareer — a researcher's work falls by publication and grant, a salesperson's by territory and\naccount — and a kind arriving later is one file here, not a change to this metamodel and a\nrelease of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/achievement-kind-schema.md"
+    },
     {
       "id": "core/experience",
       "type": "schema",
@@ -180,7 +326,7 @@
                 [
                   "`## Achievements`",
                   "No",
-                  "What was accomplished in this period"
+                  "Grouped. What was accomplished in this period, as bullets under `###` headings that name achievement kinds"
                 ],
                 [
                   "`## Ending`",
@@ -216,6 +362,23 @@
                   "Where it is"
                 ]
               ]
+            },
+            {
+              "caption": "`## Achievements` is grouped under these headings:",
+              "columns": [
+                "Heading",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Kind`",
+                  "No",
+                  "ref → achievement-kind",
+                  "The kind every bullet below it is chiefly evidence of"
+                ]
+              ]
             }
           ],
           "table": {
@@ -239,7 +402,7 @@
               [
                 "`## Achievements`",
                 "No",
-                "What was accomplished in this period"
+                "Grouped. What was accomplished in this period, as bullets under `###` headings that name achievement kinds"
               ],
               [
                 "`## Ending`",
@@ -261,7 +424,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- `role` is filled where the H1 does not already name the part the subject played, and left\n  absent where it does. An entry named for what it delivered, or for the event it happened at,\n  does not say who the subject was on it. An entry named for a position does, and repeating it\n  in the field would be the same fact twice. Which of those an instance writes is the instance's\n  own convention and no rule here fixes it; the field is what carries the part when the H1 does\n  not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- A period still running has no `end`, and the tagline says so — a reader sees a tagline and\n  does not see an absent field.\n- A one-off is not a period: a talk, a certification, an award or a publication sets `end`\n  equal to `start`. Left absent it would read as still running, and no other field says\n  otherwise. The two being equal is what makes it a one-off, and the interval that shared\n  value denotes is how precisely it is placed: `2012-05-04 .. 2012-05-04` is a day,\n  `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its year. A period that\n  genuinely ran a whole year is not written `2002 .. 2002` — it takes the months it ran,\n  `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- For a one-off, `organization` is whoever hosted, awarded or published it. The field is a\n  stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
+          "text": "- `role` is filled where the H1 does not already name the part the subject played, and left\n  absent where it does. An entry named for what it delivered, or for the event it happened at,\n  does not say who the subject was on it. An entry named for a position does, and repeating it\n  in the field would be the same fact twice. Which of those an instance writes is the instance's\n  own convention and no rule here fixes it; the field is what carries the part when the H1 does\n  not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- Where an instance defines achievement kinds, every entry with achievements groups them: each\n  bullet sits under the heading of the one kind it is chiefly evidence of, headings follow the\n  kinds' `rank`, and a kind with nothing in the entry has no heading. An instance that defines\n  none writes a flat list.\n- Every entry with achievements carries the headings, even one bullet under one heading, so a\n  reader finds a kind in the same place in every entry.\n- Within a kind the broadest claim comes first, peers follow the order they happened in, and a\n  bullet that points back comes directly after what it points to — or names it, where the\n  grouping would part them.\n- A list of tools or a stack is not an achievement: what was built with a tool says so in the\n  bullet that built it.\n- A period still running has no `end`, and the tagline says so — a reader sees a tagline and\n  does not see an absent field.\n- A one-off is not a period: a talk, a certification, an award or a publication sets `end`\n  equal to `start`. Left absent it would read as still running, and no other field says\n  otherwise. The two being equal is what makes it a one-off, and the interval that shared\n  value denotes is how precisely it is placed: `2012-05-04 .. 2012-05-04` is a day,\n  `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its year. A period that\n  genuinely ran a whole year is not written `2002 .. 2002` — it takes the months it ran,\n  `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- For a one-off, `organization` is whoever hosted, awarded or published it. The field is a\n  stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
           "tables": []
         },
         {
@@ -2781,6 +2944,15 @@
   ],
   "edges": [
     {
+      "from": "core/achievement-kind",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
       "from": "core/experience-kind",
       "to": "core/source",
       "via": "source",
@@ -2788,6 +2960,15 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "core/experience",
+      "to": "core/achievement-kind",
+      "via": "Achievements.Kind",
+      "attrs": {
+        "type": "ref → achievement-kind"
+      },
+      "label": "Achievements.Kind"
     },
     {
       "from": "core/experience",
