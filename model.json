@@ -1,5 +1,5 @@
 {
-  "commit": "c09c926ab0517f9a073134605309842f4869877c",
+  "commit": "4c65e247957009743e5f5fb8a374ac15704f125d",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -175,7 +175,7 @@
                 [
                   "`> [Tagline]`",
                   "Yes",
-                  "Single-line summary of the period"
+                  "One-paragraph summary of the period"
                 ],
                 [
                   "`## Achievements`",
@@ -234,7 +234,7 @@
               [
                 "`> [Tagline]`",
                 "Yes",
-                "Single-line summary of the period"
+                "One-paragraph summary of the period"
               ],
               [
                 "`## Achievements`",
@@ -352,7 +352,7 @@
                 [
                   "`> [Summary]`",
                   "Yes",
-                  "Single-line summary of what the kind covers"
+                  "One-paragraph summary of what the kind covers"
                 ],
                 [
                   "`## What it means`",
@@ -378,7 +378,7 @@
               [
                 "`> [Summary]`",
                 "Yes",
-                "Single-line summary of what the kind covers"
+                "One-paragraph summary of what the kind covers"
               ],
               [
                 "`## What it means`",
@@ -522,7 +522,7 @@
                 [
                   "`> [Tagline]`",
                   "Yes",
-                  "Single-line statement of what the company is"
+                  "One-paragraph statement of what the company is"
                 ],
                 [
                   "`## What it is`",
@@ -576,7 +576,7 @@
               [
                 "`> [Tagline]`",
                 "Yes",
-                "Single-line statement of what the company is"
+                "One-paragraph statement of what the company is"
               ],
               [
                 "`## What it is`",
@@ -763,7 +763,7 @@
                 [
                   "`> [Goal]`",
                   "Yes",
-                  "Single-line statement of what the phase is for"
+                  "One-paragraph statement of what the phase is for"
                 ],
                 [
                   "`## What it takes`",
@@ -832,7 +832,7 @@
               [
                 "`> [Goal]`",
                 "Yes",
-                "Single-line statement of what the phase is for"
+                "One-paragraph statement of what the phase is for"
               ],
               [
                 "`## What it takes`",
@@ -984,7 +984,7 @@
                 [
                   "`> [Purpose]`",
                   "Yes",
-                  "Single-line statement of what the process is for"
+                  "One-paragraph statement of what the process is for"
                 ],
                 [
                   "`## Tracks`",
@@ -1071,7 +1071,7 @@
               [
                 "`> [Purpose]`",
                 "Yes",
-                "Single-line statement of what the process is for"
+                "One-paragraph statement of what the process is for"
               ],
               [
                 "`## Tracks`",
@@ -1206,7 +1206,7 @@
                 [
                   "`> [Summary]`",
                   "Yes",
-                  "Single-line summary of what the level claims"
+                  "One-paragraph summary of what the level claims"
                 ],
                 [
                   "`## What it means`",
@@ -1232,7 +1232,7 @@
               [
                 "`> [Summary]`",
                 "Yes",
-                "Single-line summary of what the level claims"
+                "One-paragraph summary of what the level claims"
               ],
               [
                 "`## What it means`",
@@ -1388,7 +1388,7 @@
                 [
                   "`> [Tagline]`",
                   "Yes",
-                  "Single-line summary of the person: what they do, or the claim their work makes"
+                  "One-paragraph summary of the person: what they do, or the claim their work makes"
                 ],
                 [
                   "`## Skills`",
@@ -1476,7 +1476,7 @@
               [
                 "`> [Tagline]`",
                 "Yes",
-                "Single-line summary of the person: what they do, or the claim their work makes"
+                "One-paragraph summary of the person: what they do, or the claim their work makes"
               ],
               [
                 "`## Skills`",
@@ -1606,7 +1606,7 @@
                 [
                   "`> [Purpose]`",
                   "Yes",
-                  "Single-line statement of what the seat is for"
+                  "One-paragraph statement of what the seat is for"
                 ],
                 [
                   "`## What it takes`",
@@ -1670,7 +1670,7 @@
               [
                 "`> [Purpose]`",
                 "Yes",
-                "Single-line statement of what the seat is for"
+                "One-paragraph statement of what the seat is for"
               ],
               [
                 "`## What it takes`",
@@ -1805,7 +1805,7 @@
                 [
                   "`> [Definition]`",
                   "Yes",
-                  "Single-line definition of what the skill is"
+                  "One-paragraph definition of what the skill is"
                 ],
                 [
                   "`## In practice`",
@@ -1831,7 +1831,7 @@
               [
                 "`> [Definition]`",
                 "Yes",
-                "Single-line definition of what the skill is"
+                "One-paragraph definition of what the skill is"
               ],
               [
                 "`## In practice`",
@@ -1927,7 +1927,7 @@
                 [
                   "`> [Description]`",
                   "No",
-                  "Single-line description of what the source holds"
+                  "One-paragraph description of what the source holds"
                 ]
               ]
             }
@@ -1948,7 +1948,7 @@
               [
                 "`> [Description]`",
                 "No",
-                "Single-line description of what the source holds"
+                "One-paragraph description of what the source holds"
               ]
             ]
           }
@@ -2075,7 +2075,7 @@
                 [
                   "`> [Statement]`",
                   "Yes",
-                  "Single-line statement of what must become true"
+                  "One-paragraph statement of what must become true"
                 ],
                 [
                   "`## What it makes true`",
@@ -2101,7 +2101,7 @@
               [
                 "`> [Statement]`",
                 "Yes",
-                "Single-line statement of what must become true"
+                "One-paragraph statement of what must become true"
               ],
               [
                 "`## What it makes true`",
@@ -2245,7 +2245,7 @@
                 [
                   "`> [Statement]`",
                   "Yes",
-                  "Single-line statement of the approach"
+                  "One-paragraph statement of the approach"
                 ],
                 [
                   "`## The approach`",
@@ -2281,7 +2281,7 @@
               [
                 "`> [Statement]`",
                 "Yes",
-                "Single-line statement of the approach"
+                "One-paragraph statement of the approach"
               ],
               [
                 "`## The approach`",
@@ -2435,7 +2435,7 @@
                 [
                   "`> [Description]`",
                   "Yes",
-                  "Single-line description of what this surface is and who reaches it"
+                  "One-paragraph description of what this surface is and who reaches it"
                 ],
                 [
                   "`## What it shows`",
@@ -2471,7 +2471,7 @@
               [
                 "`> [Description]`",
                 "Yes",
-                "Single-line description of what this surface is and who reaches it"
+                "One-paragraph description of what this surface is and who reaches it"
               ],
               [
                 "`## What it shows`",
@@ -2589,7 +2589,7 @@
                 [
                   "`> [Statement]`",
                   "Yes",
-                  "Single-line statement of the value"
+                  "One-paragraph statement of the value"
                 ],
                 [
                   "`## In practice`",
@@ -2615,7 +2615,7 @@
               [
                 "`> [Statement]`",
                 "Yes",
-                "Single-line statement of the value"
+                "One-paragraph statement of the value"
               ],
               [
                 "`## In practice`",
@@ -2723,7 +2723,7 @@
                 [
                   "`> [Statement]`",
                   "Yes",
-                  "Single-line statement of the future being worked toward"
+                  "One-paragraph statement of the future being worked toward"
                 ],
                 [
                   "`## What it means`",
@@ -2749,7 +2749,7 @@
               [
                 "`> [Statement]`",
                 "Yes",
-                "Single-line statement of the future being worked toward"
+                "One-paragraph statement of the future being worked toward"
               ],
               [
                 "`## What it means`",
