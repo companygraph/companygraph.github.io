@@ -1,5 +1,5 @@
 {
-  "commit": "c09c926ab0517f9a073134605309842f4869877c",
+  "commit": "4c65e247957009743e5f5fb8a374ac15704f125d",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -1305,7 +1305,7 @@
       "id": "surfaces/beacon-systems-website",
       "type": "surface",
       "name": "Beacon Systems website",
-      "tagline": "The company's own site, where a buyer who has heard the name lands first, rebuilt from the",
+      "tagline": "The company's own site, where a buyer who has heard the name lands first, rebuilt from the model on every change.",
       "fields": {
         "source": "Local",
         "production": "built",
@@ -1326,7 +1326,7 @@
       "id": "surfaces/partner-directory",
       "type": "surface",
       "name": "Partner directory",
-      "tagline": "The listing a buyer reaches from the directory's search, maintained by hand because the",
+      "tagline": "The listing a buyer reaches from the directory's search, maintained by hand because the directory takes no feed.",
       "fields": {
         "source": "Local",
         "production": "written",
