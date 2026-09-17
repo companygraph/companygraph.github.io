@@ -103,6 +103,8 @@ npm run build                      # writes example.json and model.json from met
 npm run build:check                # fails if either artifact has drifted from source.json's commit
 npm run pages                      # renders both pages' JSON-LD graphs from the artifacts
 npm run pages:check                # fails if either graph has drifted from the artifacts
+npm run sitemap                    # date each sitemap URL from its page's last commit — run before committing a page
+npm run sitemap:check              # are those dates still what git says?
 
 npm run pdf                        # both language PDFs
 ```
