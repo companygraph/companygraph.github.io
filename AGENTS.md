@@ -463,6 +463,19 @@ not do was make the upstream one happen.
   renders anything, and a stale share card is the one failure the browser suite cannot see: the
   card is a valid PNG of a page that has since moved on. They are the cheapest steps in the job
   and they fail fastest.
+- **`.github/workflows/indexnow.yml` tells Bing and the other IndexNow engines which pages a
+  deploy changed.** It runs when `pages-build-deployment` succeeds, not on push, because a ping
+  sent while Pages is still publishing has the engines fetch the page being replaced. The
+  32-character `.txt` file at the root is the key, and it looks like a stray: deleting it makes
+  every ping answer 403. It is public by design, which is why it is committed and not a secret.
+- **Every sitemap URL carries a `<lastmod>` that git wrote, and `sitemap:check` fails when it
+  moves.** Run `npm run sitemap` after editing a page and commit both together; a page edited and
+  not yet committed is dated today. `verify` checks out full history, because the dates are read
+  from it.
+- **Both come from `@robertblust/design`**, `design indexnow` and `design sitemap`, because all
+  three sites need them and they must agree on which page changed: its `index.html`, or the file
+  its `<link data-stage>` names. The rule and its tests live in the package's *Crawlers* section,
+  and `npx design indexnow <base> <head> --dry-run` shows what a range would send.
 
 ## Checks
 
