@@ -1,5 +1,5 @@
 {
-  "commit": "0d6a001db14c05d660239d11eb4840320e584d13",
+  "commit": "c09c926ab0517f9a073134605309842f4869877c",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -1302,12 +1302,34 @@
       "path": "example/model/strategies/invoicing-strategy.md"
     },
     {
+      "id": "surfaces/beacon-systems-website",
+      "type": "surface",
+      "name": "Beacon Systems website",
+      "tagline": "The company's own site, where a buyer who has heard the name lands first, rebuilt from the",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://git.beacon.example/website",
+        "url": "https://beacon.example"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Home** — the identity's tagline and `## What it is`.\n- **Principles** — the vision and the values.\n- **Team** — the profiles, each with the roles it holds.\n- **How we deliver** — the process and its phases, in order.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/surfaces/beacon-systems-website.md"
+    },
+    {
       "id": "surfaces/partner-directory",
       "type": "surface",
       "name": "Partner directory",
       "tagline": "The listing a buyer reaches from the directory's search, maintained by hand because the",
       "fields": {
         "source": "Local",
+        "production": "written",
         "url": "https://directory.example.invalid/beacon-systems"
       },
       "sections": [
@@ -1837,6 +1859,12 @@
       "from": "strategies/invoicing-strategy",
       "to": "values/craftsmanship",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/beacon-systems-website",
+      "to": "sources/local",
+      "via": "source",
       "attrs": {}
     },
     {
