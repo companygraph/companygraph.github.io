@@ -1,8 +1,14 @@
 {
-  "commit": "4c65e247957009743e5f5fb8a374ac15704f125d",
+  "commit": "f6b212b792037548723fb3598a920838e5e789e5",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
+    {
+      "type": "achievement-kind",
+      "folder": "achievement-kinds",
+      "owner": null,
+      "singular": false
+    },
     {
       "type": "experience",
       "folder": "experiences",
@@ -95,6 +101,82 @@
     }
   ],
   "entities": [
+    {
+      "id": "achievement-kinds/decisions",
+      "type": "achievement-kind",
+      "name": "Decisions",
+      "tagline": "A call that set what the work would be — what to build, in what order and what to stop.",
+      "fields": {
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "An achievement whose claim is the choice itself: a ranking agreed, a roadmap rewritten, a\nfeature retired, a direction someone had to be talked into. What makes it this kind is that\nsomebody else could have carried it out once the call was made.\n\nCarrying it out is Delivery, even where the same person did both, and what came of it is\nResults. A bullet that decided and built in one sentence is filed by whichever half the entry\nwould be poorer without.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/achievement-kinds/decisions.md"
+    },
+    {
+      "id": "achievement-kinds/delivery",
+      "type": "achievement-kind",
+      "name": "Delivery",
+      "tagline": "Something built, changed or taken apart, and in the hands of the people it was for.",
+      "fields": {
+        "source": "Local",
+        "rank": "20"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "An achievement whose claim is the work done: a system replaced, a service split, a migration\nrun, a process put in place. It names what changed and who has it now.\n\nChoosing what to build is Decisions. What the change turned out to be worth — a measured\neffect, a finding, an outcome still owed — is Results, and it goes there even where one\nsentence could carry both.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/achievement-kinds/delivery.md"
+    },
+    {
+      "id": "achievement-kinds/results",
+      "type": "achievement-kind",
+      "name": "Results",
+      "tagline": "What came of the work — an effect measured, a finding established or an outcome still owed.",
+      "fields": {
+        "source": "Local",
+        "rank": "40"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "An achievement whose claim is the consequence rather than the act: what changed because the\nwork was done, what it turned out to show, and what it has not delivered yet. An entry's honest\nunfinished business is this kind, because it is an outcome like any other.\n\nThe work that produced the result is Delivery, and the call that aimed it is Decisions. The\nresult is filed apart from both, so a reader looking for what came of a period finds it in the\nsame place in every entry.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/achievement-kinds/results.md"
+    },
+    {
+      "id": "achievement-kinds/sharing",
+      "type": "achievement-kind",
+      "name": "Sharing",
+      "tagline": "What was learned, handed to people outside the work — a talk, a written case, a session taught.",
+      "fields": {
+        "source": "Local",
+        "rank": "30"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "An achievement whose claim is that people outside the work now know something: a conference\ntalk, a published case, a workshop for another team. The audience is the point of the bullet\nand the bullet names it.\n\nExplaining a decision to the people who had to accept it is part of Decisions, not this. A\ntalk about work done elsewhere is this kind even when the entry exists only for the talk.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/achievement-kinds/sharing.md"
+    },
     {
       "id": "experience-kinds/community",
       "type": "experience-kind",
@@ -784,7 +866,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from\n  the next morning to seconds.\n- Established that the speed-up mattered less than anyone expected, and why — which set the\n  direction for the work that followed.",
+          "text": "### Delivery\n\n- Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from\n  the next morning to seconds.\n\n### Results\n\n- Established that the speed-up mattered less than anyone expected, and why — which set the\n  direction for the work that followed.",
           "tables": []
         },
         {
@@ -819,7 +901,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Split one service that three teams edited into two that one team each owns, so the second\n  team stopped waiting on the first to merge.\n- Not finished: the third team is still waiting.",
+          "text": "### Delivery\n\n- Split one service that three teams edited into two that one team each owns, so the second\n  team stopped waiting on the first to merge.\n\n### Results\n\n- Not finished: the third team is still waiting on the split.",
           "tables": []
         },
         {
@@ -967,7 +1049,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Ran the conversations that showed visibility, not speed, was what the pipeline rebuild\n  bought — and rewrote the roadmap around it.\n- Retired a reporting feature with no users, which was harder than shipping one.",
+          "text": "### Decisions\n\n- Ran the conversations that showed visibility, not speed, was what the pipeline rebuild\n  bought — and rewrote the roadmap around it.\n- Retired a reporting feature with no users, which was harder than shipping one.",
           "tables": []
         }
       ],
@@ -999,7 +1081,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Told a room that had funded the same kind of rebuild what the Northwind conversations\n  found: that visibility, not speed, was what the pipeline bought.",
+          "text": "### Sharing\n\n- Told a room that had funded the same kind of rebuild what the Northwind conversations\n  found: that visibility, not speed, was what the pipeline bought.",
           "tables": []
         },
         {
@@ -1061,7 +1143,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Ranked the two contexts by what customers asked about in support, not by what was easier to\n  split, and got the order accepted.\n- Not finished: the third team's context has no customer voice yet, and no ranking.",
+          "text": "### Decisions\n\n- Ranked the two contexts by what customers asked about in support, not by what was easier to\n  split, and got the order accepted.\n\n### Results\n\n- Not finished: the third team's context has no customer voice yet, and no ranking.",
           "tables": []
         }
       ],
@@ -1409,6 +1491,30 @@
   ],
   "edges": [
     {
+      "from": "achievement-kinds/decisions",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "achievement-kinds/delivery",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "achievement-kinds/results",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "achievement-kinds/sharing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "experience-kinds/community",
       "to": "sources/local",
       "via": "source",
@@ -1620,6 +1726,18 @@
     },
     {
       "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
+      "to": "achievement-kinds/delivery",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
+      "to": "achievement-kinds/results",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
       "to": "experience-kinds/role",
       "via": "kind",
       "attrs": {}
@@ -1634,6 +1752,18 @@
       "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
+      "to": "achievement-kinds/delivery",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
+      "to": "achievement-kinds/results",
+      "via": "Achievements.Kind",
       "attrs": {}
     },
     {
@@ -1698,6 +1828,12 @@
     },
     {
       "from": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
+      "to": "achievement-kinds/decisions",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
       "to": "experience-kinds/role",
       "via": "kind",
       "attrs": {}
@@ -1716,6 +1852,12 @@
     },
     {
       "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
       "to": "experience-kinds/community",
       "via": "kind",
       "attrs": {}
@@ -1730,6 +1872,18 @@
       "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
+      "to": "achievement-kinds/decisions",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
+      "to": "achievement-kinds/results",
+      "via": "Achievements.Kind",
       "attrs": {}
     },
     {
