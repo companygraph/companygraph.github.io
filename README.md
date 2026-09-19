@@ -12,7 +12,7 @@ nav change had to land in both repositories in the same breath, with no CI on ei
 to see the seam. They were merged, history and all, in August 2026.
 
 | Path | |
-|---|---|
+| --- | --- |
 | `/` | The landing page. One screen: what CompanyGraph is, and the way to the model. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
