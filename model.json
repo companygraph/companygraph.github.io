@@ -1,5 +1,5 @@
 {
-  "commit": "019a92d72d710a17eefac35cee252593923f662a",
+  "commit": "59200e06f8b006a6702b6e84c60057d4db75bbfd",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -1032,7 +1032,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A `### [Track]` heading under `## Activities` names a track the owning process declares, spelled\n  as that track's `Track` cell spells it.\n- A phase whose activities are the same for every track carries no track headings at all.\n- `gate-to` names the next phase and the owning process's `## Phases` table says the same thing;\n  where the two disagree the model is wrong, not the reader, and the instance checks say so.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique across every phase in the instance, not merely within its process,\n  because R2 scopes a name to its type rather than to its owner. Two processes cannot each call\n  a phase `Review`; name a phase for what it does in the process it belongs to. A phase and a\n  role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
+          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A `### [Track]` heading under `## Activities` names a track the owning process declares, spelled\n  as that track's `Track` cell spells it.\n- A phase whose activities are the same for every track carries no track headings at all.\n- `gate-to` names the next phase and the owning process's `## Phases` table says the same thing;\n  where the two disagree the model is wrong, not the reader, and the instance checks say so.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique within its process (R2): two processes may each call a phase\n  `Review`, and a `gate-to` or a process's `## Phases` finds the one in its own process (R4). A\n  phase and a role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
           "tables": []
         },
         {
