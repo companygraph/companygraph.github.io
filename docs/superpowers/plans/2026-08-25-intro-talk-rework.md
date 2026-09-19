@@ -31,7 +31,7 @@ Copied from the spec and from `CLAUDE.md`. Every task's requirements implicitly 
 ## File Structure
 
 | File | Responsibility | Change |
-|---|---|---|
+| --- | --- | --- |
 | `talks/intro/index.html` | the deck — slides, notes, meta, UI strings | slides 03, 06 rewritten; 09, 10, 11 new/replaced; meta + UI descriptions |
 | `talks/intro/audio/{en,de}/NN.mp3` + `.sha` | narration, one clip per slide | regenerated for changed slides, `11` added |
 | `talks/intro/companygraph-{en,de}.pdf` | printable fallback | re-exported |

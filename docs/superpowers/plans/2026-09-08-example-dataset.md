@@ -63,7 +63,7 @@ README.md             modify   lines 54 and 99-100
 Counted on 2026-09-08 and reproducible with the commands in each task.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | `example/index.html` block | 23,945 bytes; artifact pretty-prints to 34,127 |
 | `model/index.html` block | 40,597 bytes; artifact pretty-prints to 64,349 |
 | Both pages' JSON-LD | round-trips exactly through `JSON.stringify(x, null, 2)` |

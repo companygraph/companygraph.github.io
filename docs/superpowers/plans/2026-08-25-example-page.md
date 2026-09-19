@@ -30,7 +30,7 @@ Copied from the spec and from `CLAUDE.md`. Every task's requirements implicitly 
 ## File Structure
 
 | File | Responsibility |
-|---|---|
+| --- | --- |
 | `example/instance.mjs` | pure: `parseInstance(files) → data`; the R4/R7 errors; the root label constant |
 | `example/build.mjs` | CLI: read `source.json`, get files (local or GitHub), write or check the block |
 | `example/source.json` | the pin: `{ repo, commit }` |

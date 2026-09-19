@@ -28,7 +28,7 @@ Copied from the specs and `CLAUDE.md`. Every task's requirements implicitly incl
 ## File Structure
 
 | File | Responsibility |
-|---|---|
+| --- | --- |
 | `example/instance.mjs` | `parseInstance` (multi-table sections), `parseSchemas`, `ROOT_LABEL`, `CORE_LABEL` |
 | `example/build.mjs` | reads `/source.json`; `TARGETS = [{ dir:"example", id:"example-data", parse:parseInstance, sub:"example/" }, { dir:"model", id:"model-data", parse:parseSchemas, sub:"core/" }]`; write or `--check` both |
 | `source.json` | the pin (moved from `example/source.json`) |
