@@ -1,5 +1,5 @@
 {
-  "commit": "f6b212b792037548723fb3598a920838e5e789e5",
+  "commit": "fac4ad8c94d8ec5711740e0bc74de0680b6d40fc",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -357,8 +357,43 @@
         },
         {
           "heading": "Phases",
-          "text": "1. [Specify](phases/specify.md)\n2. [Build](phases/build.md)\n3. [Release](phases/release.md)",
-          "tables": []
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Specify"
+                ],
+                [
+                  "Build"
+                ],
+                [
+                  "Release"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Specify"
+              ],
+              [
+                "Build"
+              ],
+              [
+                "Release"
+              ]
+            ]
+          }
         },
         {
           "heading": "What it never does",
@@ -768,19 +803,16 @@
               "caption": null,
               "columns": [
                 "Skill",
-                "Level",
-                "Evidence"
+                "Level"
               ],
               "rows": [
                 [
                   "Java Programming",
-                  "Proficient",
-                  "Owned the JVM services two other teams built on for four years, and was the one called when they stopped."
+                  "Proficient"
                 ],
                 [
                   "Domain-Driven Design",
-                  "Competent",
-                  "Split the billing domain into two bounded contexts; the seams have held under two years of change."
+                  "Competent"
                 ]
               ]
             }
@@ -789,19 +821,72 @@
             "caption": null,
             "columns": [
               "Skill",
-              "Level",
-              "Evidence"
+              "Level"
             ],
             "rows": [
               [
                 "Java Programming",
-                "Proficient",
-                "Owned the JVM services two other teams built on for four years, and was the one called when they stopped."
+                "Proficient"
               ],
               [
                 "Domain-Driven Design",
-                "Competent",
-                "Split the billing domain into two bounded contexts; the seams have held under two years of change."
+                "Competent"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Evidence",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Skill",
+                "What it shows",
+                "Experience"
+              ],
+              "rows": [
+                [
+                  "Java Programming",
+                  "Owned the JVM services two other teams built on, and was the one called when they stopped.",
+                  "Rebuilding the order pipeline"
+                ],
+                [
+                  "Java Programming",
+                  "Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from the next morning to seconds.",
+                  "Rebuilding the order pipeline"
+                ],
+                [
+                  "Domain-Driven Design",
+                  "Split the billing domain into two bounded contexts; the seams have held under two years of change.",
+                  "Splitting the billing domain"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Skill",
+              "What it shows",
+              "Experience"
+            ],
+            "rows": [
+              [
+                "Java Programming",
+                "Owned the JVM services two other teams built on, and was the one called when they stopped.",
+                "Rebuilding the order pipeline"
+              ],
+              [
+                "Java Programming",
+                "Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from the next morning to seconds.",
+                "Rebuilding the order pipeline"
+              ],
+              [
+                "Domain-Driven Design",
+                "Split the billing domain into two bounded contexts; the seams have held under two years of change.",
+                "Splitting the billing domain"
               ]
             ]
           }
@@ -974,24 +1059,20 @@
               "caption": null,
               "columns": [
                 "Skill",
-                "Level",
-                "Evidence"
+                "Level"
               ],
               "rows": [
                 [
                   "Product Discovery",
-                  "Expert",
-                  "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name."
+                  "Expert"
                 ],
                 [
                   "Domain-Driven Design",
-                  "Familiar",
-                  "Sat in the billing-context sessions and can follow a context map; has never drawn one."
+                  "Familiar"
                 ],
                 [
                   "Java Programming",
-                  "Familiar",
-                  "Reads pull requests well enough to ask the right question, and has merged none."
+                  "Familiar"
                 ]
               ]
             }
@@ -1000,24 +1081,96 @@
             "caption": null,
             "columns": [
               "Skill",
-              "Level",
-              "Evidence"
+              "Level"
             ],
             "rows": [
               [
                 "Product Discovery",
-                "Expert",
-                "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name."
+                "Expert"
               ],
               [
                 "Domain-Driven Design",
-                "Familiar",
-                "Sat in the billing-context sessions and can follow a context map; has never drawn one."
+                "Familiar"
               ],
               [
                 "Java Programming",
-                "Familiar",
-                "Reads pull requests well enough to ask the right question, and has merged none."
+                "Familiar"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Evidence",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Skill",
+                "What it shows",
+                "Experience"
+              ],
+              "rows": [
+                [
+                  "Product Discovery",
+                  "Ran the conversations that showed visibility, not speed, was what the pipeline rebuild bought, and rewrote the roadmap around it.",
+                  "Finding out what the order pipeline was for"
+                ],
+                [
+                  "Product Discovery",
+                  "Told a room that the rebuild's measured win was not the one it had been funded for.",
+                  "Conference talk — the speed-up nobody asked for"
+                ],
+                [
+                  "Product Discovery",
+                  "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name.",
+                  "Deciding which billing goes first"
+                ],
+                [
+                  "Domain-Driven Design",
+                  "Sat in the billing-context sessions and can follow a context map; has never drawn one.",
+                  "Deciding which billing goes first"
+                ],
+                [
+                  "Java Programming",
+                  "Reads pull requests well enough to ask the right question, and has merged none.",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Skill",
+              "What it shows",
+              "Experience"
+            ],
+            "rows": [
+              [
+                "Product Discovery",
+                "Ran the conversations that showed visibility, not speed, was what the pipeline rebuild bought, and rewrote the roadmap around it.",
+                "Finding out what the order pipeline was for"
+              ],
+              [
+                "Product Discovery",
+                "Told a room that the rebuild's measured win was not the one it had been funded for.",
+                "Conference talk — the speed-up nobody asked for"
+              ],
+              [
+                "Product Discovery",
+                "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name.",
+                "Deciding which billing goes first"
+              ],
+              [
+                "Domain-Driven Design",
+                "Sat in the billing-context sessions and can follow a context map; has never drawn one.",
+                "Deciding which billing goes first"
+              ],
+              [
+                "Java Programming",
+                "Reads pull requests well enough to ask the right question, and has merged none.",
+                ""
               ]
             ]
           }
@@ -1672,6 +1825,24 @@
     },
     {
       "from": "processes/delivery",
+      "to": "processes/delivery/phases/build",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/release",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/specify",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
       "to": "roles/backend-engineer",
       "via": "owner",
       "attrs": {}
@@ -1799,10 +1970,36 @@
     {
       "from": "profiles/mira-halvorsen",
       "to": "skills/domain-driven-design",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Split the billing domain into two bounded contexts; the seams have held under two years of change.",
+        "Experience": "profiles/mira-halvorsen/experiences/2022-beacon-systems"
+      }
+    },
+    {
+      "from": "profiles/mira-halvorsen",
+      "to": "skills/java-programming",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Owned the JVM services two other teams built on, and was the one called when they stopped.",
+        "Experience": "profiles/mira-halvorsen/experiences/2018-northwind-atelier"
+      }
+    },
+    {
+      "from": "profiles/mira-halvorsen",
+      "to": "skills/java-programming",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from the next morning to seconds.",
+        "Experience": "profiles/mira-halvorsen/experiences/2018-northwind-atelier"
+      }
+    },
+    {
+      "from": "profiles/mira-halvorsen",
+      "to": "skills/domain-driven-design",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/competent",
-        "Evidence": "Split the billing domain into two bounded contexts; the seams have held under two years of change."
+        "Level": "proficiency-levels/competent"
       }
     },
     {
@@ -1810,8 +2007,7 @@
       "to": "skills/java-programming",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/proficient",
-        "Evidence": "Owned the JVM services two other teams built on for four years, and was the one called when they stopped."
+        "Level": "proficiency-levels/proficient"
       }
     },
     {
@@ -1919,10 +2115,54 @@
     {
       "from": "profiles/tomas-reyes",
       "to": "skills/domain-driven-design",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Sat in the billing-context sessions and can follow a context map; has never drawn one.",
+        "Experience": "profiles/tomas-reyes/experiences/2022-beacon-systems"
+      }
+    },
+    {
+      "from": "profiles/tomas-reyes",
+      "to": "skills/java-programming",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Reads pull requests well enough to ask the right question, and has merged none.",
+        "Experience": ""
+      }
+    },
+    {
+      "from": "profiles/tomas-reyes",
+      "to": "skills/product-discovery",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Ran the conversations that showed visibility, not speed, was what the pipeline rebuild bought, and rewrote the roadmap around it.",
+        "Experience": "profiles/tomas-reyes/experiences/2019-northwind-atelier"
+      }
+    },
+    {
+      "from": "profiles/tomas-reyes",
+      "to": "skills/product-discovery",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Told a room that the rebuild's measured win was not the one it had been funded for.",
+        "Experience": "profiles/tomas-reyes/experiences/2021-orbit-conference"
+      }
+    },
+    {
+      "from": "profiles/tomas-reyes",
+      "to": "skills/product-discovery",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name.",
+        "Experience": "profiles/tomas-reyes/experiences/2022-beacon-systems"
+      }
+    },
+    {
+      "from": "profiles/tomas-reyes",
+      "to": "skills/domain-driven-design",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/familiar",
-        "Evidence": "Sat in the billing-context sessions and can follow a context map; has never drawn one."
+        "Level": "proficiency-levels/familiar"
       }
     },
     {
@@ -1930,8 +2170,7 @@
       "to": "skills/java-programming",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/familiar",
-        "Evidence": "Reads pull requests well enough to ask the right question, and has merged none."
+        "Level": "proficiency-levels/familiar"
       }
     },
     {
@@ -1939,8 +2178,7 @@
       "to": "skills/product-discovery",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/expert",
-        "Evidence": "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name."
+        "Level": "proficiency-levels/expert"
       }
     },
     {
