@@ -1,4 +1,4 @@
-<!-- conventions · v1.17.0 -->
+<!-- conventions · v1.19.0 -->
 Shared conventions of the robertblust, guestgraph and companygraph organizations live in
 `conventions/`, vendored from robertblust/conventions at the release `conventions.json`
 names. Read them before writing or committing anything here.
@@ -11,8 +11,9 @@ names. Read them before writing or committing anything here.
 
 Everything below this block is this repository's own. `sh conventions/conventions-sync check`
 says whether the copy matches the release, `sync` brings it to the release the pin names, and
-`sh conventions/conventions-check` holds this repository's own Markdown to `WRITING.md`. Edit
-a shared file in robertblust/conventions, never here.
+`sh conventions/conventions-check` holds this repository's own Markdown to `WRITING.md`, and
+`sh conventions/conventions-format` to its one form, which `fix` writes. Edit a shared file in
+robertblust/conventions, never here.
 <!-- end conventions -->
 
 # companygraph.io — working conventions
@@ -119,7 +120,6 @@ that lived in another repository. No CI in *this* repository can catch drift in
   `companygraph.github.io` to the custom domain while `CNAME` is on `main`, so both URLs die
   together, and `og:url` and `og:image` name the dead host — every shared link unfurls blank.
 
-
 - **Self-contained. No external asset at all** — fonts are served from `fonts/`, referenced
   relatively (`fonts/…`, not `/fonts/…`). A root-absolute path works on the domain and breaks
   under `file://`, which is the one failure mode nobody opens a browser to find. `verify`
@@ -208,7 +208,6 @@ that lived in another repository. No CI in *this* repository can catch drift in
   would become an index the day `companygraph/talks` shipped, because two repositories were
   going to share this domain. They no longer do: the talks live here, so one file lists every
   URL and there is no second copy to drift.
-
 
 - **The avatar is uploaded by hand** — GitHub takes no SVG and offers no API for setting an
   org avatar. Upload `avatar.png` at Organization → Settings → Profile after regenerating it
@@ -596,7 +595,6 @@ requirements implicitly include this section.
 - **Audio is committed, not LFS.** GitHub Pages serves the pointer text for LFS objects.
 - **Verify by rendering, never by reading the diff.**
 
-
 ## "AI" in the deck, "agents" everywhere else — on purpose
 
 The deck says **AI** on slides 00 and 08 and **agents** from 09 on. Nobody has been given
@@ -607,7 +605,7 @@ earn. Do not level the two words.
 The same sentence appears in three other places and deliberately does **not** match:
 
 | Where | Says |
-|---|---|
+| --- | --- |
 | this deck, slide 00 | "so people and **AI** can both rely on it" |
 | `companygraph.io` tagline and `og:description` | "so people and **agents** can both rely on it" |
 | `meta-model`'s `README.md` | "so that both people and **agents** can rely on it" |
