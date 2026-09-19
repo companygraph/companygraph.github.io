@@ -49,7 +49,7 @@ almost intact; what changes is what they are *for*.
 Ten slides, ≈10:25 — the same budget as the source, which is a proven ten-minute shape.
 
 | # | Slide | ≈ | Origin |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 0 | Title | 0:00 | source |
 | 1 | A company's knowledge lives everywhere — and nowhere | 1:00 | source |
 | 2 | **Two companies, the same shape** | 1:15 | **new — the spine** |
@@ -186,7 +186,7 @@ it is.
 All three are debts already written down where they will be read:
 
 | Repository | Change |
-|---|---|
+| --- | --- |
 | `companygraph.github.io` | The nav gains its first link. The hero gains a second call to action with the talk's length quoted inline — the one fact this project allows a page to restate, because a call to action needs it in the moment. `sitemap.xml` becomes an index pointing at `/talks/sitemap.xml`. `verify` updated for both. |
 | `companygraph/.github` | The "New here?" entry line the profile currently lacks, and a `talks` row in both repository tables. |
 | Both `CLAUDE.md`s | The shared-chrome rule from §5. |

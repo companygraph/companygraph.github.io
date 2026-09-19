@@ -53,7 +53,7 @@ Twelve slides, about twelve minutes. Times are targets for the notes, not constr
 build.
 
 | # | Title (working) | ≈ | Says |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 0 | An idea, put up for scrutiny | 0:45 | What CompanyGraph is in one sentence; open source; not finished; *I want pushback, not applause* |
 | 1 | Everywhere — and nowhere | 1:00 | Every company runs on knowledge; all of it is written down somewhere; no two people look in the same place |
 | 2 | Writing it down is not the hard part | 0:50 | What is written ages and nobody notices when; so you ask a person again — the tax a company pays every day |

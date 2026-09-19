@@ -13,7 +13,7 @@ below was counted, not estimated.
 ## 1. What is true today, measured
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Scripts that build a page from the model | 1: `build/build.mjs`, 141 lines, two targets |
 | Readers of the pinned commit | 1, `git/trees` plus the raw files, shared by both targets |
 | Markdown parsers | 1: `parseInstance` and `parseSchemas` from `companygraph-meta-model` |
