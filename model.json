@@ -1,5 +1,5 @@
 {
-  "commit": "a8e99e9bf94c2f5239a63eee0b5708503941fbb0",
+  "commit": "32e787a94f16308b9f49e2cdb74fee1a3b132053",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -326,7 +326,7 @@
                 [
                   "`## Achievements`",
                   "No",
-                  "Grouped. What was accomplished in this period, as bullets under `###` headings that name achievement kinds"
+                  "Grouped. Bulleted. What was accomplished in this period, under `###` headings that name achievement kinds"
                 ],
                 [
                   "`## Ending`",
@@ -402,7 +402,7 @@
               [
                 "`## Achievements`",
                 "No",
-                "Grouped. What was accomplished in this period, as bullets under `###` headings that name achievement kinds"
+                "Grouped. Bulleted. What was accomplished in this period, under `###` headings that name achievement kinds"
               ],
               [
                 "`## Ending`",
@@ -761,12 +761,12 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 is the company's name as the company writes it, not a description of it. A company of\n  one may name a person, and then a profile of the same person carries the same name — that is\n  expected, not a collision to resolve: the types are different and nothing references identity.\n- The tagline says what the company is, not what it aspires to. Where it is going is the\n  vision's business.\n- `## What it is` says what the company does and for whom, in the company's own voice. It is\n  not a history and not a pitch; an achievement belongs to a profile's experience.\n- A fact lives in one place. Where identity and a profile would state the same thing —\n  an address, a mail address — identity holds it, and the profile carries its own only where it\n  differs.\n- One row per place in `## Also at`, and a place the company no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the company's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the company.",
+          "text": "- The H1 is the company's name as the company writes it, not a description of it. A company of\n  one may name a person, and then a profile of the same person carries the same name — that is\n  expected, not a collision to resolve: the types are different, and a reference carries the\n  type it resolves under (R4), so the shared name sends no reader to the wrong page.\n- The tagline says what the company is, not what it aspires to. Where it is going is the\n  vision's business.\n- `## What it is` says what the company does and for whom, in the company's own voice. It is\n  not a history and not a pitch; an achievement belongs to a profile's experience.\n- A fact lives in one place. Where identity and a profile would state the same thing —\n  an address, a mail address — identity holds it, and the profile carries its own only where it\n  differs.\n- One row per place in `## Also at`, and a place the company no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the company's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the company.",
           "tables": []
         },
         {
           "heading": "File Location",
-          "text": "`model/identity.md`\n\nA company has one identity, so the type is a file directly in the container rather than a\nfolder (R6, R13). The filesystem carries the cardinality: there is nowhere to put a second one.\nThe file is named for the type, not for the slug of its H1 (R12), which leaves the H1 free to\nbe the company's name.\n\nThe file is the graph's root as well as its subject. Identity is the one entity nothing\nreferences — every other one is a reference target — so a reader arriving at a bare name\nsearches for it rather than being sent to it.",
+          "text": "`model/identity.md`\n\nA company has one identity, so the type is a file directly in the container rather than a\nfolder (R6, R13). The filesystem carries the cardinality: there is nowhere to put a second one.\nThe file is named for the type, not for the slug of its H1 (R12), which leaves the H1 free to\nbe the company's name.\n\nThe file is the graph's root as well as its subject: every other file in the instance is about\nthe company it names, and none has to say so. A page names the identity only where the company\nis itself the fact, as an experience does when the period was spent there.",
           "tables": []
         }
       ],
@@ -936,7 +936,7 @@
                 [
                   "`## Activities`",
                   "Yes",
-                  "Grouped. A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
+                  "Grouped. Numbered. What is done, in the order it is done; where the work differs by track, one `### [Track]` heading per track, each with its own list"
                 ],
                 [
                   "`## What it produces`",
@@ -946,12 +946,12 @@
                 [
                   "`## What it never does`",
                   "Yes",
-                  "A list, one sentence each, of what the phase refuses"
+                  "Bulleted. One sentence each, of what the phase refuses"
                 ],
                 [
                   "`## Gate`",
                   "Yes",
-                  "The criteria that must be satisfied to leave the phase, as a list, and what happens when they cannot be"
+                  "Bulleted. The criteria that must be satisfied to leave the phase, one item each, and in a sentence after them what happens when they cannot be"
                 ]
               ]
             },
@@ -1022,7 +1022,7 @@
               [
                 "`## Activities`",
                 "Yes",
-                "Grouped. A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
+                "Grouped. Numbered. What is done, in the order it is done; where the work differs by track, one `### [Track]` heading per track, each with its own list"
               ],
               [
                 "`## What it produces`",
@@ -1032,12 +1032,12 @@
               [
                 "`## What it never does`",
                 "Yes",
-                "A list, one sentence each, of what the phase refuses"
+                "Bulleted. One sentence each, of what the phase refuses"
               ],
               [
                 "`## Gate`",
                 "Yes",
-                "The criteria that must be satisfied to leave the phase, as a list, and what happens when they cannot be"
+                "Bulleted. The criteria that must be satisfied to leave the phase, one item each, and in a sentence after them what happens when they cannot be"
               ]
             ]
           }
@@ -1049,7 +1049,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A phase whose activities are the same for every track carries no track headings at all, and\n  one that carries any puts every activity under one: an activity above the first heading\n  belongs to no track, and the instance checks say so.\n- Activities are a numbered list, because their order is the order the work is done in, and the\n  instance checks read the marker. A numbered list under no track heading is a phase whose work\n  is the same on every track. Bullets under no heading are reported as standing under no track,\n  as an entry's achievements under no kind are, and the answer is to number them and not to add\n  a heading.\n- `gate-to` names the next phase and the owning process's `## Phases` table says the same thing;\n  where the two disagree the model is wrong, not the reader, and the instance checks say so.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique within its process (R2): two processes may each call a phase\n  `Review`, and a `gate-to` or a process's `## Phases` finds the one in its own process (R4). A\n  phase and a role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
+          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A phase whose activities are the same for every track carries no track headings at all, and\n  one that carries any puts every activity under one: an activity above the first heading\n  belongs to no track, and the instance checks say so.\n- Activities are numbered because their order is the order the work is done in, and the section\n  declares it, so the instance checks hold it (R16). A numbered list under no track heading is a\n  phase whose work is the same on every track.\n- `gate-to` names the next phase and the owning process's `## Phases` table says the same thing;\n  where the two disagree the model is wrong, not the reader, and the instance checks say so.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique within its process (R2): two processes may each call a phase\n  `Review`, and a `gate-to` or a process's `## Phases` finds the one in its own process (R4). A\n  phase and a role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
           "tables": []
         },
         {
@@ -1179,7 +1179,7 @@
                 [
                   "`## What it never does`",
                   "Yes",
-                  "A list, one sentence each, of what the process refuses in every phase"
+                  "Bulleted. One sentence each, of what the process refuses in every phase"
                 ],
                 [
                   "`## References`",
@@ -1277,7 +1277,7 @@
               [
                 "`## What it never does`",
                 "Yes",
-                "A list, one sentence each, of what the process refuses in every phase"
+                "Bulleted. One sentence each, of what the process refuses in every phase"
               ],
               [
                 "`## References`",
@@ -1561,7 +1561,7 @@
         },
         {
           "heading": "Sections",
-          "text": "An assessment is a table row rather than a frontmatter field because it is a claim with prose\nattached, not a short fact, and the evidence under it is a table for the reason stated below.\nA table renders where a reader looks, has no quoting hazard around a colon or a wrapped line,\nand declares its columns here exactly as a frontmatter field does.\n\n\n\nEvidence is a table of its own rather than a third column of `## Skills` because a claim rests\non more than one thing and a cell holds one line. A paragraph listing four engagements cannot be\ncounted, and the rule for reading a level is a rule about counting: evidence that names one\nengagement supports a lower rung than evidence that names three. One fact per row is what makes\nthat rule readable by anyone, including a machine.\n\n`Experience` is the optional column and sits last. It is optional because a claim at the lower\nrungs can rest on having been near work rather than on having owned a period of it, and such a\nrow leaves the cell blank rather than inventing a period to fill it. Where the cell is filled,\nthe experience's period is read from the experience and is not written into the sentence as\nwell: a date copied beside a fact the experience already owns is a second copy that nothing\nkeeps true. A period shorter than the experience's is different. The years a practice ran inside\na longer role are not a copy of the role's dates but a fact of their own, and the sentence is the\nonly place that holds them, so they stay.\n\nThe column is `What it shows` rather than `Evidence` so that it does not restate the section it\nsits in, which is the same reason `## References` calls its first column `What`.\n\n\n\nA presence is a place the person maintains a page on, named by the place and addressed by that\npage — never a single post, an article or a recording, which document an experience and belong\nin that experience's `## References`.",
+          "text": "An assessment is a table row rather than a frontmatter field because it is a claim with prose\nattached, not a short fact, and the evidence under it is a table for the reason stated below.\nA table renders where a reader looks, has no quoting hazard around a colon or a wrapped line,\nand declares its columns here exactly as a frontmatter field does.\n\n\n\nEvidence is a table of its own rather than a third column of `## Skills` because a claim rests\non more than one thing and a cell holds one line. A paragraph listing four engagements cannot be\ncounted, and breadth is one of the things a level is read from: a capability shown in three\nengagements has held where the people, the constraints and the stakes changed, which one\nengagement cannot show however well it went. One fact per row is what makes that breadth\nreadable by anyone, including a machine.\n\n`Experience` is the optional column and sits last. It is optional because a claim at the lower\nrungs can rest on having been near work rather than on having owned a period of it, and such a\nrow leaves the cell blank rather than inventing a period to fill it. Where the cell is filled,\nthe experience's period is read from the experience and is not written into the sentence as\nwell: a date copied beside a fact the experience already owns is a second copy that nothing\nkeeps true. A period shorter than the experience's is different. The years a practice ran inside\na longer role are not a copy of the role's dates but a fact of their own, and the sentence is the\nonly place that holds them, so they stay.\n\nThe column is `What it shows` rather than `Evidence` so that it does not restate the section it\nsits in, which is the same reason `## References` calls its first column `What`.\n\n\n\nA presence is a place the person maintains a page on, named by the place and addressed by that\npage — never a single post, an article or a recording, which document an experience and belong\nin that experience's `## References`.",
           "tables": [
             {
               "caption": null,
@@ -1589,7 +1589,7 @@
                 [
                   "`## Evidence`",
                   "No",
-                  "Table. One row per fact a claim rests on; its columns are declared below."
+                  "Table. Under `## Skills`. One row per fact a claim rests on; its columns are declared below."
                 ],
                 [
                   "`## Summary`",
@@ -1651,7 +1651,7 @@
                   "`Experience`",
                   "No",
                   "qualifier → experience",
-                  "The period the fact comes from — the H1 of a file in this profile's `experiences/`"
+                  "`skills` lists `Skill`. The period the fact comes from — the H1 of a file in this profile's `experiences/`"
                 ]
               ]
             },
@@ -1705,7 +1705,7 @@
               [
                 "`## Evidence`",
                 "No",
-                "Table. One row per fact a claim rests on; its columns are declared below."
+                "Table. Under `## Skills`. One row per fact a claim rests on; its columns are declared below."
               ],
               [
                 "`## Summary`",
@@ -1727,7 +1727,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- A `What it shows` cell states a fact that can be checked — a system, an organization, a\n  number, a named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the row\n  is describing confidence rather than the work.\n- A row that says no more than its own `Experience` cell says nothing. It is dropped rather\n  than written.\n- One sentence per row, under forty words. The sentence does not repeat the period of the\n  experience its `Experience` column names; a period of the fact's own, shorter than that one,\n  stays in it.\n- Rows run in the order the Skills table lists the skills, and chronologically within a skill.\n- A level is weighed against the rows under it and the rung's own definition, not against how\n  long the person has done it. One row supports a lower rung than three.\n- One row per skill claimed in `## Skills`, and every claim has at least one row under it in\n  `## Evidence`. A skill the person can name but not evidence has no row in either: the table\n  is the claim, and a claim needs something under it.\n- An `Experience` names a period this profile owns, and that experience lists this skill in its\n  `skills` field. The first is held by the instance checks, which hold every name of an owned\n  type to its owner from what the schemas declare. The second is not: it would be the first\n  rule in the checker to name a type, and the schemas drive every rule there today, so it is\n  kept by whoever writes.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.\n- A person who holds a role claims the skills the role requires in their Skills table, with\n  evidence. Where they cannot, the gap stays visible: the validation pass reports it and\n  nothing here invents a row to close it.\n- `nature` says what holds the profile, never how well. A profile whose nature is `agent`\n  claims no skill and carries neither a Skills table nor an Evidence table: a claim is a\n  person's history with a capability, evidenced by work that stays true after the next\n  release, and an agent has no such history. What holds an agent to a seat is the rulebook it\n  runs under, never a row it wrote about itself.",
+          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- A `What it shows` cell states a fact that can be checked — a system, an organization, a\n  number, a named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the row\n  is describing confidence rather than the work.\n- A row that says no more than its own `Experience` cell says nothing. It is dropped rather\n  than written.\n- One sentence per row, under forty words. The sentence does not repeat the period of the\n  experience its `Experience` column names; a period of the fact's own, shorter than that one,\n  stays in it.\n- Rows run in the order the Skills table lists the skills, and chronologically within a skill.\n- A level is weighed against the rows under it and the rung's own definition, not against how\n  long the person has done it. Rows that name different experiences show breadth, and breadth\n  is what the count is read for; the count never outranks the definition. Three rows that show\n  less than the rung asks for do not reach it, and one row that shows it does.\n- One row per skill claimed in `## Skills`, and every claim has at least one row under it in\n  `## Evidence`. A skill the person can name but not evidence has no row in either: the table\n  is the claim, and a claim needs something under it. The sections table declares it, `Under`,\n  and the instance checks hold it both ways (R16).\n- An `Experience` names a period this profile owns, and that experience lists this skill in its\n  `skills` field. Both are held by the instance checks from what the schemas declare: the\n  first as every name of an owned type is held to its owner, the second because the column\n  declares it, `skills` lists `Skill`. A miss has two repairs that claim different things,\n  adding the skill to the experience or naming another period, and which is true is the\n  writer's to say.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.\n- A person who holds a role claims the skills the role requires in their Skills table, with\n  evidence. Where they cannot, the gap stays visible: the validation pass reports it and\n  nothing here invents a row to close it.\n- `nature` says what holds the profile, never how well. A profile whose nature is `agent`\n  claims no skill and carries neither a Skills table nor an Evidence table: a claim is a\n  person's history with a capability, evidenced by work that stays true after the next\n  release, and an agent has no such history. What holds an agent to a seat is the rulebook it\n  runs under, never a row it wrote about itself.",
           "tables": []
         },
         {
@@ -1845,7 +1845,7 @@
                 [
                   "`## What it never does`",
                   "Yes",
-                  "A list, one sentence each, of what the seat refuses whoever holds it"
+                  "Bulleted. One sentence each, of what the seat refuses whoever holds it"
                 ],
                 [
                   "`## References`",
@@ -1909,7 +1909,7 @@
               [
                 "`## What it never does`",
                 "Yes",
-                "A list, one sentence each, of what the seat refuses whoever holds it"
+                "Bulleted. One sentence each, of what the seat refuses whoever holds it"
               ],
               [
                 "`## References`",
@@ -1931,7 +1931,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/roles/*.md`\n\nA role owns nothing and nothing owns it, so it is a file. A profile holds one by listing it,\nwhich is the only edge that reaches a role from the company's side; a role reaches out to the\nskills it requires and to nothing else.",
+          "text": "`model/roles/*.md`\n\nA role owns nothing and nothing owns it, so it is a file. A profile holds one by listing it,\nand the role never names its holder; what a role names is the skills the seat requires.",
           "tables": []
         }
       ],
@@ -2664,17 +2664,17 @@
                 [
                   "`## What it shows`",
                   "Yes",
-                  "One line per unit the surface presents, naming the unit and what fills it"
+                  "Bulleted. One item per unit the surface presents, naming the unit and what fills it"
                 ],
                 [
                   "`## Projection rules`",
                   "No",
-                  "How the model becomes this surface: what is carried, what is left out and why. Required for a `written` surface, absent for a `built` one."
+                  "Bulleted. How the model becomes this surface: what is carried, what is left out and why. Required for a `written` surface, absent for a `built` one."
                 ],
                 [
                   "`## Constraints`",
                   "No",
-                  "What the published result must satisfy, each written so a reader can pass or fail it"
+                  "Bulleted. What the published result must satisfy, each written so a reader can pass or fail it"
                 ]
               ]
             }
@@ -2700,17 +2700,17 @@
               [
                 "`## What it shows`",
                 "Yes",
-                "One line per unit the surface presents, naming the unit and what fills it"
+                "Bulleted. One item per unit the surface presents, naming the unit and what fills it"
               ],
               [
                 "`## Projection rules`",
                 "No",
-                "How the model becomes this surface: what is carried, what is left out and why. Required for a `written` surface, absent for a `built` one."
+                "Bulleted. How the model becomes this surface: what is carried, what is left out and why. Required for a `written` surface, absent for a `built` one."
               ],
               [
                 "`## Constraints`",
                 "No",
-                "What the published result must satisfy, each written so a reader can pass or fail it"
+                "Bulleted. What the published result must satisfy, each written so a reader can pass or fail it"
               ]
             ]
           }
@@ -2848,7 +2848,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- A track is named for what it makes, not for who makes it: `Code`, not `Engineering`.\n- The tagline says what is left behind when a change has run down the track, as a thing a\n  reader could point at: “a merged change to the platform”, not “development work”.\n- A track's name is unique within its process (R2): two processes may each have a track called\n  `Code`, and a phase's heading or a process's `## Tracks` finds the one in its own process\n  (R4).\n- A track carries no order: the order a process lists its tracks in is the order a reader meets\n  them and nothing more.",
+          "text": "- A track is named for what it makes, not for who makes it: `Code`, not `Engineering`.\n- The tagline says what is left behind when a change has run down the track, as a thing a\n  reader could point at: “a merged change to the platform”, not “development work”.\n- A track's name is unique within its process (R2): two processes may each have a track called\n  `Code`, and a phase's heading or a process's `## Tracks` finds the one in its own process\n  (R4).\n- A track carries no order: the order a process lists its tracks in is the order a reader meets\n  them and nothing more.\n- A track carries its name and what it produces, and nothing more. R9 lets a page hold sections\n  of its own, so no script refuses one here; what a track would say in it belongs to the phase\n  that does the work or to the process that owns the track.",
           "tables": []
         },
         {
