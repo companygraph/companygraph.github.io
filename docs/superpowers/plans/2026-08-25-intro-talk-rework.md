@@ -52,9 +52,11 @@ Every task runs from the repository root `~/git/companygraph/companygraph.github
 The deck gains a slide-count assertion, a second outbound link, and the length strings change. Write all of that into `verify/check.mjs` now so every later task is measured against it.
 
 **Files:**
+
 - Modify: `verify/check.mjs` — the `/` spec's `contains` (≈line 32), the `/talks/intro/` spec (≈lines 89–104), and `CHECKS`
 
 **Interfaces:**
+
 - Produces: a `slides` key on a page spec — `slides: 12` — checked by `CHECKS.slides`, which counts `section.slide` in the rendered DOM.
 
 - [ ] **Step 1: Add the `slides` check to `CHECKS`**
@@ -107,6 +109,7 @@ git commit -m "Assert the deck's new shape before it exists"
 Replace the convergence slide with the text slide from the spec's §3, row 3.
 
 **Files:**
+
 - Modify: `talks/intro/index.html` — the `<section>` whose kicker is `data-n="03"` (currently "Two companies. The same shape.")
 
 - [ ] **Step 1: Replace the whole section**
@@ -145,6 +148,7 @@ git commit -m "Open on the brain, not on two companies"
 Rebuild the six-cell grid as the nine-cell grid from the spec's §3, row 6.
 
 **Files:**
+
 - Modify: `talks/intro/index.html` — the `<section>` with `data-n="06"`
 
 - [ ] **Step 1: Replace the section**
@@ -189,6 +193,7 @@ git commit -m "Show the whole vocabulary, not the part that shipped"
 New slide, inserted after the current `data-n="08"` section ("For people, and for AI.") and before the current `data-n="09"` section, which Task 5 replaces.
 
 **Files:**
+
 - Modify: `talks/intro/index.html` — insert after the `</section>` of slide 08
 
 - [ ] **Step 1: Insert the section**
@@ -232,6 +237,7 @@ git commit -m "Say the thesis out loud: the prose is the schema"
 Replace the old "Where it stands" slide (the one that follows the new slide 09; its kicker still says `data-n="09"` and its h1 "The vocabulary is published. Almost nothing else is.").
 
 **Files:**
+
 - Modify: `talks/intro/index.html` — that section, whole
 
 - [ ] **Step 1: Replace the section**
@@ -273,6 +279,7 @@ git commit -m "Name the plan, and let the roadmap say the status"
 Replace the old closing slide (kicker `data-n="10"`, one question) with the four-question close. Uses the `.ask` list the deck's CSS already defines.
 
 **Files:**
+
 - Modify: `talks/intro/index.html` — the last `<section>`
 
 - [ ] **Step 1: Replace the section**
@@ -314,6 +321,7 @@ git commit -m "Close on four questions, not one"
 Everything in the deck that describes the deck: `<title>`, the two descriptions, the UI strings, the title-slide notes, `package.json`. Then `npm run verify` goes green for `/talks/intro/`.
 
 **Files:**
+
 - Modify: `talks/intro/index.html` — `<meta name="description">` (≈line 17), `og:description` (≈line 23), `UI.de.desc` and `UI.en.desc` (≈lines 794, 800), the title slide's `data-notes`/`data-notes-en`
 - Modify: `talks/intro/package.json` — `description`
 
@@ -342,9 +350,11 @@ data-notes-en="<em class='cue'>The title stays up while I open.</em> CompanyGrap
 - [ ] **Step 4: Check the numbering end to end**
 
 Run:
+
 ```bash
 grep -o 'data-n="[0-9]*"' talks/intro/index.html | tr '\n' ' '
 ```
+
 Expected: `data-n="00" … data-n="11"` — twelve values, consecutive, no repeats.
 
 - [ ] **Step 5: Run verify**
@@ -366,6 +376,7 @@ git commit -m "Describe the deck the way it now argues"
 The landing page's call to action, the talks index, and the site's `CLAUDE.md`.
 
 **Files:**
+
 - Modify: `index.html` — `.ctameta` (≈line 208)
 - Modify: `talks/index.html` — the `.talk` block in `<main>`
 - Modify: `CLAUDE.md` — the "deck and the talks index" rule about slide 9, and the "AI/agents" paragraph
@@ -411,6 +422,7 @@ git commit -m "Restate the talk's new length in the three places allowed to"
 Everything derived from the deck. Requires `ELEVENLABS_API_KEY` in the environment (probe with `${ELEVENLABS_API_KEY:+SET}`; never print it) and Docker-free Playwright with Chromium installed (`npx playwright install chromium` if `npm run pdf` complains).
 
 **Files:**
+
 - Regenerate: `talks/intro/audio/{en,de}/{00,03,06,09,10,11}.mp3` + `.sha`
 - Regenerate: `talks/intro/companygraph-en.pdf`, `talks/intro/companygraph-de.pdf`
 - Regenerate: `talks/intro/og.png`, `talks/intro/og.sha`; `talks/og.png`, `talks/og.sha`; `og.png`, `og.sha` at the root
@@ -454,6 +466,7 @@ git commit -m "Re-derive narration, PDFs and cards from the new deck"
 A different repository: `companygraph/.github`, checked out at `~/git/companygraph/.github`.
 
 **Files:**
+
 - Modify: `~/git/companygraph/.github/profile/README.md` — the "New here?" line (≈line 16)
 
 - [ ] **Step 1: Edit**

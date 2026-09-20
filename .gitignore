@@ -1,4 +1,8 @@
-node_modules/
+# What every member of the family ignores: installed packages, and the state an editor
+# or a tool keeps beside the work.
+node_modules
+.vscode
+.claudian
 
 # package-lock.json is deliberately NOT ignored here (unlike the sibling repo):
 # CI runs `npm ci`, which requires a committed lockfile to work at all.
