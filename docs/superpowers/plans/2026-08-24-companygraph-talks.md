@@ -84,11 +84,13 @@ The index page first, because it is the smaller of the two documents and it prov
 the fonts, the tokens and the suite before a deck is written against them.
 
 **Files:**
+
 - Create: `package.json`, `verify/design.mjs`, `verify/check.mjs`, `index.html`,
   `favicon.svg`, `fonts/*.woff2`, `.gitignore` (exists), `README.md`, `CLAUDE.md`
 - Remote: create `companygraph/talks` on GitHub
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `verify/check.mjs` exporting nothing, but defining `PAGES` (array of page spec
   objects keyed by `path`) and `CHECKS` (object of `async (page, spec) => string | null`).
@@ -273,10 +275,12 @@ One slide, all the chrome. This is where the transport bar, the notes panel, the
 toggle and the keyboard handling are proven — before nine more slides make failures ambiguous.
 
 **Files:**
+
 - Create: `intro/index.html`, `intro/package.json`, `intro/fonts/*.woff2`
 - Modify: `verify/check.mjs` (add the `/intro/` page spec)
 
 **Interfaces:**
+
 - Consumes: `PAGES` and `CHECKS` from Task 1.
 - Produces: `intro/index.html` with `applyLang()`, a `.deck` element, `.slide` sections, and
   `data-time` / `data-notes` / `data-notes-en` attributes that Task 6's `generate.py` reads.
@@ -358,9 +362,11 @@ The first half of the arc. Slide 2 is the spine of the whole talk and is new: it
 port of anything.
 
 **Files:**
+
 - Modify: `intro/index.html`
 
 **Interfaces:**
+
 - Consumes: the deck skeleton from Task 2.
 - Produces: slides `01`–`04`, each a `<section class="slide" data-time="M:SS" data-notes="…"
   data-notes-en="…">`.
@@ -429,9 +435,11 @@ git push
 ### Task 4: Slides 5–9 — breadth, a gate, both audiences, the thesis, the offer
 
 **Files:**
+
 - Modify: `intro/index.html`
 
 **Interfaces:**
+
 - Consumes: slides 01–04 from Task 3.
 - Produces: slides `05`–`09`; the deck is now complete and `data-time` sums to ≈10:25.
 
@@ -516,11 +524,13 @@ git push
 ### Task 5: The share cards and the PDFs
 
 **Files:**
+
 - Create: `intro/export-og.mjs`, `intro/export-pdf.mjs`, `og.png`, `intro/og.png`,
   `intro/companygraph-en.pdf`, `intro/companygraph-de.pdf`
 - Modify: `intro/package.json`, `package.json`
 
 **Interfaces:**
+
 - Consumes: the complete deck from Task 4, and `PAGES[].card` from Task 1.
 - Produces: `og.png` and `intro/og.png` at exactly 1200×630, matching the declared tags.
 
@@ -576,10 +586,12 @@ Last of the deck work, deliberately: clips cache on a content hash of the note, 
 before the words stop moving pays twice.
 
 **Files:**
+
 - Create: `intro/tts/generate.py`, `intro/audio/{en,de}/NN.mp3`, `.gitattributes`
 - Modify: `index.html` (correct the quoted length)
 
 **Interfaces:**
+
 - Consumes: `data-notes` / `data-notes-en` and the `<section class="slide` literal from Tasks
   2–4.
 - Produces: `intro/audio/en/00.mp3` … `09.mp3` and the same for `de`, plus `.sha` siblings.
@@ -658,10 +670,12 @@ git push
 ### Task 7: Findability, CI, and branch protection
 
 **Files:**
+
 - Create: `sitemap.xml`, `.github/workflows/ci.yml`
 - Remote: `protect-main` ruleset
 
 **Interfaces:**
+
 - Consumes: the pages from Tasks 1–5.
 - Produces: the URL set that `companygraph.io/sitemap.xml` will point at in Task 8.
 
@@ -723,11 +737,13 @@ starting it.** Every change here is a debt already written down in the target re
 `CLAUDE.md`, which says explicitly not to pre-write any of it before the talk exists.
 
 **Files:**
+
 - Modify: `~/git/companygraph.github.io/index.html`, `sitemap.xml`, `verify/check.mjs`,
   `CLAUDE.md`
 - Modify: `~/git/companygraph-org/profile/README.md`, `README.md`, `CLAUDE.md`
 
 **Interfaces:**
+
 - Consumes: the live URLs from Task 7 and the length from Task 6.
 - Produces: nothing this repository reads.
 

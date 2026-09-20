@@ -80,11 +80,13 @@ Writes `example.json` and `model.json` and changes no page. The blocks stay wher
 nothing can regress yet — this task is proved by showing the artifacts reproduce the blocks.
 
 **Files:**
+
 - Modify: `build/build.mjs` (replace the page-writing tail)
 - Create: `example.json`, `model.json` (generated, committed)
 - Modify: `package.json:16-17`
 
 **Interfaces:**
+
 - Consumes: nothing from earlier tasks.
 - Produces: `example.json` and `model.json` at the repository root, each an object with keys
   `commit`, `root`, `rootId`, `types`, `entities`, `edges` — the values every later task loads.
@@ -156,6 +158,7 @@ for (const [name, page] of [["example", "example/index.html"], ["model", "model/
   console.log(`  ${page}: ${mine === onPage ? "identical" : "DIFFERS"} (${onPage.length} bytes)`);
 }'
 ```
+
 Expected: `example/index.html: identical (23945 bytes)` and `model/index.html: identical (40597 bytes)`.
 
 If either differs, stop and report BLOCKED. It means the parser or the pin moved, or `finish`
@@ -198,10 +201,12 @@ MSG
 ### Task 2: The renderer layer, and the blocks through it
 
 **Files:**
+
 - Create: `build/block.mjs`, `build/pages.mjs`, `build/renderers.test.mjs`
 - Modify: `package.json` (add `pages`, `pages:check`, `test:build`)
 
 **Interfaces:**
+
 - Consumes: `example.json` and `model.json` from Task 1.
 - Produces: `writeBlock(data, { check }) => string[]` from `build/block.mjs`, returning
   repository-relative paths that did not match. `build/pages.mjs` as the orchestrator Task 3
@@ -396,6 +401,7 @@ node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("source.json"
 npm run pages:check; echo "exit: $?"
 mv source.json.bak source.json
 ```
+
 Expected: `✗ example.json is at 7f58f5e, source.json pins aaaaaaa — run: npm run build`, exit 1.
 Then `git diff --stat` must be empty — the backup restored `source.json` exactly.
 
@@ -430,10 +436,12 @@ The only task that changes published output. Everything else in this plan is pro
 diff; this one is proved by a diff containing exactly what the spec predicted.
 
 **Files:**
+
 - Create: `build/jsonld.mjs`
 - Modify: `build/pages.mjs`, `build/renderers.test.mjs`
 
 **Interfaces:**
+
 - Consumes: the `write(data, { check, root }) => string[]` contract from Task 2.
 - Produces: `writeJsonLd(data, { check, root, repo }) => string[]`.
 
@@ -698,6 +706,7 @@ node -e 'const fs=require("fs");const p="model/index.html";fs.writeFileSync(p,fs
 npm run pages:check; echo "exit: $?"
 git checkout model/index.html && npm run pages
 ```
+
 Expected: `✗ model/index.html no longer match the artifacts — run: npm run pages`, exit 1. The
 final `npm run pages` restores the page; confirm `git diff --stat` afterwards shows only the two
 pages this task legitimately changed.
@@ -732,6 +741,7 @@ MSG
 ### Task 4: CI, the cards, and the documents
 
 **Files:**
+
 - Modify: `.github/workflows/ci.yml:47-55`
 - Modify: `AGENTS.md:69`, `:136`, `:424`
 - Modify: `README.md:54`, `:99-100`
@@ -820,6 +830,7 @@ documented — the recipe hashes the page, not the picture.
 rm -f example.json model.json && npm run pages; echo "exit: $?"
 npm run build && npm run pages && npm run pages:check && npm run test:build && git diff --stat
 ```
+
 Expected: the first command fails with `example.json is missing — run: npm run build`, exit 1;
 then every command passes and `git diff --stat` shows nothing beyond what Task 3 and Step 5
 already committed.
@@ -832,6 +843,7 @@ python3 -m http.server 8000 > /dev/null 2>&1 &
 for i in $(seq 1 20); do curl -sf http://127.0.0.1:8000/ > /dev/null && break; sleep 0.5; done
 npm run verify
 ```
+
 Expected: green, all seven pages.
 
 - [ ] **Step 7: Commit**

@@ -71,9 +71,11 @@ The smallest thing that produces a green suite: the shared design assertions, th
 measure, and a skeleton page carrying the token block. Copy is Task 2; the mark is Task 3.
 
 **Files:**
+
 - Create: `package.json`, `verify/design.mjs`, `verify/check.mjs`, `index.html`, `fonts/` (4 files)
 
 **Interfaces:**
+
 - Produces: `PAGES` — an array of page specs in `verify/check.mjs`. A spec's keys select which
   checks run: a check whose name is absent from the spec is skipped. Later tasks add keys to
   the existing spec rather than adding checks.
@@ -186,6 +188,7 @@ process.exit(failures ? 1 : 0);
 npm run serve &   # or a second terminal
 npm run verify
 ```
+
 Expected: FAIL — `HTTP 404`, because `index.html` does not exist.
 
 - [ ] **Step 5: Write the skeleton page**
@@ -251,9 +254,11 @@ git commit -m "Render the page in a browser and assert what it renders"
 The page's argument, its one sentence of explanation, and its single link out.
 
 **Files:**
+
 - Modify: `index.html`, `verify/check.mjs`
 
 **Interfaces:**
+
 - Consumes: `PAGES`, `CHECKS` from Task 1.
 - Produces: the `.r70` / `.rcl` span pair on `h1` — Task 4's figure is positioned against it.
 
@@ -363,10 +368,12 @@ git commit -m "Say the one thing this page is for, and link to the code"
 Containment and reference — the model's two kinds of edge, as one glyph.
 
 **Files:**
+
 - Create: `logo.svg`, `favicon.svg`, `avatar.svg`, `avatar.png`
 - Modify: `index.html`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `logo.svg` inlined into `index.html`'s header lockup; `favicon.svg` linked from
   `<head>`.
@@ -440,9 +447,11 @@ git commit -m "Draw the model's two edges as one glyph"
 The hero's argument, drawn: two unlike trees arriving at the same shape.
 
 **Files:**
+
 - Modify: `index.html`
 
 **Interfaces:**
+
 - Consumes: the `.hero` section from Task 2.
 - Produces: `.figure` — Task 5's og render hides this element by class name.
 
@@ -503,10 +512,12 @@ git commit -m "Draw two companies arriving at the same shape"
 The domain, the crawl map, and the card a link unfurls into.
 
 **Files:**
+
 - Create: `CNAME`, `robots.txt`, `sitemap.xml`, `export-og.mjs`, `og.png`
 - Modify: `index.html`, `verify/check.mjs`
 
 **Interfaces:**
+
 - Consumes: `.figure` from Task 4, `PAGES` and `CHECKS` from Task 1.
 - Produces: `og.png` at 1200×630 and the meta tags declaring that exact size.
 
@@ -627,6 +638,7 @@ git commit -m "Make the page findable, and its card a complete thought"
 `README.md` says what the files are; `CLAUDE.md` says what is easy to break.
 
 **Files:**
+
 - Create: `README.md`, `CLAUDE.md`
 
 **Interfaces:** none.
@@ -678,9 +690,11 @@ git commit -m "Write down what this page must not say"
 ### Task 7: CI and branch protection
 
 **Files:**
+
 - Create: `.github/workflows/ci.yml`
 
 **Interfaces:**
+
 - Produces: a status check context named `verify`, required by the ruleset afterwards.
 
 - [ ] **Step 1: Write the workflow**
@@ -735,6 +749,7 @@ reported blocks every pull request, including the one introducing it."
 ```bash
 gh pr checks
 ```
+
 Expected: a row named `verify` reporting `pass`. If it reports under another name, the ruleset
 must require that name instead — the context is the job id, not the workflow name.
 
@@ -755,6 +770,7 @@ diff the two to confirm they match.
 starting it.**
 
 **Files:**
+
 - Modify: `index.html` in `~/git/guestgraph.github.io`; `index.html` in `~/git/talks` and its
   deck(s); `index.html` and the deck pages in `~/git/robertblust.github.io`
 
