@@ -1,5 +1,5 @@
 {
-  "commit": "59200e06f8b006a6702b6e84c60057d4db75bbfd",
+  "commit": "a8e99e9bf94c2f5239a63eee0b5708503941fbb0",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -85,6 +85,12 @@
       "type": "surface",
       "folder": "surfaces",
       "owner": null,
+      "singular": false
+    },
+    {
+      "type": "track",
+      "folder": "tracks",
+      "owner": "process",
       "singular": false
     },
     {
@@ -322,17 +328,14 @@
             {
               "caption": null,
               "columns": [
-                "Track",
-                "Produces"
+                "Track"
               ],
               "rows": [
                 [
-                  "Code",
-                  "A merged change to the platform"
+                  "Code"
                 ],
                 [
-                  "Docs",
-                  "A published page on the customer site"
+                  "Docs"
                 ]
               ]
             }
@@ -340,17 +343,14 @@
           "table": {
             "caption": null,
             "columns": [
-              "Track",
-              "Produces"
+              "Track"
             ],
             "rows": [
               [
-                "Code",
-                "A merged change to the platform"
+                "Code"
               ],
               [
-                "Docs",
-                "A published page on the customer site"
+                "Docs"
               ]
             ]
           }
@@ -680,6 +680,30 @@
       ],
       "owner": "processes/delivery",
       "path": "example/model/processes/delivery/phases/specify.md"
+    },
+    {
+      "id": "processes/delivery/tracks/code",
+      "type": "track",
+      "name": "Code",
+      "tagline": "A merged change to the platform.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/delivery",
+      "path": "example/model/processes/delivery/tracks/code.md"
+    },
+    {
+      "id": "processes/delivery/tracks/docs",
+      "type": "track",
+      "name": "Docs",
+      "tagline": "A published page on the customer site.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/delivery",
+      "path": "example/model/processes/delivery/tracks/docs.md"
     },
     {
       "id": "proficiency-levels/competent",
@@ -1699,6 +1723,18 @@
     },
     {
       "from": "processes/delivery/phases/build",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
+      "to": "processes/delivery/tracks/docs",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/build",
       "to": "roles/reviewer",
       "via": "escalation-authority",
       "attrs": {}
@@ -1821,6 +1857,18 @@
       "from": "processes/delivery/phases/specify",
       "to": "roles/reviewer",
       "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/tracks/code",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/tracks/docs",
+      "to": "sources/local",
+      "via": "source",
       "attrs": {}
     },
     {
@@ -1839,6 +1887,18 @@
       "from": "processes/delivery",
       "to": "processes/delivery/phases/specify",
       "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/tracks/code",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/tracks/docs",
+      "via": "Tracks.Track",
       "attrs": {}
     },
     {

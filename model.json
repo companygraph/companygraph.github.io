@@ -1,5 +1,5 @@
 {
-  "commit": "59200e06f8b006a6702b6e84c60057d4db75bbfd",
+  "commit": "a8e99e9bf94c2f5239a63eee0b5708503941fbb0",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -936,7 +936,7 @@
                 [
                   "`## Activities`",
                   "Yes",
-                  "A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
+                  "Grouped. A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
                 ],
                 [
                   "`## What it produces`",
@@ -952,6 +952,23 @@
                   "`## Gate`",
                   "Yes",
                   "The criteria that must be satisfied to leave the phase, as a list, and what happens when they cannot be"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Activities` is grouped under these headings:",
+              "columns": [
+                "Heading",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Track`",
+                  "No",
+                  "ref → track",
+                  "The track the numbered list below it is the work of, by its canonical name: the H1 of a file in the owning process's `tracks/`"
                 ]
               ]
             },
@@ -1005,7 +1022,7 @@
               [
                 "`## Activities`",
                 "Yes",
-                "A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
+                "Grouped. A numbered list of what is done; where the work differs by track, one `### [Track]` heading per track, each with its own numbered list"
               ],
               [
                 "`## What it produces`",
@@ -1032,7 +1049,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A `### [Track]` heading under `## Activities` names a track the owning process declares, spelled\n  as that track's `Track` cell spells it.\n- A phase whose activities are the same for every track carries no track headings at all.\n- `gate-to` names the next phase and the owning process's `## Phases` table says the same thing;\n  where the two disagree the model is wrong, not the reader, and the instance checks say so.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique within its process (R2): two processes may each call a phase\n  `Review`, and a `gate-to` or a process's `## Phases` finds the one in its own process (R4). A\n  phase and a role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
+          "text": "- A gate criterion is a sentence that can fail: \"the checks pass on the branch\" can, \"quality\n  is good\" cannot.\n- A phase whose activities are the same for every track carries no track headings at all, and\n  one that carries any puts every activity under one: an activity above the first heading\n  belongs to no track, and the instance checks say so.\n- Activities are a numbered list, because their order is the order the work is done in, and the\n  instance checks read the marker. A numbered list under no track heading is a phase whose work\n  is the same on every track. Bullets under no heading are reported as standing under no track,\n  as an entry's achievements under no kind are, and the answer is to number them and not to add\n  a heading.\n- `gate-to` names the next phase and the owning process's `## Phases` table says the same thing;\n  where the two disagree the model is wrong, not the reader, and the instance checks say so.\n- The last phase has no `gate-to`, and its gate is the one that releases the work.\n- A phase's name is unique within its process (R2): two processes may each call a phase\n  `Review`, and a `gate-to` or a process's `## Phases` finds the one in its own process (R4). A\n  phase and a role may share a name, since a reference carries the type it resolves under.\n- `executed-by` names the seats that do the work, never the seat that approves it; a seat that\n  only signs belongs in `gate-approvers`.",
           "tables": []
         },
         {
@@ -1152,7 +1169,7 @@
                 [
                   "`## Tracks`",
                   "Yes",
-                  "Table. The kinds of thing this process makes; its columns are declared below."
+                  "Table. The kinds of thing this process makes, one row each; its columns are declared below."
                 ],
                 [
                   "`## Phases`",
@@ -1183,14 +1200,8 @@
                 [
                   "`Track`",
                   "Yes",
-                  "string",
-                  "The kind of thing this track makes"
-                ],
-                [
-                  "`Produces`",
-                  "Yes",
-                  "string",
-                  "What this track leaves behind when a change runs down it"
+                  "ref → track",
+                  "The track, by its canonical name: the H1 of a file in this process's `tracks/`"
                 ]
               ]
             },
@@ -1256,7 +1267,7 @@
               [
                 "`## Tracks`",
                 "Yes",
-                "Table. The kinds of thing this process makes; its columns are declared below."
+                "Table. The kinds of thing this process makes, one row each; its columns are declared below."
               ],
               [
                 "`## Phases`",
@@ -1283,12 +1294,12 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- Person-neutral, as a role is: a process names seats and never who holds them.\n- Named for the work rather than for the tool that carries it: `Delivery`, not `The board`.\n- A track is named for what it makes, not for who makes it.\n- Tracks run together in one pass rather than instead of one another. A change that is both\n  code and prose runs down both, so a phase's `### [Track]` headings are strands of one step\n  and never alternative routes through it, and a phase may produce a deliverable per track in\n  the same pass.\n- Each line under `## What it never does` is a sentence an agent can hold a change against.\n  \"Never merges without the Owner\" can fail; \"works carefully\" cannot.\n- `## Phases` lists every phase in the folder and nothing else, in the order the work passes\n  through them. It is the authority on that order, and each phase's `gate-to` agrees with it;\n  the instance checks hold both.\n- A phase is named in `## Phases` by its canonical name and nothing beside it (R3). A path to\n  the phase's file is not written there: a path moves, nothing resolves one, and whatever shows\n  the model to a reader can make the name a link.\n- A process with one track says so and names it; a track table is not omitted because there\n  happens to be only one kind of work today.",
+          "text": "- Person-neutral, as a role is: a process names seats and never who holds them.\n- Named for the work rather than for the tool that carries it: `Delivery`, not `The board`.\n- Tracks run together in one pass rather than instead of one another. A change that is both\n  code and prose runs down both, so a phase's `### [Track]` headings are strands of one step\n  and never alternative routes through it, and a phase may produce a deliverable per track in\n  the same pass.\n- Each line under `## What it never does` is a sentence an agent can hold a change against.\n  \"Never merges without the Owner\" can fail; \"works carefully\" cannot.\n- `## Phases` lists every phase in the folder and nothing else, in the order the work passes\n  through them. It is the authority on that order, and each phase's `gate-to` agrees with it;\n  the instance checks hold both.\n- A phase is named in `## Phases` by its canonical name and nothing beside it (R3). A path to\n  the phase's file is not written there: a path moves, nothing resolves one, and whatever shows\n  the model to a reader can make the name a link.\n- `## Tracks` lists every track in the folder and nothing else, each by its canonical name and\n  nothing beside it (R3); the instance checks hold it. What a track produces is said once, in\n  the track's own file, and is not repeated here.\n- A process with one track says so and names it; a track table is not omitted because there\n  happens to be only one kind of work today.",
           "tables": []
         },
         {
           "heading": "File Location",
-          "text": "`model/processes/<process>/<process>.md`\n\nA process owns its phases and cannot be read without them, so it is a folder rather than a\nfile, as a profile is. The folder is named for the process and holds its own file under that\nsame name, plus the `phases/` collection the phases nest in.",
+          "text": "`model/processes/<process>/<process>.md`\n\nA process owns its phases and its tracks and cannot be read without them, so it is a folder\nrather than a file, as a profile is. The folder is named for the process and holds its own file\nunder that same name, plus the `phases/` and `tracks/` collections the phases and tracks nest\nin.",
           "tables": []
         }
       ],
@@ -2724,6 +2735,132 @@
       "path": "core/surface-schema.md"
     },
     {
+      "id": "core/track",
+      "type": "schema",
+      "name": "Track Schema",
+      "tagline": "Required structure for track files.",
+      "fields": {
+        "owner": "process"
+      },
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Track]`",
+                  "Yes",
+                  "The canonical name of the track. The owning process's `## Tracks` table and a phase's `### [Track]` headings reference it by this exact string."
+                ],
+                [
+                  "`> [Produces]`",
+                  "Yes",
+                  "One-paragraph statement of what one pass down this track leaves behind"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Track]`",
+                "Yes",
+                "The canonical name of the track. The owning process's `## Tracks` table and a phase's `### [Track]` headings reference it by this exact string."
+              ],
+              [
+                "`> [Produces]`",
+                "Yes",
+                "One-paragraph statement of what one pass down this track leaves behind"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A track is one kind of thing a process makes, and it answers “which of the things this process\nmakes is this step about?” for a reader of a phase whose work differs by what is being made. It\nis an entity so that the answer is a reference rather than a word: a phase that heads its\nactivities with a track names something that exists, a track renamed is renamed in one place\nwith every mention held to it, and the tracks are visible in the graph as nodes. It points at\nnothing. Which seats work a track and what they do on it are said by the phases.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- A track is named for what it makes, not for who makes it: `Code`, not `Engineering`.\n- The tagline says what is left behind when a change has run down the track, as a thing a\n  reader could point at: “a merged change to the platform”, not “development work”.\n- A track's name is unique within its process (R2): two processes may each have a track called\n  `Code`, and a phase's heading or a process's `## Tracks` finds the one in its own process\n  (R4).\n- A track carries no order: the order a process lists its tracks in is the order a reader meets\n  them and nothing more.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/processes/<process>/tracks/*.md`\n\nA track is owned by a process and cannot exist without it, so it nests inside the process's\nfolder beside `phases/`. The filename is R12's default, the slug of the H1.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/track-schema.md"
+    },
+    {
       "id": "core/value",
       "type": "schema",
       "name": "Value Schema",
@@ -3074,6 +3211,15 @@
     },
     {
       "from": "core/phase",
+      "to": "core/track",
+      "via": "Activities.Track",
+      "attrs": {
+        "type": "ref → track"
+      },
+      "label": "Activities.Track"
+    },
+    {
+      "from": "core/phase",
       "to": "core/role",
       "via": "escalation-authority",
       "attrs": {
@@ -3150,6 +3296,15 @@
         "type": "ref → phase"
       },
       "label": "Phases.Phase"
+    },
+    {
+      "from": "core/process",
+      "to": "core/track",
+      "via": "Tracks.Track",
+      "attrs": {
+        "type": "ref → track"
+      },
+      "label": "Tracks.Track"
     },
     {
       "from": "core/process",
@@ -3306,6 +3461,22 @@
     },
     {
       "from": "core/surface",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/track",
+      "to": "core/process",
+      "via": "owner",
+      "attrs": {},
+      "label": "owner"
+    },
+    {
+      "from": "core/track",
       "to": "core/source",
       "via": "source",
       "attrs": {
