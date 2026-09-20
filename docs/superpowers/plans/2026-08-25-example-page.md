@@ -48,11 +48,13 @@ All commands run from `~/git/companygraph/companygraph.github.io`. `npm run serv
 ### Task 1: The parser, test-first
 
 **Files:**
+
 - Create: `example/instance.mjs`
 - Create: `verify/instance.test.mjs`
 - Modify: `package.json` — script `"test:example": "node --test verify/instance.test.mjs"`
 
 **Interfaces:**
+
 - Produces: `parseInstance(files: Map<string,string>) → { commit: null, root, types, entities, edges }` where keys of `files` are paths relative to the instance root (`values/craftsmanship.md`, no leading `example/`). `ROOT_LABEL = "Fictional Company"`. Errors are `Error` with messages beginning `R4:` or `R7:`.
 - Produces: entity ids are the path without `.md`, and for the folder form the folder (`profiles/mira-halvorsen`). Folder-node ids used later by the page are `<owner id>/<folder>` for owned folders and just `<folder>` at the root.
 
@@ -334,6 +336,7 @@ git commit -m "Read an instance by its shape alone, and refuse a name that resol
 The billing skeleton with the example page's prose and an empty figure area. No data yet, no JS beyond the language toggle. `verify` learns the page.
 
 **Files:**
+
 - Create: `example/index.html`
 - Modify: `verify/check.mjs` — add the `/example/` page spec (without `graph`, that is Task 4)
 - Modify: `sitemap.xml`
@@ -345,6 +348,7 @@ cp billing/index.html example/index.html
 ```
 
 Then in `example/index.html`:
+
 - `<title>Example — CompanyGraph</title>`; `metadesc`/`og:description` → `A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.`; `canonical`/`og:url` → `https://companygraph.io/example/`; `og:image` → `https://companygraph.io/example/og.png`; `og:image:alt` → `One company, drawn: a tree from a fictional company to its folders and pages.`; the JSON-LD `WebPage` `@id`/`name`/`url` → example.
 - Nav: `<a href="https://companygraph.io/talks/" data-de="Vorträge">Talks</a>`, `<a href="./" aria-current="page" data-de="Beispiel">Example</a>`, `<a href="../billing/" data-de="Abrechnung">Billing</a>`, then the toggle.
 - Remove billing's `.unit`, `.cols`, `.card`, `.free`, `.never` CSS and the two `<section>`s that used them, keep `.title`, `.tagline`, `.note`, `section`, `h2`, `.lede`, `.rules`, footer.
@@ -471,12 +475,14 @@ git commit -m "Add the example page's prose and its place in the site, with noth
 ### Task 3: The generator and the pin
 
 **Files:**
+
 - Create: `example/source.json`, `example/build.mjs`
 - Modify: `package.json` — scripts `"example": "node example/build.mjs"`, `"example:check": "node example/build.mjs --check"`
 - Modify: `example/index.html` — the block gets written
 - Modify: `.github/workflows/ci.yml`
 
 **Interfaces:**
+
 - Consumes: `parseInstance`, from Task 1.
 - Produces: the data block in the page; `#srccommit`/`#srclink` are filled by the page's JS from `data.commit` (Task 4), not by the generator.
 
@@ -595,10 +601,12 @@ git commit -m "Generate the example page from the model's own example, at a comm
 ### Task 4: The figure and the panel (shipped as a first cut — superseded by Task 4b)
 
 **Files:**
+
 - Modify: `example/index.html` — the page script and the motion CSS
 - Modify: `verify/check.mjs` — the `graph` check and its key on the `/example/` spec
 
 **Interfaces:**
+
 - Consumes: the data block (`#example-data`), whose shape is Task 1's output plus `commit`.
 - Produces: DOM the check drives — every node is `g.n[data-id]` with `role="button"`; folder nodes have `data-kind="folder"`, entity nodes `data-kind="entity"`, the root `data-kind="root"`; `#panel h3` holds the selected entity's name; reference lines are `path.ref[data-from][data-to]`.
 
@@ -809,6 +817,7 @@ git commit -m "Draw the example as the tree it is on disk, and open it on click"
 Task 4 shipped a whole-tree figure with CSS keyframes (commit `5dcdf92`). After review the spec's §4 was rewritten: a fixed-height stage, a neighbourhood view (focus + ancestors + children + references) drawn with d3 transitions, and a card of fixed place and size. This task replaces Task 4's figure section, CSS and script; the data block, the prose sections and Task 3's generator are untouched. The frontend-design skill's process applies: plan the stage's composition against the site's existing tokens and type, build, screenshot, critique, adjust.
 
 **Files:**
+
 - Modify: `example/index.html` — the `.figure-section` markup, the figure/panel CSS, the page script
 - Create: `example/d3.v7.min.js` — copied from `node_modules/d3/dist/d3.min.js`
 - Modify: `package.json` — `"d3": "7.9.0"` in `devDependencies`; `npm install`, commit the lockfile change
@@ -816,6 +825,7 @@ Task 4 shipped a whole-tree figure with CSS keyframes (commit `5dcdf92`). After 
 - Modify: `verify/check.mjs` — the `graph` check rewritten for the neighbourhood DOM
 
 **Interfaces:**
+
 - Consumes: the data block `#example-data` (Task 1's shape + `commit`).
 - Produces: DOM the check drives — nodes are `g.n[data-id][data-kind=root|folder|entity][role=button][tabindex=0]`; the focus carries class `focus`; reference lines are `path.ref[data-from][data-to]`; the card is `#card` with `#card h3` the focused entity's name and `#card .eyebrow` the type+path line; the path line above the canvas is `#path`.
 
@@ -1001,6 +1011,7 @@ and load the library before the page script: `<script src="d3.v7.min.js"></scrip
 ### Task 5: Nav, card, the debts every page pays
 
 **Files:**
+
 - Modify: `index.html`, `privacy/index.html`, `billing/index.html`, `talks/index.html` — nav item
 - Modify: `verify/check.mjs` — nav strings on those pages
 - Modify: `og-recipe.mjs` — fourth card; regenerate `example/og.png` + `example/og.sha`
@@ -1022,6 +1033,7 @@ and load the library before the page script: `<script src="d3.v7.min.js"></scrip
 ```bash
 npm run test:example && npm run example:check && npm run test:og && npm run og:check && npm run verify
 ```
+
 All pass, every page ✓.
 
 - [ ] **Step 6: Commit**

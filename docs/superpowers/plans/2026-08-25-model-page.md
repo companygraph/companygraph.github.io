@@ -46,10 +46,12 @@ All commands run from the worktree `~/git/companygraph/companygraph.github.io-mo
 ### Task 1: The parser learns schemas, test-first
 
 **Files:**
+
 - Modify: `example/instance.mjs`
 - Modify: `verify/instance.test.mjs`
 
 **Interfaces:**
+
 - Produces: sections gain `tables: [{ caption: string|null, columns, rows }]` (all tables in the section, in order; `caption` is the text of the line directly above the table when it ends with a colon, else null); `table` remains the first table for compatibility, `text` excludes caption lines and table lines.
 - Produces: `parseSchemas(files: Map<path, markdown>) → { commit:null, root: CORE_LABEL, types:[{type:"schema", folder:"core", owner:null}], entities, edges }` where entity `id` is `core/<type>` (the filename without `-schema.md`), `type` is `"schema"`, `name` the H1, `fields.owner` from the `**Owner:** x` line when present, `path` = `core/<file>`; edges as spec §2 (`via` = field name / `Section.Column` / `"owner"`, `attrs.type` = the Type cell for table edges). `export const CORE_LABEL = "Core"`.
 - Errors: `R4: …` when a `ref → <type>` names no schema; `R9: …` when a schema lacks `## Frontmatter` or `## Sections`.
@@ -185,6 +187,7 @@ test("the example instance still parses with tables, one per section", () => {
 ### Task 2: One pin, two blocks
 
 **Files:**
+
 - Move: `example/source.json` → `source.json`
 - Modify: `example/build.mjs`; `model/index.html` placeholder block (create the file with only the markers and an empty block so the generator has a target — Task 4 fills the page); `README.md` and `CLAUDE.md` where they name `example/source.json`
 - Modify: `verify/check.mjs` if it reads `source.json` (it does not; confirm)
@@ -199,10 +202,12 @@ test("the example instance still parses with tables, one per section", () => {
 ### Task 3: The stage moves out of the example page
 
 **Files:**
+
 - Create: `stage.css`, `stage.js`; move `example/d3.v7.min.js` → `d3.v7.min.js`
 - Modify: `example/index.html` (remove the stage CSS/JS, link the files), `verify/instance.test.mjs` (d3 path), `og-recipe.mjs` if a hide rule referenced a moved selector (none expected), `README.md`
 
 **Interfaces:**
+
 - Produces: `stage.js` exposes nothing global except that it initialises on `DOMContentLoaded` (or immediately, since it loads at the end of the body) from the element `document.querySelector('script[type="application/json"][data-stage]')` — the page marks its block with `data-stage`. Everything else is as today: `#path`, `#fig`, `#card`, `#cbody`, `#cfoot`, `#expand`, `#stagemodal`, `#recentre`, `#srclink`, `#srccommit`, `.stagehead`, `.stage`.
 - Produces: `stage.js` reads an optional `label` on an edge (`edge.label`, a string) and draws it in mono beside the reference line's target, as the Level attribute is drawn today; when absent, nothing changes. And the card renders `section.tables` (all, each under its `caption` in mono when present) instead of `section.table`.
 - Produces: `stage.css` contains every rule that begins `.stagehead`, `.path`, `.stage`, `.canvas`, `.recentre`, `.card`, `.cbody`, `.cfoot`, `.expand`, `.modal`, `#fig`, `dialog` — the figure-section rules; the page keeps its own `.figure-section`, `.figcap` and prose rules.
@@ -217,6 +222,7 @@ test("the example instance still parses with tables, one per section", () => {
 ### Task 4: The model page
 
 **Files:**
+
 - Create: `model/index.html` (replace the placeholder, keeping the block), `model/og.png`, `model/og.sha`
 - Modify: `verify/check.mjs` (`/model/` spec; `graph` takes its block id from the spec value — `graph: "model-data"`, with `graph: "example-data"` on the example spec; nav strings everywhere), `index.html`, `privacy/index.html`, `billing/index.html`, `talks/index.html`, `example/index.html` (nav: `Model`/`Modell` before Example), `og-recipe.mjs` (fifth card, `EXAMPLE_HIDE` reused), `sitemap.xml`, `README.md`, `CLAUDE.md`
 
