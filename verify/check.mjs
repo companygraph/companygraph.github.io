@@ -3,6 +3,7 @@
 import { chromium } from "playwright";
 import { DESIGN_CHECKS, SYSTEM_FACES } from "@robertblust/design/verify/design";
 import { STAGE_CHECKS } from "@robertblust/design/verify/stage";
+import { MODEL_PAGE_CHECKS } from "@robertblust/design/verify/model-pages";
 import { pageChecks } from "@robertblust/design/verify/pages";
 import { runSuite } from "@robertblust/design/verify/suite";
 
@@ -82,6 +83,20 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
+  // Who does CompanyGraph's work: one board per process, drawn from company.json by
+  // @robertblust/design's writeTeam, held by the shared board check to the artifact and to where
+  // STAGE_PAGE sends a card, which here is the landing page.
+  { path: "/team/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
+    contains: ["An agent does the work,", "every", "gate", "How to read it", "Generated from"],
+    translates: { lang: "de",
+      title: "Team – CompanyGraph",
+      desc: "Wer bei CompanyGraph die Arbeit macht: Ein KI-Agent hält die meisten Sitze, und jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält.",
+      shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"] },
+    links: ["https://github.com/companygraph"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract", "team"], fits: true,
+    card: true, cardBase: SITE, internalLinks: true, board: true },
   // CompanyGraph's vision and values, generated from company.json by @robertblust/design's
   // writePrinciples. The model's words stay in the one language it is written in, so the German
   // check reads the page's own words: the head and the one heading the region translates.
@@ -199,6 +214,8 @@ const PAGES = [
 const CHECKS = {
   ...DESIGN_CHECKS,
   ...STAGE_CHECKS,
+  // The Team board, held to the artifact the page names and to where STAGE_PAGE sends a card.
+  ...MODEL_PAGE_CHECKS,
   ...pageChecks({ SITE, BASE }),
   // The deck's length in slides. The arc is twelve slides and the numbering is zero-based
   // everywhere a viewer sees it, so a slide added without its neighbours renumbered — or

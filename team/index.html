@@ -3,29 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Model — CompanyGraph</title>
-<meta id="metadesc" name="description" content="The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand.">
+<title>Team — CompanyGraph</title>
+<meta id="metadesc" name="description" content="Who does the work at CompanyGraph: an AI agent holds most of the seats, and every gate is approved by a seat a person holds.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://companygraph.io/model/">
+<link rel="canonical" href="https://companygraph.io/team/">
 
-<meta property="og:title" content="Model — CompanyGraph">
-<meta property="og:description" content="The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand.">
+<meta property="og:title" content="Team — CompanyGraph">
+<meta property="og:description" content="Who does the work at CompanyGraph: an AI agent holds most of the seats, and every gate is approved by a seat a person holds.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CompanyGraph">
-<meta property="og:url" content="https://companygraph.io/model/">
-<meta property="og:image" content="https://companygraph.io/model/og.png">
+<meta property="og:url" content="https://companygraph.io/team/">
+<meta property="og:image" content="https://companygraph.io/team/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The model, drawn: the core vocabulary with its folder and its schemas.">
+<meta property="og:image:alt" content="CompanyGraph's team boards: seats by phase">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
 <!-- The publisher, the site and this page — nothing about what the software does or when
      it does it, which is the same rule the prose follows. Each page carries the whole graph
      it references: Google resolves @graph within one document, so a bare { "@id": ... }
-     naming a node defined on another page resolves to nothing. This page was written from
-     the pre-contract template while that fix was in flight, and shipped with exactly that
-     dangling isPartOf. -->
+     naming a node defined on another page resolves to nothing. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -52,9 +50,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://companygraph.io/model/#webpage",
-      "name": "Model",
-      "url": "https://companygraph.io/model/",
+      "@id": "https://companygraph.io/team/#webpage",
+      "name": "Team",
+      "url": "https://companygraph.io/team/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://companygraph.io/#website"
@@ -63,12 +61,12 @@
         "@id": "https://companygraph.io/#organization"
       },
       "breadcrumb": {
-        "@id": "https://companygraph.io/model/#breadcrumb"
+        "@id": "https://companygraph.io/team/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://companygraph.io/model/#breadcrumb",
+      "@id": "https://companygraph.io/team/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -79,257 +77,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Model",
-          "item": "https://companygraph.io/model/"
-        }
-      ]
-    },
-    {
-      "@type": "DefinedTermSet",
-      "@id": "https://companygraph.io/model/#vocabulary",
-      "name": "CompanyGraph core vocabulary",
-      "description": "The schemas a company is described in: one per type, each stating the structure its files must carry and how they refer to one another.",
-      "url": "https://companygraph.io/model/",
-      "license": "https://www.apache.org/licenses/LICENSE-2.0",
-      "creator": {
-        "@id": "https://companygraph.io/#organization"
-      },
-      "encoding": {
-        "@type": "MediaObject",
-        "contentUrl": "https://companygraph.io/model.json",
-        "encodingFormat": "application/json"
-      },
-      "hasDefinedTerm": [
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-achievement-kind",
-          "name": "Achievement Kind Schema",
-          "description": "Required structure for achievement kind files.",
-          "termCode": "achievement-kind",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/achievement-kind-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-concept",
-          "name": "Concept Schema",
-          "description": "Required structure for concept files.",
-          "termCode": "concept",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/concept-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-domain",
-          "name": "Domain Schema",
-          "description": "Required structure for domain files.",
-          "termCode": "domain",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/domain-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-experience",
-          "name": "Experience Schema",
-          "description": "Required structure for experience files.",
-          "termCode": "experience",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/experience-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-experience-kind",
-          "name": "Experience Kind Schema",
-          "description": "Required structure for experience kind files.",
-          "termCode": "experience-kind",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/experience-kind-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-feature",
-          "name": "Feature Schema",
-          "description": "Required structure for feature files.",
-          "termCode": "feature",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/feature-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-identity",
-          "name": "Identity Schema",
-          "description": "Required structure for the identity file — who the company is.",
-          "termCode": "identity",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/identity-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-phase",
-          "name": "Phase Schema",
-          "description": "Required structure for phase files.",
-          "termCode": "phase",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/phase-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-process",
-          "name": "Process Schema",
-          "description": "Required structure for process files.",
-          "termCode": "process",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/process-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-product",
-          "name": "Product Schema",
-          "description": "Required structure for product files.",
-          "termCode": "product",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/product-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-proficiency-level",
-          "name": "Proficiency Level Schema",
-          "description": "Required structure for proficiency level files.",
-          "termCode": "proficiency-level",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/proficiency-level-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-profile",
-          "name": "Profile Schema",
-          "description": "Required structure for profile files.",
-          "termCode": "profile",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/profile-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-role",
-          "name": "Role Schema",
-          "description": "Required structure for role files.",
-          "termCode": "role",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/role-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-skill",
-          "name": "Skill Schema",
-          "description": "Required structure for skill files.",
-          "termCode": "skill",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/skill-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-source",
-          "name": "Source Schema",
-          "description": "Required structure for source files.",
-          "termCode": "source",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/source-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-strategic-objective",
-          "name": "Strategic Objective Schema",
-          "description": "Required structure for strategic objective files.",
-          "termCode": "strategic-objective",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/strategic-objective-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-strategy",
-          "name": "Strategy Schema",
-          "description": "Required structure for strategy files.",
-          "termCode": "strategy",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/strategy-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-surface",
-          "name": "Surface Schema",
-          "description": "Required structure for surface files.",
-          "termCode": "surface",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/surface-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-track",
-          "name": "Track Schema",
-          "description": "Required structure for track files.",
-          "termCode": "track",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/track-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-value",
-          "name": "Value Schema",
-          "description": "Required structure for value files.",
-          "termCode": "value",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/value-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-vision",
-          "name": "Vision Schema",
-          "description": "Required structure for the vision file — the future the company is working toward.",
-          "termCode": "vision",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/vision-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
+          "name": "Team",
+          "item": "https://companygraph.io/team/"
         }
       ]
     },
@@ -383,9 +132,8 @@
 
 </script>
 <style>
-/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
-   from file:// as well as from the domain. Relative, because this page sits one
-   directory down and a root-absolute path would break the file:// case. */
+/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
+   Relative, because a root-absolute path breaks under file://. */
 @font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
@@ -746,8 +494,6 @@
   /* The hover underline hangs below the text, so the box is taller under the text than over
      it. Mirror the space above, and the box is symmetric about its own text. */
 
-  /* Not one screen: this page has an argument to make in order, so it scrolls and
-     starts at the top rather than centering itself the way the landing page does. */
   main{flex:1; display:flex; align-items:center; padding:2vh 0 6vh}
 
   /* ─── title contract · v1 · shared ─────────────────────────────────
@@ -786,10 +532,9 @@
   @media (max-width:900px){ .tagline{max-width:100%} }
   /* ─── end title contract ────────────────────────────────────────────────── */
 
-  /* The page's one reversal, and it earns the flag: a visitor's first assumption is that a
-     page describing the model was written by someone, and this line says the opposite —
-     nothing here was written by hand; it was generated. */
-  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+  /* The page's one reversal, and the only honest place for it: the headline says nothing
+     leaves, and one thing does — the request itself, to whoever serves the file. */
+  .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
   section{margin-top:clamp(3rem,8vh,5.5rem)}
@@ -797,47 +542,34 @@
      font-weight:700; letter-spacing:-.025em; line-height:1.06;
      font-size:clamp(1.6rem,3vw,2.3rem)}
   h2 em{font-style:normal; color:var(--c-mid)}
-  /* ─── stage contract · v2 · shared ───────────────────────────────────
-     `stage.css` styles the drawing, the card and the dialog, and says in its own header that
-     the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
-     rules a page must bring for a stage to sit on it properly. They are generated from
-     @robertblust/design, like the tokens and the header above them. Editing them here has no
-     effect — the next `npm run design` overwrites them. Change them in the package.
-
-     What the contract says:
-       · the figure     gets its own air above it, and its caption sits clear of the canvas
-                        rather than hard against it, at a measure prose can be read at.
-       · the hint       how to move the drawing is not a sentence about the drawing, so it is
-                        its own line above the caption rather than a clause inside it. Small
-                        and dim: subordinate to the caption, and read first only by someone
-                        looking for a control. Not mono — mono means data here, and an
-                        instruction is prose. `monoScope` would not catch it either way: it
-                        inspects a fixed list of selectors and this class is not on one.
-       · the provenance mono end to end. It is the one line on the page that is entirely
-                        record — a repository, a commit, the folder the block was read from —
-                        and setting only the link and the commit in mono left the sentence
-                        around them looking like prose that happened to contain data.
-
-     The drawing's own behavior is in `stage.js` and `stage.css`, which are byte-identical
-     copies too. A page that carries a stage carries all of it. */
-  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
-  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
-  .figcap b{color:var(--ink); font-weight:600}
-  .stagehint{margin-top:.7rem; font-size:.82rem; color:var(--dim)}
-  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
-           letter-spacing:.06em; color:var(--dim)}
-  /* ─── end stage contract ────────────────────────────────────────────────── */
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+  .lede a{color:var(--c-mid)}
 
-  /* the source commit, stated once, in the face this system reserves for data */
+  /* the same one-datum box the sibling site uses: one fact, stated plainly and
+     once, in the face this system reserves for data */
   .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
         background:var(--raise); border:1.5px solid var(--c-firm);
         font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
 
-  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
-  .rules p b{font-weight:600; color:var(--ink)}
-  .rules p{color:var(--dim); font-size:1rem}
+  .cols{margin-top:2rem; display:grid; gap:1.1rem; align-items:start;
+        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))}
+  .card{background:var(--raise); border:1.5px solid var(--rule); border-radius:12px;
+        padding:1.5rem 1.6rem}
+  .card h3{font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--dim)}
+  .card ul{margin-top:1.1rem; list-style:none; display:grid; gap:.95rem}
+  .card li{font-size:.98rem; line-height:1.45}
+  .card li b{font-weight:600}
+  .card li i{font-style:normal; display:block; color:var(--dim); font-size:.88rem; margin-top:.2rem}
+  .card li i .mono{font-size:.95em; color:var(--ink)}
+  /* five short items across a full-width card read as a list, not a column of stubs */
+  .wide ul{grid-template-columns:repeat(auto-fit, minmax(255px, 1fr)); gap:1.3rem 1.8rem}
+  /* the .never card (declined options): terms use plain --ink like any other card, no separate treatment needed */
 
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p{color:var(--dim); font-size:1rem}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p a{color:var(--c-mid)}
 
   /* ─── prose footer · v1 · credit ───────────────────────────────────
      Generated from @robertblust/design — edit it there and run `npm run design`.
@@ -868,6 +600,171 @@
   footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
   footer a[aria-current="page"]{color:var(--c-firm)}
   /* ─── end prose footer ──────────────────────────────────────────────────*/
+  /* ─── stage contract · v2 · shared ───────────────────────────────────
+     `stage.css` styles the drawing, the card and the dialog, and says in its own header that
+     the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
+     rules a page must bring for a stage to sit on it properly. They are generated from
+     @robertblust/design, like the tokens and the header above them. Editing them here has no
+     effect — the next `npm run design` overwrites them. Change them in the package.
+
+     What the contract says:
+       · the figure     gets its own air above it, and its caption sits clear of the canvas
+                        rather than hard against it, at a measure prose can be read at.
+       · the hint       how to move the drawing is not a sentence about the drawing, so it is
+                        its own line above the caption rather than a clause inside it. Small
+                        and dim: subordinate to the caption, and read first only by someone
+                        looking for a control. Not mono — mono means data here, and an
+                        instruction is prose. `monoScope` would not catch it either way: it
+                        inspects a fixed list of selectors and this class is not on one.
+       · the provenance mono end to end. It is the one line on the page that is entirely
+                        record — a repository, a commit, the folder the block was read from —
+                        and setting only the link and the commit in mono left the sentence
+                        around them looking like prose that happened to contain data.
+
+     The drawing's own behavior is in `stage.js` and `stage.css`, which are byte-identical
+     copies too. A page that carries a stage carries all of it. */
+  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
+  .figcap b{color:var(--ink); font-weight:600}
+  .stagehint{margin-top:.7rem; font-size:.82rem; color:var(--dim)}
+  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
+           letter-spacing:.06em; color:var(--dim)}
+  /* ─── end stage contract ────────────────────────────────────────────────── */
+  .lbl{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.66rem;
+       letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  /* ─── team · v1 · shared ─────────────────────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
+
+     The board /team/ draws: the head rail with its Open-all button, the grid of seats and
+     phases, the drawer a seat's card opens into, the legend, and the phases block under it.
+     These are the rules for the markup lib/render/team.mjs writes, so they belong with the
+     renderer: a page that takes the board from this package and its styling from its own
+     copy is a page whose two halves can drift, and the renderer's next class would land on
+     every site unstyled. The page keeps its shell and the classes other pages share
+     (`.lbl`, `.nm`, `.note`), and the card's own prose measure (`.cbody`), which card.js
+     draws and this block does not.
+  */
+  /* The board. --cols (the seat column) and --phase (the width of each phase column) are
+     declared once and used by the head row and every summary, which is what lines the columns
+     up across rows without a table. Only the seat column is a template track: each cell after
+     it opens a column of its own at --phase, so the board has as many phase columns as the
+     process has phases and never an empty one or a wrapped one. */
+  /* blocks/surfaces.css declares this same base rule for its own .mk. */
+  .mk{width:1.05em; height:1.05em; flex:none; vertical-align:-.16em}
+  .mk.human{color:var(--c-firm)}
+  .mk.agent{color:var(--c-mid)}
+  .hw .mk{width:2.3rem; height:2.3rem}
+
+  .hdrail{display:flex; gap:2rem; align-items:center; justify-content:space-between;
+          padding-bottom:1.1rem; border-bottom:1px solid var(--rule); margin-top:.9rem}
+  .whos{display:flex; gap:2.6rem}
+  .hw{display:flex; gap:.7rem; align-items:center}
+  .hw .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+          font-weight:700; font-size:1.05rem}
+  .openall{background:none; border:1px solid var(--rule); border-radius:5px; color:var(--dim);
+           font:inherit; font-size:.76rem; padding:.28rem .7rem; cursor:pointer}
+  .openall:hover, .openall:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
+
+  /* Three cell marks, one hue. tokens.css allows one hue at four brightnesses and refuses a
+     second, so what a color would have carried is carried by shape. */
+  .g{display:inline-block; width:10px; height:10px; margin:0 1px}
+  .g.ex{background:var(--c-mid); border-radius:50%}
+  .g.su{border:1.4px solid var(--c-weak); border-radius:50%}
+  .g.ga{width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent;
+        border-bottom:10px solid var(--c-firm); vertical-align:-1px}
+  .legend{display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:1.1rem; color:var(--dim);
+          font-size:.76rem}
+  .legend span{display:flex; align-items:center; gap:.45rem}
+
+  .grid{--cols:30%; --phase:1fr; margin-top:0}
+  .ghead{display:grid; grid-template-columns:var(--cols); grid-auto-flow:column;
+         grid-auto-columns:var(--phase); border-bottom:1px solid var(--rule);
+         padding:.9rem 0 .8rem}
+  .ghead > span{text-align:center}
+  .ghead > span:first-child{text-align:left}
+  .phnum{color:var(--c-weak); font-size:.66rem; letter-spacing:.12em; display:block;
+         font-family:"Plex Mono", ui-monospace, Menlo, monospace}
+  .phname{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+          font-weight:700; font-size:.9rem; color:var(--ink)}
+  .grid details{border-bottom:1px solid var(--rule)}
+  .grid summary{display:grid; grid-template-columns:var(--cols); grid-auto-flow:column;
+                grid-auto-columns:var(--phase); align-items:center;
+                list-style:none; cursor:pointer; padding:.62rem 0}
+  .grid summary::-webkit-details-marker{display:none}
+  .grid summary:hover{background:var(--press)}
+  .grid summary:focus-visible{outline:2px solid var(--c-mid); outline-offset:-2px}
+  .grid summary > span{text-align:center}
+  .grid .sname{display:flex; align-items:center; gap:.6rem; text-align:left}
+  .grid .sname .tw{font-weight:600; font-size:.9rem}
+  /* The disclosure triangle is this page's only affordance that a row opens, since the page
+     carries no tooltip: the card is the seat's detail, and a hover showing a shorter version
+     of what a click shows in full is a second answer to one question. */
+  .grid .sname::before{content:""; width:0; height:0; border-style:solid; border-width:4px 0 4px 6px;
+                       border-color:transparent transparent transparent var(--c-weak);
+                       transition:transform .12s ease; flex:none}
+  .grid details[open] .sname::before{transform:rotate(90deg); border-left-color:var(--c-mid)}
+  .grid details[open] .sname .tw{color:var(--c-firm)}
+  .grid details.human summary{background:var(--press)}
+  /* Full width, not an indent: the References table under a role wrapped its URLs at anything
+     narrower. The card's own prose keeps a measure inside it. */
+  .grid .drawer{padding:.3rem 0 1.5rem}
+  .grid .drawer .card{width:100%}
+  @media (prefers-reduced-motion: reduce){ .grid .sname::before{transition:none} }
+  /* The phases in words, under the board that only names them. A grid rather than a
+     table: two columns, the phase and its one line, and the phase column sized to the longest
+     name so the sentences start on one edge. */
+  .phases{margin-top:1.9rem; padding-top:1.5rem; border-top:1px solid var(--rule);
+          display:grid; grid-template-columns:max-content 1fr; gap:.55rem 1.4rem}
+  .phases dt{display:flex; align-items:baseline; gap:.5rem; white-space:nowrap}
+  .phases dd{margin:0; color:var(--dim); font-size:.93rem; line-height:1.5; max-width:72ch}
+  @media (max-width:640px){
+    .phases{grid-template-columns:1fr; gap:.2rem 0}
+    .phases dd{margin-bottom:.9rem}
+  }
+  @media (max-width:900px){
+    /* The board stays a board. Its argument is a column — which seats carry a phase's gate,
+       say, is read off the shape of the column rather than off any one row — so a form with
+       no columns has no argument left to make. The phase names give way to their numbers
+       and the columns narrow; the block under the board is what says which number is which
+       phase, and it earns its place twice over here. */
+    .grid{--cols:minmax(0,1fr); --phase:2.1rem}
+    .ghead .phname{display:none}
+    .ghead .phnum{font-size:.74rem; color:var(--dim); letter-spacing:.08em}
+    .grid summary{padding:.72rem 0}
+    .grid .sname .tw{font-size:.86rem}
+    .g{width:9px; height:9px; margin:0}
+    .g.ga{border-left-width:5px; border-right-width:5px; border-bottom-width:9px}
+    .hdrail{flex-wrap:wrap; gap:1rem}
+    .whos{gap:1.4rem}
+  }
+  @media (max-width:640px){
+    /* Side by side, the head rail's profiles wrap their "holds … of …" line onto a second line
+       and put the last one hard against the edge. One under the other, each reads on one line. */
+    .whos{flex-direction:column; gap:.9rem}
+    .hdrail{align-items:flex-start}
+    .grid{--cols:minmax(0,1fr); --phase:1.8rem}
+    .grid .sname{gap:.42rem}
+    .grid .sname .tw{font-size:.8rem}
+  }
+  /* One board per process when a model holds more than one: the process's name and tagline
+     head its board, one step below the section's h2 and in the title block's own terms: the
+     name in the display face at the weight the phase names use, the tagline in --dim as the
+     title block's is. `section.proc` is a <section>, so the page's own `section` rule would
+     put a section's full gap between the label and the first board; the first sits where
+     the head rail would, and each one after takes the figure section's gap. */
+  .proc{margin-top:.9rem}
+  .proc + .proc{margin-top:clamp(2rem,5vh,3.5rem)}
+  .procname{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem);
+            color:var(--ink)}
+  .proctag{margin-top:.4rem; color:var(--dim); max-width:62ch}
+  /* ─── end team ──────────────────────────────────────────────────────────── */
+  /* The card's own prose keeps a measure inside the full-width drawer. card.js draws it, so
+     the team fence leaves it to the page. */
+  .cbody p, .cbody ul.prose{max-width:72ch}
+  /* The provenance line under the boards: record, so mono end to end, and clear of the rules. */
+  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
+           letter-spacing:.06em; color:var(--dim)}
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
@@ -880,17 +777,31 @@
   @media (max-width:560px){
   }
 </style>
-<!-- The stage — figure, card, expand dialog — is the one component two pages share, so
-     it is a file, not a copy in each page. Relative, like every other asset here: the
-     page stays self-contained in the sense the rule means, nothing off-origin. It comes
-     after the inline block above so the tokens it names are already defined. -->
 <link rel="stylesheet" href="../stage.css">
-<!-- The model this page draws. The stage finds it by the data-stage attribute and fetches the
-     href, so the page names its data once and carries no copy. crossorigin is not decoration:
-     without it the browser will not use the preload for the fetch and asks for the file twice. -->
-<link rel="preload" as="fetch" href="../model.json" data-stage crossorigin>
+<!-- CompanyGraph's own model, which this page's cards read. The card finds it by the
+     data-stage attribute and fetches the href; crossorigin lets the fetch use the preload. -->
+<link rel="preload" as="fetch" href="../company.json" data-stage crossorigin>
 </head>
 <body>
+
+<!-- The two natures, as form rather than as colour: tokens.css allows one hue at four
+     brightnesses and refuses a second in writing, so a filled figure and an outlined machine
+     carry what a second hue would have. The timeline tells its five kinds apart the same way. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="m-human" viewBox="0 0 16 16">
+    <circle cx="8" cy="4.6" r="3.1" fill="currentColor"/>
+    <path d="M1.6 15.4a6.4 6.4 0 0 1 12.8 0z" fill="currentColor"/>
+  </symbol>
+  <symbol id="m-agent" viewBox="0 0 16 16">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <rect x="2" y="5.4" width="12" height="8.6" rx="2.6"/><path d="M8 5.4V3.2"/>
+    </g>
+    <circle cx="8" cy="2.1" r="1.1" fill="currentColor"/>
+    <circle cx="5.7" cy="9.6" r="1.05" fill="currentColor"/>
+    <circle cx="10.3" cy="9.6" r="1.05" fill="currentColor"/>
+  </symbol>
+</defs></svg>
+
 
 <div class="shell">
   <header>
@@ -907,9 +818,9 @@
       </a>
       <nav>
         <div class="navlinks" id="navlinks">
-          <a href="../team/">Team</a>
+          <a href="./" aria-current="page">Team</a>
           <a href="../principles/" data-de="Prinzipien">Principles</a>
-          <a href="./" aria-current="page" data-de="Modell">Model</a>
+          <a href="../model/" data-de="Modell">Model</a>
           <a href="../example/" data-de="Beispiel">Example</a>
           <a href="../talks/" data-de="Vorträge">Talks</a>
           <a href="../billing/" data-de="Abrechnung">Billing</a>
@@ -929,54 +840,149 @@
   <div class="shell">
 
     <div class="title">
-      <h1 data-de="<span class='r70'>Das Modell,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">The model,</span><span class="rcl"><em>drawn</em>.</span></h1>
-      <p class="tagline" data-de="Das Vokabular, in dem eine Firma beschrieben wird – ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist.">The vocabulary a company is described in — one schema per type, drawn as the graph of what references what.</p>
-      <p class="note" data-de="Nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Kern des Modells erzeugt, beim Commit, der neben dem Diagramm steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">Nothing here was written by hand: the page is generated from the model's own core, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
+      <h1 data-de="<span class='r70'>Ein Agent macht die Arbeit,</span><span class='rcl'>ein Mensch hält jedes <em>Gate</em>.</span>"><span class="r70">An agent does the work,</span><span class="rcl">a person holds every <em>gate</em>.</span></h1>
+      <p class="tagline" data-de="Ein KI-Agent hält die Sitze, die spezifizieren, planen, steuern, umsetzen, prüfen, schreiben und übersetzen. Jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält.">An AI agent holds the seats that specify, plan, control, implement, review, write and translate. Every gate is approved by a seat a person holds.</p>
+      <!-- team-note:start -->
+      <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
+    <!-- team-note:end -->
     </div>
 
     <section class="figure-section">
-      <div class="stagehead" id="stagehead">
-        <p class="path mono" id="path"></p>
-        <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
+      <div class="lbl" data-de="Das Team">The team</div>
+      <!-- team:start -->
+      <section class="proc" id="delivery">
+        <h3 class="procname">Delivery</h3>
+        <p class="proctag">How anything we publish is shaped, specified, planned, made and merged, in code and in prose.</p>
+      <div class="hdrail"><div class="whos">
+        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="lbl">human · holds 1 of 8</div></div></div>
+        <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 7 of 8</div></div></div>
+      </div><button class="openall" id="delivery-openall" type="button" data-de="Alle öffnen">Open all</button></div>
+      <div class="grid" id="delivery-board">
+        <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Shape</span></span><span><span class="phnum">02</span><span class="phname">Spec</span></span><span><span class="phnum">03</span><span class="phname">Plan</span></span><span><span class="phnum">04</span><span class="phname">Implement</span></span><span><span class="phnum">05</span><span class="phname">Integrate</span></span></div>
+        <details class="human" id="delivery-owner" data-role="roles/owner">
+          <summary aria-label="Owner, human. executes Shape, Implement, Integrate. approves the gate of Shape, Spec, Plan, Implement, Integrate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-specifier" data-role="roles/specifier">
+          <summary aria-label="Specifier, agent. executes Spec. supports Plan. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Specifier</span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-planner" data-role="roles/planner">
+          <summary aria-label="Planner, agent. executes Plan. supports Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Planner</span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-controller" data-role="roles/controller">
+          <summary aria-label="Controller, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Controller</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-implementer" data-role="roles/implementer">
+          <summary aria-label="Implementer, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Implementer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-reviewer" data-role="roles/reviewer">
+          <summary aria-label="Reviewer, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Reviewer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-writer" data-role="roles/writer">
+          <summary aria-label="Writer, agent. executes Implement. supports Spec. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Writer</span></span><span></span><span><i class="g su"></i></span><span></span><span><i class="g ex"></i></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="delivery-translator" data-role="roles/translator">
+          <summary aria-label="Translator, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Translator</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
       </div>
-      <div class="stage" id="stage">
-        <div class="canvas">
-          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recenter" id="recenter" type="button" data-de="neu zentrieren">recenter</button>
-        </div>
-        <button class="gutter" id="gutter" type="button"
-                aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
-        <aside class="card" id="card" aria-live="polite">
-          <div class="cbody" id="cbody"></div>
-          <div class="cfoot" id="cfoot">
-            <span id="cfootlink"></span>
-          </div>
-        </aside>
+      <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
+      <dl class="phases">
+        <dt><span class="phnum">01</span><span class="phname">Shape</span></dt>
+        <dd>Decide what kind of change this is, how far it reaches, and how much of it gets written down.</dd>
+        <dt><span class="phnum">02</span><span class="phname">Spec</span></dt>
+        <dd>Write what the change must do, completely enough that nobody downstream has to guess.</dd>
+        <dt><span class="phnum">03</span><span class="phname">Plan</span></dt>
+        <dd>Cut the approved specification into pieces that can be worked one at a time.</dd>
+        <dt><span class="phnum">04</span><span class="phname">Implement</span></dt>
+        <dd>Make the thing, and let nothing go forward unread.</dd>
+        <dt><span class="phnum">05</span><span class="phname">Integrate</span></dt>
+        <dd>Put the change where it binds, release what other repositories take from it, and move everything that names it.</dd>
+      </dl>
+      </section>
+      <section class="proc" id="contribution">
+        <h3 class="procname">Contribution</h3>
+        <p class="proctag">How a change offered from outside as a pull request is reviewed and taken, under the same rules a change from inside is held to.</p>
+      <div class="hdrail"><div class="whos">
+        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="lbl">human · holds 2 of 3</div></div></div>
+        <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 1 of 3</div></div></div>
+      </div><button class="openall" id="contribution-openall" type="button" data-de="Alle öffnen">Open all</button></div>
+      <div class="grid" id="contribution-board">
+        <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Propose</span></span><span><span class="phnum">02</span><span class="phname">Consider</span></span><span><span class="phnum">03</span><span class="phname">Review</span></span><span><span class="phnum">04</span><span class="phname">Integrate</span></span></div>
+        <details class="human" id="contribution-owner" data-role="roles/owner">
+          <summary aria-label="Owner, human. executes Consider, Integrate. supports Review. approves the gate of Consider, Review, Integrate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g su"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details class="human" id="contribution-contributor" data-role="roles/contributor">
+          <summary aria-label="Contributor, human. executes Propose. supports Consider, Review. approves the gate of Propose."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Contributor</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g su"></i></span><span><i class="g su"></i></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="contribution-reviewer" data-role="roles/reviewer">
+          <summary aria-label="Reviewer, agent. executes Review. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Reviewer</span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
       </div>
-      <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
-      <p class="figcap" id="figcap" data-de="Ein umrandeter Kasten ist der Ordner, in dem die Schemas liegen. Ein gefülltes Quadrat ist ein Schema. Ein gestrichelter Strich ist ein Feld, das auf einen anderen Typ verweist, beschriftet mit dem Namen des Felds. Anklicken rückt in die Mitte.">An outlined box is the folder the schemas live in. A filled square is a schema. A dashed line is a field that references another type, labeled with the field's name. Click to bring it to the center.</p>
-
-      <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
-           same #path, #fig and #card — and moves them back on close. The URL does not
-           change when it opens. -->
-      <dialog id="stagemodal" class="modal" aria-label="The model, expanded" data-de-aria="Das Modell, vergrössert">
-        <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
-      </dialog>
+      <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
+      <dl class="phases">
+        <dt><span class="phnum">01</span><span class="phname">Propose</span></dt>
+        <dd>Offer the change, under the address the Contributor means to be known by.</dd>
+        <dt><span class="phnum">02</span><span class="phname">Consider</span></dt>
+        <dd>Establish what the change is for, before anyone spends time on how it is written.</dd>
+        <dt><span class="phnum">03</span><span class="phname">Review</span></dt>
+        <dd>Find what is wrong with the change, and hand it to whoever merges as findings rather than as a verdict.</dd>
+        <dt><span class="phnum">04</span><span class="phname">Integrate</span></dt>
+        <dd>Take the change into the default branch, and carry it to whoever vendors what it touched.</dd>
+      </dl>
+      </section>
+      <section class="proc" id="feature-request">
+        <h3 class="procname">Feature request</h3>
+        <p class="proctag">How somebody outside asks for vocabulary or tooling that is not there, as a GitHub issue, and gets an answer they can act on.</p>
+      <div class="hdrail"><div class="whos">
+        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="lbl">human · holds 2 of 2</div></div></div>
+      </div><button class="openall" id="feature-request-openall" type="button" data-de="Alle öffnen">Open all</button></div>
+      <div class="grid" id="feature-request-board">
+        <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Raise</span></span><span><span class="phnum">02</span><span class="phname">Understand</span></span><span><span class="phnum">03</span><span class="phname">Triage</span></span><span><span class="phnum">04</span><span class="phname">Answer</span></span></div>
+        <details class="human" id="feature-request-owner" data-role="roles/owner">
+          <summary aria-label="Owner, human. executes Understand, Triage, Answer. approves the gate of Understand, Triage, Answer."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details class="human" id="feature-request-requestor" data-role="roles/requestor">
+          <summary aria-label="Requestor, human. executes Raise. supports Understand, Answer. approves the gate of Raise."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Requestor</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g su"></i></span><span></span><span><i class="g su"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+      </div>
+      <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
+      <dl class="phases">
+        <dt><span class="phnum">01</span><span class="phname">Raise</span></dt>
+        <dd>Say where it can be answered that the vocabulary would not carry something.</dd>
+        <dt><span class="phnum">02</span><span class="phname">Understand</span></dt>
+        <dd>Turn what somebody asked for into the page they could not write.</dd>
+        <dt><span class="phnum">03</span><span class="phname">Triage</span></dt>
+        <dd>Decide what kind of thing the gap is, and whether it is ours to fill.</dd>
+        <dt><span class="phnum">04</span><span class="phname">Answer</span></dt>
+        <dd>Give the asker something they can act on, whether or not anything will be built.</dd>
+      </dl>
+      </section>
+      <!-- team:end -->
+      <p class="figcap" data-de="Jeder Prozess zeichnet seine eigene Tafel: die Lieferung; Feature-Requests, als GitHub-Issues eröffnet; Beiträge, als Pull-Requests vorgeschlagen. Eine Zeile zeigt, was ein Sitz über die Arbeit hinweg tut, eine Spalte, wer eine Phase berührt. Die Gate-Zeichen sind das Argument: Jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält, und keine Agentenzeile trägt eines. Ein Name neben einem Sitz ist das Profil, das ihn hält; einen Sitz ohne Namen hält ein Mensch, den das Modell nicht nennt. Ein Sitz öffnet seine Karte aus dem Modell.">Each process draws its own board: delivery; feature requests, raised as GitHub issues; contributions, proposed as pull requests. Read a row for what a seat does across the work, and a column for who touches a phase. The gate marks are the argument: every gate is approved by a seat a person holds, and no agent row carries one. A name beside a seat is the profile that holds it; a seat with no name is held by a person the model does not name. A seat opens onto its card from the model.</p>
     </section>
 
     <section>
       <h2 data-de="Wie man es liest">How to read it</h2>
       <div class="rules">
-        <p data-de="<b>Ein Typ ist eine Schema-Datei, benannt nach dem Typ.</b> Ihre Überschrift ist der kanonische Name, und genau diese Zeichenkette wird überall sonst referenziert – es gibt also einen Ort, an dem steht, wie ein Typ heisst, und einen Ort, an dem man es ändert.">
-          <b>A type is one schema file, named for the type.</b> Its heading is the canonical name, and that string is what everything else references — so there is one place that says what a type is called, and one place to change it.</p>
-        <p data-de="<b>Ein Strich zwischen zwei Schemas ist ein Feld, kein Link.</b> Das Feld ist so typisiert, dass es auf einen anderen Typ verweist, und der Strich trägt den Namen des Felds – ein Verweis auf einen Typ, den kein Schema erklärt, ist ein Fehler und kein Link, der irgendwann kaputtgeht.">
-          <b>A line between two schemas is a field, not a link.</b> The field is typed as a reference to another type, and the line carries the field's name — so a reference to a type no schema declares is an error, rather than a link that breaks later.</p>
-        <p data-de="<b>Ein Typ mit einem Besitzer sagt es in einer Zeile.</b> Sein Schema nennt den Besitzer, und im Dateisystem liegen seine Dateien im Ordner des Besitzers – der Besitz steht einmal im Vokabular, und die Ablage folgt daraus.">
-          <b>A type that is owned says so in one line.</b> Its schema names the owner, and on disk its files nest inside the owner's folder — the ownership is stated once, in the vocabulary, and the layout follows from it.</p>
+        <p data-de="<b>Ein Sitz ist eine Rolle, keine Person.</b> Ein Profil hält einige Sitze, und sein Name steht daneben. Einen Sitz ohne Namen hält eine Person; so viel sagt das Modell, nicht aber, wer."><b>A seat is a role, not a person.</b> A profile holds some seats, and its name stands beside them. A seat with no name is held by a person; the model says that much and not who.</p>
+        <p data-de="<b>Ein Gate ist das, ohne das eine Phase nicht verlassen wird.</b> Die meisten gibt der Owner frei. Der Requestor gibt die erste Phase eines Feature-Requests frei, der Contributor die erste Phase eines Beitrags."><b>A gate is what a phase cannot be left without.</b> The Owner approves most of them. The Requestor approves the first phase of a feature request, and the Contributor the first phase of a contribution.</p>
+        <p data-de="<b>Kein Zeichen ist getippt.</b> Jede Zelle wird aus der Phasendatei selbst gelesen, daher kann die Tafel dem Prozess, den sie zeichnet, nicht widersprechen."><b>No mark is typed.</b> Every cell is read off the phase's own file, so the board cannot disagree with the process it draws.</p>
       </div>
     </section>
 
-    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="core" href="https://github.com/companygraph/meta-model/tree/HEAD/core">companygraph/meta-model</a>@<span id="srccommit">HEAD</span> — <span data-de="ein Schema pro Typ, gelesen nach den Regeln in CONVENTIONS.md.">one schema per type, read by the rules in CONVENTIONS.md.</span></p>
+    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/companygraph/mental-model/tree/HEAD/model">companygraph/mental-model</a>@<span id="srccommit">HEAD</span></p>
 
   </div>
 </main>
@@ -992,9 +998,9 @@
 </div>
 
 <script>
-// Same mechanism as the landing page, and the same reason: English is the markup so the
-// page says the right thing before any JS runs, and the choice is remembered per origin —
-// so a visitor who switched to German on the landing page arrives here in German.
+// Same mechanism as the other two pages: English is the markup so the page says the right
+// thing before any JS runs, and the choice is remembered per origin. This page describes
+// that key, which is the only reason it is worth pointing at the code from here.
 (function(){
   /* ─── language · v4 · page ─────────────────────────────────────────────
      One language across three domains, and where it is remembered. Generated
@@ -1215,20 +1221,11 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
-  // The close button's × never changes, so it carries no [data-de] — but its aria-label
-  // does need German, and that lives in the label, not the innerHTML the loop above swaps.
-  var modalClose = document.getElementById("modalclose");
-  var modalCloseEnAria = modalClose ? modalClose.getAttribute("aria-label") : null;
-  // Same reasoning for the dialog itself: its aria-label names the whole stage, not markup
-  // the loop above ever sees.
-  var stageModal = document.getElementById("stagemodal");
-  var stageModalEnAria = stageModal ? stageModal.getAttribute("aria-label") : null;
-
   var UI = {
-    de:{ title:"Modell – CompanyGraph",
-         desc:"Das Vokabular, in dem eine Firma beschrieben wird – ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist. Erzeugt aus dem Kern des Modells, nichts von Hand geschrieben." },
-    en:{ title:"Model — CompanyGraph",
-         desc:"The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand." }
+    de:{ title:"Team – CompanyGraph",
+         desc:"Wer bei CompanyGraph die Arbeit macht: Ein KI-Agent hält die meisten Sitze, und jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält." },
+    en:{ title:"Team — CompanyGraph",
+         desc:"Who does the work at CompanyGraph: an AI agent holds most of the seats, and every gate is approved by a seat a person holds." }
   };
 
   function applyLang(){
@@ -1237,8 +1234,6 @@
     document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").setAttribute("aria-pressed", String(lang === "de"));
     document.getElementById("len").setAttribute("aria-pressed", String(lang === "en"));
-    if (modalClose) modalClose.setAttribute("aria-label", lang === "de" ? modalClose.getAttribute("data-de-aria") : modalCloseEnAria);
-    if (stageModal) stageModal.setAttribute("aria-label", lang === "de" ? stageModal.getAttribute("data-de-aria") : stageModalEnAria);
     document.documentElement.lang = lang;
   }
   function toggle(){ lang = (lang === "de") ? "en" : "de"; langRemember(lang); applyLang(); }
@@ -1273,10 +1268,105 @@
   applyTheme();
 })();
 </script>
-
-
-<script src="../d3.v7.min.js"></script>
 <script src="../card.js"></script>
-<script src="../stage.js"></script>
+<script>
+  var STAGE_PAGE = "../";          // the page that draws this model on the stage
+  var MODEL_CARD = "team";        // the name card.js reports a failed read under
+  /* ─── model card · v2 · shared ─────────────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
+
+     The card glue for a board of seats: a seat's card is rendered by card.js the first time
+     its row opens, again when the language has changed since, and on arrival at a seat's
+     address. It moved here from /team/ with four things generalized and nothing else: where a
+     card's links go, the rows it wires (every board's, not one board's), the Open-all button
+     (one per board), and the name it gives card.js.
+
+     This block has a contract with the page around it that `design:check` cannot see, because
+     the check only compares bytes between the markers. The page must load card.js before it
+     and declare, above this fence in the same script:
+
+       var STAGE_PAGE = "../model/";   // the page that draws this model on the stage
+       var MODEL_CARD = "team";        // the name card.js reports a failed read under
+
+     and carry what lib/render/team.mjs writes, plus the provenance line
+     (`#srclink` with its `data-src`, and `#srccommit`) that every model page has.
+  */
+  // The seats are in the markup; the cards are not. A card per seat at rest would be a copy of
+  // the model's own words for every seat, in a page whose site already serves the model as a
+  // file, and a page check that reads the body at rest would read them all. So a card is rendered
+  // the first time its row opens, and again when the language has changed since — the way the
+  // timeline renders an experience and the stage renders a card on focus.
+  (function(){
+    function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
+    rbCard.data(MODEL_CARD, function (data) {
+      // The provenance line names the commit this was read from, as the timeline's does; the
+      // markup carries HEAD only until the data arrives.
+      var src = document.getElementById("srclink");
+      src.href = "https://github.com/" + data.repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
+      document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
+      var byId = {};
+      data.entities.forEach(function (e) { byId[e.id] = e; });
+      // The href the timeline already builds: a visitor who clicked a skill wants to read it with
+      // its references around it, and the stage's dialog is where one node is read.
+      function goLink(id){
+        var a = document.createElement("a");
+        a.className = "go"; a.textContent = byId[id].name;
+        // Where a seat links: the page that draws this model on the stage. A site declares it,
+        // because on one site that is /model/ and on another the landing page, and a shared file
+        // carrying either would send the other site's visitors to the wrong page.
+        a.href = STAGE_PAGE + "?stage=expanded#" + id;
+        return a;
+      }
+      // Rendered once per row, not per seat: a seat on two boards is two rows, and each row's
+      // card is its own element, so remembering the seat left the second row's card empty.
+      var seen = {};
+      function ensure(d){
+        var id = d.getAttribute("data-role"), L = lang();
+        if (seen[d.id] === L) return;
+        rbCard.render(byId[id], d.querySelector(".cbody"), d.querySelector(".cfoot span"),
+          { data: data, lang: L, link: goLink });
+        seen[d.id] = L;
+      }
+      // Every board's rows. One process draws one board and a model with several draws one per
+      // process, each a .grid; a card opens the same way on any of them.
+      var rows = [].slice.call(document.querySelectorAll(".grid details"));
+      rows.forEach(function (d) {
+        d.addEventListener("toggle", function(){ if (d.open) ensure(d); });
+      });
+      // A link must land: arriving on /team/#reviewer opens that seat rather than scrolling to a
+      // shut row whose name is all the visitor sees.
+      function fromHash(){
+        var id = location.hash.slice(1); if (!id) return;
+        var d = document.getElementById(id);
+        if (d && d.tagName === "DETAILS") { d.open = true; ensure(d); }
+      }
+      window.addEventListener("hashchange", fromHash);
+      fromHash();
+      // Re-render what is open when the language changes, and leave what is shut alone: a shut
+      // row renders on its next open, in whatever language is current then.
+      new MutationObserver(function(){
+        rows.forEach(function (d) { if (d.open) ensure(d); });
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+
+      function label(shut){
+        return shut ? (lang() === "de" ? "Alle schliessen" : "Close all")
+                    : (lang() === "de" ? "Alle öffnen" : "Open all");
+      }
+      // One Open-all per board, and it opens its own board only. The renderer writes each board's
+      // head rail immediately before its grid, so the rail's next sibling is the board it heads.
+      [].slice.call(document.querySelectorAll(".openall")).forEach(function (all) {
+        var board = all.closest(".hdrail").nextElementSibling;
+        var mine = [].slice.call(board.querySelectorAll("details"));
+        all.addEventListener("click", function(){
+          var shut = mine.some(function (d) { return !d.open; });
+          mine.forEach(function (d) { d.open = shut; if (shut) ensure(d); });
+          all.textContent = label(shut);
+          all.setAttribute("data-de", shut ? "Alle schliessen" : "Alle öffnen");
+        });
+      });
+    });
+  })();
+  /* ─── end model card ──────────────────────────────────────────────────── */
+</script>
 </body>
 </html>
