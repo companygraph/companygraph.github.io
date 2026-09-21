@@ -1,9 +1,9 @@
-// Renders the two artifacts into every region of this site derived from the model —
+// Renders the three artifacts into every region of this site derived from the model —
 // `npm run pages` and `npm run pages:check`.
 //
 // Node built-ins only, and no network. That is the property worth keeping: the parser is a
 // dependency and is not on disk until `npm ci` has run, so a check that needed it could not run
-// in the cheap half of CI. Everything here is a pure function of two committed files.
+// in the cheap half of CI. Everything here is a pure function of three committed files.
 //
 // The pin guard is what would otherwise be a sentence in AGENTS.md saying which command to run
 // first. An artifact that declares its own commit cannot be rendered stale, so the order of
@@ -16,7 +16,7 @@ import { writeJsonLd } from "./jsonld.mjs";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PINS = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
 // Which pin each artifact is built from, so each is held to its own commit.
-const ARTIFACTS = { example: "meta-model", model: "meta-model" };
+const ARTIFACTS = { example: "meta-model", model: "meta-model", company: "mental-model" };
 const { repo, commit } = PINS["meta-model"];
 
 const data = {};

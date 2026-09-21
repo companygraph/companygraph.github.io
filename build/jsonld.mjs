@@ -1,15 +1,17 @@
-// What the two stage pages show, said in the graph. Both drew a model and described themselves
-// to a machine only as a WebPage, so the data behind them was reachable by scraping a script
+// What the stage pages show, said in the graph. Each drew a model and described itself to a
+// machine only as a WebPage, so the data behind them was reachable by scraping a script
 // element out of rendered HTML and no other way — which is the work these nodes exist to make
 // unnecessary.
 //
-// The two are not the same kind of thing. `/example/` holds a company: an identity, profiles,
+// They are not all the same kind of thing. `/example/` holds a company: an identity, profiles,
 // experiences, skills, values, a vision, so it is a Dataset. `/model/` holds nine documents
 // stating the structure a file must carry, which are records about structure rather than about
 // a company, so it is a DefinedTermSet. Schema.org gives a term set no `distribution` — that
 // property takes a DataDownload and belongs to Dataset alone — so the file hangs off `encoding`,
 // which takes a MediaObject, and a DataDownload is not used there either because its own
-// definition is "all or part of a Dataset in downloadable form".
+// definition is "all or part of a Dataset in downloadable form". The landing page holds
+// CompanyGraph itself, described in its own vocabulary, which is a company again and so a
+// Dataset like the example, under the instance's own license rather than the meta-model's.
 //
 // The terms are generated. A term set whose terms are absent names a vocabulary without naming
 // a word of it, and nine names maintained beside a model that already holds them is the drift
@@ -17,9 +19,11 @@
 // `Experience` rather than `Experience Schema` reads better and is a transformation the model
 // never authorized.
 //
-// This renderer owns the tail of each graph, not the head. The four nodes before it —
-// Organization, WebSite, WebPage, BreadcrumbList — are this site's own and stay hand-written,
-// so the node is appended and the head is passed through untouched.
+// This renderer owns the tail of each graph, not the head. The nodes before it are this site's
+// own and stay hand-written, so the node is appended and the head is passed through untouched.
+// Each page names its head: the stage pages open with Organization, WebSite, WebPage,
+// BreadcrumbList, and the landing page, which has no breadcrumb, with the person, the
+// organization, the website, the software and the page.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,12 +31,20 @@ import { fileURLToPath } from "node:url";
 const HERE = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://companygraph.io";
 const LICENSE = "https://www.apache.org/licenses/LICENSE-2.0";
+// companygraph/mental-model is CC BY 4.0, not the meta-model's Apache 2.0.
+const INSTANCE_LICENSE = "https://creativecommons.org/licenses/by/4.0/";
 const CREATOR = { "@id": `${SITE}/#organization` };
 
-// The four nodes this site writes by hand, in the order every page carries them. The renderer
-// replaces what follows and refuses a page whose head is not this, rather than appending to a
-// graph it does not recognize.
-const HEAD = ["Organization", "WebSite", "WebPage", "BreadcrumbList"];
+// The nodes this site writes by hand, in the order each page carries them. The renderer
+// replaces what follows and refuses a page whose head is not its own, rather than appending to
+// a graph it does not recognize. The landing page comes last, so a stage page's refusal is
+// what a broken fixture reports first.
+const STAGE_HEAD = ["Organization", "WebSite", "WebPage", "BreadcrumbList"];
+const PAGES = [
+  { key: "example", file: "example/index.html", head: STAGE_HEAD },
+  { key: "model", file: "model/index.html", head: STAGE_HEAD },
+  { key: "company", file: "index.html", head: ["Person", "Organization", "WebSite", "SoftwareSourceCode", "WebPage"] },
+];
 
 export function terms(model, repo) {
   return model.entities.map((e) => ({
@@ -47,6 +59,25 @@ export function terms(model, repo) {
 }
 
 function nodeFor(dir, data, repo) {
+  if (dir === "company") {
+    return {
+      "@type": "Dataset",
+      "@id": `${SITE}/#dataset`,
+      // As the example's: the name comes from the instance, and so does the repository, which
+      // the artifact names because it is not the meta-model.
+      name: `${data.company.root} — the company described in CompanyGraph`,
+      description: "CompanyGraph described in the vocabulary it publishes: its direction, the roles and processes it works by, and what it builds.",
+      url: `${SITE}/`,
+      license: INSTANCE_LICENSE,
+      creator: CREATOR,
+      isBasedOn: `https://github.com/${data.company.repo}`,
+      distribution: {
+        "@type": "DataDownload",
+        contentUrl: `${SITE}/company.json`,
+        encodingFormat: "application/json",
+      },
+    };
+  }
   if (dir === "example") {
     return {
       "@type": "Dataset",
@@ -88,9 +119,8 @@ const RE = /(<script type="application\/ld\+json">\n)([\s\S]*?)(\n<\/script>)/;
 export function writeJsonLd(data, { check = false, root = HERE, repo } = {}) {
   if (!repo) throw new Error("writeJsonLd needs the repo from source.json");
   const stale = [];
-  for (const dir of ["example", "model"]) {
+  for (const { key: dir, file: rel, head: HEAD } of PAGES) {
     if (!data[dir]) throw new Error(`no artifact for ${dir}`);
-    const rel = `${dir}/index.html`;
     const file = path.join(root, rel);
     const page = fs.readFileSync(file, "utf8");
     const m = RE.exec(page);

@@ -8,7 +8,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 
 | Path | |
 | --- | --- |
-| `/` | The landing page. One screen: what CompanyGraph is, and the way to the model. |
+| `/` | The landing page: what CompanyGraph is, and CompanyGraph's own model, drawn on the stage. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
 | `/model/` | The model's own vocabulary, drawn as the graph of what references what — one schema per type. |
@@ -22,7 +22,8 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 
 ## Contents
 
-- `index.html`, `billing/`, `privacy/` — the three prose pages, each self-contained.
+- `index.html`, `billing/`, `privacy/` — the prose pages, each self-contained. The landing page
+  also carries a stage, described with the stage pages below.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
 - `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` — one narrated clip per slide and
@@ -32,23 +33,28 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
   at them relatively, so the deck still opens from `file://`.
 - `stage.css`, `stage.js`, `d3.v7.min.js` — **the stage**: the figure, the card and the expand
-  dialog that draw the artifact a page names. The one component two pages share, so they are three
-  files at the root that each page links relatively (`../stage.css`, `../stage.js`,
-  `../d3.v7.min.js`) rather than a copy inside each page. `stage.js` knows no name from either
+  dialog that draw the artifact a page names. The one component the stage pages share, so they
+  are files at the root that each page links relatively (`stage.css` from the landing page,
+  `../stage.css` from the others) rather than a copy inside each page. `stage.js` knows no name from either
   page: it fetches whichever `<link>` the page marks `data-stage`, and takes the folder for
-  its source link from `#srclink`'s `data-src`. Edit them here and both
-  pages get it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
+  its source link from `#srclink`'s `data-src`. Edit them here and every
+  stage page gets it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
   one copy, reached relatively — and `npm run test:d3` asserts it is still the pinned
   package's build, byte for byte.
-- `example/` and `model/` — `index.html` each, the two stage pages: their own prose and inline
-  `<style>`, the stage above linked in, and a preload link naming the artifact the stage
-  draws. One pin drives both, in two steps — `build/build.mjs` writes `example.json` and
-  `model.json` (or checks both still match, `--check`) by reading `meta-model/example` and
-  `meta-model/core` at the commit `source.json` names, and `build/pages.mjs` renders each
-  artifact's JSON-LD graph into its page (or checks both still match, `--check`), touching
+- `example/` and `model/` — `index.html` each, the stage pages beside the landing page: their
+  own prose and inline `<style>`, the stage above linked in, and a preload link naming the
+  artifact the stage draws. Two steps build what the stage pages draw — `build/build.mjs`
+  writes `example.json` and `model.json` by reading `meta-model/example` and `meta-model/core`
+  at the `meta-model` pin, and `company.json`, drawn on the landing page, by reading
+  `companygraph/mental-model`'s `model/` against its vendored `meta/core/` at the
+  `mental-model` pin (or checks each still matches, `--check`); `build/pages.mjs` renders each
+  artifact's JSON-LD graph into its page (or checks each still matches, `--check`), touching
   neither the network nor the parser.
-- `source.json` — the one pin for the site: a repo and a commit of `companygraph/meta-model`,
-  the one thing the generated pages are allowed to name from the model.
+- `source.json` — the site's pins, by name: `meta-model`, a commit of `companygraph/meta-model`
+  for the vocabulary and the example, and `mental-model`, a commit of
+  `companygraph/mental-model` for CompanyGraph's own model. They are the one thing the
+  generated pages are allowed to name from a model, and `npm run pin:check` reports how far
+  each is behind.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png`,
@@ -70,7 +76,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 
 An outlined square holding a filled one, with a line out to a second filled square: the model's two kinds of edge, drawn once. **Containment** — an entity that owns collections is a folder holding its own file — is the outlined square around the filled one. **Reference** — by canonical name, to something nothing owns — is the line out to the square beside it. Nothing else is in the glyph; a mark that needs a third element to make its point is not this one.
 
-The hero figure animates two unlike trees toward that same shape — one small, one much larger — because that convergence is where the model came from, not a diagram either tree drew on its own. The mark is where the animation lands; `logo.svg` and `favicon.svg` are that same destination, held still.
+`logo.svg` and `favicon.svg` are the mark at the two sizes it has to survive.
 
 ## Running it
 
@@ -83,10 +89,10 @@ npm run verify                     # renders every page and asserts the DOM
 npm run og:check                   # do the seven share cards still show their pages?
 npm run test:og                    # the card check's own tests (node --test, no deps)
 npm run og                         # re-renders all seven share cards after a visual change
-npm run build                      # writes example.json and model.json from meta-model at the pin
-npm run build:check                # fails if either artifact has drifted from source.json's commit
-npm run pages                      # renders both pages' JSON-LD graphs from the artifacts
-npm run pages:check                # fails if either graph has drifted from the artifacts
+npm run build                      # writes example.json, model.json and company.json from their pins
+npm run build:check                # fails if any artifact has drifted from its pin's commit
+npm run pages                      # renders each page's JSON-LD graph from its artifact
+npm run pages:check                # fails if any graph has drifted from its artifact
 npm run sitemap                    # date each sitemap URL from its page's last commit — run before committing a page
 npm run sitemap:check              # are those dates still what git says?
 

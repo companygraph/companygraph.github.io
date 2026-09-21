@@ -1,16 +1,19 @@
-// Writes the example instance and the model vocabulary out as two committed artifacts,
-// `example.json` and `model.json`, or checks that those files still match what the pin
-// parses to — `npm run build` and `npm run build:check`. This is the only script in this
-// repository that reaches the network or the parser; everything derived from the two files
-// it writes is rendered by `build/pages.mjs` without touching either. `source.json`, at the
-// repository root, holds the site's pins by name, and each target names the pin it is drawn
-// from: both artifacts here come from the `meta-model` pin's one commit of
-// `companygraph/meta-model` — the instance from `example/`, the vocabulary from `core/`.
+// Writes the example instance, the model vocabulary and CompanyGraph's own instance out as
+// three committed artifacts, `example.json`, `model.json` and `company.json`, or checks that
+// those files still match what their pins parse to — `npm run build` and `npm run build:check`.
+// This is the only script in this repository that reaches the network or the parser;
+// everything derived from the files it writes is rendered by `build/pages.mjs` without
+// touching either. `source.json`, at the repository root, holds the site's pins by name, and
+// each target names the pin it is drawn from: `example.json` and `model.json` come from the
+// `meta-model` pin's one commit of `companygraph/meta-model` — the example from `example/`, the
+// vocabulary from `core/` — and `company.json` from the `mental-model` pin's commit of
+// `companygraph/mental-model`.
 //
 // Each is read at exactly the commit its pin names: from a local checkout when the pin's
-// variable (`META_MODEL` for `meta-model`) points at one whose HEAD is that commit, otherwise
-// from GitHub — one call to the git trees API per pinned commit for the whole file list,
-// shared by every target on that pin, then the raw files each target needs. No tarball, so nothing to untar, and no dependency. GITHUB_TOKEN is sent if
+// variable (`META_MODEL` for `meta-model`, `MENTAL_MODEL` for `mental-model`) points at one
+// whose HEAD is that commit, otherwise from GitHub — one call to the git trees API per pinned
+// commit for the whole file list, shared by every target on that pin, then the raw files each
+// target needs. No tarball, so nothing to untar, and no dependency. GITHUB_TOKEN is sent if
 // present and never printed.
 //
 // The parser comes from `companygraph-meta-model`, pinned by tag — the same repository this
@@ -30,11 +33,12 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const PINS = JSON.parse(fs.readFileSync(path.join(here, "..", "source.json"), "utf8"));
 
 // The checkout a pin may be read from instead of GitHub, by the variable that names it.
-const LOCAL_ENV = { "meta-model": "META_MODEL" };
+const LOCAL_ENV = { "meta-model": "META_MODEL", "mental-model": "MENTAL_MODEL" };
 
 // One entry per generated page. `pin` names the entry of `source.json` it is drawn from, and
-// `sub` is the folder inside that pin's checkout each target reads; `readLocal`/`readRemote` return its files with that prefix stripped, so the
-// two parsers see the same shape of map regardless of where the files came from. `finish`,
+// `sub` is the folder inside that pin's checkout each target reads; `readLocal`/`readRemote`
+// return its files with that prefix stripped, so the parsers see the same shape of map
+// regardless of where the files came from. `finish`,
 // when present, adjusts the parsed data before it is written — the model target uses it to
 // turn each edge's field name into the label the shared stage draws (spec §4), and to read
 // each schema in the card's order rather than the file's: R9 fixes `## File Location` first
@@ -55,6 +59,13 @@ const TARGETS = [
       }
     },
   },
+  // CompanyGraph's own instance, drawn on the landing page. An instance carries the core it is
+  // written against, vendored at `meta/core/`, so its schemas are read from the same commit as
+  // its pages, as blust.ch reads the reference instance. It is the one artifact from another
+  // repository, so it names that repository: `card.js` and `stage.js` link a card to its file
+  // through `repo` and fall back to the meta-model without it. The other two need no `repo`,
+  // because that fallback is already theirs.
+  { dir: "company", pin: "mental-model", parse: parseInstance, sub: "model/", schemas: "meta/core/", repo: true },
 ];
 
 async function readLocal({ commit, env }, sub) {
@@ -121,7 +132,7 @@ for (const target of TARGETS) {
   // the file on GitHub, and it has to be the path in the repository the files came from. The
   // parser used to hardcode `example/model/`, which happened to be right here and was a 404 on
   // every sibling site.
-  const data = { ...target.parse(files, { sub: target.sub, schemas }), commit };
+  const data = { ...target.parse(files, { sub: target.sub, schemas }), commit, ...(target.repo ? { repo } : {}) };
   if (target.finish) target.finish(data);
 
   const OUT = path.join(here, "..", `${target.dir}.json`);

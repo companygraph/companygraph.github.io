@@ -11,6 +11,7 @@ import { writeJsonLd, terms } from "./jsonld.mjs";
 const FIXTURE = {
   example: { commit: "0".repeat(40), root: "Someone", rootId: "identity", types: [], entities: [], edges: [] },
   model:   { commit: "0".repeat(40), root: "Core", rootId: null, types: [], entities: [], edges: [] },
+  company: { commit: "1".repeat(40), repo: "example/instance", root: "Acme", rootId: "identity", types: [], entities: [], edges: [] },
 };
 
 const SCHEMAS = {
@@ -46,11 +47,21 @@ function ldScratch() {
     fs.writeFileSync(path.join(dir, d, "index.html"),
       `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
   }
-  return { dir, doc };
+  // The landing page opens its graph with five nodes of its own and no breadcrumb.
+  const landing = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone" },
+    { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
+    { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
+    { "@type": "SoftwareSourceCode", "@id": "https://companygraph.io/#software", name: "CompanyGraph" },
+    { "@type": "WebPage", "@id": "https://companygraph.io/#webpage", name: "Kept" },
+  ] };
+  fs.writeFileSync(path.join(dir, "index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(landing, null, 2)}\n</script>\n</head>\n`);
+  return { dir, doc, landing };
 }
 
 test("writeJsonLd appends its node and leaves the four existing ones untouched", () => {
-  const { dir, doc } = ldScratch();
+  const { dir, doc, landing } = ldScratch();
   writeJsonLd(SCHEMAS, { check: false, root: dir, repo: "example/meta" });
   const read = (d) => JSON.parse(fs.readFileSync(path.join(dir, d, "index.html"), "utf8")
     .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
@@ -63,6 +74,14 @@ test("writeJsonLd appends its node and leaves the four existing ones untouched",
   const example = read("example");
   assert.equal(example[4]["@type"], "Dataset");
   assert.equal(example[4].distribution.contentUrl, "https://companygraph.io/example.json");
+  const home = read(".");
+  assert.equal(home.length, 6, "five kept plus one appended");
+  assert.deepEqual(home.slice(0, 5), landing["@graph"], "the landing page's own nodes are untouched");
+  assert.equal(home[5]["@type"], "Dataset");
+  assert.equal(home[5].distribution.contentUrl, "https://companygraph.io/company.json");
+  // The instance is its own repository under its own license, not the meta-model's.
+  assert.equal(home[5].isBasedOn, "https://github.com/example/instance");
+  assert.equal(home[5].license, "https://creativecommons.org/licenses/by/4.0/");
 });
 
 test("writeJsonLd is idempotent: a second run is byte-identical and check reports nothing", () => {
@@ -74,10 +93,12 @@ test("writeJsonLd is idempotent: a second run is byte-identical and check report
   const before = {
     example: fs.readFileSync(path.join(dir, "example", "index.html"), "utf8"),
     model: fs.readFileSync(path.join(dir, "model", "index.html"), "utf8"),
+    home: fs.readFileSync(path.join(dir, "index.html"), "utf8"),
   };
   assert.deepEqual(writeJsonLd(SCHEMAS, { check: false, root: dir, repo: "example/meta" }), []);
   assert.equal(fs.readFileSync(path.join(dir, "example", "index.html"), "utf8"), before.example);
   assert.equal(fs.readFileSync(path.join(dir, "model", "index.html"), "utf8"), before.model);
+  assert.equal(fs.readFileSync(path.join(dir, "index.html"), "utf8"), before.home);
   assert.deepEqual(writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }), []);
 });
 
@@ -168,5 +189,27 @@ test("source.json names both pins, each with a repo and a commit", () => {
   for (const [name, pin] of Object.entries(pins)) {
     assert.match(pin.repo, /^companygraph\//, `${name}.repo`);
     assert.match(pin.commit, /^[0-9a-f]{40}$/, `${name}.commit`);
+  }
+});
+
+// The landing page draws CompanyGraph's own instance, built from the second pin. The file is
+// read here rather than a fixture because what is asserted is that the committed artifact is
+// the instance at that pin, whole: a root, and no edge pointing outside it.
+test("company.json is the instance at the pin, with a root and edges", () => {
+  const root = path.join(import.meta.dirname, "..");
+  const pins = JSON.parse(fs.readFileSync(path.join(root, "source.json"), "utf8"));
+  const data = JSON.parse(fs.readFileSync(path.join(root, "company.json"), "utf8"));
+  assert.equal(data.commit, pins["mental-model"].commit);
+  // card.js links a card to github.com/<repo>/blob/<commit>/<path> and falls back to
+  // companygraph/meta-model when repo is missing, which is the wrong repository here.
+  assert.equal(data.repo, pins["mental-model"].repo);
+  assert.equal(data.root, "CompanyGraph");
+  assert.equal(data.rootId, "identity");
+  assert.ok(data.entities.length > 0, "entities");
+  assert.ok(data.edges.length > 0, "edges");
+  const ids = new Set(data.entities.map((e) => e.id));
+  for (const edge of data.edges) {
+    assert.ok(ids.has(edge.from), `edge from ${edge.from}`);
+    assert.ok(ids.has(edge.to), `edge to ${edge.to}`);
   }
 });

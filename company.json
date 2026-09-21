@@ -1,0 +1,5183 @@
+{
+  "commit": "4406e7d3dcd4c5808a48f4a7a02e587a192153af",
+  "root": "CompanyGraph",
+  "rootId": "identity",
+  "types": [
+    {
+      "type": "concept",
+      "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "domain",
+      "folder": "domains",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "feature",
+      "folder": "features",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "identity",
+      "folder": null,
+      "owner": null,
+      "singular": true
+    },
+    {
+      "type": "phase",
+      "folder": "phases",
+      "owner": "process",
+      "singular": false
+    },
+    {
+      "type": "process",
+      "folder": "processes",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "product",
+      "folder": "products",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "profile",
+      "folder": "profiles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "role",
+      "folder": "roles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "source",
+      "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "strategic-objective",
+      "folder": "strategic-objectives",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "strategy",
+      "folder": "strategies",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "surface",
+      "folder": "surfaces",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "track",
+      "folder": "tracks",
+      "owner": "process",
+      "singular": false
+    },
+    {
+      "type": "value",
+      "folder": "values",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "vision",
+      "folder": null,
+      "owner": null,
+      "singular": true
+    }
+  ],
+  "entities": [
+    {
+      "id": "concepts/agent-pass",
+      "type": "concept",
+      "name": "Agent pass",
+      "tagline": "An agent reading a company's pages against every rule and every schema's writing rules: the half of validation every repository has, and the only one that reaches what no script can, such as whether a definition says what a thing is.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Rule",
+                  "many",
+                  ""
+                ],
+                [
+                  "Schema",
+                  "many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Rule",
+                "many",
+                ""
+              ],
+              [
+                "Schema",
+                "many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/agent-pass.md"
+    },
+    {
+      "id": "concepts/canonical-name",
+      "type": "concept",
+      "name": "Canonical name",
+      "tagline": "The one name an entity goes by: its first heading, exactly as written, and never a field, its filename or any fallback between them.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "H1",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "H1",
+                "synonym"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/canonical-name.md"
+    },
+    {
+      "id": "concepts/check",
+      "type": "concept",
+      "name": "Check",
+      "tagline": "One assertion a script makes about a page or a schema, holding part of one rule and naming it when it fails, read from the same schemas an agent reads rather than from a copy of its own.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Rule",
+                  "one",
+                  "cited rule"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Rule",
+                "one",
+                "cited rule"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/check.md"
+    },
+    {
+      "id": "concepts/core",
+      "type": "concept",
+      "name": "Core",
+      "tagline": "The vocabulary any company can be described in, shipped as one unit — its types, a schema for each and the conventions — and copied whole into an instance, never edited there.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Type",
+                  "one to many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Type",
+                "one to many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/core.md"
+    },
+    {
+      "id": "concepts/entity",
+      "type": "concept",
+      "name": "Entity",
+      "tagline": "One thing a company knows about, written down as one Markdown file: fields in its frontmatter, prose in its body, and its name in its first heading.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Entität",
+                  "translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Entität",
+                "translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Type",
+                  "one",
+                  ""
+                ],
+                [
+                  "Canonical name",
+                  "one",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Type",
+                "one",
+                ""
+              ],
+              [
+                "Canonical name",
+                "one",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/entity.md"
+    },
+    {
+      "id": "concepts/instance",
+      "type": "concept",
+      "name": "Instance",
+      "tagline": "One company described in the vocabulary: a repository of its own holding the core it took, at the release it names, beside the company's own pages, so a graph written last year still says what it meant.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "mental model",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "mental model",
+                "synonym"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Core",
+                  "one",
+                  "vendored core"
+                ],
+                [
+                  "Pack",
+                  "many",
+                  ""
+                ],
+                [
+                  "Entity",
+                  "many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Core",
+                "one",
+                "vendored core"
+              ],
+              [
+                "Pack",
+                "many",
+                ""
+              ],
+              [
+                "Entity",
+                "many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/instance.md"
+    },
+    {
+      "id": "concepts/ownership",
+      "type": "concept",
+      "name": "Ownership",
+      "tagline": "One type's entities belonging to an entity of another so completely that they mean nothing without it: an experience without its person, a phase without its process. What is owned sits inside its owner's folder.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Type",
+                  "one",
+                  "owner"
+                ],
+                [
+                  "Type",
+                  "one",
+                  "owned"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Type",
+                "one",
+                "owner"
+              ],
+              [
+                "Type",
+                "one",
+                "owned"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/ownership.md"
+    },
+    {
+      "id": "concepts/pack",
+      "type": "concept",
+      "name": "Pack",
+      "tagline": "Vocabulary only some kinds of company need at all, shipped beside core as a unit of its own: types a company without that need should not carry, rather than types it may leave empty.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Type",
+                  "one to many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Type",
+                "one to many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/pack.md"
+    },
+    {
+      "id": "concepts/pin",
+      "type": "concept",
+      "name": "Pin",
+      "tagline": "The visible line in which one repository takes another's release or commit, moved only when someone decides it should move, so a pin that is behind is intent until that someone calls it drift.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Release",
+                  "maybe one",
+                  "pinned release"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Release",
+                "maybe one",
+                "pinned release"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/pin.md"
+    },
+    {
+      "id": "concepts/reference",
+      "type": "concept",
+      "name": "Reference",
+      "tagline": "One entity naming another in a field or a table cell the schema declares, which makes the two an edge of the graph rather than two pages that happen to mention each other.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Entity",
+                  "one",
+                  "target"
+                ],
+                [
+                  "Canonical name",
+                  "one",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Entity",
+                "one",
+                "target"
+              ],
+              [
+                "Canonical name",
+                "one",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/reference.md"
+    },
+    {
+      "id": "concepts/release",
+      "type": "concept",
+      "name": "Release",
+      "tagline": "A version of the vocabulary fixed under a tag, with notes saying what changed for whoever takes it, what breaks and how to take it; the tag is the whole of it, and nothing is published anywhere else.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "tag",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "tag",
+                "synonym"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Core",
+                  "one",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Core",
+                "one",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/release.md"
+    },
+    {
+      "id": "concepts/rule",
+      "type": "concept",
+      "name": "Rule",
+      "tagline": "One of the numbered conventions every instance is held to — one entity per file, a reference that resolves — each with its reason, as against a schema's writing rules, which say what makes one entity of a type a good one.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "convention",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "convention",
+                "synonym"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/rule.md"
+    },
+    {
+      "id": "concepts/schema",
+      "type": "concept",
+      "name": "Schema",
+      "tagline": "The Markdown page that says what every entity of one type carries: the fields its frontmatter holds, the sections its body has, and what separates a good entity of the type from one that merely has the shape.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/concepts/schema.md"
+    },
+    {
+      "id": "concepts/type",
+      "type": "concept",
+      "name": "Type",
+      "tagline": "A kind of thing a company knows about — a value, a role, a process — named in the singular, whose entities are kept together in a folder named in the plural.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Typ",
+                  "translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Typ",
+                "translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Schema",
+                  "one",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Schema",
+                "one",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/type.md"
+    },
+    {
+      "id": "domains/core",
+      "type": "domain",
+      "name": "Core",
+      "tagline": "The words we mean something exact by when we describe a company: what its graph is made of, how our vocabulary reaches it and stays fixed there, and how the graph is held to its schemas. What only some kinds of company need is left to packs.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/domains/core.md"
+    },
+    {
+      "id": "features/a-vocabulary-to-describe-a-company-in",
+      "type": "feature",
+      "name": "A vocabulary to describe a company in",
+      "tagline": "A company can write down what it knows as entities of named types, each held to a schema, instead of in whatever shape the last tool left it in.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Type",
+          "Schema",
+          "Entity",
+          "Core"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The core types, one schema per type, the conventions that make a graph of Markdown files checkable, and a worked example, vendored into an instance at a release the instance names. It stops at the vocabulary: which types a company fills, and what it writes in them, is the company's.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-vocabulary-to-describe-a-company-in.md"
+    },
+    {
+      "id": "features/an-agent-reads-the-model",
+      "type": "feature",
+      "name": "An agent reads the model",
+      "tagline": "An agent asks a company's model which types it declares, what one entity says and what evidence a claim rests on, and gets the answer the model gives at one commit.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Instance",
+          "Entity",
+          "Reference",
+          "Pin"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A server speaking the Model Context Protocol over any instance, parsed from one pinned commit: it lists the types a company declares, returns an entity with its references resolved, searches the model and finds the evidence a claim rests on. It only reads. It writes nothing back, adds nothing of its own, and answers at the commit its deployment names, so two agents asking one question get one answer. It stops at the server: where it runs, and over which instance, is each deployment's own.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/an-agent-reads-the-model.md"
+    },
+    {
+      "id": "features/checks-an-instance-runs",
+      "type": "feature",
+      "name": "Checks an instance runs",
+      "tagline": "A company finds out before a change lands whether its pages still hold to the schemas it adopted.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Check",
+          "Rule",
+          "Instance",
+          "Release",
+          "Agent pass"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The mechanical half of validation: a checker shipped in every release, which an instance's workflow calls at the release its manifest names. It reads the schemas from the core the instance vendored, never from its own, so taking a newer release never holds an instance to rules it has not adopted, and a checker that is not the named release refuses to run. It stops at what a script can read: whether a page keeps its schema's writing rules is the agent pass, and every run says so.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/checks-an-instance-runs.md"
+    },
+    {
+      "id": "features/checks-while-a-file-is-edited",
+      "type": "feature",
+      "name": "Checks while a file is edited",
+      "tagline": "Someone writing a page sees what its schema requires, and what they broke, while they type rather than when the change is pushed.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Check",
+          "Rule",
+          "Schema",
+          "Reference"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A plugin for Obsidian over any instance. It runs the checks a release ships as a file is edited and marks what fails where it is written, completes a reference or a section from what the schemas declare, and renames an entity everywhere its name is used. It bundles the checker of the release it was built with and refuses a vendored core newer than that, rather than check a vault against rules it does not know. It stops at the editor: the gate a change has to pass is still the checks an instance runs.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/checks-while-a-file-is-edited.md"
+    },
+    {
+      "id": "features/the-vocabulary-on-the-web",
+      "type": "feature",
+      "name": "The vocabulary on the web",
+      "tagline": "Anyone can read the vocabulary, and see it describe a company, in a browser and without cloning a repository.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Type",
+          "Schema",
+          "Pin"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "In English and Swiss German, the model page lists every core type with its schema, drawn from a pinned commit of the vocabulary, and the example page draws a fictional company described in it; both are also published as files an agent can fetch. It stops at reading: nothing on the web writes to a model, and what the site must say and how it is built belong to the companygraph.io website.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/the-vocabulary-on-the-web.md"
+    },
+    {
+      "id": "identity",
+      "type": "identity",
+      "name": "CompanyGraph",
+      "tagline": "The open-source meta-model for operating a company: the structure a company's knowledge takes, so that the people who run it and the agents working beside them can both rely on it.",
+      "fields": {
+        "source": "Local",
+        "url": "https://companygraph.io"
+      },
+      "sections": [
+        {
+          "heading": "What it is",
+          "text": "We publish a vocabulary for describing a company as a graph of Markdown files — one file per entity, folders named for their type, and a schema saying what each type carries. It is written for the people who run a company and for the agents that increasingly work beside them, because both need the same answer to the same question and only one of them can ask a colleague.\n\nWhat the model holds is a projection of what a company already knows. Every page names the source with authority over its facts — this repository, where a fact is written and corrected in place, or a system the company already runs, which a sync writes from and where a correction belongs instead. Describing a company this way moves nothing out of the systems it runs on, and what anyone writes here stays theirs.",
+          "tables": []
+        },
+        {
+          "heading": "Also at",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Where",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub",
+                  "https://github.com/companygraph"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Where",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub",
+                "https://github.com/companygraph"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/identity.md"
+    },
+    {
+      "id": "processes/contribution",
+      "type": "process",
+      "name": "Contribution",
+      "tagline": "How a change offered from outside as a pull request is reviewed and taken, under the same rules a change from inside is held to.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "supported-by": [
+          "Reviewer",
+          "Contributor"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track"
+              ],
+              "rows": [
+                [
+                  "Change"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track"
+            ],
+            "rows": [
+              [
+                "Change"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Propose"
+                ],
+                [
+                  "Consider"
+                ],
+                [
+                  "Review"
+                ],
+                [
+                  "Integrate"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Propose"
+              ],
+              [
+                "Consider"
+              ],
+              [
+                "Review"
+              ],
+              [
+                "Integrate"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never merges anything with a red check or no check.\n- Never squashes a pull request; a merge commit keeps the author it was given.\n- Never lets an agent merge, tag or release.\n- Never re-authors a contributor's commit, or asks a contributor to be anyone but themselves.\n- Never treats a review finding as a verdict; it is an input to whoever merges, and silence is a valid answer to one.\n- Never claims an interest in what a contributor describes in the vocabulary.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook, GitHub pull requests",
+                  "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+                ],
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Modeling rules",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook, GitHub pull requests",
+                "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+              ],
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Modeling rules",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/contribution/contribution.md"
+    },
+    {
+      "id": "processes/contribution/phases/consider",
+      "type": "phase",
+      "name": "Consider",
+      "tagline": "Establish what the change is for, before anyone spends time on how it is written.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "supported-by": [
+          "Contributor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Review"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A pull request against the default branch, from anyone, with a description saying what is now true that was not before.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner reads the description before the diff, because a change whose purpose is unclear cannot be reviewed for whether it achieves it.\n2. The Owner establishes whether the change is wanted at all, and says so early; a review of something that will not be taken spends a contributor's evening for nothing.\n3. The Owner names which rules it will be held to, where the contributor may not know them — the register a text is written in, the form the Markdown takes, the schema an entity answers to.\n4. The Owner checks that the status check reports, and that it is the contributor's own commit under their own address.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Accepted purpose",
+                  "A statement that the change is wanted, or that it is not and why, written in the pull request"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Accepted purpose",
+                "A statement that the change is wanted, or that it is not and why, written in the pull request"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never reviews the writing of a change it has not decided is wanted.\n- Never asks a contributor to commit under an address that is not theirs.\n- Never leaves a contributor to discover a rule from a failing check that could have been named.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Consider, all of these hold:\n\n- The pull request says what is now true that was not before.\n- The Owner has said the change is wanted.\n- The status check has reported.\n\nWhere they cannot be met, the Owner says which of them failed and closes the pull request, with what would make a later one succeed.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/contribution",
+      "path": "model/processes/contribution/phases/consider.md"
+    },
+    {
+      "id": "processes/contribution/phases/integrate",
+      "type": "phase",
+      "name": "Integrate",
+      "tagline": "Take the change into the default branch, and carry it to whoever vendors what it touched.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A change whose findings the Owner has ruled on, with one green check.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner merges with a merge commit, never a squash, so the address the contributor committed under reaches the default branch unchanged.\n2. Where the change touches what another repository vendors or builds from, the Owner tags a release and writes its notes: a minor where a consumer re-syncs or re-pins, a major where it is asked to do more than either, and the notes say which.\n3. The Owner moves every pin that names the release, each in a commit that says why, and every surface built from one of them is rebuilt at the commit it now names.\n4. The Owner deletes the branch, as their own step.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Merge commit",
+                  "The change on the default branch, carrying the author it was given"
+                ],
+                [
+                  "Release",
+                  "Where something vendored moved: a tag and notes saying what a consumer must do"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Merge commit",
+                "The change on the default branch, carrying the author it was given"
+              ],
+              [
+                "Release",
+                "Where something vendored moved: a tag and notes saying what a consumer must do"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never squashes, because a squash re-authors the commit to whoever pressed the button and a wrong identity would land looking correct.\n- Never merges on a contributor's say-so that a check passed.\n- Never leaves a pin that names a release the release has moved past.\n- Never chains deleting the branch to the merge, because a failed merge would still delete it.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Integrate, all of these hold:\n\n- The default branch carries the change under the address its author committed with.\n- Where something vendored moved, a release exists and its notes say what a consumer must do.\n- Every pin that names it has moved, or is recorded as deliberately behind.\n\nWhere they cannot be met, the Owner reverts rather than leaving the default branch in a state nobody chose.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/contribution",
+      "path": "model/processes/contribution/phases/integrate.md"
+    },
+    {
+      "id": "processes/contribution/phases/propose",
+      "type": "phase",
+      "name": "Propose",
+      "tagline": "Offer the change, under the address the Contributor means to be known by.",
+      "fields": {
+        "source": "Local",
+        "owner": "Contributor",
+        "executed-by": [
+          "Contributor"
+        ],
+        "gate-approvers": [
+          "Contributor"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Consider"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The repository, its conventions and its schemas, all of which are published and need nobody's permission to read.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Contributor branches from the default branch and makes the change there.\n2. The Contributor writes what is now true that was not before, as the pull request's description.\n3. The Contributor commits under their own address, which is theirs to choose and nobody else's to set.\n4. The Contributor opens the pull request and lets the check run.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Pull request",
+                  "A change against the default branch, saying what is now true that was not, under its author's own address"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Pull request",
+                "A change against the default branch, saying what is now true that was not, under its author's own address"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never commits under an address that is not the Contributor's own.\n- Never merges, tags or releases; that is the Owner's and is not delegated.\n- Never has to have read every convention first; where one was missed, naming it is the company's work.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Propose, all of these hold:\n\n- A pull request exists against the default branch.\n- It says what is now true that was not before.\n- Its commits carry the address their author means to be known by.\n\nWhere they cannot be met, the Contributor decides whether to carry on or to stop; nothing here obliges anyone to finish what they started.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/contribution",
+      "path": "model/processes/contribution/phases/propose.md"
+    },
+    {
+      "id": "processes/contribution/phases/review",
+      "type": "phase",
+      "name": "Review",
+      "tagline": "Find what is wrong with the change, and hand it to whoever merges as findings rather than as a verdict.",
+      "fields": {
+        "source": "Local",
+        "owner": "Reviewer",
+        "executed-by": [
+          "Reviewer"
+        ],
+        "supported-by": [
+          "Contributor",
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Integrate"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A change the Owner has said is wanted, with its check reporting.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Reviewer reads the change against what the pull request says it does, and reports where the two disagree.\n2. The Reviewer writes one finding per comment, each with a severity and the line it sits on.\n3. The Reviewer judges what no check reads: whether an entity answers its schema's writing rules, and whether a text is in the register its place calls for.\n4. The Reviewer says what it could not verify, rather than leaving a reader to assume it was checked.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Findings",
+                  "One per comment, each with a severity and the line it sits on, addressed to whoever merges"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Findings",
+                "One per comment, each with a severity and the line it sits on, addressed to whoever merges"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never merges, and never approves in a way that reads as merging.\n- Never states a finding as a decision the contributor must take.\n- Never counts a check nobody ran as a check that passed.\n- Never asks for a change of taste as though it were a rule.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Review, all of these hold:\n\n- Every finding carries a severity and the line it sits on.\n- The Owner has read the findings and said which are to be acted on.\n- What the review could not verify is written down.\n\nWhere they cannot be met, the Owner decides whether the change is narrowed, carried on by someone else, or declined.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/contribution",
+      "path": "model/processes/contribution/phases/review.md"
+    },
+    {
+      "id": "processes/contribution/tracks/change",
+      "type": "track",
+      "name": "Change",
+      "tagline": "A change to what this company publishes, offered from outside as a pull request, in code or in prose.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/contribution",
+      "path": "model/processes/contribution/tracks/change.md"
+    },
+    {
+      "id": "processes/delivery",
+      "type": "process",
+      "name": "Delivery",
+      "tagline": "How anything we publish is shaped, specified, planned, made and merged, in code and in prose.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track"
+              ],
+              "rows": [
+                [
+                  "Code"
+                ],
+                [
+                  "Prose"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track"
+            ],
+            "rows": [
+              [
+                "Code"
+              ],
+              [
+                "Prose"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Shape"
+                ],
+                [
+                  "Spec"
+                ],
+                [
+                  "Plan"
+                ],
+                [
+                  "Implement"
+                ],
+                [
+                  "Integrate"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Shape"
+              ],
+              [
+                "Spec"
+              ],
+              [
+                "Plan"
+              ],
+              [
+                "Implement"
+              ],
+              [
+                "Integrate"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never begins a phase whose predecessor's gate the Owner has not approved.\n- Never lets an agent merge, tag or release anything.\n- Never adds vocabulary no instance has already had to be written with.\n- Never changes what another repository vendors without a release whose notes say what it asks of a consumer.\n- Never makes the German from English the Owner has not reviewed.\n- Never counts a check nobody ran as a check that passed.\n- Never lets a published page outlive a disagreement with the model; the model is corrected first and the page rebuilt from it.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Modeling rules",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Modeling rules",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/delivery/delivery.md"
+    },
+    {
+      "id": "processes/delivery/phases/implement",
+      "type": "phase",
+      "name": "Implement",
+      "tagline": "Make the thing, and let nothing go forward unread.",
+      "fields": {
+        "source": "Local",
+        "owner": "Controller",
+        "executed-by": [
+          "Controller",
+          "Implementer",
+          "Reviewer",
+          "Writer",
+          "Translator",
+          "Owner"
+        ],
+        "supported-by": [
+          "Planner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Integrate"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "An approved plan, a branch in a worktree of its own, and for each task the brief that is the whole of its requirements.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. The Controller dispatches one brief.\n2. The Implementer works it, test first where the brief says so, and reports what was built, what was run and what it doubts.\n3. The Reviewer reads the diff against the brief and returns findings, each with a file, a line and a severity, strengths named first.\n4. Where the task touched a model, the Reviewer also reads every entity it touched against its schema's writing rules, which the mechanical checks do not reach.\n5. The Controller decides: fix, accept or park for the Owner.\n6. The task is committed before the next one is dispatched.\n7. A finding against a task already committed comes back as its own brief; the commit stands and the fix is a new one.\n\n### Prose\n\n1. The Writer drafts the English from the brief, on the branch, and reports which claims it could not trace to the brief or to prose we have already published.\n2. An entry of the model goes to the Owner on its own: what it says, the case against it, a proposal, and the Owner decides.\n3. The Owner reviews on the branch, in the diff and, where a surface carries the text, on the rendered page.\n4. The Translator makes the Swiss German from the reviewed English only, one element at a time, with the glossary open, and hands back a back-translation beside each element.\n5. An English edit re-runs the Translator on that element alone.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Reviewed commits",
+                  "One per task, on the branch, with every finding resolved or parked"
+                ],
+                [
+                  "Reviewed English",
+                  "The draft the Owner has read on the branch and, where a surface carries it, on the page"
+                ],
+                [
+                  "Swiss German",
+                  "For a surface that carries it: made from the reviewed English, with its back-translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Reviewed commits",
+                "One per task, on the branch, with every finding resolved or parked"
+              ],
+              [
+                "Reviewed English",
+                "The draft the Owner has read on the branch and, where a surface carries it, on the page"
+              ],
+              [
+                "Swiss German",
+                "For a surface that carries it: made from the reviewed English, with its back-translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never changes a test's expectation to make it pass.\n- Never makes the German from English the Owner has not reviewed.\n- Never dispatches the next task while the last one's findings are open.\n- Never commits a change to a model that no validation pass has read.\n- Never claims a check that was not run.\n- Never merges.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Implement, all of these hold:\n\n- Every task's findings are resolved, or parked for the Owner and named in the pull request.\n- The repository's checks pass on the branch.\n- Where a model changed, both halves of the validation pass have run over it: the mechanical checks, and an agent reading each entity against its schema's writing rules.\n- The branch does what the specification said, and nothing else.\n\nWhere they cannot be met, the Owner decides whether the branch is reworked or abandoned.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/implement.md"
+    },
+    {
+      "id": "processes/delivery/phases/integrate",
+      "type": "phase",
+      "name": "Integrate",
+      "tagline": "Put the change where it binds, release what other repositories take from it, and move everything that names it.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Controller",
+          "Reviewer",
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A branch that left Implement with its checks green, and the specification it was made from.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Reviewer reviews the whole branch against the specification, not task by task.\n2. The Controller opens the pull request and stops.\n3. The Owner reads the diff and, where a surface carries the change, the rendered page, and merges it with a merge commit.\n4. Where the change touches what another repository vendors or builds from, the Owner tags a release and writes its notes: a minor where a consumer re-syncs or re-pins, a major where it is asked to do more than either, and the notes say which.\n5. The Owner moves every pin that names the release, each in a commit that says why, and every surface built from one of them is rebuilt at the commit it now names.\n6. The Owner deletes the branch and its worktree, as their own step.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Merged change",
+                  "On the default branch, with its checks green"
+                ],
+                [
+                  "Release",
+                  "Where one is due: the tag, notes saying whether a consumer re-syncs, re-pins or does more, and every pin that names it moved"
+                ],
+                [
+                  "Rebuilt surface",
+                  "Where a surface is built from what changed: rebuilt at the commit it names, so the page and the model agree"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Merged change",
+                "On the default branch, with its checks green"
+              ],
+              [
+                "Release",
+                "Where one is due: the tag, notes saying whether a consumer re-syncs, re-pins or does more, and every pin that names it moved"
+              ],
+              [
+                "Rebuilt surface",
+                "Where a surface is built from what changed: rebuilt at the commit it names, so the page and the model agree"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never merges without the Owner; an agent opens and reports.\n- Never squashes a merge, because a squash re-authors the commit to whoever pressed the button and a wrong identity would land looking correct.\n- Never chains a branch delete after a merge, because a failed merge would still run the delete and close the pull request.\n- Never changes what another repository vendors without a release, because the change has made every copy of it stale.\n- Never leaves a consumer pinned to a release that no longer exists.\n- Never releases a change the model disagrees with.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "Integrate is the last phase. The work is done when all of these hold:\n\n- The checks pass on the pull request.\n- The Owner has merged it.\n- Where a release was due it is tagged, and its notes say whether a consumer re-syncs, re-pins or does more.\n- Every pin that names the release has moved with it, and every surface built from one of them has been rebuilt.\n\nWhere they cannot be met, the Owner decides whether the change is reverted or the release held.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/integrate.md"
+    },
+    {
+      "id": "processes/delivery/phases/plan",
+      "type": "phase",
+      "name": "Plan",
+      "tagline": "Cut the approved specification into pieces that can be worked one at a time.",
+      "fields": {
+        "source": "Local",
+        "owner": "Planner",
+        "executed-by": [
+          "Planner"
+        ],
+        "supported-by": [
+          "Specifier"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Implement"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A specification or brief the Owner has approved, and the repository the work lands in with the rules that bind it.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. The Planner maps the files the change creates and modifies, and what each is responsible for.\n2. The Planner cuts the work into task briefs, each the whole of its own requirements.\n3. The Planner names the interfaces each brief produces and consumes, so no brief depends on a conversation its holder did not have.\n4. The Planner orders them so each can be worked, tested and committed on its own.\n5. Where the change reaches another repository, the pin that moves is a brief of its own, because it lands in a repository of its own and after the release.\n\n### Prose\n\n1. The Planner names the entries that change, and in what order.\n2. The Planner cuts them one to a brief, because an entry is put to the Owner on its own.\n3. The Planner names which of them a surface carries in German, and so which the Translator is run on.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Task briefs",
+                  "An ordered set, each whole on its own, each with a way to tell it is done"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Task briefs",
+                "An ordered set, each whole on its own, each with a way to tell it is done"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never re-opens a decision the specification took.\n- Never writes a brief whose holder would have to guess at an interface.\n- Never writes the change.\n- Never plans a task whose completion cannot be checked.\n- Never puts two entries of the model in one brief.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Plan, all of these hold:\n\n- The Owner has read the plan and approved it.\n- Every brief states how its holder can tell the task is done.\n- The order is one the briefs can actually be worked in.\n\nWhere they cannot be met, the Owner decides whether the plan is recut or the specification reopened.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/plan.md"
+    },
+    {
+      "id": "processes/delivery/phases/shape",
+      "type": "phase",
+      "name": "Shape",
+      "tagline": "Decide what kind of change this is, how far it reaches, and how much of it gets written down.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Spec"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A request in whatever words it arrived in, and the part of the model, the vocabulary or the repository it will have to agree with, read rather than remembered.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner states the request as one sentence.\n2. The Owner classifies it: a question whose output is an answer, a bounded change to something already here to read or a change to how things fit together.\n3. The Owner names the track it runs on.\n4. The Owner names how far it reaches: what another repository vendors or builds from, and what surface is rebuilt from a commit of it.\n5. The Owner says which phases write a document and which are satisfied in conversation.\n6. The Owner names what is explicitly not being changed.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Classification",
+                  "Which of the three kinds of change this is, and why"
+                ],
+                [
+                  "Track",
+                  "Which track the work runs on, named as the process spells it"
+                ],
+                [
+                  "Reach",
+                  "What the change makes stale: what vendors it, what builds from it, and what is rebuilt when it lands"
+                ],
+                [
+                  "Document plan",
+                  "Which phases produce a file and which are answered in conversation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Classification",
+                "Which of the three kinds of change this is, and why"
+              ],
+              [
+                "Track",
+                "Which track the work runs on, named as the process spells it"
+              ],
+              [
+                "Reach",
+                "What the change makes stale: what vendors it, what builds from it, and what is rebuilt when it lands"
+              ],
+              [
+                "Document plan",
+                "Which phases produce a file and which are answered in conversation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never classifies by how familiar the work feels rather than by what exists to read.\n- Never lets a classification skip a gate; only the document scales, never the approval.\n- Never begins the work it is classifying.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Shape, all of these hold:\n\n- The request is stated as one sentence.\n- The track is named.\n- What the change makes stale is named, or named as nothing.\n- The classification is stated, and the phases that will write a document are named.\n\nWhere they cannot be met, the Owner decides whether the request is reshaped or dropped.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/shape.md"
+    },
+    {
+      "id": "processes/delivery/phases/spec",
+      "type": "phase",
+      "name": "Spec",
+      "tagline": "Write what the change must do, completely enough that nobody downstream has to guess.",
+      "fields": {
+        "source": "Local",
+        "owner": "Specifier",
+        "executed-by": [
+          "Specifier"
+        ],
+        "supported-by": [
+          "Writer"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Plan"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A classified request, the model and the vocabulary the change must not contradict, and whatever it will touch, read rather than remembered.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. The Specifier reads the model, the vocabulary and the code the change lands in, before proposing anything.\n2. The Specifier names the approaches worth considering, with their trade-offs, and recommends one.\n3. The Specifier writes the specification: the gap, the decisions and their reasons, what was rejected and why, and what is explicitly not being done.\n4. Where the change adds vocabulary, the specification names the company nobody could describe without it and the instance that will be written against it.\n5. Where the change reaches what another repository vendors or builds from, the specification says what the release will ask of a consumer: a re-sync, a re-pin or more than either.\n6. The Specifier parks every question that is the Owner's, rather than answering it conveniently.\n\n### Prose\n\n1. The Specifier names the audience, the one point, the facts the text may claim and where each is shown.\n2. For an entry of the model, each fact is traced to prose we have already published, because nothing here is invented.\n3. The Specifier names the file and the place it lands, and the register the place calls for.\n4. The Specifier names the claims it may not make.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Specification",
+                  "The whole of the requirements for a change to code, with what is not being done named"
+                ],
+                [
+                  "Brief",
+                  "For prose: the audience, the one point, the facts it may claim and where each is shown"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Specification",
+                "The whole of the requirements for a change to code, with what is not being done named"
+              ],
+              [
+                "Brief",
+                "For prose: the audience, the one point, the facts it may claim and where each is shown"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change it specifies.\n- Never decides a question that is the Owner's; it names the options and parks it.\n- Never adds a type to the vocabulary that no instance has had to be written with.\n- Never states a fact the model does not hold, or one no published page shows.\n- Never leaves a question unasked because an assumption would be convenient.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Spec, all of these hold:\n\n- The Owner has read the specification or the brief and approved it.\n- What is explicitly not being done is written down.\n- Where the change reaches another repository, what its release asks of a consumer is written down.\n- Every parked question has the Owner's word on it.\n\nWhere they cannot be met, the Owner decides whether the change is reshaped, narrowed or dropped.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/spec.md"
+    },
+    {
+      "id": "processes/delivery/tracks/code",
+      "type": "track",
+      "name": "Code",
+      "tagline": "A merged change to one of the repositories we publish, with its checks green, and where it changes what another repository vendors, the release that carries it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/tracks/code.md"
+    },
+    {
+      "id": "processes/delivery/tracks/prose",
+      "type": "track",
+      "name": "Prose",
+      "tagline": "An entry of the model, a schema, a README or a page of a site, in English the Owner has reviewed, and in Swiss German where the surface carries it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/tracks/prose.md"
+    },
+    {
+      "id": "processes/feature-request",
+      "type": "process",
+      "name": "Feature request",
+      "tagline": "How somebody outside asks for vocabulary or tooling that is not there, as a GitHub issue, and gets an answer they can act on.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "supported-by": [
+          "Requestor"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track"
+              ],
+              "rows": [
+                [
+                  "Decision"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track"
+            ],
+            "rows": [
+              [
+                "Decision"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Raise"
+                ],
+                [
+                  "Understand"
+                ],
+                [
+                  "Triage"
+                ],
+                [
+                  "Answer"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Raise"
+              ],
+              [
+                "Understand"
+              ],
+              [
+                "Triage"
+              ],
+              [
+                "Answer"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never answers a request before knowing which page the asker could not write.\n- Never promises a date, a release or a place on the roadmap.\n- Never closes a request without the reason written where it was asked.\n- Never adds vocabulary because it was asked for; a request is evidence of a gap and never the decision to fill it.\n- Never asks for the name of the company behind a request, or repeats one that is offered.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook, GitHub issues",
+                  "https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues"
+                ],
+                [
+                  "Modeling rules",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ],
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook, GitHub issues",
+                "https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues"
+              ],
+              [
+                "Modeling rules",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ],
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/feature-request/feature-request.md"
+    },
+    {
+      "id": "processes/feature-request/phases/answer",
+      "type": "phase",
+      "name": "Answer",
+      "tagline": "Give the asker something they can act on, whether or not anything will be built.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "supported-by": [
+          "Requestor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A classified gap with its reason.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner writes the answer in the issue: what was decided, why, and what the asker can do now.\n2. Where the gap is real and will be filled, the Owner says which release it is aimed at only if one has been chosen, and otherwise says that it has not been.\n3. Where the gap is real and will not be filled, the Owner says what would change that.\n4. Where there is no gap, the Owner names the type that already carries the fact and how it is written.\n5. The Owner closes the issue.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Answer",
+                  "The decision, its reason and what the asker can do now, written where the request was made"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Answer",
+                "The decision, its reason and what the asker can do now, written where the request was made"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never closes with a label and no sentence.\n- Never leaves the asker without something to do, even where the answer is no.\n- Never promises a date that has not been chosen.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Answer, all of these hold:\n\n- The answer says what was decided and why, in the issue.\n- The asker has something to do next, or is told plainly that there is nothing.\n- No date appears that has not actually been chosen.\n\nWhere they cannot be met, the issue stays open; an answer nobody can act on is not an answer and closing it does not make it one.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/feature-request",
+      "path": "model/processes/feature-request/phases/answer.md"
+    },
+    {
+      "id": "processes/feature-request/phases/raise",
+      "type": "phase",
+      "name": "Raise",
+      "tagline": "Say where it can be answered that the vocabulary would not carry something.",
+      "fields": {
+        "source": "Local",
+        "owner": "Requestor",
+        "executed-by": [
+          "Requestor"
+        ],
+        "gate-approvers": [
+          "Requestor"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Understand"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "Whatever the Requestor was trying to describe and could not, in whatever words they have for it.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Requestor opens an issue on the repository the request concerns.\n2. The Requestor says what they were trying to describe and where they stopped, in their own words.\n3. The Requestor adds whatever makes that concrete — the page they were writing, the fact that had nowhere to go — and nothing they were not asked for.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Request",
+                  "A GitHub issue on the repository it concerns, saying what could not be described"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Request",
+                "A GitHub issue on the repository it concerns, saying what could not be described"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never has to be written in the vocabulary's terms; putting it in them is the company's work.\n- Never has to name the company it asks for.\n- Never waits for a template, a label or a form; there is none, by design.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Raise, all of these hold:\n\n- An issue exists, in the open, on the repository the request concerns.\n- It says what the Requestor was trying to describe and could not.\n\nWhere they cannot be met, the Owner helps state it rather than closing it; a request nobody could phrase is still a finding about the vocabulary.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/feature-request",
+      "path": "model/processes/feature-request/phases/raise.md"
+    },
+    {
+      "id": "processes/feature-request/phases/triage",
+      "type": "phase",
+      "name": "Triage",
+      "tagline": "Decide what kind of thing the gap is, and whether it is ours to fill.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Answer"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A restated request naming what could not be written.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner decides which of four the gap is: vocabulary every kind of company needs, vocabulary only some kinds need, tooling, or no gap at all.\n2. The Owner checks whether an existing type already carries the fact under another name, because a request for a second name for one thing is a finding about the first.\n3. The Owner weighs it against the strategy: vocabulary enters core once a company has actually had to be described with it, so one request is evidence and is not yet that.\n4. The Owner writes the classification and its reason in the issue.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Classification",
+                  "Which of the four the gap is, with the reason, written in the issue"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Classification",
+                "Which of the four the gap is, with the reason, written in the issue"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never classifies a gap as core vocabulary on the strength of one request.\n- Never leaves the reason out because the classification seems obvious.\n- Never opens a specification; what happens next is Delivery's, and it starts from its own Shape.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Triage, all of these hold:\n\n- The gap is classified as core vocabulary, pack vocabulary, tooling or no gap.\n- The reason is written where the request was made.\n- Where it is core vocabulary, the instance that had to be described with it is named.\n\nWhere they cannot be met, the Owner leaves the request open and says what would settle it, rather than classifying it to be finished with it.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/feature-request",
+      "path": "model/processes/feature-request/phases/triage.md"
+    },
+    {
+      "id": "processes/feature-request/phases/understand",
+      "type": "phase",
+      "name": "Understand",
+      "tagline": "Turn what somebody asked for into the page they could not write.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "supported-by": [
+          "Requestor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Triage"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A GitHub issue on the repository the request is about, from anyone, in whatever words they brought.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner reads the request as it was written, before restating it.\n2. The Owner establishes what the asker was trying to describe and could not — the entity, the field or the rule that was missing when they stopped.\n3. The Owner asks for that where it is absent, and asks for nothing else; a request is not a form to be completed.\n4. The Owner restates the request as the gap it is, in the issue, and lets the asker correct the restatement.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Restated request",
+                  "The request written as the page that could not be written, agreed with whoever raised it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Restated request",
+                "The request written as the page that could not be written, agreed with whoever raised it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never rewrites the asker's words as the record; the restatement sits beside them.\n- Never decides whether the gap is real.\n- Never asks which company the request comes from.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Understand, all of these hold:\n\n- The request names the entity, the field or the rule that was missing.\n- Whoever raised it has seen the restatement and not disputed it.\n\nWhere they cannot be met, the Owner says so in the issue and closes it as not understood, which is an answer and is not a refusal.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/feature-request",
+      "path": "model/processes/feature-request/phases/understand.md"
+    },
+    {
+      "id": "processes/feature-request/tracks/decision",
+      "type": "track",
+      "name": "Decision",
+      "tagline": "An answer written where the request was made, in the words the request used, saying what was decided and why.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/feature-request",
+      "path": "model/processes/feature-request/tracks/decision.md"
+    },
+    {
+      "id": "products/companygraph-core",
+      "type": "product",
+      "name": "CompanyGraph Core",
+      "tagline": "The vocabulary for describing a company as a graph of Markdown files, with the checks, the agent access and the editing support that read it, used by the people who run a company and the agents working beside them.",
+      "fields": {
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/products/companygraph-core.md"
+    },
+    {
+      "id": "profiles/ai-agent",
+      "type": "profile",
+      "name": "AI Agent",
+      "tagline": "Specifies, plans, runs, implements, reviews, drafts and translates what this company publishes, under a rulebook for each, and decides nothing.",
+      "fields": {
+        "source": "Local",
+        "nature": "agent",
+        "roles": [
+          "Specifier",
+          "Planner",
+          "Controller",
+          "Implementer",
+          "Reviewer",
+          "Writer",
+          "Translator"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Summary",
+          "text": "It holds every seat in Delivery but the Owner's, and none in the two processes that begin outside the company: a request is raised by a person and a change is offered by one. Whichever model runs it, the rulebooks are the same, every question it parks ends with the Owner's word, and nothing it produces reaches the default branch without the Owner merging it.\n\nThis profile is here so the model can say what holds a seat. A seat no profile names is held by a person, and which person is a fact this repository does not carry.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/profiles/ai-agent/ai-agent.md"
+    },
+    {
+      "id": "roles/contributor",
+      "type": "role",
+      "name": "Contributor",
+      "tagline": "Someone outside the company who offers a change to what it publishes, under the same rules a change from inside is held to.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The repository, its conventions and its schemas, all of which are published; and the rules a change is held to, named by the company where a contributor could not be expected to know them.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A pull request against the default branch, committed under their own address, saying what is now true that was not before.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never commits under an address that is not theirs, and is never asked to.\n- Never merges, tags or releases.\n- Never gives up an interest in what they describe in the vocabulary by contributing to it.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook, GitHub pull requests",
+                  "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook, GitHub pull requests",
+                "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/contributor.md"
+    },
+    {
+      "id": "roles/controller",
+      "type": "role",
+      "name": "Controller",
+      "tagline": "The seat that runs a plan one brief at a time, reads every report as a claim, and writes nothing itself.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "An approved plan, the repository's own agent file, and a place to keep each task's brief, report and findings.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "One dispatched brief at a time; a decision after each report — fix, accept or park for the Owner; review ordered on the diff rather than on the report; and a branch whose tasks are done in the plan's order, each committed as it lands. The pull request at the end, opened and reported and no further.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change or the test itself.\n- Never rewrites what a commit contains; a finding against a committed task is a new brief.\n- Never dispatches the next task while the last one's findings are open.\n- Never accepts a claim that a check passed without the check's output.\n- Never commits a change to a model before the validation pass has read it.\n- Never merges, tags or edits a pull request.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/controller.md"
+    },
+    {
+      "id": "roles/implementer",
+      "type": "role",
+      "name": "Implementer",
+      "tagline": "The seat that turns one task brief into a tested commit and a report, and nothing beyond the brief.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A task brief that is the whole of its requirements, the interfaces earlier tasks produced, the repository's own agent file and a path for the report. Where the brief is unclear the seat asks before starting.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "The change the brief specifies, test first where the brief says so; the commit in the git register; a report naming what was built, what was run and what it doubts; and a short status the Controller acts on.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never spawns a subagent or a reviewer; review comes from the Controller after the report.\n- Never changes a test's expectation to make it pass.\n- Never merges, tags or edits a pull request.\n- Never claims a check it did not run.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/implementer.md"
+    },
+    {
+      "id": "roles/owner",
+      "type": "role",
+      "name": "Owner",
+      "tagline": "The seat that decides what the project is for, says the last word on every page, and is the only one that merges, tags and releases.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The model, read before deciding: the vision, the objectives and the strategies under them, and the values a decision is weighed against. A draft or a pull request to review, on the branch and on the rendered page. The signals a strategy names as showing whether it is working.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "Decisions, recorded where they bind: a merge, a tag, a release and its notes, a pin moved in a commit that says why, a corrected model. The reviewed English every translation is made from. The word that ends a question an agent has parked, and the word that closes a question the model has left open.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never delegates a merge, a tag or a release; an agent opens the pull request and reports, the Owner merges.\n- Never approves a type no instance has already had to be written with.\n- Never releases a change to what another repository vendors without notes saying what it asks of a consumer.\n- Never lets a published page outlive a disagreement with the model; the model is corrected and the page rebuilt from it.\n- Never states a number that was not counted or a claim the model does not hold.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/owner.md"
+    },
+    {
+      "id": "roles/planner",
+      "type": "role",
+      "name": "Planner",
+      "tagline": "The seat that cuts an approved specification into task briefs, each whole on its own, and writes none of them.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A specification the Owner has approved, and the repository the work lands in, including the rules that bind it.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "An ordered set of task briefs. Each is the whole of its own requirements, names the interfaces the briefs around it produce and consume, and states how its holder can tell it is done. An entry of a model gets a brief of its own, because the Owner decides one entry at a time. The order is the order they can be worked in, not the order they were thought of.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never re-opens a decision the specification took.\n- Never writes a brief that depends on a conversation its holder did not have.\n- Never writes the change.\n- Never plans a task whose completion cannot be checked.\n- Never puts two entries of a model in one brief.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/planner.md"
+    },
+    {
+      "id": "roles/requestor",
+      "type": "role",
+      "name": "Requestor",
+      "tagline": "Someone outside the company who could not describe something in the vocabulary, and says so where it can be answered.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "Whatever they were trying to describe and could not — the entity, the field or the rule that was missing when they stopped. Nothing else: the seat is filled by whoever turns up, and a request is not a form to be completed before it is heard.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A GitHub issue on the repository the request concerns, in their own words, and a correction where the company restates it wrongly.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never has to know the vocabulary's terms to be understood; restating the request in them is the company's work.\n- Never has to say which company it asks for, and is never asked.\n- Never decides whether the gap is filled.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook, GitHub issues",
+                  "https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook, GitHub issues",
+                "https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/requestor.md"
+    },
+    {
+      "id": "roles/reviewer",
+      "type": "role",
+      "name": "Reviewer",
+      "tagline": "The seat that reads one diff against its brief, returns findings with a severity and changes nothing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The brief the work was done from, the implementer's report read as unverified claims, the diff as one file with its commits and context, and the constraints that bind the task.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "Two verdicts, spec compliance and quality, and findings each with a file and a line, what is wrong, why it matters and how to fix it, ranked by severity, with the strengths named first. Where the diff touched a model, a third verdict: every entity it touched read against its schema's writing rules, which no mechanical check reaches. A finding is an input to whoever merges and never a verdict: it does not decide, and it is not passed on a person.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never mutates the working tree, the index, a branch or the pull request.\n- Never re-runs a suite to confirm a report; it runs one focused test on a doubt the report does not answer.\n- Never reads a schema's writing rules as satisfied because the mechanical checks are green.\n- Never spawns another reviewer.\n- Never marks polish as critical.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Modeling rules",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Modeling rules",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/reviewer.md"
+    },
+    {
+      "id": "roles/specifier",
+      "type": "role",
+      "name": "Specifier",
+      "tagline": "The seat that turns a shaped request into a specification nobody has to guess at, and builds nothing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A request already classified, the model and the vocabulary it must not contradict, and the code or the pages it will touch, read rather than remembered. Where the request is ambiguous the seat asks before writing.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A specification that is the whole of the requirements: the gap it closes, the approaches considered with the one chosen and why, the decisions taken, and what is explicitly not being done. Where the change adds vocabulary, the instance that will be written against it. Where it reaches another repository, what its release will ask of a consumer. Where a decision is the Owner's, the seat names the options and parks the question.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change it specifies.\n- Never decides scope; it names the options and the Owner chooses.\n- Never specifies a type without naming the instance that will be written against it.\n- Never leaves a question unasked because an assumption would be convenient.\n- Never states a fact the model does not hold.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Modeling rules",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Modeling rules",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/specifier.md"
+    },
+    {
+      "id": "roles/translator",
+      "type": "role",
+      "name": "Translator",
+      "tagline": "The seat that makes the Swiss German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The reviewed English of the elements the task names, and the glossary. Reviewed means the Owner has said the English is done; a draft is not reviewed, and the seat says so. Where the task names no elements, the seat names the gap and writes nothing.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "The German in the element's own place, de-CH in the forms Switzerland uses, and beside each element a back-translation in English, so a reviewer with a minute can read what the German says.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never translates a draft.\n- Never edits the English.\n- Never writes German into a model; a model is English, and the German a surface carries lives in the surface's own attributes.\n- Never writes a family term in any form but the glossary's.\n- Never commits.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Glossary",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+                ],
+                [
+                  "Rulebook",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/TRANSLATOR.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Glossary",
+                "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+              ],
+              [
+                "Rulebook",
+                "https://github.com/robertblust/conventions/blob/main/conventions/TRANSLATOR.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/translator.md"
+    },
+    {
+      "id": "roles/writer",
+      "type": "role",
+      "name": "Writer",
+      "tagline": "The seat that drafts English in the family voice from a brief, so the Owner reviews a draft instead of writing one.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A brief naming the audience, the one point, the facts the text may claim and where each is shown, and the file and the place the text lands. The rulebook and the glossary. Where the brief lacks the audience, the point or a fact's source, the seat names the gap and writes nothing.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "The text in its file on the current branch, in the register the place calls for, and a reply naming what was written, what changed and which claims could not be traced to the brief or to prose we have already published.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes a fact the brief, the repository or a page we have published does not show.\n- Never writes a count or a version of something that is still changing; it says where the number is read instead.\n- Never writes German; the translation is the Translator's, made after the English is reviewed.\n- Never commits and never runs the build.\n- Never uses an adjective that sells.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Glossary",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+                ],
+                [
+                  "Rulebook",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITER.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Glossary",
+                "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+              ],
+              [
+                "Rulebook",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITER.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/writer.md"
+    },
+    {
+      "id": "sources/local",
+      "type": "source",
+      "name": "Local",
+      "tagline": "Written and kept in this repository, which masters every page in the model. Nothing syncs it, and it issues no identifiers, so no page carries a `source-id`.",
+      "fields": {
+        "url": "https://github.com/companygraph/mental-model"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/sources/local.md"
+    },
+    {
+      "id": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
+      "type": "strategic-objective",
+      "name": "A company we have never met keeps its own model",
+      "tagline": "A company nobody here has worked with describes itself in this vocabulary and keeps that description current, without us in the room.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-08-23"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "Two instances exist and both are ours, which means every question the vocabulary has been asked so far was asked by someone who already knew the answer. When a company we have never met keeps its own model, the vocabulary has been read by people who owe it nothing, applied to facts we have never seen, and corrected where it did not fit — and the corrections arrive as questions we did not think to ask ourselves.\n\nIt holds when the model is still current after we stop looking. Adoption that needs us present is a consulting engagement and not evidence about the vocabulary; what settles this is a model that was updated in a month when nobody asked it to be, because someone found it cheaper to change the model than to work around it.\n\nWhat falls outside: how many companies, and whether any of them pay. One company keeping one model current satisfies this, and a hundred that tried it once and stopped does not. Also outside: whether they adopt all of it. A company that uses four types and ignores the rest has still described itself in the vocabulary, and a type nobody reaches for is a finding rather than a failure of this objective.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/a-company-we-have-never-met-keeps-its-own-model.md"
+    },
+    {
+      "id": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
+      "type": "strategic-objective",
+      "name": "An agent answers as well as the person who runs the company",
+      "tagline": "An agent asked about a company answers from the model alone, and is held to the same evidence the person who runs it would have to show.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-16"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "A person answering about their own company draws on what they remember, and nobody asks them for the source. An agent cannot do the first and must not be excused the second, so the answer it gives is only worth what the model behind it can show. When this holds, the two answers agree, and where they disagree the model is what gets corrected — because the person was working from memory and the agent was working from the record.\n\nIt holds when the same question, put to a person and to an agent, comes back with the same answer and the agent's can be followed to the page it came from. A reader can run that test in a minute, which is what makes this an objective rather than a claim: it fails visibly, on any question where the model is thinner than the person's memory.\n\nWhat falls outside: fluency, and anything about how the answer reads. An agent that answers well because it guesses well has failed this, not met it. Also outside: agents acting on a company rather than answering about it. What an agent is permitted to change is a question this model does not reach, and an objective that covered it would be two objectives.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company.md"
+    },
+    {
+      "id": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
+      "type": "strategic-objective",
+      "name": "Core holds a company without running out of vocabulary",
+      "tagline": "Someone describing their company reaches the end of it without meeting a fact that no type can carry.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-08-26"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "Today an instance finds gaps, because it is written by the people who write the types and the two are corrected against each other. When this holds, a company can be described start to finish and the only things left out are the things its author chose to leave out — not the things the vocabulary had no shape for.\n\nIt holds when an instance stops producing findings about core. That is observable from the instance side rather than claimed from the schema side: every gap so far has surfaced as a real page someone could not write, and the absence of those for a company we did not build the vocabulary around is what would settle it.\n\nWhat falls outside: a pack. Vocabulary that only one kind of company needs at all is deliberately not in core, so a company reaching for something a pack would carry has not found a gap in core — it has found the case that justifies the pack mechanism. Also outside: completeness of any one instance. A company that declares six types and populates four has not met a gap; it has made a choice.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary.md"
+    },
+    {
+      "id": "strategic-objectives/whether-this-is-a-business-is-answered",
+      "type": "strategic-objective",
+      "name": "Whether this is a business is answered",
+      "tagline": "The question of whether any of this earns anything is settled, in either direction, rather than left open while the work continues.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-08-24"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "The pages say plainly that nothing is being sold, that there is no rate and no proposal, and that whether this becomes consulting at all is being validated. That is honest and it is not an answer. When this holds, the question has been closed — either somebody paid for time and the terms the billing page describes turned out to be the terms, or it is written down that this is not a business and the pages stop implying the question is live.\n\nIt holds the day the answer is written where the question was asked. A no settles it as completely as a yes; what does not settle it is another year of the billing page saying the matter is open, because a question permanently under validation has become a position nobody has to defend.\n\nWhat falls outside: how much, and from whom. A single engagement billed by the day answers this; a large one does not answer it better. Also outside: whether the vocabulary is worth adopting. That question is answered by companies keeping models current, not by anybody paying us, and tying the two together would make the free half hostage to the paid one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/whether-this-is-a-business-is-answered.md"
+    },
+    {
+      "id": "strategies/instance-led-strategy",
+      "type": "strategy",
+      "name": "Instance-Led Strategy",
+      "tagline": "The vocabulary grows from companies actually being described in it, one cluster at a time, and stays below 1.0 for as long as the instances are still finding things.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-08-23",
+        "serves": [
+          "A company we have never met keeps its own model",
+          "Core holds a company without running out of vocabulary"
+        ],
+        "upholds": [
+          "Run on what we publish",
+          "Describe the pattern, never the company",
+          "Adoption is not taxed"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The approach",
+          "text": "A type enters core because a company could not be described without it. The order of work is a spec that records what was rejected and why, then an instance written against it, then the findings the instance produced — and the findings are the point, because a schema reviewed by its author agrees with itself. Each release carries one cluster completely rather than every type partially, so an instance can describe one whole side of a company instead of a thin layer across all of it.\n\nThe version number is doing work. Below 1.0 the vocabulary is free to change, and an instance decides when to take a change because core is vendored into it at a release its manifest names rather than resolved at read time. A release says what an instance must do about it, and most say nothing; that sentence is what lets the vocabulary keep moving without moving anyone else's model underneath them.\n\nEverything a company needs in order to adopt it is published and costs nothing — the vocabulary, the tooling, the talks — and the tooling is open source rather than the paid half of a free thing. What the instances that drove a type are called stays out of the type: the schema shows the shape and the example is invented, because a rule legible only to someone who knows whose company it came from cannot be adopted by anyone else.",
+          "tables": []
+        },
+        {
+          "heading": "What it rules out",
+          "text": "No 1.0 while the instances are still producing findings, and so no stability promise we would have to break. No type added because the model looked incomplete — a cluster nobody has needed stays unwritten, and a company that does not group what its people achieved writes no achievement kind. No standardization by agreement among parties who do not run an instance: a vocabulary designed by committee is answerable to the committee rather than to a company that has to write a page. No proprietary edition, no hosted service and no per-seat price, because each of them makes adoption cost more the more of it a company does. And no real company named inside core, however much clearer the example would be.",
+          "tables": []
+        },
+        {
+          "heading": "What would show it is working",
+          "text": "The findings an instance produced that core acted on, countable per release and visible in the specs, where each decision keeps the finding that led to it. Release notes that ask an instance to do nothing — a run of those says the vocabulary is settling; a run of the other kind says it is not. A type left unpopulated by an instance that was not blocked by leaving it so, which is the difference between a type that is optional and a type that is missing. And the one that matters most because it is the first thing we cannot produce ourselves: a gap found by an instance we did not write.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategies/instance-led-strategy.md"
+    },
+    {
+      "id": "strategies/read-only-server-strategy",
+      "type": "strategy",
+      "name": "Read-Only Server Strategy",
+      "tagline": "An agent reaches a company's model through a server that only reads it, answers at one named commit, and adds nothing of its own.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-16",
+        "serves": [
+          "An agent answers as well as the person who runs the company"
+        ],
+        "upholds": [
+          "Run on what we publish",
+          "Adoption is not taxed"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The approach",
+          "text": "The server reports what the model says and stops there. Every answer names the commit it was read at, so an answer can be checked against the same bytes later and two answers given a week apart can be told apart. Its tools are the vocabulary's own questions — which types a company declares, what one entity says, what evidence a claim rests on, which rule governs a page — so an agent asks the model the way the model is shaped rather than searching its text and hoping.\n\nIt serves any instance, not only ours, and the deployment we run points at the reference instance at a pinned commit. That is what keeps the server honest: the first model it has to answer about is one whose every claim we can be held to.\n\nNothing is summarized away. Where a claim has evidence the answer carries the evidence, and where it has none the answer says so rather than filling the gap with something plausible. The server is published under the same terms as everything else, because an access layer that costs money is a seat count wearing a different name.",
+          "tables": []
+        },
+        {
+          "heading": "What it rules out",
+          "text": "No write path: an agent cannot change a company's model through the server, so no company has to decide whether to trust one with that. No embedding index as the way in — a retrieval layer answers with a paraphrase, and a paraphrase cannot be held to the evidence the model attached to the claim. No answer without a commit behind it, which rules out answering about a model's current state in general. No reasoning the server does that the model cannot show, however much more useful the inferred answer would be. And no hosted model bundled with it: the server reads an instance a company keeps, and a company that would have to hand over its model to be served has been charged for adoption.",
+          "tables": []
+        },
+        {
+          "heading": "What would show it is working",
+          "text": "The same question put to the person who runs a company and to an agent reading its model, and the two answers agreeing — with the agent's followable to the page it came from. That test runs in a minute and fails visibly, which is what makes it an instrument rather than a verdict. Answers that name no commit, which should be none and are countable. And an instance nobody here wrote being served without a change to the server, because a server that needs adjusting per model has learned one company rather than the vocabulary.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategies/read-only-server-strategy.md"
+    },
+    {
+      "id": "surfaces/companygraph-io-website",
+      "type": "surface",
+      "name": "companygraph.io website",
+      "tagline": "The project's own site, in English and Swiss German, where a visitor, a search engine or an agent meets the vocabulary and the company that publishes it, rebuilt from pinned commits of the models it draws.",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/companygraph.github.io",
+        "url": "https://companygraph.io"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Model** — the vocabulary's types and the edges between them, drawn from `model.json`, which is parsed from the meta-model and not from here.\n- **Example** — the invented company the vocabulary ships with, drawn from `example.json`, parsed from the meta-model and not from here.\n- **Talks** — the introduction, as a deck, a PDF and audio, in both languages.\n- **Billing** — what would cost money and what never does, written by hand rather than drawn from the value it restates.\n- **Privacy** — what the site collects and who runs it, written by hand.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- Every page that carries a graph names the repository and the commit it was parsed from, on the page.\n- A page drawn from a model is rebuilt from the artifact committed beside it, and the build fails when that artifact is not what the pinned commit parses to.\n- Both languages carry the same claims: a page's German is a translation of its reviewed English, never a second text.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/companygraph-io-website.md"
+    },
+    {
+      "id": "values/adoption-is-not-taxed",
+      "type": "value",
+      "name": "Adoption is not taxed",
+      "tagline": "A meta-model is worth whatever gets adopted of it, so anything that makes adopting it cost more works against the one thing it was built to do.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "In practice",
+          "text": "We publish the vocabulary, the tooling and the talks under licenses that ask nothing back, and we bill consulting by the day rather than by the model, so what costs money is time and never what a company does with the model. Where a way to charge would have fitted we wrote down why it was refused instead of leaving it open: a seat count charges a company for being read, which a model meant for its people and its agents at once cannot bear, and a per-entry price charges it for the completeness the model exists to produce. Doing it without us is the normal case and the pages say so, because a model most people need help to adopt has not been made adoptable.\n\nWe never let the model cost more the more of a company, or the more of its agents, that reads it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/values/adoption-is-not-taxed.md"
+    },
+    {
+      "id": "values/describe-the-pattern-never-the-company",
+      "type": "value",
+      "name": "Describe the pattern, never the company",
+      "tagline": "A meta-model that carries one company's tooling in its conventions has stopped being one, so the vocabulary states the shape and never who was found holding it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "In practice",
+          "text": "The vocabulary names no company it was drawn from, quotes no company's internal conventions, and says nothing about the tracker, the wiki or the chat tool anyone runs on. Where an example would read better with a real company behind it we write the pattern instead, because a thin file per person is portable and the company that keeps one is not, and because a rule that only makes sense once a reader knows whose it was is a rule nobody else can adopt. Confidentiality is part of this and it is not the reason for it: a claim about the shape a company's knowledge takes has to stand without naming a company, or it was never a claim about the shape.\n\nWe never put a company's name, its tooling or its counts into the vocabulary.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/values/describe-the-pattern-never-the-company.md"
+    },
+    {
+      "id": "values/run-on-what-we-publish",
+      "type": "value",
+      "name": "Run on what we publish",
+      "tagline": "A vocabulary its authors have not had to use is a proposal, and the only evidence that a type holds a real company is a real company being held by it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "In practice",
+          "text": "We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and a second instance beside it describes a company of one the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.\n\nWe never ship a type we have not already had to use on ourselves.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/values/run-on-what-we-publish.md"
+    },
+    {
+      "id": "vision",
+      "type": "vision",
+      "name": "Written once, read by both",
+      "tagline": "We are working toward companies whose knowledge is written once, in a structure that the people who run them and the agents working beside them can both rely on — so that what a company knows can be read, checked and acted on where it is needed, rather than reassembled out of wikis, decks, tickets and chat threads every time somebody asks.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "It holds when a company can answer a question about itself from the structure rather than from whoever remembers, when an agent answering the same question is held to the same evidence as a person, and when a claim that rests on nothing is visible as such instead of passing unchallenged. A reader can tell whether it holds by asking the same question twice, of a person and of an agent, and comparing what each had to stand on.\n\nIt does not ask a company to move what it keeps elsewhere. A fact the wiki, the tracker or the directory has authority over stays mastered there and is projected into the model by a sync that names it, so a company whose knowledge is legible this way still runs on the tools it ran on before. It is also not reached by describing more: a model nobody acts on has not made a company legible, whatever it contains.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/vision.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "concepts/agent-pass",
+      "to": "concepts/rule",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/agent-pass",
+      "to": "concepts/schema",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/agent-pass",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/agent-pass",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/canonical-name",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/canonical-name",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/check",
+      "to": "concepts/rule",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "cited rule"
+      }
+    },
+    {
+      "from": "concepts/check",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/check",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/core",
+      "to": "concepts/type",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/core",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/core",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/entity",
+      "to": "concepts/canonical-name",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/entity",
+      "to": "concepts/type",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/entity",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/entity",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/instance",
+      "to": "concepts/core",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "vendored core"
+      }
+    },
+    {
+      "from": "concepts/instance",
+      "to": "concepts/entity",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/instance",
+      "to": "concepts/pack",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/instance",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/instance",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/ownership",
+      "to": "concepts/type",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "owner"
+      }
+    },
+    {
+      "from": "concepts/ownership",
+      "to": "concepts/type",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "owned"
+      }
+    },
+    {
+      "from": "concepts/ownership",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/ownership",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pack",
+      "to": "concepts/type",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/pack",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pack",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pin",
+      "to": "concepts/release",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "maybe one",
+        "As": "pinned release"
+      }
+    },
+    {
+      "from": "concepts/pin",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pin",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/reference",
+      "to": "concepts/canonical-name",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/reference",
+      "to": "concepts/entity",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "target"
+      }
+    },
+    {
+      "from": "concepts/reference",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/reference",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/release",
+      "to": "concepts/core",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/release",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/release",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/rule",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/rule",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/schema",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/schema",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/type",
+      "to": "concepts/schema",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/type",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/type",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "domains/core",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "concepts/core",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "concepts/entity",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "concepts/schema",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "concepts/type",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-reads-the-model",
+      "to": "concepts/entity",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-reads-the-model",
+      "to": "concepts/instance",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-reads-the-model",
+      "to": "concepts/pin",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-reads-the-model",
+      "to": "concepts/reference",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-reads-the-model",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-reads-the-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "concepts/agent-pass",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "concepts/check",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "concepts/instance",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "concepts/release",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "concepts/rule",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-an-instance-runs",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-while-a-file-is-edited",
+      "to": "concepts/check",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-while-a-file-is-edited",
+      "to": "concepts/reference",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-while-a-file-is-edited",
+      "to": "concepts/rule",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-while-a-file-is-edited",
+      "to": "concepts/schema",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-while-a-file-is-edited",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/checks-while-a-file-is-edited",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-vocabulary-on-the-web",
+      "to": "concepts/pin",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-vocabulary-on-the-web",
+      "to": "concepts/schema",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-vocabulary-on-the-web",
+      "to": "concepts/type",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-vocabulary-on-the-web",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-vocabulary-on-the-web",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "identity",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "processes/contribution/phases/review",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/consider",
+      "to": "roles/contributor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/integrate",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/integrate",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/integrate",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/integrate",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/integrate",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/propose",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/propose",
+      "to": "roles/contributor",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/propose",
+      "to": "roles/contributor",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/propose",
+      "to": "processes/contribution/phases/consider",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/propose",
+      "to": "roles/contributor",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/propose",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "processes/contribution/phases/integrate",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "roles/reviewer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "roles/contributor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/phases/review",
+      "to": "roles/owner",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution/tracks/change",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "processes/contribution/phases/consider",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "processes/contribution/phases/integrate",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "processes/contribution/phases/propose",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "processes/contribution/phases/review",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "processes/contribution/tracks/change",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "roles/contributor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/contribution",
+      "to": "roles/reviewer",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/controller",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/implementer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/translator",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/writer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "processes/delivery/phases/integrate",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/controller",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/planner",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/controller",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/planner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "processes/delivery/phases/implement",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/planner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/specifier",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "processes/delivery/phases/spec",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/specifier",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "processes/delivery/phases/plan",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/specifier",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/writer",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/tracks/code",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/tracks/prose",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/implement",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/integrate",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/plan",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/shape",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/phases/spec",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/tracks/code",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/answer",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/answer",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/answer",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/answer",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/answer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/answer",
+      "to": "roles/requestor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/raise",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/raise",
+      "to": "roles/requestor",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/raise",
+      "to": "roles/requestor",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/raise",
+      "to": "processes/feature-request/phases/understand",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/raise",
+      "to": "roles/requestor",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/raise",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/triage",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/triage",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/triage",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/triage",
+      "to": "processes/feature-request/phases/answer",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/triage",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/triage",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "processes/feature-request/phases/triage",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/phases/understand",
+      "to": "roles/requestor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request/tracks/decision",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "processes/feature-request/phases/answer",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "processes/feature-request/phases/raise",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "processes/feature-request/phases/triage",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "processes/feature-request/phases/understand",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "processes/feature-request/tracks/decision",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/feature-request",
+      "to": "roles/requestor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "products/companygraph-core",
+      "to": "domains/core",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/companygraph-core",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/controller",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/implementer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/planner",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/reviewer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/specifier",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/translator",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/writer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/contributor",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/controller",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/implementer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/owner",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/planner",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/requestor",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/reviewer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/specifier",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/translator",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/writer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/whether-this-is-a-business-is-answered",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/instance-led-strategy",
+      "to": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/instance-led-strategy",
+      "to": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/instance-led-strategy",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/instance-led-strategy",
+      "to": "values/adoption-is-not-taxed",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/instance-led-strategy",
+      "to": "values/describe-the-pattern-never-the-company",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/instance-led-strategy",
+      "to": "values/run-on-what-we-publish",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/read-only-server-strategy",
+      "to": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/read-only-server-strategy",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/read-only-server-strategy",
+      "to": "values/adoption-is-not-taxed",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/read-only-server-strategy",
+      "to": "values/run-on-what-we-publish",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/companygraph-io-website",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "values/adoption-is-not-taxed",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "values/describe-the-pattern-never-the-company",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "values/run-on-what-we-publish",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "vision",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    }
+  ],
+  "repo": "companygraph/mental-model"
+}
