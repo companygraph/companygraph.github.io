@@ -572,10 +572,10 @@
   .term-top{display:flex; align-items:center; gap:.45rem; padding:.7rem .9rem; background:var(--t-top)}
   .term-top i{width:.7rem; height:.7rem; border-radius:50%; background:var(--t-dot)}
   .term-body{padding:1.1rem 1.35rem 1.3rem; overflow-x:auto; font-size:clamp(.74rem,1.1vw,.9rem); line-height:1.55}
-  /* While the flow plays, the window keeps one height, as a terminal window does, so the page
-     under it never jumps; a screen taller than the window shows its last lines, where a
-     terminal's cursor is. */
-  .term.playing .term-body{height:calc(26 * 1.55em + 2.4rem); overflow-y:hidden}
+  /* Once the flow has started, the window keeps one height, as a terminal window does, playing
+     or paused, so the page under it never jumps; a screen taller than the window shows its last
+     lines, where a terminal's cursor is. */
+  .term.live .term-body{height:calc(26 * 1.55em + 2.4rem); overflow-y:hidden}
   .term-body pre{margin:0; white-space:pre; font:inherit}
   .term-logo{display:flex; align-items:center; gap:1.1rem; margin:1.1rem 0 1.2rem .9rem}
   .term-logo svg{width:5.2em; height:5.2em; color:var(--t-accent); flex:0 0 auto}
@@ -1109,7 +1109,7 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
   function play(){
     var mine = ++run;
     paused = false;
-    fig.classList.add("playing");
+    fig.classList.add("live", "playing");
     button.setAttribute("aria-pressed", "true");
     clear();
     return type('<span class="d">$</span> ', CMD, mine, 32)
