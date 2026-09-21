@@ -557,23 +557,29 @@
   .note code, .lede code, .rules code{font-size:.88em; color:var(--ink); background:var(--raise);
        border:1px solid var(--rule); border-radius:5px; padding:.05em .35em; white-space:nowrap}
 
-  /* The menu as a terminal draws it. A terminal is dark in either theme, so its colors are its
-     own and not the tokens; the accent is the one the tooling paints. The mark is the site's
-     SVG and not the tooling's box characters, because Plex Mono as served here carries none of
-     them and a fallback face would break their columns. */
-  .term{margin-top:1.4rem; max-width:100%; border-radius:12px; overflow:hidden;
-        background:#0E141C; border:1.5px solid var(--c-firm); color:#D5DCE6}
-  .term-top{display:flex; gap:.45rem; padding:.7rem .9rem; background:#161E29}
-  .term-top i{width:.7rem; height:.7rem; border-radius:50%; background:#2B3645}
+  /* The menu as a terminal draws it, dark in the dark theme and light in the light one, as a
+     terminal follows its owner's. Its colors are its own and not the tokens, because a terminal
+     is not a page surface; the accent is the one the tooling paints, and in the light theme the
+     page's own, which holds 4.5:1 there. The mark is the site's SVG and not the tooling's box
+     characters, because Plex Mono as served here carries none of them and a fallback face would
+     break their columns. */
+  .term{--t-bg:#0E141C; --t-top:#161E29; --t-dot:#2B3645; --t-ink:#D5DCE6; --t-dim:#8793A3;
+        --t-accent:#7FA3D8; --t-strong:#FFFFFF;
+        margin-top:1.4rem; max-width:100%; border-radius:12px; overflow:hidden;
+        background:var(--t-bg); border:1.5px solid var(--c-firm); color:var(--t-ink)}
+  :root[data-theme="light"] .term{--t-bg:#FDFCF9; --t-top:#EFECE5; --t-dot:#D6D1C6; --t-ink:#1D232C;
+        --t-dim:#676152; --t-accent:#3A6DA6; --t-strong:#0C0E13}
+  .term-top{display:flex; gap:.45rem; padding:.7rem .9rem; background:var(--t-top)}
+  .term-top i{width:.7rem; height:.7rem; border-radius:50%; background:var(--t-dot)}
   .term-body{padding:1.1rem 1.35rem 1.3rem; overflow-x:auto; font-size:clamp(.74rem,1.1vw,.9rem); line-height:1.55}
   .term-body pre{margin:0; white-space:pre; font:inherit}
   .term-logo{display:flex; align-items:center; gap:1.1rem; margin:1.1rem 0 1.2rem .9rem}
-  .term-logo svg{width:5.2em; height:5.2em; color:#7FA3D8; flex:0 0 auto}
-  .term .a{color:#7FA3D8}
-  .term .d{color:#8793A3}
-  .term .k{color:#FFFFFF; font-weight:600}
-  .term .k.a{color:#7FA3D8}
-  .term .cur{display:inline-block; width:.6em; height:1.15em; vertical-align:-.2em; background:#D5DCE6}
+  .term-logo svg{width:5.2em; height:5.2em; color:var(--t-accent); flex:0 0 auto}
+  .term .a{color:var(--t-accent)}
+  .term .d{color:var(--t-dim)}
+  .term .k{color:var(--t-strong); font-weight:600}
+  .term .k.a{color:var(--t-accent)}
+  .term .cur{display:inline-block; width:.6em; height:1.15em; vertical-align:-.2em; background:var(--t-ink)}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
