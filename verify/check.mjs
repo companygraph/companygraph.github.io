@@ -47,7 +47,7 @@ const PAGES = [
                // still not derived from the deck's own timings, so re-cut the talk and this
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
-               "Watch intro talk", "12 minutes · German or English", "Set it up",
+               "Watch intro talk", "12 minutes · German or English", "Try the CLI",
                // The hero's note says what the drawing below it is: CompanyGraph, in
                // its own vocabulary. Only the words that carry it, so rewording the
                // rest of the sentence does not fail the check.
@@ -70,9 +70,9 @@ const PAGES = [
       // Declared here so the swap cannot quietly go away again.
       title: "CompanyGraph – ein Meta-Modell für den Betrieb eines Unternehmens",
       desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
-                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "Einrichten", "12 Minuten · Deutsch oder Englisch",
+                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "12 Minuten · Deutsch oder Englisch",
                           "beschrieben in seinem eigenen Vokabular"],
-                  hides: ["Everything a company", "Read the source", "Set it up", "described in its own vocabulary"] },
+                  hides: ["Everything a company", "Read the source", "Try the CLI", "described in its own vocabulary"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
     // /example/ are: `graph` reads company.json, the file the page names, and walks what it
     // draws, so no name from the model is written here.
