@@ -2,27 +2,17 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Ship `companygraph/talks` — a talks index and one ten-minute narrated deck,
-serving at `companygraph.io/talks/`, and wire it into the site and the org profile.
+**Goal:** Ship `companygraph/talks` — a talks index and one ten-minute narrated deck, serving at `companygraph.io/talks/`, and wire it into the site and the org profile.
 
-**Architecture:** Self-contained HTML. No build step and no framework: the index page is a
-page, the deck is a deck, and both must open from `file://` as well as from a server. The
-sibling repository `~/git/talks` (`guestgraph/talks`) is a working implementation of exactly
-this shape — most tasks copy a file from it and change what is CompanyGraph's. Verification
-renders the served pages in headless Chromium and asserts the DOM; each task adds its check
-first (red), then the content that satisfies it (green).
+**Architecture:** Self-contained HTML. No build step and no framework: the index page is a page, the deck is a deck, and both must open from `file://` as well as from a server. The sibling repository `~/git/talks` (`guestgraph/talks`) is a working implementation of exactly this shape — most tasks copy a file from it and change what is CompanyGraph's. Verification renders the served pages in headless Chromium and asserts the DOM; each task adds its check first (red), then the content that satisfies it (green).
 
-**Tech Stack:** HTML, CSS, vanilla JS. Node 18+ with Playwright for `verify`, `og` and `pdf`.
-Python 3 with `requests` for narration. No dependencies in the pages themselves.
+**Tech Stack:** HTML, CSS, vanilla JS. Node 18+ with Playwright for `verify`, `og` and `pdf`. Python 3 with `requests` for narration. No dependencies in the pages themselves.
 
-**Spec:** [`../specs/2026-08-24-companygraph-talks-design.md`](../specs/2026-08-24-companygraph-talks-design.md)
-— read §3 (the arc), §5 (the index shares the site's chrome), §6 (language and notes) and §7
-(narration) before starting. Where this plan and the spec disagree, the spec wins.
+**Spec:** [`../specs/2026-08-24-companygraph-talks-design.md`](../specs/2026-08-24-companygraph-talks-design.md) — read §3 (the arc), §5 (the index shares the site's chrome), §6 (language and notes) and §7 (narration) before starting. Where this plan and the spec disagree, the spec wins.
 
 ## Global Constraints
 
-Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task's
-requirements implicitly include this section.
+Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task's requirements implicitly include this section.
 
 - **English markup, German in `data-de`.** Static `lang="en"`, because the source is English.
   `applyLang()` sets `de` when a visitor switches.
@@ -73,15 +63,13 @@ intro/audio/{en,de}/NN.mp3    committed clips, one per slide, zero-based
 CLAUDE.md, README.md
 ```
 
-`verify/check.mjs` stays one file: every check shares the same page-loading helpers, and the
-index and the deck are asserted by the same machinery with different spec objects.
+`verify/check.mjs` stays one file: every check shares the same page-loading helpers, and the index and the deck are asserted by the same machinery with different spec objects.
 
 ---
 
 ### Task 1: The repository, the harness, and the talks index
 
-The index page first, because it is the smaller of the two documents and it proves the shell,
-the fonts, the tokens and the suite before a deck is written against them.
+The index page first, because it is the smaller of the two documents and it proves the shell, the fonts, the tokens and the suite before a deck is written against them.
 
 **Files:**
 
@@ -106,9 +94,7 @@ git remote add origin git@github.com:companygraph/talks.git
 git push -u origin main
 ```
 
-Expected: the existing spec commit lands on `main`. The repository name is load-bearing —
-Pages serves it at `companygraph.io/talks/` because the org's `CNAME` cascades from
-`companygraph.github.io`. Do not rename it.
+Expected: the existing spec commit lands on `main`. The repository name is load-bearing — Pages serves it at `companygraph.io/talks/` because the org's `CNAME` cascades from `companygraph.github.io`. Do not rename it.
 
 - [ ] **Step 2: Copy the harness from the sibling, unchanged where it must be**
 
@@ -121,8 +107,7 @@ cp ~/git/companygraph.github.io/favicon.svg favicon.svg
 diff ~/git/talks/verify/design.mjs verify/design.mjs && echo "identical"
 ```
 
-Expected: `identical`. If it ever differs, the shared-token check in every sibling repository
-is asserting something different from this one.
+Expected: `identical`. If it ever differs, the shared-token check in every sibling repository is asserting something different from this one.
 
 - [ ] **Step 3: Write `package.json`**
 
@@ -168,20 +153,11 @@ const PAGES = [
 
 - [ ] **Step 4b: Bring the toggle check across from the landing page**
 
-The sibling's suite does **not** have this check — it asserts only the first render, which is
-English, so deleting a toggle's click listener leaves it printing `all checks pass`. It was
-written for `companygraph.io` and caught three real breakages there. This repository gets it
-from the start rather than discovering the gap later (spec §10).
+The sibling's suite does **not** have this check — it asserts only the first render, which is English, so deleting a toggle's click listener leaves it printing `all checks pass`. It was written for `companygraph.io` and caught three real breakages there. This repository gets it from the start rather than discovering the gap later (spec §10).
 
-Copy the `translates` function from `~/git/companygraph.github.io/verify/check.mjs` into
-`CHECKS` here, **last in the object**, unchanged. It clicks `#langind`, requires `lang` to
-flip and the German strings to appear and the English to be gone, then clicks back and
-requires the page to be exactly what it was. It runs last because it is the only check that
-mutates what the others read, and the round trip is what stops a later check inheriting a
-German page.
+Copy the `translates` function from `~/git/companygraph.github.io/verify/check.mjs` into `CHECKS` here, **last in the object**, unchanged. It clicks `#langind`, requires `lang` to flip and the German strings to appear and the English to be gone, then clicks back and requires the page to be exactly what it was. It runs last because it is the only check that mutates what the others read, and the round trip is what stops a later check inheriting a German page.
 
-If the deck's control has a different id than the index page's, pass it in the spec object
-rather than branching inside the check.
+If the deck's control has a different id than the index page's, pass it in the spec object rather than branching inside the check.
 
 - [ ] **Step 5: Run it and watch it fail**
 
@@ -226,8 +202,7 @@ Then, in order:
 npm run verify
 ```
 
-Expected: `✓ /` and `all checks pass`. If `monoScope` fails, prose has been set in mono —
-fix the page, never the check.
+Expected: `✓ /` and `all checks pass`. If `monoScope` fails, prose has been set in mono — fix the page, never the check.
 
 - [ ] **Step 8: Look at it**
 
@@ -235,14 +210,11 @@ fix the page, never the check.
 open http://localhost:8000/
 ```
 
-Check both OS colour schemes and a phone width. The header, main content and footer must line
-up on the same two edges at every width — that is `.shell` doing its job, and it is invisible
-in a diff.
+Check both OS colour schemes and a phone width. The header, main content and footer must line up on the same two edges at every width — that is `.shell` doing its job, and it is invisible in a diff.
 
 - [ ] **Step 9: Write `README.md` and `CLAUDE.md`**
 
-`README.md`: what the repository is, the file list, `npm run serve` / `verify` / `og` / `pdf`,
-and that the domain is served by two repositories.
+`README.md`: what the repository is, the file list, `npm run serve` / `verify` / `og` / `pdf`, and that the domain is served by two repositories.
 
 `CLAUDE.md`: the Global Constraints above, plus the two rules that have no CI behind them —
 
@@ -271,8 +243,7 @@ git push
 
 ### Task 2: The deck skeleton and its title slide
 
-One slide, all the chrome. This is where the transport bar, the notes panel, the language
-toggle and the keyboard handling are proven — before nine more slides make failures ambiguous.
+One slide, all the chrome. This is where the transport bar, the notes panel, the language toggle and the keyboard handling are proven — before nine more slides make failures ambiguous.
 
 **Files:**
 
@@ -316,8 +287,7 @@ cp ~/git/talks/intro/fonts/*.woff2 intro/fonts/
 cp ~/git/talks/intro/package.json intro/package.json
 ```
 
-In `intro/index.html`, delete every `<section class="slide">` except the title slide, and
-change:
+In `intro/index.html`, delete every `<section class="slide">` except the title slide, and change:
 
 - `<title>` → `CompanyGraph — an introduction · a talk by Robert Blust`
 - `<link rel="canonical">` and `og:url` → `https://companygraph.io/talks/intro/`
@@ -325,8 +295,7 @@ change:
 - `og:description` / `<meta name="description">` → the talk's own sentence, not the site's
 - the title slide's `<h1>` → `CompanyGraph` with `data-de` carrying the German
 
-In `intro/package.json`, set `"name": "companygraph-talk-intro"` and a `description` naming
-this talk.
+In `intro/package.json`, set `"name": "companygraph-talk-intro"` and a `description` naming this talk.
 
 - [ ] **Step 4: Run the check and watch it pass**
 
@@ -342,9 +311,7 @@ Expected: `✓ /` and `✓ /intro/`.
 open http://localhost:8000/intro/
 ```
 
-Press `→`, `N` (notes) and `L` (language). Confirm: the notes panel shows the note and the
-slide does not, the counter reads `00`, and the transport bar's *All talks* control is on the
-far side of the divider from play and next.
+Press `→`, `N` (notes) and `L` (language). Confirm: the notes panel shows the note and the slide does not, the counter reads `00`, and the transport bar's *All talks* control is on the far side of the divider from play and next.
 
 - [ ] **Step 6: Commit**
 
@@ -358,8 +325,7 @@ git push
 
 ### Task 3: Slides 1–4 — the problem, the convergence, the shape, the references
 
-The first half of the arc. Slide 2 is the spine of the whole talk and is new: it is not a
-port of anything.
+The first half of the arc. Slide 2 is the spine of the whole talk and is new: it is not a port of anything.
 
 **Files:**
 
@@ -373,42 +339,29 @@ port of anything.
 
 - [ ] **Step 1: Add slide 01 — knowledge everywhere and nowhere**
 
-Visible: *A company's knowledge lives everywhere — and nowhere.* `data-de`:
-*Das Wissen einer Firma liegt überall — und nirgends.*
+Visible: *A company's knowledge lives everywhere — and nowhere.* `data-de`: *Das Wissen einer Firma liegt überall — und nirgends.*
 
-Notes (EN, `data-notes-en`) say: every company runs on knowledge — what it is for, how it
-works, who decides what, what it measures, which rules hold. It sits in heads, in wiki pages,
-in spreadsheets, in tickets. **Name no tool**: "wiki pages" and "tickets", never a product
-name. Neither people nor agents can rely on it. `data-time="1:00"`.
+Notes (EN, `data-notes-en`) say: every company runs on knowledge — what it is for, how it works, who decides what, what it measures, which rules hold. It sits in heads, in wiki pages, in spreadsheets, in tickets. **Name no tool**: "wiki pages" and "tickets", never a product name. Neither people nor agents can rely on it. `data-time="1:00"`.
 
 - [ ] **Step 2: Add slide 02 — two companies, the same shape**
 
 Visible: *Two companies. The same shape.* — the landing page's own headline, deliberately.
 
-Notes: one company has a payroll and keeps a thin file per person, because the rest lives on a
-website. One is a company of one, and was forced to model a person properly — that is where
-`profile`, `skill` and `experience` come from. **Neither knew about the other.** Both arrived
-at one Markdown file per entity, frontmatter and a body, folders named for the type, schemas
-beside them.
+Notes: one company has a payroll and keeps a thin file per person, because the rest lives on a website. One is a company of one, and was forced to model a person properly — that is where `profile`, `skill` and `experience` come from. **Neither knew about the other.** Both arrived at one Markdown file per entity, frontmatter and a body, folders named for the type, schemas beside them.
 
-**Name neither company.** The structural claim stands without it, and naming them is
-forbidden by the model's own conventions. `data-time="1:15"`.
+**Name neither company.** The structural claim stands without it, and naming them is forbidden by the model's own conventions. `data-time="1:15"`.
 
 - [ ] **Step 3: Add slide 03 — that shape**
 
 Visible: the brain image from the source deck, with *One file per entity.*
 
-Notes: an entity is a file when it owns nothing and a folder when it owns collections of its
-own — one mechanism, not two. The canonical name is the H1, not a field and not the filename.
-`data-time="1:10"`.
+Notes: an entity is a file when it owns nothing and a folder when it owns collections of its own — one mechanism, not two. The canonical name is the H1, not a field and not the filename. `data-time="1:10"`.
 
 - [ ] **Step 4: Add slide 04 — references, not links**
 
 Visible: *No dead links.* — the source deck's `keine toten Links`, in English.
 
-Notes: every reference is a canonical name, never a path. Moving a file breaks nothing;
-renaming an entity breaks loudly, because a name that does not resolve is caught. Say what is
-checked — a person without a role, a rule without an owner. `data-time="1:10"`.
+Notes: every reference is a canonical name, never a path. Moving a file breaks nothing; renaming an entity breaks loudly, because a name that does not resolve is caught. Say what is checked — a person without a role, a rule without an owner. `data-time="1:10"`.
 
 - [ ] **Step 5: Verify by rendering, twice**
 
@@ -417,10 +370,7 @@ npm run verify
 open http://localhost:8000/intro/
 ```
 
-Walk all five slides in both languages. The three inherited hazards all show up here and only
-here: a straight `"` inside a German note dumps the note onto the slide, a `class="cue"` with
-double quotes does the same, and an HTML comment inside a start tag swallows `data-notes`
-entirely. **Look at each slide with notes open before moving on.**
+Walk all five slides in both languages. The three inherited hazards all show up here and only here: a straight `"` inside a German note dumps the note onto the slide, a `class="cue"` with double quotes does the same, and an HTML comment inside a start tag swallows `data-notes` entirely. **Look at each slide with notes open before moving on.**
 
 - [ ] **Step 6: Commit**
 
@@ -447,48 +397,33 @@ git push
 
 Visible: *Everything that makes a company — in one vocabulary.*
 
-Notes: roles and groups (who does what), processes with gates (how work flows), strategy and
-objectives (where we invest), KPIs (what we measure), rules (what we enforce), concepts (what
-we define). **No count and no exhaustive list read aloud** — pick, do not recite.
-`data-time="1:20"`.
+Notes: roles and groups (who does what), processes with gates (how work flows), strategy and objectives (where we invest), KPIs (what we measure), rules (what we enforce), concepts (what we define). **No count and no exhaustive list read aloud** — pick, do not recite. `data-time="1:20"`.
 
 - [ ] **Step 2: Add slide 06 — a gate, concrete**
 
 Visible: *Governance as data, not as a slide.*
 
-Notes: take the transition from concept to build. The model says who is accountable, what the
-gate's criteria are, and which rules sit behind it. Keep the source deck's example shape but
-**invent the specifics** — no real company's thresholds. `data-time="1:20"`.
+Notes: take the transition from concept to build. The model says who is accountable, what the gate's criteria are, and which rules sit behind it. Keep the source deck's example shape but **invent the specifics** — no real company's thresholds. `data-time="1:20"`.
 
 - [ ] **Step 3: Add slide 07 — it pays twice**
 
 Visible: *For people, and for agents.*
 
-Notes: people get onboarding by role, an answer to "who owns this?", and alignment. Agents get
-a context layer they can act inside — vision, strategy, process, rules. `data-time="1:15"`.
+Notes: people get onboarding by role, an answer to "who owns this?", and alignment. Agents get a context layer they can act inside — vision, strategy, process, rules. `data-time="1:15"`.
 
 - [ ] **Step 4: Add slide 08 — Markdown, checked by agents**
 
-Visible: *Markdown. Checked by agents.* — new, and the claim the private model never had to
-defend.
+Visible: *Markdown. Checked by agents.* — new, and the claim the private model never had to defend.
 
-Notes: the schemas are Markdown too, and an agent enforces them. This is not a stage on the
-way to JSON Schema — a formal schema language would contradict the thesis the model ships
-under. Say why it holds: the schema tables are written to a fixed shape, so what an agent
-checks is the same thing every time. `data-time="1:00"`.
+Notes: the schemas are Markdown too, and an agent enforces them. This is not a stage on the way to JSON Schema — a formal schema language would contradict the thesis the model ships under. Say why it holds: the schema tables are written to a fixed shape, so what an agent checks is the same thing every time. `data-time="1:00"`.
 
-**This is where the "no hallucinations" restraint applies.** The claim is that the model
-shrinks the space in which an agent has to guess, and holds it inside stated guardrails.
+**This is where the "no hallucinations" restraint applies.** The claim is that the model shrinks the space in which an agent has to guess, and holds it inside stated guardrails.
 
 - [ ] **Step 5: Add slide 09 — take it**
 
 Visible: *Apache 2.0 · companygraph.io*
 
-Notes: the vocabulary is published, copy it into a repository of your own, nothing to install.
-Then the one honesty sentence, in this form and no other: **"Not all of it is written yet —
-the roadmap says what is."** No count, no type list, no "the first release describes one
-person completely". Those are true the day they are recorded and wrong within a release, and
-correcting a recorded slide costs two audio clips and two PDF exports. `data-time="0:55"`.
+Notes: the vocabulary is published, copy it into a repository of your own, nothing to install. Then the one honesty sentence, in this form and no other: **"Not all of it is written yet — the roadmap says what is."** No count, no type list, no "the first release describes one person completely". Those are true the day they are recorded and wrong within a release, and correcting a recorded slide costs two audio clips and two PDF exports. `data-time="0:55"`.
 
 - [ ] **Step 6: Check the running time**
 
@@ -498,8 +433,7 @@ grep -o 'data-time="[0-9]:[0-9][0-9]"' intro/index.html \
   | awk -F: '{s+=$1*60+$2} END {printf "%d:%02d\n", s/60, s%60}'
 ```
 
-Expected: `10:25`. If it drifts more than ~30s from the spec's budget, the arc has grown —
-cut, do not let it run long.
+Expected: `10:25`. If it drifts more than ~30s from the spec's budget, the arc has grown — cut, do not let it run long.
 
 - [ ] **Step 7: Verify by rendering**
 
@@ -508,8 +442,7 @@ npm run verify
 open http://localhost:8000/intro/
 ```
 
-All ten slides, both languages, notes open. Confirm the counter reads `09` on the last slide —
-zero-based everywhere the viewer can see it.
+All ten slides, both languages, notes open. Confirm the counter reads `09` on the last slide — zero-based everywhere the viewer can see it.
 
 - [ ] **Step 8: Commit**
 
@@ -541,14 +474,11 @@ cp ~/git/talks/intro/export-og.mjs intro/export-og.mjs
 cp ~/git/talks/intro/export-pdf.mjs intro/export-pdf.mjs
 ```
 
-In `export-og.mjs`, the `cards` array names the sources and destinations — point one at
-`../index.html` → `../og.png` and one at `index.html` → `og.png`. In `export-pdf.mjs`, set the
-output names to `companygraph-en.pdf` and `companygraph-de.pdf`.
+In `export-og.mjs`, the `cards` array names the sources and destinations — point one at `../index.html` → `../og.png` and one at `index.html` → `og.png`. In `export-pdf.mjs`, set the output names to `companygraph-en.pdf` and `companygraph-de.pdf`.
 
 - [ ] **Step 2: Add the scripts**
 
-In `intro/package.json`, keep `"pdf": "node export-pdf.mjs"` and `"og": "node export-og.mjs"`,
-and add `pdf-lib` alongside `playwright` in `devDependencies`.
+In `intro/package.json`, keep `"pdf": "node export-pdf.mjs"` and `"og": "node export-og.mjs"`, and add `pdf-lib` alongside `playwright` in `devDependencies`.
 
 - [ ] **Step 3: Generate, then look at the files**
 
@@ -558,9 +488,7 @@ file og.png ../og.png                      # must report 1200 x 630
 open og.png ../og.png companygraph-en.pdf
 ```
 
-Expected: 1200×630 for both cards. `verify`'s `card` check only compares the *declared*
-numbers against the literals — it never measures the file, so a card at the wrong size passes.
-Looking at it is the check.
+Expected: 1200×630 for both cards. `verify`'s `card` check only compares the *declared* numbers against the literals — it never measures the file, so a card at the wrong size passes. Looking at it is the check.
 
 - [ ] **Step 4: Run verify**
 
@@ -582,8 +510,7 @@ git push
 
 ### Task 6: Narration
 
-Last of the deck work, deliberately: clips cache on a content hash of the note, so generating
-before the words stop moving pays twice.
+Last of the deck work, deliberately: clips cache on a content hash of the note, so generating before the words stop moving pays twice.
 
 **Files:**
 
@@ -604,11 +531,7 @@ cp ~/git/talks/intro/tts/generate.py intro/tts/generate.py
 chmod +x intro/tts/generate.py
 ```
 
-Keep `VOICE` exactly as it is — Matilda `XrExE9yKIg1WjnnlVkGX` for English, Jessica
-`cgSgspJ2msm6clMCkdW9` for German — and **rewrite the comment above it**, which currently says
-these are GuestGraph's voices chosen to differ from the person's. Replace with what §7 of the
-spec decided: the same two voices, now a house voice across the projects, because the products
-are told apart by what the decks say rather than by who reads them.
+Keep `VOICE` exactly as it is — Matilda `XrExE9yKIg1WjnnlVkGX` for English, Jessica `cgSgspJ2msm6clMCkdW9` for German — and **rewrite the comment above it**, which currently says these are GuestGraph's voices chosen to differ from the person's. Replace with what §7 of the spec decided: the same two voices, now a house voice across the projects, because the products are told apart by what the decks say rather than by who reads them.
 
 - [ ] **Step 2: Dry run before anything is billed**
 
@@ -617,9 +540,7 @@ cd intro/tts
 ./generate.py --dry-run
 ```
 
-Expected: 20 clips (ten slides × two languages) and a character count. **Check the slide count
-against the deck.** If it is fewer than ten, a `<section` tag has an attribute before `class`
-and the generator cannot see that slide — nothing errors, the clip is simply never made.
+Expected: 20 clips (ten slides × two languages) and a character count. **Check the slide count against the deck.** If it is fewer than ten, a `<section` tag has an attribute before `class` and the generator cannot see that slide — nothing errors, the clip is simply never made.
 
 - [ ] **Step 3: Generate**
 
@@ -633,8 +554,7 @@ Never echo the value. `${VAR:-UNSET}` prints it — the form above cannot.
 
 - [ ] **Step 4: Listen to at least slides 00, 02 and 09 in both languages**
 
-An English title read in the German voice is invisible in every diff and every DOM query. It
-is caught by listening, and by nothing else.
+An English title read in the German voice is invisible in every diff and every DOM query. It is caught by listening, and by nothing else.
 
 - [ ] **Step 5: Record why the audio is committed**
 
@@ -648,9 +568,7 @@ is caught by listening, and by nothing else.
 
 - [ ] **Step 6: Time the narration and correct the quoted length**
 
-Narrated runs shorter than presented, and **the live figure is the one quoted publicly**. Sum
-the clip durations, compare against the deck's `data-time` total, and set the length in
-`index.html`'s talk card to the live figure.
+Narrated runs shorter than presented, and **the live figure is the one quoted publicly**. Sum the clip durations, compare against the deck's `data-time` total, and set the length in `index.html`'s talk card to the live figure.
 
 ```bash
 for f in intro/audio/en/*.mp3; do ffprobe -v error -show_entries format=duration \
@@ -685,9 +603,7 @@ git push
 cp ~/git/talks/sitemap.xml sitemap.xml
 ```
 
-Two URLs: `https://companygraph.io/talks/` and `https://companygraph.io/talks/intro/`. **The
-PDFs are deliberately not listed** — the same talk in a second format would compete with the
-deck for the same query.
+Two URLs: `https://companygraph.io/talks/` and `https://companygraph.io/talks/intro/`. **The PDFs are deliberately not listed** — the same talk in a second format would compete with the deck for the same query.
 
 - [ ] **Step 2: Copy the CI workflow**
 
@@ -696,12 +612,7 @@ mkdir -p .github/workflows
 cp ~/git/companygraph.github.io/.github/workflows/ci.yml .github/workflows/ci.yml
 ```
 
-Keep the job id `verify` — a ruleset requires the job id, not the workflow name, and renaming
-it leaves a branch that looks protected and is not. Keep `timeout-minutes: 10` and
-`permissions: contents: read`. The server step must stay backgrounded **with its output
-redirected** (`> /dev/null 2>&1 &`): a backgrounded process holding the step's log pipe open
-hangs the job just as surely as a foreground one. `npm run og` never runs in CI — it would
-overwrite the committed cards.
+Keep the job id `verify` — a ruleset requires the job id, not the workflow name, and renaming it leaves a branch that looks protected and is not. Keep `timeout-minutes: 10` and `permissions: contents: read`. The server step must stay backgrounded **with its output redirected** (`> /dev/null 2>&1 &`): a backgrounded process holding the step's log pipe open hangs the job just as surely as a foreground one. `npm run og` never runs in CI — it would overwrite the committed cards.
 
 - [ ] **Step 3: Push and confirm CI runs green on a PR**
 
@@ -713,8 +624,7 @@ gh pr create --fill
 gh pr checks --watch
 ```
 
-Expected: `verify` passes. The workflow's first run is this PR, because it only exists on the
-branch.
+Expected: `verify` passes. The workflow's first run is this PR, because it only exists on the branch.
 
 - [ ] **Step 4: Add the ruleset after the PR merges**
 
@@ -725,16 +635,13 @@ gh api --method POST repos/companygraph/talks/rulesets --input /tmp/ruleset.json
 gh api repos/companygraph/talks/rules/branches/main --jq '[.[].type] | join(", ")'
 ```
 
-Expected: `deletion, non_fast_forward, pull_request, required_status_checks`. This is the
-meta-model variant, with the status check, because this repository has CI.
+Expected: `deletion, non_fast_forward, pull_request, required_status_checks`. This is the meta-model variant, with the status check, because this repository has CI.
 
 ---
 
 ### Task 8: Wire it into the site and the profile
 
-**This task edits two repositories other than this one. Confirm with the user before
-starting it.** Every change here is a debt already written down in the target repository's
-`CLAUDE.md`, which says explicitly not to pre-write any of it before the talk exists.
+**This task edits two repositories other than this one. Confirm with the user before starting it.** Every change here is a debt already written down in the target repository's `CLAUDE.md`, which says explicitly not to pre-write any of it before the talk exists.
 
 **Files:**
 
@@ -749,34 +656,21 @@ starting it.** Every change here is a debt already written down in the target re
 
 - [ ] **Step 1: The landing page's nav and second call to action**
 
-In `~/git/companygraph.github.io/index.html`: the nav gains its first link, **Talks** →
-`https://companygraph.io/talks/`, beside the language control it was built to hold. The hero
-gains a second button, *Watch the introduction*, with the length quoted inline — the one fact
-that page is allowed to restate, because a call to action needs it in the moment rather than
-one click away.
+In `~/git/companygraph.github.io/index.html`: the nav gains its first link, **Talks** → `https://companygraph.io/talks/`, beside the language control it was built to hold. The hero gains a second button, *Watch the introduction*, with the length quoted inline — the one fact that page is allowed to restate, because a call to action needs it in the moment rather than one click away.
 
 Add both to that repository's `verify/check.mjs` `PAGES[0].links` so they are asserted.
 
 - [ ] **Step 2: The landing page's sitemap becomes an index**
 
-`sitemap.xml` there currently lists one page. It becomes a `<sitemapindex>` pointing at
-`https://companygraph.io/sitemap.xml`'s own URL set and at
-`https://companygraph.io/talks/sitemap.xml`. Its `CLAUDE.md` records this as a debt to pay
-"the day `companygraph/talks` ships" — this is that day.
+`sitemap.xml` there currently lists one page. It becomes a `<sitemapindex>` pointing at `https://companygraph.io/sitemap.xml`'s own URL set and at `https://companygraph.io/talks/sitemap.xml`. Its `CLAUDE.md` records this as a debt to pay "the day `companygraph/talks` ships" — this is that day.
 
 - [ ] **Step 3: Both `CLAUDE.md`s gain the shared-chrome rule**
 
-The same paragraph on both sides: the talks index carries the site's shell verbatim, and
-adding, renaming or reordering a nav item means doing it in both repositories in the same
-breath. Neither repository's CI can see the other.
+The same paragraph on both sides: the talks index carries the site's shell verbatim, and adding, renaming or reordering a nav item means doing it in both repositories in the same breath. Neither repository's CI can see the other.
 
 - [ ] **Step 4: The org profile gains its entry point**
 
-In `~/git/companygraph-org/profile/README.md`: a `talks` row in the *Where to start* table,
-and the "New here?" line the sibling profile has and this one has deliberately lacked —
-pointing at `companygraph.io/talks/intro/` with the length. Add the same row to the repo table
-in `README.md`, and to `CLAUDE.md`'s fact-ownership table, where "The talk" currently reads
-"`companygraph/talks`, the day it exists".
+In `~/git/companygraph-org/profile/README.md`: a `talks` row in the *Where to start* table, and the "New here?" line the sibling profile has and this one has deliberately lacked — pointing at `companygraph.io/talks/intro/` with the length. Add the same row to the repo table in `README.md`, and to `CLAUDE.md`'s fact-ownership table, where "The talk" currently reads "`companygraph/talks`, the day it exists".
 
 - [ ] **Step 5: Verify the site still passes, and look at both pages**
 

@@ -7,17 +7,9 @@ Status: design agreed, nothing built.
 
 ## 1. Purpose, and what this supersedes
 
-The deck's job changes. Today it explains the model and leads with the claim that two companies
-converged on one shape. After this it is the CompanyGraph counterpart of
-`guestgraph.io/talks/intro/`: the same opening frame, the same close, the same tone — the
-presenter wants to be told where it is wrong.
+The deck's job changes. Today it explains the model and leads with the claim that two companies converged on one shape. After this it is the CompanyGraph counterpart of `guestgraph.io/talks/intro/`: the same opening frame, the same close, the same tone — the presenter wants to be told where it is wrong.
 
-This spec **supersedes §2 and §3** of
-[`2026-08-24-companygraph-talks-design.md`](2026-08-24-companygraph-talks-design.md) — the arc
-and the reasoning behind it. That spec's §4–§11 stand unchanged: repository, index page,
-language and notes, narration, the independence of `blust.ch/talks/mental-model/`,
-verification, and its open questions. The older spec is not rewritten; it carries a header
-pointing here.
+This spec **supersedes §2 and §3** of [`2026-08-24-companygraph-talks-design.md`](2026-08-24-companygraph-talks-design.md) — the arc and the reasoning behind it. That spec's §4–§11 stand unchanged: repository, index page, language and notes, narration, the independence of `blust.ch/talks/mental-model/`, verification, and its open questions. The older spec is not rewritten; it carries a header pointing here.
 
 ### Non-goals
 
@@ -30,27 +22,17 @@ pointing here.
 
 ## 2. Why the spine changes
 
-The older spec made *convergence* the spine because it is the strongest claim the project has.
-Rehearsed, it confuses: the audience has to hold two companies they know nothing about before
-they have been shown a single page of the model. The evidence arrives before the thing it is
-evidence for.
+The older spec made *convergence* the spine because it is the strongest claim the project has. Rehearsed, it confuses: the audience has to hold two companies they know nothing about before they have been shown a single page of the model. The evidence arrives before the thing it is evidence for.
 
-The personal deck's spine works because it is concrete before it is general: the brain, one
-page, one reference, one gate — then the payoff. The audience sees the shape before it is asked
-to believe anything about it. That spine comes back, and convergence becomes what it actually is
-in the argument: one sentence of provenance on the slide that introduces the brain.
+The personal deck's spine works because it is concrete before it is general: the brain, one page, one reference, one gate — then the payoff. The audience sees the shape before it is asked to believe anything about it. That spine comes back, and convergence becomes what it actually is in the argument: one sentence of provenance on the slide that introduces the brain.
 
-The GuestGraph deck adds the frame the personal deck never needed: *this is not finished, and I
-am here to be argued with*. The title and the close carry it; the middle stays declarative. A
-deck that hedges on every slide sounds unsure of itself. One that states the idea plainly and
-then asks four hard questions sounds like it means them.
+The GuestGraph deck adds the frame the personal deck never needed: *this is not finished, and I am here to be argued with*. The title and the close carry it; the middle stays declarative. A deck that hedges on every slide sounds unsure of itself. One that states the idea plainly and then asks four hard questions sounds like it means them.
 
 ---
 
 ## 3. The arc
 
-Twelve slides, about twelve minutes. Times are targets for the notes, not constraints on the
-build.
+Twelve slides, about twelve minutes. Times are targets for the notes, not constraints on the build.
 
 | # | Title (working) | ≈ | Says |
 | --- | --- | --- | --- |
@@ -95,13 +77,9 @@ Ordered from the shape outward, so each presupposes the previous one was answere
 4. **Would you pay for help building one — time and material, nothing hosted — or is that
    something you only do yourselves?** — the consulting model.
 
-Question 4 is the one the site's `CLAUDE.md` guards against: the site makes no offer. Neither
-does the slide. It asks whether an offer would be wanted, which is exactly what `/billing/` says
-is being validated. The notes say so in as many words, so a later edit cannot turn the question
-into a pitch without contradicting the note beside it.
+Question 4 is the one the site's `CLAUDE.md` guards against: the site makes no offer. Neither does the slide. It asks whether an offer would be wanted, which is exactly what `/billing/` says is being validated. The notes say so in as many words, so a later edit cannot turn the question into a pitch without contradicting the note beside it.
 
-As in the GuestGraph close: the questions are on the slide in full, the presenter reads them,
-and then stops. The notes end with *listen, do not defend*.
+As in the GuestGraph close: the questions are on the slide in full, the presenter reads them, and then stops. The notes end with *listen, do not defend*.
 
 ---
 

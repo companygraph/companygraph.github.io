@@ -2,20 +2,13 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build companygraph.io — one screen that says what CompanyGraph is and sends the
-visitor to the code, with a verify suite that renders the page and asserts it.
+**Goal:** Build companygraph.io — one screen that says what CompanyGraph is and sends the visitor to the code, with a verify suite that renders the page and asserts it.
 
-**Architecture:** A single self-contained `index.html`. No build step, no external asset, no
-framework. The tests are Playwright assertions against a served copy, following the harness
-three sibling repositories already share: `verify/design.mjs` copies in byte-identical and
-brings the design assertions with it; `verify/check.mjs` is this page's own.
+**Architecture:** A single self-contained `index.html`. No build step, no external asset, no framework. The tests are Playwright assertions against a served copy, following the harness three sibling repositories already share: `verify/design.mjs` copies in byte-identical and brings the design assertions with it; `verify/check.mjs` is this page's own.
 
-**Tech Stack:** HTML and CSS by hand. Node with Playwright for `verify` and the og render.
-Python's `http.server` to serve. Nothing else.
+**Tech Stack:** HTML and CSS by hand. Node with Playwright for `verify` and the og render. Python's `http.server` to serve. Nothing else.
 
-**Spec:** [`docs/superpowers/specs/2026-08-23-landing-page-design.md`](../specs/2026-08-23-landing-page-design.md)
-— read §1 (the one claim), §2 (what the page says), §3 (what it must not say) and §4 (the mark)
-before starting. Where plan and spec disagree, the spec wins and the plan is wrong.
+**Spec:** [`docs/superpowers/specs/2026-08-23-landing-page-design.md`](../specs/2026-08-23-landing-page-design.md) — read §1 (the one claim), §2 (what the page says), §3 (what it must not say) and §4 (the mark) before starting. Where plan and spec disagree, the spec wins and the plan is wrong.
 
 ## Global Constraints
 
@@ -60,15 +53,13 @@ CLAUDE.md             the constraints that are easy to break
 .github/workflows/ci.yml
 ```
 
-`index.html` stays one file. It is one screen, everything in it changes together, and a deck in
-a sibling repo has to open from `file://` — which is why these sites share no stylesheet at all.
+`index.html` stays one file. It is one screen, everything in it changes together, and a deck in a sibling repo has to open from `file://` — which is why these sites share no stylesheet at all.
 
 ---
 
 ### Task 1: The harness, and a page for it to check
 
-The smallest thing that produces a green suite: the shared design assertions, the fonts they
-measure, and a skeleton page carrying the token block. Copy is Task 2; the mark is Task 3.
+The smallest thing that produces a green suite: the shared design assertions, the fonts they measure, and a skeleton page carrying the token block. Copy is Task 2; the mark is Task 3.
 
 **Files:**
 
@@ -92,8 +83,7 @@ cp ~/git/guestgraph.github.io/fonts/*.woff2 fonts/
 md5 -q verify/design.mjs ~/git/guestgraph.github.io/verify/design.mjs
 ```
 
-The two hashes must match. `design.mjs` is byte-identical across every repo that shares the
-design system — if you find yourself editing it, you are solving the wrong problem.
+The two hashes must match. `design.mjs` is byte-identical across every repo that shares the design system — if you find yourself editing it, you are solving the wrong problem.
 
 - [ ] **Step 2: Write `package.json`**
 
@@ -193,11 +183,7 @@ Expected: FAIL — `HTTP 404`, because `index.html` does not exist.
 
 - [ ] **Step 5: Write the skeleton page**
 
-Create `index.html`. Copy the `@font-face` rules and the token block **verbatim** from
-`~/git/guestgraph.github.io/index.html` — the token values and the `design tokens · v1` marker
-must match exactly or `tokens` and `tokenVersion` fail. Reword only the comment's first line,
-which currently says "keep in step across all three repositories": make it name no count, so it
-cannot go stale. Task 8 propagates that rewording.
+Create `index.html`. Copy the `@font-face` rules and the token block **verbatim** from `~/git/guestgraph.github.io/index.html` — the token values and the `design tokens · v1` marker must match exactly or `tokens` and `tokenVersion` fail. Reword only the comment's first line, which currently says "keep in step across all three repositories": make it name no count, so it cannot go stale. Task 8 propagates that rewording.
 
 ```html
 <!doctype html>
@@ -312,9 +298,7 @@ Expected: FAIL — `contains: body text is missing "Two companies"`.
 
 - [ ] **Step 3: Write the hero**
 
-Replace `<main>`'s contents. The headline carries the argument on the weight axis — light for
-the setup, heavy where it lands, `<em>` on the landing word. The tagline says what the thing is,
-because the headline does not.
+Replace `<main>`'s contents. The headline carries the argument on the weight axis — light for the setup, heavy where it lands, `<em>` on the landing word. The tagline says what the thing is, because the headline does not.
 
 ```html
 <main>
@@ -329,11 +313,9 @@ because the headline does not.
 </main>
 ```
 
-Style `.r70` at a light weight and `.rcl` at a heavy one on the display face's variable axis,
-matching the sibling's treatment. `em` takes `--c-firm` — it is the resolved thing.
+Style `.r70` at a light weight and `.rcl` at a heavy one on the display face's variable axis, matching the sibling's treatment. `em` takes `--c-firm` — it is the resolved thing.
 
-Write the language toggle to swap `data-de` into place. English stays in the markup so a
-crawler reads English, which is what the og tags will promise.
+Write the language toggle to swap `data-de` into place. English stays in the markup so a crawler reads English, which is what the og tags will promise.
 
 - [ ] **Step 4: Run it to verify it passes**
 
@@ -350,9 +332,7 @@ Expected: `all checks pass`.
 
 - [ ] **Step 6: Read the page against §3 of the spec**
 
-Open it and check the rendered text says nothing the spec forbids: no type count, no type list,
-no status, no roadmap, no pack claim, no source company, no service, no price. This is a reading
-step, not a scripted one — the assertions cannot catch a sentence that should not be there.
+Open it and check the rendered text says nothing the spec forbids: no type count, no type list, no status, no roadmap, no pack claim, no source company, no service, no price. This is a reading step, not a scripted one — the assertions cannot catch a sentence that should not be there.
 
 - [ ] **Step 7: Commit**
 
@@ -380,9 +360,7 @@ Containment and reference — the model's two kinds of edge, as one glyph.
 
 - [ ] **Step 1: Draw the mark**
 
-Create `logo.svg`. An outlined square holding a filled one — ownership, carried by nesting —
-with a line out to a second filled square: reference, by canonical name, to something nothing
-owns. `currentColor` throughout, so it inherits whatever colour it is placed in.
+Create `logo.svg`. An outlined square holding a filled one — ownership, carried by nesting — with a line out to a second filled square: reference, by canonical name, to something nothing owns. `currentColor` throughout, so it inherits whatever colour it is placed in.
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -410,28 +388,19 @@ import("playwright").then(async ({chromium}) => {
 open /tmp/favicon-16.png
 ```
 
-**This is a gate.** If the containment does not read at 16px — if the outer square and its
-filled child merge into one blob — do not ship it. Fall back to a plain nested tree: three
-marks in a column with one indented. A mark that is illegible at favicon size is not a mark,
-and a muddy one is worse than a plain one.
+**This is a gate.** If the containment does not read at 16px — if the outer square and its filled child merge into one blob — do not ship it. Fall back to a plain nested tree: three marks in a column with one indented. A mark that is illegible at favicon size is not a mark, and a muddy one is worse than a plain one.
 
 - [ ] **Step 3: Derive the favicon and the avatar**
 
-`favicon.svg` is `logo.svg` with an explicit colour rather than `currentColor` — a favicon has
-no inherited context. `avatar.svg` is the mark centred on `--ground` at 1024×1024, **full
-bleed**: GitHub rounds org avatars itself, and a rounded rectangle here shows its corners
-through that mask. Render `avatar.png` from it at 1024×1024.
+`favicon.svg` is `logo.svg` with an explicit colour rather than `currentColor` — a favicon has no inherited context. `avatar.svg` is the mark centred on `--ground` at 1024×1024, **full bleed**: GitHub rounds org avatars itself, and a rounded rectangle here shows its corners through that mask. Render `avatar.png` from it at 1024×1024.
 
 - [ ] **Step 4: Put the mark on the page**
 
-Inline `logo.svg` into a header lockup beside the wordmark, and link `favicon.svg` from
-`<head>`. Inline rather than `<img>`: `currentColor` only works inlined, and an `<img>` is a
-second request on a page whose rule is that it makes none.
+Inline `logo.svg` into a header lockup beside the wordmark, and link `favicon.svg` from `<head>`. Inline rather than `<img>`: `currentColor` only works inlined, and an `<img>` is a second request on a page whose rule is that it makes none.
 
 - [ ] **Step 5: Run the suite**
 
-Expected: `all checks pass`. The suite lists failed requests, so a mistyped favicon path fails
-the run rather than passing quietly.
+Expected: `all checks pass`. The suite lists failed requests, so a mistyped favicon path fails the run rather than passing quietly.
 
 - [ ] **Step 6: Commit**
 
@@ -457,20 +426,13 @@ The hero's argument, drawn: two unlike trees arriving at the same shape.
 
 - [ ] **Step 1: Draw the settled state first**
 
-Inline SVG in a `<figure class="figure">` after the hero. Left: a small tree — a handful of
-nodes, one nested inside another. Right: a large tree, many more nodes, same nesting rhythm.
-Between and below them: the shape they share, drawn in `--c-firm` as the resolved thing.
+Inline SVG in a `<figure class="figure">` after the hero. Left: a small tree — a handful of nodes, one nested inside another. Right: a large tree, many more nodes, same nesting rhythm. Between and below them: the shape they share, drawn in `--c-firm` as the resolved thing.
 
-The two source trees use `--c-weak`: they are candidates, considered and not accepted as the
-answer — the shape is. That is what the colour stop means, and using `--c-mid` here would say
-they are interactive, which they are not.
+The two source trees use `--c-weak`: they are candidates, considered and not accepted as the answer — the shape is. That is what the colour stop means, and using `--c-mid` here would say they are interactive, which they are not.
 
-**It must stay abstract.** No company name, no headcount, no industry. "A company of one" and
-"a company with a payroll" is the whole characterisation the spec permits.
+**It must stay abstract.** No company name, no headcount, no industry. "A company of one" and "a company with a payroll" is the whole characterisation the spec permits.
 
-Build the settled state before any animation. If the page is right when nothing moves, the
-animation is decoration; if it is only right once the animation finishes, the animation is
-load-bearing and the og card will be wrong.
+Build the settled state before any animation. If the page is right when nothing moves, the animation is decoration; if it is only right once the animation finishes, the animation is load-bearing and the og card will be wrong.
 
 - [ ] **Step 2: Add the animation, and its settled fallback**
 
@@ -483,20 +445,15 @@ Animate the two trees drawing in, then the shape resolving last. Then add:
 }
 ```
 
-This block is not an accessibility afterthought — Task 5 renders the og card with reduced
-motion emulated, so **this block is what the card shows.** If it is wrong or missing, the card
-ships showing two trees arriving at nothing.
+This block is not an accessibility afterthought — Task 5 renders the og card with reduced motion emulated, so **this block is what the card shows.** If it is wrong or missing, the card ships showing two trees arriving at nothing.
 
 - [ ] **Step 3: Run the suite, then look at both themes and a phone width**
 
-Expected: `all checks pass`. Then open the page and check it renders at 375px wide. Verify by
-rendering, not by reading the diff.
+Expected: `all checks pass`. Then open the page and check it renders at 375px wide. Verify by rendering, not by reading the diff.
 
 - [ ] **Step 4: Prove the reduced-motion state is complete**
 
-In devtools, emulate `prefers-reduced-motion: reduce`, reload, and screenshot immediately —
-before any timer could have run. Every element of the figure must be present and final. If
-anything is missing, the fallback is incomplete and Task 5 will ship a broken card.
+In devtools, emulate `prefers-reduced-motion: reduce`, reload, and screenshot immediately — before any timer could have run. Every element of the figure must be present and final. If anything is missing, the fallback is incomplete and Task 5 will ship a broken card.
 
 - [ ] **Step 5: Commit**
 
@@ -563,10 +520,7 @@ Allow: /
 Sitemap: https://companygraph.io/sitemap.xml
 ```
 
-`sitemap.xml` — **flat, one URL.** The sibling's is an index because two repositories serve
-that domain; ours has one page and no talks repository, and an index pointing at
-`/talks/sitemap.xml` would 404. It becomes an index the day talks lands, and `CLAUDE.md`
-records that obligation in Task 6.
+`sitemap.xml` — **flat, one URL.** The sibling's is an index because two repositories serve that domain; ours has one page and no talks repository, and an index pointing at `/talks/sitemap.xml` would 404. It becomes an index the day talks lands, and `CLAUDE.md` records that obligation in Task 6.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -577,9 +531,7 @@ records that obligation in Task 6.
 
 - [ ] **Step 4: Add the og tags**
 
-In `<head>`, with `og:image` absolute (a card URL must resolve from anywhere), `og:type` set to
-`website`, and width and height declared as `1200` and `630`. `og:description` is the tagline —
-the same sentence, not a second copy written differently.
+In `<head>`, with `og:image` absolute (a card URL must resolve from anywhere), `og:type` set to `website`, and width and height declared as `1200` and `630`. `og:description` is the tagline — the same sentence, not a second copy written differently.
 
 - [ ] **Step 5: Write the render script**
 
@@ -618,9 +570,7 @@ Add `"og": "node export-og.mjs"` to `package.json` scripts.
 npm run og && file og.png && open og.png
 ```
 
-Expected: `PNG image data, 1200 x 630`. Then **look at it.** It must carry the lockup, the
-headline and the call to action, and that must read as a complete thought without the figure.
-If it looks like a page with something missing, adjust the clip rather than shipping it.
+Expected: `PNG image data, 1200 x 630`. Then **look at it.** It must carry the lockup, the headline and the call to action, and that must read as a complete thought without the figure. If it looks like a page with something missing, adjust the clip rather than shipping it.
 
 - [ ] **Step 7: Run the suite and commit**
 
@@ -645,11 +595,7 @@ git commit -m "Make the page findable, and its card a complete thought"
 
 - [ ] **Step 1: Write `README.md`**
 
-Cover: what the site is and where it lives; each file and what it is for; what the mark means —
-containment and reference, the model's two kinds of edge, and that it is the shape the hero's
-two trees arrive at; how to run it (`npm run serve`, `npm run verify`, `npm run og`); and a
-section on what the page deliberately does not say, pointing at `meta-model` as the owner of
-every claim it declines to make.
+Cover: what the site is and where it lives; each file and what it is for; what the mark means — containment and reference, the model's two kinds of edge, and that it is the shape the hero's two trees arrive at; how to run it (`npm run serve`, `npm run verify`, `npm run og`); and a section on what the page deliberately does not say, pointing at `meta-model` as the owner of every claim it declines to make.
 
 - [ ] **Step 2: Write `CLAUDE.md`**
 
@@ -726,8 +672,7 @@ jobs:
 
 - [ ] **Step 2: Commit, push, and open a pull request**
 
-The workflow must run at least once before the ruleset can require it: a status check context
-that has never reported blocks every pull request, including the one introducing it.
+The workflow must run at least once before the ruleset can require it: a status check context that has never reported blocks every pull request, including the one introducing it.
 
 ```bash
 git add .github/workflows/ci.yml
@@ -750,24 +695,17 @@ reported blocks every pull request, including the one introducing it."
 gh pr checks
 ```
 
-Expected: a row named `verify` reporting `pass`. If it reports under another name, the ruleset
-must require that name instead — the context is the job id, not the workflow name.
+Expected: a row named `verify` reporting `pass`. If it reports under another name, the ruleset must require that name instead — the context is the job id, not the workflow name.
 
 - [ ] **Step 4: After merge, add the ruleset**
 
-Match the sibling repositories exactly: `protect-main`, active, `~DEFAULT_BRANCH`, bypass for
-`RepositoryRole:5` with mode `always`, and four rules — `deletion`, `non_fast_forward`,
-`pull_request` (0 required approvals, dismiss stale reviews on push), and
-`required_status_checks` requiring `verify` with `strict_required_status_checks_policy: true`.
-Copy the parameters from `guestgraph/engine`'s ruleset rather than composing them by hand, then
-diff the two to confirm they match.
+Match the sibling repositories exactly: `protect-main`, active, `~DEFAULT_BRANCH`, bypass for `RepositoryRole:5` with mode `always`, and four rules — `deletion`, `non_fast_forward`, `pull_request` (0 required approvals, dismiss stale reviews on push), and `required_status_checks` requiring `verify` with `strict_required_status_checks_policy: true`. Copy the parameters from `guestgraph/engine`'s ruleset rather than composing them by hand, then diff the two to confirm they match.
 
 ---
 
 ### Task 8: Reword the shared token comment across the sibling repositories
 
-**This task edits three repositories other than this one. Confirm with the user before
-starting it.**
+**This task edits three repositories other than this one. Confirm with the user before starting it.**
 
 **Files:**
 
@@ -785,12 +723,9 @@ grep -rn "design tokens · v" ~/git/guestgraph.github.io ~/git/talks ~/git/rober
 
 - [ ] **Step 2: Reword, without touching the marker**
 
-The comment currently reads `design tokens · v1 · keep in step across all three repositories`.
-There are now four. Replace the count with wording that names none — the marker itself
-(`design tokens · v1`) must not change, because `verify` matches on it in every repository.
+The comment currently reads `design tokens · v1 · keep in step across all three repositories`. There are now four. Replace the count with wording that names none — the marker itself (`design tokens · v1`) must not change, because `verify` matches on it in every repository.
 
-A count in a comment is the same defect this project keeps finding in prose: a number that is
-correct on the day it is written and silently wrong afterwards, with nothing to catch it.
+A count in a comment is the same defect this project keeps finding in prose: a number that is correct on the day it is written and silently wrong afterwards, with nothing to catch it.
 
 - [ ] **Step 3: Run each repository's suite**
 
@@ -804,8 +739,7 @@ All three must still pass — the marker is unchanged, so `tokenVersion` still m
 
 - [ ] **Step 4: Commit in each repository separately**
 
-Each gets its own commit, in its own repository, with the same message:
-`Stop the token comment counting repositories`
+Each gets its own commit, in its own repository, with the same message: `Stop the token comment counting repositories`
 
 ---
 
