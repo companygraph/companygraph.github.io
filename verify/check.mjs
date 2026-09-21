@@ -64,8 +64,9 @@ const PAGES = [
       // Declared here so the swap cannot quietly go away again.
       title: "CompanyGraph – ein Meta-Modell für den Betrieb eines Unternehmens",
       desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
-                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
-                  hides: ["Everything a company", "Read the source"] },
+                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch",
+                          "beschrieben in seinem eigenen Vokabular"],
+                  hides: ["Everything a company", "Read the source", "described in its own vocabulary"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
     // /example/ are: `graph` reads company.json, the file the page names, and walks what it
     // draws, so no name from the model is written here.

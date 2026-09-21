@@ -46,21 +46,24 @@ The page says what CompanyGraph is and sends the visitor to `companygraph/meta-m
 
 This is not hypothetical caution: the sibling org's profile at `guestgraph/.github` once advertised "Core in development" while two slices had shipped, because it restated a roadmap that lived in another repository. No CI in *this* repository can catch drift in `companygraph/meta-model` — the only defense is never restating anything that lives there.
 
-- **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
-  draw one of two committed artifacts, `example.json` and `model.json` — `npm run build` writes
-  them from `meta-model` at the commit in `source.json`, the example from `example/` and the
-  model from `core/`. A page names its artifact rather than carrying it: one `<link
-  rel="preload" as="fetch" href="../example.json" data-stage crossorigin>` in the head, which
+- **The stage pages are the one mechanical exception:** `/example/`, `/model/` and the landing
+  page each draw a committed artifact, `example.json`, `model.json` and `company.json` —
+  `npm run build` writes the first two from `meta-model` at the `meta-model` pin in
+  `source.json`, the example from `example/` and the model from `core/`, and the third from
+  `companygraph/mental-model` at the `mental-model` pin. A page names its artifact rather than
+  carrying it: one `<link rel="preload" as="fetch" href="../example.json" data-stage
+  crossorigin>` in the head, which
   the stage finds by the attribute and fetches. Nothing derives that link — its href and its
   marker never vary — so it is ordinary markup, and the page holds no commit at all; what holds
-  it to the pin is that only one copy exists, the artifact, which `build:check` holds against
+  it to its pin is that only one copy exists, the artifact, which `build:check` holds against
   `source.json`. A page that names no data does not fail quietly: the stage throws, and the
   suite reports it on every page through the listener it already has. The JSON-LD graph is the
   one region still rendered into each page, by `npm run pages`; each artifact carries the
   commit it was built from, so `pages.mjs` refuses to render against a missing or stale one
   rather than needing this document to say which command runs first, and `pages:check` fails
-  when a graph drifts. Nothing else on the example page names anything from the example, and
-  nothing else on the model page names anything from the model.
+  when a graph drifts. Nothing else on the example page names anything from the example,
+  nothing else on the model page names anything from the model, and nothing else on the
+  landing page names anything from CompanyGraph's own model.
 
 ## Constraints
 
