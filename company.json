@@ -1,5 +1,5 @@
 {
-  "commit": "4406e7d3dcd4c5808a48f4a7a02e587a192153af",
+  "commit": "ff8611cc289af031a8297faf424591f1a9d3a06c",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -3602,6 +3602,48 @@
       "path": "model/surfaces/companygraph-io-website.md"
     },
     {
+      "id": "surfaces/mcp-companygraph-io-mcp-server",
+      "type": "surface",
+      "name": "mcp.companygraph.io MCP server",
+      "tagline": "The server an agent connects to for answers about what we know, and the page a person reaches at the same address, reading a pinned commit of our model and adding nothing to it.",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/mcp-companygraph-io",
+        "url": "https://mcp.companygraph.io"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — listing the types, describing a schema, what the types declare about each other and what they constrain, the rules the model is held to and the checks that hold it, listing and returning entities, finding evidence, searching and fetching, over every entity in the model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a protocol endpoint without a client: the identity's name, the vision's and the identity's taglines, the address to give a client, every tool with what it returns, and the commit the answers are read from.\n- **Structured data** — the organization and the endpoint that the page describes to a crawler, with the organization's addresses from the identity's `## Also at`.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/mcp-companygraph-io-mcp-server.md"
+    },
+    {
+      "id": "surfaces/mcp-registry-listing",
+      "type": "surface",
+      "name": "MCP Registry listing",
+      "tagline": "The entry an agent client finds when it searches the public MCP Registry, pointing it at the MCP server.",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/mcp-companygraph-io",
+        "url": "https://registry.modelcontextprotocol.io/v0/servers?search=io.companygraph/mental-model"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Title** — the identity's name.\n- **Description** — the identity's name and the vision's name, joined by a colon.\n- **Remote** — the MCP server's address.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/mcp-registry-listing.md"
+    },
+    {
       "id": "values/adoption-is-not-taxed",
       "type": "value",
       "name": "Adoption is not taxed",
@@ -5150,6 +5192,18 @@
     },
     {
       "from": "surfaces/companygraph-io-website",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/mcp-companygraph-io-mcp-server",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/mcp-registry-listing",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
