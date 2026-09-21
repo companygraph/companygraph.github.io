@@ -642,7 +642,7 @@
     <div class="title">
       <h1><span class="r70">Start a model</span><span class="rcl">in <em>one command</em>.</span></h1>
       <p class="tagline">A company’s model is a folder of Markdown files in a repository of its own. The command line makes that folder and keeps its vocabulary current, the Obsidian plugin checks it while you write, and an agent reads it through skills and a server.</p>
-      <p class="note">Nothing here is installed from a registry. Every command runs straight from a release on GitHub, and <code class="mono">#semver:*</code> is what picks it: npm reads the repository’s release tags as version numbers and takes the highest, so a command runs the newest release on the day you run it. <code class="mono">init</code> writes which one into the instance, so the instance keeps saying what it was made with. The <a href="https://github.com/companygraph/meta-model/releases">releases page</a> lists them all. The commands need Node 22 or newer.</p>
+      <p class="note">Nothing here is installed from a registry. Every command runs straight from a release on GitHub, and <code class="mono">'#semver:*'</code> is what picks it: npm reads the repository’s release tags as version numbers and takes the highest, so a command runs the newest release on the day you run it. The quotes keep the shell from reading the <code class="mono">*</code> as a file pattern. <code class="mono">init</code> writes which release it was into the instance, so the instance keeps saying what it was made with. The <a href="https://github.com/companygraph/meta-model/releases">releases page</a> lists them all. The commands need <a href="https://nodejs.org/en/download">Node</a> 22 or newer.</p>
     </div>
 
     <section>
