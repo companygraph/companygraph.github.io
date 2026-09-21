@@ -70,9 +70,9 @@ const PAGES = [
       // Declared here so the swap cannot quietly go away again.
       title: "CompanyGraph – ein Meta-Modell für den Betrieb eines Unternehmens",
       desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
-                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch",
+                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "Einrichten", "12 Minuten · Deutsch oder Englisch",
                           "beschrieben in seinem eigenen Vokabular"],
-                  hides: ["Everything a company", "Read the source", "described in its own vocabulary"] },
+                  hides: ["Everything a company", "Read the source", "Set it up", "described in its own vocabulary"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
     // /example/ are: `graph` reads company.json, the file the page names, and walks what it
     // draws, so no name from the model is written here.
@@ -92,6 +92,11 @@ const PAGES = [
   // nothing from another origin, which `sameOrigin` holds it to as it holds Privacy.
   { path: "/tools/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Tools/, lang: "en", sourceLang: "en",
     contains: ["Start a model", "one command", "Make an instance", "Check it", "Take a newer release", "Write it in Obsidian", "Let an agent work with it"],
+    translates: { lang: "de",
+      title: "Tools – CompanyGraph",
+      desc: "Eine CompanyGraph-Instanz einrichten: die Kommandozeile, die eine anlegt und ihr Vokabular aktuell hält, das Obsidian-Plugin, das sie beim Schreiben prüft, und womit ein Agent sie liest.",
+      shows: ["Ein Modell anlegen", "Eine Instanz anlegen", "Die Instanz prüfen", "Ein neueres Release übernehmen", "In Obsidian schreiben", "Einen Agenten damit arbeiten lassen"],
+      hides: ["Start a model", "Make an instance", "Take a newer release", "Let an agent work with it"] },
     links: ["https://github.com/companygraph/meta-model/releases", "https://github.com/companygraph/obsidian-plugin/releases"],
     sameTab: ["../team/", "../principles/", "../privacy/", "../", "./"],
     sameOrigin: true,
