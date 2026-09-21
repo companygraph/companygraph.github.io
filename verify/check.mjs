@@ -17,7 +17,10 @@ const SITE = "https://companygraph.io";
 // What every prose footer reads, left to right. The check compares this to the rendered DOM,
 // so it is the one place that decides the order — and the German labels never appear here
 // because the suite loads each page in its source language.
-const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy"];
+// The last entry is the file the landing page draws, CompanyGraph's own model, so a person or a
+// crawler reading any page without running it can reach the data. The label is the filename,
+// the same in both languages, so it carries no data-de.
+const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy", "company.json"];
 
 const PAGES = [
   { path: "/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
