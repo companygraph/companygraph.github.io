@@ -45,8 +45,7 @@ const PAGES = [
                // vocabulary. Only the words that carry the claim, so rewording the
                // rest of the sentence does not fail the check.
                "Nothing here matches or merges records", "vocabulary"],
-    links: ["https://github.com/companygraph/meta-model",
-            "https://github.com/companygraph",
+    links: ["https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
             "https://blust.ch/"],
     // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
