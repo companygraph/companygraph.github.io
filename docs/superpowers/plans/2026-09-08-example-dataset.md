@@ -2,18 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Say what `/example/` and `/model/` show — a `Dataset` and a `DefinedTermSet` with a
-term per schema — and give each a committed artifact a machine can fetch.
+**Goal:** Say what `/example/` and `/model/` show — a `Dataset` and a `DefinedTermSet` with a term per schema — and give each a committed artifact a machine can fetch.
 
-**Architecture:** Two layers. `build/build.mjs` keeps the network and the parser and writes
-`example.json` and `model.json` instead of writing pages. `build/pages.mjs` loads both
-artifacts, refuses to run if either names a commit other than the one `source.json` pins, and
-calls two renderers: `build/block.mjs` for the two data blocks and `build/jsonld.mjs` for the
-two JSON-LD graphs.
+**Architecture:** Two layers. `build/build.mjs` keeps the network and the parser and writes `example.json` and `model.json` instead of writing pages. `build/pages.mjs` loads both artifacts, refuses to run if either names a commit other than the one `source.json` pins, and calls two renderers: `build/block.mjs` for the two data blocks and `build/jsonld.mjs` for the two JSON-LD graphs.
 
-**Tech Stack:** Node 22 ESM, no framework. `companygraph-meta-model` for `parseInstance` and
-`parseSchemas`. `node --test` for unit tests, matching `verify/og-recipe.test.mjs`. Playwright
-only in `npm run verify`, which this plan does not change.
+**Tech Stack:** Node 22 ESM, no framework. `companygraph-meta-model` for `parseInstance` and `parseSchemas`. `node --test` for unit tests, matching `verify/og-recipe.test.mjs`. Playwright only in `npm run verify`, which this plan does not change.
 
 **Spec:** `docs/superpowers/specs/2026-09-08-example-dataset-design.md`
 
@@ -76,8 +69,7 @@ Counted on 2026-09-08 and reproducible with the commands in each task.
 
 ### Task 1: The parse becomes two files
 
-Writes `example.json` and `model.json` and changes no page. The blocks stay where they are, so
-nothing can regress yet — this task is proved by showing the artifacts reproduce the blocks.
+Writes `example.json` and `model.json` and changes no page. The blocks stay where they are, so nothing can regress yet — this task is proved by showing the artifacts reproduce the blocks.
 
 **Files:**
 
@@ -93,9 +85,7 @@ nothing can regress yet — this task is proved by showing the artifacts reprodu
 
 - [ ] **Step 1: Replace the tail of `build/build.mjs`**
 
-Keep everything down to and including the `finish` call. Delete the `START`/`END`/`block`
-construction, the page read, the marker search, the check-or-write branch and the trailing
-`if (check && !allMatch)`. In their place:
+Keep everything down to and including the `finish` call. Delete the `START`/`END`/`block` construction, the page read, the marker search, the check-or-write branch and the trailing `if (check && !allMatch)`. In their place:
 
 ```js
   const OUT = path.join(here, "..", `${target.dir}.json`);
@@ -118,13 +108,7 @@ construction, the page read, the marker search, the check-or-write branch and th
 if (check && !allMatch) process.exit(1);
 ```
 
-Then rewrite the file's header comment. It currently says the script "writes the example
-instance and the model vocabulary into their pages as data blocks". It no longer writes pages.
-Say what is now true and why: this is the only script here that reaches the network or the
-parser, it writes two committed artifacts, and everything derived from them is rendered by
-`build/pages.mjs` without either. Keep the paragraphs about the shared trees call, about `sub`
-going to the parser, and about the parser living in the repository that defines the conventions
-— all three are still true.
+Then rewrite the file's header comment. It currently says the script "writes the example instance and the model vocabulary into their pages as data blocks". It no longer writes pages. Say what is now true and why: this is the only script here that reaches the network or the parser, it writes two committed artifacts, and everything derived from them is rendered by `build/pages.mjs` without either. Keep the paragraphs about the shared trees call, about `sub` going to the parser, and about the parser living in the repository that defines the conventions — all three are still true.
 
 - [ ] **Step 2: Rename the scripts**
 
@@ -137,16 +121,13 @@ In `package.json`, replace lines 16-17:
 
 - [ ] **Step 3: Generate both artifacts**
 
-Run: `npm run build`
-Expected: two `wrote …` lines, `example.json` with 24 entities and 41 edges, `model.json` with
-9 entities and 13 edges, both from `companygraph/meta-model@7f58f5e`.
+Run: `npm run build` Expected: two `wrote …` lines, `example.json` with 24 entities and 41 edges, `model.json` with 9 entities and 13 edges, both from `companygraph/meta-model@7f58f5e`.
 
 This needs the network. If GitHub rate-limits, export `GITHUB_TOKEN` first; never echo it.
 
 - [ ] **Step 4: Prove the artifacts reproduce the blocks byte-for-byte**
 
-This is the whole point of the task. The blocks now in the pages were produced by the old code
-path; each artifact must serialize to exactly the same bytes.
+This is the whole point of the task. The blocks now in the pages were produced by the old code path; each artifact must serialize to exactly the same bytes.
 
 ```bash
 node --input-type=module -e '
@@ -161,16 +142,13 @@ for (const [name, page] of [["example", "example/index.html"], ["model", "model/
 
 Expected: `example/index.html: identical (23945 bytes)` and `model/index.html: identical (40597 bytes)`.
 
-If either differs, stop and report BLOCKED. It means the parser or the pin moved, or `finish`
-ran in the wrong place, and no later task is safe.
+If either differs, stop and report BLOCKED. It means the parser or the pin moved, or `finish` ran in the wrong place, and no later task is safe.
 
 - [ ] **Step 5: Confirm the check catches a broken artifact**
 
-Run: `printf '{}\n' >> model.json && npm run build:check; echo "exit: $?"`
-Expected: `✗ model.json is not what … parses to — run: npm run build`, exit 1
+Run: `printf '{}\n' >> model.json && npm run build:check; echo "exit: $?"` Expected: `✗ model.json is not what … parses to — run: npm run build`, exit 1
 
-Run: `npm run build && npm run build:check`
-Expected: two `✓` lines.
+Run: `npm run build && npm run build:check` Expected: two `✓` lines.
 
 - [ ] **Step 6: Commit**
 
@@ -275,8 +253,7 @@ test("writeBlock reports nothing once the pages are written", () => {
 
 - [ ] **Step 2: Run it to make sure it fails**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: FAIL, `Cannot find module` for `./block.mjs`
+Run: `node --test build/renderers.test.mjs` Expected: FAIL, `Cannot find module` for `./block.mjs`
 
 - [ ] **Step 3: Write `build/block.mjs`**
 
@@ -320,8 +297,7 @@ export function writeBlock(data, { check = false, root = HERE } = {}) {
 
 - [ ] **Step 4: Run the test and make sure it passes**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 3 tests
+Run: `node --test build/renderers.test.mjs` Expected: PASS, 3 tests
 
 - [ ] **Step 5: Write `build/pages.mjs`**
 
@@ -386,12 +362,9 @@ In `package.json`, after the two `build` entries:
 
 - [ ] **Step 7: Prove the data blocks are unchanged**
 
-Run: `npm run pages && git diff --stat`
-Expected: no output from `git diff --stat`. The blocks were already correct, so rendering them
-again must change nothing.
+Run: `npm run pages && git diff --stat` Expected: no output from `git diff --stat`. The blocks were already correct, so rendering them again must change nothing.
 
-Run: `npm run pages:check`
-Expected: `✓ every derived region matches the artifacts at companygraph/meta-model@7f58f5e`
+Run: `npm run pages:check` Expected: `✓ every derived region matches the artifacts at companygraph/meta-model@7f58f5e`
 
 - [ ] **Step 8: Prove the pin guard**
 
@@ -402,8 +375,7 @@ npm run pages:check; echo "exit: $?"
 mv source.json.bak source.json
 ```
 
-Expected: `✗ example.json is at 7f58f5e, source.json pins aaaaaaa — run: npm run build`, exit 1.
-Then `git diff --stat` must be empty — the backup restored `source.json` exactly.
+Expected: `✗ example.json is at 7f58f5e, source.json pins aaaaaaa — run: npm run build`, exit 1. Then `git diff --stat` must be empty — the backup restored `source.json` exactly.
 
 - [ ] **Step 9: Commit**
 
@@ -432,8 +404,7 @@ MSG
 
 ### Task 3: The two pages say what they show
 
-The only task that changes published output. Everything else in this plan is proved by an empty
-diff; this one is proved by a diff containing exactly what the spec predicted.
+The only task that changes published output. Everything else in this plan is proved by an empty diff; this one is proved by a diff containing exactly what the spec predicted.
 
 **Files:**
 
@@ -538,8 +509,7 @@ test("writeJsonLd refuses a graph whose head is not the four it passes through",
 
 - [ ] **Step 2: Run it to make sure it fails**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: FAIL, `Cannot find module` for `./jsonld.mjs`
+Run: `node --test build/renderers.test.mjs` Expected: FAIL, `Cannot find module` for `./jsonld.mjs`
 
 - [ ] **Step 3: Write `build/jsonld.mjs`**
 
@@ -667,8 +637,7 @@ export function writeJsonLd(data, { check = false, root = HERE, repo } = {}) {
 
 - [ ] **Step 4: Run the tests and make sure they pass**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 6 tests
+Run: `node --test build/renderers.test.mjs` Expected: PASS, 6 tests
 
 - [ ] **Step 5: Register it**
 
@@ -683,23 +652,17 @@ const RENDERERS = [writeBlock, (d, o) => writeJsonLd(d, { ...o, repo })];
 
 Run: `npm run pages && git diff --stat`
 
-Expected: exactly two files changed, `example/index.html` and `model/index.html`, and no change
-to either artifact or to either data block.
+Expected: exactly two files changed, `example/index.html` and `model/index.html`, and no change to either artifact or to either data block.
 
 Run: `git diff -- example/index.html model/index.html | grep '^[-+]' | grep -v '^[-+][-+]' | sort | uniq -c | sort -rn | head -30`
 
-Expected: additions only, and every one of them inside the new node — the `Dataset` on
-`/example/` and the `DefinedTermSet` with nine `DefinedTerm` entries on `/model/`.
+Expected: additions only, and every one of them inside the new node — the `Dataset` on `/example/` and the `DefinedTermSet` with nine `DefinedTerm` entries on `/model/`.
 
-**If a line beginning `-` appears at all, or any line mentions `Organization`, `WebSite`,
-`WebPage`, `BreadcrumbList`, `isPartOf` or `itemListElement`, stop and report BLOCKED.** That
-means the renderer is disturbing a node it does not own, which is the one thing this task
-promises will not happen.
+**If a line beginning `-` appears at all, or any line mentions `Organization`, `WebSite`, `WebPage`, `BreadcrumbList`, `isPartOf` or `itemListElement`, stop and report BLOCKED.** That means the renderer is disturbing a node it does not own, which is the one thing this task promises will not happen.
 
 - [ ] **Step 7: Confirm the checks**
 
-Run: `npm run pages:check`
-Expected: `✓ every derived region matches the artifacts at companygraph/meta-model@7f58f5e`
+Run: `npm run pages:check` Expected: `✓ every derived region matches the artifacts at companygraph/meta-model@7f58f5e`
 
 ```bash
 node -e 'const fs=require("fs");const p="model/index.html";fs.writeFileSync(p,fs.readFileSync(p,"utf8").replace("Experience Schema","EDITED"))'
@@ -707,9 +670,7 @@ npm run pages:check; echo "exit: $?"
 git checkout model/index.html && npm run pages
 ```
 
-Expected: `✗ model/index.html no longer match the artifacts — run: npm run pages`, exit 1. The
-final `npm run pages` restores the page; confirm `git diff --stat` afterwards shows only the two
-pages this task legitimately changed.
+Expected: `✗ model/index.html no longer match the artifacts — run: npm run pages`, exit 1. The final `npm run pages` restores the page; confirm `git diff --stat` afterwards shows only the two pages this task legitimately changed.
 
 - [ ] **Step 8: Commit**
 
@@ -751,8 +712,7 @@ MSG
 
 - [ ] **Step 1: Rewrite the CI steps**
 
-Replace the `The stage pages still show the pinned commit` step with two. The first goes
-**above** `- run: npm ci`, directly after the `setup-node` block:
+Replace the `The stage pages still show the pinned commit` step with two. The first goes **above** `- run: npm ci`, directly after the `setup-node` block:
 
 ```yaml
       # Every region this site derives from the model, held against the artifacts it derives
@@ -781,8 +741,7 @@ The second keeps the position and the comment the old step had, below `npm ci`:
 
 Run: `python3 -c 'import yaml; d=yaml.safe_load(open(".github/workflows/ci.yml")); [print("  ", s.get("name") or ("RUN " + s.get("run","")[:30])) for s in d["jobs"]["verify"]["steps"]]'`
 
-Expected: `pages:check` appears before the `npm ci` step, `build:check` after it, and no step
-named for `example` remains. Cross-check every `npm run` in the workflow against `package.json`.
+Expected: `pages:check` appears before the `npm ci` step, `build:check` after it, and no step named for `example` remains. Cross-check every `npm run` in the workflow against `package.json`.
 
 - [ ] **Step 3: Update the documents**
 
@@ -792,37 +751,25 @@ Three places in `AGENTS.md` and two in `README.md` name the old command. Find th
 grep -n "npm run example\|example:check\|build/build.mjs" AGENTS.md README.md
 ```
 
-`AGENTS.md:69` describes one pin serving both pages and `example:check` holding them; it now
-describes two artifacts, `npm run build` writing them, `npm run pages` rendering four regions
-from them, and the guard that makes the order impossible to get wrong. `AGENTS.md:136` says
-`build/build.mjs` writes the `data-stage` attribute into every block — that is `build/block.mjs`
-now. `AGENTS.md:424` says `npm run example` would overwrite a hand edit and `example:check`
-would catch it — that is `npm run pages` and `pages:check`.
+`AGENTS.md:69` describes one pin serving both pages and `example:check` holding them; it now describes two artifacts, `npm run build` writing them, `npm run pages` rendering four regions from them, and the guard that makes the order impossible to get wrong. `AGENTS.md:136` says `build/build.mjs` writes the `data-stage` attribute into every block — that is `build/block.mjs` now. `AGENTS.md:424` says `npm run example` would overwrite a hand edit and `example:check` would catch it — that is `npm run pages` and `pages:check`.
 
-`README.md:54` describes `build/build.mjs` writing each page's data block; it now writes two
-artifacts. `README.md:99-100` are the two command lines, which become four: `build`,
-`build:check`, `pages`, `pages:check`.
+`README.md:54` describes `build/build.mjs` writing each page's data block; it now writes two artifacts. `README.md:99-100` are the two command lines, which become four: `build`, `build:check`, `pages`, `pages:check`.
 
-Add one sentence to `README.md` after the command block: `example.json` and `model.json` are
-committed files, and moving the pin means `npm run build` then `npm run pages`.
+Add one sentence to `README.md` after the command block: `example.json` and `model.json` are committed files, and moving the pin means `npm run build` then `npm run pages`.
 
 - [ ] **Step 4: Hold the prose to the conventions**
 
-Run: `sh conventions/conventions-check`
-Expected: `✓ every Markdown file follows WRITING.md`
+Run: `sh conventions/conventions-check` Expected: `✓ every Markdown file follows WRITING.md`
 
 - [ ] **Step 5: Re-render the two stale share cards**
 
 The bytes of both pages changed in Task 3, so their cards report stale and CI runs that check.
 
-Run: `npm run og:check; echo "exit: $?"`
-Expected: exit 1, naming `example/og.png` and `model/og.png` — two cards, not seven.
+Run: `npm run og:check; echo "exit: $?"` Expected: exit 1, naming `example/og.png` and `model/og.png` — two cards, not seven.
 
-Run: `npm run og`, then `npm run og:check`
-Expected: `every card matches the page it renders`, exit 0.
+Run: `npm run og`, then `npm run og:check` Expected: `every card matches the page it renders`, exit 0.
 
-The PNGs may come back byte-identical while only the `og.sha` stamps move; that is correct and
-documented — the recipe hashes the page, not the picture.
+The PNGs may come back byte-identical while only the `og.sha` stamps move; that is correct and documented — the recipe hashes the page, not the picture.
 
 - [ ] **Step 6: Prove the whole thing from a clean slate**
 
@@ -831,12 +778,9 @@ rm -f example.json model.json && npm run pages; echo "exit: $?"
 npm run build && npm run pages && npm run pages:check && npm run test:build && git diff --stat
 ```
 
-Expected: the first command fails with `example.json is missing — run: npm run build`, exit 1;
-then every command passes and `git diff --stat` shows nothing beyond what Task 3 and Step 5
-already committed.
+Expected: the first command fails with `example.json is missing — run: npm run build`, exit 1; then every command passes and `git diff --stat` shows nothing beyond what Task 3 and Step 5 already committed.
 
-Then the browser suite, which is what proves both artifacts are served — the graph check fetches
-every on-site URL it finds and requires HTTP 200:
+Then the browser suite, which is what proves both artifacts are served — the graph check fetches every on-site URL it finds and requires HTTP 200:
 
 ```bash
 python3 -m http.server 8000 > /dev/null 2>&1 &
@@ -871,34 +815,18 @@ MSG
 
 - [ ] **Step 8: Stop**
 
-Do not push and do not open a pull request. Report what passed and stop; the owner decides
-when this is proposed and merged.
+Do not push and do not open a pull request. Report what passed and stop; the owner decides when this is proposed and merged.
 
 ---
 
 ## Self-review
 
-**Spec coverage.** §2's two nodes, the generated terms, the two artifacts and the pin guard are
-Tasks 1 to 3. §3's file structure is Tasks 1 to 3, with no `read.mjs`, as the spec requires.
-§4's commands are Tasks 1, 2 and 4. §5's CI is Task 4. §6's card re-render is Task 4 step 5.
-§7's acceptance test runs in Task 3 step 6 and Task 4 step 6.
+**Spec coverage.** §2's two nodes, the generated terms, the two artifacts and the pin guard are Tasks 1 to 3. §3's file structure is Tasks 1 to 3, with no `read.mjs`, as the spec requires. §4's commands are Tasks 1, 2 and 4. §5's CI is Task 4. §6's card re-render is Task 4 step 5. §7's acceptance test runs in Task 3 step 6 and Task 4 step 6.
 
-**Placeholders.** None. Every code step carries the code, every check step the command and its
-expected output.
+**Placeholders.** None. Every code step carries the code, every check step the command and its expected output.
 
-**Type consistency.** Both renderers export `write*(data, { check, root }) => string[]` and are
-called from the `RENDERERS` array; `writeJsonLd` takes one extra option, `repo`, which
-`pages.mjs` binds because the artifacts deliberately do not carry it. `terms` is exported for
-its test and used by `nodeFor`.
+**Type consistency.** Both renderers export `write*(data, { check, root }) => string[]` and are called from the `RENDERERS` array; `writeJsonLd` takes one extra option, `repo`, which `pages.mjs` binds because the artifacts deliberately do not carry it. `terms` is exported for its test and used by `nodeFor`.
 
-**One difference from blust.ch worth naming.** That site's JSON-LD renderer owns the *leading*
-three nodes and slices from the front. This one owns the *last* node and slices from the front
-to keep four. The guard is therefore also inverted: it checks the head is what this site writes
-by hand, rather than that the head is what the renderer writes. Reusing blust.ch's shape here
-would delete the `Organization`, `WebSite`, `WebPage` and `BreadcrumbList` nodes.
+**One difference from blust.ch worth naming.** That site's JSON-LD renderer owns the *leading* three nodes and slices from the front. This one owns the *last* node and slices from the front to keep four. The guard is therefore also inverted: it checks the head is what this site writes by hand, rather than that the head is what the renderer writes. Reusing blust.ch's shape here would delete the `Organization`, `WebSite`, `WebPage` and `BreadcrumbList` nodes.
 
-**Left for later, deliberately.** `stage.js:31` and `card.js:227` fall back to a hardcoded
-`companygraph/meta-model` when a block carries no `repo`, and the comment in blust.ch's copy
-names this repository as the reason the fallback still exists. Adding `repo` to these artifacts
-would change both blocks' bytes, which this plan promises not to do, so it is its own small
-piece of work in the design package and here.
+**Left for later, deliberately.** `stage.js:31` and `card.js:227` fall back to a hardcoded `companygraph/meta-model` when a block carries no `repo`, and the comment in blust.ch's copy names this repository as the reason the fallback still exists. Adding `repo` to these artifacts would change both blocks' bytes, which this plan promises not to do, so it is its own small piece of work in the design package and here.

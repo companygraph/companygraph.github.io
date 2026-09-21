@@ -167,8 +167,7 @@ test("output is deterministic regardless of map order", () => {
 
 - [ ] **Step 2: Run to see them fail**
 
-Run: `npm run test:example` (after adding the script)
-Expected: every test fails with `Cannot find module '../example/instance.mjs'`.
+Run: `npm run test:example` (after adding the script) Expected: every test fails with `Cannot find module '../example/instance.mjs'`.
 
 - [ ] **Step 3: Write `example/instance.mjs`**
 
@@ -319,8 +318,7 @@ export function parseInstance(files) {
 
 - [ ] **Step 4: Run the tests**
 
-Run: `npm run test:example`
-Expected: 10/10 pass. If the frontmatter-list test fails on `skills: [Java Programming]`, check `parseFrontmatter` keeps spaces inside list items (it must: names carry spaces).
+Run: `npm run test:example` Expected: 10/10 pass. If the frontmatter-list test fails on `skills: [Java Programming]`, check `parseFrontmatter` keeps spaces inside list items (it must: names carry spaces).
 
 - [ ] **Step 5: Commit**
 
@@ -571,8 +569,7 @@ console.log(`  wrote ${data.entities.length} entities, ${data.edges.length} edge
 
 - [ ] **Step 3: Generate locally, then check remotely**
 
-Run: `META_MODEL=$HOME/git/companygraph/meta-model npm run example`
-Expected: `wrote 11 entities, 7 edges from companygraph/meta-model@400ab2b` (2 values, 2 skills, 4 levels, 1 profile, 2 experiences; edges: Mira→Java, Mira→DDD, 2022→Java, 2022→DDD, 2018→Java = 5 … count what it prints and confirm by reading the block; the plan's numbers are a sanity check, the block is the truth).
+Run: `META_MODEL=$HOME/git/companygraph/meta-model npm run example` Expected: `wrote 11 entities, 7 edges from companygraph/meta-model@400ab2b` (2 values, 2 skills, 4 levels, 1 profile, 2 experiences; edges: Mira→Java, Mira→DDD, 2022→Java, 2022→DDD, 2018→Java = 5 … count what it prints and confirm by reading the block; the plan's numbers are a sanity check, the block is the truth).
 
 Run: `npm run example:check` (no `META_MODEL`) — fetches from GitHub, must print ✓. Then edit one character inside the block by hand, run the check again, see ✗, revert with `npm run example`.
 

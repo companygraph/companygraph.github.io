@@ -1,8 +1,6 @@
 # SEO — the head contract
 
-*2026-08-25. The same spec `blust.ch` and `guestgraph.io` carry, because the three sites
-share a head and drifted the same way. What differs here is how much of it went missing,
-and how recently.*
+*2026-08-25. The same spec `blust.ch` and `guestgraph.io` carry, because the three sites share a head and drifted the same way. What differs here is how much of it went missing, and how recently.*
 
 ## The problem, measured
 
@@ -33,8 +31,7 @@ and how recently.*
 
 **2. A title and a description** — present, within the lengths Google renders (65 / 200).
 
-**3. Structured data that resolves.** Every `@id` a page references defined on that page;
-every same-origin URL in it fetchable. The types:
+**3. Structured data that resolves.** Every `@id` a page references defined on that page; every same-origin URL in it fetchable. The types:
 
 - `Organization` and `WebSite` on every page, so `isPartOf` and `publisher` have targets.
 - `WebPage` per page.
@@ -46,32 +43,21 @@ every same-origin URL in it fetchable. The types:
   offers and ratings, and this project has neither. Claiming the type without them
   describes a product that does not exist.
 
-**4. Sitemaps that resolve, both directions.** Every URL the sitemap lists is a real page,
-and every sitemap `robots.txt` names is a real file.
+**4. Sitemaps that resolve, both directions.** Every URL the sitemap lists is a real page, and every sitemap `robots.txt` names is a real file.
 
 ## Non-goals, and why
 
-**`hreflang` is not applicable, and adding it would be wrong.** These pages are bilingual
-through `data-de` swapped in by `applyLang()` at runtime — one URL per page. `hreflang`
-announces *another address* for the other language, and there is none. Pointing it at the
-same URL is inert at best and an invitation to treat one page as two at worst. `og:locale`
-plus `og:locale:alternate` describes one document carrying two languages, which is what
-this is. Revisit the day `/de/` URLs ship.
+**`hreflang` is not applicable, and adding it would be wrong.** These pages are bilingual through `data-de` swapped in by `applyLang()` at runtime — one URL per page. `hreflang` announces *another address* for the other language, and there is none. Pointing it at the same URL is inert at best and an invitation to treat one page as two at worst. `og:locale` plus `og:locale:alternate` describes one document carrying two languages, which is what this is. Revisit the day `/de/` URLs ship.
 
-**No `VideoObject` on the talk pages.** There is no video — the deck is HTML with
-synthesized narration clips. Marking it up as video is structured data that contradicts the
-page, which is what manual actions are for.
+**No `VideoObject` on the talk pages.** There is no video — the deck is HTML with synthesized narration clips. Marking it up as video is structured data that contradicts the page, which is what manual actions are for.
 
 **The deck's twelve `<h1>` stay.** One per slide is what a slide is.
 
-**No keyword pages.** "Every role, every rule." is not a query anyone types. That is a
-content decision, not a metadata one, and no tag compensates for it.
+**No keyword pages.** "Every role, every rule." is not a query anyone types. That is a content decision, not a metadata one, and no tag compensates for it.
 
 ## The check is the deliverable
 
-`verify/check.mjs` gains `seo` on every page and the crawl-map block this suite never had.
-Written before the fixes and run first. The landing page, exactly as `main` carries it,
-fails with:
+`verify/check.mjs` gains `seo` on every page and the crawl-map block this suite never had. Written before the fixes and run first. The landing page, exactly as `main` carries it, fails with:
 
 ```
 ✗ /

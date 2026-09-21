@@ -12,27 +12,17 @@ Everything below this block is this repository's own. `sh conventions/convention
 
 # companygraph.io — working conventions
 
-The site for CompanyGraph, the open-source meta-model for operating a company: the landing
-page, the billing and privacy notes, and the talks at `/talks/`. What the files are and what the mark means is in `README.md`; this
-file is about the constraints that are easy to break.
+The site for CompanyGraph, the open-source meta-model for operating a company: the landing page, the billing and privacy notes, and the talks at `/talks/`. What the files are and what the mark means is in `README.md`; this file is about the constraints that are easy to break.
 
 ## Build & verify
 
-No build. `npm run serve` (`python3 -m http.server 8000`), then `npm run verify` in another
-terminal — it renders the served page in headless Chromium and asserts against the DOM, not
-the source.
+No build. `npm run serve` (`python3 -m http.server 8000`), then `npm run verify` in another terminal — it renders the served page in headless Chromium and asserts against the DOM, not the source.
 
-**Verify by rendering, not by reading the diff.** Check both OS color-scheme preferences and
-at least a phone width. The page's own palette is fixed — it does not redraw for
-`prefers-color-scheme: light` — but the browser's native chrome (scrollbar, form control,
-selection color) still follows the OS setting where the page states no opinion, and that gap
-is invisible in a source diff; it only shows up in a rendered window.
+**Verify by rendering, not by reading the diff.** Check both OS color-scheme preferences and at least a phone width. The page's own palette is fixed — it does not redraw for `prefers-color-scheme: light` — but the browser's native chrome (scrollbar, form control, selection color) still follows the OS setting where the page states no opinion, and that gap is invisible in a source diff; it only shows up in a rendered window.
 
 ## One screen, one job
 
-The page says what CompanyGraph is and sends the visitor to `companygraph/meta-model`. That
-is the whole scope of `index.html`, and the list of what it must never say is longer than what
-it does say:
+The page says what CompanyGraph is and sends the visitor to `companygraph/meta-model`. That is the whole scope of `index.html`, and the list of what it must never say is longer than what it does say:
 
 - **No type count and no type list.** The model ships five types today and a planned
   eighteen; it moves fast, so any number here is wrong within a release. That sentence
@@ -54,10 +44,7 @@ it does say:
   a seat count or a paid edition of the model — the four things the billing page rejects by
   name.
 
-This is not hypothetical caution: the sibling org's profile at `guestgraph/.github` once
-advertised "Core in development" while two slices had shipped, because it restated a roadmap
-that lived in another repository. No CI in *this* repository can catch drift in
-`companygraph/meta-model` — the only defense is never restating anything that lives there.
+This is not hypothetical caution: the sibling org's profile at `guestgraph/.github` once advertised "Core in development" while two slices had shipped, because it restated a roadmap that lived in another repository. No CI in *this* repository can catch drift in `companygraph/meta-model` — the only defense is never restating anything that lives there.
 
 - **The two stage pages are the one mechanical exception:** `/example/` and `/model/` each
   draw one of two committed artifacts, `example.json` and `model.json` — `npm run build` writes
@@ -216,58 +203,25 @@ that lived in another repository. No CI in *this* repository can catch drift in
 
 ## A page is en-US; a `-de` attribute is de-CH
 
-One rule, positional, with no exceptions to remember: every word of a page is American
-English, and the value of any attribute whose name ends `-de` is Swiss German — `data-de`,
-and in a deck `data-notes-de`.
+One rule, positional, with no exceptions to remember: every word of a page is American English, and the value of any attribute whose name ends `-de` is Swiss German — `data-de`, and in a deck `data-notes-de`.
 
-It reads as one line now because the attributes were made to agree. Notes used to invert the
-page's convention: `data-notes` held German and English was the suffixed `data-notes-en`, so
-the base attribute meant a different language depending on which pair you were reading.
-Design v0.25.0 swapped them, which is what leaves nothing here to remember.
+It reads as one line now because the attributes were made to agree. Notes used to invert the page's convention: `data-notes` held German and English was the suffixed `data-notes-en`, so the base attribute meant a different language depending on which pair you were reading. Design v0.25.0 swapped them, which is what leaves nothing here to remember.
 
-It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is
-correct German, not a British spelling left behind, and renaming it produces German that is
-wrong in a way nothing here can catch: every DOM check reads the rendered page, and the
-rendered page is only ever one language. A sweep masks those two attributes and touches
-nothing else.
+It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is correct German, not a British spelling left behind, and renaming it produces German that is wrong in a way nothing here can catch: every DOM check reads the rendered page, and the rendered page is only ever one language. A sweep masks those two attributes and touches nothing else.
 
-This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says
-where it applies.
+This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says where it applies.
 
-Four more places carry German, and none of their names ends in `-de`. The `UI.de` object on
-every prose page and `TALK.de` in every deck hold the German `<title>` and description; a deck's
-`UI.de` also holds its control labels; and `data-de-href` on a talks index holds the German
-PDF's path, a URL rather than a sentence. A sweep that masks only the two attributes rewrites
-the first two, so mask the `de:` branches of those objects as well. The model and example
-pages also carry German in `data-de-aria` beside an `aria-label`, which the language switch
-applies, so a sweep masks it like the others. The `translates` specs in `verify/check.mjs`
-quote German too, and are the one place it is quoted on purpose.
+Four more places carry German, and none of their names ends in `-de`. The `UI.de` object on every prose page and `TALK.de` in every deck hold the German `<title>` and description; a deck's `UI.de` also holds its control labels; and `data-de-href` on a talks index holds the German PDF's path, a URL rather than a sentence. A sweep that masks only the two attributes rewrites the first two, so mask the `de:` branches of those objects as well. The model and example pages also carry German in `data-de-aria` beside an `aria-label`, which the language switch applies, so a sweep masks it like the others. The `translates` specs in `verify/check.mjs` quote German too, and are the one place it is quoted on purpose.
 
-`<html lang>` carries the bare language, `en` in the source and `de` after a switch, and the
-region rides in `og:locale` alone. The rule's name says where the spelling and the grammar come
-from, not what the attribute says: every check that reads the language compares against `en`
-and `de`, and a regional tag would tell a crawler nothing `og:locale` does not already.
+`<html lang>` carries the bare language, `en` in the source and `de` after a switch, and the region rides in `og:locale` alone. The rule's name says where the spelling and the grammar come from, not what the attribute says: every check that reads the language compares against `en` and `de`, and a regional tag would tell a crawler nothing `og:locale` does not already.
 
-A page generated from a pinned model — blust.ch's `/model/` and `/principles/`, companygraph.io's
-`/model/` and `/example/` — shows the model's own words in the one language the model is written
-in, and the German page shows them unchanged under `lang="de"`. Each of those pages says so in its
-note; the site's own words around them are bilingual like everything else. A translated copy would
-be a second thing to keep true, which is the argument the principles page makes against it.
+A page generated from a pinned model — blust.ch's `/model/` and `/principles/`, companygraph.io's `/model/` and `/example/` — shows the model's own words in the one language the model is written in, and the German page shows them unchanged under `lang="de"`. Each of those pages says so in its note; the site's own words around them are bilingual like everything else. A translated copy would be a second thing to keep true, which is the argument the principles page makes against it.
 
-`translates` is the check that clicks. Every other DOM check reads the page as it first renders,
-which is English; this one presses DE, asserts the German is there and the English is gone — body
-text, `<title>`, meta description and, on a talks index, the PDF link — then presses EN and requires
-the page back exactly as it was. It is shared, in `@robertblust/design`, and every page in `PAGES`
-declares a spec for it, because a page without one is a page whose German half no test has seen.
+`translates` is the check that clicks. Every other DOM check reads the page as it first renders, which is English; this one presses DE, asserts the German is there and the English is gone — body text, `<title>`, meta description and, on a talks index, the PDF link — then presses EN and requires the page back exactly as it was. It is shared, in `@robertblust/design`, and every page in `PAGES` declares a spec for it, because a page without one is a page whose German half no test has seen.
 
 ## The header is a contract, and its copy carries a version
 
-The row across the top — wordmark, links, language control — is one design on three sites,
-and like the tokens it is a copy, because a deck opens from `file://` and there is no
-stylesheet to share. It is fenced in every page as `header contract · vN` and is
-**byte-identical on all sixteen pages** in the three repositories. It is generated, like the
-tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing
-it in this file does nothing — the next sync overwrites it.
+The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is a copy, because a deck opens from `file://` and there is no stylesheet to share. It is fenced in every page as `header contract · vN` and is **byte-identical on all sixteen pages** in the three repositories. It is generated, like the tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
 
 What the contract says:
 
@@ -290,20 +244,11 @@ What the contract says:
   still reads. The links are *wrapped*, not duplicated: one list presented two ways, so
   there is no second copy to drift.
 
-`navOrder`, `headerBaseline` and `mobileNav` assert all of it, per repository. What they
-cannot do is see a sibling — that is the whole reason the block carries a version. Before
-this was written down there were five different mobile behaviors across the family and
-eight different wordings of the same CSS, and nothing failed anywhere.
+`navOrder`, `headerBaseline` and `mobileNav` assert all of it, per repository. What they cannot do is see a sibling — that is the whole reason the block carries a version. Before this was written down there were five different mobile behaviors across the family and eight different wordings of the same CSS, and nothing failed anywhere.
 
 ## Share cards go stale silently, and nothing on the page says so
 
-The five `og.png` files are not banners someone drew: `npm run og` renders each from the page
-it belongs to — the landing card is the landing page, the talks card is the talks index, the
-deck's card is its title slide, and the model and example cards are those two pages — so a
-link preview shows what the visitor is about to land on.
-The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a
-stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every
-other check here passes the whole time it is wrong.
+The five `og.png` files are not banners someone drew: `npm run og` renders each from the page it belongs to — the landing card is the landing page, the talks card is the talks index, the deck's card is its title slide, and the model and example cards are those two pages — so a link preview shows what the visitor is about to land on. The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every other check here passes the whole time it is wrong.
 
 - **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterize the same
   text differently, so a card compared by its bytes reports which machine rendered it. The
@@ -364,9 +309,7 @@ other check here passes the whole time it is wrong.
 
 ## The head is a contract, and `seo` is what holds it
 
-Canonical, description, the `og:` block, `twitter:card` and a JSON-LD graph, on every page.
-`verify`'s `seo` check asserts the lot. Three of its assertions exist because the thing they
-catch had already shipped green:
+Canonical, description, the `og:` block, `twitter:card` and a JSON-LD graph, on every page. `verify`'s `seo` check asserts the lot. Three of its assertions exist because the thing they catch had already shipped green:
 
 - **The canonical is compared against the page's own URL**, not merely against `og:url`.
   Agreeing with `og:url` proves two tags say the same thing, and both can say the same wrong
@@ -389,49 +332,21 @@ Two traps worth knowing before editing that check:
   matched nothing, so every graph URL was skipped and the check still printed ✓. Use the `SITE`
   constant.
 
-`PAGES` is the single list: the sitemap's expected URLs derive from it, and the suite fails if
-any page lacks `seo: true` — the runner skips a check whose key is undefined, so deleting that
-one line would otherwise turn the contract off in silence. The suite also asserts that whatever
-is on `BASE` is actually this site: a sibling repository left serving on `:8000` produced a full
-run of failures belonging to a site nobody was testing.
+`PAGES` is the single list: the sitemap's expected URLs derive from it, and the suite fails if any page lacks `seo: true` — the runner skips a check whose key is undefined, so deleting that one line would otherwise turn the contract off in silence. The suite also asserts that whatever is on `BASE` is actually this site: a sibling repository left serving on `:8000` produced a full run of failures belonging to a site nobody was testing.
 
-**`/favicon.svg` is checked too, separately, by fetch — not by rendering a page.** It is the one
-place the mark lives outside a page, so no DOM check can reach it: it cannot `@font-face`
-anything and inherits nothing, so every face it names has to be a platform face already in
-`SYSTEM_FACES` or a generic keyword. This mark carries no text at all, so today it names no
-`font-family` and the check has nothing to reject — it passes on the HTTP 200 alone, not because
-a named face was verified against the list. That changes the day lettering is added to it; until
-then, a green check here says less than it will later.
+**`/favicon.svg` is checked too, separately, by fetch — not by rendering a page.** It is the one place the mark lives outside a page, so no DOM check can reach it: it cannot `@font-face` anything and inherits nothing, so every face it names has to be a platform face already in `SYSTEM_FACES` or a generic keyword. This mark carries no text at all, so today it names no `font-family` and the check has nothing to reject — it passes on the HTTP 200 alone, not because a named face was verified against the list. That changes the day lettering is added to it; until then, a green check here says less than it will later.
 
-**`og:locale` is Open Graph only. No search engine reads it.** It is `en_US`, with
-`og:locale:alternate` `de_CH`, and the prose is American to match. Google reads `<html lang>`,
-which `sourceLang` fetches cold on every page — `lang` alone cannot, because it reads
-`documentElement.lang` after `applyLang()` has already corrected it.
+**`og:locale` is Open Graph only. No search engine reads it.** It is `en_US`, with `og:locale:alternate` `de_CH`, and the prose is American to match. Google reads `<html lang>`, which `sourceLang` fetches cold on every page — `lang` alone cannot, because it reads `documentElement.lang` after `applyLang()` has already corrected it.
 
-**No `hreflang`.** It names another address for the other language and there is none: one URL
-per page, German swapped in at runtime from `data-de`. It becomes correct the day `/de/` URLs
-ship, and not before.
+**No `hreflang`.** It names another address for the other language and there is none: one URL per page, German swapped in at runtime from `data-de`. It becomes correct the day `/de/` URLs ship, and not before.
 
-**The head contract is a third copy**, shared with `blust.ch` and `guestgraph.io` and
-carrying no `· vN` tripwire, unlike the token block and the deck footer. Port changes by hand
-to all three.
+**The head contract is a third copy**, shared with `blust.ch` and `guestgraph.io` and carrying no `· vN` tripwire, unlike the token block and the deck footer. Port changes by hand to all three.
 
-**The landing page is the one that drifts.** It shipped with no head at all after a rework —
-no canonical, no description, no structured data — and later with an `id="metadesc"` that
-nothing acted on, so a German visitor read an English title under `lang="de"`. Its
-`translates` spec now declares the German title and description, which is what makes that
-second failure impossible to reintroduce quietly.
+**The landing page is the one that drifts.** It shipped with no head at all after a rework — no canonical, no description, no structured data — and later with an `id="metadesc"` that nothing acted on, so a German visitor read an English title under `lang="de"`. Its `translates` spec now declares the German title and description, which is what makes that second failure impossible to reintroduce quietly.
 
-**`/example/`'s entity data is fetched from `companygraph/meta-model` at a pinned commit.**
-Nothing in it is editable here: `npm run pages` would overwrite the edit and `pages:check`
-guards the pin, so a change to what a node shows is a change upstream and a re-pin.
+**`/example/`'s entity data is fetched from `companygraph/meta-model` at a pinned commit.** Nothing in it is editable here: `npm run pages` would overwrite the edit and `pages:check` guards the pin, so a change to what a node shows is a change upstream and a re-pin.
 
-This paragraph used to name three British spellings the example data carried — they surfaced
-when a node was clicked — and say the fix belonged upstream. It did, and it took a while to get
-there: core 0.13.0 made American English a rule (R14) and renamed `organisation`, and 0.13.1
-caught the two the sweep had missed, because R14 binds an instance's content and the reference
-example is instance content. What the note got right was refusing the local fix; what it could
-not do was make the upstream one happen.
+This paragraph used to name three British spellings the example data carried — they surfaced when a node was clicked — and say the fix belonged upstream. It did, and it took a while to get there: core 0.13.0 made American English a rule (R14) and renamed `organisation`, and 0.13.1 caught the two the sweep had missed, because R14 binds an instance's content and the reference example is instance content. What the note got right was refusing the local fix; what it could not do was make the upstream one happen.
 
 ## CI
 
@@ -472,38 +387,19 @@ not do was make the upstream one happen.
 
 ## Checks
 
-Two jobs, both required by the ruleset on `main`: `verify`, this repository's own suite, and
-`conventions`, called from robertblust/conventions at the pinned tag and shown by GitHub as
-`conventions / conventions`. The prose check leaves out `node_modules`, third-party text;
-`.superpowers`, tooling scratch; and `docs/superpowers`, whose specs and plans quote the very
-words it scans for. Everything about how to write and how to work with git is in
-`conventions/`; this file is only what is this site's own.
+Two jobs, both required by the ruleset on `main`: `verify`, this repository's own suite, and `conventions`, called from robertblust/conventions at the pinned tag and shown by GitHub as `conventions / conventions`. The prose check leaves out `node_modules`, third-party text; `.superpowers`, tooling scratch; and `docs/superpowers`, whose specs and plans quote the very words it scans for. Everything about how to write and how to work with git is in `conventions/`; this file is only what is this site's own.
 
 ## The deck has no package.json of its own
 
-`npm run pdf` is a **root** script and `pdf-lib` is a **root** devDependency. Until
-2026-08-26 both lived in `talks/intro/package.json`, which is why that file and its lockfile
-existed at all — the root had neither, so building the deck's PDFs meant
-`cd talks/intro && npm install` first, exactly as the README used to say.
+`npm run pdf` is a **root** script and `pdf-lib` is a **root** devDependency. Until 2026-08-26 both lived in `talks/intro/package.json`, which is why that file and its lockfile existed at all — the root had neither, so building the deck's PDFs meant `cd talks/intro && npm install` first, exactly as the README used to say.
 
-That second manifest cost more than the `cd`. CI only ever runs `npm ci` at the root, so
-nothing under `talks/intro` was ever installed or exercised by a check, and a Dependabot bump
-there arrived green having proved nothing about the directory it changed. `blust.ch` has had
-the single-manifest shape all along; this is the two sibling sites catching up.
+That second manifest cost more than the `cd`. CI only ever runs `npm ci` at the root, so nothing under `talks/intro` was ever installed or exercised by a check, and a Dependabot bump there arrived green having proved nothing about the directory it changed. `blust.ch` has had the single-manifest shape all along; this is the two sibling sites catching up.
 
-`export-pdf.mjs` sits at the repository root, and `root` in the object it hands to
-`exportDecks` is derived from its own location — `path.dirname(fileURLToPath(import.meta.url))`
-— not from the deck. The deck is named relative to that root by the `decks` list:
-`{ dir: "talks/intro", slug: "companygraph" }`. Moving the script back under `talks/intro/`
-would break this: `root` would become `talks/intro`, and `goto` would resolve
-`talks/intro/talks/intro/index.html`, which does not exist. Verified by rebuilding both PDFs
-from the root: same page counts, and the only bytes that moved were pdf-lib's `CreationDate`
-and `ModDate`.
+`export-pdf.mjs` sits at the repository root, and `root` in the object it hands to `exportDecks` is derived from its own location — `path.dirname(fileURLToPath(import.meta.url))` — not from the deck. The deck is named relative to that root by the `decks` list: `{ dir: "talks/intro", slug: "companygraph" }`. Moving the script back under `talks/intro/` would break this: `root` would become `talks/intro`, and `goto` would resolve `talks/intro/talks/intro/index.html`, which does not exist. Verified by rebuilding both PDFs from the root: same page counts, and the only bytes that moved were pdf-lib's `CreationDate` and `ModDate`.
 
 ## The deck and the talks index
 
-Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task's
-requirements implicitly include this section.
+Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task's requirements implicitly include this section.
 
 - **English markup, German in `data-de`.** Static `lang="en"`, because the source is English.
   `applyLang()` sets `de` when a visitor switches.
@@ -591,10 +487,7 @@ requirements implicitly include this section.
 
 ## "AI" in the deck, "agents" everywhere else — on purpose
 
-The deck says **AI** on slides 00 and 08 and **agents** from 09 on. Nobody has been given
-the narrower word at 0:00, and those opening slides are about who can *read* the thing; an
-agent is software that *acts* inside the stated rules, which is a claim slides 09 and 10
-earn. Do not level the two words.
+The deck says **AI** on slides 00 and 08 and **agents** from 09 on. Nobody has been given the narrower word at 0:00, and those opening slides are about who can *read* the thing; an agent is software that *acts* inside the stated rules, which is a claim slides 09 and 10 earn. Do not level the two words.
 
 The same sentence appears in three other places and deliberately does **not** match:
 
@@ -605,7 +498,4 @@ The same sentence appears in three other places and deliberately does **not** ma
 | `meta-model`'s `README.md` | "so that both people and **agents** can rely on it" |
 | `companygraph/.github` profile | "People can read it and **agents** can rely on it" |
 
-The deck is where a newcomer meets the idea; the repositories are read by someone already
-at the model, where `agents` is the word its schemas and conventions use throughout. This
-is a decision, not drift — if you are here because a reviewer flagged the mismatch, the
-answer is that it was flagged and kept.
+The deck is where a newcomer meets the idea; the repositories are read by someone already at the model, where `agents` is the word its schemas and conventions use throughout. This is a decision, not drift — if you are here because a reviewer flagged the mismatch, the answer is that it was flagged and kept.

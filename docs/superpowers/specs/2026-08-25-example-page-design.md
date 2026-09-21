@@ -8,9 +8,7 @@ Status: design agreed, nothing built.
 
 ## 1. Purpose and non-goals
 
-The page shows what an instance *is* without a reader opening a repository. It is the third
-page in the site's plain-page family beside billing and privacy: same shell, nav, footer,
-language toggle, `verify` spec and share card. Its one figure is interactive.
+The page shows what an instance *is* without a reader opening a repository. It is the third page in the site's plain-page family beside billing and privacy: same shell, nav, footer, language toggle, `verify` spec and share card. Its one figure is interactive.
 
 **Owns:**
 
@@ -33,8 +31,7 @@ language toggle, `verify` spec and share card. Its one figure is interactive.
 - Type names from core's vocabulary — profile, experience — may appear in the prose; they are
   the model's words, not the example's. Entity names, folder names as facts, and counts may not.
 
-The nav gains **Example** on every page. The talks live in this repository now, so there is
-no second repository to keep in step: one repo, five pages, one `verify` run.
+The nav gains **Example** on every page. The talks live in this repository now, so there is no second repository to keep in step: one repo, five pages, one `verify` run.
 
 ---
 
@@ -47,22 +44,11 @@ example/
   index.html        the page; carries the block between markers
 ```
 
-**Input.** `META_MODEL=/path/to/checkout` when set, for local work; otherwise the tarball of
-`repo` at `commit` from GitHub. The generator refuses a local checkout whose `HEAD` is not
-`commit`, so local and CI read the same bytes.
+**Input.** `META_MODEL=/path/to/checkout` when set, for local work; otherwise the tarball of `repo` at `commit` from GitHub. The generator refuses a local checkout whose `HEAD` is not `commit`, so local and CI read the same bytes.
 
-**Parsing is by the fixed shape only**, the same discipline the tooling spec sets for its
-`check`: YAML frontmatter as key/scalar or key/list; the H1 as the canonical name; the `>`
-tagline; `##` sections as heading plus body text; a body table as rows by its header. No
-schema is read. Types are the folder names singularised by R7; the owner relation is nesting
-on disk (R5, R6). Reference edges come from two places only: frontmatter values that name an
-H1 elsewhere in the instance (`skills:` on an experience), and table cells that do (a
-profile's `Skill` and `Level` columns). A name that resolves to nothing is a generator error
-under R4, so the page can never draw a dangling edge.
+**Parsing is by the fixed shape only**, the same discipline the tooling spec sets for its `check`: YAML frontmatter as key/scalar or key/list; the H1 as the canonical name; the `>` tagline; `##` sections as heading plus body text; a body table as rows by its header. No schema is read. Types are the folder names singularised by R7; the owner relation is nesting on disk (R5, R6). Reference edges come from two places only: frontmatter values that name an H1 elsewhere in the instance (`skills:` on an experience), and table cells that do (a profile's `Skill` and `Level` columns). A name that resolves to nothing is a generator error under R4, so the page can never draw a dangling edge.
 
-**Output.** One JSON object in `<script type="application/json" id="example-data">`, fenced by
-`<!-- example data · <commit> -->` and `<!-- /example data -->` — the committed-copy-with-a-
-marker pattern the token block already uses:
+**Output.** One JSON object in `<script type="application/json" id="example-data">`, fenced by `<!-- example data · <commit> -->` and `<!-- /example data -->` — the committed-copy-with-a- marker pattern the token block already uses:
 
 ```json
 { "commit": "…", "root": "Fictional Company",
@@ -78,25 +64,17 @@ marker pattern the token block already uses:
                  "attrs": { "Level": "proficiency-levels/proficient", "Evidence": "…" } }, …] }
 ```
 
-`"Fictional Company"` is the only string that is not in the instance. It labels the root, it
-is the generator's one constant, and the source names it as the one invented string. The
-example's own README calls itself a fictional company, which is why that is the word.
+`"Fictional Company"` is the only string that is not in the instance. It labels the root, it is the generator's one constant, and the source names it as the one invented string. The example's own README calls itself a fictional company, which is why that is the word.
 
-**`npm run example`** rebuilds the block. **`npm run example:check`** re-derives it from the
-pinned commit into memory and fails with a diff if the page's block differs. It runs in CI
-before `npm ci`, beside `og:check` — Node only, and the tarball fetch is the one network
-request, on a runner that already has network for `npm ci`.
+**`npm run example`** rebuilds the block. **`npm run example:check`** re-derives it from the pinned commit into memory and fails with a diff if the page's block differs. It runs in CI before `npm ci`, beside `og:check` — Node only, and the tarball fetch is the one network request, on a runner that already has network for `npm ci`.
 
-**Bumping the example** is: edit `commit` in `source.json`, `npm run example`, commit both.
-The marker names the commit, so anyone reading the HTML sees which state of the model it shows.
+**Bumping the example** is: edit `commit` in `source.json`, `npm run example`, commit both. The marker names the commit, so anyone reading the HTML sees which state of the model it shows.
 
 ---
 
 ## 3. The page
 
-The billing skeleton: `.shell` header with nav — *Talks · Example · Billing* and the language
-toggle — `main .shell` with a `.title` block and sections, the footer. English markup, German
-in `data-de`, the `cg-lang` mechanism copied verbatim.
+The billing skeleton: `.shell` header with nav — *Talks · Example · Billing* and the language toggle — `main .shell` with a `.title` block and sections, the footer. English markup, German in `data-de`, the `cg-lang` mechanism copied verbatim.
 
 - **Title:** *One company, drawn.* / *Eine Firma, gezeichnet.* **Tagline:** a fictional
   company described in CompanyGraph, exactly as its files say, drawn as the graph those files
@@ -123,14 +101,9 @@ The page states no type count and no entity count. Those are read off the figure
 
 ## 4. The figure
 
-**The stage.** A band of fixed height — `clamp(520px, 62vh, 720px)` — across the content width,
-split into two regions that never change size: the graph canvas on the left, flexible in width,
-and the card on the right, 360px wide and the stage's height, its body scrolling internally.
-On a phone the two stack, each keeping a fixed height. Nothing on the page reflows when a
-node is clicked; the page never scrolls horizontally.
+**The stage.** A band of fixed height — `clamp(520px, 62vh, 720px)` — across the content width, split into two regions that never change size: the graph canvas on the left, flexible in width, and the card on the right, 360px wide and the stage's height, its body scrolling internally. On a phone the two stack, each keeping a fixed height. Nothing on the page reflows when a node is clicked; the page never scrolls horizontally.
 
-**Focus and context, not the whole tree.** An instance can be hundreds of pages, so the canvas
-shows one focused node and its neighbourhood only:
+**Focus and context, not the whole tree.** An instance can be hundreds of pages, so the canvas shows one focused node and its neighbourhood only:
 
 - **Ancestors**, as a chain to the left — root, folder, owner, folder — which is the focused
   node's path on disk. The same path is printed above the canvas in mono
@@ -144,40 +117,15 @@ shows one focused node and its neighbourhood only:
   is drawn only to a node that is on the canvas, and every node on the canvas is there
   because of the focus, so no line ever lands on nothing.
 
-Clicking any node makes it the focus. Survivors move to their new places, newcomers fade in,
-the rest fade out — a d3 transition of about 400 ms, 0 ms under `prefers-reduced-motion`,
-which is also what the share card renders: the root focused, its folders to the right,
-nothing selected. Drag pans; ctrl/⌘ + wheel zooms, so a plain wheel still scrolls the page; a
-*recentre* control restores the fitted view.
-Keyboard: nodes are focusable with Enter and Space; the card is `aria-live="polite"`. The URL
-hash names the focus (`#skills/java-programming`) so a state can be shared and is restored
-on load.
+Clicking any node makes it the focus. Survivors move to their new places, newcomers fade in, the rest fade out — a d3 transition of about 400 ms, 0 ms under `prefers-reduced-motion`, which is also what the share card renders: the root focused, its folders to the right, nothing selected. Drag pans; ctrl/⌘ + wheel zooms, so a plain wheel still scrolls the page; a *recentre* control restores the fitted view. Keyboard: nodes are focusable with Enter and Space; the card is `aria-live="polite"`. The URL hash names the focus (`#skills/java-programming`) so a state can be shared and is restored on load.
 
-**The card.** A fixed place and a fixed size, and quiet: a mono eyebrow with the type and the
-path; the canonical name; the tagline. Then the frontmatter as a two-column list with mono
-keys; then each section as a mono eyebrow heading with its text; a table section as a table
-whose resolving cells are links that refocus. *View file* — the path at the pinned commit on
-GitHub, opened in the same tab like every link on this site — is pinned to the card's footer. When the root or a folder is focused the card is
-not empty: one line says what is focused and how many pages it holds, read from the block.
+**The card.** A fixed place and a fixed size, and quiet: a mono eyebrow with the type and the path; the canonical name; the tagline. Then the frontmatter as a two-column list with mono keys; then each section as a mono eyebrow heading with its text; a table section as a table whose resolving cells are links that refocus. *View file* — the path at the pinned commit on GitHub, opened in the same tab like every link on this site — is pinned to the card's footer. When the root or a folder is focused the card is not empty: one line says what is focused and how many pages it holds, read from the block.
 
-**The stage, expanded.** An *Expand* control beside the path line opens the whole stage —
-path, canvas and card — in a modal that fills the window, closed by its × button, Escape or
-a click outside. It is the same stage moved, not a copy: clicks, links, the hash and
-*recentre* keep working, and the graph re-fits to the larger canvas.
+**The stage, expanded.** An *Expand* control beside the path line opens the whole stage — path, canvas and card — in a modal that fills the window, closed by its × button, Escape or a click outside. It is the same stage moved, not a copy: clicks, links, the hash and *recentre* keep working, and the graph re-fits to the larger canvas.
 
-**Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and
-anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lines dashed in
-`--c-mid` — every line drawn belongs to the focus. No `--c-flag`: nothing here is a
-reversal. Mono for the path, folder names, field keys, eyebrows and the commit; prose for the
-name, tagline and text.
+**Tokens.** Folder boxes outlined `--c-weak`; entity squares filled `--c-firm`; the focus, and anything clickable on hover or focus, `--c-mid`; owns-lines solid; reference lines dashed in `--c-mid` — every line drawn belongs to the focus. No `--c-flag`: nothing here is a reversal. Mono for the path, folder names, field keys, eyebrows and the commit; prose for the name, tagline and text.
 
-**The library.** d3 v7, vendored as `example/d3.v7.min.js` (moved to the site root by the
-model page spec §4) from the pinned npm package —
-`d3` in `devDependencies` — and loaded with a relative `<script src>`, so the page stays
-self-contained and the share-card recipe hashes it as a drawn asset. `npm run test:example`
-asserts the vendored file is byte-identical to the package's `dist/d3.min.js`, the way
-`design.mjs` is held identical across the sites. The full build is ~280 KB; a custom bundle
-would need a build step this repository does not have, and that was the trade taken.
+**The library.** d3 v7, vendored as `example/d3.v7.min.js` (moved to the site root by the model page spec §4) from the pinned npm package — `d3` in `devDependencies` — and loaded with a relative `<script src>`, so the page stays self-contained and the share-card recipe hashes it as a drawn asset. `npm run test:example` asserts the vendored file is byte-identical to the package's `dist/d3.min.js`, the way `design.mjs` is held identical across the sites. The full build is ~280 KB; a custom bundle would need a build step this repository does not have, and that was the trade taken.
 
 ---
 

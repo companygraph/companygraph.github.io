@@ -8,11 +8,7 @@ Status: design agreed, nothing built.
 
 ## 1. Purpose and non-goals
 
-The example page shows *an instance*. The model page shows *the vocabulary* an instance is
-written in: the schemas in `core/`, and what references what. It sits in the nav before
-Example — *Talks · Model · Example · Billing* — because a reader meets the model before an
-instance of it. It is the same page family, the same stage, the same card; only the data and
-the prose differ.
+The example page shows *an instance*. The model page shows *the vocabulary* an instance is written in: the schemas in `core/`, and what references what. It sits in the nav before Example — *Talks · Model · Example · Billing* — because a reader meets the model before an instance of it. It is the same page family, the same stage, the same card; only the data and the prose differ.
 
 **Owns:**
 
@@ -29,28 +25,17 @@ the prose differ.
 - packs, or types the design names but `core/` does not yet contain
 - a schema editor, search, or anything the tooling spec owns
 
-The rule from the example page holds: nothing about the model is written by hand except the
-root label, and that label is named as the invented string.
+The rule from the example page holds: nothing about the model is written by hand except the root label, and that label is named as the invented string.
 
 ---
 
 ## 2. The generator
 
-One pin for the site. `example/source.json` moves to `/source.json`; both pages are generated
-from the same commit, and `npm run example` writes both blocks while `npm run example:check`
-compares both. (The script names stay — CI and CLAUDE.md know them.)
+One pin for the site. `example/source.json` moves to `/source.json`; both pages are generated from the same commit, and `npm run example` writes both blocks while `npm run example:check` compares both. (The script names stay — CI and CLAUDE.md know them.)
 
-**Reading `core/`.** A schema file is read by the same fixed shape as an entity: the H1 is the
-canonical name (`Profile Schema`), the `>` line the tagline, `##` sections with text — and,
-because the R9 fixed shape puts more than one table in `## Sections`, a section may hold
-**several tables, each with the caption line that addresses it** (`` `## Skills` is a table
-with these columns: ``). The parser's section gains `tables: [{ caption, columns, rows }]`;
-`table` stays as the first of them for the example page's card.
+**Reading `core/`.** A schema file is read by the same fixed shape as an entity: the H1 is the canonical name (`Profile Schema`), the `>` line the tagline, `##` sections with text — and, because the R9 fixed shape puts more than one table in `## Sections`, a section may hold **several tables, each with the caption line that addresses it** (`` `## Skills` is a table with these columns: ``). The parser's section gains `tables: [{ caption, columns, rows }]`; `table` stays as the first of them for the example page's card.
 
-**Entities.** One per schema file, in a single folder `core`, type `schema`:
-`{ id: "core/profile", type: "schema", name: "Profile Schema", tagline, fields: {}, sections,
-owner: null, path: "core/profile-schema.md" }`. The `**Owner:** profile` line, when present,
-is kept as `fields.owner = "profile"`.
+**Entities.** One per schema file, in a single folder `core`, type `schema`: `{ id: "core/profile", type: "schema", name: "Profile Schema", tagline, fields: {}, sections, owner: null, path: "core/profile-schema.md" }`. The `**Owner:** profile` line, when present, is kept as `fields.owner = "profile"`.
 
 **Edges** come from the tables, and only from them:
 
@@ -60,12 +45,9 @@ is kept as `fields.owner = "profile"`.
 - a row of a column table whose Type is `ref → <type>` → edge `via "<Section>.<Column>"`
 - the `**Owner:**` line → edge `via "owner"` to the owning type's schema
 
-A `ref → <type>` naming a type with no schema file is a generator error (R4, applied to the
-vocabulary itself). The root label is `Core`, the one invented string, named as such.
+A `ref → <type>` naming a type with no schema file is a generator error (R4, applied to the vocabulary itself). The root label is `Core`, the one invented string, named as such.
 
-**Block.** `<!-- model data · <commit> -->` … `<script type="application/json"
-id="model-data">` … `<!-- /model data -->` in `model/index.html`, same markers pattern, same
-check.
+**Block.** `<!-- model data · <commit> -->` … `<script type="application/json" id="model-data">` … `<!-- /model data -->` in `model/index.html`, same markers pattern, same check.
 
 ---
 
@@ -95,12 +77,7 @@ The example page's skeleton, with its prose replaced:
 
 ## 4. The stage, shared
 
-The example page's stage — path line, canvas, card, expand dialog, the d3 neighbourhood
-layout — moves out of `example/index.html` into two files at the site root, `stage.css` and
-`stage.js`, loaded relatively by both pages beside `d3.v7.min.js` (which moves to the root as
-well). The share-card recipe hashes all three as drawn assets. Nothing in `stage.js` knows a
-name from either data block; it is configured by the id of the block it reads and by the
-four UI strings it owns, unchanged.
+The example page's stage — path line, canvas, card, expand dialog, the d3 neighbourhood layout — moves out of `example/index.html` into two files at the site root, `stage.css` and `stage.js`, loaded relatively by both pages beside `d3.v7.min.js` (which moves to the root as well). The share-card recipe hashes all three as drawn assets. Nothing in `stage.js` knows a name from either data block; it is configured by the id of the block it reads and by the four UI strings it owns, unchanged.
 
 Two things the model page needs that the example page did not, both generic:
 
@@ -111,15 +88,9 @@ Two things the model page needs that the example page did not, both generic:
   caption, and a caption that names a section of the model (`` `## Skills` is a table with
   these columns: ``) stays mono, as data.
 
-The card for a schema shows: eyebrow *schema · core/profile-schema.md*, the name, the tagline,
-the `owner` field when present, then Frontmatter (the table, or the sentence *No YAML
-frontmatter.*), Sections (the sections table, then each column table under its caption), and
-last File Location (its code path in mono and its prose) — the generator moves it to the end
-for the card; in the file R9 keeps it first. *View file* pinned to the footer, as before.
+The card for a schema shows: eyebrow *schema · core/profile-schema.md*, the name, the tagline, the `owner` field when present, then Frontmatter (the table, or the sentence *No YAML frontmatter.*), Sections (the sections table, then each column table under its caption), and last File Location (its code path in mono and its prose) — the generator moves it to the end for the card; in the file R9 keeps it first. *View file* pinned to the footer, as before.
 
-Everything else — focus and context, ancestors to the left, children to the right, references
-below and above, the fitted camera, ctrl/⌘+wheel zoom, keyboard, hash, reduced motion, the
-expand dialog — is the same code and behaves the same.
+Everything else — focus and context, ancestors to the left, children to the right, references below and above, the fitted camera, ctrl/⌘+wheel zoom, keyboard, hash, reduced motion, the expand dialog — is the same code and behaves the same.
 
 ---
 
