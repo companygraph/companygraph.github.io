@@ -4,23 +4,15 @@
 > (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use
 > checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** companygraph.io's landing page draws CompanyGraph's own model on the shared stage,
-in place of the figure drawn by hand.
+**Goal:** companygraph.io's landing page draws CompanyGraph's own model on the shared stage, in place of the figure drawn by hand.
 
-**Architecture:** The site grows a second pin, a third build target that reads it into
-`company.json`, and a stage inside the `<figure>` the drawn figure occupies now. Nothing about
-the share card changes, because `HOME_HIDE` already hides that figure.
+**Architecture:** The site grows a second pin, a third build target that reads it into `company.json`, and a stage inside the `<figure>` the drawn figure occupies now. Nothing about the share card changes, because `HOME_HIDE` already hides that figure.
 
-**Tech Stack:** Node 22 with built-ins only for `pages.mjs`, `companygraph-meta-model`'s parser
-for `build.mjs`, d3 v7 vendored at the root, playwright for the suite,
-`@robertblust/design` for the shared stage, pin and page checks.
+**Tech Stack:** Node 22 with built-ins only for `pages.mjs`, `companygraph-meta-model`'s parser for `build.mjs`, d3 v7 vendored at the root, playwright for the suite, `@robertblust/design` for the shared stage, pin and page checks.
 
 **Spec:** [`companygraph/meta-model` · `docs/superpowers/specs/2026-09-21-companygraph-instance-design.md`](https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-21-companygraph-instance-design.md)
 
-**Sibling plan:** the instance half is
-`companygraph/meta-model` · `docs/superpowers/plans/2026-09-21-companygraph-mental-model.md`.
-**This plan cannot start until that one has merged**, because Task 1 pins a commit of
-`companygraph/mental-model` and that repository does not exist yet.
+**Sibling plan:** the instance half is `companygraph/meta-model` · `docs/superpowers/plans/2026-09-21-companygraph-mental-model.md`. **This plan cannot start until that one has merged**, because Task 1 pins a commit of `companygraph/mental-model` and that repository does not exist yet.
 
 ## Global constraints
 
@@ -59,9 +51,7 @@ for `build.mjs`, d3 v7 vendored at the root, playwright for the suite,
 - Produces: `PINS`, an object keyed `meta-model` and `mental-model`, each `{ repo, commit }`;
   every module that used the bare `repo` and `commit` constants now names which pin it means
 
-This task changes the shape of a file three modules read and adds **no** new artifact. Keeping
-those two changes apart is the point: if `example.json` or `model.json` moves a byte here,
-something is wrong with the refactor rather than with the new target.
+This task changes the shape of a file three modules read and adds **no** new artifact. Keeping those two changes apart is the point: if `example.json` or `model.json` moves a byte here, something is wrong with the refactor rather than with the new target.
 
 - [ ] **Step 1: Branch, in a sibling worktree**
 
@@ -98,8 +88,7 @@ test("source.json names both pins, each with a repo and a commit", () => {
 
 Run: `npm run test:build`
 
-Expected: FAIL — the current `source.json` has top-level `repo` and `commit`, so
-`Object.keys(pins).sort()` is `["commit", "repo"]`.
+Expected: FAIL — the current `source.json` has top-level `repo` and `commit`, so `Object.keys(pins).sort()` is `["commit", "repo"]`.
 
 - [ ] **Step 4: Rewrite `source.json`**
 
@@ -110,9 +99,7 @@ Expected: FAIL — the current `source.json` has top-level `repo` and `commit`, 
 }
 ```
 
-Take the first commit verbatim from the current `source.json` — this task does not move that
-pin. Take the second from `git -C ~/git/companygraph/mental-model rev-parse origin/main` after
-the instance's content work has merged.
+Take the first commit verbatim from the current `source.json` — this task does not move that pin. Take the second from `git -C ~/git/companygraph/mental-model rev-parse origin/main` after the instance's content work has merged.
 
 - [ ] **Step 5: Run the test and watch it pass**
 
@@ -142,9 +129,7 @@ const TARGETS = [
 ];
 ```
 
-`fetchTree` and `readRemote` close over `repo` and `commit` today, and the tree cache is a
-single module-level `tree`. Both become per-pin: key the cache by pin name, and pass
-`{ repo, commit }` into the reader rather than reading module state.
+`fetchTree` and `readRemote` close over `repo` and `commit` today, and the tree cache is a single module-level `tree`. Both become per-pin: key the cache by pin name, and pass `{ repo, commit }` into the reader rather than reading module state.
 
 ```js
 const trees = new Map();
@@ -163,14 +148,11 @@ async function fetchTree({ repo, commit }) {
 }
 ```
 
-`readLocal` takes the checkout's environment variable name per pin — `META_MODEL` for
-`meta-model` — and keeps its guard that the checkout's `HEAD` is the commit the pin names.
-`MENTAL_MODEL` is added in Task 2 and not here.
+`readLocal` takes the checkout's environment variable name per pin — `META_MODEL` for `meta-model` — and keeps its guard that the checkout's `HEAD` is the commit the pin names. `MENTAL_MODEL` is added in Task 2 and not here.
 
 - [ ] **Step 7: Teach `build/pages.mjs` and `pin-check.mjs` the same shape**
 
-`pages.mjs` reads `repo` and `commit` for its per-artifact commit guard; it now looks the pin up
-by the artifact's name. `pin-check.mjs` becomes the loop guestgraph.io already runs:
+`pages.mjs` reads `repo` and `commit` for its per-artifact commit guard; it now looks the pin up by the artifact's name. `pin-check.mjs` becomes the loop guestgraph.io already runs:
 
 ```js
 import { readFileSync } from "node:fs";
@@ -186,8 +168,7 @@ for (const [name, pin] of Object.entries(pins)) {
 }
 ```
 
-Rewrite the file's header comment to say the site pins two repositories and why each pin is
-editorial — the existing comment says "one commit of the meta-model" and stops being true.
+Rewrite the file's header comment to say the site pins two repositories and why each pin is editorial — the existing comment says "one commit of the meta-model" and stops being true.
 
 - [ ] **Step 8: Verify nothing about the two existing artifacts moved**
 
@@ -200,15 +181,11 @@ npm run pin:check; echo "pin:check: $?"
 git diff --stat -- example.json model.json
 ```
 
-Expected: `0`, `0`, `0`, `0`, and **no diff** on either artifact. `pin:check` now prints two
-lines, one per pin. If either artifact moved, stop and find out why before going on.
+Expected: `0`, `0`, `0`, `0`, and **no diff** on either artifact. `pin:check` now prints two lines, one per pin. If either artifact moved, stop and find out why before going on.
 
 - [ ] **Step 9: Commit, push, open the pull request, report and stop**
 
-The body says why a second repository means a second pin and why both live in one file — one
-pin file for the site was what consolidating `example/source.json` into a root `source.json`
-was protecting, and the guestgraph.io `api-sources.json` shape keeps it. End with the
-`Verified:` line naming the five commands above, then the trailers.
+The body says why a second repository means a second pin and why both live in one file — one pin file for the site was what consolidating `example/source.json` into a root `source.json` was protecting, and the guestgraph.io `api-sources.json` shape keeps it. End with the `Verified:` line naming the five commands above, then the trailers.
 
 ---
 
@@ -272,19 +249,15 @@ In `build/build.mjs`'s `TARGETS`:
 { dir: "company", pin: "mental-model", parse: parseInstance, sub: "model/", schemas: "meta/core/" },
 ```
 
-`sub` is `model/` and `schemas` is `meta/core/` because an instance carries its own vendored
-core — which is how blust.ch reads the reference instance, and not how the `example` target
-works: the example is parsed against the core sitting beside it in the same commit.
+`sub` is `model/` and `schemas` is `meta/core/` because an instance carries its own vendored core — which is how blust.ch reads the reference instance, and not how the `example` target works: the example is parsed against the core sitting beside it in the same commit.
 
-Add `MENTAL_MODEL` beside `META_MODEL` as that pin's local-checkout escape hatch, with the same
-guard that the checkout's `HEAD` is the commit the pin names:
+Add `MENTAL_MODEL` beside `META_MODEL` as that pin's local-checkout escape hatch, with the same guard that the checkout's `HEAD` is the commit the pin names:
 
 ```js
 const LOCAL_ENV = { "meta-model": "META_MODEL", "mental-model": "MENTAL_MODEL" };
 ```
 
-The artifact carries `repo` as well as `commit`, because two artifacts now come from two
-repositories and a file that names only a SHA cannot say which.
+The artifact carries `repo` as well as `commit`, because two artifacts now come from two repositories and a file that names only a SHA cannot say which.
 
 - [ ] **Step 5: Build it and watch the test pass**
 
@@ -302,17 +275,11 @@ Expected: `build` prints a line for each of the three artifacts; `test:build` ex
 for (const name of ["example", "model", "company"]) {
 ```
 
-Its commit guard compares each artifact against **its own** pin, not against one commit — the
-current code compares every artifact to the single `commit`, which would now fail `company.json`
-on every run.
+Its commit guard compares each artifact against **its own** pin, not against one commit — the current code compares every artifact to the single `commit`, which would now fail `company.json` on every run.
 
 - [ ] **Step 7: Name it a Dataset in the landing page's JSON-LD**
 
-`build/jsonld.mjs` writes a `Dataset` for `/example/` with a `DataDownload` under `encoding`
-whose `contentUrl` is `${SITE}/example.json`. The landing page gains the same shape for
-`company.json`: a `Dataset` describing CompanyGraph's own model, with its `encoding` pointing at
-`${SITE}/company.json`. Read the existing block and match its property order rather than
-inventing a second arrangement.
+`build/jsonld.mjs` writes a `Dataset` for `/example/` with a `DataDownload` under `encoding` whose `contentUrl` is `${SITE}/example.json`. The landing page gains the same shape for `company.json`: a `Dataset` describing CompanyGraph's own model, with its `encoding` pointing at `${SITE}/company.json`. Read the existing block and match its property order rather than inventing a second arrangement.
 
 - [ ] **Step 8: Verify**
 
@@ -329,8 +296,7 @@ Expected: `0`, `0`, `0`, `0`, and no diff on the two older artifacts.
 
 - [ ] **Step 9: Commit `company.json` with the code that builds it, push, open the pull request, report and stop**
 
-`git add company.json` explicitly — a generated file that CI checks must be in the same commit
-as the generator, or `build:check` is red on `main` for the length of a review.
+`git add company.json` explicitly — a generated file that CI checks must be in the same commit as the generator, or `build:check` is red on `main` for the length of a review.
 
 ---
 
@@ -368,17 +334,14 @@ sed -n '1020,1026p' example/index.html # d3 and stage.js at the foot
 
 - [ ] **Step 3: Add the stage contract fence markers, then let `design sync` fill them**
 
-Inside `index.html`'s `<style>`, after the `design tokens` fence, add the marker pair the
-generator writes between:
+Inside `index.html`'s `<style>`, after the `design tokens` fence, add the marker pair the generator writes between:
 
 ```css
   /* ─── stage contract · v2 · shared ───────────────────────────────────
   /* ─── end stage contract ────────────────────────────────────────────────── */
 ```
 
-Then run `npm run design` and confirm the body was written. Do not paste the contract's rules
-by hand: `design sync --check` compares them to the package, and a hand copy is a second copy
-that drifts.
+Then run `npm run design` and confirm the body was written. Do not paste the contract's rules by hand: `design sync --check` compares them to the package, and a hand copy is a second copy that drifts.
 
 - [ ] **Step 4: Link the stylesheet and the artifact in `<head>`**
 
@@ -387,13 +350,11 @@ that drifts.
 <link rel="preload" as="fetch" href="company.json" data-stage crossorigin>
 ```
 
-`data-stage` is how `stage.js` finds which artifact to fetch; a page that carries a stage and
-names no data does not fail quietly — the stage throws.
+`data-stage` is how `stage.js` finds which artifact to fetch; a page that carries a stage and names no data does not fail quietly — the stage throws.
 
 - [ ] **Step 5: Replace the drawn figure with the stage, inside the same `<figure>`**
 
-Keep `<figure class="figure">` and its `<figcaption>`. Replace the whole `<svg class="fig">`
-element with the stage's markup, adapted from `/example/`:
+Keep `<figure class="figure">` and its `<figcaption>`. Replace the whole `<svg class="fig">` element with the stage's markup, adapted from `/example/`:
 
 ```html
   <figure class="figure">
@@ -429,11 +390,7 @@ The `<figcaption>` keeps `id="figcap"`, because the `<svg>` names it through `ar
 
 - [ ] **Step 6: Delete what the drawing left behind**
 
-Remove from the `<style>`: the `.fig .box`, `.fig .ref`, `.fig .node`, `.fig .join`,
-`.fig .r-box`, `.fig .r-ref`, `.fig .r-node` rules; `.an`, `.land`, `.trace`; the three
-`@keyframes` blocks `fig-in`, `fig-land`, `fig-trace`; and the figure's
-`@media (prefers-reduced-motion: reduce)` block. Keep `.figure{display:contents}` and
-`.figcap`. Confirm nothing else on the page used `.an`:
+Remove from the `<style>`: the `.fig .box`, `.fig .ref`, `.fig .node`, `.fig .join`, `.fig .r-box`, `.fig .r-ref`, `.fig .r-node` rules; `.an`, `.land`, `.trace`; the three `@keyframes` blocks `fig-in`, `fig-land`, `fig-trace`; and the figure's `@media (prefers-reduced-motion: reduce)` block. Keep `.figure{display:contents}` and `.figcap`. Confirm nothing else on the page used `.an`:
 
 ```bash
 grep -n 'class="[^"]*\ban\b' index.html
@@ -443,11 +400,7 @@ Expected: no output.
 
 - [ ] **Step 7: Write the caption in English, and present it for review**
 
-The caption is the one place the page states plainly what the drawing is. It says this is
-CompanyGraph's own model, drawn from the repository the page links to — and, as `/example/`'s
-caption does, what a solid line and a dashed line mean, because a reader meets those before
-they meet anything else. It does **not** explain the header mark; that derivation left with the
-drawing, by decision.
+The caption is the one place the page states plainly what the drawing is. It says this is CompanyGraph's own model, drawn from the repository the page links to — and, as `/example/`'s caption does, what a solid line and a dashed line mean, because a reader meets those before they meet anything else. It does **not** explain the header mark; that derivation left with the drawing, by decision.
 
 - [ ] **Step 8: Load d3 and the stage at the foot**
 
@@ -467,15 +420,11 @@ npm run serve &
 open http://localhost:8000/
 ```
 
-Click a node, open Expand, close it, resize to phone width. The stage's own behavior is
-`stage.js`'s and is not changed here; what is being checked is that it has room, that the card
-opens, and that the page does not scroll sideways.
+Click a node, open Expand, close it, resize to phone width. The stage's own behavior is `stage.js`'s and is not changed here; what is being checked is that it has room, that the card opens, and that the page does not scroll sideways.
 
 - [ ] **Step 10: Commit, push, open the pull request, report and stop**
 
-The suite is extended in Task 4, so `npm run verify` is expected to pass here on the checks the
-landing page already had. Say in the body that the spec follows, so a reviewer does not read
-its absence as an oversight.
+The suite is extended in Task 4, so `npm run verify` is expected to pass here on the checks the landing page already had. Say in the body that the spec follows, so a reviewer does not read its absence as an oversight.
 
 ---
 
@@ -514,10 +463,7 @@ In `PAGES`, the entry whose `path` is `/`:
 - add the caption's own words to `contains`, choosing only the words that carry the claim, so
   rewording the rest of the sentence does not fail the check.
 
-`card: true`, `cardBase: SITE`, `internalLinks: true` and a `translates` block are already on
-this entry — do not add a second copy of any of them. `divider: true` is carried by both stage
-pages and is not on this one: add it, run the suite, and if it fails read what it asserts
-before deciding whether the landing page should carry it rather than relaxing it.
+`card: true`, `cardBase: SITE`, `internalLinks: true` and a `translates` block are already on this entry — do not add a second copy of any of them. `divider: true` is carried by both stage pages and is not on this one: add it, run the suite, and if it fails read what it asserts before deciding whether the landing page should carry it rather than relaxing it.
 
 - [ ] **Step 3: Run the suite and read what it says**
 
@@ -526,8 +472,7 @@ cd ~/git/companygraph/companygraph.github.io-the-suite-holds-the-landing-stage
 npm run verify; echo "verify: $?"
 ```
 
-Expected: `0`. If `graph` fails, it is reading `company.json` and finding a name the page does
-not draw — that is a real failure and not a check to relax.
+Expected: `0`. If `graph` fails, it is reading `company.json` and finding a name the page does not draw — that is a real failure and not a check to relax.
 
 - [ ] **Step 4: Prove the share card did not move**
 
@@ -536,10 +481,7 @@ npm run og:check; echo "og:check: $?"
 npm run test:og; echo "test:og: $?"
 ```
 
-Expected: `0` and `0`, **with no re-render**. `HOME_HIDE` is `.figure{display:none}` and the
-stage sits inside that figure, so the card's inputs are unchanged. If `og:check` reports the
-landing card stale, the stage was put outside the figure — go back to Task 3, Step 5 rather
-than re-rendering the card.
+Expected: `0` and `0`, **with no re-render**. `HOME_HIDE` is `.figure{display:none}` and the stage sits inside that figure, so the card's inputs are unchanged. If `og:check` reports the landing card stale, the stage was put outside the figure — go back to Task 3, Step 5 rather than re-rendering the card.
 
 - [ ] **Step 5: Commit, push, open the pull request, report and stop**
 
@@ -569,32 +511,21 @@ cd ~/git/companygraph/companygraph.github.io-the-landing-stage-speaks-german && 
 
 - [ ] **Step 2: Run the translator over the new elements only**
 
-Invoke the translator role of `conventions/TRANSLATOR.md`, with `conventions/GLOSSARY.md` open,
-one element at a time, over the strings Task 3 added: the caption, and any control whose German
-was not copied verbatim from `/example/`. The role edits files and reports; it never commits.
+Invoke the translator role of `conventions/TRANSLATOR.md`, with `conventions/GLOSSARY.md` open, one element at a time, over the strings Task 3 added: the caption, and any control whose German was not copied verbatim from `/example/`. The role edits files and reports; it never commits.
 
-Where a string was taken verbatim from `/example/` — the hint, `Expand`, `recenter`, the gutter
-and dialog aria labels — the German is already made and is copied with it. Do not re-translate
-a string that has a reviewed translation; two German renderings of one English sentence is the
-drift the one-glossary rule exists to stop.
+Where a string was taken verbatim from `/example/` — the hint, `Expand`, `recenter`, the gutter and dialog aria labels — the German is already made and is copied with it. Do not re-translate a string that has a reviewed translation; two German renderings of one English sentence is the drift the one-glossary rule exists to stop.
 
 - [ ] **Step 3: Read the back-translation, not the German**
 
-The translator hands back an English rendering of what the German says, beside each element.
-Review that. Reading German prose takes an evening and the family has one reader for it.
+The translator hands back an English rendering of what the German says, beside each element. Review that. Reading German prose takes an evening and the family has one reader for it.
 
 - [ ] **Step 4: Add the German to the `/` spec's `translates` block**
 
-`/model/` and `/example/` each name `shows`, `hides` and a `title` for German. The landing page
-has a `translates` block already; add the caption's German words to `shows` and its English
-words to `hides`.
+`/model/` and `/example/` each name `shows`, `hides` and a `title` for German. The landing page has a `translates` block already; add the caption's German words to `shows` and its English words to `hides`.
 
 - [ ] **Step 5: Update `README.md` and `AGENTS.md`**
 
-Both say the site has one pin and that two artifacts are built from it. Rewrite the file table
-and the build paragraph to name three artifacts and two pins, and say which repository each
-artifact comes from. `AGENTS.md`'s note that a page naming no data makes the stage throw now
-applies to three pages rather than two.
+Both say the site has one pin and that two artifacts are built from it. Rewrite the file table and the build paragraph to name three artifacts and two pins, and say which repository each artifact comes from. `AGENTS.md`'s note that a page naming no data makes the stage throw now applies to three pages rather than two.
 
 - [ ] **Step 6: Verify everything, each exit code on its own**
 
@@ -622,10 +553,6 @@ Expected: `0` from every one.
 
 ## After this plan
 
-The organization profile's diagram gains an edge — companygraph.io now pins
-`companygraph/mental-model` as well — and that edit belongs with the instance plan's Task 9 if
-it has not merged yet, or is a one-line follow-up if it has.
+The organization profile's diagram gains an edge — companygraph.io now pins `companygraph/mental-model` as well — and that edit belongs with the instance plan's Task 9 if it has not merged yet, or is a one-line follow-up if it has.
 
-`conventions/REPOSITORIES.md` describes which site pins what, and this site now pins two
-repositories. That edit rides the same conventions release as the new member's row rather than
-opening one of its own.
+`conventions/REPOSITORIES.md` describes which site pins what, and this site now pins two repositories. That edit rides the same conventions release as the new member's row rather than opening one of its own.
