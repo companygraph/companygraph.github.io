@@ -53,6 +53,7 @@ export const PAGES = [
   { file: "index.html", head: ["Person", "Organization", "WebSite", "SoftwareSourceCode", "WebPage"] },
   { file: "billing/index.html", head: PAGE_HEAD },
   { file: "privacy/index.html", head: PAGE_HEAD },
+  { file: "principles/index.html", head: PAGE_HEAD },
   { file: "talks/index.html", head: PAGE_HEAD },
   { file: "talks/intro/index.html", head: PAGE_HEAD },
 ];

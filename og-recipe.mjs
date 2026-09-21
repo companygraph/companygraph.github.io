@@ -71,6 +71,7 @@ export const cards = [
   // URL previewed the landing hero under the pasted page's title. The seo check now asserts a
   // page points at its own card, which is what surfaced these two.
   { dir: "billing", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
+  { dir: "principles", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "privacy", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
 ];
 

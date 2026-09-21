@@ -1,9 +1,10 @@
 // Renders the three artifacts into every region of this site derived from the model —
 // `npm run pages` and `npm run pages:check`.
 //
-// Node built-ins only, and no network. That is the property worth keeping: the parser is a
-// dependency and is not on disk until `npm ci` has run, so a check that needed it could not run
-// in the cheap half of CI. Everything here is a pure function of three committed files.
+// No network and no parser: everything here is a pure function of three committed files. The
+// model pages' renderers come from @robertblust/design, which the sites that draw a model share,
+// so this runs after `npm ci` has put the package on disk. The model pages draw
+// CompanyGraph's own model, `company.json`; the JSON-LD graphs read all three.
 //
 // The pin guard is what would otherwise be a sentence in AGENTS.md saying which command to run
 // first. An artifact that declares its own commit cannot be rendered stale, so the order of
@@ -11,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeJsonLd } from "./jsonld.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -39,7 +41,10 @@ for (const [name, pinName] of Object.entries(ARTIFACTS)) {
 }
 
 const check = process.argv.includes("--check");
-const RENDERERS = [(d, o) => writeJsonLd(d, { ...o, repo })];
+const RENDERERS = [
+  (d, o) => writeJsonLd(d, { ...o, repo }),
+  (d, o) => writePrinciples(d.company, { ...o, root: ROOT }),
+];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
 

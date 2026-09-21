@@ -82,6 +82,20 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
+  // CompanyGraph's vision and values, generated from company.json by @robertblust/design's
+  // writePrinciples. The model's words stay in the one language it is written in, so the German
+  // check reads the page's own words: the head and the one heading the region translates.
+  { path: "/principles/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+    contains: ["Written once", "read by", "Values", "Generated from"],
+    translates: { lang: "de",
+      title: "Prinzipien – CompanyGraph",
+      desc: "Die Vision und die Werte, an die sich CompanyGraph, ein Meta-Modell für den Betrieb einer Firma, selbst hält – gelesen aus seinem eigenen Modell, nicht für diese Seite geschrieben.",
+      shows: ["Werte"], hides: ["Values"] },
+    links: ["https://github.com/companygraph"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "principles"], fits: true,
+    card: true, cardBase: SITE, internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.

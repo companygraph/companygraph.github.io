@@ -38,14 +38,12 @@ jobs:
         with:
           node-version: "22"
           cache: npm
+      - run: npm ci
       # Every region this site derives from the model, held against the artifacts it derives
-      # them from. Before npm ci because it installs nothing: pages.mjs and its renderers are
-      # node built-ins and two committed files, with no network. That is the whole reason the
-      # artifacts are committed — the check that catches a page edited by hand is also the
-      # cheapest step in this job.
+      # them from. After npm ci because the model pages' renderers come from
+      # @robertblust/design; it still reaches no network, only the committed artifacts.
       - name: The derived regions still match the artifacts
         run: npm run pages:check
-      - run: npm ci
       # How far the model pin has fallen behind what it points at. Non-blocking on purpose:
       # the pin is editorial — it says which state of the model these pages publish — so a pin
       # behind its upstream is either deliberate or waiting to be looked at, and no script can
