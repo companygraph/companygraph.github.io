@@ -2,14 +2,15 @@
 // `example.json` and `model.json`, or checks that those files still match what the pin
 // parses to — `npm run build` and `npm run build:check`. This is the only script in this
 // repository that reaches the network or the parser; everything derived from the two files
-// it writes is rendered by `build/pages.mjs` without touching either. One pin (`source.json`,
-// at the repository root) names one commit of `companygraph/meta-model`, and both artifacts
-// are drawn from that same commit — the instance from `example/`, the vocabulary from `core/`.
+// it writes is rendered by `build/pages.mjs` without touching either. `source.json`, at the
+// repository root, holds the site's pins by name, and each target names the pin it is drawn
+// from: both artifacts here come from the `meta-model` pin's one commit of
+// `companygraph/meta-model` — the instance from `example/`, the vocabulary from `core/`.
 //
-// Each is read at exactly the commit source.json names: from a local checkout when
-// META_MODEL points at one whose HEAD is that commit, otherwise from GitHub — one call to the
-// git trees API for the whole file list, shared by both targets, then the raw files each
-// target needs. No tarball, so nothing to untar, and no dependency. GITHUB_TOKEN is sent if
+// Each is read at exactly the commit its pin names: from a local checkout when the pin's
+// variable (`META_MODEL` for `meta-model`) points at one whose HEAD is that commit, otherwise
+// from GitHub — one call to the git trees API per pinned commit for the whole file list,
+// shared by every target on that pin, then the raw files each target needs. No tarball, so nothing to untar, and no dependency. GITHUB_TOKEN is sent if
 // present and never printed.
 //
 // The parser comes from `companygraph-meta-model`, pinned by tag — the same repository this
@@ -26,10 +27,13 @@ import { fileURLToPath } from "node:url";
 import { parseInstance, parseSchemas } from "companygraph-meta-model/instance";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const { repo, commit } = JSON.parse(fs.readFileSync(path.join(here, "..", "source.json"), "utf8"));
+const PINS = JSON.parse(fs.readFileSync(path.join(here, "..", "source.json"), "utf8"));
 
-// One entry per generated page. `sub` is the folder inside the meta-model checkout each
-// target reads; `readLocal`/`readRemote` return its files with that prefix stripped, so the
+// The checkout a pin may be read from instead of GitHub, by the variable that names it.
+const LOCAL_ENV = { "meta-model": "META_MODEL" };
+
+// One entry per generated page. `pin` names the entry of `source.json` it is drawn from, and
+// `sub` is the folder inside that pin's checkout each target reads; `readLocal`/`readRemote` return its files with that prefix stripped, so the
 // two parsers see the same shape of map regardless of where the files came from. `finish`,
 // when present, adjusts the parsed data before it is written — the model target uses it to
 // turn each edge's field name into the label the shared stage draws (spec §4), and to read
@@ -40,9 +44,9 @@ const { repo, commit } = JSON.parse(fs.readFileSync(path.join(here, "..", "sourc
 // changes, and the schema files keep the shape the conventions require. The example target
 // needs no such step, so it carries none.
 const TARGETS = [
-  { dir: "example", parse: parseInstance, sub: "example/model/", schemas: "core/" },
+  { dir: "example", pin: "meta-model", parse: parseInstance, sub: "example/model/", schemas: "core/" },
   {
-    dir: "model", parse: parseSchemas, sub: "core/",
+    dir: "model", pin: "meta-model", parse: parseSchemas, sub: "core/",
     finish(data) {
       for (const e of data.edges) e.label = e.via;
       for (const en of data.entities) {
@@ -53,10 +57,10 @@ const TARGETS = [
   },
 ];
 
-async function readLocal(sub) {
-  const dir = process.env.META_MODEL;
+async function readLocal({ commit, env }, sub) {
+  const dir = process.env[env];
   const head = execFileSync("git", ["-C", dir, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-  if (head !== commit) throw new Error(`META_MODEL is at ${head.slice(0, 7)}, source.json pins ${commit.slice(0, 7)}`);
+  if (head !== commit) throw new Error(`${env} is at ${head.slice(0, 7)}, source.json pins ${commit.slice(0, 7)}`);
   const root = path.join(dir, sub);
   const files = new Map();
   const walk = (d) => {
@@ -70,23 +74,27 @@ async function readLocal(sub) {
   return files;
 }
 
-// The trees API listing is the whole repository at `commit`, so it is fetched once per run —
-// not once per target — and cached here; each target then just filters the entries it owns.
-let tree = null;
-async function fetchTree() {
-  if (tree) return tree;
+// The trees API listing is the whole repository at one commit, so it is fetched once per
+// pinned commit per run — not once per target — and cached here; each target then just
+// filters the entries it owns.
+const trees = new Map();
+async function fetchTree({ repo, commit }) {
+  const key = `${repo}@${commit}`;
+  if (trees.has(key)) return trees.get(key);
   const headers = { "user-agent": "companygraph.io example build" };
   if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   const res = await fetch(`https://api.github.com/repos/${repo}/git/trees/${commit}?recursive=1`, { headers });
-  if (!res.ok) throw new Error(`trees API: HTTP ${res.status}`);
+  if (!res.ok) throw new Error(`trees API for ${repo}: HTTP ${res.status}`);
   const { tree: entries, truncated } = await res.json();
-  if (truncated) throw new Error("trees API truncated the listing");
-  tree = { entries, headers };
-  return tree;
+  if (truncated) throw new Error(`trees API truncated the listing for ${repo}`);
+  const value = { entries, headers };
+  trees.set(key, value);
+  return value;
 }
 
-async function readRemote(sub) {
-  const { entries, headers } = await fetchTree();
+async function readRemote(pin, sub) {
+  const { repo, commit } = pin;
+  const { entries, headers } = await fetchTree(pin);
   const files = new Map();
   for (const e of entries) {
     if (e.type !== "blob" || !e.path.startsWith(sub)) continue;
@@ -101,7 +109,9 @@ const check = process.argv.includes("--check");
 let allMatch = true;
 
 for (const target of TARGETS) {
-  const read = process.env.META_MODEL ? readLocal : readRemote;
+  const pin = { ...PINS[target.pin], env: LOCAL_ENV[target.pin] };
+  const { repo, commit } = pin;
+  const read = (sub) => (process.env[pin.env] ? readLocal : readRemote)(pin, sub);
   const files = await read(target.sub);
   // The example is read beside the core it is written against: at 0.22.0 the parser resolves
   // a reference by the type its schema declares, so the schemas travel with the pages. The

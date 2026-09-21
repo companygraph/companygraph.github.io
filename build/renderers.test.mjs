@@ -156,3 +156,17 @@ test("writeJsonLd refuses a graph carrying more than one node after the four it 
   assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
     /does not own — .*#person/);
 });
+
+// The site pins two repositories, the meta-model for the vocabulary and the example and
+// CompanyGraph's own instance for the landing page, and every module that reads source.json
+// names which pin it means. A file back in the one-pin shape would be read as two pins named
+// "repo" and "commit".
+test("source.json names both pins, each with a repo and a commit", () => {
+  const root = path.join(import.meta.dirname, "..");
+  const pins = JSON.parse(fs.readFileSync(path.join(root, "source.json"), "utf8"));
+  assert.deepEqual(Object.keys(pins).sort(), ["mental-model", "meta-model"]);
+  for (const [name, pin] of Object.entries(pins)) {
+    assert.match(pin.repo, /^companygraph\//, `${name}.repo`);
+    assert.match(pin.commit, /^[0-9a-f]{40}$/, `${name}.commit`);
+  }
+});

@@ -14,22 +14,26 @@ import { fileURLToPath } from "node:url";
 import { writeJsonLd } from "./jsonld.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const { repo, commit } = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
+const PINS = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
+// Which pin each artifact is built from, so each is held to its own commit.
+const ARTIFACTS = { example: "meta-model", model: "meta-model" };
+const { repo, commit } = PINS["meta-model"];
 
 const data = {};
-for (const name of ["example", "model"]) {
+for (const [name, pinName] of Object.entries(ARTIFACTS)) {
+  const pin = PINS[pinName];
   const file = path.join(ROOT, `${name}.json`);
   if (!fs.existsSync(file)) {
     console.error(`  ✗ ${name}.json is missing — run: npm run build`);
     process.exit(1);
   }
   data[name] = JSON.parse(fs.readFileSync(file, "utf8"));
-  if (data[name].commit !== commit) {
+  if (data[name].commit !== pin.commit) {
     // An artifact with no commit at all is the same failure as one at the wrong commit, and
     // the remedy is the same, so it prints rather than throwing on the slice inside its own
     // message.
     const at = typeof data[name].commit === "string" ? data[name].commit.slice(0, 7) : "no commit";
-    console.error(`  ✗ ${name}.json is at ${at}, source.json pins ${commit.slice(0, 7)} — run: npm run build`);
+    console.error(`  ✗ ${name}.json is at ${at}, source.json's ${pinName} pin is ${pin.commit.slice(0, 7)} — run: npm run build`);
     process.exit(1);
   }
 }
