@@ -3,29 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Model — CompanyGraph</title>
-<meta id="metadesc" name="description" content="The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand.">
+<title>Principles — CompanyGraph</title>
+<meta id="metadesc" name="description" content="The vision and values CompanyGraph, a meta-model for operating a company, holds itself to — read from its own model, not written for this page.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://companygraph.io/model/">
+<link rel="canonical" href="https://companygraph.io/principles/">
 
-<meta property="og:title" content="Model — CompanyGraph">
-<meta property="og:description" content="The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand.">
+<meta property="og:title" content="Principles — CompanyGraph">
+<meta property="og:description" content="The vision and values CompanyGraph, a meta-model for operating a company, holds itself to — read from its own model, not written for this page.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CompanyGraph">
-<meta property="og:url" content="https://companygraph.io/model/">
-<meta property="og:image" content="https://companygraph.io/model/og.png">
+<meta property="og:url" content="https://companygraph.io/principles/">
+<meta property="og:image" content="https://companygraph.io/principles/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The model, drawn: the core vocabulary with its folder and its schemas.">
+<meta property="og:image:alt" content="Principles read from its own model.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
 <!-- The publisher, the site and this page — nothing about what the software does or when
      it does it, which is the same rule the prose follows. Each page carries the whole graph
      it references: Google resolves @graph within one document, so a bare { "@id": ... }
-     naming a node defined on another page resolves to nothing. This page was written from
-     the pre-contract template while that fix was in flight, and shipped with exactly that
-     dangling isPartOf. -->
+     naming a node defined on another page resolves to nothing. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -52,9 +50,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://companygraph.io/model/#webpage",
-      "name": "Model",
-      "url": "https://companygraph.io/model/",
+      "@id": "https://companygraph.io/principles/#webpage",
+      "name": "Principles",
+      "url": "https://companygraph.io/principles/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://companygraph.io/#website"
@@ -63,12 +61,12 @@
         "@id": "https://companygraph.io/#organization"
       },
       "breadcrumb": {
-        "@id": "https://companygraph.io/model/#breadcrumb"
+        "@id": "https://companygraph.io/principles/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://companygraph.io/model/#breadcrumb",
+      "@id": "https://companygraph.io/principles/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -79,257 +77,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Model",
-          "item": "https://companygraph.io/model/"
-        }
-      ]
-    },
-    {
-      "@type": "DefinedTermSet",
-      "@id": "https://companygraph.io/model/#vocabulary",
-      "name": "CompanyGraph core vocabulary",
-      "description": "The schemas a company is described in: one per type, each stating the structure its files must carry and how they refer to one another.",
-      "url": "https://companygraph.io/model/",
-      "license": "https://www.apache.org/licenses/LICENSE-2.0",
-      "creator": {
-        "@id": "https://companygraph.io/#organization"
-      },
-      "encoding": {
-        "@type": "MediaObject",
-        "contentUrl": "https://companygraph.io/model.json",
-        "encodingFormat": "application/json"
-      },
-      "hasDefinedTerm": [
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-achievement-kind",
-          "name": "Achievement Kind Schema",
-          "description": "Required structure for achievement kind files.",
-          "termCode": "achievement-kind",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/achievement-kind-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-concept",
-          "name": "Concept Schema",
-          "description": "Required structure for concept files.",
-          "termCode": "concept",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/concept-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-domain",
-          "name": "Domain Schema",
-          "description": "Required structure for domain files.",
-          "termCode": "domain",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/domain-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-experience",
-          "name": "Experience Schema",
-          "description": "Required structure for experience files.",
-          "termCode": "experience",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/experience-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-experience-kind",
-          "name": "Experience Kind Schema",
-          "description": "Required structure for experience kind files.",
-          "termCode": "experience-kind",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/experience-kind-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-feature",
-          "name": "Feature Schema",
-          "description": "Required structure for feature files.",
-          "termCode": "feature",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/feature-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-identity",
-          "name": "Identity Schema",
-          "description": "Required structure for the identity file — who the company is.",
-          "termCode": "identity",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/identity-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-phase",
-          "name": "Phase Schema",
-          "description": "Required structure for phase files.",
-          "termCode": "phase",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/phase-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-process",
-          "name": "Process Schema",
-          "description": "Required structure for process files.",
-          "termCode": "process",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/process-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-product",
-          "name": "Product Schema",
-          "description": "Required structure for product files.",
-          "termCode": "product",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/product-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-proficiency-level",
-          "name": "Proficiency Level Schema",
-          "description": "Required structure for proficiency level files.",
-          "termCode": "proficiency-level",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/proficiency-level-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-profile",
-          "name": "Profile Schema",
-          "description": "Required structure for profile files.",
-          "termCode": "profile",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/profile-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-role",
-          "name": "Role Schema",
-          "description": "Required structure for role files.",
-          "termCode": "role",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/role-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-skill",
-          "name": "Skill Schema",
-          "description": "Required structure for skill files.",
-          "termCode": "skill",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/skill-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-source",
-          "name": "Source Schema",
-          "description": "Required structure for source files.",
-          "termCode": "source",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/source-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-strategic-objective",
-          "name": "Strategic Objective Schema",
-          "description": "Required structure for strategic objective files.",
-          "termCode": "strategic-objective",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/strategic-objective-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-strategy",
-          "name": "Strategy Schema",
-          "description": "Required structure for strategy files.",
-          "termCode": "strategy",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/strategy-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-surface",
-          "name": "Surface Schema",
-          "description": "Required structure for surface files.",
-          "termCode": "surface",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/surface-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-track",
-          "name": "Track Schema",
-          "description": "Required structure for track files.",
-          "termCode": "track",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/track-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-value",
-          "name": "Value Schema",
-          "description": "Required structure for value files.",
-          "termCode": "value",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/value-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://companygraph.io/model/#term-vision",
-          "name": "Vision Schema",
-          "description": "Required structure for the vision file — the future the company is working toward.",
-          "termCode": "vision",
-          "url": "https://github.com/companygraph/meta-model/blob/1dc6d81af51e74fcac1ac4a3aca965d1343667a6/core/vision-schema.md",
-          "inDefinedTermSet": {
-            "@id": "https://companygraph.io/model/#vocabulary"
-          }
+          "name": "Principles",
+          "item": "https://companygraph.io/principles/"
         }
       ]
     },
@@ -383,9 +132,8 @@
 
 </script>
 <style>
-/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
-   from file:// as well as from the domain. Relative, because this page sits one
-   directory down and a root-absolute path would break the file:// case. */
+/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
+   Relative, because a root-absolute path breaks under file://. */
 @font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
@@ -746,8 +494,6 @@
   /* The hover underline hangs below the text, so the box is taller under the text than over
      it. Mirror the space above, and the box is symmetric about its own text. */
 
-  /* Not one screen: this page has an argument to make in order, so it scrolls and
-     starts at the top rather than centering itself the way the landing page does. */
   main{flex:1; display:flex; align-items:center; padding:2vh 0 6vh}
 
   /* ─── title contract · v1 · shared ─────────────────────────────────
@@ -786,10 +532,9 @@
   @media (max-width:900px){ .tagline{max-width:100%} }
   /* ─── end title contract ────────────────────────────────────────────────── */
 
-  /* The page's one reversal, and it earns the flag: a visitor's first assumption is that a
-     page describing the model was written by someone, and this line says the opposite —
-     nothing here was written by hand; it was generated. */
-  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+  /* The page's one reversal, and the only honest place for it: the headline says nothing
+     leaves, and one thing does — the request itself, to whoever serves the file. */
+  .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
   section{margin-top:clamp(3rem,8vh,5.5rem)}
@@ -797,47 +542,34 @@
      font-weight:700; letter-spacing:-.025em; line-height:1.06;
      font-size:clamp(1.6rem,3vw,2.3rem)}
   h2 em{font-style:normal; color:var(--c-mid)}
-  /* ─── stage contract · v2 · shared ───────────────────────────────────
-     `stage.css` styles the drawing, the card and the dialog, and says in its own header that
-     the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
-     rules a page must bring for a stage to sit on it properly. They are generated from
-     @robertblust/design, like the tokens and the header above them. Editing them here has no
-     effect — the next `npm run design` overwrites them. Change them in the package.
-
-     What the contract says:
-       · the figure     gets its own air above it, and its caption sits clear of the canvas
-                        rather than hard against it, at a measure prose can be read at.
-       · the hint       how to move the drawing is not a sentence about the drawing, so it is
-                        its own line above the caption rather than a clause inside it. Small
-                        and dim: subordinate to the caption, and read first only by someone
-                        looking for a control. Not mono — mono means data here, and an
-                        instruction is prose. `monoScope` would not catch it either way: it
-                        inspects a fixed list of selectors and this class is not on one.
-       · the provenance mono end to end. It is the one line on the page that is entirely
-                        record — a repository, a commit, the folder the block was read from —
-                        and setting only the link and the commit in mono left the sentence
-                        around them looking like prose that happened to contain data.
-
-     The drawing's own behavior is in `stage.js` and `stage.css`, which are byte-identical
-     copies too. A page that carries a stage carries all of it. */
-  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
-  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
-  .figcap b{color:var(--ink); font-weight:600}
-  .stagehint{margin-top:.7rem; font-size:.82rem; color:var(--dim)}
-  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
-           letter-spacing:.06em; color:var(--dim)}
-  /* ─── end stage contract ────────────────────────────────────────────────── */
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+  .lede a{color:var(--c-mid)}
 
-  /* the source commit, stated once, in the face this system reserves for data */
+  /* the same one-datum box the sibling site uses: one fact, stated plainly and
+     once, in the face this system reserves for data */
   .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
         background:var(--raise); border:1.5px solid var(--c-firm);
         font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
 
-  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
-  .rules p b{font-weight:600; color:var(--ink)}
-  .rules p{color:var(--dim); font-size:1rem}
+  .cols{margin-top:2rem; display:grid; gap:1.1rem; align-items:start;
+        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))}
+  .card{background:var(--raise); border:1.5px solid var(--rule); border-radius:12px;
+        padding:1.5rem 1.6rem}
+  .card h3{font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--dim)}
+  .card ul{margin-top:1.1rem; list-style:none; display:grid; gap:.95rem}
+  .card li{font-size:.98rem; line-height:1.45}
+  .card li b{font-weight:600}
+  .card li i{font-style:normal; display:block; color:var(--dim); font-size:.88rem; margin-top:.2rem}
+  .card li i .mono{font-size:.95em; color:var(--ink)}
+  /* five short items across a full-width card read as a list, not a column of stubs */
+  .wide ul{grid-template-columns:repeat(auto-fit, minmax(255px, 1fr)); gap:1.3rem 1.8rem}
+  /* the .never card (declined options): terms use plain --ink like any other card, no separate treatment needed */
 
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p{color:var(--dim); font-size:1rem}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p a{color:var(--c-mid)}
 
   /* ─── prose footer · v1 · credit ───────────────────────────────────
      Generated from @robertblust/design — edit it there and run `npm run design`.
@@ -868,6 +600,23 @@
   footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
   footer a[aria-current="page"]{color:var(--c-firm)}
   /* ─── end prose footer ──────────────────────────────────────────────────*/
+  /* ─── principles · v1 · shared ───────────────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
+
+     The values /principles/ lists, one `article.value` each, as lib/render/principles.mjs
+     writes them. The rest of what that renderer writes is styled elsewhere on purpose: the
+     title, tagline and headline marks by the `title contract` fence, and `.lede`, `.derived`,
+     `.note` and `.mono` by rules several pages share, which a page's own fence must not copy.
+  */
+  .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
+  .value h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem)}
+  .value .tagline{margin-top:.5rem; color:var(--c-firm); max-width:62ch}
+  .value p{margin-top:.9rem; color:var(--dim); max-width:70ch; line-height:1.6}
+  /* ─── end principles ───────────────────────────────────────────────────── */
+  /* The provenance line under the values: record, so mono end to end, and clear of the last value. */
+  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
+           letter-spacing:.06em; color:var(--dim)}
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
@@ -880,15 +629,6 @@
   @media (max-width:560px){
   }
 </style>
-<!-- The stage — figure, card, expand dialog — is the one component two pages share, so
-     it is a file, not a copy in each page. Relative, like every other asset here: the
-     page stays self-contained in the sense the rule means, nothing off-origin. It comes
-     after the inline block above so the tokens it names are already defined. -->
-<link rel="stylesheet" href="../stage.css">
-<!-- The model this page draws. The stage finds it by the data-stage attribute and fetches the
-     href, so the page names its data once and carries no copy. crossorigin is not decoration:
-     without it the browser will not use the preload for the fetch and asks for the file twice. -->
-<link rel="preload" as="fetch" href="../model.json" data-stage crossorigin>
 </head>
 <body>
 
@@ -907,8 +647,8 @@
       </a>
       <nav>
         <div class="navlinks" id="navlinks">
-          <a href="../principles/" data-de="Prinzipien">Principles</a>
-          <a href="./" aria-current="page" data-de="Modell">Model</a>
+          <a href="./" aria-current="page" data-de="Prinzipien">Principles</a>
+          <a href="../model/" data-de="Modell">Model</a>
           <a href="../example/" data-de="Beispiel">Example</a>
           <a href="../talks/" data-de="Vorträge">Talks</a>
           <a href="../billing/" data-de="Abrechnung">Billing</a>
@@ -926,57 +666,43 @@
 
 <main>
   <div class="shell">
-
+    <!-- principles:start -->
     <div class="title">
-      <h1 data-de="<span class='r70'>Das Modell,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">The model,</span><span class="rcl"><em>drawn</em>.</span></h1>
-      <p class="tagline" data-de="Das Vokabular, in dem eine Firma beschrieben wird – ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist.">The vocabulary a company is described in — one schema per type, drawn as the graph of what references what.</p>
-      <p class="note" data-de="Nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Kern des Modells erzeugt, beim Commit, der neben dem Diagramm steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">Nothing here was written by hand: the page is generated from the model's own core, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
+      <h1><span class="r70">Written once,</span><span class="rcl">read by <em>both</em></span></h1>
+      <p class="tagline">We are working toward companies whose knowledge is written once, in a structure that the people who run them and the agents working beside them can both rely on — so that what a company knows can be read, checked and acted on where it is needed, rather than reassembled out of wikis, decks, tickets and chat threads every time somebody asks.</p>
+      <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
     </div>
 
-    <section class="figure-section">
-      <div class="stagehead" id="stagehead">
-        <p class="path mono" id="path"></p>
-        <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
-      </div>
-      <div class="stage" id="stage">
-        <div class="canvas">
-          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recenter" id="recenter" type="button" data-de="neu zentrieren">recenter</button>
-        </div>
-        <button class="gutter" id="gutter" type="button"
-                aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
-        <aside class="card" id="card" aria-live="polite">
-          <div class="cbody" id="cbody"></div>
-          <div class="cfoot" id="cfoot">
-            <span id="cfootlink"></span>
-          </div>
-        </aside>
-      </div>
-      <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
-      <p class="figcap" id="figcap" data-de="Ein umrandeter Kasten ist der Ordner, in dem die Schemas liegen. Ein gefülltes Quadrat ist ein Schema. Ein gestrichelter Strich ist ein Feld, das auf einen anderen Typ verweist, beschriftet mit dem Namen des Felds. Anklicken rückt in die Mitte.">An outlined box is the folder the schemas live in. A filled square is a schema. A dashed line is a field that references another type, labeled with the field's name. Click to bring it to the center.</p>
-
-      <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
-           same #path, #fig and #card — and moves them back on close. The URL does not
-           change when it opens. -->
-      <dialog id="stagemodal" class="modal" aria-label="The model, expanded" data-de-aria="Das Modell, vergrössert">
-        <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
-      </dialog>
+    <section>
+      <h2>What it means</h2>
+      <p class="lede">It holds when a company can answer a question about itself from the structure rather than from whoever remembers, when an agent answering the same question is held to the same evidence as a person, and when a claim that rests on nothing is visible as such instead of passing unchallenged. A reader can tell whether it holds by asking the same question twice, of a person and of an agent, and comparing what each had to stand on.</p>
+      <p class="lede">It does not ask a company to move what it keeps elsewhere. A fact the wiki, the tracker or the directory has authority over stays mastered there and is projected into the model by a sync that names it, so a company whose knowledge is legible this way still runs on the tools it ran on before. It is also not reached by describing more: a model nobody acts on has not made a company legible, whatever it contains.</p>
     </section>
 
     <section>
-      <h2 data-de="Wie man es liest">How to read it</h2>
-      <div class="rules">
-        <p data-de="<b>Ein Typ ist eine Schema-Datei, benannt nach dem Typ.</b> Ihre Überschrift ist der kanonische Name, und genau diese Zeichenkette wird überall sonst referenziert – es gibt also einen Ort, an dem steht, wie ein Typ heisst, und einen Ort, an dem man es ändert.">
-          <b>A type is one schema file, named for the type.</b> Its heading is the canonical name, and that string is what everything else references — so there is one place that says what a type is called, and one place to change it.</p>
-        <p data-de="<b>Ein Strich zwischen zwei Schemas ist ein Feld, kein Link.</b> Das Feld ist so typisiert, dass es auf einen anderen Typ verweist, und der Strich trägt den Namen des Felds – ein Verweis auf einen Typ, den kein Schema erklärt, ist ein Fehler und kein Link, der irgendwann kaputtgeht.">
-          <b>A line between two schemas is a field, not a link.</b> The field is typed as a reference to another type, and the line carries the field's name — so a reference to a type no schema declares is an error, rather than a link that breaks later.</p>
-        <p data-de="<b>Ein Typ mit einem Besitzer sagt es in einer Zeile.</b> Sein Schema nennt den Besitzer, und im Dateisystem liegen seine Dateien im Ordner des Besitzers – der Besitz steht einmal im Vokabular, und die Ablage folgt daraus.">
-          <b>A type that is owned says so in one line.</b> Its schema names the owner, and on disk its files nest inside the owner's folder — the ownership is stated once, in the vocabulary, and the layout follows from it.</p>
-      </div>
+      <h2 data-de="Werte">Values</h2>
+      <article class="value">
+        <h3>Adoption is not taxed</h3>
+        <p class="tagline">A meta-model is worth whatever gets adopted of it, so anything that makes adopting it cost more works against the one thing it was built to do.</p>
+        <p>We publish the vocabulary, the tooling and the talks under licenses that ask nothing back, and we bill consulting by the day rather than by the model, so what costs money is time and never what a company does with the model. Where a way to charge would have fitted we wrote down why it was refused instead of leaving it open: a seat count charges a company for being read, which a model meant for its people and its agents at once cannot bear, and a per-entry price charges it for the completeness the model exists to produce. Doing it without us is the normal case and the pages say so, because a model most people need help to adopt has not been made adoptable.</p>
+        <p>We never let the model cost more the more of a company, or the more of its agents, that reads it.</p>
+      </article>
+      <article class="value">
+        <h3>Describe the pattern, never the company</h3>
+        <p class="tagline">A meta-model that carries one company's tooling in its conventions has stopped being one, so the vocabulary states the shape and never who was found holding it.</p>
+        <p>The vocabulary names no company it was drawn from, quotes no company's internal conventions, and says nothing about the tracker, the wiki or the chat tool anyone runs on. Where an example would read better with a real company behind it we write the pattern instead, because a thin file per person is portable and the company that keeps one is not, and because a rule that only makes sense once a reader knows whose it was is a rule nobody else can adopt. Confidentiality is part of this and it is not the reason for it: a claim about the shape a company's knowledge takes has to stand without naming a company, or it was never a claim about the shape.</p>
+        <p>We never put a company's name, its tooling or its counts into the vocabulary.</p>
+      </article>
+      <article class="value">
+        <h3>Run on what we publish</h3>
+        <p class="tagline">A vocabulary its authors have not had to use is a proposal, and the only evidence that a type holds a real company is a real company being held by it.</p>
+        <p>We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and a second instance beside it describes a company of one the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.</p>
+        <p>We never ship a type we have not already had to use on ourselves.</p>
+      </article>
     </section>
 
-    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="core" href="https://github.com/companygraph/meta-model/tree/HEAD/core">companygraph/meta-model</a>@<span id="srccommit">HEAD</span> — <span data-de="ein Schema pro Typ, gelesen nach den Regeln in CONVENTIONS.md.">one schema per type, read by the rules in CONVENTIONS.md.</span></p>
-
+    <p class="derived" data-de="Erzeugt aus <a href='https://github.com/companygraph/mental-model'>companygraph/mental-model</a>@4406e7d – <code class='mono'>model/vision.md</code> und <code class='mono'>model/values/</code>. Dieses Repository ist eine Instanz von <a href='https://companygraph.io/'>CompanyGraph</a>, einem Meta-Modell, das ein Unternehmen als Graph aus Markdown beschreibt.">Generated from <a href="https://github.com/companygraph/mental-model">companygraph/mental-model</a>@4406e7d — <code class="mono">model/vision.md</code> and <code class="mono">model/values/</code>. That repository is an instance of <a href="https://companygraph.io/">CompanyGraph</a>, a meta-model for describing a company as a graph of Markdown.</p>
+    <!-- principles:end -->
   </div>
 </main>
 
@@ -991,9 +717,9 @@
 </div>
 
 <script>
-// Same mechanism as the landing page, and the same reason: English is the markup so the
-// page says the right thing before any JS runs, and the choice is remembered per origin —
-// so a visitor who switched to German on the landing page arrives here in German.
+// Same mechanism as the other two pages: English is the markup so the page says the right
+// thing before any JS runs, and the choice is remembered per origin. This page describes
+// that key, which is the only reason it is worth pointing at the code from here.
 (function(){
   /* ─── language · v4 · page ─────────────────────────────────────────────
      One language across three domains, and where it is remembered. Generated
@@ -1214,20 +940,11 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
-  // The close button's × never changes, so it carries no [data-de] — but its aria-label
-  // does need German, and that lives in the label, not the innerHTML the loop above swaps.
-  var modalClose = document.getElementById("modalclose");
-  var modalCloseEnAria = modalClose ? modalClose.getAttribute("aria-label") : null;
-  // Same reasoning for the dialog itself: its aria-label names the whole stage, not markup
-  // the loop above ever sees.
-  var stageModal = document.getElementById("stagemodal");
-  var stageModalEnAria = stageModal ? stageModal.getAttribute("aria-label") : null;
-
   var UI = {
-    de:{ title:"Modell – CompanyGraph",
-         desc:"Das Vokabular, in dem eine Firma beschrieben wird – ein Schema pro Typ, gezeichnet als der Graph dessen, was worauf verweist. Erzeugt aus dem Kern des Modells, nichts von Hand geschrieben." },
-    en:{ title:"Model — CompanyGraph",
-         desc:"The vocabulary a company is described in — one schema per type, drawn as the graph of what references what. Generated from the model's own core, nothing written by hand." }
+    de:{ title:"Prinzipien – CompanyGraph",
+         desc:"Die Vision und die Werte, an die sich CompanyGraph, ein Meta-Modell für den Betrieb einer Firma, selbst hält – gelesen aus seinem eigenen Modell, nicht für diese Seite geschrieben." },
+    en:{ title:"Principles — CompanyGraph",
+         desc:"The vision and values CompanyGraph, a meta-model for operating a company, holds itself to — read from its own model, not written for this page." }
   };
 
   function applyLang(){
@@ -1236,8 +953,6 @@
     document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").setAttribute("aria-pressed", String(lang === "de"));
     document.getElementById("len").setAttribute("aria-pressed", String(lang === "en"));
-    if (modalClose) modalClose.setAttribute("aria-label", lang === "de" ? modalClose.getAttribute("data-de-aria") : modalCloseEnAria);
-    if (stageModal) stageModal.setAttribute("aria-label", lang === "de" ? stageModal.getAttribute("data-de-aria") : stageModalEnAria);
     document.documentElement.lang = lang;
   }
   function toggle(){ lang = (lang === "de") ? "en" : "de"; langRemember(lang); applyLang(); }
@@ -1272,10 +987,5 @@
   applyTheme();
 })();
 </script>
-
-
-<script src="../d3.v7.min.js"></script>
-<script src="../card.js"></script>
-<script src="../stage.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/` | The landing page: what CompanyGraph is, and CompanyGraph's own model, drawn on the stage. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
+| `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
 | `/model/` | The model's own vocabulary, drawn as the graph of what references what — one schema per type. |
 | `/example/` | One instance of the model, drawn as the graph its own files form — generated, never written by hand. |
 | `/billing/` | What would cost money, if anything ever does. |
@@ -41,6 +42,8 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   stage page gets it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
   one copy, reached relatively — and `npm run test:d3` asserts it is still the pinned
   package's build, byte for byte.
+- `principles/` — `index.html`, the page shell around a region `build/pages.mjs` writes from
+  `company.json` with `@robertblust/design/render/principles`, and the `principles` fence.
 - `example/` and `model/` — `index.html` each, the stage pages beside the landing page: their
   own prose and inline `<style>`, the stage above linked in, and a preload link naming the
   artifact the stage draws. Two steps build what the stage pages draw — `build/build.mjs`
@@ -58,14 +61,14 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png`,
-  `billing/og.png`, `privacy/og.png` — 1200×630 share cards, each
+  `billing/og.png`, `privacy/og.png`, `principles/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
-  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders all seven and writes
+  `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders every one and writes
   the stamps, and `og-check.mjs` reports which have drifted. `export-pdf.mjs`, alongside it at
   the root, renders the deck's two PDFs into `talks/intro/`.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
-- `verify/check.mjs` — the suite, covering all seven pages in one run. Its shared page checks
+- `verify/check.mjs` — the suite, covering every page in one run. Its shared page checks
   and `verify/design.mjs` come from `@robertblust/design`, imported by package specifier; edit
   them there, tag a release, and re-pin the tag in `package.json`. A `verify/design.mjs`
   created in this repo would never be resolved by that import, so editing one here does
@@ -86,9 +89,9 @@ No build step.
 npm install                        # once, for Playwright
 npm run serve                      # → http://localhost:8000
 npm run verify                     # renders every page and asserts the DOM
-npm run og:check                   # do the seven share cards still show their pages?
+npm run og:check                   # do the share cards still show their pages?
 npm run test:og                    # the card check's own tests (node --test, no deps)
-npm run og                         # re-renders all seven share cards after a visual change
+npm run og                         # re-renders every share card after a visual change
 npm run build                      # writes example.json, model.json and company.json from their pins
 npm run build:check                # fails if any artifact has drifted from its pin's commit
 npm run pages                      # renders each page's JSON-LD graph from its artifact
