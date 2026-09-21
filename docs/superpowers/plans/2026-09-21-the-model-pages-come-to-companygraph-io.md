@@ -17,6 +17,7 @@
 - companygraph.io's `/privacy/` carries the same fences as blust.ch's three pages (theme boot, design tokens, prose reset, header contract, title contract, prose footer, language, theme, nav fit) and a `.title` block, so it is the shell each new page starts from. blust.ch's shells cannot be copied: their head, header, footer, JSON-LD and `UI` strings are blust.ch's.
 - Every page of companygraph.io with a nav: `index.html`, `model/`, `example/`, `talks/`, `billing/`, `privacy/`. The deck carries no nav.
 - companygraph.io's `ci.yml` runs `npm run pages:check` before `npm ci`. Once `build/pages.mjs` imports `@robertblust/design/render/*`, that step fails with `ERR_MODULE_NOT_FOUND` on every push until it moves after `npm ci`, as design v0.68.0's release notes say.
+- After #178, every page's footer ends with `company.json`, and `build/jsonld.mjs` writes the company's Dataset into every page listed in its `PAGES`; a test fails when a committed page with JSON-LD is missing from that list. A page built from `/privacy/`'s shell inherits the footer entry, and joins the list in its own task.
 - On companygraph.io `/model/` draws the vocabulary; CompanyGraph's instance is drawn on the landing page. So a seat or a surface links to `../?stage=expanded#<id>`, and `STAGE_PAGE` is `"../"` on both pages.
 
 ## Global constraints
@@ -442,6 +443,8 @@ and add to `RENDERERS`, beside the JSON-LD writer:
 (d, o) => writePrinciples(d.company, { ...o, root: ROOT }),
 ```
 
+In `build/jsonld.mjs`, add `{ file: "principles/index.html", head: PAGE_HEAD }` to `PAGES`, after `privacy/index.html`'s entry; `npm run pages` then writes the company's Dataset into the page's graph, after the `WebPage` and `BreadcrumbList` it carries from `/privacy/`'s shell.
+
 Update the file's header, which says it uses Node built-ins only and runs before `npm ci`: it now imports the design package, so it runs after it.
 
 In `.github/workflows/ci.yml`, move the step named `The derived regions still match the artifacts` (`npm run pages:check`) from before `npm ci` to after it, and rewrite the comment above it, which says the check is the cheapest in the job because it needs nothing installed.
@@ -553,7 +556,7 @@ Copy the `model card` markers byte for byte from blust.ch's `team/index.html`; `
 
 - [ ] **Step 4: Render and wire**
 
-Add `import { writeTeam } from "@robertblust/design/render/team";` and `(d, o) => writeTeam(d.company, { ...o, root: ROOT })` to `RENDERERS`. Run `npm run design` and `npm run pages`, then open `/team/` at 1280px and 390px: three boards, each under its process's name, a row opening its card, a reference in the card leaving for `../?stage=expanded#…` and landing on the landing page's stage with that node focused.
+Add `import { writeTeam } from "@robertblust/design/render/team";` and `(d, o) => writeTeam(d.company, { ...o, root: ROOT })` to `RENDERERS`, and `{ file: "team/index.html", head: PAGE_HEAD }` to `PAGES` in `build/jsonld.mjs`. Run `npm run design` and `npm run pages`, then open `/team/` at 1280px and 390px: three boards, each under its process's name, a row opening its card, a reference in the card leaving for `../?stage=expanded#…` and landing on the landing page's stage with that node focused.
 
 - [ ] **Step 5: Nav, suite, card, German, sitemap**
 
@@ -615,7 +618,7 @@ Copy both markers byte for byte from blust.ch's page.
 
 - [ ] **Step 4: Render and wire, nav, suite, card, German, sitemap**
 
-As Task 4 Steps 4 and 5, with `writeSurfaces`, `lineage: true`, `fences` adding `"stage contract"` and `"surfaces"`, `Surfaces` in the nav after Principles with no `data-de` (the family keeps the word in German), and a share card. The nav now reads Team, Principles, Surfaces, Model, Example, Talks, Billing on every page.
+As Task 4 Steps 4 and 5, with `writeSurfaces`, `{ file: "surfaces/index.html", head: PAGE_HEAD }` in `PAGES`, `lineage: true`, `fences` adding `"stage contract"` and `"surfaces"`, `Surfaces` in the nav after Principles with no `data-de` (the family keeps the word in German), and a share card. The nav now reads Team, Principles, Surfaces, Model, Example, Talks, Billing on every page.
 
 - [ ] **Step 5: The documents**
 
