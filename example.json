@@ -1,11 +1,23 @@
 {
-  "commit": "18cb0dc08c4654bd31ae786ec0b9bfb69381a22d",
+  "commit": "1dc6d81af51e74fcac1ac4a3aca965d1343667a6",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
     {
       "type": "achievement-kind",
       "folder": "achievement-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "concept",
+      "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "domain",
+      "folder": "domains",
       "owner": null,
       "singular": false
     },
@@ -18,6 +30,12 @@
     {
       "type": "experience-kind",
       "folder": "experience-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "feature",
+      "folder": "features",
       "owner": null,
       "singular": false
     },
@@ -36,6 +54,12 @@
     {
       "type": "process",
       "folder": "processes",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "product",
+      "folder": "products",
       "owner": null,
       "singular": false
     },
@@ -184,6 +208,508 @@
       "path": "example/model/achievement-kinds/sharing.md"
     },
     {
+      "id": "concepts/billing-period",
+      "type": "concept",
+      "name": "Billing period",
+      "tagline": "The stretch of time one invoice charges for, set by the contract, with a first and a last day.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/concepts/billing-period.md"
+    },
+    {
+      "id": "concepts/contract",
+      "type": "concept",
+      "name": "Contract",
+      "tagline": "The terms a customer agreed to buy under, in the words both sides signed, from the day they take effect until they are replaced or ended.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Customer",
+                  "one",
+                  "signing customer"
+                ],
+                [
+                  "Customer",
+                  "maybe one",
+                  "paying customer"
+                ],
+                [
+                  "Pricing rule",
+                  "one to many",
+                  "terms"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Customer",
+                "one",
+                "signing customer"
+              ],
+              [
+                "Customer",
+                "maybe one",
+                "paying customer"
+              ],
+              [
+                "Pricing rule",
+                "one to many",
+                "terms"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/contract.md"
+    },
+    {
+      "id": "concepts/credit-note",
+      "type": "concept",
+      "name": "Credit note",
+      "tagline": "A document that lowers what a customer owes on an invoice already issued, leaving that invoice as it was.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "CN",
+                  "abbreviation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "CN",
+                "abbreviation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Invoice",
+                  "one",
+                  "corrected invoice"
+                ],
+                [
+                  "Invoice line",
+                  "one to many",
+                  "lines"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Invoice",
+                "one",
+                "corrected invoice"
+              ],
+              [
+                "Invoice line",
+                "one to many",
+                "lines"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/credit-note.md"
+    },
+    {
+      "id": "concepts/customer",
+      "type": "concept",
+      "name": "Customer",
+      "tagline": "A person or company that has agreed to a contract or pays under one — the party an invoice is addressed to, never the company that issues it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/concepts/customer.md"
+    },
+    {
+      "id": "concepts/invoice",
+      "type": "concept",
+      "name": "Invoice",
+      "tagline": "What one customer is asked to pay for one billing period, as a document that stays as it was issued.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Rechnung",
+                  "translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Rechnung",
+                "translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Customer",
+                  "one",
+                  "billed customer"
+                ],
+                [
+                  "Billing period",
+                  "one",
+                  ""
+                ],
+                [
+                  "Invoice line",
+                  "one to many",
+                  "lines"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Customer",
+                "one",
+                "billed customer"
+              ],
+              [
+                "Billing period",
+                "one",
+                ""
+              ],
+              [
+                "Invoice line",
+                "one to many",
+                "lines"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/invoice.md"
+    },
+    {
+      "id": "concepts/invoice-line",
+      "type": "concept",
+      "name": "Invoice line",
+      "tagline": "One charge on an invoice: an amount, and the reason for that amount in terms the customer agreed to.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Pricing rule",
+                  "one",
+                  "rule"
+                ],
+                [
+                  "Usage record",
+                  "many",
+                  "usage read"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Pricing rule",
+                "one",
+                "rule"
+              ],
+              [
+                "Usage record",
+                "many",
+                "usage read"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/invoice-line.md"
+    },
+    {
+      "id": "concepts/pricing-rule",
+      "type": "concept",
+      "name": "Pricing rule",
+      "tagline": "One term of a contract in a form that can be applied: what it charges for, at what price and under which conditions, named as the contract names it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Price plan",
+                  "deprecated"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Price plan",
+                "deprecated"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/pricing-rule.md"
+    },
+    {
+      "id": "concepts/usage-record",
+      "type": "concept",
+      "name": "Usage record",
+      "tagline": "One thing a customer used that a contract charges for — a call made, a seat held, a gigabyte stored — with when it happened and how much of it there was.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Usage event",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Usage event",
+                "synonym"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Contract",
+                  "one",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Contract",
+                "one",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/usage-record.md"
+    },
+    {
+      "id": "domains/invoicing",
+      "type": "domain",
+      "name": "Invoicing",
+      "tagline": "What a customer is asked to pay, for which period and on which document, and how a document already issued is corrected. What a term of a contract means, and the amount it produces, is left to Pricing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/domains/invoicing.md"
+    },
+    {
+      "id": "domains/pricing",
+      "type": "domain",
+      "name": "Pricing",
+      "tagline": "What a customer agreed to pay for, and how each term of that agreement turns what they used into an amount. Which invoice an amount lands on, and when it is issued, is left to Invoicing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/domains/pricing.md"
+    },
+    {
       "id": "experience-kinds/community",
       "type": "experience-kind",
       "name": "Community",
@@ -256,6 +782,156 @@
       "path": "example/model/experience-kinds/role.md"
     },
     {
+      "id": "features/billing-run",
+      "type": "feature",
+      "name": "Billing run",
+      "tagline": "A finance team can close a billing period and have every invoice for it issued at once, the same whoever runs it.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Billing Console"
+        ],
+        "concepts": [
+          "Billing period",
+          "Contract",
+          "Invoice"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Closing a period applies every contract’s rules to the usage recorded in it and issues one invoice per customer, and running it twice on the same inputs issues the same invoices. It ends when the invoices are issued. Sending reminders and collecting payment come after it and are not part of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/billing-run.md"
+    },
+    {
+      "id": "features/charge-explanation",
+      "type": "feature",
+      "name": "Charge explanation",
+      "tagline": "Anyone reading an invoice can tell how each charge was reached, in the words of the contract they agreed to.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Invoice Page",
+          "Billing Console"
+        ],
+        "concepts": [
+          "Invoice line",
+          "Pricing rule",
+          "Usage record"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Every line on an invoice carries the term of the contract that produced it and the usage that term was applied to, and the explanation beside the line is rendered from both. The person paying reads it where they read the invoice, and the finance team that issued it reads the same words when a question reaches them. It explains the arithmetic and stops there: whether the contract says what the payer believes it says is a question for the contract, and nothing here answers it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/charge-explanation.md"
+    },
+    {
+      "id": "features/credit-notes",
+      "type": "feature",
+      "name": "Credit notes",
+      "tagline": "A finance team can correct an invoice already sent, and the payer can read what changed and why.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Billing Console",
+          "Invoice Page"
+        ],
+        "concepts": [
+          "Credit note",
+          "Invoice"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A credit note is issued against an invoice when the usage it read or the rule it applied turns out wrong, and it is computed from the corrected usage or the corrected rule, so every line on it explains itself the way an invoice line does. It never changes the invoice it corrects, and it carries no amount typed in by hand.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/credit-notes.md"
+    },
+    {
+      "id": "features/invoice-download",
+      "type": "feature",
+      "name": "Invoice download",
+      "tagline": "Whoever pays an invoice can keep a copy of it in their own books, exactly as it was issued.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Invoice Page"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The copy is a file holding the invoice as issued, with every line and its explanation, and it matches what the page shows on the day it was issued and on every day after. It is a copy and nothing more: paying, disputing and asking a question about the invoice happen elsewhere.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/invoice-download.md"
+    },
+    {
+      "id": "features/pricing-rules",
+      "type": "feature",
+      "name": "Pricing rules",
+      "tagline": "A finance team can write each term of a contract as a rule every billing run applies, named as the contract names it.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Billing Console"
+        ],
+        "concepts": [
+          "Contract",
+          "Pricing rule"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A rule states what a term charges for, at what price and under which conditions, and it belongs to the contract it was written from, so a new version of the contract brings new versions of its rules. It records prices and never proposes them. A term the rules cannot express is not approximated: the term is renegotiated or the rules grow, and until one of those happens the term is not billed.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/pricing-rules.md"
+    },
+    {
+      "id": "features/usage-reporting",
+      "type": "feature",
+      "name": "Usage reporting",
+      "tagline": "Usage can be reported by the systems that see it happen, as it happens, so nobody types it in at the end of the month.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Usage API"
+        ],
+        "concepts": [
+          "Usage record",
+          "Contract"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Each report becomes a usage record under the contract it counts against, kept as it was sent. It records and does not correct: a report sent wrong is answered by a second report that offsets it, never by editing the first, so what a billing run read can always be read again.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/usage-reporting.md"
+    },
+    {
       "id": "identity",
       "type": "identity",
       "name": "Beacon Systems",
@@ -269,7 +945,7 @@
       "sections": [
         {
           "heading": "What it is",
-          "text": "We build and run the billing platform our customers invoice their own customers through. Two teams, one product, and a domain we are still splitting into the shapes it wants to be in.\n\nWe sell to companies at the point where pricing has become a system rather than a page — usage, tiers, credits, corrections — and where getting an invoice wrong costs more than the invoice.",
+          "text": "We build and run the billing platform our customers invoice their own customers through. Two teams, one platform, and a domain we are still splitting into the shapes it wants to be in.\n\nWe sell to companies at the point where pricing has become a system rather than a page — usage, tiers, credits, corrections — and where getting an invoice wrong costs more than the invoice.",
           "tables": []
         },
         {
@@ -704,6 +1380,48 @@
       "sections": [],
       "owner": "processes/delivery",
       "path": "example/model/processes/delivery/tracks/docs.md"
+    },
+    {
+      "id": "products/billing-console",
+      "type": "product",
+      "name": "Billing Console",
+      "tagline": "The web application where the finance team of a company billing through Beacon keeps its pricing, runs its billing and answers for every invoice that goes out.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing",
+        "audience": "Finance"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/products/billing-console.md"
+    },
+    {
+      "id": "products/invoice-page",
+      "type": "product",
+      "name": "Invoice Page",
+      "tagline": "The page every invoice links to, opened by whoever has to pay it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing",
+        "audience": "Payer"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/products/invoice-page.md"
+    },
+    {
+      "id": "products/usage-api",
+      "type": "product",
+      "name": "Usage API",
+      "tagline": "The interface the systems of a company billing through Beacon send usage to, set up by the developers who connect them.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing",
+        "audience": "Developer"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/products/usage-api.md"
     },
     {
       "id": "proficiency-levels/competent",
@@ -1692,6 +2410,213 @@
       "attrs": {}
     },
     {
+      "from": "concepts/billing-period",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/billing-period",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/contract",
+      "to": "concepts/customer",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "signing customer"
+      }
+    },
+    {
+      "from": "concepts/contract",
+      "to": "concepts/customer",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "maybe one",
+        "As": "paying customer"
+      }
+    },
+    {
+      "from": "concepts/contract",
+      "to": "concepts/pricing-rule",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "terms"
+      }
+    },
+    {
+      "from": "concepts/contract",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/contract",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "concepts/invoice",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "corrected invoice"
+      }
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "concepts/invoice-line",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "lines"
+      }
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/customer",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/customer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "concepts/pricing-rule",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "rule"
+      }
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "concepts/usage-record",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": "usage read"
+      }
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "concepts/billing-period",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "concepts/customer",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "billed customer"
+      }
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "concepts/invoice-line",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "lines"
+      }
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pricing-rule",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pricing-rule",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/usage-record",
+      "to": "concepts/contract",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/usage-record",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/usage-record",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "domains/invoicing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "domains/pricing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "experience-kinds/community",
       "to": "sources/local",
       "via": "source",
@@ -1711,6 +2636,162 @@
     },
     {
       "from": "experience-kinds/role",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "concepts/billing-period",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "concepts/contract",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "concepts/invoice",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "concepts/invoice-line",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "concepts/pricing-rule",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "concepts/usage-record",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "products/invoice-page",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "concepts/credit-note",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "concepts/invoice",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "products/invoice-page",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/invoice-download",
+      "to": "products/invoice-page",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/invoice-download",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "concepts/contract",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "concepts/pricing-rule",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
+      "to": "concepts/contract",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
+      "to": "concepts/usage-record",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
+      "to": "products/usage-api",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -1917,6 +2998,42 @@
       "from": "processes/delivery",
       "to": "roles/reviewer",
       "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "products/billing-console",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/billing-console",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "products/invoice-page",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/invoice-page",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "products/usage-api",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/usage-api",
+      "to": "sources/local",
+      "via": "source",
       "attrs": {}
     },
     {

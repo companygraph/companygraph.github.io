@@ -1,5 +1,5 @@
 {
-  "commit": "18cb0dc08c4654bd31ae786ec0b9bfb69381a22d",
+  "commit": "1dc6d81af51e74fcac1ac4a3aca965d1343667a6",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -155,6 +155,338 @@
       ],
       "owner": null,
       "path": "core/achievement-kind-schema.md"
+    },
+    {
+      "id": "core/concept",
+      "type": "schema",
+      "name": "Concept Schema",
+      "tagline": "Required structure for concept files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`domain`",
+                  "Yes",
+                  "ref → domain",
+                  "The area of the vocabulary this concept belongs to — the H1 of a file in `domains/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`domain`",
+                "Yes",
+                "ref → domain",
+                "The area of the vocabulary this concept belongs to — the H1 of a file in `domains/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Concept]`",
+                  "Yes",
+                  "The canonical name of the concept. Every reference to it, from any domain, uses this exact string."
+                ],
+                [
+                  "`> [Definition]`",
+                  "Yes",
+                  "One-paragraph definition of what the concept is"
+                ],
+                [
+                  "`## Also known as`",
+                  "No",
+                  "Table. The other names this concept goes by, none of which resolves."
+                ],
+                [
+                  "`## Relations`",
+                  "No",
+                  "Table. What this concept points at."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Also known as` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Term`",
+                  "Yes",
+                  "string",
+                  "The other name"
+                ],
+                [
+                  "`Kind`",
+                  "Yes",
+                  "enum",
+                  "`synonym`, `abbreviation`, `translation` or `deprecated`. What the other name is: a second word for the same thing, a short form of it, the same thing in another language, or a name this concept used to go by."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Relations` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Concept`",
+                  "Yes",
+                  "ref → concept",
+                  "What this concept points at, by its canonical name"
+                ],
+                [
+                  "`Cardinality`",
+                  "Yes",
+                  "enum",
+                  "`one`, `maybe one`, `many` or `one to many`. How many of the target one of these has: exactly one, none or one, none or more, or one or more."
+                ],
+                [
+                  "`As`",
+                  "No",
+                  "string",
+                  "The role the target plays in this relation. Required where two rows name the same concept, which is the only thing that tells them apart."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Concept]`",
+                "Yes",
+                "The canonical name of the concept. Every reference to it, from any domain, uses this exact string."
+              ],
+              [
+                "`> [Definition]`",
+                "Yes",
+                "One-paragraph definition of what the concept is"
+              ],
+              [
+                "`## Also known as`",
+                "No",
+                "Table. The other names this concept goes by, none of which resolves."
+              ],
+              [
+                "`## Relations`",
+                "No",
+                "Table. What this concept points at."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A concept is one word the company means something exact by, and it answers \"what do we mean when we say this, and what does it hang off?\" for anyone reading a feature, a process or a role that names it. It is an entity rather than a heading in a glossary so that a file can cite it, a rename is caught everywhere at once, and the relations between the company's words are rows a check resolves instead of lines in a drawing.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The definition says what the thing is, not what a system does with it, and it is written so that someone outside the company could tell one of these from something adjacent.\n- A concept this one hangs off belongs in `## Relations`, where it resolves, and never in the definition dressed as a link.\n- A relation is written on one side only. Where it reads better the other way round, write it on the other concept and not here as well.\n- `As` is the name the target goes by in this relation, written as the company says it: `booker`, `primary guest`, `included services`.\n- An alias is never used as a reference anywhere in the model. It is there so a reader searching the wrong word finds the right page.\n- A deprecated alias stays until nothing outside the model uses the old name, and then it goes; it is not a history of the name.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/concepts/*.md`\n\nA concept owns nothing, so it is a file, and nothing owns a concept: it sits in the container rather than inside its domain so that a concept of one domain can be named by a concept of another, which an owned name cannot be.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/concept-schema.md"
+    },
+    {
+      "id": "core/domain",
+      "type": "schema",
+      "name": "Domain Schema",
+      "tagline": "Required structure for domain files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Domain]`",
+                  "Yes",
+                  "The canonical name of the domain. A concept's or a product's `domain` references this exact string."
+                ],
+                [
+                  "`> [Scope]`",
+                  "Yes",
+                  "One-paragraph statement of what this domain covers and what it leaves to another"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Domain]`",
+                "Yes",
+                "The canonical name of the domain. A concept's or a product's `domain` references this exact string."
+              ],
+              [
+                "`> [Scope]`",
+                "Yes",
+                "One-paragraph statement of what this domain covers and what it leaves to another"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A domain is one area of the company — the words it means something exact by there, and the products it ships there — and it answers \"where does this belong, and who decides what it means?\" for a reader looking a term or a product up and for a writer placing a new one. It holds no definitions and lists nothing: what a domain contains is read from the concepts and products naming it.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline says what the domain covers and names at least one thing it deliberately leaves to another domain, because a boundary stated from one side only is not a boundary.\n- A domain is named for the area, not for the team that owns it or the system that implements it.\n- A domain carries no diagram and no list of its concepts or its products. Each is a second copy of what those files already say.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/domains/*.md`\n\nA domain owns nothing, so it is a file: its concepts and its products name it rather than sit inside it, because a concept one domain owned could not be named by a concept of another.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/domain-schema.md"
     },
     {
       "id": "core/experience",
@@ -569,6 +901,164 @@
       ],
       "owner": null,
       "path": "core/experience-kind-schema.md"
+    },
+    {
+      "id": "core/feature",
+      "type": "schema",
+      "name": "Feature Schema",
+      "tagline": "Required structure for feature files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`products`",
+                  "Yes",
+                  "array of ref → product",
+                  "The products this feature is assembled into"
+                ],
+                [
+                  "`concepts`",
+                  "No",
+                  "array of ref → concept",
+                  "The concepts this feature operates on"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`products`",
+                "Yes",
+                "array of ref → product",
+                "The products this feature is assembled into"
+              ],
+              [
+                "`concepts`",
+                "No",
+                "array of ref → concept",
+                "The concepts this feature operates on"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Feature]`",
+                  "Yes",
+                  "The canonical name of the feature"
+                ],
+                [
+                  "`> [What it gives]`",
+                  "Yes",
+                  "One-paragraph statement of what someone can do with this that they could not without it"
+                ],
+                [
+                  "`## Description`",
+                  "Yes",
+                  "What the feature does, and where it stops"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Feature]`",
+                "Yes",
+                "The canonical name of the feature"
+              ],
+              [
+                "`> [What it gives]`",
+                "Yes",
+                "One-paragraph statement of what someone can do with this that they could not without it"
+              ],
+              [
+                "`## Description`",
+                "Yes",
+                "What the feature does, and where it stops"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A feature is one thing a product lets someone do, and it answers \"what is this for, and which products have it?\" for a reader deciding what to build, sell or document. It is the unit product documentation is organized along, so a feature nobody can name the user of is a component and belongs in neither this type nor this folder.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline says what someone can now do, in their words, and never names a screen, a service or a vendor.\n- `## Description` says where the feature stops as plainly as what it does, because the boundary is what tells two neighboring features apart.\n- A feature is named for the capability, not for the vendor that supplies it. Where a vendor is what varies, the vendor is a concept the feature names and not a feature of its own.\n- Nothing about a release, a ticket or a delivery date goes here: those move, and a feature outlives all three.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/features/*.md`\n\nA feature owns nothing, so it is a file. It is not owned by a product either: a feature is assembled into several, so the edge is written here, on the side that can hold more than one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/feature-schema.md"
     },
     {
       "id": "core/identity",
@@ -1305,6 +1795,154 @@
       ],
       "owner": null,
       "path": "core/process-schema.md"
+    },
+    {
+      "id": "core/product",
+      "type": "schema",
+      "name": "Product Schema",
+      "tagline": "Required structure for product files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`domain`",
+                  "Yes",
+                  "ref → domain",
+                  "The area of the company this product belongs to — the H1 of a file in `domains/`"
+                ],
+                [
+                  "`audience`",
+                  "No",
+                  "string",
+                  "Free-text grouping, e.g. `Staff`. Whether an audience becomes an entity of its own is deliberately open."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`domain`",
+                "Yes",
+                "ref → domain",
+                "The area of the company this product belongs to — the H1 of a file in `domains/`"
+              ],
+              [
+                "`audience`",
+                "No",
+                "string",
+                "Free-text grouping, e.g. `Staff`. Whether an audience becomes an entity of its own is deliberately open."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Product]`",
+                  "Yes",
+                  "The canonical name of the product. A feature's `products` references this exact string."
+                ],
+                [
+                  "`> [What it is]`",
+                  "Yes",
+                  "One-paragraph statement of what the product is and who opens it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Product]`",
+                "Yes",
+                "The canonical name of the product. A feature's `products` references this exact string."
+              ],
+              [
+                "`> [What it is]`",
+                "Yes",
+                "One-paragraph statement of what the product is and who opens it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A product is something the company ships that somebody uses on its own, and it answers \"what does this company actually put in front of people?\" for a reader who has met its values, its strategy and its processes and still cannot name its output. It is not the market it serves, the project that built it or the revenue it earns.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline names what the product is and who opens it, in that order, and claims nothing about how well it does either.\n- A product is named as the people who use it name it, not as its repository or its internal project is named.\n- Two names for one thing a user opens are one product, and the second name is not a second product; where a concept of the same name exists, the second name is recorded there as an alias.\n- A product names one domain, the one whose concepts its users came to it for. A product that works across two still names one, and the concepts its features name show the rest.\n- Nothing about a release, a version or a roadmap goes here: a product outlives all three.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/products/*.md`\n\nA product owns nothing, so it is a file. Nothing owns a product either, and it lists no features: a feature names the products it is assembled into, and the edge is written once, on the side that can hold several. A product names the domain it belongs to, as a concept does, and sits in the container rather than inside that domain for the same reason.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/product-schema.md"
     },
     {
       "id": "core/proficiency-level",
@@ -3140,6 +3778,42 @@
       "label": "source"
     },
     {
+      "from": "core/concept",
+      "to": "core/concept",
+      "via": "Relations.Concept",
+      "attrs": {
+        "type": "ref → concept"
+      },
+      "label": "Relations.Concept"
+    },
+    {
+      "from": "core/concept",
+      "to": "core/domain",
+      "via": "domain",
+      "attrs": {
+        "type": "ref → domain"
+      },
+      "label": "domain"
+    },
+    {
+      "from": "core/concept",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/domain",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
       "from": "core/experience-kind",
       "to": "core/source",
       "via": "source",
@@ -3193,6 +3867,33 @@
     },
     {
       "from": "core/experience",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/feature",
+      "to": "core/concept",
+      "via": "concepts",
+      "attrs": {
+        "type": "array of ref → concept"
+      },
+      "label": "concepts"
+    },
+    {
+      "from": "core/feature",
+      "to": "core/product",
+      "via": "products",
+      "attrs": {
+        "type": "array of ref → product"
+      },
+      "label": "products"
+    },
+    {
+      "from": "core/feature",
       "to": "core/source",
       "via": "source",
       "attrs": {
@@ -3332,6 +4033,24 @@
         "type": "array of ref → role"
       },
       "label": "supported-by"
+    },
+    {
+      "from": "core/product",
+      "to": "core/domain",
+      "via": "domain",
+      "attrs": {
+        "type": "ref → domain"
+      },
+      "label": "domain"
+    },
+    {
+      "from": "core/product",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
     },
     {
       "from": "core/proficiency-level",
