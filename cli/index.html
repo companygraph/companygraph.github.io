@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Example — CompanyGraph</title>
-<meta id="metadesc" name="description" content="A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.">
+<title>CLI — CompanyGraph</title>
+<meta id="metadesc" name="description" content="The CompanyGraph command line: one command opens a menu that makes a company’s model, checks it, moves it to a newer release and installs the Obsidian plugin.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://companygraph.io/example/">
+<link rel="canonical" href="https://companygraph.io/cli/">
 
-<meta property="og:title" content="Example — CompanyGraph">
-<meta property="og:description" content="A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand.">
+<meta property="og:title" content="CLI — CompanyGraph">
+<meta property="og:description" content="The CompanyGraph command line: one command opens a menu that makes a company’s model, checks it, moves it to a newer release and installs the Obsidian plugin.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CompanyGraph">
-<meta property="og:url" content="https://companygraph.io/example/">
-<meta property="og:image" content="https://companygraph.io/example/og.png">
+<meta property="og:url" content="https://companygraph.io/cli/">
+<meta property="og:image" content="https://companygraph.io/cli/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="One company, drawn: a fictional company at the center of the folders its files form.">
+<meta property="og:image:alt" content="One command does it all.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -50,9 +50,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://companygraph.io/example/#webpage",
-      "name": "Example",
-      "url": "https://companygraph.io/example/",
+      "@id": "https://companygraph.io/cli/#webpage",
+      "name": "CLI",
+      "url": "https://companygraph.io/cli/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://companygraph.io/#website"
@@ -61,12 +61,12 @@
         "@id": "https://companygraph.io/#organization"
       },
       "breadcrumb": {
-        "@id": "https://companygraph.io/example/#breadcrumb"
+        "@id": "https://companygraph.io/cli/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://companygraph.io/example/#breadcrumb",
+      "@id": "https://companygraph.io/cli/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -77,27 +77,10 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Example",
-          "item": "https://companygraph.io/example/"
+          "name": "CLI",
+          "item": "https://companygraph.io/cli/"
         }
       ]
-    },
-    {
-      "@type": "Dataset",
-      "@id": "https://companygraph.io/example/#dataset",
-      "name": "Beacon Systems — an example CompanyGraph instance",
-      "description": "A fictional company described in CompanyGraph: its identity, profiles, experiences, skills, values and vision.",
-      "url": "https://companygraph.io/example/",
-      "license": "https://www.apache.org/licenses/LICENSE-2.0",
-      "creator": {
-        "@id": "https://companygraph.io/#organization"
-      },
-      "isBasedOn": "https://github.com/companygraph/meta-model",
-      "distribution": {
-        "@type": "DataDownload",
-        "contentUrl": "https://companygraph.io/example.json",
-        "encodingFormat": "application/json"
-      }
     },
     {
       "@type": "Dataset",
@@ -149,9 +132,8 @@
 
 </script>
 <style>
-/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
-   from file:// as well as from the domain. Relative, because this page sits one
-   directory down and a root-absolute path would break the file:// case. */
+/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
+   Relative, because a root-absolute path breaks under file://. */
 @font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
@@ -514,8 +496,6 @@
   /* The hover underline hangs below the text, so the box is taller under the text than over
      it. Mirror the space above, and the box is symmetric about its own text. */
 
-  /* Not one screen: this page has an argument to make in order, so it scrolls and
-     starts at the top rather than centering itself the way the landing page does. */
   main{flex:1; display:flex; align-items:center; padding:2vh 0 6vh}
 
   /* ─── title contract · v1 · shared ─────────────────────────────────
@@ -554,58 +534,51 @@
   @media (max-width:900px){ .tagline{max-width:100%} }
   /* ─── end title contract ────────────────────────────────────────────────── */
 
-  /* The page's one reversal, and it earns the flag: a visitor's first assumption is that
-     they are looking at a real company, and this line says the opposite — nothing here is
-     real, and nothing here was written by hand. */
-  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+  /* What every command below assumes, said once beside the title rather than repeated. */
+  .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
   section{margin-top:clamp(3rem,8vh,5.5rem)}
   h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
      font-weight:700; letter-spacing:-.025em; line-height:1.06;
      font-size:clamp(1.6rem,3vw,2.3rem)}
-  h2 em{font-style:normal; color:var(--c-mid)}
-  /* ─── stage contract · v2 · shared ───────────────────────────────────
-     `stage.css` styles the drawing, the card and the dialog, and says in its own header that
-     the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
-     rules a page must bring for a stage to sit on it properly. They are generated from
-     @robertblust/design, like the tokens and the header above them. Editing them here has no
-     effect — the next `npm run design` overwrites them. Change them in the package.
-
-     What the contract says:
-       · the figure     gets its own air above it, and its caption sits clear of the canvas
-                        rather than hard against it, at a measure prose can be read at.
-       · the hint       how to move the drawing is not a sentence about the drawing, so it is
-                        its own line above the caption rather than a clause inside it. Small
-                        and dim: subordinate to the caption, and read first only by someone
-                        looking for a control. Not mono — mono means data here, and an
-                        instruction is prose. `monoScope` would not catch it either way: it
-                        inspects a fixed list of selectors and this class is not on one.
-       · the provenance mono end to end. It is the one line on the page that is entirely
-                        record — a repository, a commit, the folder the block was read from —
-                        and setting only the link and the commit in mono left the sentence
-                        around them looking like prose that happened to contain data.
-
-     The drawing's own behavior is in `stage.js` and `stage.css`, which are byte-identical
-     copies too. A page that carries a stage carries all of it. */
-  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
-  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
-  .figcap b{color:var(--ink); font-weight:600}
-  .stagehint{margin-top:.7rem; font-size:.82rem; color:var(--dim)}
-  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
-           letter-spacing:.06em; color:var(--dim)}
-  /* ─── end stage contract ────────────────────────────────────────────────── */
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+  .note a{color:var(--c-mid)}
 
-  /* the source commit, stated once, in the face this system reserves for data */
-  .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
-        background:var(--raise); border:1.5px solid var(--c-firm);
-        font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
+  /* the same one-datum box the sibling site uses: one fact, stated plainly and
+     once, in the face this system reserves for data */
+  /* A command is copied, not read: one block per command, in the face this system reserves
+     for data, and it scrolls sideways on a phone rather than wrapping a command into two. */
+  .cmd{margin-top:1.4rem; display:block; max-width:100%; overflow-x:auto; white-space:pre;
+       padding:1rem 1.35rem; border-radius:10px; background:var(--raise);
+       border:1.5px solid var(--c-firm); font-size:clamp(.82rem,1.2vw,.95rem); color:var(--ink)}
+  /* Inline code carries the command blocks' box at text size, so a flag or a path reads as
+     something to type rather than as a word of the sentence around it. */
+  .note code, .lede code, .rules code{font-size:.88em; color:var(--ink); background:var(--raise);
+       border:1px solid var(--rule); border-radius:5px; padding:.05em .35em; white-space:nowrap}
+
+  /* The menu as a terminal draws it. A terminal is dark in either theme, so its colors are its
+     own and not the tokens; the accent is the one the tooling paints. The mark is the site's
+     SVG and not the tooling's box characters, because Plex Mono as served here carries none of
+     them and a fallback face would break their columns. */
+  .term{margin-top:1.4rem; max-width:100%; border-radius:12px; overflow:hidden;
+        background:#0E141C; border:1.5px solid var(--c-firm); color:#D5DCE6}
+  .term-top{display:flex; gap:.45rem; padding:.7rem .9rem; background:#161E29}
+  .term-top i{width:.7rem; height:.7rem; border-radius:50%; background:#2B3645}
+  .term-body{padding:1.1rem 1.35rem 1.3rem; overflow-x:auto; font-size:clamp(.74rem,1.1vw,.9rem); line-height:1.55}
+  .term-body pre{margin:0; white-space:pre; font:inherit}
+  .term-logo{display:flex; align-items:center; gap:1.1rem; margin:1.1rem 0 1.2rem .9rem}
+  .term-logo svg{width:5.2em; height:5.2em; color:#7FA3D8; flex:0 0 auto}
+  .term .a{color:#7FA3D8}
+  .term .d{color:#8793A3}
+  .term .k{color:#FFFFFF; font-weight:600}
+  .term .k.a{color:#7FA3D8}
+  .term .cur{display:inline-block; width:.6em; height:1.15em; vertical-align:-.2em; background:#D5DCE6}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
-  .rules p b{font-weight:600; color:var(--ink)}
   .rules p{color:var(--dim); font-size:1rem}
-
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p a{color:var(--c-mid)}
 
   /* ─── prose footer · v1 · credit ───────────────────────────────────
      Generated from @robertblust/design — edit it there and run `npm run design`.
@@ -648,15 +621,6 @@
   @media (max-width:560px){
   }
 </style>
-<!-- The stage — figure, card, expand dialog — is the one component two pages share, so
-     it is a file, not a copy in each page. Relative, like every other asset here: the
-     page stays self-contained in the sense the rule means, nothing off-origin. It comes
-     after the inline block above so the tokens it names are already defined. -->
-<link rel="stylesheet" href="../stage.css">
-<!-- The example this page draws. The stage finds it by the data-stage attribute and fetches the
-     href, so the page names its data once and carries no copy. crossorigin is not decoration:
-     without it the browser will not use the preload for the fetch and asks for the file twice. -->
-<link rel="preload" as="fetch" href="../example.json" data-stage crossorigin>
 </head>
 <body>
 
@@ -675,7 +639,7 @@
       </a>
       <nav>
         <div class="navlinks" id="navlinks">
-          <a href="../cli/">CLI</a>
+          <a href="./" aria-current="page">CLI</a>
           <a href="../team/">Team</a>
           <a href="../principles/" data-de="Prinzipien">Principles</a>
           <a href="../surfaces/">Surfaces</a>
@@ -696,57 +660,64 @@
 
 <main>
   <div class="shell">
-
     <div class="title">
-      <h1 data-de="<span class='r70'>Eine Firma,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">One company,</span><span class="rcl"><em>drawn</em>.</span></h1>
-      <p class="tagline" data-de="Eine fiktive Firma, in CompanyGraph beschrieben – genau so, wie ihre Dateien es sagen, und gezeichnet als der Graph, den diese Dateien bilden.">A fictional company described in CompanyGraph — exactly as its files say, drawn as the graph those files form.</p>
-      <p class="note" data-de="Nichts hier ist echt, und nichts hier wurde von Hand geschrieben: Die Seite wird aus dem Beispiel des Modells erzeugt, beim Commit, der neben dem Diagramm steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">Nothing here is real, and nothing here was written by hand: the page is generated from the model's example, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
+      <h1 data-de="<span class='r70'>Ein Befehl</span><span class='rcl'>für <em>alles</em>.</span>"><span class="r70">One command</span><span class="rcl">does it <em>all</em>.</span></h1>
+      <p class="tagline" data-de="Das Modell eines Unternehmens ist ein Ordner mit Markdown-Dateien in einem eigenen Repository. Die Kommandozeile legt diesen Ordner an, prüft ihn, hält sein Vokabular aktuell und installiert das Obsidian-Plugin dazu – alles aus einem Menü.">A company’s model is a folder of Markdown files in a repository of its own. The command line makes that folder, checks it, keeps its vocabulary current and puts the Obsidian plugin beside it, all from one menu.</p>
+      <p class="note" data-de="Hier wird nichts aus einer Registry installiert. Der Befehl läuft direkt aus einem Release auf GitHub, und <code class='mono'>#semver:*</code> wählt es aus: npm liest die Release-Tags des Repositorys als Versionsnummern und nimmt die höchste. So läuft er mit dem neuesten Release an dem Tag, an dem Sie ihn ausführen. Die Anführungszeichen verhindern, dass die Shell den <code class='mono'>*</code> als Dateimuster liest, und <code class='mono'>--yes</code> beantwortet die Frage, die npx vor jedem Release stellt, das es noch nicht ausgeführt hat. Er braucht <a href='https://nodejs.org/en/download'>Node</a> 22 oder neuer.">Nothing here is installed from a registry. The command runs straight from a release on GitHub, and <code class="mono">#semver:*</code> is what picks it: npm reads the repository’s release tags as version numbers and takes the highest, so it runs the newest release on the day you run it. The quotes keep the shell from reading the <code class="mono">*</code> as a file pattern, and <code class="mono">--yes</code> answers the question npx asks before any release it has not run before. It needs <a href="https://nodejs.org/en/download">Node</a> 22 or newer.</p>
     </div>
 
-    <section class="figure-section">
-      <div class="stagehead" id="stagehead">
-        <p class="path mono" id="path"></p>
-        <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
-      </div>
-      <div class="stage" id="stage">
-        <div class="canvas">
-          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recenter" id="recenter" type="button" data-de="neu zentrieren">recenter</button>
-        </div>
-        <button class="gutter" id="gutter" type="button"
-                aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
-        <aside class="card" id="card" aria-live="polite">
-          <div class="cbody" id="cbody"></div>
-          <div class="cfoot" id="cfoot">
-            <span id="cfootlink"></span>
+    <section>
+      <h2 data-de="Starten">Run it</h2>
+      <p class="lede" data-de="In einem Terminal, in einem beliebigen Ordner. Der Befehl öffnet ein Menü, fragt nach, was er braucht, und sagt, was er getan hat.">In a terminal, from any folder. It opens a menu, asks for what it needs, and says what it did.</p>
+      <pre class="cmd mono">npx --yes 'github:companygraph/meta-model#semver:*'</pre>
+      <figure class="term mono" aria-label="The menu the command opens" data-de-aria="Das Menü, das der Befehl öffnet">
+        <div class="term-top" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="term-body">
+          <pre><span class="d">$</span> npx --yes 'github:companygraph/meta-model#semver:*'</pre>
+          <div class="term-logo">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+              <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+              <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+              <path d="M12.5 12 h4.5"/>
+              <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+            </svg>
+            <pre><span class="k">Company</span><span class="k a">Graph</span>
+<span class="d">tooling &lt;release&gt; · companygraph.io</span></pre>
           </div>
-        </aside>
-      </div>
-      <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
-      <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the center.</p>
+          <pre>  <span class="a">1</span>  Make a model                <span class="d">a new instance in a folder, or beside the files already in one</span>
+  <span class="a">2</span>  Check a model               <span class="d">the mechanical checks, as its CI runs them</span>
+  <span class="a">3</span>  Move a model to &lt;release&gt;   <span class="d">its vendored core, skills, manifest and workflow tag together</span>
+  <span class="a">4</span>  Obsidian plugin             <span class="d">install it in a vault, or update it there</span>
 
-      <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
-           same #path, #fig and #card — and moves them back on close. The URL does not
-           change when it opens. -->
-      <dialog id="stagemodal" class="modal" aria-label="The example, expanded" data-de-aria="Das Beispiel, vergrössert">
-        <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
-      </dialog>
+<span class="a">›</span> <span class="k">Pick 1-4</span> <span class="d">(Enter to leave)</span> 1
+<span class="a">›</span> <span class="k">Which folder?</span> <span class="d">(a path; it is made if it is missing)</span> ~/git/acme
+<span class="a">›</span> <span class="k">What is the company called?</span> Acme<span class="cur"></span></pre>
+        </div>
+      </figure>
     </section>
 
     <section>
-      <h2 data-de="Wie man es liest">How to read it</h2>
+      <h2 data-de="Was das Menü tut">What the menu does</h2>
       <div class="rules">
-        <p data-de="<b>Ein Ordner ist der Plural seines Typs.</b> Was in einem Ordner liegt, ist eine Seite von dessen Typ – nichts wird abgekürzt, weil die eine Regel, die beide Namen vorhersagbar macht, keine Ausnahme verträgt.">
-          <b>A folder is the plural of its type.</b> What sits in a folder is one page of that folder's type — nothing is abbreviated, because the one rule that makes both names predictable cannot afford an exception.</p>
-        <p data-de="<b>Eine Seite ist eine Datei, wenn sie nichts besitzt, und ein Ordner, wenn sie eigene Sammlungen besitzt.</b> Das Profil ist das Beispiel für das Zweite: Es hält seine eigene Datei und daneben die Erfahrungen, die ihm gehören.">
-          <b>A page is a file when it owns nothing, and a folder when it owns collections of its own.</b> The profile is the example of the second: it holds its own file and, beside it, the experiences that belong to it.</p>
-        <p data-de="<b>Jede Linie ist ein Name, der in einer Datei steht.</b> Nichts hier ist ein Link, der kaputtgehen kann: Ein Name, der auf nichts zeigt, ist ein Fehler, keine Warnung.">
-          <b>Every line is a name written in a file.</b> Nothing here is a link that can break: a name that points at nothing is an error, not a warning.</p>
+        <p data-de="<b>1 · Ein Modell anlegen.</b> Es fragt nach einem Ordner und dem Namen des Unternehmens und schreibt die Instanz dorthin: das Vokabular unter <code class='mono'>meta/core/</code>, ein Manifest mit einem Hash für jede Datei, die ihm gehört, einen Ordner pro Typ mit einem README, das sein Schema nennt, die Entitäten, ohne die keine Instanz die Prüfung besteht, einen CI-Workflow und für Claude ein <code class='mono'>AGENTS.md</code>, ein <code class='mono'>CLAUDE.md</code> und drei Skills. In einen Ordner, der schon Dateien enthält – ein Repository oder einen Obsidian-Vault –, schreibt es erst, wenn Sie zustimmen, und überschreibt nichts. Danach bietet es das Obsidian-Plugin an."><b>1 · Make a model.</b> It asks for a folder and the company’s name, and writes the instance there: the vocabulary under <code class="mono">meta/core/</code>, a manifest with a hash for every file it owns, a folder for each type with a README naming its schema, the entities no instance passes without, a CI workflow, and for Claude an <code class="mono">AGENTS.md</code>, a <code class="mono">CLAUDE.md</code> and three skills. A folder that already holds files, a repository or an Obsidian vault, is added to only once you say yes, and nothing in it is written over. Then it offers the Obsidian plugin.</p>
+        <p data-de="<b>2 · Ein Modell prüfen.</b> Die mechanischen Prüfungen, dieselben, die der Workflow bei jedem Push und jedem Pull-Request ausführt, sobald der Ordner ein Repository auf GitHub ist. Sie wenden die Regeln des Vokabulars an, das die Instanz kopiert hat – nie die eines neueren. Ob eine Entität die Schreibregeln ihres Schemas einhält, lässt sich nur lesend beurteilen; das übernimmt der Skill <code class='mono'>companygraph-validate</code>."><b>2 · Check a model.</b> The mechanical checks, the same ones the workflow runs on every push and pull request once the folder is a repository on GitHub. They apply the rules of the vocabulary the instance copied in, never a newer one. Whether an entity keeps its schema’s writing rules is judged by reading, which the <code class="mono">companygraph-validate</code> skill does.</p>
+        <p data-de="<b>3 · Ein Modell auf ein neueres Release bringen.</b> Ein Release landet im Vokabular, in den Skills, im Manifest und im Pin des Workflows, darum bewegt es diese gemeinsam. Es zeigt zuerst jede Datei, die es schreiben oder entfernen würde, und schreibt erst, wenn Sie zustimmen. Eine in der Instanz geänderte Vokabular-Datei hält es auf und wird genannt; das Modell selbst, <code class='mono'>AGENTS.md</code> und <code class='mono'>CLAUDE.md</code> werden nie angerührt."><b>3 · Move a model to a newer release.</b> A release lands in the vocabulary, the skills, the manifest and the workflow’s pin, so it moves them together. It first shows every file it would write or remove, and writes only once you say yes. A vocabulary file edited inside the instance stops it and is named; the model itself, <code class="mono">AGENTS.md</code> and <code class="mono">CLAUDE.md</code> are never touched.</p>
+        <p data-de="<b>4 · Das Obsidian-Plugin.</b> Eine Instanz ist ein Ordner mit Markdown-Dateien – genau das ist ein Obsidian-Vault. Das Plugin prüft das Modell beim Tippen, ergänzt, was die Schemas deklarieren, und markiert, was bricht, dort, wo es steht. Es steht nicht im Community-Verzeichnis von Obsidian, darum installiert es das Menü: das neueste Release unter <code class='mono'>.obsidian/plugins/companygraph/</code>, eingeschaltet, und Plugins, die schon eingeschaltet sind, bleiben es. Erneut ausgeführt, aktualisiert es das Plugin und behält seine Einstellungen."><b>4 · Obsidian plugin.</b> An instance is a folder of Markdown files, which is what an Obsidian vault is. The plugin checks the model as you type, completes what the schemas declare and marks what breaks where it is written. It is not in Obsidian’s community directory, so the menu installs it: the newest release into <code class="mono">.obsidian/plugins/companygraph/</code>, switched on, and any plugin already on stays on. Run again, it updates the plugin and keeps its settings.</p>
+        <p data-de="<b>Was Obsidian noch fragt.</b> Beim ersten Öffnen fragt Obsidian, ob Sie dem Autor des Vaults vertrauen – bestätigen Sie. Fehlt das Plugin danach unter Installed plugins, wurde der Vault einmal im eingeschränkten Modus geöffnet: Settings → Community plugins → Turn on community plugins. Diesen Schalter speichert Obsidian ausserhalb des Vaults, darum kann ihn kein Befehl setzen."><b>What Obsidian still asks.</b> The first time it opens the vault, Obsidian asks whether you trust the vault’s author; say yes. If the plugin is still not under Installed plugins, the vault was once opened in restricted mode: Settings → Community plugins → Turn on community plugins. Obsidian keeps that switch outside the vault, so no command can set it.</p>
       </div>
     </section>
 
-    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="example/model" href="https://github.com/companygraph/meta-model/tree/HEAD/example/model">companygraph/meta-model</a>@<span id="srccommit">HEAD</span> — <span data-de="das Unternehmen ist bewusst erfunden, und sein README sagt warum.">the company is fictional by design, and its README says why.</span></p>
-
+    <section>
+      <h2 data-de="Ohne Menü">Without the menu</h2>
+      <p class="lede" data-de="Jeder Eintrag ist auch ein Befehl, für ein Skript oder einen CI-Schritt, und die Flags sagen, was das Menü fragt. Ohne Terminal, in einer Pipe oder in CI, zeigt der Befehl ohne Argument nur, was er kann.">Each entry is also a command, for a script or a CI step, and its flags say what the menu asks. Without a terminal, in a pipe or in CI, the bare command only prints what it can do.</p>
+      <pre class="cmd mono">npx --yes 'github:companygraph/meta-model#semver:*' init ~/git/acme --name "Acme" --agent claude
+npx --yes 'github:companygraph/meta-model#semver:*' check ~/git/acme
+npx --yes 'github:companygraph/meta-model#semver:*' upgrade ~/git/acme --dry-run
+npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
+      <div class="rules">
+        <p data-de="<b>Die Flags.</b> <code class='mono'>init</code> nimmt <code class='mono'>--here</code>, um in einen Ordner zu schreiben, der schon Dateien enthält, und <code class='mono'>--folders values,processes</code>, um nur die genannten Typen zu schreiben. <code class='mono'>upgrade</code> nimmt <code class='mono'>--dry-run</code>, das nur zeigt, und <code class='mono'>--force</code>, das eine geänderte Vokabular-Datei überschreibt und es sagt. <code class='mono'>obsidian</code> nimmt <code class='mono'>--release</code> für ein bestimmtes Release des Plugins. Das <a href='https://github.com/companygraph/meta-model#readme'>README des Meta-Modells</a> nennt sie alle."><b>The flags.</b> <code class="mono">init</code> takes <code class="mono">--here</code> to write into a folder that already holds files, and <code class="mono">--folders values,processes</code> to write only the types named. <code class="mono">upgrade</code> takes <code class="mono">--dry-run</code>, which only shows, and <code class="mono">--force</code>, which overwrites an edited vocabulary file and says so. <code class="mono">obsidian</code> takes <code class="mono">--release</code> for one release of the plugin. The <a href="https://github.com/companygraph/meta-model#readme">meta-model’s README</a> names them all.</p>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -761,9 +732,8 @@
 </div>
 
 <script>
-// Same mechanism as the landing page, and the same reason: English is the markup so the
-// page says the right thing before any JS runs, and the choice is remembered per origin —
-// so a visitor who switched to German on the landing page arrives here in German.
+// Same mechanism as every other page: English is the markup so the page says the right
+// thing before any JS runs, and the choice is remembered per origin.
 (function(){
   /* ─── language · v4 · page ─────────────────────────────────────────────
      One language across three domains, and where it is remembered. Generated
@@ -984,20 +954,11 @@
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
-  // The close button's × never changes, so it carries no [data-de] — but its aria-label
-  // does need German, and that lives in the label, not the innerHTML the loop above swaps.
-  var modalClose = document.getElementById("modalclose");
-  var modalCloseEnAria = modalClose ? modalClose.getAttribute("aria-label") : null;
-  // Same reasoning for the dialog itself: its aria-label names the whole stage, not markup
-  // the loop above ever sees.
-  var stageModal = document.getElementById("stagemodal");
-  var stageModalEnAria = stageModal ? stageModal.getAttribute("aria-label") : null;
-
   var UI = {
-    de:{ title:"Beispiel – CompanyGraph",
-         desc:"Eine fiktive Firma, in CompanyGraph beschrieben, gezeichnet als der Graph, den ihre Dateien bilden – erzeugt aus dem Beispiel des Modells, nichts von Hand geschrieben." },
-    en:{ title:"Example — CompanyGraph",
-         desc:"A fictional company described in CompanyGraph, drawn as the graph its files form — generated from the model's own example, nothing written by hand." }
+    de:{ title:"CLI – CompanyGraph",
+         desc:"Die Kommandozeile von CompanyGraph: Ein Befehl öffnet ein Menü, das das Modell eines Unternehmens anlegt, prüft, auf ein neueres Release bringt und das Obsidian-Plugin installiert." },
+    en:{ title:"CLI — CompanyGraph",
+         desc:"The CompanyGraph command line: one command opens a menu that makes a company’s model, checks it, moves it to a newer release and installs the Obsidian plugin." }
   };
 
   function applyLang(){
@@ -1006,8 +967,6 @@
     document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").setAttribute("aria-pressed", String(lang === "de"));
     document.getElementById("len").setAttribute("aria-pressed", String(lang === "en"));
-    if (modalClose) modalClose.setAttribute("aria-label", lang === "de" ? modalClose.getAttribute("data-de-aria") : modalCloseEnAria);
-    if (stageModal) stageModal.setAttribute("aria-label", lang === "de" ? stageModal.getAttribute("data-de-aria") : stageModalEnAria);
     document.documentElement.lang = lang;
   }
   function toggle(){ lang = (lang === "de") ? "en" : "de"; langRemember(lang); applyLang(); }
@@ -1042,10 +1001,5 @@
   applyTheme();
 })();
 </script>
-
-
-<script src="../d3.v7.min.js"></script>
-<script src="../card.js"></script>
-<script src="../stage.js"></script>
 </body>
 </html>

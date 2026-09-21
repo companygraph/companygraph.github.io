@@ -75,6 +75,7 @@ export const cards = [
   { dir: "team", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "surfaces", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "privacy", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
+  { dir: "cli", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
 ];
 
 // The machinery, bound to this repository's root so the site's own callers — the exporter, the

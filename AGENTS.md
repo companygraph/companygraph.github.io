@@ -64,6 +64,7 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   when a graph drifts. Nothing else on the example page names anything from the example,
   nothing else on the model page names anything from the model, and nothing else on the
   landing page names anything from CompanyGraph's own model.
+- **`/cli/` restates meta-model's command line, and is the one page allowed to.** A page about the command line that only linked to the README would not be one, so it shows the command, the menu it opens, what each entry does, what Obsidian still asks after the plugin is installed, and the subcommands with their flags. What keeps it true is what the page leaves out and one habit. It names no release: every command reads `#semver:*`, which npm resolves to the highest release tag when the command runs, and the drawn menu writes `<release>` where the tooling prints one, because a version written here is wrong at the next release. And every command on it was run from a release before it was written: when meta-model changes the menu, a command or a flag the page names, this page changes in the same wave, since nothing in this repository can see the change happen. Its prose is hand-written, so it is not a unit of the website surface in `companygraph/mental-model`.
 - **Team, Principles and Surfaces are generated regions around a hand-written shell.** Each is
   a page built from `/privacy/`'s shell whose model-derived region `npm run pages` writes from
   `company.json` with the design package's `render/team`, `render/principles` and
