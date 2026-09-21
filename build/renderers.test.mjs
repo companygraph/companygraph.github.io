@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { writeJsonLd, terms } from "./jsonld.mjs";
+import { writeJsonLd, terms, PAGES } from "./jsonld.mjs";
 
 const FIXTURE = {
   example: { commit: "0".repeat(40), root: "Someone", rootId: "identity", types: [], entities: [], edges: [] },
@@ -47,6 +47,13 @@ function ldScratch() {
     fs.writeFileSync(path.join(dir, d, "index.html"),
       `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
   }
+  // Every other page the renderer writes carries the head the stage pages carry.
+  for (const { file } of PAGES) {
+    if (file === "index.html" || fs.existsSync(path.join(dir, file))) continue;
+    fs.mkdirSync(path.dirname(path.join(dir, file)), { recursive: true });
+    fs.writeFileSync(path.join(dir, file),
+      `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  }
   // The landing page opens its graph with five nodes of its own and no breadcrumb.
   const landing = { "@context": "https://schema.org", "@graph": [
     { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone" },
@@ -66,8 +73,9 @@ test("writeJsonLd appends its node and leaves the four existing ones untouched",
   const read = (d) => JSON.parse(fs.readFileSync(path.join(dir, d, "index.html"), "utf8")
     .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
   const model = read("model");
-  assert.equal(model.length, 5, "four kept plus one appended");
+  assert.equal(model.length, 6, "four kept, the page's own node and the company's appended");
   assert.deepEqual(model.slice(0, 4), doc["@graph"], "the existing nodes are untouched");
+  assert.equal(model[5]["@id"], "https://companygraph.io/#dataset");
   assert.equal(model[4]["@type"], "DefinedTermSet");
   assert.equal(model[4].hasDefinedTerm.length, 2);
   assert.equal(model[4].encoding.contentUrl, "https://companygraph.io/model.json");
@@ -75,13 +83,38 @@ test("writeJsonLd appends its node and leaves the four existing ones untouched",
   assert.equal(example[4]["@type"], "Dataset");
   assert.equal(example[4].distribution.contentUrl, "https://companygraph.io/example.json");
   const home = read(".");
-  assert.equal(home.length, 6, "five kept plus one appended");
+  assert.equal(home.length, 6, "five kept plus the company's node appended");
   assert.deepEqual(home.slice(0, 5), landing["@graph"], "the landing page's own nodes are untouched");
   assert.equal(home[5]["@type"], "Dataset");
   assert.equal(home[5].distribution.contentUrl, "https://companygraph.io/company.json");
   // The instance is its own repository under its own license, not the meta-model's.
   assert.equal(home[5].isBasedOn, "https://github.com/example/instance");
   assert.equal(home[5].license, "https://creativecommons.org/licenses/by/4.0/");
+  // A page with no artifact of its own carries the company's node alone, identical to the
+  // landing page's.
+  const privacy = read("privacy");
+  assert.equal(privacy.length, 5);
+  assert.deepEqual(privacy[4], home[5]);
+  assert.deepEqual(read("talks/intro")[4], home[5], "the deck carries it too");
+});
+
+// Every page with a graph is on the renderer's list, so a page added later cannot go without
+// the company's node without this failing. Read from the committed pages, as the pin test is.
+test("every page that carries JSON-LD is one the renderer writes", () => {
+  const root = path.join(import.meta.dirname, "..");
+  const listed = new Set(PAGES.map((p) => p.file));
+  const found = [];
+  const walk = (d) => {
+    for (const e of fs.readdirSync(path.join(root, d), { withFileTypes: true })) {
+      if (e.name === "node_modules" || e.name.startsWith(".")) continue;
+      const rel = d ? `${d}/${e.name}` : e.name;
+      if (e.isDirectory()) walk(rel);
+      else if (e.name === "index.html" && fs.readFileSync(path.join(root, rel), "utf8").includes('type="application/ld+json"')) found.push(rel);
+    }
+  };
+  walk("");
+  // Both ways: a page the list misses, and a listed page that no longer carries a graph.
+  assert.deepEqual(found.sort(), [...listed].sort());
 });
 
 test("writeJsonLd is idempotent: a second run is byte-identical and check reports nothing", () => {
