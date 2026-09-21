@@ -1,5 +1,5 @@
 {
-  "commit": "32e787a94f16308b9f49e2cdb74fee1a3b132053",
+  "commit": "1dc6d81af51e74fcac1ac4a3aca965d1343667a6",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -139,7 +139,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "An achievement kind answers \"what sort of claim is this bullet?\" — the question a reader cannot\notherwise ask of a list that holds a decision, a delivery and an outcome side by side. Its value\nis that the answer is a reference rather than a word: two bullets under the same kind mean the\nsame sort of thing across every entry, the kinds are visible in the graph as nodes, and changing\nwhat a kind covers is one edit rather than a pass over every period.",
+          "text": "An achievement kind answers \"what sort of claim is this bullet?\" — the question a reader cannot otherwise ask of a list that holds a decision, a delivery and an outcome side by side. Its value is that the answer is a reference rather than a word: two bullets under the same kind mean the same sort of thing across every entry, the kinds are visible in the graph as nodes, and changing what a kind covers is one edit rather than a pass over every period.",
           "tables": []
         },
         {
@@ -149,12 +149,344 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/achievement-kinds/*.md`\n\nA kind owns nothing and nothing owns it: many experiences group their achievements under the\nsame few, and what each kind covers lives here rather than being restated in every entry. It\nsits at the container root beside `experience-kinds/` rather than inside a profile, because\nevery profile's experiences group by the same set.\n\nThe set is deliberately the instance's own. Which groups a career needs is a fact about that\ncareer — a researcher's work falls by publication and grant, a salesperson's by territory and\naccount — and a kind arriving later is one file here, not a change to this metamodel and a\nrelease of it.",
+          "text": "`model/achievement-kinds/*.md`\n\nA kind owns nothing and nothing owns it: many experiences group their achievements under the same few, and what each kind covers lives here rather than being restated in every entry. It sits at the container root beside `experience-kinds/` rather than inside a profile, because every profile's experiences group by the same set.\n\nThe set is deliberately the instance's own. Which groups a career needs is a fact about that career — a researcher's work falls by publication and grant, a salesperson's by territory and account — and a kind arriving later is one file here, not a change to this metamodel and a release of it.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "core/achievement-kind-schema.md"
+    },
+    {
+      "id": "core/concept",
+      "type": "schema",
+      "name": "Concept Schema",
+      "tagline": "Required structure for concept files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`domain`",
+                  "Yes",
+                  "ref → domain",
+                  "The area of the vocabulary this concept belongs to — the H1 of a file in `domains/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`domain`",
+                "Yes",
+                "ref → domain",
+                "The area of the vocabulary this concept belongs to — the H1 of a file in `domains/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Concept]`",
+                  "Yes",
+                  "The canonical name of the concept. Every reference to it, from any domain, uses this exact string."
+                ],
+                [
+                  "`> [Definition]`",
+                  "Yes",
+                  "One-paragraph definition of what the concept is"
+                ],
+                [
+                  "`## Also known as`",
+                  "No",
+                  "Table. The other names this concept goes by, none of which resolves."
+                ],
+                [
+                  "`## Relations`",
+                  "No",
+                  "Table. What this concept points at."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Also known as` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Term`",
+                  "Yes",
+                  "string",
+                  "The other name"
+                ],
+                [
+                  "`Kind`",
+                  "Yes",
+                  "enum",
+                  "`synonym`, `abbreviation`, `translation` or `deprecated`. What the other name is: a second word for the same thing, a short form of it, the same thing in another language, or a name this concept used to go by."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Relations` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Concept`",
+                  "Yes",
+                  "ref → concept",
+                  "What this concept points at, by its canonical name"
+                ],
+                [
+                  "`Cardinality`",
+                  "Yes",
+                  "enum",
+                  "`one`, `maybe one`, `many` or `one to many`. How many of the target one of these has: exactly one, none or one, none or more, or one or more."
+                ],
+                [
+                  "`As`",
+                  "No",
+                  "string",
+                  "The role the target plays in this relation. Required where two rows name the same concept, which is the only thing that tells them apart."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Concept]`",
+                "Yes",
+                "The canonical name of the concept. Every reference to it, from any domain, uses this exact string."
+              ],
+              [
+                "`> [Definition]`",
+                "Yes",
+                "One-paragraph definition of what the concept is"
+              ],
+              [
+                "`## Also known as`",
+                "No",
+                "Table. The other names this concept goes by, none of which resolves."
+              ],
+              [
+                "`## Relations`",
+                "No",
+                "Table. What this concept points at."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A concept is one word the company means something exact by, and it answers \"what do we mean when we say this, and what does it hang off?\" for anyone reading a feature, a process or a role that names it. It is an entity rather than a heading in a glossary so that a file can cite it, a rename is caught everywhere at once, and the relations between the company's words are rows a check resolves instead of lines in a drawing.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The definition says what the thing is, not what a system does with it, and it is written so that someone outside the company could tell one of these from something adjacent.\n- A concept this one hangs off belongs in `## Relations`, where it resolves, and never in the definition dressed as a link.\n- A relation is written on one side only. Where it reads better the other way round, write it on the other concept and not here as well.\n- `As` is the name the target goes by in this relation, written as the company says it: `booker`, `primary guest`, `included services`.\n- An alias is never used as a reference anywhere in the model. It is there so a reader searching the wrong word finds the right page.\n- A deprecated alias stays until nothing outside the model uses the old name, and then it goes; it is not a history of the name.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/concepts/*.md`\n\nA concept owns nothing, so it is a file, and nothing owns a concept: it sits in the container rather than inside its domain so that a concept of one domain can be named by a concept of another, which an owned name cannot be.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/concept-schema.md"
+    },
+    {
+      "id": "core/domain",
+      "type": "schema",
+      "name": "Domain Schema",
+      "tagline": "Required structure for domain files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Domain]`",
+                  "Yes",
+                  "The canonical name of the domain. A concept's or a product's `domain` references this exact string."
+                ],
+                [
+                  "`> [Scope]`",
+                  "Yes",
+                  "One-paragraph statement of what this domain covers and what it leaves to another"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Domain]`",
+                "Yes",
+                "The canonical name of the domain. A concept's or a product's `domain` references this exact string."
+              ],
+              [
+                "`> [Scope]`",
+                "Yes",
+                "One-paragraph statement of what this domain covers and what it leaves to another"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A domain is one area of the company — the words it means something exact by there, and the products it ships there — and it answers \"where does this belong, and who decides what it means?\" for a reader looking a term or a product up and for a writer placing a new one. It holds no definitions and lists nothing: what a domain contains is read from the concepts and products naming it.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline says what the domain covers and names at least one thing it deliberately leaves to another domain, because a boundary stated from one side only is not a boundary.\n- A domain is named for the area, not for the team that owns it or the system that implements it.\n- A domain carries no diagram and no list of its concepts or its products. Each is a second copy of what those files already say.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/domains/*.md`\n\nA domain owns nothing, so it is a file: its concepts and its products name it rather than sit inside it, because a concept one domain owned could not be named by a concept of another.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/domain-schema.md"
     },
     {
       "id": "core/experience",
@@ -303,7 +635,7 @@
         },
         {
           "heading": "Sections",
-          "text": "An `end` date with nothing beside it is read anyway: the reader supplies a reason, and usually a\nworse one than the truth. The section is optional because most periods need none — a talk ends\nwhen it has been given — and a required one would manufacture noise, or invent. It is only\nmeaningful where `end` is set; an ongoing period has not ended.\n\nIt is prose rather than a frontmatter field because a reason is a sentence: it wraps, it may\ncarry a colon, and R8 keeps frontmatter for short facts. It is deliberately not an enum either.\nA closed set of endings — resigned, redundancy, contract end — flattens the one thing that\ncarries the meaning, does not survive the move between employment cultures, and would be the\nmost sensitive field in the model to filter on. What is worth recording here is a sentence\nsomeone wrote on purpose, not a token someone selected.",
+          "text": "An `end` date with nothing beside it is read anyway: the reader supplies a reason, and usually a worse one than the truth. The section is optional because most periods need none — a talk ends when it has been given — and a required one would manufacture noise, or invent. It is only meaningful where `end` is set; an ongoing period has not ended.\n\nIt is prose rather than a frontmatter field because a reason is a sentence: it wraps, it may carry a colon, and R8 keeps frontmatter for short facts. It is deliberately not an enum either. A closed set of endings — resigned, redundancy, contract end — flattens the one thing that carries the meaning, does not survive the move between employment cultures, and would be the most sensitive field in the model to filter on. What is worth recording here is a sentence someone wrote on purpose, not a token someone selected.",
           "tables": [
             {
               "caption": null,
@@ -419,7 +751,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "An experience is one dated period in a profile's history, and the place a skill claim gets its\nevidence. It answers \"what did this person do here, and what does that show?\" — so it is\nwritten from the person's side, not the organization's. What the organization is, what a skill\nmeans and how strongly the person claims it are all somewhere else; what only this file holds\nis what happened, when, and what it evidences.",
+          "text": "An experience is one dated period in a profile's history, and the place a skill claim gets its evidence. It answers \"what did this person do here, and what does that show?\" — so it is written from the person's side, not the organization's. What the organization is, what a skill means and how strongly the person claims it are all somewhere else; what only this file holds is what happened, when, and what it evidences.",
           "tables": []
         },
         {
@@ -429,7 +761,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/profiles/<profile>/experiences/*.md`\n\nAn experience is owned by a profile and cannot exist without it, so it nests inside the\nprofile's folder rather than sitting at the root with a `profile:` field pointing back.\nThe filename is not the slug of the H1, which is what R12 does by default. It is the start\nyear, then a `-`, then a slug naming the period — chosen, not derived: the H1 says what happened\nand makes a long name that neither sorts nor scans, `organization` is optional so a required\nfilename cannot come from it, and one organization covers several periods anyway. Whoever writes\nthe file picks the shortest thing that identifies it — `2018-northwind-atelier.md`,\n`2019-orbit-conference.md`, `2026-career-break.md` — and the folder then sorts chronologically and\nreads as a career. The year must be the year in `start`, the rest must be a slug by R12, and the\ntwo together must be unique in the folder.",
+          "text": "`model/profiles/<profile>/experiences/*.md`\n\nAn experience is owned by a profile and cannot exist without it, so it nests inside the profile's folder rather than sitting at the root with a `profile:` field pointing back. The filename is not the slug of the H1, which is what R12 does by default. It is the start year, then a `-`, then a slug naming the period — chosen, not derived: the H1 says what happened and makes a long name that neither sorts nor scans, `organization` is optional so a required filename cannot come from it, and one organization covers several periods anyway. Whoever writes the file picks the shortest thing that identifies it — `2018-northwind-atelier.md`, `2019-orbit-conference.md`, `2026-career-break.md` — and the folder then sorts chronologically and reads as a career. The year must be the year in `start`, the rest must be a slug by R12, and the two together must be unique in the folder.",
           "tables": []
         }
       ],
@@ -553,7 +885,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A kind answers \"what sort of period is this?\" — the question a reader cannot otherwise ask of a\nfolder that holds a degree, a conference talk and a decade of employment side by side. Its\nvalue is that the answer is a reference rather than a word: two experiences of the same kind\nmean the same thing, the kinds are visible in the graph as nodes, and changing what a kind\ncovers is one edit rather than a scan of every period.",
+          "text": "A kind answers \"what sort of period is this?\" — the question a reader cannot otherwise ask of a folder that holds a degree, a conference talk and a decade of employment side by side. Its value is that the answer is a reference rather than a word: two experiences of the same kind mean the same thing, the kinds are visible in the graph as nodes, and changing what a kind covers is one edit rather than a scan of every period.",
           "tables": []
         },
         {
@@ -563,12 +895,170 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/experience-kinds/*.md`\n\nA kind owns nothing and nothing owns it: many experiences claim the same few, and what each\nkind means lives here rather than being restated on every period. It sits at the container\nroot beside `skills/` rather than inside a profile, because the same kinds are claimed by\nevery profile in the instance.\n\nThe set is deliberately the instance's own. A career acquires categories — a self-directed\nperiod, an advisory seat, a board — and a kind arriving later is one file here, not a change to\nthis metamodel and a release of it.",
+          "text": "`model/experience-kinds/*.md`\n\nA kind owns nothing and nothing owns it: many experiences claim the same few, and what each kind means lives here rather than being restated on every period. It sits at the container root beside `skills/` rather than inside a profile, because the same kinds are claimed by every profile in the instance.\n\nThe set is deliberately the instance's own. A career acquires categories — a self-directed period, an advisory seat, a board — and a kind arriving later is one file here, not a change to this metamodel and a release of it.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "core/experience-kind-schema.md"
+    },
+    {
+      "id": "core/feature",
+      "type": "schema",
+      "name": "Feature Schema",
+      "tagline": "Required structure for feature files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`products`",
+                  "Yes",
+                  "array of ref → product",
+                  "The products this feature is assembled into"
+                ],
+                [
+                  "`concepts`",
+                  "No",
+                  "array of ref → concept",
+                  "The concepts this feature operates on"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`products`",
+                "Yes",
+                "array of ref → product",
+                "The products this feature is assembled into"
+              ],
+              [
+                "`concepts`",
+                "No",
+                "array of ref → concept",
+                "The concepts this feature operates on"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Feature]`",
+                  "Yes",
+                  "The canonical name of the feature"
+                ],
+                [
+                  "`> [What it gives]`",
+                  "Yes",
+                  "One-paragraph statement of what someone can do with this that they could not without it"
+                ],
+                [
+                  "`## Description`",
+                  "Yes",
+                  "What the feature does, and where it stops"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Feature]`",
+                "Yes",
+                "The canonical name of the feature"
+              ],
+              [
+                "`> [What it gives]`",
+                "Yes",
+                "One-paragraph statement of what someone can do with this that they could not without it"
+              ],
+              [
+                "`## Description`",
+                "Yes",
+                "What the feature does, and where it stops"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A feature is one thing a product lets someone do, and it answers \"what is this for, and which products have it?\" for a reader deciding what to build, sell or document. It is the unit product documentation is organized along, so a feature nobody can name the user of is a component and belongs in neither this type nor this folder.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline says what someone can now do, in their words, and never names a screen, a service or a vendor.\n- `## Description` says where the feature stops as plainly as what it does, because the boundary is what tells two neighboring features apart.\n- A feature is named for the capability, not for the vendor that supplies it. Where a vendor is what varies, the vendor is a concept the feature names and not a feature of its own.\n- Nothing about a release, a ticket or a delivery date goes here: those move, and a feature outlives all three.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/features/*.md`\n\nA feature owns nothing, so it is a file. It is not owned by a product either: a feature is assembled into several, so the edge is written here, on the side that can hold more than one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/feature-schema.md"
     },
     {
       "id": "core/identity",
@@ -667,7 +1157,7 @@
         },
         {
           "heading": "Sections",
-          "text": "A presence is a place the company maintains a page on, named by the place and addressed by that\npage — never a single post, an article or a recording, which document an experience and belong\nin that experience's `## References`.",
+          "text": "A presence is a place the company maintains a page on, named by the place and addressed by that page — never a single post, an article or a recording, which document an experience and belong in that experience's `## References`.",
           "tables": [
             {
               "caption": null,
@@ -756,7 +1246,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "Identity is the company itself: the entity every other file in the instance is about. It\nanswers \"whose model is this?\" — which nothing else does, because a repository folder's name is\na path, and R2 and R3 exist to keep a canonical name out of a path. Without it an instance\ndescribes a company it never names.",
+          "text": "Identity is the company itself: the entity every other file in the instance is about. It answers \"whose model is this?\" — which nothing else does, because a repository folder's name is a path, and R2 and R3 exist to keep a canonical name out of a path. Without it an instance describes a company it never names.",
           "tables": []
         },
         {
@@ -766,7 +1256,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/identity.md`\n\nA company has one identity, so the type is a file directly in the container rather than a\nfolder (R6, R13). The filesystem carries the cardinality: there is nowhere to put a second one.\nThe file is named for the type, not for the slug of its H1 (R12), which leaves the H1 free to\nbe the company's name.\n\nThe file is the graph's root as well as its subject: every other file in the instance is about\nthe company it names, and none has to say so. A page names the identity only where the company\nis itself the fact, as an experience does when the period was spent there.",
+          "text": "`model/identity.md`\n\nA company has one identity, so the type is a file directly in the container rather than a folder (R6, R13). The filesystem carries the cardinality: there is nowhere to put a second one. The file is named for the type, not for the slug of its H1 (R12), which leaves the H1 free to be the company's name.\n\nThe file is the graph's root as well as its subject: every other file in the instance is about the company it names, and none has to say so. A page names the identity only where the company is itself the fact, as an experience does when the period was spent there.",
           "tables": []
         }
       ],
@@ -1044,7 +1534,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A phase is one step of a process and the gate at its end — what enters, what is done, what\nleaves, and what must be true for it to leave. It answers \"am I done, and who says so?\" for\nwhoever is in it. The gate is the part the model enforces: the document a phase produces scales\nwith the size of the change and may be a conversation rather than a file, and the approval at\nits end does not scale at all.",
+          "text": "A phase is one step of a process and the gate at its end — what enters, what is done, what leaves, and what must be true for it to leave. It answers \"am I done, and who says so?\" for whoever is in it. The gate is the part the model enforces: the document a phase produces scales with the size of the change and may be a conversation rather than a file, and the approval at its end does not scale at all.",
           "tables": []
         },
         {
@@ -1054,7 +1544,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/processes/<process>/phases/*.md`\n\nA phase is owned by a process and cannot exist without it, so it nests inside the process's\nfolder rather than sitting at the root with a `process:` field pointing back. The filename is\nR12's default, the slug of the H1. It carries no position prefix: the order is the owning\nprocess's `## Phases` table and the `gate-to` chain, and a third copy on the filename would have\nto be renamed through the whole folder whenever a phase was inserted.",
+          "text": "`model/processes/<process>/phases/*.md`\n\nA phase is owned by a process and cannot exist without it, so it nests inside the process's folder rather than sitting at the root with a `process:` field pointing back. The filename is R12's default, the slug of the H1. It carries no position prefix: the order is the owning process's `## Phases` table and the `gate-to` chain, and a third copy on the filename would have to be renamed through the whole folder whenever a phase was inserted.",
           "tables": []
         }
       ],
@@ -1289,7 +1779,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A process is the path work takes through the company's seats — one folder, the phases in the\norder they are passed through, and the gate between each pair — and it answers \"what happens\nnext, who does it, and what has to be true before it moves on?\" for someone doing the work or\nwaiting on it. It is not a seat, which says what one role takes and produces whenever it acts,\nand it is not a record of work that happened, which is an experience.",
+          "text": "A process is the path work takes through the company's seats — one folder, the phases in the order they are passed through, and the gate between each pair — and it answers \"what happens next, who does it, and what has to be true before it moves on?\" for someone doing the work or waiting on it. It is not a seat, which says what one role takes and produces whenever it acts, and it is not a record of work that happened, which is an experience.",
           "tables": []
         },
         {
@@ -1299,12 +1789,160 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/processes/<process>/<process>.md`\n\nA process owns its phases and its tracks and cannot be read without them, so it is a folder\nrather than a file, as a profile is. The folder is named for the process and holds its own file\nunder that same name, plus the `phases/` and `tracks/` collections the phases and tracks nest\nin.",
+          "text": "`model/processes/<process>/<process>.md`\n\nA process owns its phases and its tracks and cannot be read without them, so it is a folder rather than a file, as a profile is. The folder is named for the process and holds its own file under that same name, plus the `phases/` and `tracks/` collections the phases and tracks nest in.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "core/process-schema.md"
+    },
+    {
+      "id": "core/product",
+      "type": "schema",
+      "name": "Product Schema",
+      "tagline": "Required structure for product files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`domain`",
+                  "Yes",
+                  "ref → domain",
+                  "The area of the company this product belongs to — the H1 of a file in `domains/`"
+                ],
+                [
+                  "`audience`",
+                  "No",
+                  "string",
+                  "Free-text grouping, e.g. `Staff`. Whether an audience becomes an entity of its own is deliberately open."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`domain`",
+                "Yes",
+                "ref → domain",
+                "The area of the company this product belongs to — the H1 of a file in `domains/`"
+              ],
+              [
+                "`audience`",
+                "No",
+                "string",
+                "Free-text grouping, e.g. `Staff`. Whether an audience becomes an entity of its own is deliberately open."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Product]`",
+                  "Yes",
+                  "The canonical name of the product. A feature's `products` references this exact string."
+                ],
+                [
+                  "`> [What it is]`",
+                  "Yes",
+                  "One-paragraph statement of what the product is and who opens it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Product]`",
+                "Yes",
+                "The canonical name of the product. A feature's `products` references this exact string."
+              ],
+              [
+                "`> [What it is]`",
+                "Yes",
+                "One-paragraph statement of what the product is and who opens it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A product is something the company ships that somebody uses on its own, and it answers \"what does this company actually put in front of people?\" for a reader who has met its values, its strategy and its processes and still cannot name its output. It is not the market it serves, the project that built it or the revenue it earns.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline names what the product is and who opens it, in that order, and claims nothing about how well it does either.\n- A product is named as the people who use it name it, not as its repository or its internal project is named.\n- Two names for one thing a user opens are one product, and the second name is not a second product; where a concept of the same name exists, the second name is recorded there as an alias.\n- A product names one domain, the one whose concepts its users came to it for. A product that works across two still names one, and the concepts its features name show the rest.\n- Nothing about a release, a version or a roadmap goes here: a product outlives all three.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/products/*.md`\n\nA product owns nothing, so it is a file. Nothing owns a product either, and it lists no features: a feature names the products it is assembled into, and the edge is written once, on the side that can hold several. A product names the domain it belongs to, as a concept does, and sits in the container rather than inside that domain for the same reason.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/product-schema.md"
     },
     {
       "id": "core/proficiency-level",
@@ -1435,7 +2073,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A proficiency level is one rung of the single ladder every claim in the instance is made\nagainst. It answers \"what does this word mean when someone claims a skill at it?\" — for the\nperson making the claim, and for the person weighing it. Its whole value is that the definition\nsits in one file: two assessments at the same rung mean the same thing, and changing what a\nrung means is one edit rather than a hundred.",
+          "text": "A proficiency level is one rung of the single ladder every claim in the instance is made against. It answers \"what does this word mean when someone claims a skill at it?\" — for the person making the claim, and for the person weighing it. Its whole value is that the definition sits in one file: two assessments at the same rung mean the same thing, and changing what a rung means is one edit rather than a hundred.",
           "tables": []
         },
         {
@@ -1445,7 +2083,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/proficiency-levels/*.md`\n\nA level owns nothing and nothing owns it: many profiles claim the same few, and the definition\nof each lives here rather than being restated on every assessment. Changing what a level means\nis then one edit, in one file.",
+          "text": "`model/proficiency-levels/*.md`\n\nA level owns nothing and nothing owns it: many profiles claim the same few, and the definition of each lives here rather than being restated on every assessment. Changing what a level means is then one edit, in one file.",
           "tables": []
         }
       ],
@@ -1561,7 +2199,7 @@
         },
         {
           "heading": "Sections",
-          "text": "An assessment is a table row rather than a frontmatter field because it is a claim with prose\nattached, not a short fact, and the evidence under it is a table for the reason stated below.\nA table renders where a reader looks, has no quoting hazard around a colon or a wrapped line,\nand declares its columns here exactly as a frontmatter field does.\n\n\n\nEvidence is a table of its own rather than a third column of `## Skills` because a claim rests\non more than one thing and a cell holds one line. A paragraph listing four engagements cannot be\ncounted, and breadth is one of the things a level is read from: a capability shown in three\nengagements has held where the people, the constraints and the stakes changed, which one\nengagement cannot show however well it went. One fact per row is what makes that breadth\nreadable by anyone, including a machine.\n\n`Experience` is the optional column and sits last. It is optional because a claim at the lower\nrungs can rest on having been near work rather than on having owned a period of it, and such a\nrow leaves the cell blank rather than inventing a period to fill it. Where the cell is filled,\nthe experience's period is read from the experience and is not written into the sentence as\nwell: a date copied beside a fact the experience already owns is a second copy that nothing\nkeeps true. A period shorter than the experience's is different. The years a practice ran inside\na longer role are not a copy of the role's dates but a fact of their own, and the sentence is the\nonly place that holds them, so they stay.\n\nThe column is `What it shows` rather than `Evidence` so that it does not restate the section it\nsits in, which is the same reason `## References` calls its first column `What`.\n\n\n\nA presence is a place the person maintains a page on, named by the place and addressed by that\npage — never a single post, an article or a recording, which document an experience and belong\nin that experience's `## References`.",
+          "text": "An assessment is a table row rather than a frontmatter field because it is a claim with prose attached, not a short fact, and the evidence under it is a table for the reason stated below. A table renders where a reader looks, has no quoting hazard around a colon or a wrapped line, and declares its columns here exactly as a frontmatter field does.\n\n\n\nEvidence is a table of its own rather than a third column of `## Skills` because a claim rests on more than one thing and a cell holds one line. A paragraph listing four engagements cannot be counted, and breadth is one of the things a level is read from: a capability shown in three engagements has held where the people, the constraints and the stakes changed, which one engagement cannot show however well it went. One fact per row is what makes that breadth readable by anyone, including a machine.\n\n`Experience` is the optional column and sits last. It is optional because a claim at the lower rungs can rest on having been near work rather than on having owned a period of it, and such a row leaves the cell blank rather than inventing a period to fill it. Where the cell is filled, the experience's period is read from the experience and is not written into the sentence as well: a date copied beside a fact the experience already owns is a second copy that nothing keeps true. A period shorter than the experience's is different. The years a practice ran inside a longer role are not a copy of the role's dates but a fact of their own, and the sentence is the only place that holds them, so they stay.\n\nThe column is `What it shows` rather than `Evidence` so that it does not restate the section it sits in, which is the same reason `## References` calls its first column `What`.\n\n\n\nA presence is a place the person maintains a page on, named by the place and addressed by that page — never a single post, an article or a recording, which document an experience and belong in that experience's `## References`.",
           "tables": [
             {
               "caption": null,
@@ -1722,7 +2360,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A profile is the one page that says who a person or an agent is and what they claim — the\nentity every experience is owned by, every skill claim is made from and every role is held by.\nIt answers \"who is this, what can they do, and what is that judgment resting on?\" for\nsomeone deciding whether to work with them. It is not a curriculum vitae: what happened, when\nand where lives in the experiences the profile owns, and what a capability *is* lives in the\nskill. What only the profile can hold is the claim — this person, this skill, at this level,\non this evidence.",
+          "text": "A profile is the one page that says who a person or an agent is and what they claim — the entity every experience is owned by, every skill claim is made from and every role is held by. It answers \"who is this, what can they do, and what is that judgment resting on?\" for someone deciding whether to work with them. It is not a curriculum vitae: what happened, when and where lives in the experiences the profile owns, and what a capability *is* lives in the skill. What only the profile can hold is the claim — this person, this skill, at this level, on this evidence.",
           "tables": []
         },
         {
@@ -1732,7 +2370,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/profiles/<profile>/<profile>.md`\n\nA profile owns experiences, so it is a folder rather than a file: `profiles/<profile>/` holds\nthe profile's own file and an `experiences/` folder beside it. Removing a person is then one\noperation and an orphaned experience is unrepresentable.",
+          "text": "`model/profiles/<profile>/<profile>.md`\n\nA profile owns experiences, so it is a folder rather than a file: `profiles/<profile>/` holds the profile's own file and an `experiences/` folder beside it. Removing a person is then one operation and an orphaned experience is unrepresentable.",
           "tables": []
         }
       ],
@@ -1921,7 +2559,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A role is a seat the company needs filled — one file, named once, held by whichever profile\nlists it. It answers \"what does this seat take, produce and refuse, and what must whoever holds\nit be able to do?\" for someone filling it, holding it or handing work to it. It is not a\nperson's history in the seat, which lives on the profile and in its experiences, and it is not\na process, which says when the seat acts.",
+          "text": "A role is a seat the company needs filled — one file, named once, held by whichever profile lists it. It answers \"what does this seat take, produce and refuse, and what must whoever holds it be able to do?\" for someone filling it, holding it or handing work to it. It is not a person's history in the seat, which lives on the profile and in its experiences, and it is not a process, which says when the seat acts.",
           "tables": []
         },
         {
@@ -1931,7 +2569,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/roles/*.md`\n\nA role owns nothing and nothing owns it, so it is a file. A profile holds one by listing it,\nand the role never names its holder; what a role names is the skills the seat requires.",
+          "text": "`model/roles/*.md`\n\nA role owns nothing and nothing owns it, so it is a file. A profile holds one by listing it, and the role never names its holder; what a role names is the skills the seat requires.",
           "tables": []
         }
       ],
@@ -2067,7 +2705,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A skill is a capability a person can claim, an experience can evidence and a role can require —\none file, named once, referenced by every profile that claims it. It answers \"what is this, and\nwhat does doing it look like?\" for a reader who may claim it, assess it or hire for it. It is\nnot any one person's history with the capability: that lives in the profile's Skills table as\na level, in the Evidence table under it and in the experiences that list the skill.",
+          "text": "A skill is a capability a person can claim, an experience can evidence and a role can require — one file, named once, referenced by every profile that claims it. It answers \"what is this, and what does doing it look like?\" for a reader who may claim it, assess it or hire for it. It is not any one person's history with the capability: that lives in the profile's Skills table as a level, in the Evidence table under it and in the experiences that list the skill.",
           "tables": []
         },
         {
@@ -2077,7 +2715,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/skills/*.md`\n\nA skill owns nothing, so it is a file. Nothing owns a skill either: a profile claims one and\na role requires one, and it outlives both.",
+          "text": "`model/skills/*.md`\n\nA skill owns nothing, so it is a file. Nothing owns a skill either: a profile claims one and a role requires one, and it outlives both.",
           "tables": []
         }
       ],
@@ -2179,7 +2817,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A source is the answer to \"if this page is wrong, where does it get fixed?\" Every other core\ntype names one, so no page is of unknown origin, and naming it by canonical name means a\nsystem's name and address are written once rather than on every page that came from it. A\nsource is where a fact is *mastered* — the place with the authority to change it — not merely\nwhere it was seen.",
+          "text": "A source is the answer to \"if this page is wrong, where does it get fixed?\" Every other core type names one, so no page is of unknown origin, and naming it by canonical name means a system's name and address are written once rather than on every page that came from it. A source is where a fact is *mastered* — the place with the authority to change it — not merely where it was seen.",
           "tables": []
         },
         {
@@ -2189,7 +2827,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/sources/*.md`\n\nA source is where a page's facts come from: the repository itself, or a system the company\nalready runs that a sync writes from. One file per source, so a page can name where it was\nmastered by canonical name rather than restating a system's name and address on every entry.\nNothing owns a source and a source owns nothing. Every other core type carries a required\n`source` field naming one, so no page is of unknown origin, and an optional `source-id` —\nthe page's identifier inside that source — so a sync can find it again.",
+          "text": "`model/sources/*.md`\n\nA source is where a page's facts come from: the repository itself, or a system the company already runs that a sync writes from. One file per source, so a page can name where it was mastered by canonical name rather than restating a system's name and address on every entry. Nothing owns a source and a source owns nothing. Every other core type carries a required `source` field naming one, so no page is of unknown origin, and an optional `source-id` — the page's identifier inside that source — so a sync can find it again.",
           "tables": []
         }
       ],
@@ -2337,7 +2975,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A strategic objective is what must become true for the vision to be reached — the layer between\na direction that holds still and the strategies that change under it. It answers \"what are we\ntrying to make true, that we are not sure of yet?\" for someone weighing whether a piece of work\nis worth doing at all.",
+          "text": "A strategic objective is what must become true for the vision to be reached — the layer between a direction that holds still and the strategies that change under it. It answers \"what are we trying to make true, that we are not sure of yet?\" for someone weighing whether a piece of work is worth doing at all.",
           "tables": []
         },
         {
@@ -2347,7 +2985,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/strategic-objectives/*.md`\n\nOne file per objective. Nothing owns an objective and an objective owns nothing, as with\n`value` — and a strategy cites the objective it serves by name, which a heading in a shared\ndocument could not offer.",
+          "text": "`model/strategic-objectives/*.md`\n\nOne file per objective. Nothing owns an objective and an objective owns nothing, as with `value` — and a strategy cites the objective it serves by name, which a heading in a shared document could not offer.",
           "tables": []
         }
       ],
@@ -2527,7 +3165,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A strategy is how an objective gets reached — one route among routes that could all have been\ntaken, written so that the choice is visible as a choice. It answers \"why this way and not the\nother way?\" for someone who arrives after the decision and would otherwise re-open it.",
+          "text": "A strategy is how an objective gets reached — one route among routes that could all have been taken, written so that the choice is visible as a choice. It answers \"why this way and not the other way?\" for someone who arrives after the decision and would otherwise re-open it.",
           "tables": []
         },
         {
@@ -2537,7 +3175,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/strategies/*.md`\n\nOne file per strategy. Nothing owns a strategy and a strategy owns nothing, as with\n`strategic-objective`.",
+          "text": "`model/strategies/*.md`\n\nOne file per strategy. Nothing owns a strategy and a strategy owns nothing, as with `strategic-objective`.",
           "tables": []
         }
       ],
@@ -2717,7 +3355,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A surface is a place the company publishes from the model. For a written surface, this file is\nwhat somebody needs in order to write it: which of the model's facts reach it, in what shape and\nwhat the result has to satisfy. For a built surface, it is what somebody needs in order to know\nthe place exists, what it presents and which repository holds its rules. Either way it answers\n\"if I had to rebuild this from the model today, what would I have to know, and where would I\nfind it?\" — for a person, and for an agent. It is not a record of what the surface currently\nshows, which is R17's business and belongs in a validation report.",
+          "text": "A surface is a place the company publishes from the model. For a written surface, this file is what somebody needs in order to write it: which of the model's facts reach it, in what shape and what the result has to satisfy. For a built surface, it is what somebody needs in order to know the place exists, what it presents and which repository holds its rules. Either way it answers \"if I had to rebuild this from the model today, what would I have to know, and where would I find it?\" — for a person, and for an agent. It is not a record of what the surface currently shows, which is R17's business and belongs in a validation report.",
           "tables": []
         },
         {
@@ -2727,7 +3365,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/surfaces/*.md`\n\nA surface is a place the company publishes from the model. A place is published when anyone\ncan reach it without asking; a bundle handed to whoever requests it is not a surface. One file\nper surface, so every place the model reaches is named in the model, and a reader who finds no\nfile for a place can take that as meaning the model does not reach it. Nothing owns a surface\nand a surface owns nothing.",
+          "text": "`model/surfaces/*.md`\n\nA surface is a place the company publishes from the model. A place is published when anyone can reach it without asking; a bundle handed to whoever requests it is not a surface. One file per surface, so every place the model reaches is named in the model, and a reader who finds no file for a place can take that as meaning the model does not reach it. Nothing owns a surface and a surface owns nothing.",
           "tables": []
         }
       ],
@@ -2843,7 +3481,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A track is one kind of thing a process makes, and it answers “which of the things this process\nmakes is this step about?” for a reader of a phase whose work differs by what is being made. It\nis an entity so that the answer is a reference rather than a word: a phase that heads its\nactivities with a track names something that exists, a track renamed is renamed in one place\nwith every mention held to it, and the tracks are visible in the graph as nodes. It points at\nnothing. Which seats work a track and what they do on it are said by the phases.",
+          "text": "A track is one kind of thing a process makes, and it answers “which of the things this process makes is this step about?” for a reader of a phase whose work differs by what is being made. It is an entity so that the answer is a reference rather than a word: a phase that heads its activities with a track names something that exists, a track renamed is renamed in one place with every mention held to it, and the tracks are visible in the graph as nodes. It points at nothing. Which seats work a track and what they do on it are said by the phases.",
           "tables": []
         },
         {
@@ -2853,7 +3491,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/processes/<process>/tracks/*.md`\n\nA track is owned by a process and cannot exist without it, so it nests inside the process's\nfolder beside `phases/`. The filename is R12's default, the slug of the H1.",
+          "text": "`model/processes/<process>/tracks/*.md`\n\nA track is owned by a process and cannot exist without it, so it nests inside the process's folder beside `phases/`. The filename is R12's default, the slug of the H1.",
           "tables": []
         }
       ],
@@ -2977,7 +3615,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A value is something the company holds itself to, written so that a strategy, a role or a\nprocess can cite it — which is why it is one file rather than a heading in a list. It answers\n\"what does this company refuse to trade away, and how would anyone know?\" for someone deciding\nwhether to work here, or deciding a hard case where two good options disagree. It is not an\naspiration and not a slogan: a value nobody could act against is decoration.",
+          "text": "A value is something the company holds itself to, written so that a strategy, a role or a process can cite it — which is why it is one file rather than a heading in a list. It answers \"what does this company refuse to trade away, and how would anyone know?\" for someone deciding whether to work here, or deciding a hard case where two good options disagree. It is not an aspiration and not a slogan: a value nobody could act against is decoration.",
           "tables": []
         },
         {
@@ -2987,7 +3625,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a\nheading per value, and a heading has no canonical name — so no strategy, role or process\ncould cite the value it upholds, which is the one thing a company's values are for.",
+          "text": "`model/values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a heading per value, and a heading has no canonical name — so no strategy, role or process could cite the value it upholds, which is the one thing a company's values are for.",
           "tables": []
         }
       ],
@@ -3111,7 +3749,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A vision is the future state the company is working toward, stated so that a decision can be\nweighed against it. It is not a plan and not a strategy: it says where, never how, and it holds\nstill while the ways of getting there change.",
+          "text": "A vision is the future state the company is working toward, stated so that a decision can be weighed against it. It is not a plan and not a strategy: it says where, never how, and it holds still while the ways of getting there change.",
           "tables": []
         },
         {
@@ -3121,7 +3759,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/vision.md`\n\nA company has one vision, so the type is a file directly in the container rather than a folder\n(R6, R13), named for the type rather than for the slug of its H1 (R12).",
+          "text": "`model/vision.md`\n\nA company has one vision, so the type is a file directly in the container rather than a folder (R6, R13), named for the type rather than for the slug of its H1 (R12).",
           "tables": []
         }
       ],
@@ -3132,6 +3770,42 @@
   "edges": [
     {
       "from": "core/achievement-kind",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/concept",
+      "to": "core/concept",
+      "via": "Relations.Concept",
+      "attrs": {
+        "type": "ref → concept"
+      },
+      "label": "Relations.Concept"
+    },
+    {
+      "from": "core/concept",
+      "to": "core/domain",
+      "via": "domain",
+      "attrs": {
+        "type": "ref → domain"
+      },
+      "label": "domain"
+    },
+    {
+      "from": "core/concept",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/domain",
       "to": "core/source",
       "via": "source",
       "attrs": {
@@ -3193,6 +3867,33 @@
     },
     {
       "from": "core/experience",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/feature",
+      "to": "core/concept",
+      "via": "concepts",
+      "attrs": {
+        "type": "array of ref → concept"
+      },
+      "label": "concepts"
+    },
+    {
+      "from": "core/feature",
+      "to": "core/product",
+      "via": "products",
+      "attrs": {
+        "type": "array of ref → product"
+      },
+      "label": "products"
+    },
+    {
+      "from": "core/feature",
       "to": "core/source",
       "via": "source",
       "attrs": {
@@ -3332,6 +4033,24 @@
         "type": "array of ref → role"
       },
       "label": "supported-by"
+    },
+    {
+      "from": "core/product",
+      "to": "core/domain",
+      "via": "domain",
+      "attrs": {
+        "type": "ref → domain"
+      },
+      "label": "domain"
+    },
+    {
+      "from": "core/product",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
     },
     {
       "from": "core/proficiency-level",

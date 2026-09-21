@@ -1,11 +1,23 @@
 {
-  "commit": "32e787a94f16308b9f49e2cdb74fee1a3b132053",
+  "commit": "1dc6d81af51e74fcac1ac4a3aca965d1343667a6",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
     {
       "type": "achievement-kind",
       "folder": "achievement-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "concept",
+      "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "domain",
+      "folder": "domains",
       "owner": null,
       "singular": false
     },
@@ -18,6 +30,12 @@
     {
       "type": "experience-kind",
       "folder": "experience-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "feature",
+      "folder": "features",
       "owner": null,
       "singular": false
     },
@@ -36,6 +54,12 @@
     {
       "type": "process",
       "folder": "processes",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "product",
+      "folder": "products",
       "owner": null,
       "singular": false
     },
@@ -119,7 +143,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is the choice itself: a ranking agreed, a roadmap rewritten, a\nfeature retired, a direction someone had to be talked into. What makes it this kind is that\nsomebody else could have carried it out once the call was made.\n\nCarrying it out is Delivery, even where the same person did both, and what came of it is\nResults. A bullet that decided and built in one sentence is filed by whichever half the entry\nwould be poorer without.",
+          "text": "An achievement whose claim is the choice itself: a ranking agreed, a roadmap rewritten, a feature retired, a direction someone had to be talked into. What makes it this kind is that somebody else could have carried it out once the call was made.\n\nCarrying it out is Delivery, even where the same person did both, and what came of it is Results. A bullet that decided and built in one sentence is filed by whichever half the entry would be poorer without.",
           "tables": []
         }
       ],
@@ -138,7 +162,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is the work done: a system replaced, a service split, a migration\nrun, a process put in place. It names what changed and who has it now.\n\nChoosing what to build is Decisions. What the change turned out to be worth — a measured\neffect, a finding, an outcome still owed — is Results, and it goes there even where one\nsentence could carry both.",
+          "text": "An achievement whose claim is the work done: a system replaced, a service split, a migration run, a process put in place. It names what changed and who has it now.\n\nChoosing what to build is Decisions. What the change turned out to be worth — a measured effect, a finding, an outcome still owed — is Results, and it goes there even where one sentence could carry both.",
           "tables": []
         }
       ],
@@ -157,7 +181,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is the consequence rather than the act: what changed because the\nwork was done, what it turned out to show, and what it has not delivered yet. An entry's honest\nunfinished business is this kind, because it is an outcome like any other.\n\nThe work that produced the result is Delivery, and the call that aimed it is Decisions. The\nresult is filed apart from both, so a reader looking for what came of a period finds it in the\nsame place in every entry.",
+          "text": "An achievement whose claim is the consequence rather than the act: what changed because the work was done, what it turned out to show, and what it has not delivered yet. An entry's honest unfinished business is this kind, because it is an outcome like any other.\n\nThe work that produced the result is Delivery, and the call that aimed it is Decisions. The result is filed apart from both, so a reader looking for what came of a period finds it in the same place in every entry.",
           "tables": []
         }
       ],
@@ -176,12 +200,514 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is that people outside the work now know something: a conference\ntalk, a published case, a workshop for another team. The audience is the point of the bullet\nand the bullet names it.\n\nExplaining a decision to the people who had to accept it is part of Decisions, not this. A\ntalk about work done elsewhere is this kind even when the entry exists only for the talk.",
+          "text": "An achievement whose claim is that people outside the work now know something: a conference talk, a published case, a workshop for another team. The audience is the point of the bullet and the bullet names it.\n\nExplaining a decision to the people who had to accept it is part of Decisions, not this. A talk about work done elsewhere is this kind even when the entry exists only for the talk.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "example/model/achievement-kinds/sharing.md"
+    },
+    {
+      "id": "concepts/billing-period",
+      "type": "concept",
+      "name": "Billing period",
+      "tagline": "The stretch of time one invoice charges for, set by the contract, with a first and a last day.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/concepts/billing-period.md"
+    },
+    {
+      "id": "concepts/contract",
+      "type": "concept",
+      "name": "Contract",
+      "tagline": "The terms a customer agreed to buy under, in the words both sides signed, from the day they take effect until they are replaced or ended.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Customer",
+                  "one",
+                  "signing customer"
+                ],
+                [
+                  "Customer",
+                  "maybe one",
+                  "paying customer"
+                ],
+                [
+                  "Pricing rule",
+                  "one to many",
+                  "terms"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Customer",
+                "one",
+                "signing customer"
+              ],
+              [
+                "Customer",
+                "maybe one",
+                "paying customer"
+              ],
+              [
+                "Pricing rule",
+                "one to many",
+                "terms"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/contract.md"
+    },
+    {
+      "id": "concepts/credit-note",
+      "type": "concept",
+      "name": "Credit note",
+      "tagline": "A document that lowers what a customer owes on an invoice already issued, leaving that invoice as it was.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "CN",
+                  "abbreviation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "CN",
+                "abbreviation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Invoice",
+                  "one",
+                  "corrected invoice"
+                ],
+                [
+                  "Invoice line",
+                  "one to many",
+                  "lines"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Invoice",
+                "one",
+                "corrected invoice"
+              ],
+              [
+                "Invoice line",
+                "one to many",
+                "lines"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/credit-note.md"
+    },
+    {
+      "id": "concepts/customer",
+      "type": "concept",
+      "name": "Customer",
+      "tagline": "A person or company that has agreed to a contract or pays under one — the party an invoice is addressed to, never the company that issues it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/concepts/customer.md"
+    },
+    {
+      "id": "concepts/invoice",
+      "type": "concept",
+      "name": "Invoice",
+      "tagline": "What one customer is asked to pay for one billing period, as a document that stays as it was issued.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Rechnung",
+                  "translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Rechnung",
+                "translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Customer",
+                  "one",
+                  "billed customer"
+                ],
+                [
+                  "Billing period",
+                  "one",
+                  ""
+                ],
+                [
+                  "Invoice line",
+                  "one to many",
+                  "lines"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Customer",
+                "one",
+                "billed customer"
+              ],
+              [
+                "Billing period",
+                "one",
+                ""
+              ],
+              [
+                "Invoice line",
+                "one to many",
+                "lines"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/invoice.md"
+    },
+    {
+      "id": "concepts/invoice-line",
+      "type": "concept",
+      "name": "Invoice line",
+      "tagline": "One charge on an invoice: an amount, and the reason for that amount in terms the customer agreed to.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Pricing rule",
+                  "one",
+                  "rule"
+                ],
+                [
+                  "Usage record",
+                  "many",
+                  "usage read"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Pricing rule",
+                "one",
+                "rule"
+              ],
+              [
+                "Usage record",
+                "many",
+                "usage read"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/invoice-line.md"
+    },
+    {
+      "id": "concepts/pricing-rule",
+      "type": "concept",
+      "name": "Pricing rule",
+      "tagline": "One term of a contract in a form that can be applied: what it charges for, at what price and under which conditions, named as the contract names it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Price plan",
+                  "deprecated"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Price plan",
+                "deprecated"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/pricing-rule.md"
+    },
+    {
+      "id": "concepts/usage-record",
+      "type": "concept",
+      "name": "Usage record",
+      "tagline": "One thing a customer used that a contract charges for — a call made, a seat held, a gigabyte stored — with when it happened and how much of it there was.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Usage event",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Usage event",
+                "synonym"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Contract",
+                  "one",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Contract",
+                "one",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/concepts/usage-record.md"
+    },
+    {
+      "id": "domains/invoicing",
+      "type": "domain",
+      "name": "Invoicing",
+      "tagline": "What a customer is asked to pay, for which period and on which document, and how a document already issued is corrected. What a term of a contract means, and the amount it produces, is left to Pricing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/domains/invoicing.md"
+    },
+    {
+      "id": "domains/pricing",
+      "type": "domain",
+      "name": "Pricing",
+      "tagline": "What a customer agreed to pay for, and how each term of that agreement turns what they used into an amount. Which invoice an amount lands on, and when it is issued, is left to Invoicing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/domains/pricing.md"
     },
     {
       "id": "experience-kinds/community",
@@ -194,7 +720,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is addressed to people outside the organization paying for it: a\nconference talk, a board or committee seat, a standards or user group, a case study published\nunder someone else's name. `organization` names the host — the conference, the group, the\npublisher — not an employer.\n\nA one-off writes `end` equal to `start`; a seat held over years does not. Both are this kind:\nwhat makes it community work is the audience, not the duration.",
+          "text": "A period whose output is addressed to people outside the organization paying for it: a conference talk, a board or committee seat, a standards or user group, a case study published under someone else's name. `organization` names the host — the conference, the group, the publisher — not an employer.\n\nA one-off writes `end` equal to `start`; a seat held over years does not. Both are this kind: what makes it community work is the audience, not the duration.",
           "tables": []
         }
       ],
@@ -212,7 +738,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is a qualification rather than a delivery. `organization` names the\nawarding body — the school, the certifying institute — which is the one case where the field\ndoes not name somewhere work was done.\n\nLearning that happened during a role is not this kind. Every role teaches something; what makes\na period education is that the qualification is the point of it.",
+          "text": "A period whose output is a qualification rather than a delivery. `organization` names the awarding body — the school, the certifying institute — which is the one case where the field does not name somewhere work was done.\n\nLearning that happened during a role is not this kind. Every role teaches something; what makes a period education is that the qualification is the point of it.",
           "tables": []
         }
       ],
@@ -230,7 +756,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period defined by what it produced rather than by who it was spent with: a system, a\nmigration, a launch. Client work and internal work alike. `organization` names the client, or\nthe organization the work was done for when that differs from the employer.\n\nIt ends when the delivery does. A project that has no end and no deliverable is a role\ndescribed by its current work.",
+          "text": "A period defined by what it produced rather than by who it was spent with: a system, a migration, a launch. Client work and internal work alike. `organization` names the client, or the organization the work was done for when that differs from the employer.\n\nIt ends when the delivery does. A project that has no end and no deliverable is a role described by its current work.",
           "tables": []
         }
       ],
@@ -248,12 +774,162 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period spent working for an organization under an arrangement that outlasts any one piece of\nwork: employment, a long-running contract, a partnership. `organization` names the employer.\n\nIt is not a delivery. What was built during a role belongs to a project, and a role that lists\none delivery in its achievements is usually two periods written as one. The test is whether the\nperiod would have continued had the work changed: if it would, it is a role.",
+          "text": "A period spent working for an organization under an arrangement that outlasts any one piece of work: employment, a long-running contract, a partnership. `organization` names the employer.\n\nIt is not a delivery. What was built during a role belongs to a project, and a role that lists one delivery in its achievements is usually two periods written as one. The test is whether the period would have continued had the work changed: if it would, it is a role.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "example/model/experience-kinds/role.md"
+    },
+    {
+      "id": "features/billing-run",
+      "type": "feature",
+      "name": "Billing run",
+      "tagline": "A finance team can close a billing period and have every invoice for it issued at once, the same whoever runs it.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Billing Console"
+        ],
+        "concepts": [
+          "Billing period",
+          "Contract",
+          "Invoice"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Closing a period applies every contract’s rules to the usage recorded in it and issues one invoice per customer, and running it twice on the same inputs issues the same invoices. It ends when the invoices are issued. Sending reminders and collecting payment come after it and are not part of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/billing-run.md"
+    },
+    {
+      "id": "features/charge-explanation",
+      "type": "feature",
+      "name": "Charge explanation",
+      "tagline": "Anyone reading an invoice can tell how each charge was reached, in the words of the contract they agreed to.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Invoice Page",
+          "Billing Console"
+        ],
+        "concepts": [
+          "Invoice line",
+          "Pricing rule",
+          "Usage record"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Every line on an invoice carries the term of the contract that produced it and the usage that term was applied to, and the explanation beside the line is rendered from both. The person paying reads it where they read the invoice, and the finance team that issued it reads the same words when a question reaches them. It explains the arithmetic and stops there: whether the contract says what the payer believes it says is a question for the contract, and nothing here answers it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/charge-explanation.md"
+    },
+    {
+      "id": "features/credit-notes",
+      "type": "feature",
+      "name": "Credit notes",
+      "tagline": "A finance team can correct an invoice already sent, and the payer can read what changed and why.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Billing Console",
+          "Invoice Page"
+        ],
+        "concepts": [
+          "Credit note",
+          "Invoice"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A credit note is issued against an invoice when the usage it read or the rule it applied turns out wrong, and it is computed from the corrected usage or the corrected rule, so every line on it explains itself the way an invoice line does. It never changes the invoice it corrects, and it carries no amount typed in by hand.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/credit-notes.md"
+    },
+    {
+      "id": "features/invoice-download",
+      "type": "feature",
+      "name": "Invoice download",
+      "tagline": "Whoever pays an invoice can keep a copy of it in their own books, exactly as it was issued.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Invoice Page"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The copy is a file holding the invoice as issued, with every line and its explanation, and it matches what the page shows on the day it was issued and on every day after. It is a copy and nothing more: paying, disputing and asking a question about the invoice happen elsewhere.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/invoice-download.md"
+    },
+    {
+      "id": "features/pricing-rules",
+      "type": "feature",
+      "name": "Pricing rules",
+      "tagline": "A finance team can write each term of a contract as a rule every billing run applies, named as the contract names it.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Billing Console"
+        ],
+        "concepts": [
+          "Contract",
+          "Pricing rule"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A rule states what a term charges for, at what price and under which conditions, and it belongs to the contract it was written from, so a new version of the contract brings new versions of its rules. It records prices and never proposes them. A term the rules cannot express is not approximated: the term is renegotiated or the rules grow, and until one of those happens the term is not billed.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/pricing-rules.md"
+    },
+    {
+      "id": "features/usage-reporting",
+      "type": "feature",
+      "name": "Usage reporting",
+      "tagline": "Usage can be reported by the systems that see it happen, as it happens, so nobody types it in at the end of the month.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Usage API"
+        ],
+        "concepts": [
+          "Usage record",
+          "Contract"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Each report becomes a usage record under the contract it counts against, kept as it was sent. It records and does not correct: a report sent wrong is answered by a second report that offsets it, never by editing the first, so what a billing run read can always be read again.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/features/usage-reporting.md"
     },
     {
       "id": "identity",
@@ -269,7 +945,7 @@
       "sections": [
         {
           "heading": "What it is",
-          "text": "We build and run the billing platform our customers invoice their own customers through. Two\nteams, one product, and a domain we are still splitting into the shapes it wants to be in.\n\nWe sell to companies at the point where pricing has become a system rather than a page —\nusage, tiers, credits, corrections — and where getting an invoice wrong costs more than the\ninvoice.",
+          "text": "We build and run the billing platform our customers invoice their own customers through. Two teams, one platform, and a domain we are still splitting into the shapes it wants to be in.\n\nWe sell to companies at the point where pricing has become a system rather than a page — usage, tiers, credits, corrections — and where getting an invoice wrong costs more than the invoice.",
           "tables": []
         },
         {
@@ -627,7 +1303,7 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A request from the platform's users, and the part of the system it will touch, read rather than\nremembered.",
+          "text": "A request from the platform's users, and the part of the system it will touch, read rather than remembered.",
           "tables": []
         },
         {
@@ -706,6 +1382,48 @@
       "path": "example/model/processes/delivery/tracks/docs.md"
     },
     {
+      "id": "products/billing-console",
+      "type": "product",
+      "name": "Billing Console",
+      "tagline": "The web application where the finance team of a company billing through Beacon keeps its pricing, runs its billing and answers for every invoice that goes out.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing",
+        "audience": "Finance"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/products/billing-console.md"
+    },
+    {
+      "id": "products/invoice-page",
+      "type": "product",
+      "name": "Invoice Page",
+      "tagline": "The page every invoice links to, opened by whoever has to pay it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Invoicing",
+        "audience": "Payer"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/products/invoice-page.md"
+    },
+    {
+      "id": "products/usage-api",
+      "type": "product",
+      "name": "Usage API",
+      "tagline": "The interface the systems of a company billing through Beacon send usage to, set up by the developers who connect them.",
+      "fields": {
+        "source": "Local",
+        "domain": "Pricing",
+        "audience": "Developer"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/products/usage-api.md"
+    },
+    {
       "id": "proficiency-levels/competent",
       "type": "proficiency-level",
       "name": "Competent",
@@ -717,7 +1435,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level works with it unsupervised and the result is predictable. They recognize\nthe common failure modes, having run into them.",
+          "text": "Someone at this level works with it unsupervised and the result is predictable. They recognize the common failure modes, having run into them.",
           "tables": []
         }
       ],
@@ -736,7 +1454,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level knows where it breaks down and where it is simply wrong. They have worked\nbelow its surface, shaped it, or taught it.",
+          "text": "Someone at this level knows where it breaks down and where it is simply wrong. They have worked below its surface, shaped it, or taught it.",
           "tables": []
         }
       ],
@@ -755,7 +1473,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level has used it on real work, with guidance or frequent reference. They can\nfollow a conversation about it and make sense of other people's work in it.",
+          "text": "Someone at this level has used it on real work, with guidance or frequent reference. They can follow a conversation about it and make sense of other people's work in it.",
           "tables": []
         }
       ],
@@ -774,7 +1492,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level makes judgment calls in it and can explain why the alternatives are\nworse. Other people bring them their questions.",
+          "text": "Someone at this level makes judgment calls in it and can explain why the alternatives are worse. Other people bring them their questions.",
           "tables": []
         }
       ],
@@ -796,7 +1514,7 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "One profile for every agent the company runs, so the seat has a holder. It claims no skill,\nand not because the first review is unread: a claim is a person's history with a capability,\nand an agent has none. What holds it to the seat is the rulebook, never a row.",
+          "text": "One profile for every agent the company runs, so the seat has a holder. It claims no skill, and not because the first review is unread: a claim is a person's history with a capability, and an agent has none. What holds it to the seat is the rulebook, never a row.",
           "tables": []
         }
       ],
@@ -917,7 +1635,7 @@
         },
         {
           "heading": "Summary",
-          "text": "Eight years across two companies, both of them small enough that the boundary between\nbuilding a thing and running it never really existed.",
+          "text": "Eight years across two companies, both of them small enough that the boundary between building a thing and running it never really existed.",
           "tables": []
         },
         {
@@ -980,7 +1698,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left in January 2022 when the pipeline work was done and the next problem worth four years was\nsomewhere else.",
+          "text": "Left in January 2022 when the pipeline work was done and the next problem worth four years was somewhere else.",
           "tables": []
         }
       ],
@@ -1201,7 +1919,7 @@
         },
         {
           "heading": "Summary",
-          "text": "Six years across the same two companies as the engineers he works with, on the other side of\nthe table: deciding what gets built rather than building it.",
+          "text": "Six years across the same two companies as the engineers he works with, on the other side of the table: deciding what gets built rather than building it.",
           "tables": []
         }
       ],
@@ -1346,12 +2064,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A bounded context with a name and the invoices it has to get right. A change request that\nsays what is wrong for a customer, not which class to edit. A turn on the pager, because the\nseat answers for what it ships.",
+          "text": "A bounded context with a name and the invoices it has to get right. A change request that says what is wrong for a customer, not which class to edit. A turn on the pager, because the seat answers for what it ships.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "A service that stays up, and a change small enough that a reviewer reads it in one sitting,\nwith the tests that show the invoice is still right.",
+          "text": "A service that stays up, and a change small enough that a reviewer reads it in one sitting, with the tests that show the invoice is still right.",
           "tables": []
         },
         {
@@ -1377,12 +2095,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "The change as a diff, the request it answers and the report of whoever made it, read as a\nclaim rather than a fact.",
+          "text": "The change as a diff, the request it answers and the report of whoever made it, read as a claim rather than a fact.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "Findings, each with a file, a line, what is wrong, why it matters and how to fix it, ranked\nby severity, and the strengths named first. A finding is an input to whoever merges.",
+          "text": "Findings, each with a file, a line, what is wrong, why it matters and how to fix it, ranked by severity, and the strengths named first. A finding is an input to whoever merges.",
           "tables": []
         },
         {
@@ -1438,7 +2156,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Name things as the business names them, and refuse a name that only makes sense inside the\ncodebase. Draw the boundary between one model and the next, and hold it when a second team\nwants to reach across it. Rework the model when the language changes, rather than mapping\naround it and keeping both.",
+          "text": "Name things as the business names them, and refuse a name that only makes sense inside the codebase. Draw the boundary between one model and the next, and hold it when a second team wants to reach across it. Rework the model when the language changes, rather than mapping around it and keeping both.",
           "tables": []
         }
       ],
@@ -1457,7 +2175,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Write services other teams depend on, and keep them running once they do. Read the stack trace\nwhen one stops. Know the runtime well enough to tell a slow query from a slow collector, and to\nsay which of the two a graph is showing. Typical tools: the JDK, a build tool, a profiler.",
+          "text": "Write services other teams depend on, and keep them running once they do. Read the stack trace when one stops. Know the runtime well enough to tell a slow query from a slow collector, and to say which of the two a graph is showing. Typical tools: the JDK, a build tool, a profiler.",
           "tables": []
         }
       ],
@@ -1476,7 +2194,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Talk to the people who would use a thing before the first line of it is written. Frame the\nquestion so that the answer can be no, and hear it when it is. Test the cheapest version of an\nidea that could still turn out wrong, and stop when it does.",
+          "text": "Talk to the people who would use a thing before the first line of it is written. Frame the question so that the answer can be no, and hear it when it is. Test the cheapest version of an idea that could still turn out wrong, and stop when it does.",
           "tables": []
         }
       ],
@@ -1518,7 +2236,7 @@
       "sections": [
         {
           "heading": "What it makes true",
-          "text": "A customer looking at an invoice can tell how each number was reached, in the words their own\ncontract uses, so the question \"why is this line 4,200\" is answered where it is asked. Support\nstill hears from customers, and what it hears about is their pricing rather than our arithmetic.\n\nWe would know it holds by what stops arriving. An explanation ticket is one where the customer\nasks how a number was reached and nothing about the number is wrong; those are countable today\nand they are the measure. The invoice being correct is not what is in question and never was.\n\nWhat falls outside: a disagreement about what the contract says. An invoice that explains itself\nperfectly can still bill something the customer believes they did not buy, and that is a\nquestion for the contract, not for the page.",
+          "text": "A customer looking at an invoice can tell how each number was reached, in the words their own contract uses, so the question \"why is this line 4,200\" is answered where it is asked. Support still hears from customers, and what it hears about is their pricing rather than our arithmetic.\n\nWe would know it holds by what stops arriving. An explanation ticket is one where the customer asks how a number was reached and nothing about the number is wrong; those are countable today and they are the measure. The invoice being correct is not what is in question and never was.\n\nWhat falls outside: a disagreement about what the contract says. An invoice that explains itself perfectly can still bill something the customer believes they did not buy, and that is a question for the contract, not for the page.",
           "tables": []
         }
       ],
@@ -1543,17 +2261,17 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "We keep the pricing rules as data the billing run reads, rather than code it executes: one rule\nper pricing term, named in the words the contract uses, versioned with the contract it belongs\nto. A line on an invoice carries the id of the rule that produced it, and the explanation a\ncustomer reads is rendered from that rule and the inputs it saw. One run produces both the\nnumber and the sentence about the number, which is what keeps them from drifting apart.\n\nWhere a rule cannot express a term, we renegotiate the term or we grow the rule language.\nNeither is quick, and choosing that over a manual adjustment is the whole of this strategy.",
+          "text": "We keep the pricing rules as data the billing run reads, rather than code it executes: one rule per pricing term, named in the words the contract uses, versioned with the contract it belongs to. A line on an invoice carries the id of the rule that produced it, and the explanation a customer reads is rendered from that rule and the inputs it saw. One run produces both the number and the sentence about the number, which is what keeps them from drifting apart.\n\nWhere a rule cannot express a term, we renegotiate the term or we grow the rule language. Neither is quick, and choosing that over a manual adjustment is the whole of this strategy.",
           "tables": []
         },
         {
           "heading": "What it rules out",
-          "text": "We never add a manual adjustment line. An invoice that anyone can add a number to is an invoice\nthat cannot explain itself, and every exception granted teaches the next team to ask for one. We\nnever write the explanation by hand after the fact, however well written it would be: a sentence\nmaintained beside a number is a second copy of a rule, and it goes stale on the first pricing\nchange nobody remembers to follow. And we keep no per-customer pricing code, which is the fast\nway to win one deal and the slow way to lose the ability to explain anything.",
+          "text": "We never add a manual adjustment line. An invoice that anyone can add a number to is an invoice that cannot explain itself, and every exception granted teaches the next team to ask for one. We never write the explanation by hand after the fact, however well written it would be: a sentence maintained beside a number is a second copy of a rule, and it goes stale on the first pricing change nobody remembers to follow. And we keep no per-customer pricing code, which is the fast way to win one deal and the slow way to lose the ability to explain anything.",
           "tables": []
         },
         {
           "heading": "What would show it is working",
-          "text": "We watch the share of invoice lines whose rule id is missing, which is countable on every run and\nshould fall to nothing. Then the share of explanation tickets in support's queue, which moves\nlater and is read monthly. The first number moves within a sprint of any pricing change, which is\nwhat makes it worth watching — by the time the second one moves, the change that broke it is\nmonths old.",
+          "text": "We watch the share of invoice lines whose rule id is missing, which is countable on every run and should fall to nothing. Then the share of explanation tickets in support's queue, which moves later and is read monthly. The first number moves within a sprint of any pricing change, which is what makes it worth watching — by the time the second one moves, the change that broke it is months old.",
           "tables": []
         }
       ],
@@ -1622,7 +2340,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We refuse a deadline that can only be met by leaving something half-built, and we say so early\nenough that the date can still move.\n\nWe never ship on time while knowing privately which part will be rewritten within the quarter.",
+          "text": "We refuse a deadline that can only be met by leaving something half-built, and we say so early enough that the date can still move.\n\nWe never ship on time while knowing privately which part will be rewritten within the quarter.",
           "tables": []
         }
       ],
@@ -1640,7 +2358,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We name the objection in the room where the choice is being made, once and plainly, and then\ncommit to whatever is decided.\n\nWe never agree in the meeting and reopen the question in a side channel afterwards.",
+          "text": "We name the objection in the room where the choice is being made, once and plainly, and then commit to whatever is decided.\n\nWe never agree in the meeting and reopen the question in a side channel afterwards.",
           "tables": []
         }
       ],
@@ -1658,7 +2376,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Every charge traces to something the customer did, in language they used when they agreed to\nit. When an invoice is disputed the answer is in the invoice, and support confirms it rather\nthan reconstructing it. We would know this holds when disputes are resolved by reading rather\nthan by investigation.\n\nIt says nothing about what we charge or whom we sell to. Pricing models and market are\ndecisions we expect to change several times; this is what we want to be true of the bill\nwhatever they turn out to be.",
+          "text": "Every charge traces to something the customer did, in language they used when they agreed to it. When an invoice is disputed the answer is in the invoice, and support confirms it rather than reconstructing it. We would know this holds when disputes are resolved by reading rather than by investigation.\n\nIt says nothing about what we charge or whom we sell to. Pricing models and market are decisions we expect to change several times; this is what we want to be true of the bill whatever they turn out to be.",
           "tables": []
         }
       ],
@@ -1692,6 +2410,213 @@
       "attrs": {}
     },
     {
+      "from": "concepts/billing-period",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/billing-period",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/contract",
+      "to": "concepts/customer",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "signing customer"
+      }
+    },
+    {
+      "from": "concepts/contract",
+      "to": "concepts/customer",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "maybe one",
+        "As": "paying customer"
+      }
+    },
+    {
+      "from": "concepts/contract",
+      "to": "concepts/pricing-rule",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "terms"
+      }
+    },
+    {
+      "from": "concepts/contract",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/contract",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "concepts/invoice",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "corrected invoice"
+      }
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "concepts/invoice-line",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "lines"
+      }
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/credit-note",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/customer",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/customer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "concepts/pricing-rule",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "rule"
+      }
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "concepts/usage-record",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": "usage read"
+      }
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice-line",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "concepts/billing-period",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "concepts/customer",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "billed customer"
+      }
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "concepts/invoice-line",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "lines"
+      }
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/invoice",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pricing-rule",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/pricing-rule",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/usage-record",
+      "to": "concepts/contract",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/usage-record",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/usage-record",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "domains/invoicing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "domains/pricing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "experience-kinds/community",
       "to": "sources/local",
       "via": "source",
@@ -1711,6 +2636,162 @@
     },
     {
       "from": "experience-kinds/role",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "concepts/billing-period",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "concepts/contract",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "concepts/invoice",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/billing-run",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "concepts/invoice-line",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "concepts/pricing-rule",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "concepts/usage-record",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "products/invoice-page",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/charge-explanation",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "concepts/credit-note",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "concepts/invoice",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "products/invoice-page",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/credit-notes",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/invoice-download",
+      "to": "products/invoice-page",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/invoice-download",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "concepts/contract",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "concepts/pricing-rule",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "products/billing-console",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/pricing-rules",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
+      "to": "concepts/contract",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
+      "to": "concepts/usage-record",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
+      "to": "products/usage-api",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/usage-reporting",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -1917,6 +2998,42 @@
       "from": "processes/delivery",
       "to": "roles/reviewer",
       "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "products/billing-console",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/billing-console",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "products/invoice-page",
+      "to": "domains/invoicing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/invoice-page",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "products/usage-api",
+      "to": "domains/pricing",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/usage-api",
+      "to": "sources/local",
+      "via": "source",
       "attrs": {}
     },
     {
