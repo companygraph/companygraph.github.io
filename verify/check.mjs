@@ -21,6 +21,10 @@ const SITE = "https://companygraph.io";
 // The last entry is the file the landing page draws, CompanyGraph's own model, so a person or a
 // crawler reading any page without running it can reach the data. The label is the filename,
 // the same in both languages, so it carries no data-de.
+// The German nav no longer fits one row at desktop width and collapses to the menu, which is the
+// nav fit fence doing its work; a label inside the closed menu is not visible text, so no
+// `shows` list names a nav label. Every label's German is still held by the translates walk
+// over each element that carries data-de, visible or not.
 const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy", "company.json"];
 
 const PAGES = [
@@ -65,7 +69,7 @@ const PAGES = [
       // Declared here so the swap cannot quietly go away again.
       title: "CompanyGraph – ein Meta-Modell für den Betrieb eines Unternehmens",
       desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
-                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch",
+                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch",
                           "beschrieben in seinem eigenen Vokabular"],
                   hides: ["Everything a company", "Read the source", "described in its own vocabulary"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
@@ -83,6 +87,20 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
+  // Where CompanyGraph's model is published and what makes each place, drawn from company.json
+  // by @robertblust/design's writeSurfaces, held by the shared lineage check to the artifact and
+  // to where STAGE_PAGE sends a card, which here is the landing page.
+  { path: "/surfaces/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
+    contains: ["Nothing kept beside", "model", "How to read it", "Generated from"],
+    translates: { lang: "de",
+      title: "Surfaces – CompanyGraph",
+      desc: "Jeder Ort, an dem CompanyGraph sein Modell veröffentlicht, und wie er aus ihm entsteht: von Hand oder durch den Build eines Repositorys aus einem gepinnten Commit.",
+      shows: ["Wie man es liest", "HERKUNFT DER SURFACES", "Keine Linie ist getippt"], hides: ["How to read it", "SURFACE LINEAGE", "No line is typed"] },
+    links: ["https://github.com/companygraph"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract", "surfaces"], fits: true,
+    card: true, cardBase: SITE, internalLinks: true, lineage: true },
   // Who does CompanyGraph's work: one board per process, drawn from company.json by
   // @robertblust/design's writeTeam, held by the shared board check to the artifact and to where
   // STAGE_PAGE sends a card, which here is the landing page.
@@ -131,7 +149,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
-    translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "BEISPIEL", "Seiten"], hides: ["One company", "How to read it"],
+    translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "Seiten"], hides: ["One company", "How to read it"],
                   title: "Beispiel – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
@@ -146,7 +164,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
-    translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest", "MODELL"], hides: ["The model", "How to read it"],
+    translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest"], hides: ["The model", "How to read it"],
                   title: "Modell – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
@@ -167,7 +185,7 @@ const PAGES = [
     sameTab: ["intro/", "./", "../", "../model/", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
-    translates: { lang: "de", shows: ["Vortrag", "Vorträge", "MODELL", "BEISPIEL"], hides: ["Watch the talk"],
+    translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
                   desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
