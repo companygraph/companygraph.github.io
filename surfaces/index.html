@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Billing — CompanyGraph</title>
-<meta id="metadesc" name="description" content="The meta-model and its tooling are open source forever. What costs money is time: consulting, billed time and material.">
+<title>Surfaces — CompanyGraph</title>
+<meta id="metadesc" name="description" content="Every place CompanyGraph publishes its model, and how each is made from it: by hand, or by a repository's build from a pinned commit.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://companygraph.io/billing/">
+<link rel="canonical" href="https://companygraph.io/surfaces/">
 
-<meta property="og:title" content="Billing — CompanyGraph">
-<meta property="og:description" content="The meta-model and its tooling are open source forever. What costs money is time: consulting, billed time and material.">
+<meta property="og:title" content="Surfaces — CompanyGraph">
+<meta property="og:description" content="Every place CompanyGraph publishes its model, and how each is made from it: by hand, or by a repository's build from a pinned commit.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CompanyGraph">
-<meta property="og:url" content="https://companygraph.io/billing/">
-<meta property="og:image" content="https://companygraph.io/billing/og.png">
+<meta property="og:url" content="https://companygraph.io/surfaces/">
+<meta property="og:image" content="https://companygraph.io/surfaces/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Not per seat. Per day.">
+<meta property="og:image:alt" content="From CompanyGraph's model to each surface">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -50,9 +50,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://companygraph.io/billing/#webpage",
-      "name": "Billing",
-      "url": "https://companygraph.io/billing/",
+      "@id": "https://companygraph.io/surfaces/#webpage",
+      "name": "Surfaces",
+      "url": "https://companygraph.io/surfaces/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://companygraph.io/#website"
@@ -61,12 +61,12 @@
         "@id": "https://companygraph.io/#organization"
       },
       "breadcrumb": {
-        "@id": "https://companygraph.io/billing/#breadcrumb"
+        "@id": "https://companygraph.io/surfaces/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://companygraph.io/billing/#breadcrumb",
+      "@id": "https://companygraph.io/surfaces/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -77,8 +77,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Billing",
-          "item": "https://companygraph.io/billing/"
+          "name": "Surfaces",
+          "item": "https://companygraph.io/surfaces/"
         }
       ]
     },
@@ -132,9 +132,8 @@
 
 </script>
 <style>
-/* Self-hosted, same origin: no third party sees a visitor, and the files resolve
-   from file:// as well as from the domain. Relative, because this page sits one
-   directory down and a root-absolute path would break the file:// case. */
+/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
+   Relative, because a root-absolute path breaks under file://. */
 @font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
@@ -495,8 +494,6 @@
   /* The hover underline hangs below the text, so the box is taller under the text than over
      it. Mirror the space above, and the box is symmetric about its own text. */
 
-  /* Not one screen: this page has an argument to make in order, so it scrolls and
-     starts at the top rather than centering itself the way the landing page does. */
   main{flex:1; display:flex; align-items:center; padding:2vh 0 6vh}
 
   /* ─── title contract · v1 · shared ─────────────────────────────────
@@ -535,10 +532,9 @@
   @media (max-width:900px){ .tagline{max-width:100%} }
   /* ─── end title contract ────────────────────────────────────────────────── */
 
-  /* The page's one reversal, and it earns the flag: everything below describes a
-     service you cannot buy yet. Said quietly at the bottom it would be small print;
-     said here it is part of the argument. */
-  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
+  /* The page's one reversal, and the only honest place for it: the headline says nothing
+     leaves, and one thing does — the request itself, to whoever serves the file. */
+  .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
   section{margin-top:clamp(3rem,8vh,5.5rem)}
@@ -547,30 +543,12 @@
      font-size:clamp(1.6rem,3vw,2.3rem)}
   h2 em{font-style:normal; color:var(--c-mid)}
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
-
-  /* the billable unit, stated once, in the face this system reserves for data */
-  .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
-        background:var(--raise); border:1.5px solid var(--c-firm);
-        font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
-
-  .cols{margin-top:2rem; display:grid; gap:1.1rem; align-items:start;
-        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))}
-  .card{background:var(--raise); border:1.5px solid var(--rule); border-radius:12px;
-        padding:1.5rem 1.6rem}
-  .card h3{font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
-           color:var(--dim)}
-  .card ul{margin-top:1.1rem; list-style:none; display:grid; gap:.95rem}
-  .card li{font-size:.98rem; line-height:1.45}
-  .card li b{font-weight:600}
-  .card li i{font-style:normal; display:block; color:var(--dim); font-size:.88rem; margin-top:.2rem}
-  /* free: the settled half of the model */
-  .free{border-color:var(--c-firm)}
-  .free li b{color:var(--c-firm)}
-  /* the .never card (declined options): terms use plain --ink like any other card, no separate treatment needed */
+  .lede a{color:var(--c-mid)}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
-  .rules p b{font-weight:600; color:var(--ink)}
   .rules p{color:var(--dim); font-size:1rem}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p a{color:var(--c-mid)}
 
   /* ─── prose footer · v1 · credit ───────────────────────────────────
      Generated from @robertblust/design — edit it there and run `npm run design`.
@@ -601,6 +579,114 @@
   footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
   footer a[aria-current="page"]{color:var(--c-firm)}
   /* ─── end prose footer ──────────────────────────────────────────────────*/
+  /* ─── stage contract · v2 · shared ───────────────────────────────────
+     `stage.css` styles the drawing, the card and the dialog, and says in its own header that
+     the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
+     rules a page must bring for a stage to sit on it properly. They are generated from
+     @robertblust/design, like the tokens and the header above them. Editing them here has no
+     effect — the next `npm run design` overwrites them. Change them in the package.
+
+     What the contract says:
+       · the figure     gets its own air above it, and its caption sits clear of the canvas
+                        rather than hard against it, at a measure prose can be read at.
+       · the hint       how to move the drawing is not a sentence about the drawing, so it is
+                        its own line above the caption rather than a clause inside it. Small
+                        and dim: subordinate to the caption, and read first only by someone
+                        looking for a control. Not mono — mono means data here, and an
+                        instruction is prose. `monoScope` would not catch it either way: it
+                        inspects a fixed list of selectors and this class is not on one.
+       · the provenance mono end to end. It is the one line on the page that is entirely
+                        record — a repository, a commit, the folder the block was read from —
+                        and setting only the link and the commit in mono left the sentence
+                        around them looking like prose that happened to contain data.
+
+     The drawing's own behavior is in `stage.js` and `stage.css`, which are byte-identical
+     copies too. A page that carries a stage carries all of it. */
+  .figure-section{margin-top:clamp(2rem,5vh,3.5rem)}
+  .figcap{margin-top:1.1rem; color:var(--dim); font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.5; max-width:68ch}
+  .figcap b{color:var(--ink); font-weight:600}
+  .stagehint{margin-top:.7rem; font-size:.82rem; color:var(--dim)}
+  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
+           letter-spacing:.06em; color:var(--dim)}
+  /* ─── end stage contract ────────────────────────────────────────────────── */
+  .lbl{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.66rem;
+       letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  /* ─── surfaces · v1 · shared ─────────────────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
+
+     The lineage /surfaces/ draws: the model, the makers under it, and the surfaces each
+     maker produces, with the wires between them. These are the rules for the markup
+     lib/render/surfaces.mjs writes, and for the two marks it puts on a maker. The page keeps
+     its shell, the classes other pages share (`.lbl`, `.nm`, `.mono`), and the parts it writes
+     itself around the lineage: the legend, the hint and the card panel.
+  */
+  /* blocks/team.css declares this same base rule for its own .mk. */
+  .mk{width:1.05em; height:1.05em; flex:none; vertical-align:-.16em}
+  .mk.hand{color:var(--c-firm)}
+  .mk.build{color:var(--c-mid)}
+
+  /* The lineage. Three columns on a wide screen — the model, the makers, the surfaces — laid out
+     by nesting, so the markup is the tree the drawing shows and a reader with no CSS gets the
+     same order. The wires sit behind it and are drawn by the page from where the nodes landed. */
+  .lineage{position:relative; display:grid; grid-template-columns:minmax(0,13rem) minmax(0,1fr);
+           column-gap:clamp(3rem,7vw,6rem); align-items:center; margin-top:1.4rem}
+  .wires{position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none}
+  .wires path{fill:none; stroke:var(--rule); stroke-width:1.5; transition:stroke .2s ease}
+  .wires path.hand{stroke-dasharray:5 5}
+  /* --c-path is the token for exactly this: the way back to the root from what is focused. */
+  .wires path.on{stroke:var(--c-path); stroke-width:2}
+  .ln-model{position:relative; padding:1.1rem 1.2rem; border:1.5px solid var(--c-firm); border-radius:10px;
+            background:var(--raise)}
+  .ln-model .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:800;
+                font-size:clamp(1.2rem,2vw,1.5rem); letter-spacing:-.02em; line-height:1.05; margin-top:.35rem}
+  .ln-model .at{font-size:.78rem; color:var(--c-mid); margin-top:.3rem}
+  .ln-groups, .ln-surfaces{list-style:none}
+  .ln-groups{display:grid; gap:2.2rem}
+  .ln-group{display:grid; grid-template-columns:minmax(0,12rem) minmax(0,1fr);
+            column-gap:clamp(2.5rem,6vw,5rem); align-items:center}
+  .ln-maker{position:relative; display:flex; gap:.6rem; align-items:center; padding:.5rem 0}
+  .ln-maker .mk{width:1.5rem; height:1.5rem}
+  .ln-maker .who{font-weight:600; font-size:.92rem; line-height:1.25}
+  .ln-maker .how{display:block; font-size:.76rem; color:var(--dim); font-weight:400}
+  .ln-surfaces{display:grid; grid-template-columns:minmax(0,1fr); gap:.6rem}
+  .ln-surfaces li{min-width:0}
+  .ln-s{position:relative; width:100%; text-align:left; font:inherit; color:var(--ink); cursor:pointer;
+        display:flex; flex-direction:column; gap:.1rem; padding:.7rem .95rem;
+        background:var(--ground); border:1px solid var(--rule); border-radius:8px;
+        transition:border-color .15s ease, background-color .15s ease}
+  .ln-s:hover{border-color:var(--c-mid)}
+  .ln-s:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+  .ln-s .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:1.02rem}
+  /* An address, so mono: it is a record value, not prose. */
+  .ln-s .host{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.72rem; color:var(--dim);
+              overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .ln-s[aria-pressed="true"]{border-color:var(--c-path); background:var(--press)}
+  .ln-s[aria-pressed="true"] .nm{color:var(--c-firm)}
+  @media (prefers-reduced-motion: reduce){ .wires path, .ln-s{transition:none} }
+  /* No room for three columns: the drawing becomes the tree it already is, its lines drawn as
+     rules — dashed under the hand, as the wire is. */
+  @media (max-width:760px){
+    .wires{display:none}
+    .lineage{grid-template-columns:minmax(0,1fr); row-gap:0}
+    .ln-model{justify-self:start}
+    .ln-groups{gap:0; margin-left:1rem; padding:1.2rem 0 0 1.1rem; border-left:1.5px solid var(--rule)}
+    .ln-group{grid-template-columns:minmax(0,1fr); padding-bottom:1.2rem}
+    .ln-surfaces{margin-left:.7rem; padding-left:1rem; border-left:1.5px solid var(--rule)}
+    .ln-group.hand .ln-surfaces{border-left-style:dashed}
+  }
+  /* ─── end surfaces ─────────────────────────────────────────────────────── */
+  .legend{display:flex; gap:.6rem 1.5rem; flex-wrap:wrap; margin-top:1.4rem; color:var(--dim); font-size:.76rem}
+  .legend > span{display:flex; align-items:center; gap:.5rem}
+  .legend svg.ln{width:28px; height:6px; flex:none}
+  .legend svg.ln path{stroke:var(--dim); stroke-width:1.5}
+  .ln-hint{margin-top:1.6rem; font-size:.82rem; color:var(--dim)}
+  /* Full width, like a seat's card on /team/: a References table needs the width. */
+  .ln-panel{margin-top:1.6rem}
+  .ln-panel .card{width:100%}
+  .cbody p, .cbody ul.prose{max-width:72ch}
+  /* The provenance line under the rules: record, so mono end to end, and clear of them. */
+  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
+           letter-spacing:.06em; color:var(--dim)}
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
@@ -613,8 +699,27 @@
   @media (max-width:560px){
   }
 </style>
+<link rel="stylesheet" href="../stage.css">
+<!-- CompanyGraph's own model, which this page's lineage and cards read. They find it by the
+     data-stage attribute and fetch the href; crossorigin lets the fetch use the preload. -->
+<link rel="preload" as="fetch" href="../company.json" data-stage crossorigin>
 </head>
 <body>
+
+<!-- The two ways a surface is made, as form rather than as colour, the way /team/ tells a human
+     from an agent: a filled pen for the hand, an outlined build for the machine. tokens.css
+     allows one hue at four brightnesses and refuses a second in writing. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="m-hand" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M8 .8l5.4 6.3-2.9 8.1H5.5L2.6 7.1zM8 7.2a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7z"/>
+  </symbol>
+  <symbol id="m-build" viewBox="0 0 16 16">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2.8"/><path d="M6.4 5.6L4.2 8l2.2 2.4M9.6 5.6L11.8 8 9.6 10.4"/>
+    </g>
+  </symbol>
+</defs></svg>
+
 
 <div class="shell">
   <header>
@@ -633,11 +738,11 @@
         <div class="navlinks" id="navlinks">
           <a href="../team/">Team</a>
           <a href="../principles/" data-de="Prinzipien">Principles</a>
-          <a href="../surfaces/">Surfaces</a>
+          <a href="./" aria-current="page">Surfaces</a>
           <a href="../model/" data-de="Modell">Model</a>
           <a href="../example/" data-de="Beispiel">Example</a>
           <a href="../talks/" data-de="Vorträge">Talks</a>
-          <a href="./" aria-current="page" data-de="Abrechnung">Billing</a>
+          <a href="../billing/" data-de="Abrechnung">Billing</a>
         </div>
         <button class="burger" id="burger" type="button" aria-expanded="false"
                 aria-controls="navlinks" aria-label="menu" data-de-aria="Menü">
@@ -654,55 +759,45 @@
   <div class="shell">
 
     <div class="title">
-      <h1 data-de="<span class='r70'>Nicht pro Sitzplatz.</span><span class='rcl'>Pro <em>Tag</em>.</span>"><span class="r70">Not per seat.</span><span class="rcl">Per <em>day</em>.</span></h1>
-      <p class="tagline" data-de="Das Modell ist quelloffen und bleibt es. Falls hier je etwas kostet, dann Zeit – und diese Seite sagt, wie sie gezählt würde.">The model is open source and stays that way. If anything here ever costs money it is time — and this page says how it would be counted.</p>
-      <p class="note" data-de="Es gibt keine Lizenz zu kaufen, keine Sitzplätze zu zählen und nichts zu hosten. Verkauft wird heute nichts, und vielleicht nie: ob daraus je Beratung wird, ist Teil dessen, was gerade geprüft wird.">There is no license to buy, no seats to count and nothing hosted. Nothing is being sold today, and it may never be: whether this becomes consulting at all is part of what is being validated.</p>
+      <h1 data-de="<span class='r70'>Nichts wird neben</span><span class='rcl'>dem <em>Modell</em> gepflegt.</span>"><span class="r70">Nothing kept beside</span><span class="rcl">the <em>model</em>.</span></h1>
+      <p class="tagline" data-de="Jeder Ort, an dem CompanyGraph sein Modell veröffentlicht, ist aus einem gepinnten Commit dieses Modells abgeleitet, und nichts wird daneben gepflegt. Diese Seite zeichnet jeden Ort und das, was ihn erzeugt.">Every place CompanyGraph publishes its model is derived from it at a pinned commit, and nothing is maintained beside it. This page draws each place and what makes it.</p>
+      <!-- surfaces-note:start -->
+      <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
+    <!-- surfaces-note:end -->
     </div>
 
-    <section>
-      <h2 data-de="Ein Zähler">One meter</h2>
-      <p class="lede" data-de="Beratung würde nach Aufwand abgerechnet: gearbeitete Zeit, plus Auslagen, die vorher vereinbart sind. Kein Paket, keine Bandbreite, keine Mindestabnahme.">Consulting would be billed time and material: hours worked, plus expenses agreed in advance. No package, no band, no minimum.</p>
-      <p class="unit mono" data-de="1 Tag = 8 Stunden">1 day = 8 hours</p>
-      <p class="lede" data-de="Halbe Tage gibt es, angefangene Stunden nicht. Was in einer Woche entsteht, steht in derselben Woche im Modell – Sie sehen die Arbeit dort, wo sie liegt, nicht in einem Statusbericht.">Half days exist; part-hours do not. Whatever gets built in a week is in the model that week — you see the work where it lives, not in a status report.</p>
-      <p class="lede" data-de="Einen Satz gibt es nicht, und es gibt auch niemanden, den man danach fragen könnte. Er hinge vom Umfang ab, und eine Zahl auf einer Website, die für jeden Fall gilt, gilt für keinen – sie gehörte in eine Offerte, falls es je eine zu schreiben gibt.">There is no rate, and nobody to ask for one. It would depend on the scope, and a number on a website that fits every engagement fits none — it would belong in a proposal, if there is ever a proposal to write.</p>
-    </section>
-
-    <section>
-      <h2 data-de="Alles andere ist frei">Everything else is free</h2>
-      <p class="lede" data-de="Ein Meta-Modell nützt nur, wenn es übernommen wird. Alles, was die Übernahme teurer macht, arbeitet gegen den Zweck – also kostet nichts davon etwas.">A meta-model is only worth anything if it gets adopted. Anything that makes adoption more expensive works against the point, so none of it costs anything.</p>
-      <div class="cols">
-        <div class="card free">
-          <h3 data-de="Frei, für immer">Free, forever</h3>
-          <ul>
-            <li><b data-de="Das Vokabular">The vocabulary</b><i data-de="Typen, Schemas, Konventionen. Apache 2.0.">Types, schemas, conventions. Apache 2.0.</i></li>
-            <li><b data-de="Die Werkzeuge">The tooling</b><i data-de="Was je gebaut wird, um das Modell anzulegen und aktuell zu halten, ist quelloffen – nicht die kostenpflichtige Hälfte von etwas Freiem.">Whatever gets built to create the model and keep it current is open source — not the paid half of a free thing.</i></li>
-            <li><b data-de="Die Vorträge">The talks</b><i data-de="Deck, PDF und Tonspur, in beiden Sprachen.">Deck, PDF and audio, in both languages.</i></li>
-            <li><b data-de="Ihre Inhalte">Your content</b><i data-de="Was Sie beschreiben, gehört Ihnen. Dieses Projekt hat daran keinen Anteil.">What you describe is yours. This project claims no interest in it.</i></li>
-            <li><b data-de="Selbst machen">Doing it yourself</b><i data-de="Das ist der Normalfall, nicht die Sparvariante. Die meisten brauchen niemanden dafür.">That is the normal case, not the budget one. Most people need nobody for it.</i></li>
-          </ul>
-        </div>
-        <div class="card never">
-          <h3 data-de="Erwogen, nicht angenommen">Considered, not accepted</h3>
-          <ul>
-            <li><b data-de="Lizenz pro Sitzplatz">A per-seat license</b><i data-de="Zählt Leser. Ein Modell, das Menschen und KI zugleich dienen soll, darf nicht teurer werden, je mehr es lesen.">Counts readers. A model meant for people and AI at once must not cost more the more of them read it.</i></li>
-            <li><b data-de="Preis pro Eintrag">A per-entry price</b><i data-de="Bestraft Vollständigkeit. Ein halb ausgefülltes Modell ist genau das, was hier nicht entstehen soll.">Punishes completeness. A half-filled model is precisely what this is built to avoid.</i></li>
-            <li><b data-de="Eine bezahlte Fassung des Modells">A paid edition of the model</b><i data-de="Zwei Vokabulare, von denen eines besser ist, sind kein Meta-Modell mehr.">Two vocabularies, one of them better, stop being a meta-model.</i></li>
-          </ul>
-        </div>
+    <section class="figure-section">
+      <div class="lbl" data-de="Herkunft der Surfaces">Surface lineage</div>
+      <!-- surfaces:start -->
+      <div class="lineage" id="lineage">
+        <svg class="wires" id="wires" aria-hidden="true"></svg>
+        <div class="ln-model" id="lnmodel"><div class="lbl" data-de="Das Modell">The model</div><div class="nm">mental-model</div><div class="at mono">@4406e7d</div></div>
+        <ul class="ln-groups">
+          <li class="ln-group">
+            <div class="ln-maker" data-maker="https://github.com/companygraph/companygraph.github.io"><svg class="mk build" aria-hidden="true"><use href="#m-build"/></svg><span class="who">companygraph.github.io<span class="how" data-de="Build">build</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="companygraph-io-website" data-id="surfaces/companygraph-io-website" data-maker="https://github.com/companygraph/companygraph.github.io" aria-pressed="false" aria-controls="lnpanel"><span class="nm">companygraph.io website</span><span class="host">companygraph.io</span></button></li>
+            </ul>
+          </li>
+        </ul>
       </div>
+      <!-- surfaces:end -->
+      <div class="legend"><span><svg class="ln" aria-hidden="true"><path d="M0 3H28"/></svg> <span data-de="ein Build, der beim nächsten Pin erneut läuft">a build, which runs again on the next pin</span></span><span><svg class="ln" aria-hidden="true"><path d="M0 3H28" stroke-dasharray="5 5"/></svg> <span data-de="eine Person, die die Regeln liest">a person, who reads the rules</span></span></div>
+      <div class="ln-panel" id="lnpanel" aria-live="polite" hidden><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+      <p class="ln-hint" id="lnhint" data-de="Wählen Sie eine Surface, um ihrer Linie zu folgen und ihre Karte zu lesen.">Choose a surface to follow its line and read its card.</p>
+      <p class="figcap" data-de="Links der Commit des Modells, in der Mitte jeder Urheber und rechts jede Surface unter ihrem Urheber. Eine durchgezogene Linie ist ein Build; eine gestrichelte Linie ist eine Person.">The model's commit on the left, each maker in the middle, and each surface under its maker on the right. A solid line is a build; a dashed line is a person.</p>
     </section>
 
     <section>
-      <h2 data-de="Wie sich die Rechnung verhält">How the bill behaves</h2>
+      <h2 data-de="Wie man es liest">How to read it</h2>
       <div class="rules">
-        <p data-de="<b>Sie können jederzeit aufhören.</b> Keine Laufzeit, kein Retainer, keine Kündigungsfrist. Was bis dahin entstanden ist, liegt in Ihrem Repository und funktioniert ohne mich weiter – das ist der Sinn eines quelloffenen Modells.">
-          <b>You can stop at any time.</b> No term, no retainer, no notice period. What exists by then sits in your repository and keeps working without me — which is the point of an open model.</p>
-        <p data-de="<b>Es gibt nichts, worin Sie feststecken.</b> Kein Konto, kein Dienst, keine Datenhaltung bei mir. Wenn die Beratung endet, ändert sich an dem, was Sie haben, nichts.">
-          <b>There is nothing to be locked into.</b> No account, no service, no data held here. When the consulting ends, nothing about what you have changes.</p>
-        <p data-de="<b>Nichts davon läuft heute.</b> Keine Offerte, kein Satz, kein Kontakt und nichts zu kaufen – und vielleicht bleibt es dabei. Ob daraus je Umsatz wird, ist eine der Fragen, die offen geprüft werden. Diese Seite steht trotzdem schon hier, damit die Frage beantwortet ist, bevor sie gestellt wird.">
-          <b>None of this is running today.</b> No proposal, no rate, no contact and nothing to buy — and it may stay that way. Whether any of this ever earns anything is one of the questions being validated in the open. The page is here anyway, so the question is answered before it is asked.</p>
+        <p data-de="<b>Eine Surface ist eine Seite, kein Ort.</b> Das Modell enthält die Website companygraph.io, nicht den Host, der sie bereitstellt, und nicht die Domain, unter der sie antwortet. Was es beschreibt, ist das, was ein Besucher liest."><b>A surface is a page, not a place.</b> The model holds the companygraph.io website, not the host that serves it or the domain it answers on. What it describes is what a visitor reads.</p>
+        <p data-de="<b>Geschrieben oder gebaut: Das sagt, wo die Regeln stehen.</b> Bei einer geschriebenen Surface stehen die Projektionsregeln im Modell, denn eine Person lässt sich nicht erneut ausführen. Eine gebaute Surface nennt das Repository, dessen Build sie schreibt, und die Regeln sind dieser Build."><b>Written or built says where the rules are kept.</b> A written surface keeps its projection rules in the model, because nothing re-runs a person. A built surface names the repository whose build writes it, and the rules are that build.</p>
+        <p data-de="<b>Keine Linie ist getippt.</b> Jede Surface steht unter dem Urheber, den ihre eigene Datei nennt, daher kann das Diagramm dem Modell nicht widersprechen."><b>No line is typed.</b> Each surface sits under the maker its own file names, so the drawing cannot disagree with the model.</p>
       </div>
     </section>
+
+    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/companygraph/mental-model/tree/HEAD/model">companygraph/mental-model</a>@<span id="srccommit">HEAD</span></p>
 
   </div>
 </main>
@@ -718,9 +813,9 @@
 </div>
 
 <script>
-// Same mechanism as the landing page, and the same reason: English is the markup so the
-// page says the right thing before any JS runs, and the choice is remembered per origin —
-// so a visitor who switched to German on the landing page arrives here in German.
+// Same mechanism as the other two pages: English is the markup so the page says the right
+// thing before any JS runs, and the choice is remembered per origin. This page describes
+// that key, which is the only reason it is worth pointing at the code from here.
 (function(){
   /* ─── language · v4 · page ─────────────────────────────────────────────
      One language across three domains, and where it is remembered. Generated
@@ -942,10 +1037,10 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"Abrechnung – CompanyGraph",
-         desc:"Das Meta-Modell und seine Werkzeuge sind für immer quelloffen. Was kostet, ist Zeit: Beratung, nach Aufwand abgerechnet." },
-    en:{ title:"Billing — CompanyGraph",
-         desc:"The meta-model and its tooling are open source forever. What costs money is time: consulting, billed time and material." }
+    de:{ title:"Surfaces – CompanyGraph",
+         desc:"Jeder Ort, an dem CompanyGraph sein Modell veröffentlicht, und wie er aus ihm entsteht: von Hand oder durch den Build eines Repositorys aus einem gepinnten Commit." },
+    en:{ title:"Surfaces — CompanyGraph",
+         desc:"Every place CompanyGraph publishes its model, and how each is made from it: by hand, or by a repository's build from a pinned commit." }
   };
 
   function applyLang(){
@@ -987,6 +1082,118 @@
   applyLang();
   applyTheme();
 })();
+</script>
+<script src="../card.js"></script>
+<script>
+  var STAGE_PAGE = "../";          // the page that draws this model on the stage
+  /* ─── surfaces lineage · v1 · shared ───────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
+
+     The lineage's behavior on /surfaces/: the wires drawn from where the nodes landed, a
+     surface chosen by click or by address, and its card in the panel under the drawing. It
+     holds the page's card glue as well as its drawing, rather than leaving that to the
+     `model card` block, because the two share state: the card shown is the surface chosen,
+     and choosing one redraws the wires and fills the panel in one step. It moved here from
+     /surfaces/ with one thing generalized and nothing else: where a card's links go.
+
+     This block has a contract with the page around it that `design:check` cannot see, because
+     the check only compares bytes between the markers. The page must load card.js before it
+     and declare, above this fence in the same script:
+
+       var STAGE_PAGE = "../model/";   // the page that draws this model on the stage
+
+     and carry what lib/render/surfaces.mjs writes, the panel (`#lnpanel`, holding a card with
+     `.cbody` and `.cfoot span`), the hint (`#lnhint`), and the provenance line (`#srclink`
+     with its `data-src`, and `#srccommit`).
+  */
+  // The nodes are in the markup; the lines and the cards are not. A line is drawn from where two
+  // nodes landed, which only the browser knows, and says nothing the nesting of the lists does not.
+  // A card is rendered when its surface is chosen and again when the language changes, as a seat's
+  // card is on /team/.
+  (function(){
+    var box = document.getElementById("lineage"), svg = document.getElementById("wires"),
+        model = document.getElementById("lnmodel"), panel = document.getElementById("lnpanel"),
+        hint = document.getElementById("lnhint"),
+        btns = [].slice.call(document.querySelectorAll(".ln-s")), current = null, card = null;
+
+    function at(el){
+      var a = el.getBoundingClientRect(), b = box.getBoundingClientRect();
+      return { l: a.left - b.left, r: a.right - b.left, y: a.top - b.top + a.height / 2 };
+    }
+    function curve(x1, y1, x2, y2){
+      var m = (x1 + x2) / 2;
+      return "M" + x1 + " " + y1 + "C" + m + " " + y1 + " " + m + " " + y2 + " " + x2 + " " + y2;
+    }
+    // Model to each maker, maker to each of its surfaces. The chosen surface's two segments take
+    // --c-path, which is what that token names: the way back to the root.
+    function draw(){
+      if (getComputedStyle(svg).display === "none") return;
+      var on = current && current.getAttribute("data-maker"), out = [], m = at(model);
+      [].forEach.call(document.querySelectorAll(".ln-maker"), function(mk){
+        var key = mk.getAttribute("data-maker"), a = at(mk), cls = key === "hand" ? "hand" : "";
+        out.push('<path class="' + cls + (on === key ? " on" : "") + '" d="' + curve(m.r, m.y, a.l - 8, a.y) + '"/>');
+        var right = at(mk.querySelector(".who")).r + 10;
+        btns.forEach(function(b){
+          if (b.getAttribute("data-maker") !== key) return;
+          var s = at(b);
+          out.push('<path class="' + cls + (b === current ? " on" : "") + '" d="' + curve(right, a.y, s.l, s.y) + '"/>');
+        });
+      });
+      svg.innerHTML = out.join("");
+    }
+    function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
+    function show(){
+      if (!current || !card) return;
+      card(current.getAttribute("data-id"));
+    }
+    function select(b, address){
+      current = b;
+      btns.forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+      panel.hidden = !b; hint.hidden = !!b;
+      show();
+      if (address) history.replaceState(null, "", b ? "#" + b.id : location.pathname + location.search);
+      draw();
+    }
+    btns.forEach(function(b){
+      b.addEventListener("click", function(){ select(current === b ? null : b, true); });
+    });
+    // A link must land: arriving on /surfaces/#linkedin-profile chooses that surface.
+    function fromHash(){
+      var b = document.getElementById(location.hash.slice(1));
+      if (b && b.classList.contains("ln-s")) select(b, false);
+    }
+    window.addEventListener("hashchange", fromHash);
+    window.addEventListener("resize", draw);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+    new MutationObserver(function(){ show(); draw(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    fromHash();
+    draw();
+
+    rbCard.data("surfaces", function (data) {
+      // The provenance line names the commit this was read from, as the timeline's does; the
+      // markup carries HEAD only until the data arrives.
+      var src = document.getElementById("srclink");
+      src.href = "https://github.com/" + data.repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
+      document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
+      var byId = {};
+      data.entities.forEach(function (e) { byId[e.id] = e; });
+      function goLink(id){
+        var a = document.createElement("a");
+        a.className = "go"; a.textContent = byId[id].name;
+        // Where a card links: the page that draws this model on the stage, which a site declares
+        // for the reason the `model card` block gives.
+        a.href = STAGE_PAGE + "?stage=expanded#" + id;
+        return a;
+      }
+      card = function (id) {
+        rbCard.render(byId[id], panel.querySelector(".cbody"), panel.querySelector(".cfoot span"),
+          { data: data, lang: lang(), link: goLink });
+      };
+      show();
+    });
+  })();
+  /* ─── end surfaces lineage ────────────────────────────────────────────── */
 </script>
 </body>
 </html>

@@ -13,6 +13,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
 | `/team/` | Who does CompanyGraph's work: one board per process, generated from `company.json` by the design package's `render/team`, each opening on the process's owner. |
 | `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
+| `/surfaces/` | Where CompanyGraph's model is published and what makes each place, generated from `company.json` by the design package's `render/surfaces`. |
 | `/model/` | The model's own vocabulary, drawn as the graph of what references what — one schema per type. |
 | `/example/` | One instance of the model, drawn as the graph its own files form — generated, never written by hand. |
 | `/billing/` | What would cost money, if anything ever does. |
@@ -48,6 +49,9 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   `stage contract` and `model card` fences.
 - `principles/` — `index.html`, the page shell around a region `build/pages.mjs` writes from
   `company.json` with `@robertblust/design/render/principles`, and the `principles` fence.
+- `surfaces/` — `index.html`, the page shell around the lineage `build/pages.mjs` writes from
+  `company.json` with `@robertblust/design/render/surfaces`, and the `surfaces`, `stage contract`
+  and `surfaces lineage` fences.
 - `example/` and `model/` — `index.html` each, the stage pages beside the landing page: their
   own prose and inline `<style>`, the stage above linked in, and a preload link naming the
   artifact the stage draws. Two steps build what the stage pages draw — `build/build.mjs`
@@ -65,7 +69,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png`,
-  `billing/og.png`, `privacy/og.png`, `principles/og.png`, `team/og.png` — 1200×630 share cards, each
+  `billing/og.png`, `privacy/og.png`, `principles/og.png`, `team/og.png`, `surfaces/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
   `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders every one and writes

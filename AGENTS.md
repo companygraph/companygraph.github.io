@@ -64,6 +64,15 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   when a graph drifts. Nothing else on the example page names anything from the example,
   nothing else on the model page names anything from the model, and nothing else on the
   landing page names anything from CompanyGraph's own model.
+- **Team, Principles and Surfaces are generated regions around a hand-written shell.** Each is
+  a page built from `/privacy/`'s shell whose model-derived region `npm run pages` writes from
+  `company.json` with the design package's `render/team`, `render/principles` and
+  `render/surfaces`; its fences come from `npm run design`. Those words are the model's own and
+  are not translated, which the page's generated note says; everything around them is the
+  page's, reviewed English with German made from it. Team's board order is the list
+  `build/pages.mjs` passes as `order`, because core gives a process no rank. Team and Surfaces
+  declare `STAGE_PAGE = "../"`, the landing page, which draws the instance, and the suite's
+  `board` and `lineage` checks fail if that page stops drawing `company.json`.
 
 ## Constraints
 

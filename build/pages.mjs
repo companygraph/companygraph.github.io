@@ -14,6 +14,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeTeam } from "@robertblust/design/render/team";
+import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeJsonLd } from "./jsonld.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -48,6 +49,7 @@ const RENDERERS = [
   // The order the boards argue in: the work first, then how an outsider joins it. Core gives a
   // process no rank, so the page names it.
   (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request"] }),
+  (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));

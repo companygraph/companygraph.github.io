@@ -73,6 +73,7 @@ export const cards = [
   { dir: "billing", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "principles", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "team", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
+  { dir: "surfaces", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "privacy", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
 ];
 
