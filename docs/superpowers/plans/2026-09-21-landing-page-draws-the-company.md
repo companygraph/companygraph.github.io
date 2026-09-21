@@ -17,7 +17,7 @@
 **Refreshed on 2026-09-21, before execution**, against this repository at `45dd7f6`, `companygraph/mental-model` at `ca495ed` and `@robertblust/design` at v0.68.0. What the refresh measured and changed:
 
 - The instance now vendors core 0.37.0, with products and concepts. This site's parser pin, `companygraph-meta-model` v0.34.0, parses it at `ca495ed` without a problem: the root is `CompanyGraph`, `identity`, and every type the instance uses comes through. The parser pin is editorial and this plan does not move it.
-- The site stays on design v0.66.0. v0.67.0 and v0.68.0 change the nav order and add the model-page fences; neither touches the stage, so the re-pin belongs to the plan that adopts Team, Principles and Surfaces, not to this one.
+- The site takes design v0.68.0 first, as Task 0. The landing stage is the first of two pieces of work on this site, and the second, adopting Team, Principles and Surfaces, needs v0.68.0; building and verifying the stage on the design the site will ship with means nothing here is verified twice. v0.67.0 reorders the nav check's order, which this site's nav, naming no Principles, does not feel, and v0.68.0 adds fences no page here carries yet, so the re-pin is expected to write nothing.
 - **A card links to its source file through `data.repo`, and falls back to `companygraph/meta-model` when the artifact names none** (`card.js` and `stage.js` in the design package). Neither `example.json` nor `model.json` carries `repo`, and neither needs to. `company.json` must, or every card on the landing page links to a path in the wrong repository. Task 2 now says so and tests it.
 - Task 3 read `/example/` by line numbers that have since moved; it now finds the same regions by their anchors.
 
@@ -42,6 +42,71 @@
 - Commits and pull request bodies are in the git register, ending `Verified:` then the trailers.
 - **Merging is the owner's decision.** Every task ends by opening the pull request, reporting
   the check and stopping.
+
+---
+
+### Task 0: The site takes design v0.68.0
+
+**Files:**
+
+- Modify: `package.json`, `package-lock.json`
+
+**Interfaces:**
+
+- Consumes: `@robertblust/design` v0.68.0
+- Produces: every later task builds and verifies against v0.68.0
+
+- [ ] **Step 1: Branch, in a sibling worktree**
+
+```bash
+export PATH=/opt/homebrew/bin:$PATH
+cd ~/git/companygraph/companygraph.github.io && git fetch origin --quiet
+git worktree add -b the-site-takes-design-v0-68-0 \
+  ~/git/companygraph/companygraph.github.io-the-site-takes-design-v0-68-0 origin/main
+cd ~/git/companygraph/companygraph.github.io-the-site-takes-design-v0-68-0
+```
+
+- [ ] **Step 2: Move the pin, and make the lockfile follow it**
+
+Set `"@robertblust/design": "github:robertblust/design#v0.68.0"` in `package.json`. A plain `npm install` does not re-resolve a git tag whose lockfile entry npm considers satisfied, and `--package-lock-only` does not either, so resolve from nothing:
+
+```bash
+rm -rf node_modules package-lock.json && npm install
+```
+
+Then prove the lockfile names the tag's commit rather than trusting the command. Read the entry, not a grep for the tag string, which matches the dependency spec in the root entry of a stale lockfile too:
+
+```bash
+gh api repos/robertblust/design/git/refs/tags/v0.68.0 --jq .object.sha
+node -e 'const l=require("./package-lock.json").packages["node_modules/@robertblust/design"]; console.log(l.version, l.resolved)'
+```
+
+Expected: version `0.68.0`, and `resolved` ending in the sha the first command prints. `git diff package-lock.json` must move only that entry and what it pulls in; if other dependencies moved, restore the lockfile and move only this one with `npm install @robertblust/design@github:robertblust/design#v0.68.0`.
+
+- [ ] **Step 3: Write what the release ships, and expect nothing new**
+
+```bash
+npm run design; git status --short
+```
+
+Expected: only `package.json` and `package-lock.json` changed. A page that changes here carries a fence whose body moved between v0.66.0 and v0.68.0; read the diff and name it in the pull request body.
+
+- [ ] **Step 4: Verify, each exit code on its own**
+
+```bash
+npm run design:check;   echo "design:check: $?"
+npm run pin:check;      echo "pin:check: $?"
+npm run sitemap:check;  echo "sitemap:check: $?"
+npm run og:check;       echo "og:check: $?"
+npm run serve > /dev/null 2>&1 &
+npm run verify;         echo "verify: $?"
+```
+
+Stop only the server this step started, by its PID. Expected: `0` from every one.
+
+- [ ] **Step 5: Commit, push, open the pull request, report and stop**
+
+The body names both releases taken and what each changes for this site: v0.67.0's nav order, felt by no page here, and v0.68.0's renderers and fences, carried by no page here yet, which the adoption of Team, Principles and Surfaces takes up.
 
 ---
 
