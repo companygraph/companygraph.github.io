@@ -68,8 +68,8 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   that only linked to the README would not be one, so the page shows `init`, `check` and
   `upgrade` with their flags, the Obsidian plugin's install and commands, the skills and the
   MCP server's command. What keeps it true is what the page leaves out and one habit. It names
-  no release: every command reads `#<tag>` and the page sends the reader to the releases page
-  for the newest one, because a version written here is wrong at the next release. And every
+  no release: every command reads `#semver:*`, which npm resolves to the highest release tag
+  when the command runs, because a version written here is wrong at the next release. And every
   command on it was run from a release before it was written: when meta-model, the plugin or
   the server changes a command or a flag the page names, this page changes in the same wave,
   since nothing in this repository can see the change happen. Its prose is hand-written, so
