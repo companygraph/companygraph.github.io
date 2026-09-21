@@ -92,8 +92,7 @@ In the `/` spec's `contains`, change `"10 minutes · German or English"` to `"12
 
 - [ ] **Step 4: Run verify to see it fail**
 
-Run: `npm run verify`
-Expected: `✗ /` on the missing "12 minutes" string, and `✗ /talks/intro/` with `slides: 11 slides, expected 12` and a missing-link failure for the roadmap URL. `/talks/` still passes.
+Run: `npm run verify` Expected: `✗ /` on the missing "12 minutes" string, and `✗ /talks/intro/` with `slides: 11 slides, expected 12` and a missing-link failure for the roadmap URL. `/talks/` still passes.
 
 - [ ] **Step 5: Commit**
 
@@ -359,8 +358,7 @@ Expected: `data-n="00" … data-n="11"` — twelve values, consecutive, no repea
 
 - [ ] **Step 5: Run verify**
 
-Run: `npm run verify`
-Expected: `✓ /talks/intro/` and `✓ /talks/`; `✗ /` remains only on the "12 minutes" string, which Task 8 fixes.
+Run: `npm run verify` Expected: `✓ /talks/intro/` and `✓ /talks/`; `✗ /` remains only on the "12 minutes" string, which Task 8 fixes.
 
 - [ ] **Step 6: Commit**
 
@@ -396,17 +394,13 @@ Replace the `.meta` and `.d` spans inside the `<a class="talk" href="intro/">`:
 
 - [ ] **Step 3: `CLAUDE.md`**
 
-Replace the bullet
-`- **No type count, no type list read aloud, and no status claim that ages.** Slide 9 says "not all of it is written yet, the roadmap says what is" and links. It never says how much.`
-with:
-`- **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.`
+Replace the bullet `- **No type count, no type list read aloud, and no status claim that ages.** Slide 9 says "not all of it is written yet, the roadmap says what is" and links. It never says how much.` with: `- **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.`
 
 The "AI in the deck, agents everywhere else" paragraph keeps its numbers: the new slide is inserted after 08, so 00–08 are unchanged. Only the table row for "this deck, slide 00" stays true as well — verify that by reading the title slide's `.sub`, which this plan does not touch.
 
 - [ ] **Step 4: Run verify**
 
-Run: `npm run verify`
-Expected: all three pages `✓`, `all checks pass`.
+Run: `npm run verify` Expected: all three pages `✓`, `all checks pass`.
 
 - [ ] **Step 5: Commit**
 
@@ -429,28 +423,23 @@ Everything derived from the deck. Requires `ELEVENLABS_API_KEY` in the environme
 
 - [ ] **Step 1: Dry-run the narration**
 
-Run: `cd talks/intro && ./tts/generate.py --dry-run`
-Expected: exactly slides 00, 03, 06, 09, 10 and 11 listed as needing generation, in both languages, with a character count. Any other slide listed means its note changed by accident — diff it before generating. If 04 or another unchanged slide appears, `read_h1` has flipped languages; stop and fix that first.
+Run: `cd talks/intro && ./tts/generate.py --dry-run` Expected: exactly slides 00, 03, 06, 09, 10 and 11 listed as needing generation, in both languages, with a character count. Any other slide listed means its note changed by accident — diff it before generating. If 04 or another unchanged slide appears, `read_h1` has flipped languages; stop and fix that first.
 
 - [ ] **Step 2: Generate**
 
-Run: `./tts/generate.py`
-Then listen to `audio/en/11.mp3` and `audio/de/11.mp3` at least: the four questions come out as four beats, and the cue text is not spoken.
+Run: `./tts/generate.py` Then listen to `audio/en/11.mp3` and `audio/de/11.mp3` at least: the four questions come out as four beats, and the cue text is not spoken.
 
 - [ ] **Step 3: PDFs**
 
-Run: `npm install && npm run pdf` (inside `talks/intro/`)
-Expected: both PDFs regenerated with twelve pages each. Open one and check slide 06's nine cells and slide 11's list are inside the page.
+Run: `npm install && npm run pdf` (inside `talks/intro/`) Expected: both PDFs regenerated with twelve pages each. Open one and check slide 06's nine cells and slide 11's list are inside the page.
 
 - [ ] **Step 4: Share cards**
 
-Run from the repository root: `npm run og && npm run og:check`
-Expected: three cards rendered; `og:check` reports all three current. The deck's card renders its title slide, which is visually unchanged — it is re-rendered anyway because the recipe hashes the whole page.
+Run from the repository root: `npm run og && npm run og:check` Expected: three cards rendered; `og:check` reports all three current. The deck's card renders its title slide, which is visually unchanged — it is re-rendered anyway because the recipe hashes the whole page.
 
 - [ ] **Step 5: The og suite and verify**
 
-Run: `npm run test:og && npm run verify`
-Expected: both pass.
+Run: `npm run test:og && npm run verify` Expected: both pass.
 
 - [ ] **Step 6: Commit**
 

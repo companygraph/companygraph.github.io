@@ -1,15 +1,10 @@
 # companygraph.io
 
-The site for **CompanyGraph** — an open-source meta-model for operating a company: the
-structure its knowledge takes, as a graph of Markdown files, so people and agents can both
-rely on it.
+The site for **CompanyGraph** — an open-source meta-model for operating a company: the structure its knowledge takes, as a graph of Markdown files, so people and agents can both rely on it.
 
 **Live:** https://companygraph.io
 
-One repository serves the whole domain. It was two — the talks had their own — and the split
-cost more than it saved: the talks index copies this site's shell, header and footer, so every
-nav change had to land in both repositories in the same breath, with no CI on either side able
-to see the seam. They were merged, history and all, in August 2026.
+One repository serves the whole domain. It was two — the talks had their own — and the split cost more than it saved: the talks index copies this site's shell, header and footer, so every nav change had to land in both repositories in the same breath, with no CI on either side able to see the seam. They were merged, history and all, in August 2026.
 
 | Path | |
 | --- | --- |
@@ -21,13 +16,9 @@ to see the seam. They were merged, history and all, in August 2026.
 | `/billing/` | What would cost money, if anything ever does. |
 | `/privacy/` | What this site collects, which is nothing. |
 
-The repository is named `companygraph.github.io` because that makes it the organization's
-GitHub Pages site, which is what puts it on the custom domain in `CNAME`. **Renaming it or
-removing `CNAME` takes the whole domain down**, talks included.
+The repository is named `companygraph.github.io` because that makes it the organization's GitHub Pages site, which is what puts it on the custom domain in `CNAME`. **Renaming it or removing `CNAME` takes the whole domain down**, talks included.
 
-A repository named `talks` in this organization would claim `companygraph.io/talks/` the
-moment its Pages were enabled — shadowing the folder in this repository, which is how the old
-split had to be unwound. Do not recreate one.
+A repository named `talks` in this organization would claim `companygraph.io/talks/` the moment its Pages were enabled — shadowing the folder in this repository, which is how the old split had to be unwound. Do not recreate one.
 
 ## Contents
 
@@ -77,16 +68,9 @@ split had to be unwound. Do not recreate one.
 
 ## The mark
 
-An outlined square holding a filled one, with a line out to a second filled square: the
-model's two kinds of edge, drawn once. **Containment** — an entity that owns collections is a
-folder holding its own file — is the outlined square around the filled one. **Reference** — by
-canonical name, to something nothing owns — is the line out to the square beside it. Nothing
-else is in the glyph; a mark that needs a third element to make its point is not this one.
+An outlined square holding a filled one, with a line out to a second filled square: the model's two kinds of edge, drawn once. **Containment** — an entity that owns collections is a folder holding its own file — is the outlined square around the filled one. **Reference** — by canonical name, to something nothing owns — is the line out to the square beside it. Nothing else is in the glyph; a mark that needs a third element to make its point is not this one.
 
-The hero figure animates two unlike trees toward that same shape — one small, one much
-larger — because that convergence is where the model came from, not a diagram either tree
-drew on its own. The mark is where the animation lands; `logo.svg` and `favicon.svg` are that
-same destination, held still.
+The hero figure animates two unlike trees toward that same shape — one small, one much larger — because that convergence is where the model came from, not a diagram either tree drew on its own. The mark is where the animation lands; `logo.svg` and `favicon.svg` are that same destination, held still.
 
 ## Running it
 
@@ -109,47 +93,22 @@ npm run sitemap:check              # are those dates still what git says?
 npm run pdf                        # both language PDFs
 ```
 
-`example.json` and `model.json` are committed files, and moving the pin means `npm run build`
-then `npm run pages`.
+`example.json` and `model.json` are committed files, and moving the pin means `npm run build` then `npm run pages`.
 
-`og:check` needs no server and no browser — it re-derives each card's recipe and compares it
-with the `og.sha` committed beside it, which is why CI runs it before `npm ci`. `npm run og`
-needs no server either: it renders every card from `file://`, the same way the deck opens.
-Commit each `og.png` with its `og.sha`, in the commit that moved the page.
+`og:check` needs no server and no browser — it re-derives each card's recipe and compares it with the `og.sha` committed beside it, which is why CI runs it before `npm ci`. `npm run og` needs no server either: it renders every card from `file://`, the same way the deck opens. Commit each `og.png` with its `og.sha`, in the commit that moved the page.
 
-`verify` needs a server already running in another terminal. It also runs against the live
-site — `BASE=https://companygraph.io npm run verify` — which is worth doing after a deploy,
-and is how a bug was once found that could not appear locally: a check rewrote the share
-card's URL onto `location.origin`, which is only correct when the repository is the root of
-its host.
+`verify` needs a server already running in another terminal. It also runs against the live site — `BASE=https://companygraph.io npm run verify` — which is worth doing after a deploy, and is how a bug was once found that could not appear locally: a check rewrote the share card's URL onto `location.origin`, which is only correct when the repository is the root of its host.
 
-Most checks read the page as it first renders, which is English. `translates` is the one that
-clicks: it presses DE, requires the German to be there and the English to be gone, then presses
-EN and requires the page to come back exactly as it was. It runs last among the shared checks
-because it is the only one that changes what the others read. It was written here and now lives
-in `@robertblust/design` with the other shared checks, so blust.ch and guestgraph.io run the same
-code; what stays here is each page's spec.
+Most checks read the page as it first renders, which is English. `translates` is the one that clicks: it presses DE, requires the German to be there and the English to be gone, then presses EN and requires the page to come back exactly as it was. It runs last among the shared checks because it is the only one that changes what the others read. It was written here and now lives in `@robertblust/design` with the other shared checks, so blust.ch and guestgraph.io run the same code; what stays here is each page's spec.
 
-It was written by breaking the page three ways and watching it catch each: the toggle's click
-listener deleted, an `<h1>`'s `data-de` misspelled, and `applyLang` stopped from setting
-`document.documentElement.lang`. Before it existed, all three printed `all checks pass`.
+It was written by breaking the page three ways and watching it catch each: the toggle's click listener deleted, an `<h1>`'s `data-de` misspelled, and `applyLang` stopped from setting `document.documentElement.lang`. Before it existed, all three printed `all checks pass`.
 
-`sameOrigin` guards the privacy page's central claim — that nothing is fetched from anywhere
-else. A font link or an analytics tag is a request, not markup, so no other check here can
-see one.
+`sameOrigin` guards the privacy page's central claim — that nothing is fetched from anywhere else. A font link or an analytics tag is a request, not markup, so no other check here can see one.
 
 ## What this site deliberately does not say
 
-No type count, no type list, no status and no roadmap — those live in
-[`companygraph/meta-model`](https://github.com/companygraph/meta-model), which ships them in
-the same commit as the thing they describe. No claim that a pack exists. Nothing identifying
-the companies the model was extracted from.
+No type count, no type list, no status and no roadmap — those live in [`companygraph/meta-model`](https://github.com/companygraph/meta-model), which ships them in the same commit as the thing they describe. No claim that a pack exists. Nothing identifying the companies the model was extracted from.
 
-`/billing/` is the one place a commercial model is stated, and it states one that is not
-running: consulting, time and material, no rate, nobody to ask, and it may never happen at
-all. **The absent contact is deliberate** — adding one turns a described model into an offer.
-Nothing anywhere may imply a hosted product, a license fee, a seat count or a paid edition of
-the model; those are the four things the billing page rejects by name.
+`/billing/` is the one place a commercial model is stated, and it states one that is not running: consulting, time and material, no rate, nobody to ask, and it may never happen at all. **The absent contact is deliberate** — adding one turns a described model into an offer. Nothing anywhere may imply a hosted product, a license fee, a seat count or a paid edition of the model; those are the four things the billing page rejects by name.
 
-See `AGENTS.md` for why each of those constraints exists, and what has already gone wrong when
-a page like this one didn't hold them.
+See `AGENTS.md` for why each of those constraints exists, and what has already gone wrong when a page like this one didn't hold them.

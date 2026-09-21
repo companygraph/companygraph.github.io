@@ -7,15 +7,9 @@
 
 ## 1. Purpose
 
-`companygraph.io` says what CompanyGraph is in one screen and sends the visitor to the model.
-The talk is the step between those two: ten minutes that make the argument the landing page's
-figure only gestures at, and that a README cannot make at all.
+`companygraph.io` says what CompanyGraph is in one screen and sends the visitor to the model. The talk is the step between those two: ten minutes that make the argument the landing page's figure only gestures at, and that a README cannot make at all.
 
-The argument already exists as a deck. `blust.ch/talks/mental-model/` runs ten slides in
-about ten minutes and says most of it: a company's knowledge lives everywhere and nowhere,
-the facts belong in Markdown structured by a meta-model, references are canonical names so
-there are no dead links, and the same model serves people and agents. This repository is that
-argument re-aimed — spoken for the published model rather than for one person's instance.
+The argument already exists as a deck. `blust.ch/talks/mental-model/` runs ten slides in about ten minutes and says most of it: a company's knowledge lives everywhere and nowhere, the facts belong in Markdown structured by a meta-model, references are canonical names so there are no dead links, and the same model serves people and agents. This repository is that argument re-aimed — spoken for the published model rather than for one person's instance.
 
 ### Non-goals
 
@@ -31,18 +25,11 @@ argument re-aimed — spoken for the published model rather than for one person'
 
 ## 2. Why the arc changes
 
-The source deck's spine is *I am building this*. Three slides open with a personal framing,
-and its strongest evidence — breadth, references, a gate, three worked examples — is a tour of
-one company's model.
+The source deck's spine is *I am building this*. Three slides open with a personal framing, and its strongest evidence — breadth, references, a gate, three worked examples — is a tour of one company's model.
 
-The published thing's claim is different and stronger: **two companies that never knew about
-each other arrived at the same shape.** One has a payroll and keeps a thin file per person;
-one is a company of one and was forced to model a person properly. Neither borrowed from the
-other. That convergence is the reason any of this is worth publishing, and it is what the
-landing page's animation draws.
+The published thing's claim is different and stronger: **two companies that never knew about each other arrived at the same shape.** One has a payroll and keeps a thin file per person; one is a company of one and was forced to model a person properly. Neither borrowed from the other. That convergence is the reason any of this is worth publishing, and it is what the landing page's animation draws.
 
-So convergence becomes the spine, and the tour becomes evidence. The middle slides survive
-almost intact; what changes is what they are *for*.
+So convergence becomes the spine, and the tour becomes evidence. The middle slides survive almost intact; what changes is what they are *for*.
 
 ## 3. The arc
 
@@ -61,32 +48,19 @@ Ten slides, ≈10:25 — the same budget as the source, which is a proven ten-mi
 | 8 | Markdown, checked by agents — and why that is the thesis, not a stage | 1:00 | **new** |
 | 9 | Take it — Apache 2.0, what ships today, where the roadmap is | 0:55 | source, re-aimed |
 
-**Slide 8 is new because the published model has a claim the private one never had to
-defend.** Schemas are Markdown enforced by agents, deliberately not JSON Schema. A talk that
-skipped it would leave the audience assuming the Markdown is a stage on the way to a real
-schema language, which is the reading the design explicitly rejects.
+**Slide 8 is new because the published model has a claim the private one never had to defend.** Schemas are Markdown enforced by agents, deliberately not JSON Schema. A talk that skipped it would leave the audience assuming the Markdown is a stage on the way to a real schema language, which is the reading the design explicitly rejects.
 
-**The "brain" image survives** as slide 3's visual. It is the source deck's most memorable
-frame and it costs nothing to keep.
+**The "brain" image survives** as slide 3's visual. It is the source deck's most memorable frame and it costs nothing to keep.
 
-**The restraint survives too.** The source deck's own notes say: do not claim "no
-hallucinations". The port keeps that. The claim is that the model shrinks the space in which
-an agent has to guess, and holds it inside stated guardrails — not that guessing stops.
+**The restraint survives too.** The source deck's own notes say: do not claim "no hallucinations". The port keeps that. The claim is that the model shrinks the space in which an agent has to guess, and holds it inside stated guardrails — not that guessing stops.
 
 ### Honesty about what ships
 
-Slide 5 shows the vocabulary the *design* names, while only part of it is written today. The
-deck does not hedge mid-argument: **slide 9 carries it**, in one sentence that says not all of
-this is written yet and that the roadmap says what is.
+Slide 5 shows the vocabulary the *design* names, while only part of it is written today. The deck does not hedge mid-argument: **slide 9 carries it**, in one sentence that says not all of this is written yet and that the roadmap says what is.
 
-**It must not say how much.** A count, a type list, or "the first release describes one person
-completely" would all be true on the day they are recorded and wrong within a release — and
-correcting them means editing a slide, regenerating two clips, and re-exporting two PDFs. The
-form "not all of it yet, the roadmap says what" never ages, because the roadmap moves on its
-own and the deck points at it rather than copying it.
+**It must not say how much.** A count, a type list, or "the first release describes one person completely" would all be true on the day they are recorded and wrong within a release — and correcting them means editing a slide, regenerating two clips, and re-exporting two PDFs. The form "not all of it yet, the roadmap says what" never ages, because the roadmap moves on its own and the deck points at it rather than copying it.
 
-This is the same rule the site and the org profile already hold, applied to the one medium
-that cannot be edited cheaply.
+This is the same rule the site and the org profile already hold, applied to the one medium that cannot be edited cheaply.
 
 ---
 
@@ -110,25 +84,15 @@ companygraph/talks
   CLAUDE.md, README.md
 ```
 
-It serves at `companygraph.io/talks/` with **no configuration of its own**: the org's Pages
-site carries the `CNAME`, and that cascades to every other Pages repository in the org. This
-was designed in before the landing page shipped and is why the site repository must keep its
-name.
+It serves at `companygraph.io/talks/` with **no configuration of its own**: the org's Pages site carries the `CNAME`, and that cascades to every other Pages repository in the org. This was designed in before the landing page shipped and is why the site repository must keep its name.
 
-`protect-main` matches the other repositories — `deletion`, `non_fast_forward`,
-`pull_request`, and `required_status_checks` on the job id `verify`, since this repository has
-CI.
+`protect-main` matches the other repositories — `deletion`, `non_fast_forward`, `pull_request`, and `required_status_checks` on the job id `verify`, since this repository has CI.
 
 ## 5. The index page is a page; the deck is a deck
 
-`index.html` at the root is not a deck. It carries `companygraph.io`'s shell, header and
-footer **verbatim**, because the domain is served by two repositories and a visitor crossing
-between them must not meet a seam.
+`index.html` at the root is not a deck. It carries `companygraph.io`'s shell, header and footer **verbatim**, because the domain is served by two repositories and a visitor crossing between them must not meet a seam.
 
-**This is a two-repository obligation with no CI that can see it.** `verify` here can assert
-that a link is in the tab; it can never assert that the page on the other side still exists or
-still carries the same item back. Adding, renaming or reordering a nav item means doing it in
-both repositories in the same breath. Both `CLAUDE.md`s record this.
+**This is a two-repository obligation with no CI that can see it.** `verify` here can assert that a link is in the tab; it can never assert that the page on the other side still exists or still carries the same item back. Adding, renaming or reordering a nav item means doing it in both repositories in the same breath. Both `CLAUDE.md`s record this.
 
 The deck is out of scope for that rule: a deck has a transport bar, not a nav.
 
@@ -145,8 +109,7 @@ The deck is out of scope for that rule: a deck has a transport bar, not a nav.
 
 ## 7. Narration
 
-`generate.py` reads the deck, so the notes are the single source for what is said, and clips
-cache on `sha256(voice|model|text)` — editing one note regenerates one clip.
+`generate.py` reads the deck, so the notes are the single source for what is said, and clips cache on `sha256(voice|model|text)` — editing one note regenerates one clip.
 
 - **Same voices as `guestgraph/talks`:** Matilda (`XrExE9yKIg1WjnnlVkGX`) for English,
   Jessica (`cgSgspJ2msm6clMCkdW9`) for German. Decided explicitly, and English was picked on
@@ -173,13 +136,9 @@ cache on `sha256(voice|model|text)` — editing one note regenerates one clip.
 
 It is not moved, not retired, and **not linked in either direction**. Decided.
 
-It remains the personal keynote: first person, one company's model, a talk given by a person.
-This deck is the project's. Two decks making one argument is only a problem if a reader is
-promised they are the same thing, and neither page promises that.
+It remains the personal keynote: first person, one company's model, a talk given by a person. This deck is the project's. Two decks making one argument is only a problem if a reader is promised they are the same thing, and neither page promises that.
 
-The cost is accepted: someone who finds both hears the argument twice. The alternative — a
-cross-link — would make the personal deck look like a redirect to a product, which is not what
-it is.
+The cost is accepted: someone who finds both hears the argument twice. The alternative — a cross-link — would make the personal deck look like a redirect to a product, which is not what it is.
 
 ## 9. What lands in other repositories the day this ships
 
@@ -191,8 +150,7 @@ All three are debts already written down where they will be read:
 | `companygraph/.github` | The "New here?" entry line the profile currently lacks, and a `talks` row in both repository tables. |
 | Both `CLAUDE.md`s | The shared-chrome rule from §5. |
 
-The site's `CLAUDE.md` already anticipates every one of these and says explicitly: do not
-pre-write them, the obligation begins the day the talk repository exists.
+The site's `CLAUDE.md` already anticipates every one of these and says explicitly: do not pre-write them, the obligation begins the day the talk repository exists.
 
 ## 10. Verification
 
