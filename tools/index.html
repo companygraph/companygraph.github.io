@@ -651,8 +651,9 @@
     <section>
       <h2>Make an instance</h2>
       <p class="lede">An instance is the repository a company’s model lives in: the vocabulary copied in at one release, a manifest saying which, and a workflow that checks every change. <code class="mono">init</code> writes all of it, and nothing else.</p>
-      <pre class="cmd mono">npx 'github:companygraph/meta-model#semver:*' init acme --name "Acme" --agent claude</pre>
+      <pre class="cmd mono">npx 'github:companygraph/meta-model#semver:*' init ~/git/acme --name "Acme" --agent claude</pre>
       <div class="rules">
+        <p><b>The folder is where the instance goes.</b> <code class="mono">~/git/acme</code> above is a path, and <code class="mono">init</code> creates the folder there, with any folder above it that is missing. A bare name such as <code class="mono">acme</code> is created in the directory you run the command from.</p>
         <p><b>It writes over nothing.</b> For a folder that already holds files, a repository or an Obsidian vault, run it inside that folder with <code class="mono">init . --here</code>. It refuses, and names each file, when something it would write is already there.</p>
         <p><b>It writes only the folders you name.</b> <code class="mono">--folders values,processes</code> leaves out every other type, and a company with no people in it needs no folder for them. <code class="mono">sources</code> is always written, because the first source lives there.</p>
         <p><b>What it writes.</b> The vocabulary under <code class="mono">meta/core/</code>, <code class="mono">.companygraph/manifest.json</code> with a hash for every file it owns, a folder for each type with a README naming its schema, the source and the entities no instance passes without, a CI workflow, and for Claude an <code class="mono">AGENTS.md</code>, a <code class="mono">CLAUDE.md</code> and its skills.</p>
@@ -662,7 +663,7 @@
     <section>
       <h2>Check it</h2>
       <p class="lede">A model is only useful while it holds to its schemas, so it is checked on every change and not once a quarter. <code class="mono">check</code> runs the rules of the vocabulary the instance copied in, never a newer one.</p>
-      <pre class="cmd mono">npx 'github:companygraph/meta-model#semver:*' check acme</pre>
+      <pre class="cmd mono">npx 'github:companygraph/meta-model#semver:*' check ~/git/acme</pre>
       <div class="rules">
         <p><b>CI runs the same check.</b> The workflow <code class="mono">init</code> writes runs it on every push and pull request, once the folder is a git repository on GitHub. <code class="mono">init</code> does not create the repository.</p>
         <p><b>It checks what a script can read.</b> Whether a page keeps its schema’s writing rules is judged by reading, and every run says so. The validate skill below does that reading.</p>
@@ -672,8 +673,8 @@
     <section>
       <h2>Take a newer release</h2>
       <p class="lede">A release lands in more than one place: the vocabulary, the skills, the manifest and the workflow’s pin. Moved apart, one gets left behind, so <code class="mono">upgrade</code> moves them together and touches nothing else.</p>
-      <pre class="cmd mono">npx 'github:companygraph/meta-model#semver:*' upgrade acme --dry-run
-npx 'github:companygraph/meta-model#semver:*' upgrade acme</pre>
+      <pre class="cmd mono">npx 'github:companygraph/meta-model#semver:*' upgrade ~/git/acme --dry-run
+npx 'github:companygraph/meta-model#semver:*' upgrade ~/git/acme</pre>
       <div class="rules">
         <p><b>It says what it will do first.</b> <code class="mono">--dry-run</code> lists every file it would write or remove and writes nothing.</p>
         <p><b>An edited vocabulary file stops it.</b> The vocabulary is not the instance’s to edit, so a file whose hash no longer matches the manifest stops the whole upgrade and is named. <code class="mono">--force</code> overwrites it and says so. The model itself, <code class="mono">AGENTS.md</code> and <code class="mono">CLAUDE.md</code> are never touched.</p>
@@ -696,7 +697,8 @@ npx 'github:companygraph/meta-model#semver:*' upgrade acme</pre>
         <p><b>Skills, in <code class="mono">.claude/skills/</code>.</b> <code class="mono">companygraph-validate</code> runs the check and then reads every entity against its schema’s writing rules. <code class="mono">companygraph-export</code> packages the model as a skill an agent can load and as sources for Gemini Notebook. <code class="mono">companygraph-surface</code> produces a page the model describes as one of its surfaces. The last two need Python 3.</p>
         <p><b>A server that only reads.</b> The MCP server answers an agent’s questions about the model: which types it declares, what one entity says, what a claim rests on. Every answer names the commit it was read from. Run it from the instance’s folder:</p>
       </div>
-      <pre class="cmd mono">npx --package 'github:companygraph/mcp-server#semver:*' companygraph-mcp ./model ./meta/core</pre>
+      <pre class="cmd mono">cd ~/git/acme
+npx --package 'github:companygraph/mcp-server#semver:*' companygraph-mcp ./model ./meta/core</pre>
     </section>
   </div>
 </main>
