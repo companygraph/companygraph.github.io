@@ -552,7 +552,10 @@
   .cmd{margin-top:1.4rem; display:block; max-width:100%; overflow-x:auto; white-space:pre;
        padding:1rem 1.35rem; border-radius:10px; background:var(--raise);
        border:1.5px solid var(--c-firm); font-size:clamp(.82rem,1.2vw,.95rem); color:var(--ink)}
-  .lede code, .rules code{font-size:.92em; color:var(--ink)}
+  /* Inline code carries the command blocks' box at text size, so a flag or a path reads as
+     something to type rather than as a word of the sentence around it. */
+  .note code, .lede code, .rules code{font-size:.88em; color:var(--ink); background:var(--raise);
+       border:1px solid var(--rule); border-radius:5px; padding:.05em .35em; white-space:nowrap}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
