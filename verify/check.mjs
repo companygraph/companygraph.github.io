@@ -22,7 +22,7 @@ const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy"];
 const PAGES = [
   { path: "/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
     // which requires target=_blank — wrong for chrome pointing at another page on this
     // same domain, which should stay in the tab the reader is already in.
@@ -44,7 +44,9 @@ const PAGES = [
                // "graph" guesses the wrong thing. Pin its claim: this is a
                // vocabulary. Only the words that carry the claim, so rewording the
                // rest of the sentence does not fail the check.
-               "Nothing here matches or merges records", "vocabulary"],
+               "Nothing here matches or merges records", "vocabulary",
+               // The stage's caption: what the drawing is. Only the words that carry it.
+               "described in its own vocabulary"],
     links: ["https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
             "https://blust.ch/"],
@@ -64,7 +66,10 @@ const PAGES = [
       desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
                   shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "VORTRÄGE", "MODELL", "BEISPIEL", "Einführungsvortrag ansehen", "12 Minuten · Deutsch oder Englisch"],
                   hides: ["Everything a company", "Read the source"] },
-    card: true, cardBase: SITE },
+    // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
+    // /example/ are: `graph` reads company.json, the file the page names, and walks what it
+    // draws, so no name from the model is written here.
+    card: true, cardBase: SITE, graph: true, divider: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
