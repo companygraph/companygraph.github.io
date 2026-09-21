@@ -43,12 +43,9 @@ const PAGES = [
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
                "Watch intro talk", "12 minutes · German or English",
-               // The sentence exists because a reader who arrives from the word
-               // "graph" guesses the wrong thing. Pin its claim: this is a
-               // vocabulary. Only the words that carry the claim, so rewording the
+               // The hero's note says what the drawing below it is: CompanyGraph, in
+               // its own vocabulary. Only the words that carry it, so rewording the
                // rest of the sentence does not fail the check.
-               "Nothing here matches or merges records", "vocabulary",
-               // The stage's caption: what the drawing is. Only the words that carry it.
                "described in its own vocabulary"],
     links: ["https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
