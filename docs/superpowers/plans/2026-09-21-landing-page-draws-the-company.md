@@ -12,7 +12,14 @@
 
 **Spec:** [`companygraph/meta-model` · `docs/superpowers/specs/2026-09-21-companygraph-instance-design.md`](https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-21-companygraph-instance-design.md)
 
-**Sibling plan:** the instance half is `companygraph/meta-model` · `docs/superpowers/plans/2026-09-21-companygraph-mental-model.md`. **This plan cannot start until that one has merged**, because Task 1 pins a commit of `companygraph/mental-model` and that repository does not exist yet.
+**Sibling plan:** the instance half is `companygraph/meta-model` · `docs/superpowers/plans/2026-09-21-companygraph-mental-model.md`. It has merged, and `companygraph/mental-model` exists with its content complete, so this plan can start.
+
+**Refreshed on 2026-09-21, before execution**, against this repository at `45dd7f6`, `companygraph/mental-model` at `ca495ed` and `@robertblust/design` at v0.68.0. What the refresh measured and changed:
+
+- The instance now vendors core 0.37.0, with products and concepts. This site's parser pin, `companygraph-meta-model` v0.34.0, parses it at `ca495ed` without a problem: the root is `CompanyGraph`, `identity`, and every type the instance uses comes through. The parser pin is editorial and this plan does not move it.
+- The site stays on design v0.66.0. v0.67.0 and v0.68.0 change the nav order and add the model-page fences; neither touches the stage, so the re-pin belongs to the plan that adopts Team, Principles and Surfaces, not to this one.
+- **A card links to its source file through `data.repo`, and falls back to `companygraph/meta-model` when the artifact names none** (`card.js` and `stage.js` in the design package). Neither `example.json` nor `model.json` carries `repo`, and neither needs to. `company.json` must, or every card on the landing page links to a path in the wrong repository. Task 2 now says so and tests it.
+- Task 3 read `/example/` by line numbers that have since moved; it now finds the same regions by their anchors.
 
 ## Global constraints
 
@@ -200,8 +207,9 @@ The body says why a second repository means a second pin and why both live in on
 **Interfaces:**
 
 - Consumes: `PINS["mental-model"]` from Task 1
-- Produces: `company.json` — `{ commit, repo, root, rootId, types, entities, edges }`, the same
-  shape `example.json` has, which `stage.js` reads through its `data-stage` link
+- Produces: `company.json` — `{ commit, repo, root, rootId, types, entities, edges }`: the
+  shape `example.json` has plus `repo`, which `stage.js` reads through its `data-stage` link and
+  `card.js` reads to link each card to its source file
 
 - [ ] **Step 1: Branch, in a sibling worktree**
 
@@ -223,6 +231,9 @@ test("company.json is the instance at the pin, with a root and edges", () => {
   const pins = JSON.parse(fs.readFileSync(path.join(root, "source.json"), "utf8"));
   const data = JSON.parse(fs.readFileSync(path.join(root, "company.json"), "utf8"));
   assert.equal(data.commit, pins["mental-model"].commit);
+  // card.js links a card to github.com/<repo>/blob/<commit>/<path> and falls back to
+  // companygraph/meta-model when repo is missing, which is the wrong repository here.
+  assert.equal(data.repo, pins["mental-model"].repo);
   assert.equal(data.root, "CompanyGraph");
   assert.equal(data.rootId, "identity");
   assert.ok(data.entities.length > 0, "entities");
@@ -257,7 +268,7 @@ Add `MENTAL_MODEL` beside `META_MODEL` as that pin's local-checkout escape hatch
 const LOCAL_ENV = { "meta-model": "META_MODEL", "mental-model": "MENTAL_MODEL" };
 ```
 
-The artifact carries `repo` as well as `commit`, because two artifacts now come from two repositories and a file that names only a SHA cannot say which.
+`company.json` carries `repo` as well as `commit`, because it is the one artifact from another repository, and `card.js` and `stage.js` read `data.repo` to link a card to its file and fall back to `companygraph/meta-model` without it. Add it for this target only, for example with a `repo: true` flag on the target that makes the build write `repo: PINS[target.pin].repo` into the data. `example.json` and `model.json` do not gain it: the fallback is already right for them, and Step 8 requires that neither moves a byte.
 
 - [ ] **Step 5: Build it and watch the test pass**
 
@@ -326,11 +337,13 @@ cd ~/git/companygraph/companygraph.github.io-the-landing-page-draws-the-company 
 - [ ] **Step 2: Read the page that already does this**
 
 ```bash
-sed -n '540,580p' example/index.html   # the stage contract fence
-sed -n '628,640p' example/index.html   # the stylesheet and the data link
-sed -n '682,712p' example/index.html   # the stage markup
-sed -n '1020,1026p' example/index.html # d3 and stage.js at the foot
+grep -n 'stage contract · \|end stage contract' example/index.html   # the stage contract fence
+grep -n 'stage.css\|data-stage' example/index.html                   # the stylesheet and the data link
+grep -n 'id="stagehead"\|id="stagemodal"' example/index.html         # the stage markup, between these
+grep -n 'd3.v7.min.js\|stage.js"' example/index.html                 # d3 and stage.js at the foot
 ```
+
+Read each region in full from the line numbers these print. The markup in Step 5 was taken from `/example/` on 2026-09-21; if the two differ, `/example/` is right.
 
 - [ ] **Step 3: Add the stage contract fence markers, then let `design sync` fill them**
 
