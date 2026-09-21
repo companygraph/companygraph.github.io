@@ -1,5 +1,5 @@
 {
-  "commit": "32e787a94f16308b9f49e2cdb74fee1a3b132053",
+  "commit": "18cb0dc08c4654bd31ae786ec0b9bfb69381a22d",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -119,7 +119,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is the choice itself: a ranking agreed, a roadmap rewritten, a\nfeature retired, a direction someone had to be talked into. What makes it this kind is that\nsomebody else could have carried it out once the call was made.\n\nCarrying it out is Delivery, even where the same person did both, and what came of it is\nResults. A bullet that decided and built in one sentence is filed by whichever half the entry\nwould be poorer without.",
+          "text": "An achievement whose claim is the choice itself: a ranking agreed, a roadmap rewritten, a feature retired, a direction someone had to be talked into. What makes it this kind is that somebody else could have carried it out once the call was made.\n\nCarrying it out is Delivery, even where the same person did both, and what came of it is Results. A bullet that decided and built in one sentence is filed by whichever half the entry would be poorer without.",
           "tables": []
         }
       ],
@@ -138,7 +138,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is the work done: a system replaced, a service split, a migration\nrun, a process put in place. It names what changed and who has it now.\n\nChoosing what to build is Decisions. What the change turned out to be worth — a measured\neffect, a finding, an outcome still owed — is Results, and it goes there even where one\nsentence could carry both.",
+          "text": "An achievement whose claim is the work done: a system replaced, a service split, a migration run, a process put in place. It names what changed and who has it now.\n\nChoosing what to build is Decisions. What the change turned out to be worth — a measured effect, a finding, an outcome still owed — is Results, and it goes there even where one sentence could carry both.",
           "tables": []
         }
       ],
@@ -157,7 +157,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is the consequence rather than the act: what changed because the\nwork was done, what it turned out to show, and what it has not delivered yet. An entry's honest\nunfinished business is this kind, because it is an outcome like any other.\n\nThe work that produced the result is Delivery, and the call that aimed it is Decisions. The\nresult is filed apart from both, so a reader looking for what came of a period finds it in the\nsame place in every entry.",
+          "text": "An achievement whose claim is the consequence rather than the act: what changed because the work was done, what it turned out to show, and what it has not delivered yet. An entry's honest unfinished business is this kind, because it is an outcome like any other.\n\nThe work that produced the result is Delivery, and the call that aimed it is Decisions. The result is filed apart from both, so a reader looking for what came of a period finds it in the same place in every entry.",
           "tables": []
         }
       ],
@@ -176,7 +176,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "An achievement whose claim is that people outside the work now know something: a conference\ntalk, a published case, a workshop for another team. The audience is the point of the bullet\nand the bullet names it.\n\nExplaining a decision to the people who had to accept it is part of Decisions, not this. A\ntalk about work done elsewhere is this kind even when the entry exists only for the talk.",
+          "text": "An achievement whose claim is that people outside the work now know something: a conference talk, a published case, a workshop for another team. The audience is the point of the bullet and the bullet names it.\n\nExplaining a decision to the people who had to accept it is part of Decisions, not this. A talk about work done elsewhere is this kind even when the entry exists only for the talk.",
           "tables": []
         }
       ],
@@ -194,7 +194,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is addressed to people outside the organization paying for it: a\nconference talk, a board or committee seat, a standards or user group, a case study published\nunder someone else's name. `organization` names the host — the conference, the group, the\npublisher — not an employer.\n\nA one-off writes `end` equal to `start`; a seat held over years does not. Both are this kind:\nwhat makes it community work is the audience, not the duration.",
+          "text": "A period whose output is addressed to people outside the organization paying for it: a conference talk, a board or committee seat, a standards or user group, a case study published under someone else's name. `organization` names the host — the conference, the group, the publisher — not an employer.\n\nA one-off writes `end` equal to `start`; a seat held over years does not. Both are this kind: what makes it community work is the audience, not the duration.",
           "tables": []
         }
       ],
@@ -212,7 +212,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is a qualification rather than a delivery. `organization` names the\nawarding body — the school, the certifying institute — which is the one case where the field\ndoes not name somewhere work was done.\n\nLearning that happened during a role is not this kind. Every role teaches something; what makes\na period education is that the qualification is the point of it.",
+          "text": "A period whose output is a qualification rather than a delivery. `organization` names the awarding body — the school, the certifying institute — which is the one case where the field does not name somewhere work was done.\n\nLearning that happened during a role is not this kind. Every role teaches something; what makes a period education is that the qualification is the point of it.",
           "tables": []
         }
       ],
@@ -230,7 +230,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period defined by what it produced rather than by who it was spent with: a system, a\nmigration, a launch. Client work and internal work alike. `organization` names the client, or\nthe organization the work was done for when that differs from the employer.\n\nIt ends when the delivery does. A project that has no end and no deliverable is a role\ndescribed by its current work.",
+          "text": "A period defined by what it produced rather than by who it was spent with: a system, a migration, a launch. Client work and internal work alike. `organization` names the client, or the organization the work was done for when that differs from the employer.\n\nIt ends when the delivery does. A project that has no end and no deliverable is a role described by its current work.",
           "tables": []
         }
       ],
@@ -248,7 +248,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period spent working for an organization under an arrangement that outlasts any one piece of\nwork: employment, a long-running contract, a partnership. `organization` names the employer.\n\nIt is not a delivery. What was built during a role belongs to a project, and a role that lists\none delivery in its achievements is usually two periods written as one. The test is whether the\nperiod would have continued had the work changed: if it would, it is a role.",
+          "text": "A period spent working for an organization under an arrangement that outlasts any one piece of work: employment, a long-running contract, a partnership. `organization` names the employer.\n\nIt is not a delivery. What was built during a role belongs to a project, and a role that lists one delivery in its achievements is usually two periods written as one. The test is whether the period would have continued had the work changed: if it would, it is a role.",
           "tables": []
         }
       ],
@@ -269,7 +269,7 @@
       "sections": [
         {
           "heading": "What it is",
-          "text": "We build and run the billing platform our customers invoice their own customers through. Two\nteams, one product, and a domain we are still splitting into the shapes it wants to be in.\n\nWe sell to companies at the point where pricing has become a system rather than a page —\nusage, tiers, credits, corrections — and where getting an invoice wrong costs more than the\ninvoice.",
+          "text": "We build and run the billing platform our customers invoice their own customers through. Two teams, one product, and a domain we are still splitting into the shapes it wants to be in.\n\nWe sell to companies at the point where pricing has become a system rather than a page — usage, tiers, credits, corrections — and where getting an invoice wrong costs more than the invoice.",
           "tables": []
         },
         {
@@ -627,7 +627,7 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A request from the platform's users, and the part of the system it will touch, read rather than\nremembered.",
+          "text": "A request from the platform's users, and the part of the system it will touch, read rather than remembered.",
           "tables": []
         },
         {
@@ -717,7 +717,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level works with it unsupervised and the result is predictable. They recognize\nthe common failure modes, having run into them.",
+          "text": "Someone at this level works with it unsupervised and the result is predictable. They recognize the common failure modes, having run into them.",
           "tables": []
         }
       ],
@@ -736,7 +736,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level knows where it breaks down and where it is simply wrong. They have worked\nbelow its surface, shaped it, or taught it.",
+          "text": "Someone at this level knows where it breaks down and where it is simply wrong. They have worked below its surface, shaped it, or taught it.",
           "tables": []
         }
       ],
@@ -755,7 +755,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level has used it on real work, with guidance or frequent reference. They can\nfollow a conversation about it and make sense of other people's work in it.",
+          "text": "Someone at this level has used it on real work, with guidance or frequent reference. They can follow a conversation about it and make sense of other people's work in it.",
           "tables": []
         }
       ],
@@ -774,7 +774,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level makes judgment calls in it and can explain why the alternatives are\nworse. Other people bring them their questions.",
+          "text": "Someone at this level makes judgment calls in it and can explain why the alternatives are worse. Other people bring them their questions.",
           "tables": []
         }
       ],
@@ -796,7 +796,7 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "One profile for every agent the company runs, so the seat has a holder. It claims no skill,\nand not because the first review is unread: a claim is a person's history with a capability,\nand an agent has none. What holds it to the seat is the rulebook, never a row.",
+          "text": "One profile for every agent the company runs, so the seat has a holder. It claims no skill, and not because the first review is unread: a claim is a person's history with a capability, and an agent has none. What holds it to the seat is the rulebook, never a row.",
           "tables": []
         }
       ],
@@ -917,7 +917,7 @@
         },
         {
           "heading": "Summary",
-          "text": "Eight years across two companies, both of them small enough that the boundary between\nbuilding a thing and running it never really existed.",
+          "text": "Eight years across two companies, both of them small enough that the boundary between building a thing and running it never really existed.",
           "tables": []
         },
         {
@@ -980,7 +980,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left in January 2022 when the pipeline work was done and the next problem worth four years was\nsomewhere else.",
+          "text": "Left in January 2022 when the pipeline work was done and the next problem worth four years was somewhere else.",
           "tables": []
         }
       ],
@@ -1201,7 +1201,7 @@
         },
         {
           "heading": "Summary",
-          "text": "Six years across the same two companies as the engineers he works with, on the other side of\nthe table: deciding what gets built rather than building it.",
+          "text": "Six years across the same two companies as the engineers he works with, on the other side of the table: deciding what gets built rather than building it.",
           "tables": []
         }
       ],
@@ -1346,12 +1346,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A bounded context with a name and the invoices it has to get right. A change request that\nsays what is wrong for a customer, not which class to edit. A turn on the pager, because the\nseat answers for what it ships.",
+          "text": "A bounded context with a name and the invoices it has to get right. A change request that says what is wrong for a customer, not which class to edit. A turn on the pager, because the seat answers for what it ships.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "A service that stays up, and a change small enough that a reviewer reads it in one sitting,\nwith the tests that show the invoice is still right.",
+          "text": "A service that stays up, and a change small enough that a reviewer reads it in one sitting, with the tests that show the invoice is still right.",
           "tables": []
         },
         {
@@ -1377,12 +1377,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "The change as a diff, the request it answers and the report of whoever made it, read as a\nclaim rather than a fact.",
+          "text": "The change as a diff, the request it answers and the report of whoever made it, read as a claim rather than a fact.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "Findings, each with a file, a line, what is wrong, why it matters and how to fix it, ranked\nby severity, and the strengths named first. A finding is an input to whoever merges.",
+          "text": "Findings, each with a file, a line, what is wrong, why it matters and how to fix it, ranked by severity, and the strengths named first. A finding is an input to whoever merges.",
           "tables": []
         },
         {
@@ -1438,7 +1438,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Name things as the business names them, and refuse a name that only makes sense inside the\ncodebase. Draw the boundary between one model and the next, and hold it when a second team\nwants to reach across it. Rework the model when the language changes, rather than mapping\naround it and keeping both.",
+          "text": "Name things as the business names them, and refuse a name that only makes sense inside the codebase. Draw the boundary between one model and the next, and hold it when a second team wants to reach across it. Rework the model when the language changes, rather than mapping around it and keeping both.",
           "tables": []
         }
       ],
@@ -1457,7 +1457,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Write services other teams depend on, and keep them running once they do. Read the stack trace\nwhen one stops. Know the runtime well enough to tell a slow query from a slow collector, and to\nsay which of the two a graph is showing. Typical tools: the JDK, a build tool, a profiler.",
+          "text": "Write services other teams depend on, and keep them running once they do. Read the stack trace when one stops. Know the runtime well enough to tell a slow query from a slow collector, and to say which of the two a graph is showing. Typical tools: the JDK, a build tool, a profiler.",
           "tables": []
         }
       ],
@@ -1476,7 +1476,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Talk to the people who would use a thing before the first line of it is written. Frame the\nquestion so that the answer can be no, and hear it when it is. Test the cheapest version of an\nidea that could still turn out wrong, and stop when it does.",
+          "text": "Talk to the people who would use a thing before the first line of it is written. Frame the question so that the answer can be no, and hear it when it is. Test the cheapest version of an idea that could still turn out wrong, and stop when it does.",
           "tables": []
         }
       ],
@@ -1518,7 +1518,7 @@
       "sections": [
         {
           "heading": "What it makes true",
-          "text": "A customer looking at an invoice can tell how each number was reached, in the words their own\ncontract uses, so the question \"why is this line 4,200\" is answered where it is asked. Support\nstill hears from customers, and what it hears about is their pricing rather than our arithmetic.\n\nWe would know it holds by what stops arriving. An explanation ticket is one where the customer\nasks how a number was reached and nothing about the number is wrong; those are countable today\nand they are the measure. The invoice being correct is not what is in question and never was.\n\nWhat falls outside: a disagreement about what the contract says. An invoice that explains itself\nperfectly can still bill something the customer believes they did not buy, and that is a\nquestion for the contract, not for the page.",
+          "text": "A customer looking at an invoice can tell how each number was reached, in the words their own contract uses, so the question \"why is this line 4,200\" is answered where it is asked. Support still hears from customers, and what it hears about is their pricing rather than our arithmetic.\n\nWe would know it holds by what stops arriving. An explanation ticket is one where the customer asks how a number was reached and nothing about the number is wrong; those are countable today and they are the measure. The invoice being correct is not what is in question and never was.\n\nWhat falls outside: a disagreement about what the contract says. An invoice that explains itself perfectly can still bill something the customer believes they did not buy, and that is a question for the contract, not for the page.",
           "tables": []
         }
       ],
@@ -1543,17 +1543,17 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "We keep the pricing rules as data the billing run reads, rather than code it executes: one rule\nper pricing term, named in the words the contract uses, versioned with the contract it belongs\nto. A line on an invoice carries the id of the rule that produced it, and the explanation a\ncustomer reads is rendered from that rule and the inputs it saw. One run produces both the\nnumber and the sentence about the number, which is what keeps them from drifting apart.\n\nWhere a rule cannot express a term, we renegotiate the term or we grow the rule language.\nNeither is quick, and choosing that over a manual adjustment is the whole of this strategy.",
+          "text": "We keep the pricing rules as data the billing run reads, rather than code it executes: one rule per pricing term, named in the words the contract uses, versioned with the contract it belongs to. A line on an invoice carries the id of the rule that produced it, and the explanation a customer reads is rendered from that rule and the inputs it saw. One run produces both the number and the sentence about the number, which is what keeps them from drifting apart.\n\nWhere a rule cannot express a term, we renegotiate the term or we grow the rule language. Neither is quick, and choosing that over a manual adjustment is the whole of this strategy.",
           "tables": []
         },
         {
           "heading": "What it rules out",
-          "text": "We never add a manual adjustment line. An invoice that anyone can add a number to is an invoice\nthat cannot explain itself, and every exception granted teaches the next team to ask for one. We\nnever write the explanation by hand after the fact, however well written it would be: a sentence\nmaintained beside a number is a second copy of a rule, and it goes stale on the first pricing\nchange nobody remembers to follow. And we keep no per-customer pricing code, which is the fast\nway to win one deal and the slow way to lose the ability to explain anything.",
+          "text": "We never add a manual adjustment line. An invoice that anyone can add a number to is an invoice that cannot explain itself, and every exception granted teaches the next team to ask for one. We never write the explanation by hand after the fact, however well written it would be: a sentence maintained beside a number is a second copy of a rule, and it goes stale on the first pricing change nobody remembers to follow. And we keep no per-customer pricing code, which is the fast way to win one deal and the slow way to lose the ability to explain anything.",
           "tables": []
         },
         {
           "heading": "What would show it is working",
-          "text": "We watch the share of invoice lines whose rule id is missing, which is countable on every run and\nshould fall to nothing. Then the share of explanation tickets in support's queue, which moves\nlater and is read monthly. The first number moves within a sprint of any pricing change, which is\nwhat makes it worth watching — by the time the second one moves, the change that broke it is\nmonths old.",
+          "text": "We watch the share of invoice lines whose rule id is missing, which is countable on every run and should fall to nothing. Then the share of explanation tickets in support's queue, which moves later and is read monthly. The first number moves within a sprint of any pricing change, which is what makes it worth watching — by the time the second one moves, the change that broke it is months old.",
           "tables": []
         }
       ],
@@ -1622,7 +1622,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We refuse a deadline that can only be met by leaving something half-built, and we say so early\nenough that the date can still move.\n\nWe never ship on time while knowing privately which part will be rewritten within the quarter.",
+          "text": "We refuse a deadline that can only be met by leaving something half-built, and we say so early enough that the date can still move.\n\nWe never ship on time while knowing privately which part will be rewritten within the quarter.",
           "tables": []
         }
       ],
@@ -1640,7 +1640,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We name the objection in the room where the choice is being made, once and plainly, and then\ncommit to whatever is decided.\n\nWe never agree in the meeting and reopen the question in a side channel afterwards.",
+          "text": "We name the objection in the room where the choice is being made, once and plainly, and then commit to whatever is decided.\n\nWe never agree in the meeting and reopen the question in a side channel afterwards.",
           "tables": []
         }
       ],
@@ -1658,7 +1658,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Every charge traces to something the customer did, in language they used when they agreed to\nit. When an invoice is disputed the answer is in the invoice, and support confirms it rather\nthan reconstructing it. We would know this holds when disputes are resolved by reading rather\nthan by investigation.\n\nIt says nothing about what we charge or whom we sell to. Pricing models and market are\ndecisions we expect to change several times; this is what we want to be true of the bill\nwhatever they turn out to be.",
+          "text": "Every charge traces to something the customer did, in language they used when they agreed to it. When an invoice is disputed the answer is in the invoice, and support confirms it rather than reconstructing it. We would know this holds when disputes are resolved by reading rather than by investigation.\n\nIt says nothing about what we charge or whom we sell to. Pricing models and market are decisions we expect to change several times; this is what we want to be true of the bill whatever they turn out to be.",
           "tables": []
         }
       ],
