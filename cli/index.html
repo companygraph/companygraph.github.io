@@ -564,14 +564,18 @@
      characters, because Plex Mono as served here carries none of them and a fallback face would
      break their columns. */
   .term{--t-bg:#0E141C; --t-top:#161E29; --t-dot:#2B3645; --t-ink:#D5DCE6; --t-dim:#8793A3;
-        --t-accent:#7FA3D8; --t-strong:#FFFFFF;
+        --t-accent:#7FA3D8; --t-strong:#FFFFFF; --t-good:#86C79A;
         margin-top:1.4rem; max-width:100%; border-radius:12px; overflow:hidden;
         background:var(--t-bg); border:1.5px solid var(--c-firm); color:var(--t-ink)}
   :root[data-theme="light"] .term{--t-bg:#FDFCF9; --t-top:#EFECE5; --t-dot:#D6D1C6; --t-ink:#1D232C;
-        --t-dim:#676152; --t-accent:#3A6DA6; --t-strong:#0C0E13}
-  .term-top{display:flex; gap:.45rem; padding:.7rem .9rem; background:var(--t-top)}
+        --t-dim:#676152; --t-accent:#3A6DA6; --t-strong:#0C0E13; --t-good:#2E7A45}
+  .term-top{display:flex; align-items:center; gap:.45rem; padding:.7rem .9rem; background:var(--t-top)}
   .term-top i{width:.7rem; height:.7rem; border-radius:50%; background:var(--t-dot)}
   .term-body{padding:1.1rem 1.35rem 1.3rem; overflow-x:auto; font-size:clamp(.74rem,1.1vw,.9rem); line-height:1.55}
+  /* Once the flow has started, the window keeps one height, as a terminal window does, playing
+     or paused, so the page under it never jumps; a screen taller than the window shows its last
+     lines, where a terminal's cursor is. */
+  .term.live .term-body{height:calc(26 * 1.55em + 2.4rem); overflow-y:hidden}
   .term-body pre{margin:0; white-space:pre; font:inherit}
   .term-logo{display:flex; align-items:center; gap:1.1rem; margin:1.1rem 0 1.2rem .9rem}
   .term-logo svg{width:5.2em; height:5.2em; color:var(--t-accent); flex:0 0 auto}
@@ -579,7 +583,20 @@
   .term .d{color:var(--t-dim)}
   .term .k{color:var(--t-strong); font-weight:600}
   .term .k.a{color:var(--t-accent)}
+  .term .g{color:var(--t-good)}
   .term .cur{display:inline-block; width:.6em; height:1.15em; vertical-align:-.2em; background:var(--t-ink)}
+  .term.playing .cur{animation:blink 1.1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  /* Play and pause, at the title bar's far end. The flow runs past five seconds, so a visitor
+     can stop it; with reduced motion it waits for this button instead of starting on its own. */
+  .term-play{margin-left:auto; display:grid; place-items:center; width:1.7rem; height:1.7rem;
+             background:none; border:1px solid var(--t-dot); border-radius:6px; color:var(--t-dim);
+             cursor:pointer; padding:0}
+  .term-play:hover{color:var(--t-ink)}
+  .term-play:focus-visible{outline:2px solid var(--t-accent); outline-offset:1px}
+  .term-play svg{width:.8rem; height:.8rem; fill:currentColor}
+  .term-play .ipause, .term.playing .term-play .iplay{display:none}
+  .term.playing .term-play .ipause{display:block}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
@@ -674,30 +691,33 @@
 
     <section>
       <h2 data-de="Starten">Run it</h2>
-      <p class="lede" data-de="In einem Terminal, in einem beliebigen Ordner. Der Befehl öffnet ein Menü, fragt nach, was er braucht, und sagt, was er getan hat.">In a terminal, from any folder. It opens a menu, asks for what it needs, and says what it did.</p>
+      <p class="lede" data-de="In einem Terminal, in einem beliebigen Ordner. Der Befehl öffnet ein Menü, fragt nach, was er braucht, und sagt, was er getan hat. Danach kommt das Menü zurück, mit dem letzten Schritt darüber, grün, wenn er gelungen ist, rot, wenn nicht, bis Sie Quit wählen, q tippen oder Ctrl+C drücken.">In a terminal, from any folder. It opens a menu, asks for what it needs, and says what it did. Then the menu comes back, with the latest pick above it, green when it went through and red when not, until you pick Quit, type q or press Ctrl+C.</p>
       <pre class="cmd mono">npx --yes 'github:companygraph/meta-model#semver:*'</pre>
       <figure class="term mono" aria-label="The menu the command opens" data-de-aria="Das Menü, das der Befehl öffnet">
-        <div class="term-top" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="term-top"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+          <button type="button" class="term-play" aria-label="Play the menu" data-de-aria="Das Menü abspielen" hidden><svg class="iplay" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ipause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button>
+        </div>
         <div class="term-body">
-          <pre><span class="d">$</span> npx --yes 'github:companygraph/meta-model#semver:*'</pre>
-          <div class="term-logo">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-              <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
-              <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
-              <path d="M12.5 12 h4.5"/>
-              <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
-            </svg>
-            <pre><span class="k">Company</span><span class="k a">Graph</span>
+          <div class="term-screen">
+            <pre><span class="d">$</span> npx --yes 'github:companygraph/meta-model#semver:*'</pre>
+            <div class="term-logo">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+                <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/>
+                <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+                <path d="M12.5 12 h4.5"/>
+                <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/>
+              </svg>
+              <pre><span class="k">Company</span><span class="k a">Graph</span>
 <span class="d">tooling &lt;release&gt; · companygraph.io</span></pre>
-          </div>
-          <pre>  <span class="a">1</span>  Make a model                <span class="d">a new instance in a folder, or beside the files already in one</span>
+            </div>
+            <pre>  <span class="a">1</span>  Make a model                <span class="d">a new instance in a folder, or beside the files already in one</span>
   <span class="a">2</span>  Check a model               <span class="d">the mechanical checks, as its CI runs them</span>
   <span class="a">3</span>  Move a model to &lt;release&gt;   <span class="d">its vendored core, skills, manifest and workflow tag together</span>
   <span class="a">4</span>  Obsidian plugin             <span class="d">install it in a vault, or update it there</span>
+  <span class="a">5</span>  Quit                        <span class="d">or q, or Ctrl+C</span>
 
-<span class="a">›</span> <span class="k">Pick 1-4</span> <span class="d">(Enter to leave)</span> 1
-<span class="a">›</span> <span class="k">Which folder?</span> <span class="d">(a path; it is made if it is missing)</span> ~/git/acme
-<span class="a">›</span> <span class="k">What is the company called?</span> Acme<span class="cur"></span></pre>
+<span class="a">›</span> <span class="k">Pick 1-5</span> <span class="cur"></span></pre>
+          </div>
         </div>
       </figure>
     </section>
@@ -1005,6 +1025,139 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
 
   applyLang();
   applyTheme();
+})();
+</script>
+<script>
+// The menu's default flow, played in the drawing: the command, Make a model with its questions
+// and what it prints, the plugin, then the menu back with the pick above it, and Quit. Every
+// line is the tooling's own; where it prints a release, a count or a list that moves with the
+// next release, the drawing writes a placeholder, as the static menu does. Without script the
+// figure keeps the menu as its markup draws it; with reduced motion it keeps it until Play.
+(function(){
+  var fig = document.querySelector(".term");
+  var screen = fig.querySelector(".term-screen");
+  var body = fig.querySelector(".term-body");
+  var button = fig.querySelector(".term-play");
+  var logo = fig.querySelector(".term-logo").cloneNode(true);
+  var CMD = "npx --yes 'github:companygraph/meta-model#semver:*'";
+  var ask = function(q, hint){ return '<span class="a">›</span> <span class="k">' + q + '</span>' + (hint ? ' <span class="d">(' + hint + ')</span>' : '') + ' '; };
+  var MENU = [
+    '  <span class="a">1</span>  Make a model                <span class="d">a new instance in a folder, or beside the files already in one</span>',
+    '  <span class="a">2</span>  Check a model               <span class="d">the mechanical checks, as its CI runs them</span>',
+    '  <span class="a">3</span>  Move a model to &lt;release&gt;   <span class="d">its vendored core, skills, manifest and workflow tag together</span>',
+    '  <span class="a">4</span>  Obsidian plugin             <span class="d">install it in a vault, or update it there</span>',
+    '  <span class="a">5</span>  Quit                        <span class="d">or q, or Ctrl+C</span>',
+    ''];
+  var FOLDER = [ask("Which folder?", "a path; it is made if it is missing"), "~/git/acme"];
+  var NAME = [ask("What is the company called?"), "Acme"];
+  var PLUGIN = [ask("Install the Obsidian plugin in it, to write it in Obsidian?", "y/N"), "y"];
+  var MADE = ['',
+    '<span class="g">✓</span> &lt;n&gt; files written into ~/git/acme',
+    '  written for claude, with the companygraph-validate, -export and -surface skills; export and surface need Python 3',
+    '  core &lt;core&gt;, vendored under meta/core/',
+    '  folders: &lt;one for each type core declares&gt;',
+    '  the model is empty but for its README files, its source and its two singular entities',
+    ''];
+  var INSTALLED = ['',
+    '<span class="g">✓</span> CompanyGraph &lt;plugin release&gt; installed in ~/git/acme, and switched on',
+    '',
+    '<span class="k">Next, in Obsidian</span>',
+    '  <span class="a">1</span>  Open the folder as a vault, if it is not one yet: <span class="d">Open another vault → Open folder as vault</span>',
+    '  <span class="a">2</span>  Trust the vault\'s author when Obsidian asks',
+    '  <span class="a">3</span>  CompanyGraph not under Installed plugins? <span class="d">Settings → Community plugins → Turn on community plugins</span>',
+    '     <span class="d">Obsidian keeps that switch itself, outside the vault, so no command can set it.</span>',
+    '  A vault Obsidian has open already takes the plugin on <span class="d">Reload app without saving</span>.'];
+
+  var run = 0, paused = false, wake = null;
+  function wait(ms, mine){
+    return new Promise(function(done){ setTimeout(done, ms); }).then(function(){
+      if (mine !== run) throw mine;
+      if (paused) return new Promise(function(go){ wake = go; }).then(function(){ if (mine !== run) throw mine; });
+    });
+  }
+  function line(html){
+    var pre = document.createElement("pre");
+    pre.innerHTML = html === "" ? " " : html;
+    screen.appendChild(pre);
+    body.scrollTop = body.scrollHeight;
+    return pre;
+  }
+  function clear(){ screen.textContent = ""; body.scrollTop = 0; }
+  function banner(){ screen.appendChild(logo.cloneNode(true)); }
+  function lines(list, mine, gap){
+    return list.reduce(function(p, html){ return p.then(function(){ line(html); return wait(gap, mine); }); }, Promise.resolve());
+  }
+  // A prompt, a moment to read it, then the answer typed a character at a time, then Enter.
+  function type(prompt, text, mine, speed, lead){
+    var pre = line(prompt + '<span class="t"></span><span class="cur"></span>');
+    var t = pre.querySelector(".t");
+    var chars = Array.from(text);
+    return wait(lead || 700, mine).then(function step(){
+      if (!chars.length) return wait(450, mine).then(function(){ pre.querySelector(".cur").remove(); });
+      t.textContent += chars.shift();
+      return wait(speed || 85, mine).then(step);
+    });
+  }
+  function menu(mine){ return lines(MENU, mine, 40); }
+  function panel(){
+    var said = [FOLDER[0] + FOLDER[1], NAME[0] + NAME[1]].concat(MADE, [PLUGIN[0] + PLUGIN[1]], INSTALLED);
+    line('  <span class="g">╭─ ✓</span> <span class="k">Make a model</span>');
+    said.forEach(function(html){ line('  <span class="g">│</span> ' + html); });
+    line('  <span class="g">╰─</span>');
+    line('');
+  }
+  function play(){
+    var mine = ++run;
+    paused = false;
+    fig.classList.add("live", "playing");
+    button.setAttribute("aria-pressed", "true");
+    clear();
+    return type('<span class="d">$</span> ', CMD, mine, 32)
+      .then(function(){ return wait(900, mine); })
+      .then(function(){ line(""); banner(); return menu(mine); })
+      .then(function(){ return type(ask("Pick 1-5"), "1", mine); })
+      .then(function(){ clear(); line(""); banner(); line('  <span class="a">›</span> <span class="k">Make a model</span>'); line(""); return wait(500, mine); })
+      .then(function(){ return type(FOLDER[0], FOLDER[1], mine); })
+      .then(function(){ return type(NAME[0], NAME[1], mine); })
+      .then(function(){ return wait(900, mine); })
+      .then(function(){ return lines(MADE, mine, 120); })
+      .then(function(){ return type(PLUGIN[0], PLUGIN[1], mine); })
+      .then(function(){ return wait(1400, mine); })
+      .then(function(){ return lines(INSTALLED, mine, 90); })
+      .then(function(){ return wait(3200, mine); })
+      .then(function(){ clear(); line(""); banner(); panel(); return menu(mine); })
+      .then(function(){ return type(ask("Pick 1-5"), "q", mine, 85, 5000); })
+      .then(function(){ clear(); line('<span class="d">$</span> <span class="cur"></span>'); return wait(2800, mine); })
+      .then(function(){ return play(); })
+      .catch(function(stale){ if (typeof stale !== "number") throw stale; });
+  }
+  function pause(){
+    paused = true;
+    fig.classList.remove("playing");
+    button.setAttribute("aria-pressed", "false");
+  }
+  function resume(){
+    paused = false;
+    fig.classList.add("playing");
+    button.setAttribute("aria-pressed", "true");
+    if (wake) { var go = wake; wake = null; go(); }
+  }
+  button.hidden = false;
+  button.setAttribute("aria-pressed", "false");
+  button.addEventListener("click", function(){
+    if (fig.classList.contains("playing")) pause();
+    else if (run) resume();
+    else play();
+  });
+  // Motion only for a visitor who has not asked for less of it, and only once the drawing is
+  // on screen, so the flow starts at its beginning where it is read.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+  var seen = new IntersectionObserver(function(entries){
+    if (!entries[0].isIntersecting) return;
+    seen.disconnect();
+    play();
+  }, { threshold: 0.4 });
+  seen.observe(fig);
 })();
 </script>
 </body>
