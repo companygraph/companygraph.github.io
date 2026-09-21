@@ -64,6 +64,16 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   when a graph drifts. Nothing else on the example page names anything from the example,
   nothing else on the model page names anything from the model, and nothing else on the
   landing page names anything from CompanyGraph's own model.
+- **`/tools/` restates meta-model's commands, and is the one page allowed to.** A setup guide
+  that only linked to the README would not be one, so the page shows `init`, `check` and
+  `upgrade` with their flags, the Obsidian plugin's install and commands, the skills and the
+  MCP server's command. What keeps it true is what the page leaves out and one habit. It names
+  no release: every command reads `#<tag>` and the page sends the reader to the releases page
+  for the newest one, because a version written here is wrong at the next release. And every
+  command on it was run from a release before it was written: when meta-model, the plugin or
+  the server changes a command or a flag the page names, this page changes in the same wave,
+  since nothing in this repository can see the change happen. Its prose is hand-written, so
+  it is not a unit of the website surface in `companygraph/mental-model`.
 - **Team, Principles and Surfaces are generated regions around a hand-written shell.** Each is
   a page built from `/privacy/`'s shell whose model-derived region `npm run pages` writes from
   `company.json` with the design package's `render/team`, `render/principles` and

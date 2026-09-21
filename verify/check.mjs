@@ -39,7 +39,7 @@ const PAGES = [
     // the nav sets `text-transform:uppercase`, so the markup's "Talks" arrives here as
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
-    contains: ["Everything a company knows", "One graph", "CompanyGraph", "TALKS", "MODEL", "EXAMPLE", "BILLING",
+    contains: ["Everything a company knows", "One graph", "CompanyGraph", "TOOLS", "TALKS", "MODEL", "BILLING",
                // The talk's call to action and the one fact this page is allowed to
                // restate: its length. A call to action needs it in the moment, not one
                // click away. The deck is in this repository now — `talks/intro/` — so the
@@ -47,7 +47,7 @@ const PAGES = [
                // still not derived from the deck's own timings, so re-cut the talk and this
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
-               "Watch intro talk", "12 minutes · German or English",
+               "Watch intro talk", "12 minutes · German or English", "Set it up",
                // The hero's note says what the drawing below it is: CompanyGraph, in
                // its own vocabulary. Only the words that carry it, so rewording the
                // rest of the sentence does not fail the check.
@@ -58,7 +58,8 @@ const PAGES = [
     // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
     // page whole; what `sameTab` adds is the name. The nav gained one item and the check
     // that would have caught it opening elsewhere never mentioned it, so it is named here.
-    sameTab: ["model/"],
+    // The third call to action goes to the setup page, on this domain, so it stays in the tab.
+    sameTab: ["model/", "tools/"],
     internalLinks: true,
     // The German half, named by what the reader must see and what must stop being
     // visible. Strings, not element counts: a translation that never got applied leaves
@@ -82,7 +83,17 @@ const PAGES = [
   { path: "/privacy/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["../talks/", "../model/", "../example/", "../billing/", "../", "./"],
+    sameTab: ["../talks/", "../model/", "../tools/", "../billing/", "../", "./"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    card: true, cardBase: SITE, internalLinks: true },
+  // The setup page. Its commands name GitHub releases, and the page itself still fetches
+  // nothing from another origin, which `sameOrigin` holds it to as it holds Privacy.
+  { path: "/tools/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Tools/, lang: "en", sourceLang: "en",
+    contains: ["Start a model", "one command", "Make an instance", "Check it", "Take a newer release", "Write it in Obsidian", "Let an agent work with it"],
+    links: ["https://github.com/companygraph/meta-model/releases", "https://github.com/companygraph/obsidian-plugin/releases"],
+    sameTab: ["../team/", "../principles/", "../privacy/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
@@ -137,7 +148,7 @@ const PAGES = [
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
     links: ["https://github.com/companygraph"],
-    sameTab: ["../talks/", "../model/", "../example/", "../privacy/", "../", "./"],
+    sameTab: ["../talks/", "../model/", "../tools/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
@@ -182,7 +193,7 @@ const PAGES = [
     // the href as delivered, and the swap happens only after a click on the toggle. What
     // this line catches is the path being wrong for everyone; the German half is checked
     // by `translates.dlHref` below.
-    sameTab: ["intro/", "./", "../", "../model/", "../example/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
+    sameTab: ["intro/", "./", "../", "../model/", "../tools/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],

@@ -11,6 +11,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/` | The landing page: what CompanyGraph is, and CompanyGraph's own model, drawn on the stage. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
+| `/tools/` | How to set CompanyGraph up: the command line, the Obsidian plugin, the skills and the MCP server, each with the command it takes. First in the nav, by the owner's decision. |
 | `/team/` | Who does CompanyGraph's work: one board per process, generated from `company.json` by the design package's `render/team`, each opening on the process's owner. |
 | `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
 | `/surfaces/` | Where CompanyGraph's model is published and what makes each place, generated from `company.json` by the design package's `render/surfaces`. |
@@ -25,7 +26,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 
 ## Contents
 
-- `index.html`, `billing/`, `privacy/` — the prose pages, each self-contained. The landing page
+- `index.html`, `tools/`, `billing/`, `privacy/` — the prose pages, each self-contained. The landing page
   also carries a stage, described with the stage pages below.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
@@ -69,7 +70,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png`,
-  `billing/og.png`, `privacy/og.png`, `principles/og.png`, `team/og.png`, `surfaces/og.png` — 1200×630 share cards, each
+  `billing/og.png`, `privacy/og.png`, `tools/og.png`, `principles/og.png`, `team/og.png`, `surfaces/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
   `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders every one and writes

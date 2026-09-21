@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Principles — CompanyGraph</title>
-<meta id="metadesc" name="description" content="The vision and values CompanyGraph, a meta-model for operating a company, holds itself to — read from its own model, not written for this page.">
+<title>Tools — CompanyGraph</title>
+<meta id="metadesc" name="description" content="Set up a CompanyGraph instance: the command line that makes one and keeps its vocabulary current, the Obsidian plugin that checks it while you write, and what an agent uses to read it.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://companygraph.io/principles/">
+<link rel="canonical" href="https://companygraph.io/tools/">
 
-<meta property="og:title" content="Principles — CompanyGraph">
-<meta property="og:description" content="The vision and values CompanyGraph, a meta-model for operating a company, holds itself to — read from its own model, not written for this page.">
+<meta property="og:title" content="Tools — CompanyGraph">
+<meta property="og:description" content="Set up a CompanyGraph instance: the command line that makes one and keeps its vocabulary current, the Obsidian plugin that checks it while you write, and what an agent uses to read it.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CompanyGraph">
-<meta property="og:url" content="https://companygraph.io/principles/">
-<meta property="og:image" content="https://companygraph.io/principles/og.png">
+<meta property="og:url" content="https://companygraph.io/tools/">
+<meta property="og:image" content="https://companygraph.io/tools/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Principles read from its own model.">
+<meta property="og:image:alt" content="Start a model in one command.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -50,9 +50,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://companygraph.io/principles/#webpage",
-      "name": "Principles",
-      "url": "https://companygraph.io/principles/",
+      "@id": "https://companygraph.io/tools/#webpage",
+      "name": "Tools",
+      "url": "https://companygraph.io/tools/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://companygraph.io/#website"
@@ -61,12 +61,12 @@
         "@id": "https://companygraph.io/#organization"
       },
       "breadcrumb": {
-        "@id": "https://companygraph.io/principles/#breadcrumb"
+        "@id": "https://companygraph.io/tools/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://companygraph.io/principles/#breadcrumb",
+      "@id": "https://companygraph.io/tools/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -77,8 +77,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Principles",
-          "item": "https://companygraph.io/principles/"
+          "name": "Tools",
+          "item": "https://companygraph.io/tools/"
         }
       ]
     },
@@ -534,8 +534,7 @@
   @media (max-width:900px){ .tagline{max-width:100%} }
   /* ─── end title contract ────────────────────────────────────────────────── */
 
-  /* The page's one reversal, and the only honest place for it: the headline says nothing
-     leaves, and one thing does — the request itself, to whoever serves the file. */
+  /* What every command below assumes, said once beside the title rather than repeated. */
   .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
         border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
@@ -543,9 +542,17 @@
   h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
      font-weight:700; letter-spacing:-.025em; line-height:1.06;
      font-size:clamp(1.6rem,3vw,2.3rem)}
-  h2 em{font-style:normal; color:var(--c-mid)}
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
-  .lede a{color:var(--c-mid)}
+  .note a{color:var(--c-mid)}
+
+  /* the same one-datum box the sibling site uses: one fact, stated plainly and
+     once, in the face this system reserves for data */
+  /* A command is copied, not read: one block per command, in the face this system reserves
+     for data, and it scrolls sideways on a phone rather than wrapping a command into two. */
+  .cmd{margin-top:1.4rem; display:block; max-width:100%; overflow-x:auto; white-space:pre;
+       padding:1rem 1.35rem; border-radius:10px; background:var(--raise);
+       border:1.5px solid var(--c-firm); font-size:clamp(.82rem,1.2vw,.95rem); color:var(--ink)}
+  .lede code, .rules code{font-size:.92em; color:var(--ink)}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
@@ -581,23 +588,6 @@
   footer .credit:hover b em, footer .credit:focus-visible b em{color:var(--ink)}
   footer a[aria-current="page"]{color:var(--c-firm)}
   /* ─── end prose footer ──────────────────────────────────────────────────*/
-  /* ─── principles · v1 · shared ───────────────────────────────────────
-     Generated from @robertblust/design — edit it there and run `npm run design`.
-
-     The values /principles/ lists, one `article.value` each, as lib/render/principles.mjs
-     writes them. The rest of what that renderer writes is styled elsewhere on purpose: the
-     title, tagline and headline marks by the `title contract` fence, and `.lede`, `.derived`,
-     `.note` and `.mono` by rules several pages share, which a page's own fence must not copy.
-  */
-  .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
-  .value h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem)}
-  .value .tagline{margin-top:.5rem; color:var(--c-firm); max-width:62ch}
-  .value p{margin-top:.9rem; color:var(--dim); max-width:70ch; line-height:1.6}
-  /* ─── end principles ───────────────────────────────────────────────────── */
-  /* The provenance line under the values: record, so mono end to end, and clear of the last value. */
-  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
-           letter-spacing:.06em; color:var(--dim)}
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
@@ -628,9 +618,9 @@
       </a>
       <nav>
         <div class="navlinks" id="navlinks">
-          <a href="../tools/">Tools</a>
+          <a href="./" aria-current="page">Tools</a>
           <a href="../team/">Team</a>
-          <a href="./" aria-current="page" data-de="Prinzipien">Principles</a>
+          <a href="../principles/" data-de="Prinzipien">Principles</a>
           <a href="../surfaces/">Surfaces</a>
           <a href="../model/" data-de="Modell">Model</a>
           <a href="../talks/" data-de="Vorträge">Talks</a>
@@ -649,43 +639,62 @@
 
 <main>
   <div class="shell">
-    <!-- principles:start -->
     <div class="title">
-      <h1><span class="r70">Written once,</span><span class="rcl">read by <em>both</em></span></h1>
-      <p class="tagline">We are working toward companies whose knowledge is written once, in a structure that the people who run them and the agents working beside them can both rely on — so that what a company knows can be read, checked and acted on where it is needed, rather than reassembled out of wikis, decks, tickets and chat threads every time somebody asks.</p>
-      <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
+      <h1><span class="r70">Start a model</span><span class="rcl">in <em>one command</em>.</span></h1>
+      <p class="tagline">A company’s model is a folder of Markdown files in a repository of its own. The command line makes that folder and keeps its vocabulary current, the Obsidian plugin checks it while you write, and an agent reads it through skills and a server.</p>
+      <p class="note">Nothing here is installed from a registry. Every command runs straight from a release on GitHub, and <code class="mono">&lt;tag&gt;</code> below stands for the newest one on the <a href="https://github.com/companygraph/meta-model/releases">releases page</a>. The commands need Node 22 or newer.</p>
     </div>
 
     <section>
-      <h2>What it means</h2>
-      <p class="lede">It holds when a company can answer a question about itself from the structure rather than from whoever remembers, when an agent answering the same question is held to the same evidence as a person, and when a claim that rests on nothing is visible as such instead of passing unchallenged. A reader can tell whether it holds by asking the same question twice, of a person and of an agent, and comparing what each had to stand on.</p>
-      <p class="lede">It does not ask a company to move what it keeps elsewhere. A fact the wiki, the tracker or the directory has authority over stays mastered there and is projected into the model by a sync that names it, so a company whose knowledge is legible this way still runs on the tools it ran on before. It is also not reached by describing more: a model nobody acts on has not made a company legible, whatever it contains.</p>
+      <h2>Make an instance</h2>
+      <p class="lede">An instance is the repository a company’s model lives in: the vocabulary copied in at one release, a manifest saying which, and a workflow that checks every change. <code class="mono">init</code> writes all of it, and nothing else.</p>
+      <pre class="cmd mono">npx github:companygraph/meta-model#&lt;tag&gt; init acme --name "Acme" --agent claude</pre>
+      <div class="rules">
+        <p><b>It writes over nothing.</b> For a folder that already holds files, a repository or an Obsidian vault, run it inside that folder with <code class="mono">init . --here</code>. It refuses, and names each file, when something it would write is already there.</p>
+        <p><b>It writes only the folders you name.</b> <code class="mono">--folders values,processes</code> leaves out every other type, and a company with no people in it needs no folder for them. <code class="mono">sources</code> is always written, because the first source lives there.</p>
+        <p><b>What it writes.</b> The vocabulary under <code class="mono">meta/core/</code>, <code class="mono">.companygraph/manifest.json</code> with a hash for every file it owns, a folder for each type with a README naming its schema, the source and the entities no instance passes without, a CI workflow, and for Claude an <code class="mono">AGENTS.md</code>, a <code class="mono">CLAUDE.md</code> and its skills.</p>
+      </div>
     </section>
 
     <section>
-      <h2 data-de="Werte">Values</h2>
-      <article class="value">
-        <h3>Adoption is not taxed</h3>
-        <p class="tagline">A meta-model is worth whatever gets adopted of it, so anything that makes adopting it cost more works against the one thing it was built to do.</p>
-        <p>We publish the vocabulary, the tooling and the talks under licenses that ask nothing back, and we bill consulting by the day rather than by the model, so what costs money is time and never what a company does with the model. Where a way to charge would have fitted we wrote down why it was refused instead of leaving it open: a seat count charges a company for being read, which a model meant for its people and its agents at once cannot bear, and a per-entry price charges it for the completeness the model exists to produce. Doing it without us is the normal case and the pages say so, because a model most people need help to adopt has not been made adoptable.</p>
-        <p>We never let the model cost more the more of a company, or the more of its agents, that reads it.</p>
-      </article>
-      <article class="value">
-        <h3>Describe the pattern, never the company</h3>
-        <p class="tagline">A meta-model that carries one company's tooling in its conventions has stopped being one, so the vocabulary states the shape and never who was found holding it.</p>
-        <p>The vocabulary names no company it was drawn from, quotes no company's internal conventions, and says nothing about the tracker, the wiki or the chat tool anyone runs on. Where an example would read better with a real company behind it we write the pattern instead, because a thin file per person is portable and the company that keeps one is not, and because a rule that only makes sense once a reader knows whose it was is a rule nobody else can adopt. Confidentiality is part of this and it is not the reason for it: a claim about the shape a company's knowledge takes has to stand without naming a company, or it was never a claim about the shape.</p>
-        <p>We never put a company's name, its tooling or its counts into the vocabulary.</p>
-      </article>
-      <article class="value">
-        <h3>Run on what we publish</h3>
-        <p class="tagline">A vocabulary its authors have not had to use is a proposal, and the only evidence that a type holds a real company is a real company being held by it.</p>
-        <p>We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and a second instance beside it describes a company of one the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.</p>
-        <p>We never ship a type we have not already had to use on ourselves.</p>
-      </article>
+      <h2>Check it</h2>
+      <p class="lede">A model is only useful while it holds to its schemas, so it is checked on every change and not once a quarter. <code class="mono">check</code> runs the rules of the vocabulary the instance copied in, never a newer one.</p>
+      <pre class="cmd mono">npx github:companygraph/meta-model#&lt;tag&gt; check acme</pre>
+      <div class="rules">
+        <p><b>CI runs the same check.</b> The workflow <code class="mono">init</code> writes runs it on every push and pull request, once the folder is a git repository on GitHub. <code class="mono">init</code> does not create the repository.</p>
+        <p><b>It checks what a script can read.</b> Whether a page keeps its schema’s writing rules is judged by reading, and every run says so. The validate skill below does that reading.</p>
+      </div>
     </section>
 
-    <p class="derived" data-de="Erzeugt aus <a href='https://github.com/companygraph/mental-model'>companygraph/mental-model</a>@ff8611c – <code class='mono'>model/vision.md</code> und <code class='mono'>model/values/</code>. Dieses Repository ist eine Instanz von <a href='https://companygraph.io/'>CompanyGraph</a>, einem Meta-Modell, das ein Unternehmen als Graph aus Markdown beschreibt.">Generated from <a href="https://github.com/companygraph/mental-model">companygraph/mental-model</a>@ff8611c — <code class="mono">model/vision.md</code> and <code class="mono">model/values/</code>. That repository is an instance of <a href="https://companygraph.io/">CompanyGraph</a>, a meta-model for describing a company as a graph of Markdown.</p>
-    <!-- principles:end -->
+    <section>
+      <h2>Take a newer release</h2>
+      <p class="lede">A release lands in more than one place: the vocabulary, the skills, the manifest and the workflow’s pin. Moved apart, one gets left behind, so <code class="mono">upgrade</code> moves them together and touches nothing else.</p>
+      <pre class="cmd mono">npx github:companygraph/meta-model#&lt;tag&gt; upgrade acme --dry-run
+npx github:companygraph/meta-model#&lt;tag&gt; upgrade acme</pre>
+      <div class="rules">
+        <p><b>It says what it will do first.</b> <code class="mono">--dry-run</code> lists every file it would write or remove and writes nothing.</p>
+        <p><b>An edited vocabulary file stops it.</b> The vocabulary is not the instance’s to edit, so a file whose hash no longer matches the manifest stops the whole upgrade and is named. <code class="mono">--force</code> overwrites it and says so. The model itself, <code class="mono">AGENTS.md</code> and <code class="mono">CLAUDE.md</code> are never touched.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Write it in Obsidian</h2>
+      <p class="lede">An instance is a folder of Markdown files, which is what an Obsidian vault is, so it opens as a vault with no change to any file. The CompanyGraph plugin checks the model as you type, completes what the schemas declare and marks what breaks where it is written.</p>
+      <div class="rules">
+        <p><b>Installing it.</b> The plugin is not in Obsidian’s community directory. Copy <code class="mono">main.js</code>, <code class="mono">manifest.json</code> and <code class="mono">styles.css</code> from its <a href="https://github.com/companygraph/obsidian-plugin/releases">latest release</a> into <code class="mono">.obsidian/plugins/companygraph/</code> in the vault, then switch it on under Community plugins.</p>
+        <p><b>The command line, from inside the vault.</b> <code class="mono">Make this vault an instance</code> does what <code class="mono">init</code> does, and <code class="mono">Move this vault’s core</code> what <code class="mono">upgrade</code> does. Both run the same code, so a vault made either way is the same instance.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Let an agent work with it</h2>
+      <p class="lede">An agent can work in the model’s files or ask about it without touching them. The first is the skills <code class="mono">init</code> gives Claude, the second a server.</p>
+      <div class="rules">
+        <p><b>Skills, in <code class="mono">.claude/skills/</code>.</b> <code class="mono">companygraph-validate</code> runs the check and then reads every entity against its schema’s writing rules. <code class="mono">companygraph-export</code> packages the model as a skill an agent can load and as sources for Gemini Notebook. <code class="mono">companygraph-surface</code> produces a page the model describes as one of its surfaces. The last two need Python 3.</p>
+        <p><b>A server that only reads.</b> The MCP server answers an agent’s questions about the model: which types it declares, what one entity says, what a claim rests on. Every answer names the commit it was read from. Run it from the instance’s folder:</p>
+      </div>
+      <pre class="cmd mono">npx --package github:companygraph/mcp-server companygraph-mcp ./model ./meta/core</pre>
+    </section>
   </div>
 </main>
 
@@ -700,9 +709,8 @@
 </div>
 
 <script>
-// Same mechanism as the other two pages: English is the markup so the page says the right
-// thing before any JS runs, and the choice is remembered per origin. This page describes
-// that key, which is the only reason it is worth pointing at the code from here.
+// Same mechanism as every other page: English is the markup so the page says the right
+// thing before any JS runs, and the choice is remembered per origin.
 (function(){
   /* ─── language · v4 · page ─────────────────────────────────────────────
      One language across three domains, and where it is remembered. Generated
@@ -924,10 +932,12 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"Prinzipien – CompanyGraph",
-         desc:"Die Vision und die Werte, an die sich CompanyGraph, ein Meta-Modell für den Betrieb einer Firma, selbst hält – gelesen aus seinem eigenen Modell, nicht für diese Seite geschrieben." },
-    en:{ title:"Principles — CompanyGraph",
-         desc:"The vision and values CompanyGraph, a meta-model for operating a company, holds itself to — read from its own model, not written for this page." }
+    // The German is the translator's, made once the English is reviewed; until then both
+    // languages read the English.
+    de:{ title:"Tools — CompanyGraph",
+         desc:"Set up a CompanyGraph instance: the command line that makes one and keeps its vocabulary current, the Obsidian plugin that checks it while you write, and what an agent uses to read it." },
+    en:{ title:"Tools — CompanyGraph",
+         desc:"Set up a CompanyGraph instance: the command line that makes one and keeps its vocabulary current, the Obsidian plugin that checks it while you write, and what an agent uses to read it." }
   };
 
   function applyLang(){

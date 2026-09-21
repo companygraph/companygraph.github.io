@@ -289,7 +289,7 @@
   .brand svg{width:28px; height:28px; color:var(--c-mid); flex:0 0 auto}
   .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
   .brand b span{color:var(--c-mid)}
-  /* ─── header contract · v13 · shared ──────────────────────────────────
+  /* ─── header contract · v14 · shared ──────────────────────────────────
      One row, three sites, and no stylesheet between them — a deck opens from file://, so
      this is a copy, generated from @robertblust/design. Editing it here has no effect — the
      next `npm run design` overwrites it. Change it in the package.
@@ -300,10 +300,12 @@
      not that every site declares it the same way, and `mobileNav` asserts the outcome.
 
      The contract:
-       · order      Team, Principles, Surfaces, API, Ideas, Model, Timeline, Example, Talks,
-                    Billing, Privacy, then the language control. A site skips what it does
-                    not have and reorders nothing. Read right to left, the switcher is at the
-                    edge and each step left is more the site's own subject. Principles is
+       · order      Tools, Team, Principles, Surfaces, API, Ideas, Model, Timeline, Example,
+                    Talks, Billing, Privacy, then the language control. A site skips what it
+                    does not have and reorders nothing. Read right to left, the switcher is at
+                    the edge and each step left is more the site's own subject. Tools is the
+                    one exception and leads, because a reader who came to set the thing up
+                    wants that before anything the site says about it. Principles is
                     second because what the work is held to belongs to a site as closely as
                     who does it, and comes before where any of it is published. API was
                     missing from this list for one release while the check enforced it; the
@@ -736,11 +738,11 @@
       </a>
       <nav>
         <div class="navlinks" id="navlinks">
+          <a href="../tools/">Tools</a>
           <a href="../team/">Team</a>
           <a href="../principles/" data-de="Prinzipien">Principles</a>
           <a href="./" aria-current="page">Surfaces</a>
           <a href="../model/" data-de="Modell">Model</a>
-          <a href="../example/" data-de="Beispiel">Example</a>
           <a href="../talks/" data-de="Vorträge">Talks</a>
           <a href="../billing/" data-de="Abrechnung">Billing</a>
         </div>
