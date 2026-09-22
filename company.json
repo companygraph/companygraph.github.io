@@ -1,5 +1,5 @@
 {
-  "commit": "ff8611cc289af031a8297faf424591f1a9d3a06c",
+  "commit": "b57438b1324dae68d3c9ea7ee6f163dc9b643b90",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -3576,6 +3576,27 @@
       "path": "model/strategies/read-only-server-strategy.md"
     },
     {
+      "id": "surfaces/chat-companygraph-io-chat",
+      "type": "surface",
+      "name": "chat.companygraph.io chat",
+      "tagline": "The chat a visitor opens on companygraph.io to ask about what we know, answered from what the mcp.companygraph.io MCP server says at its pinned commit, and the page a person reaches at the same address.",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/mcp-companygraph-io",
+        "url": "https://chat.companygraph.io"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Endpoint** — `/chat` on this address, which a page of companygraph.io posts a visitor's conversation to and which answers it as a stream of events.\n- **Answer** — the text a language model writes from what the MCP server's tools returned for the visitor's question, in the language of the visitor's message, naming the entity each claim rests on.\n- **From the model** — a link to each entity a tool returned on its own, opening it on the model page of companygraph.io.\n- **Refusals** — the sentences a visitor reads instead of an answer when the day's or the month's share is spent, when one address has sent too many messages in an hour, when the host does not answer or when the chat is switched off.\n- **Page** — what a browser gets at the chat's own address: the host's name, the vision's and the identity's taglines, the paths and the events the endpoint answers, the fence that bounds what it spends, and the commit of the model it answers from.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/chat-companygraph-io-chat.md"
+    },
+    {
       "id": "surfaces/companygraph-io-website",
       "type": "surface",
       "name": "companygraph.io website",
@@ -3589,7 +3610,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Model** — the vocabulary's types and the edges between them, drawn from `model.json`, which is parsed from the meta-model and not from here.\n- **Example** — the invented company the vocabulary ships with, drawn from `example.json`, parsed from the meta-model and not from here.\n- **Talks** — the introduction, as a deck, a PDF and audio, in both languages.\n- **Billing** — what would cost money and what never does, written by hand rather than drawn from the value it restates.\n- **Privacy** — what the site collects and who runs it, written by hand.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
+          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Team** — each process's phases as a board of the roles that own, execute, support and approve each, and the profiles that hold those roles, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, drawn from `company.json`.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
           "tables": []
         },
         {
@@ -5188,6 +5209,12 @@
       "from": "strategies/read-only-server-strategy",
       "to": "values/run-on-what-we-publish",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/chat-companygraph-io-chat",
+      "to": "sources/local",
+      "via": "source",
       "attrs": {}
     },
     {
