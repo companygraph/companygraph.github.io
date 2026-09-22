@@ -633,11 +633,11 @@
   @media (max-width:560px){
   }
 </style>
-<link rel="stylesheet" href="chat.css">
 <!-- The stage — figure, card, expand dialog — is the component the stage pages share, so it
      is a file, not a copy in each page. It comes after the inline block above so the tokens
      it names are already defined. -->
 <link rel="stylesheet" href="stage.css">
+<link rel="stylesheet" href="chat.css">
 <!-- CompanyGraph's own model, which this page draws. The stage finds it by the data-stage
      attribute and fetches the href; crossorigin lets the fetch use the preload. -->
 <link rel="preload" as="fetch" href="company.json" data-stage crossorigin>
