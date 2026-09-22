@@ -644,6 +644,7 @@
   @media (max-width:560px){
   }
 </style>
+<link rel="stylesheet" href="../chat.css">
 </head>
 <body>
 
@@ -1160,5 +1161,8 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
   seen.observe(fig);
 })();
 </script>
+
+<!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
+<script src="../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/model/" defer></script>
 </body>
 </html>
