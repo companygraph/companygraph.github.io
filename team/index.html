@@ -758,6 +758,7 @@
   @media (max-width:560px){
   }
 </style>
+<link rel="stylesheet" href="../chat.css">
 <link rel="stylesheet" href="../stage.css">
 <!-- CompanyGraph's own model, which this page's cards read. The card finds it by the
      data-stage attribute and fetches the href; crossorigin lets the fetch use the preload. -->
@@ -1350,5 +1351,8 @@
   })();
   /* ─── end model card ──────────────────────────────────────────────────── */
 </script>
+
+<!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
+<script src="../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/model/" defer></script>
 </body>
 </html>

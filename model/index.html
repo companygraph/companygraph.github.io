@@ -888,6 +888,7 @@
      page stays self-contained in the sense the rule means, nothing off-origin. It comes
      after the inline block above so the tokens it names are already defined. -->
 <link rel="stylesheet" href="../stage.css">
+<link rel="stylesheet" href="../chat.css">
 <!-- The model this page draws. The stage finds it by the data-stage attribute and fetches the
      href, so the page names its data once and carries no copy. crossorigin is not decoration:
      without it the browser will not use the preload for the fetch and asks for the file twice. -->
@@ -1282,5 +1283,8 @@
 <script src="../d3.v7.min.js"></script>
 <script src="../card.js"></script>
 <script src="../stage.js"></script>
+
+<!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
+<script src="../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/model/" defer></script>
 </body>
 </html>

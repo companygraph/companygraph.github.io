@@ -26,7 +26,7 @@
     "d3": "7.9.0"
   },
   "devDependencies": {
-    "@robertblust/design": "github:robertblust/design#v0.73.0",
+    "@robertblust/design": "github:robertblust/design#v0.75.0",
     "companygraph-meta-model": "github:companygraph/meta-model#v0.34.0",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.63.0"

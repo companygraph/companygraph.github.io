@@ -32,14 +32,19 @@ export const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 // inside a PNG. `.bar` is two different things by the same name — a deck's transport bar and
 // the talks index's header bar — and hiding both is what a card wants, but the overlap is
 // accidental: rename either one and the other's rule here stops applying, silently.
-const DECK_HIDE = `.chrome,.bar,.notes,.langind,.hint{display:none!important}
+//
+// `.rbchat-open` gets the same treatment, on all three hide rules below: it is the chat's
+// button, fixed to the corner of every prose page by the design package's widget, and a
+// picture of a button that cannot be pressed is the wrong advertisement whichever page it
+// sits on — the exact rule the play button already follows here.
+const DECK_HIDE = `.chrome,.bar,.notes,.langind,.hint,.rbchat-open{display:none!important}
   .slide.active > *{animation:none!important}`;
 
 // The landing page's figure is hidden not because it wouldn't fit; it would. The card's job is
 // the headline and the call to action, the thing a reader takes in before they've decided to
 // care. The figure is the argument that leads there, and an argument doesn't survive being
 // glanced at in a feed — it needs a page and a reader who has already arrived.
-const HOME_HIDE = ".figure{display:none}";
+const HOME_HIDE = ".figure{display:none} .rbchat-open{display:none!important}";
 
 // Rendered at 16:9 and the middle band taken: these pages lay themselves out in vmin, so
 // squeezed straight into 1.9:1 they shrink and leave the frame half empty. deviceScaleFactor
@@ -52,7 +57,7 @@ const FRAME = { width: 1200, height: 630, renderHeight: 675, clipY: Math.round((
 // Both stage pages use this. The card shows what the page shows: the stage. The title block
 // is the page's opening, and a preview already prints og:title and og:description beside the
 // image — repeating them inside it spends the whole card on words the platform renders anyway.
-const STAGE_HIDE = ".title{display:none}";
+const STAGE_HIDE = ".title{display:none} .rbchat-open{display:none!important}";
 
 export const cards = [
   { dir: ".", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
