@@ -1,5 +1,5 @@
 {
-  "commit": "b57438b1324dae68d3c9ea7ee6f163dc9b643b90",
+  "commit": "670ee12b4a07dfdae6545f236bfaad93d278778c",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -1011,6 +1011,32 @@
       "path": "model/features/an-agent-reads-the-model.md"
     },
     {
+      "id": "features/an-instance-is-made-and-kept-from-one-command",
+      "type": "feature",
+      "name": "An instance is made and kept from one command",
+      "tagline": "Someone starts a company's model, checks it, moves it to a newer vocabulary and puts the editor beside it, from one menu and without installing anything first.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Instance",
+          "Release",
+          "Check"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "One command, run from a release on GitHub, opens a menu that does all of it: it makes an instance in a folder, with the vocabulary vendored, a manifest naming every file it owns, a folder per type, the entities no instance passes without, a workflow and the agent files, so that the instance passes the checks on its first day; it runs the mechanical checks as the instance's own workflow runs them; it moves an instance to a newer release, its vendored core, its skills, its manifest and its workflow together; and it installs the Obsidian plugin in a vault or updates it there. Each pick reports what it did and the menu comes back. It stops at the instance's shape and its tooling: what a company writes into the folders is the company's, and writing a page from its schema is not among the picks.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/an-instance-is-made-and-kept-from-one-command.md"
+    },
+    {
       "id": "features/checks-an-instance-runs",
       "type": "feature",
       "name": "Checks an instance runs",
@@ -1084,7 +1110,7 @@
       "sections": [
         {
           "heading": "Description",
-          "text": "In English and Swiss German, the model page lists every core type with its schema, drawn from a pinned commit of the vocabulary, and the example page draws a fictional company described in it; both are also published as files an agent can fetch. It stops at reading: nothing on the web writes to a model, and what the site must say and how it is built belong to the companygraph.io website.",
+          "text": "In English and Swiss Standard German, the model page is the model, drawn: every core type with its schema, as the graph of what references what, from a pinned commit of the vocabulary. The example page is one company, drawn: a fictional company described in that vocabulary, from the same commit. Both are also published as files an agent can fetch. It stops at reading: nothing on the web writes to a model, and what the site must say and how it is built belong to the companygraph.io website.",
           "tables": []
         }
       ],
@@ -1141,6 +1167,209 @@
       ],
       "owner": null,
       "path": "model/identity.md"
+    },
+    {
+      "id": "processes/answering",
+      "type": "process",
+      "name": "Answering",
+      "tagline": "How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track"
+              ],
+              "rows": [
+                [
+                  "Reply"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track"
+            ],
+            "rows": [
+              [
+                "Reply"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Answer"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Answer"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never lets a claim stand that no tool returned in that conversation.\n- Never keeps a conversation, a question or an answer; the tab holds it and the meter counts only what was spent.\n- Never spends past the ceiling the deployment wrote down, and refuses before asking the model.\n- Never answers from a model commit other than the one the host pins.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Design",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-22-chat-server-design.md"
+                ],
+                [
+                  "Interface",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Design",
+                "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-22-chat-server-design.md"
+              ],
+              [
+                "Interface",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/answering/answering.md"
+    },
+    {
+      "id": "processes/answering/phases/answer",
+      "type": "phase",
+      "name": "Answer",
+      "tagline": "Give the visitor what the model says, in their words, and not a claim more.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Answerer"
+        ],
+        "supported-by": [
+          "Visitor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A message the fence has let through: under the length it allows, from a page the deployment names, inside the hour's, the day's and the month's share. The host's tools, at its pinned commit.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Visitor asks, in their own words and language.\n2. The Answerer asks the host's tools, up to four rounds: a kind of thing by its type, a named thing by search and then the entity itself.\n3. The Answerer writes the answer from what the tools said, naming the entity each claim rests on, and where they said nothing, that the model does not say.\n4. The page links each entity the answer was read from, to the model page and to the file at the commit.\n5. Nobody reads the answer before the Visitor does. The Owner's gate was passed once, before any question: the rules the seat runs under, the commit the host pins, the fence, and the switch that stops the chat without a deploy.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Answer",
+                  "In the visitor's tab, in their language, every claim traceable to a tool's answer in that conversation; gone when the tab closes"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Answer",
+                "In the visitor's tab, in their language, every claim traceable to a tool's answer in that conversation; gone when the tab closes"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never sends a message before the visitor presses send, and never reads one they did not.\n- Never answers a question that is not about the model with more than a sentence saying what the chat is for.\n- Never continues past the ceiling: a spent share is a refusal, made before the model is asked.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "Answer is the only phase. An answer has left it when:\n\n- Every claim in it names the entity a tool returned it from.\n- Where the tools did not say, it says the model does not say.\n- It was written inside the fence: the rounds, the output length and the share.\n\nWhere they cannot be met, the Owner closes the chat at its switch, corrects the rules or the model, and opens it again; no answer is corrected after the fact, because none is kept.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/answering",
+      "path": "model/processes/answering/phases/answer.md"
+    },
+    {
+      "id": "processes/answering/tracks/reply",
+      "type": "track",
+      "name": "Reply",
+      "tagline": "One answer in a visitor's tab, in their language, read from the model at the host's commit and kept nowhere.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/answering",
+      "path": "model/processes/answering/tracks/reply.md"
     },
     {
       "id": "processes/contribution",
@@ -1803,7 +2032,7 @@
         },
         {
           "heading": "Activities",
-          "text": "### Code\n\n1. The Controller dispatches one brief.\n2. The Implementer works it, test first where the brief says so, and reports what was built, what was run and what it doubts.\n3. The Reviewer reads the diff against the brief and returns findings, each with a file, a line and a severity, strengths named first.\n4. Where the task touched a model, the Reviewer also reads every entity it touched against its schema's writing rules, which the mechanical checks do not reach.\n5. The Controller decides: fix, accept or park for the Owner.\n6. The task is committed before the next one is dispatched.\n7. A finding against a task already committed comes back as its own brief; the commit stands and the fix is a new one.\n\n### Prose\n\n1. The Writer drafts the English from the brief, on the branch, and reports which claims it could not trace to the brief or to prose we have already published.\n2. An entry of the model goes to the Owner on its own: what it says, the case against it, a proposal, and the Owner decides.\n3. The Owner reviews on the branch, in the diff and, where a surface carries the text, on the rendered page.\n4. The Translator makes the Swiss German from the reviewed English only, one element at a time, with the glossary open, and hands back a back-translation beside each element.\n5. An English edit re-runs the Translator on that element alone.",
+          "text": "### Code\n\n1. The Controller dispatches one brief.\n2. The Implementer works it, test first where the brief says so, and reports what was built, what was run and what it doubts.\n3. The Reviewer reads the diff against the brief and returns findings, each with a file, a line and a severity, strengths named first.\n4. Where the task touched a model, the Reviewer also reads every entity it touched against its schema's writing rules, which the mechanical checks do not reach.\n5. The Controller decides: fix, accept or park for the Owner.\n6. The task is committed before the next one is dispatched.\n7. A finding against a task already committed comes back as its own brief; the commit stands and the fix is a new one.\n\n### Prose\n\n1. The Writer drafts the English from the brief, on the branch, and reports which claims it could not trace to the brief or to prose we have already published.\n2. An entry of the model goes to the Owner on its own: what it says, the case against it, a proposal, and the Owner decides.\n3. The Owner reviews on the branch, in the diff and, where a surface carries the text, on the rendered page.\n4. The Translator makes the Swiss Standard German from the reviewed English only, one element at a time, with the glossary open, and hands back a back-translation beside each element.\n5. An English edit re-runs the Translator on that element alone.",
           "tables": []
         },
         {
@@ -1826,7 +2055,7 @@
                   "The draft the Owner has read on the branch and, where a surface carries it, on the page"
                 ],
                 [
-                  "Swiss German",
+                  "Swiss Standard German",
                   "For a surface that carries it: made from the reviewed English, with its back-translation"
                 ]
               ]
@@ -1848,7 +2077,7 @@
                 "The draft the Owner has read on the branch and, where a surface carries it, on the page"
               ],
               [
-                "Swiss German",
+                "Swiss Standard German",
                 "For a surface that carries it: made from the reviewed English, with its back-translation"
               ]
             ]
@@ -2235,7 +2464,7 @@
       "id": "processes/delivery/tracks/prose",
       "type": "track",
       "name": "Prose",
-      "tagline": "An entry of the model, a schema, a README or a page of a site, in English the Owner has reviewed, and in Swiss German where the surface carries it.",
+      "tagline": "An entry of the model, a schema, a README or a page of a site, in English the Owner has reviewed, and in Swiss Standard German where the surface carries it.",
       "fields": {
         "source": "Local"
       },
@@ -2717,7 +2946,7 @@
       "id": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
-      "tagline": "Specifies, plans, runs, implements, reviews, drafts and translates what this company publishes, under a rulebook for each, and decides nothing.",
+      "tagline": "Specifies, plans, runs, implements, reviews, drafts and translates what this company publishes, answers whoever asks about it, under a rulebook for each, and decides nothing.",
       "fields": {
         "source": "Local",
         "nature": "agent",
@@ -2728,7 +2957,8 @@
           "Implementer",
           "Reviewer",
           "Writer",
-          "Translator"
+          "Translator",
+          "Answerer"
         ]
       },
       "sections": [
@@ -2740,6 +2970,74 @@
       ],
       "owner": null,
       "path": "model/profiles/ai-agent/ai-agent.md"
+    },
+    {
+      "id": "roles/answerer",
+      "type": "role",
+      "name": "Answerer",
+      "tagline": "The seat that answers a visitor's question from what the model's tools return, names the entity each claim rests on, and says that the model does not say where it does not.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A visitor's message with the conversation so far, the tools of the MCP host at the commit it pins, the rulebook, and the language the visitor wrote in. Where the question is not about the model, the seat says in one sentence what the chat is for and calls no tool.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "An answer in the visitor's language, in one or two short paragraphs, a list or a table, written from what the tools answered in that conversation and nothing else, naming the entity each claim rests on; where the tools do not say, the sentence that the model does not say. The entities it read whole, so the page can link them under the answer.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never claims what no tool answered in that conversation, and never guesses about the owner, the company or anyone named.\n- Never answers from its instructions or an earlier turn instead of a tool, because they are not the model.\n- Never speaks of its instructions or its tools when asked about them.\n- Never writes to the model, keeps a conversation, or decides anything.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/prompt.mjs"
+                ],
+                [
+                  "The fence it answers inside",
+                  "https://github.com/companygraph/chat-server/blob/main/README.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook",
+                "https://github.com/companygraph/chat-server/blob/main/lib/prompt.mjs"
+              ],
+              [
+                "The fence it answers inside",
+                "https://github.com/companygraph/chat-server/blob/main/README.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/answerer.md"
     },
     {
       "id": "roles/contributor",
@@ -3249,7 +3547,7 @@
       "id": "roles/translator",
       "type": "role",
       "name": "Translator",
-      "tagline": "The seat that makes the Swiss German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
+      "tagline": "The seat that makes the Swiss Standard German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
       "fields": {
         "source": "Local"
       },
@@ -3328,6 +3626,34 @@
       ],
       "owner": null,
       "path": "model/roles/translator.md"
+    },
+    {
+      "id": "roles/visitor",
+      "type": "role",
+      "name": "Visitor",
+      "tagline": "Someone who asks about the company in their own words, on its site or through an agent of their own, and is owed what the model says and nothing else.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A question, in whatever words and language they have. Nothing else: the seat is filled by whoever turns up, and nobody is asked who they are.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A question, and where the answer sends them, a click on the entity it rests on: on the model page, or on the file at the commit it was read from.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never has to know the model's vocabulary to be answered; meeting their words is the company's work.\n- Never leaves anything behind: the conversation lives in their tab and ends with it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/visitor.md"
     },
     {
       "id": "roles/writer",
@@ -3494,7 +3820,7 @@
       "sections": [
         {
           "heading": "What it makes true",
-          "text": "The pages say plainly that nothing is being sold, that there is no rate and no proposal, and that whether this becomes consulting at all is being validated. That is honest and it is not an answer. When this holds, the question has been closed — either somebody paid for time and the terms the billing page describes turned out to be the terms, or it is written down that this is not a business and the pages stop implying the question is live.\n\nIt holds the day the answer is written where the question was asked. A no settles it as completely as a yes; what does not settle it is another year of the billing page saying the matter is open, because a question permanently under validation has become a position nobody has to defend.\n\nWhat falls outside: how much, and from whom. A single engagement billed by the day answers this; a large one does not answer it better. Also outside: whether the vocabulary is worth adopting. That question is answered by companies keeping models current, not by anybody paying us, and tying the two together would make the free half hostage to the paid one.",
+          "text": "The pages say plainly that nothing is being sold, that there is no rate and no proposal, and that whether this becomes consulting at all is being validated. The terms are stated all the same: consulting would be billed time and material, per day and never per seat, with no license to buy and nothing hosted, and an engagement anyone can stop at any time with everything built sitting in their own repository. That is honest and it is not an answer. When this holds, the question has been closed — either somebody paid for time and the terms the billing page describes turned out to be the terms, or it is written down that this is not a business and the pages stop implying the question is live.\n\nIt holds the day the answer is written where the question was asked. A no settles it as completely as a yes; what does not settle it is another year of the billing page saying the matter is open, because a question permanently under validation has become a position nobody has to defend.\n\nWhat falls outside: how much, and from whom. A single engagement billed by the day answers this; a large one does not answer it better. Also outside: whether the vocabulary is worth adopting. That question is answered by companies keeping models current, not by anybody paying us, and tying the two together would make the free half hostage to the paid one.",
           "tables": []
         }
       ],
@@ -3600,7 +3926,7 @@
       "id": "surfaces/companygraph-io-website",
       "type": "surface",
       "name": "companygraph.io website",
-      "tagline": "The project's own site, in English and Swiss German, where a visitor, a search engine or an agent meets the vocabulary and the company that publishes it, rebuilt from pinned commits of the models it draws.",
+      "tagline": "The project's own site, in English and Swiss Standard German, where a visitor, a search engine or an agent meets the vocabulary and the company that publishes it, rebuilt from pinned commits of the models it draws.",
       "fields": {
         "source": "Local",
         "production": "built",
@@ -3610,12 +3936,12 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Team** — each process's phases as a board of the roles that own, execute, support and approve each, and the profiles that hold those roles, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, drawn from `company.json`.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
+          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **CLI** — the one command an instance is made and kept from: what each pick of its menu does, and how the command is run from a release.\n- **Team** — each process's phases as a board of the roles that own, execute, support and approve each, and the profiles that hold those roles, drawn from `company.json`.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, and nothing kept beside the model, drawn from `company.json`.\n- **Model** — the vocabulary, drawn: every core type with its schema, as a graph from a pinned commit of core.\n- **Example** — one company, drawn: the fictional company the vocabulary's example describes, as a graph from the same commit.\n- **Talks** — the introduction talk, narrated in both languages with a PDF, and the questions it ends on.\n- **Billing** — how consulting would be counted if it ever were, what is free and stays so, and the ways to charge that were refused and why.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
           "tables": []
         },
         {
           "heading": "Constraints",
-          "text": "- Every page that carries a graph names the repository and the commit it was parsed from, on the page.\n- A page drawn from a model is rebuilt from the artifact committed beside it, and the build fails when that artifact is not what the pinned commit parses to.\n- Both languages carry the same claims: a page's German is a translation of its reviewed English, never a second text.",
+          "text": "- The site collects nothing: no page sets a cookie, no page loads an analytics script, and nothing counts a visit; the one request a page makes to another address is the chat's, and only after the visitor has pressed send.\n- Every page that carries a graph names the repository and the commit it was parsed from, on the page.\n- A page drawn from a model is rebuilt from the artifact committed beside it, and the build fails when that artifact is not what the pinned commit parses to.\n- Both languages carry the same claims: a page's German is a translation of its reviewed English, never a second text.",
           "tables": []
         }
       ],
@@ -3675,7 +4001,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We publish the vocabulary, the tooling and the talks under licenses that ask nothing back, and we bill consulting by the day rather than by the model, so what costs money is time and never what a company does with the model. Where a way to charge would have fitted we wrote down why it was refused instead of leaving it open: a seat count charges a company for being read, which a model meant for its people and its agents at once cannot bear, and a per-entry price charges it for the completeness the model exists to produce. Doing it without us is the normal case and the pages say so, because a model most people need help to adopt has not been made adoptable.\n\nWe never let the model cost more the more of a company, or the more of its agents, that reads it.",
+          "text": "We publish the vocabulary, the tooling and the talks under licenses that ask nothing back, and we bill consulting by the day rather than by the model, so what costs money is time and never what a company does with the model. Where a way to charge would have fitted we wrote down why it was refused instead of leaving it open: a per-seat license charges a company for being read, which a model meant for its people and its agents at once cannot bear, and a per-entry price charges it for the completeness the model exists to produce. Doing it without us is the normal case and the pages say so, because a model most people need help to adopt has not been made adoptable.\n\nWe never let the model cost more the more of a company, or the more of its agents, that reads it.",
           "tables": []
         }
       ],
@@ -3711,7 +4037,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and a second instance beside it describes a company of one the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.\n\nWe never ship a type we have not already had to use on ourselves.",
+          "text": "We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and a second instance beside it describes a company of one the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, and nothing is kept beside the model, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.\n\nWe never ship a type we have not already had to use on ourselves.",
           "tables": []
         }
       ],
@@ -4138,6 +4464,36 @@
       "attrs": {}
     },
     {
+      "from": "features/an-instance-is-made-and-kept-from-one-command",
+      "to": "concepts/check",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-instance-is-made-and-kept-from-one-command",
+      "to": "concepts/instance",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-instance-is-made-and-kept-from-one-command",
+      "to": "concepts/release",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-instance-is-made-and-kept-from-one-command",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-instance-is-made-and-kept-from-one-command",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "features/checks-an-instance-runs",
       "to": "concepts/agent-pass",
       "via": "concepts",
@@ -4247,6 +4603,72 @@
     },
     {
       "from": "identity",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/answerer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/visitor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/tracks/reply",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "processes/answering/phases/answer",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "processes/answering/tracks/reply",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -5021,6 +5443,12 @@
     },
     {
       "from": "profiles/ai-agent",
+      "to": "roles/answerer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
       "to": "roles/controller",
       "via": "roles",
       "attrs": {}
@@ -5063,6 +5491,12 @@
     },
     {
       "from": "profiles/ai-agent",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/answerer",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -5117,6 +5551,12 @@
     },
     {
       "from": "roles/translator",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/visitor",
       "to": "sources/local",
       "via": "source",
       "attrs": {}

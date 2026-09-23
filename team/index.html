@@ -824,7 +824,7 @@
 
     <div class="title">
       <h1 data-de="<span class='r70'>Ein Agent macht die Arbeit,</span><span class='rcl'>ein Mensch hält jedes <em>Gate</em>.</span>"><span class="r70">An agent does the work,</span><span class="rcl">a person holds every <em>gate</em>.</span></h1>
-      <p class="tagline" data-de="Ein KI-Agent hält die Sitze, die spezifizieren, planen, steuern, umsetzen, prüfen, schreiben und übersetzen. Jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält.">An AI agent holds the seats that specify, plan, control, implement, review, write and translate. Every gate is approved by a seat a person holds.</p>
+      <p class="tagline" data-de="Ein KI-Agent hält die Sitze, die spezifizieren, planen, steuern, umsetzen, prüfen, schreiben, übersetzen und antworten. Jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält.">An AI agent holds the seats that specify, plan, control, implement, review, write, translate and answer. Every gate is approved by a seat a person holds.</p>
       <!-- team-note:start -->
       <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
     <!-- team-note:end -->
@@ -950,6 +950,34 @@
         <dd>Decide what kind of thing the gap is, and whether it is ours to fill.</dd>
         <dt><span class="phnum">04</span><span class="phname">Answer</span></dt>
         <dd>Give the asker something they can act on, whether or not anything will be built.</dd>
+      </dl>
+      </section>
+      <section class="proc" id="answering">
+        <h3 class="procname">Answering</h3>
+        <p class="proctag">How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.</p>
+      <div class="hdrail"><div class="whos">
+        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="lbl">human · holds 2 of 3</div></div></div>
+        <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 1 of 3</div></div></div>
+      </div><button class="openall" id="answering-openall" type="button" data-de="Alle öffnen">Open all</button></div>
+      <div class="grid" id="answering-board">
+        <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Answer</span></span></div>
+        <details class="human" id="answering-owner" data-role="roles/owner">
+          <summary aria-label="Owner, human. approves the gate of Answer."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ga"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details class="human" id="answering-visitor" data-role="roles/visitor">
+          <summary aria-label="Visitor, human. supports Answer. approves no gate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Visitor</span></span><span><i class="g su"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="answering-answerer" data-role="roles/answerer">
+          <summary aria-label="Answerer, agent. executes Answer. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Answerer</span></span><span><i class="g ex"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+      </div>
+      <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
+      <dl class="phases">
+        <dt><span class="phnum">01</span><span class="phname">Answer</span></dt>
+        <dd>Give the visitor what the model says, in their words, and not a claim more.</dd>
       </dl>
       </section>
       <!-- team:end -->
