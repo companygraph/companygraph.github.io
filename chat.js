@@ -20,6 +20,10 @@
 //   rbChat.link(model, id)             where a cite points
 //   rbChat.nameLinks(root, names, …)   the model's names, linked in a rendered answer
 //   rbChat.refocus(window)             whether the cursor goes back after an answer
+//   rbChat.when(retryAt, now, lang)    when a limit lifts, in the visitor's language and time
+//   rbChat.refusalText(code, retryAt, …)  the refusal sentence, ending with that moment where there is one
+//   rbChat.citeLine(cites, model, icon, doc)  the line under an answer: the icon, each title, each mark
+//   rbChat.iconOf(doc)                 the page's icon, for the head of that line
 //
 // On a desk the panel is sized by its top left corner and the size is kept in the tab beside
 // the conversation, under `chat-size`; on a phone it is the whole screen and has no corner.
@@ -34,10 +38,12 @@
       privacy: "Privacy", privacyHref: "/privacy/", from: "From the model",
       cut: "… the answer stopped at its length limit.",
       full: "This conversation has reached twenty messages.", fresh: "New conversation",
+      again: { sentence: "You can ask again {when}.", minute: "in a minute", minutes: "in {n} minutes", at: "at {time}", tomorrow: "tomorrow at {time}", day: "on {day} at {time}" },
+      github: "{title} on GitHub", commit: "commit {sha}",
       refusal: {
         too_long: "That message is over 1,000 characters.",
         too_much: "The conversation has grown too long to send; start a new one.",
-        busy: "Too many messages for the moment; try again in a minute.",
+        busy: "Too many messages for the moment; try again later.",
         over_day: "Today's share of answers is spent; there is more tomorrow.",
         over_month: "This month's share of answers is spent.",
         closed: "The chat is switched off for now.",
@@ -57,10 +63,12 @@
       privacy: "Datenschutz", privacyHref: "/privacy/", from: "Aus dem Modell",
       cut: "… die Antwort endete an ihrer Längengrenze.",
       full: "Dieses Gespräch hat zwanzig Nachrichten erreicht.", fresh: "Neues Gespräch",
+      again: { sentence: "Sie können {when} wieder fragen.", minute: "in einer Minute", minutes: "in {n} Minuten", at: "um {time}", tomorrow: "morgen um {time}", day: "am {day} um {time}" },
+      github: "{title} auf GitHub", commit: "Commit {sha}",
       refusal: {
         too_long: "Diese Nachricht ist länger als 1’000 Zeichen.",
         too_much: "Das Gespräch ist zu lang geworden, um es zu senden; beginnen Sie ein neues.",
-        busy: "Im Moment zu viele Nachrichten; versuchen Sie es in einer Minute wieder.",
+        busy: "Im Moment zu viele Nachrichten; versuchen Sie es später wieder.",
         over_day: "Der heutige Anteil an Antworten ist aufgebraucht; morgen gibt es mehr.",
         over_month: "Der Anteil dieses Monats an Antworten ist aufgebraucht.",
         closed: "Der Chat ist zurzeit abgeschaltet.",
@@ -77,9 +85,94 @@
   // A code the table does not carry — or one that only exists on Object.prototype, `toString`
   // and the like, walked by a bare `[code]` lookup — falls back to `internal` rather than
   // printing whatever the prototype chain hands back.
-  function sentence(code){
-    var r = strings(langNow()).refusal;
+  function sentence(code, lang){
+    var r = strings(lang || langNow()).refusal;
     return Object.prototype.hasOwnProperty.call(r, code) ? r[code] : r.internal;
+  }
+
+  // When a limit lifts, in the visitor's terms. The server sends the moment as an ISO time in
+  // UTC on `busy`, `over_day` and `over_month`, and the widget writes it against the visitor's
+  // clock and zone: within the hour in minutes, later the same local day as a time, tomorrow
+  // by name, and beyond that by the day's name, so midnight UTC reads as the local hour it is.
+  // Under a minute is "a minute", the one case where the old sentence was right. The sentence
+  // says "at" and never "exactly at": the bucket is per instance, and a visitor may find the
+  // chat open earlier than the moment says, never later. `zone` is for the suite; the page
+  // passes nothing and gets the browser's. An unreadable moment or one already past gives an
+  // empty string, and the caller writes the plain sentence. `en-CA` writes a date as
+  // 2026-09-23, which two moments can be compared by; `en-GB` and `de-CH` both write a
+  // 24-hour time as 14:35, where `en-US` would write 2:35 PM.
+  function when(retryAt, now, lang, zone){
+    var t = Date.parse(retryAt);
+    if (isNaN(t) || t <= now) return "";
+    var s = strings(lang).again, clause;
+    var minutes = Math.ceil((t - now) / 60000);
+    if (minutes <= 60) clause = minutes <= 1 ? s.minute : s.minutes.replace("{n}", String(minutes));
+    else {
+      var opts = zone ? { timeZone: zone } : {};
+      var day = function(ms){ return new Intl.DateTimeFormat("en-CA", Object.assign({ year: "numeric", month: "2-digit", day: "2-digit" }, opts)).format(new Date(ms)); };
+      var time = new Intl.DateTimeFormat(lang === "de" ? "de-CH" : "en-GB", Object.assign({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" }, opts)).format(new Date(t));
+      var then = day(t);
+      if (then === day(now)) clause = s.at.replace("{time}", time);
+      else if (then === day(now + 86400000)) clause = s.tomorrow.replace("{time}", time);
+      else clause = s.day.replace("{day}", new Intl.DateTimeFormat(lang === "de" ? "de-CH" : "en-US", Object.assign({ weekday: "long" }, opts)).format(new Date(t))).replace("{time}", time);
+    }
+    return s.sentence.replace("{when}", clause);
+  }
+
+  // The refusal as the visitor reads it: the code's sentence, and where the server named the
+  // moment its limit lifts, that moment after it. A response without the field, or one whose
+  // body could not be read, gives the sentence alone, so a widget meeting an older server
+  // degrades to what it said before.
+  function refusalText(code, retryAt, now, lang, zone){
+    var base = sentence(code, lang);
+    var moment = retryAt ? when(retryAt, now, lang, zone) : "";
+    return moment ? base + " " + moment : base;
+  }
+
+  // The page's own icon, for the head of the cite line: the first `<link rel="icon">`, or
+  // null, and then the words stand instead. Read once, on the page; the suite passes a stub.
+  function iconOf(doc){
+    var l = doc.querySelector && doc.querySelector('link[rel~="icon"]');
+    return l && l.href ? l.href : null;
+  }
+
+  // GitHub's own mark, the Octicon `mark-github` (MIT), inlined so the page loads nothing.
+  var GH = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+
+  // The line under an answer: the receipt for the rule that every claim comes from a tool's
+  // answer. It opens with the site's icon where the page declares one, the words "From the
+  // model" as its name and tooltip, and with the words themselves where it does not, so the
+  // line is never a bare list. Each cite is its title, linked where a name in the text links,
+  // and after it GitHub's mark to the file at the commit the host serves, the one address
+  // that lets a reader check the answer without trusting the chat; its name carries the
+  // title and the commit's first seven characters, read from the URL's `blob/<sha>/`. A cite
+  // without a URL gets no mark. The icon stands once, at the head: a line that repeated it
+  // before every title was drawn and declined for the width it costs in a panel that is
+  // twenty-six rem on a desk and the whole screen on a phone.
+  function citeLine(cites, model, icon, doc){
+    var lang = doc.documentElement && doc.documentElement.lang === "de" ? "de" : "en", s = strings(lang);
+    var c = doc.createElement("p"); c.className = "rbchat-cites";
+    if (icon) {
+      var img = doc.createElement("img"); img.className = "rbchat-from";
+      img.setAttribute("src", icon); img.setAttribute("alt", s.from); img.setAttribute("title", s.from);
+      img.setAttribute("width", "16"); img.setAttribute("height", "16");
+      c.appendChild(img);
+    } else {
+      var words = doc.createElement("span"); words.textContent = s.from + ": "; c.appendChild(words);
+    }
+    cites.forEach(function(x, i){
+      var a = doc.createElement("a"); a.className = "rbchat-cite"; a.href = link(model, x.id); a.textContent = x.title || x.id;
+      c.appendChild(a);
+      if (x.url) {
+        var m = /\/blob\/([0-9a-f]{7,40})\//.exec(x.url);
+        var name = s.github.replace("{title}", x.title || x.id) + (m ? ", " + s.commit.replace("{sha}", m[1].slice(0, 7)) : "");
+        var g = doc.createElement("a"); g.className = "rbchat-gh"; g.href = x.url;
+        g.setAttribute("aria-label", name); g.setAttribute("title", name); g.innerHTML = GH;
+        c.appendChild(g);
+      }
+      if (i < cites.length - 1) c.appendChild(doc.createTextNode(", "));
+    });
+    return c;
   }
 
   // ─── The subset ───────────────────────────────────────────────────────────────────────────
@@ -271,12 +364,13 @@
     } catch (e) {}
   }
 
-  window.rbChat = { md: md, readEvents: readEvents, strings: strings, link: link, refocus: refocus, nameLinks: nameLinks };
+  window.rbChat = { md: md, readEvents: readEvents, strings: strings, link: link, refocus: refocus, nameLinks: nameLinks, when: when, refusalText: refusalText, citeLine: citeLine, iconOf: iconOf };
 
   // ─── The page ─────────────────────────────────────────────────────────────────────────────
   var tag = document.currentScript;
   if (!tag || !tag.dataset || !tag.dataset.chat) return;
   var ENDPOINT = tag.dataset.chat, MODEL = tag.dataset.model || "/model/";
+  var ICON = iconOf(document);
   var HOST = (function(){ try { return new URL(ENDPOINT).host; } catch (e) { return ENDPOINT; } })();
 
   // `messages` is what the server sees, `turns` the same exchange as the panel shows it: an
@@ -400,20 +494,13 @@
   function close(){ panel.hidden = true; button.hidden = false; button.focus(); keep(); }
   function reset(){ messages = []; turns = []; log.innerHTML = ""; fullNote.hidden = true; busy = false; input.disabled = false; sendBtn.disabled = false; input.focus(); keep(); }
 
-  // The cites under an answer, drawn the same way whether the answer just arrived or is being
-  // read back from the tab.
-  function citeLine(cites){
-    var c = el("p", "rbchat-cites"); c.appendChild(el("span", null, strings(langNow()).from + ": "));
-    cites.forEach(function(x, i){ var a = el("a", null, x.title || x.id); a.href = link(MODEL, x.id); c.appendChild(a); if (i < cites.length - 1) c.appendChild(document.createTextNode(", ")); });
-    return c;
-  }
-
   function bubble(role){ var b = el("div", "rbchat-msg rbchat-" + role); log.appendChild(b); log.scrollTop = log.scrollHeight; return b; }
   // A refusal always leaves the visitor able to try again: the sentence is on the table's own
   // keys, never a bare lookup, and focus goes back to the box once the panel is still open —
   // every call site re-enables the form before calling this, so the box is never focused
-  // while disabled.
-  function refuse(code){ bubble("refusal").textContent = sentence(code); if (panel && !panel.hidden && refocus(window)) input.focus(); }
+  // while disabled. The moment the server named, if any, comes with the code and ends the
+  // sentence.
+  function refuse(code, retryAt){ bubble("refusal").textContent = refusalText(code, retryAt, Date.now(), langNow()); if (panel && !panel.hidden && refocus(window)) input.focus(); }
 
   function send(){
     if (busy) return;
@@ -458,8 +545,10 @@
       // Once, on the finished answer: the names are linked in the text the visitor reads, not
       // in the Markdown, so nothing about the answer itself changes and the next render — a
       // language switch, a redraw — would simply do it again.
-      nameLinks(body, names, MODEL, document);
-      if (cites.length) ans.appendChild(citeLine(cites));
+      // A cited entity is linked in the text too, so no title stands plain above the line
+      // that cites it; the server keeps cites and names disjoint, so nothing is linked twice.
+      nameLinks(body, names.concat(cites), MODEL, document);
+      if (cites.length) ans.appendChild(citeLine(cites, MODEL, ICON, document));
       messages.push({ role: "assistant", content: acc });
       turns.push({ role: "assistant", content: acc, cites: cites, names: names });
       keep();
@@ -470,13 +559,15 @@
     fetch(ENDPOINT, { method: "POST", headers: { "content-type": "application/json", "X-Chat": "1" }, signal: ac.signal, body: JSON.stringify({ messages: messages, lang: langNow() }) })
       .then(function(r){
         if (r.status !== 200) {
-          return r.json().then(function(j){ return (j && j.error && j.error.code) || "internal"; }, function(){ return r.status === 413 ? "too_much" : "internal"; })
-            .then(function(code){
+          // The body is read for its code and, on the three limits, the moment the limit
+          // lifts; a body that cannot be read refuses by the status alone and names no moment.
+          return r.json().then(function(j){ var e = j && j.error; return { code: (e && e.code) || "internal", retryAt: e && e.retryAt }; }, function(){ return { code: r.status === 413 ? "too_much" : "internal" }; })
+            .then(function(got){
               clearTimeout(timer);
               if (ans.parentNode) ans.parentNode.removeChild(ans);
               messages.pop(); turns.pop(); keep();
               busy = false; input.disabled = false; sendBtn.disabled = false;
-              refuse(code);
+              refuse(got.code, got.retryAt);
             });
         }
         return readEvents(r, function(name, data){
@@ -485,16 +576,16 @@
           else if (name === "names") (data && data.names || []).forEach(function(n){ if (n && n.id && n.title) names.push(n); });
           else if (name === "done") cut = !!data.cut;
           else if (name === "error") {
-            var code = data && data.error && data.error.code;
+            var code = data && data.error && data.error.code, at = data && data.error && data.error.retryAt;
             if (!acc.trim()) {
               clearTimeout(timer);
               if (ans.parentNode) ans.parentNode.removeChild(ans);
               messages.pop(); turns.pop(); keep();
               busy = false; input.disabled = false; sendBtn.disabled = false;
-              refuse(code || "internal");
+              refuse(code || "internal", at);
               return;
             }
-            acc += "\n\n" + sentence(code);
+            acc += "\n\n" + refusalText(code, at, Date.now(), langNow());
           }
         }).then(function(){ if (busy) finish(); });
       })
@@ -519,9 +610,9 @@
       if (t.role === "user") { bubble("user").textContent = t.content; messages.push({ role: "user", content: t.content }); turns.push({ role: "user", content: t.content }); return; }
       var ans = bubble("assistant"), body = el("div", "rbchat-body");
       body.innerHTML = md(t.content); ans.appendChild(body);
-      nameLinks(body, t.names || [], MODEL, document);
       var cites = t.cites || [];
-      if (cites.length) ans.appendChild(citeLine(cites));
+      nameLinks(body, (t.names || []).concat(cites), MODEL, document);
+      if (cites.length) ans.appendChild(citeLine(cites, MODEL, ICON, document));
       messages.push({ role: "assistant", content: t.content });
       turns.push({ role: "assistant", content: t.content, cites: cites, names: t.names || [] });
     });
