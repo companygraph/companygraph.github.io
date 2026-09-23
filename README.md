@@ -26,16 +26,26 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 
 ## Contents
 
-- `index.html`, `cli/`, `billing/`, `privacy/` — the prose pages, each self-contained. The landing page
-  also carries a stage, described with the stage pages below.
+- `index.html`, `cli/`, `billing/`, `privacy/` — the prose pages, each its own markup and prose,
+  linking `tokens.css`, `page.css` and `page.js` for the chrome and tokens they share with every
+  other page in the family. The landing page also carries a stage, described with the stage
+  pages below.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
-- `talks/intro/` — the deck: `index.html`, `audio/{en,de}/` — one narrated clip per slide and
-  language — both PDFs, and `tts/generate.py`, which reads the deck's speaker notes as the
-  single source for what is spoken. Its share card is rendered by the root `export-og.mjs`,
-  with the other three.
+- `talks/intro/` — the deck: `index.html`, linking `tokens.css` and `deck.css` and loading
+  `deck.js` the same way a prose page loads its three, `audio/{en,de}/` — one narrated clip per
+  slide and language — both PDFs, and `tts/generate.py`, which reads the deck's speaker notes as
+  the single source for what is spoken. Its share card is rendered by the root `export-og.mjs`,
+  with the other three. Nothing here requires the deck to open from `file://` any more — it is
+  normally read served, like every other page — though it still does, checked rather than
+  assumed.
+- `tokens.css`, `page.css`, `page.js`, `deck.css`, `deck.js` — five whole files `npm run design`
+  writes from `@robertblust/design` at the pinned tag: the tokens, the chrome and the runtime
+  every prose page or the deck links and loads instead of carrying a fenced copy. Editing one
+  here does nothing — the next `npm run design` overwrites it; change it in the package. See
+  `AGENTS.md` for what still stays a fence and why.
 - `fonts/` — four self-hosted `.woff2` files, and the only copy. Every page and the deck point
-  at them relatively, so the deck still opens from `file://`.
+  at them relatively.
 - `stage.css`, `stage.js`, `d3.v7.min.js` — **the stage**: the figure, the card and the expand
   dialog that draw the artifact a page names. The one component the stage pages share, so they
   are files at the root that each page links relatively (`stage.css` from the landing page,
@@ -46,13 +56,14 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   one copy, reached relatively — and `npm run test:d3` asserts it is still the pinned
   package's build, byte for byte.
 - `team/` — `index.html`, the page shell around the boards `build/pages.mjs` writes from
-  `company.json` with `@robertblust/design/render/team`, in the order it names, and the `team`,
-  `stage contract` and `model card` fences.
+  `company.json` with `@robertblust/design/render/team`, in the order it names. Its CSS is
+  `page.css`'s now; `stage contract` and `model card` are the fences it still carries.
 - `principles/` — `index.html`, the page shell around a region `build/pages.mjs` writes from
-  `company.json` with `@robertblust/design/render/principles`, and the `principles` fence.
+  `company.json` with `@robertblust/design/render/principles`. Its CSS is `page.css`'s now, and
+  it carries no fence of its own.
 - `surfaces/` — `index.html`, the page shell around the lineage `build/pages.mjs` writes from
-  `company.json` with `@robertblust/design/render/surfaces`, and the `surfaces`, `stage contract`
-  and `surfaces lineage` fences.
+  `company.json` with `@robertblust/design/render/surfaces`. Its CSS is `page.css`'s now;
+  `stage contract` and `surfaces lineage` are the fences it still carries.
 - `example/` and `model/` — `index.html` each, the stage pages beside the landing page: their
   own prose and inline `<style>`, the stage above linked in, and a preload link naming the
   artifact the stage draws. Two steps build what the stage pages draw — `build/build.mjs`
@@ -113,7 +124,7 @@ npm run pdf                        # both language PDFs
 
 `example.json` and `model.json` are committed files, and moving the pin means `npm run build` then `npm run pages`.
 
-`og:check` needs no server and no browser — it re-derives each card's recipe and compares it with the `og.sha` committed beside it, which is why CI runs it before `npm ci`. `npm run og` needs no server either: it renders every card from `file://`, the same way the deck opens. Commit each `og.png` with its `og.sha`, in the commit that moved the page.
+`og:check` needs no server and no browser — it re-derives each card's recipe and compares it with the `og.sha` committed beside it, which is why CI runs it before `npm ci`. `npm run og` does need one: the shared exporter in `@robertblust/design` serves this repository's root on a free port and renders every card, the deck's included, from that address, because a stage page's card has to fetch its data the same way a visitor's browser would. Commit each `og.png` with its `og.sha`, in the commit that moved the page.
 
 `verify` needs a server already running in another terminal. It also runs against the live site — `BASE=https://companygraph.io npm run verify` — which is worth doing after a deploy, and is how a bug was once found that could not appear locally: a check rewrote the share card's URL onto `location.origin`, which is only correct when the repository is the root of its host.
 

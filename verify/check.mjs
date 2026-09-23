@@ -30,7 +30,11 @@ const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy", "company.json"];
 const PAGES = [
   { path: "/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    // fences is not empty here — this page keeps stage contract, its own glue to the model,
+    // fenced as it always was. tokenVersion reads tokens.css's own opening comment whenever
+    // the page does not declare the design tokens fence itself, which this page satisfies by
+    // keeping only stage contract.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
     // which requires target=_blank — wrong for chrome pointing at another page on this
     // same domain, which should stay in the tab the reader is already in.
@@ -86,7 +90,18 @@ const PAGES = [
     sameTab: ["../talks/", "../model/", "../cli/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    // fences reads the served HTML for named marker comments, and this page carries none:
+    // design tokens, header contract, title contract, prose reset and prose footer are
+    // what tokens.css and page.css supply instead. An empty list satisfies the per-page
+    // check (nothing named is missing) and runSuite's own gate, which only asks that every
+    // page in PAGES carry the key at all (an empty array is truthy). tokenVersion's gate is
+    // the same shape: since @robertblust/design v0.80.3 it reads the release out of the
+    // linked tokens.css file's own opening comment whenever the page does not declare the
+    // design tokens fence itself, so this page needs no hand-written comment naming the
+    // version. tokens, sky, header, monoScope, monoDefined and contrast read computed
+    // style, which a linked stylesheet satisfies exactly as a fenced one did, and stay
+    // declared.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The command line's page. Its commands name GitHub releases, and the page itself still
   // fetches nothing from another origin, which `sameOrigin` holds it to as it holds Privacy.
@@ -101,7 +116,7 @@ const PAGES = [
     sameTab: ["../team/", "../principles/", "../privacy/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // Where CompanyGraph's model is published and what makes each place, drawn from company.json
   // by @robertblust/design's writeSurfaces, held by the shared lineage check to the artifact and
@@ -115,7 +130,9 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract", "surfaces"], fits: true,
+    // fences keeps stage contract and drops surfaces: the surfaces CSS is page.css's now,
+    // reaching every prose page rather than only this one, per the package README's warning.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, lineage: true },
   // Who does CompanyGraph's work: one board per process, drawn from company.json by
   // @robertblust/design's writeTeam, held by the shared board check to the artifact and to where
@@ -129,7 +146,9 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract", "team"], fits: true,
+    // fences keeps stage contract and drops team: the team CSS is page.css's now, reaching
+    // every prose page rather than only this one, per the package README's warning.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, board: true },
   // CompanyGraph's vision and values, generated from company.json by @robertblust/design's
   // writePrinciples. The model's words stay in the one language it is written in, so the German
@@ -143,7 +162,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "principles"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
@@ -155,7 +174,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../cli/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
@@ -168,7 +187,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "Seiten"], hides: ["One company", "How to read it"],
                   title: "Beispiel – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
@@ -183,7 +202,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest"], hides: ["The model", "How to read it"],
                   title: "Modell – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
 
   { path: "/talks/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
@@ -200,7 +219,7 @@ const PAGES = [
     // by `translates.dlHref` below.
     sameTab: ["intro/", "./", "../", "../model/", "../cli/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
@@ -229,11 +248,17 @@ const PAGES = [
             "https://github.com/companygraph"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // This deck links tokens.css and deck.css instead of fencing design tokens, deck
+    // transport, deck lockup, deck fit and deck runtime, so fences is empty (fenceOrder no
+    // longer applies — there is nothing left to order) and tokenVersion reads tokens.css's
+    // own opening comment, exactly as /privacy/'s note explains. readoutInvariant is armed:
+    // design:check only proves tokens.css itself matches the pinned release byte for byte,
+    // which says nothing about this deck's own remaining <style> rules — a rule added there
+    // that names a token differing between the themes is exactly what readoutInvariant
+    // exists to catch, and it now reads the :root pair from the linked tokens.css where the
+    // deck's own <style> carries none.
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
-    // fences is presence-only and order-blind — deck runtime landing last here while
-    // fenceOrder places it third, two lines down, is not the pair disagreeing.
-    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
-    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
+    fences: [],
     lockupCollapses: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
