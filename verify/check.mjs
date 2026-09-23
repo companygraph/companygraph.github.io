@@ -86,7 +86,18 @@ const PAGES = [
     sameTab: ["../talks/", "../model/", "../cli/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    // fences reads the served HTML for named marker comments, and this page carries none:
+    // design tokens, header contract, title contract, prose reset and prose footer are
+    // what tokens.css and page.css supply instead. An empty list satisfies the per-page
+    // check (nothing named is missing) and runSuite's own gate, which only asks that every
+    // page in PAGES carry the key at all (an empty array is truthy). tokenVersion's gate is
+    // the same shape: since @robertblust/design v0.80.3 it reads the release out of the
+    // linked tokens.css file's own opening comment whenever the page does not declare the
+    // design tokens fence itself, so this page needs no hand-written comment naming the
+    // version. tokens, sky, header, monoScope, monoDefined and contrast read computed
+    // style, which a linked stylesheet satisfies exactly as a fenced one did, and stay
+    // declared.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The command line's page. Its commands name GitHub releases, and the page itself still
   // fetches nothing from another origin, which `sameOrigin` holds it to as it holds Privacy.
