@@ -161,8 +161,8 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   and `principles` are gone as fences — their CSS is `page.css`'s now, reaching every prose
   page rather than only the page that used to carry each, which is why a class name this
   site already uses for something else, `.legend`, `.card`, `.row` or `.board` among them,
-  can meet a rule it never met before. `design.config.json`'s `"files"` group carries the
-  `"footer"` and `"lockup"` variants those files still need: `"credit"` for the footer's
+  can meet a rule it never met before. `design.config.json` names the `"files"` group and, beside
+  the groups, the `"footer"` and `"lockup"` variants those files still need: `"credit"` for the footer's
   lockup, because this site credits `blust.ch` where blust.ch does not credit itself, and
   `"two"` for the deck's, because CompanyGraph and its presenter are different names.
 
@@ -249,7 +249,7 @@ A page generated from a pinned model — blust.ch's `/model/` and `/principles/`
 
 ## The header is a contract, and its copy carries a version
 
-The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is generated, part of `page.css` now rather than its own fence. It is **byte-identical on every prose page in the family**, because every page takes it from the same pinned release. Change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
+The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is generated, part of `page.css` now rather than its own fence. It is **one generated design, byte-identical wherever two pages are on the same release**, and a site behind on its pin carries the older bytes until it re-pins. Change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
 
 What the contract says:
 
@@ -276,7 +276,7 @@ What the contract says:
 
 ## Share cards go stale silently, and nothing on the page says so
 
-The five `og.png` files are not banners someone drew: `npm run og` renders each from the page it belongs to — the landing card is the landing page, the talks card is the talks index, the deck's card is its title slide, and the model and example cards are those two pages — so a link preview shows what the visitor is about to land on. The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every other check here passes the whole time it is wrong.
+The `og.png` files, one beside each page, are not banners someone drew: `npm run og` renders each from the page it belongs to — the landing card is the landing page, the talks card is the talks index, the deck's card is its title slide, and the model and example cards are those two pages — so a link preview shows what the visitor is about to land on. The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every other check here passes the whole time it is wrong.
 
 - **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterize the same
   text differently, so a card compared by its bytes reports which machine rendered it. The
@@ -288,7 +288,7 @@ The five `og.png` files are not banners someone drew: `npm run og` renders each 
 - **The recipe is the page, plus every local file the page *draws*, plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at all.
   Because `fonts/` is one copy at the root and every page reaches it relatively, perturbing a
-  font here marks **all five** cards stale — the sibling repositories, whose decks carry their
+  font here marks **every** card stale — the sibling repositories, whose decks carry their
   own `fonts/`, isolate theirs, and this repository deliberately does not.
 - **An `<a href>` is skipped: a link names somewhere to go, not something to draw.** The talks
   index is why the exception exists — it links both multi-megabyte deck PDFs, so hashing link
@@ -314,7 +314,7 @@ The five `og.png` files are not banners someone drew: `npm run og` renders each 
   The shared harness is the *union*, never the intersection; the site keeps exactly what only
   the site can know. `root` is passed in rather than derived, because a module that works out
   where it is from its own location points inside `node_modules` once it ships as a dependency.
-- **One exporter, one crop, and no second terminal.** `npm run og` renders all five cards
+- **One exporter, one crop, and no second terminal.** `npm run og` renders every card
   served rather than opened from disk — a page that fetches its own data, the stage pages and
   now the deck alike, cannot do that from `file://`, since the origin is opaque there and both
   `fetch` and a JSON module import are blocked. The shared exporter starts its own server on a
