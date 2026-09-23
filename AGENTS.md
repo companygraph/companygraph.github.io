@@ -68,7 +68,8 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
 - **Team, Principles and Surfaces are generated regions around a hand-written shell.** Each is
   a page built from `/privacy/`'s shell whose model-derived region `npm run pages` writes from
   `company.json` with the design package's `render/team`, `render/principles` and
-  `render/surfaces`; its fences come from `npm run design`. Those words are the model's own and
+  `render/surfaces`; its CSS is `page.css`'s now, and its `model card` or `surfaces lineage`
+  fence still comes from `npm run design`. Those words are the model's own and
   are not translated, which the page's generated note says; everything around them is the
   page's, reviewed English with German made from it. Team's board order is the list
   `build/pages.mjs` passes as `order`, because core gives a process no rank. Team and Surfaces
@@ -132,30 +133,44 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   `npm run design && npm run og` here — that is what "one place" means now. Taking
   `"stage"` out of this repository's `design.config.json` would also clear a red
   `design:check`, but that is not a build fix; it is this site deciding to own the file and
-  diverge, a real decision and not the correct way to make the check pass. Every
-  other page here is a single self-contained file and stays that way; this is the deliberate
-  exception, because a copied stage drifts the first time one page's figure is fixed and
-  nothing in this repository can see the two halves disagree. `stage.js` knows no name from
+  diverge, a real decision and not the correct way to make the check pass. Every page here
+  links the stage the same way, relatively, rather than carrying its own copy, because a
+  copied stage drifts the first time one page's figure is fixed and nothing in this
+  repository can see the two halves disagree. `stage.js` knows no name from
   either page — it fetches whichever `<link>` carries `data-stage` and takes its source
   link's folder from `#srclink`'s `data-src`. **And the og recipe hashes all three as
   drawn assets of every page that links them**, so touching the stage marks each of those
   cards stale — `npm run og` and commit the `og.png`/`og.sha` pair with the change, the same
   as for a font.
 
-- **The design tokens are a copy, fenced by `design tokens · vN` markers**, shared with
-  `blust.ch` and `guestgraph.io`, which cannot import a stylesheet because a deck has to open
-  from `file://` — there is nothing to `import` in that context.
+- **The design system is shared with `blust.ch` and `guestgraph.io` as five whole files,
+  not a copy fenced into every page.** `tokens.css`, `page.css` and `page.js` are what a
+  prose page links and loads; `deck.css` and `deck.js` are what the deck links and loads.
+  `npm run design` writes all five from `@robertblust/design` at the pinned tag, the same
+  release that also writes `stage.css`, `stage.js`, `d3.v7.min.js`, `chat.css` and `chat.js`
+  into this repository. Editing a generated file here does nothing — the next `npm run
+  design` overwrites it; change it in the package, tag a release, then run `npm run design
+  && npm run og` here. `npm run design:check` runs in CI before the browser suite, so a page
+  that drifts from the pinned release goes red without anyone going looking.
 
-  **They are generated now, and this bullet used to say the opposite.** It said bumping the
-  version means editing the block in every repository that carries it and running every suite —
-  a habit with a tripwire rather than a guarantee. Six blocks now come from
-  `@robertblust/design`, pinned here by tag: `design tokens`, `header contract`,
-  `stage contract`, `language`, `prose reset` and `prose footer`. Editing one in place does
-  nothing; the next `npm run design` overwrites it. Change it in the package, tag a release, then
-  run `npm run design && npm run og` here. `npm run design:check` runs in CI before the browser
-  suite, so a page that drifts from the pinned release goes red without anyone going looking —
-  which is the guarantee the habit never was. The deck footer and the `<head>` contract are still
-  hand-maintained copies; for those two the old discipline applies in full.
+  A handful of fences remain, for what a whole file cannot cover: `theme boot`, because it
+  is the one script that has to run inline in `<head>`, before the first paint, so every
+  `<link>` and `<script src>` this repository adds comes after it; and, on the pages that
+  draw the model, `stage contract`, `model card` and `surfaces lineage`, which are this
+  site's own glue to what each page draws rather than shared boilerplate. `team`, `surfaces`
+  and `principles` are gone as fences — their CSS is `page.css`'s now, reaching every prose
+  page rather than only the page that used to carry each, which is why a class name this
+  site already uses for something else, `.legend`, `.card`, `.row` or `.board` among them,
+  can meet a rule it never met before. `design.config.json` names the `"files"` group and, beside
+  the groups, the `"footer"` and `"lockup"` variants those files still need: `"credit"` for the footer's
+  lockup, because this site credits `blust.ch` where blust.ch does not credit itself, and
+  `"two"` for the deck's, because CompanyGraph and its presenter are different names.
+
+  **A page and the files it links are never the same release, the file first.** The pin here
+  names a tag already cut in `robertblust/design`; the commit that takes it — running `npm
+  run design`, editing a page to link the files, committing what changed — always lands
+  after. A rule renamed or a selector a page starts relying on that the pinned tag does not
+  yet carry is two releases, never one.
 
 - **`package-lock.json` is committed here, although the sibling ignores its own.** CI will
   run `npm ci`, which fails outright without a lockfile in the tree — the workflow itself
@@ -234,7 +249,7 @@ A page generated from a pinned model — blust.ch's `/model/` and `/principles/`
 
 ## The header is a contract, and its copy carries a version
 
-The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is a copy, because a deck opens from `file://` and there is no stylesheet to share. It is fenced in every page as `header contract · vN` and is **byte-identical on all sixteen pages** in the three repositories. It is generated, like the tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
+The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is generated, part of `page.css` now rather than its own fence. It is **one generated design, byte-identical wherever two pages are on the same release**, and a site behind on its pin carries the older bytes until it re-pins. Change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
 
 What the contract says:
 
@@ -261,7 +276,7 @@ What the contract says:
 
 ## Share cards go stale silently, and nothing on the page says so
 
-The five `og.png` files are not banners someone drew: `npm run og` renders each from the page it belongs to — the landing card is the landing page, the talks card is the talks index, the deck's card is its title slide, and the model and example cards are those two pages — so a link preview shows what the visitor is about to land on. The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every other check here passes the whole time it is wrong.
+The `og.png` files, one beside each page, are not banners someone drew: `npm run og` renders each from the page it belongs to — the landing card is the landing page, the talks card is the talks index, the deck's card is its title slide, and the model and example cards are those two pages — so a link preview shows what the visitor is about to land on. The cost is a copy that has to be re-rendered whenever the page moves, and nothing about a stale card looks wrong: it is a valid PNG of the site as it read some commits ago, and every other check here passes the whole time it is wrong.
 
 - **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterize the same
   text differently, so a card compared by its bytes reports which machine rendered it. The
@@ -273,7 +288,7 @@ The five `og.png` files are not banners someone drew: `npm run og` renders each 
 - **The recipe is the page, plus every local file the page *draws*, plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at all.
   Because `fonts/` is one copy at the root and every page reaches it relatively, perturbing a
-  font here marks **all five** cards stale — the sibling repositories, whose decks carry their
+  font here marks **every** card stale — the sibling repositories, whose decks carry their
   own `fonts/`, isolate theirs, and this repository deliberately does not.
 - **An `<a href>` is skipped: a link names somewhere to go, not something to draw.** The talks
   index is why the exception exists — it links both multi-megabyte deck PDFs, so hashing link
@@ -299,9 +314,14 @@ The five `og.png` files are not banners someone drew: `npm run og` renders each 
   The shared harness is the *union*, never the intersection; the site keeps exactly what only
   the site can know. `root` is passed in rather than derived, because a module that works out
   where it is from its own location points inside `node_modules` once it ships as a dependency.
-- **One exporter, one crop, and no server.** `npm run og` renders all five cards from
-  `file://` — the same way the deck opens — because every page here references its assets
-  relatively. The landing card was once cropped a pixel higher than the other two; that was an
+- **One exporter, one crop, and no second terminal.** `npm run og` renders every card
+  served rather than opened from disk — a page that fetches its own data, the stage pages and
+  now the deck alike, cannot do that from `file://`, since the origin is opaque there and both
+  `fetch` and a JSON module import are blocked. The shared exporter starts its own server on a
+  free port and stops it when the run is done, which is what "no server" always meant: none to
+  run yourself in a second terminal, not that nothing serves the page. A card rendered this way
+  was measured byte-identical to one rendered from disk. The landing card was once cropped a
+  pixel higher than the other two; that was an
   accident of a separate exporter, not a choice, and there is now one constant. The shared
   exporter awaits `document.fonts.ready` on *every* card. This repository used to await it only
   in the `reduced-motion` branch, which made it the settle mechanism rather than a font guard
@@ -457,27 +477,36 @@ Copied from the spec and from the sibling repositories' `CLAUDE.md`. Every task'
   The same footer is on `guestgraph.io`, and on `blust.ch` in two parts rather than three:
   there the brand and the person are the same name.
 
-  It used to be fenced by its own `deck footer · vN` marker with a `footerVersion` check — the
-  same habit-with-a-tripwire the token block gets, for the same reason: no suite can see a
-  sibling. Both are gone now, not retargeted: retired in a previous plan and replaced by the
-  deck's chrome fences — `deck transport`, `deck lockup`, `deck fit` and `deck runtime` —
-  generated like the tokens. What the old marker covered is still a contract, not a look —
-  where each of the three links goes, and that none opens in a new tab — and `design:check`
-  is what enforces it now, comparing each fence's bytes against the pinned release.
+  It used to be fenced by its own `deck footer · vN` marker with a `footerVersion` check, then
+  by four chrome fences — `deck transport`, `deck lockup`, `deck fit` and `deck runtime` — each
+  with the same habit-with-a-tripwire the tokens got, for the same reason: no suite can see a
+  sibling. All four are gone now, folded into `deck.css` and `deck.js`, the two whole files the
+  deck links and loads instead: `tokens.css` and `deck.css` after the `theme boot` fence in
+  `<head>`, `deck.js` at the end of the body. What the old markers covered is still a contract,
+  not a look — where each of the three footer links goes, and that none opens in a new tab —
+  and `design:check` is what enforces it now, comparing the generated files' bytes against the
+  pinned release rather than a fence's.
 
-  `verify/design.mjs` now lives in `@robertblust/design`, alongside the nineteen shared page
-  checks — edited there, released as a tag, and taken here by re-pinning that tag in
-  `package.json`, exactly like the token block below. `verify/check.mjs` imports it by package
+  `verify/design.mjs` now lives in `@robertblust/design`, alongside the package's other shared
+  page checks — edited there, released as a tag, and taken here by re-pinning that tag in
+  `package.json`, exactly like the tokens below. `verify/check.mjs` imports it by package
   specifier, `@robertblust/design/verify/design`; a `verify/design.mjs` created in this
   repository is never resolved by that import and would be silently ignored — the suite would
   still report green, having run the pinned release's code instead of the one just edited.
-- **The design token block is generated**, fenced by `design tokens · vN` markers, shared with
+
+  The deck states its own `TALK` and `UI` — the talk's title and description in both
+  languages, and the transport's strings built from them — and declares `window.rbDeck = {
+  talk: TALK, ui: UI }` before `<script src="../../deck.js" defer>`, the same shape a prose
+  page declares `window.rbPage` before `page.js`. `theme` and `deck fit` ship inside `deck.js`
+  alongside `deck runtime`; only `theme boot` stays a fence, because it has to run inline,
+  before the first paint.
+- **The design tokens are generated into `tokens.css`, a whole file now**, shared with
   `blust.ch` and `guestgraph.io` — each of which now carries its own talks in the same
   repository, as this one does. Do not edit it here: it comes from `@robertblust/design` and
-  `npm run design` writes it. This bullet named `v1` for a long time after the block had moved
-  past it, which is the argument for naming the mechanism rather than the number.
-  `verify/design.mjs`, which holds `TOKEN_VERSION`, lives in that same package now — see
-  the footer bullet above for where it moved and what importing it by specifier means.
+  `npm run design` writes it. `verify/design.mjs`, which holds `TOKEN_VERSION`, lives in that
+  same package — see the footer bullet above for where it moved and what importing it by
+  specifier means. A page that carries no `design tokens` fence of its own — every page here,
+  now — is read by `tokenVersion` from `tokens.css`'s own opening comment instead.
 - **No type count, no type list read aloud, and no status claim that ages — name the plan, never the status.** Slide 10 says what would make the model usable and links to the roadmap for what exists. A slide may say what the project intends to build; it never says what it has built, because the deck is the one medium that cannot be edited cheaply.
 - **The `blust.ch` credit in the page footer is a lockup, not a footer link.** It leaves the
   footer's mono for the same treatment it has on every deck — the `rb` plate inlined, wordmark

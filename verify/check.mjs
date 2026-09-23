@@ -28,9 +28,13 @@ const SITE = "https://companygraph.io";
 const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy", "company.json"];
 
 const PAGES = [
-  { path: "/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    // fences is not empty here — this page keeps stage contract, its own glue to the model,
+    // fenced as it always was. tokenVersion reads tokens.css's own opening comment whenever
+    // the page does not declare the design tokens fence itself, which this page satisfies by
+    // keeping only stage contract.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     // "TALKS" is the nav's first and only link. Asserted here rather than in `links`,
     // which requires target=_blank — wrong for chrome pointing at another page on this
     // same domain, which should stay in the tab the reader is already in.
@@ -80,17 +84,28 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none, and
   // `sameOrigin` is the only check that can see that.
-  { path: "/privacy/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/privacy/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../cli/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    // fences reads the served HTML for named marker comments, and this page carries none:
+    // design tokens, header contract, title contract, prose reset and prose footer are
+    // what tokens.css and page.css supply instead. An empty list satisfies the per-page
+    // check (nothing named is missing) and runSuite's own gate, which only asks that every
+    // page in PAGES carry the key at all (an empty array is truthy). tokenVersion's gate is
+    // the same shape: since @robertblust/design v0.80.3 it reads the release out of the
+    // linked tokens.css file's own opening comment whenever the page does not declare the
+    // design tokens fence itself, so this page needs no hand-written comment naming the
+    // version. tokens, sky, header, monoScope, monoDefined and contrast read computed
+    // style, which a linked stylesheet satisfies exactly as a fenced one did, and stay
+    // declared.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The command line's page. Its commands name GitHub releases, and the page itself still
   // fetches nothing from another origin, which `sameOrigin` holds it to as it holds Privacy.
-  { path: "/cli/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CLI/, lang: "en", sourceLang: "en",
+  { path: "/cli/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CLI/, lang: "en", sourceLang: "en",
     contains: ["One command", "does it", "Run it", "What the menu does", "Make a model", "Obsidian plugin", "What Obsidian still asks", "Without the menu"],
     translates: { lang: "de",
       title: "CLI – CompanyGraph",
@@ -101,12 +116,12 @@ const PAGES = [
     sameTab: ["../team/", "../principles/", "../privacy/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // Where CompanyGraph's model is published and what makes each place, drawn from company.json
   // by @robertblust/design's writeSurfaces, held by the shared lineage check to the artifact and
   // to where STAGE_PAGE sends a card, which here is the landing page.
-  { path: "/surfaces/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
+  { path: "/surfaces/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
     contains: ["Nothing kept beside", "model", "How to read it", "Generated from"],
     translates: { lang: "de",
       title: "Surfaces – CompanyGraph",
@@ -115,12 +130,14 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract", "surfaces"], fits: true,
+    // fences keeps stage contract and drops surfaces: the surfaces CSS is page.css's now,
+    // reaching every prose page rather than only this one, per the package README's warning.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, lineage: true },
   // Who does CompanyGraph's work: one board per process, drawn from company.json by
   // @robertblust/design's writeTeam, held by the shared board check to the artifact and to where
   // STAGE_PAGE sends a card, which here is the landing page.
-  { path: "/team/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
+  { path: "/team/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
     contains: ["An agent does the work,", "every", "gate", "How to read it", "Generated from"],
     translates: { lang: "de",
       title: "Team – CompanyGraph",
@@ -129,12 +146,14 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract", "team"], fits: true,
+    // fences keeps stage contract and drops team: the team CSS is page.css's now, reaching
+    // every prose page rather than only this one, per the package README's warning.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, board: true },
   // CompanyGraph's vision and values, generated from company.json by @robertblust/design's
   // writePrinciples. The model's words stay in the one language it is written in, so the German
   // check reads the page's own words: the head and the one heading the region translates.
-  { path: "/principles/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["Written once", "read by", "Values", "Generated from"],
     translates: { lang: "de",
       title: "Prinzipien – CompanyGraph",
@@ -143,24 +162,24 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "principles"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The billing page. It states a commercial model, so the two claims that make it
   // trustworthy are asserted rather than trusted: that the tooling is free forever, and
   // that nothing here is running yet. Drop either and the page starts selling something.
-  { path: "/billing/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/billing/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     // "FREE, FOREVER" upper case because `contains` reads rendered text and the card
     // headings are uppercased in CSS — the same trap the nav assertion fell into.
     contains: ["Not per seat", "FREE, FOREVER", "The tooling", "None of this is running today"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../cli/", "../privacy/", "../", "./"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     card: true, cardBase: SITE, internalLinks: true },
   // The example page. Its one promise is that nothing about the example was written by hand,
   // so the strings asserted here are the page's own prose, never a name from the model —
   // those are asserted by `graph`, which reads them out of the artifact the page names.
-  { path: "/example/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/example/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["One company", "drawn", "A solid line means", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
@@ -168,14 +187,14 @@ const PAGES = [
     translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "Seiten"], hides: ["One company", "How to read it"],
                   title: "Beispiel – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
   // The model page. The same page in every respect the suite can see — one stage, one card,
   // one generated block — so its spec is the example's with its own prose and its own block
   // id. `graph` is what makes that possible: it reads the block the spec names, and every
   // name it asserts comes out of that block, so one check serves both pages without either
   // page's vocabulary appearing here.
-  { path: "/model/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/model/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
     contains: ["The model", "drawn", "A dashed line", "How to read it", "Generated from"],
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
@@ -183,10 +202,10 @@ const PAGES = [
     translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest"], hides: ["The model", "How to read it"],
                   title: "Modell – CompanyGraph" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
 
-  { path: "/talks/", typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["CompanyGraph", "meta-model"],
     links: ["https://github.com/companygraph"],
     // "../" is the wordmark, which is the only way back to the model
@@ -200,7 +219,7 @@ const PAGES = [
     // by `translates.dlHref` below.
     sameTab: ["intro/", "./", "../", "../model/", "../cli/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"], fits: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
@@ -229,11 +248,17 @@ const PAGES = [
             "https://github.com/companygraph"],
     slides: 12,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // This deck links tokens.css and deck.css instead of fencing design tokens, deck
+    // transport, deck lockup, deck fit and deck runtime, so fences is empty (fenceOrder no
+    // longer applies — there is nothing left to order) and tokenVersion reads tokens.css's
+    // own opening comment, exactly as /privacy/'s note explains. readoutInvariant is armed:
+    // design:check only proves tokens.css itself matches the pinned release byte for byte,
+    // which says nothing about this deck's own remaining <style> rules — a rule added there
+    // that names a token differing between the themes is exactly what readoutInvariant
+    // exists to catch, and it now reads the :root pair from the linked tokens.css where the
+    // deck's own <style> carries none.
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
-    // fences is presence-only and order-blind — deck runtime landing last here while
-    // fenceOrder places it third, two lines down, is not the pair disagreeing.
-    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
-    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
+    fences: [],
     lockupCollapses: true,
     // The deck's German is the whole second half of the talk, including every speaker note.
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
@@ -281,6 +306,35 @@ const CHECKS = {
   // because German is the wider half and the half that broke first — asserting English
   // alone would have passed over the worse of the two. Runs last, and puts the viewport
   // back, so no earlier check ever sees a resized page.
+  // A cite under a chat answer links into the page the tag's data-model names, with the
+  // entity's id as the hash and the stage expanded. On this site /model/ draws the meta-model's
+  // vocabulary, while the stage that draws the company's own instance, the one
+  // mcp.companygraph.io serves, is the home page — so a tag naming /model/ sends every cite
+  // to the wrong graph. This holds every page that carries the tag to the home page, and
+  // proves once, from the home page's own data, that a cite's address opens the card there.
+  async citeOpens(page, spec) {
+    const tag = await page.evaluate(() => {
+      const t = document.querySelector("script[data-chat]");
+      return t ? { model: t.dataset.model || "/model/", resolved: new URL(t.dataset.model || "/model/", location.href).pathname } : null;
+    });
+    if (!tag) return "no chat tag on a page the spec says carries one";
+    if (tag.resolved !== "/") return `the chat tag names ${tag.model}, which resolves to ${tag.resolved} and not the home stage`;
+    if (spec.path !== "/") return null;
+    const first = await page.evaluate(async () => {
+      const link = document.querySelector("link[data-stage]");
+      const data = await (await fetch(link.href)).json();
+      const e = data.entities.find((x) => x.name);
+      return e ? { id: e.id, name: e.name } : null;
+    });
+    if (!first) return "the home stage's data names no entity to cite";
+    await page.goto(BASE + "/?stage=expanded#" + first.id);
+    try { await page.waitForFunction((name) => { const b = document.getElementById("cbody"); return b && b.textContent.includes(name); }, first.name, { timeout: 8000 }); }
+    catch { return `a cite's address /?stage=expanded#${first.id} did not open the card of ${first.name}`; }
+    const open = await page.evaluate(() => { const m = document.getElementById("stagemodal"); return !!(m && m.open); });
+    if (!open) return "the card opened but the stage is not expanded, which is what the cite asked for";
+    await page.goto(BASE + spec.path);
+    return null;
+  },
   async fits(page, spec) {
     const before = page.viewportSize();
     const overflow = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
