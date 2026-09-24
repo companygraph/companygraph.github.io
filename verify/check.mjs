@@ -51,7 +51,7 @@ const PAGES = [
                // still not derived from the deck's own timings, so re-cut the talk and this
                // string has to be changed by hand; what changed is that nothing crosses a
                // repository boundary to do it.
-               "Watch intro talk", "12 minutes · German or English", "Try the CLI",
+               "Watch intro talk", "7 minutes · German or English", "Try the CLI",
                // The hero's note says what the drawing below it is: CompanyGraph, in
                // its own vocabulary. Only the words that carry it, so rewording the
                // rest of the sentence does not fail the check.
@@ -72,7 +72,7 @@ const PAGES = [
       // The head, not just the body: this page carried an id="metadesc" that nothing acted
       // on, so a German visitor read an English title and description under lang="de".
       // Declared here so the swap cannot quietly go away again.
-                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "12 Minuten · Deutsch oder Englisch",
+                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "7 Minuten · Deutsch oder Englisch",
                           "beschrieben in seinem eigenen Vokabular"],
                   hides: ["Everything a company", "Read the source", "Try the CLI", "described in its own vocabulary"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and

@@ -229,6 +229,11 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   moment, not one click away. That obligation begins the day the talk repository exists, not
   now; do not pre-write a "talk coming soon" in the meantime, which is exactly the kind of
   status claim §3 above forbids.
+- **The length quoted is the one a visitor plays**: the narration of every clip plus the
+  player's pause between slides (`SETTLE_MS` and `READ_MS` in `deck.js`), rounded to the
+  minute and stated per language. It was 12 minutes until Sep 25, 2026, the length presented
+  live; a visitor never hears that version, so the owner chose the one they do. Re-measure
+  when a clip is regenerated.
 
 ## A page is en-US; a `-de` attribute is de-CH
 
