@@ -1,5 +1,5 @@
 {
-  "commit": "b8a16c3d34273e70f5ca75168e08a5cc2518e2a7",
+  "commit": "7713a3b8f088bab44adc86e6c6be27e3782692da",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -1029,7 +1029,7 @@
       "sections": [
         {
           "heading": "Description",
-          "text": "One command, `npx --yes 'github:companygraph/meta-model#semver:*'`, run from the newest release on GitHub, opens a menu that does all of it: it makes an instance in a folder, with the vocabulary vendored, a manifest naming every file it owns, a folder per type, the entities no instance passes without, a workflow and the agent files, so that the instance passes the checks on its first day; it runs the mechanical checks as the instance's own workflow runs them; it moves an instance to a newer release, its vendored core, its skills, its manifest and its workflow together; and it installs the Obsidian plugin in a vault or updates it there. Each pick reports what it did and the menu comes back. It stops at the instance's shape and its tooling: what a company writes into the folders is the company's, and writing a page from its schema is not among the picks.",
+          "text": "The CLI is one command, `npx --yes 'github:companygraph/meta-model#semver:*'`, run from the newest release on GitHub; it opens a menu that does all of it: it makes an instance in a folder, with the vocabulary vendored, a manifest naming every file it owns, a folder per type, the entities no instance passes without, a workflow and the agent files, so that the instance passes the checks on its first day; it runs the mechanical checks as the instance's own workflow runs them; it moves an instance to a newer release, its vendored core, its skills, its manifest and its workflow together; and it installs the Obsidian plugin in a vault or updates it there. Each pick reports what it did and the menu comes back. It stops at the instance's shape and its tooling: what a company writes into the folders is the company's, and writing a page from its schema is not among the picks.",
           "tables": []
         }
       ],
