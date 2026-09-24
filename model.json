@@ -1,5 +1,5 @@
 {
-  "commit": "1dc6d81af51e74fcac1ac4a3aca965d1343667a6",
+  "commit": "e16645cae02fde34b6e3ea52d18e11a19d3f1e03",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -2145,6 +2145,12 @@
                   "No",
                   "string",
                   "Where the person works from"
+                ],
+                [
+                  "`image`",
+                  "No",
+                  "image",
+                  "The person's picture, a file in this profile's folder — square, 512×512 recommended, 256–1024 pixels on a side, at most 300 KB"
                 ]
               ]
             }
@@ -2193,6 +2199,12 @@
                 "No",
                 "string",
                 "Where the person works from"
+              ],
+              [
+                "`image`",
+                "No",
+                "image",
+                "The person's picture, a file in this profile's folder — square, 512×512 recommended, 256–1024 pixels on a side, at most 300 KB"
               ]
             ]
           }
@@ -2365,7 +2377,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- A `What it shows` cell states a fact that can be checked — a system, an organization, a\n  number, a named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the row\n  is describing confidence rather than the work.\n- A row that says no more than its own `Experience` cell says nothing. It is dropped rather\n  than written.\n- One sentence per row, under forty words. The sentence does not repeat the period of the\n  experience its `Experience` column names; a period of the fact's own, shorter than that one,\n  stays in it.\n- Rows run in the order the Skills table lists the skills, and chronologically within a skill.\n- A level is weighed against the rows under it and the rung's own definition, not against how\n  long the person has done it. Rows that name different experiences show breadth, and breadth\n  is what the count is read for; the count never outranks the definition. Three rows that show\n  less than the rung asks for do not reach it, and one row that shows it does.\n- One row per skill claimed in `## Skills`, and every claim has at least one row under it in\n  `## Evidence`. A skill the person can name but not evidence has no row in either: the table\n  is the claim, and a claim needs something under it. The sections table declares it, `Under`,\n  and the instance checks hold it both ways (R16).\n- An `Experience` names a period this profile owns, and that experience lists this skill in its\n  `skills` field. Both are held by the instance checks from what the schemas declare: the\n  first as every name of an owned type is held to its owner, the second because the column\n  declares it, `skills` lists `Skill`. A miss has two repairs that claim different things,\n  adding the skill to the experience or naming another period, and which is true is the\n  writer's to say.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.\n- A person who holds a role claims the skills the role requires in their Skills table, with\n  evidence. Where they cannot, the gap stays visible: the validation pass reports it and\n  nothing here invents a row to close it.\n- `nature` says what holds the profile, never how well. A profile whose nature is `agent`\n  claims no skill and carries neither a Skills table nor an Evidence table: a claim is a\n  person's history with a capability, evidenced by work that stays true after the next\n  release, and an agent has no such history. What holds an agent to a seat is the rulebook it\n  runs under, never a row it wrote about itself.",
+          "text": "- The tagline and `## Summary` are the person's own, in their own voice: what they do and what\n  runs through it. Not their employer's description of the role, and not a job advertisement.\n- A tagline may state the claim the person's work makes rather than describe the work. Then the\n  claim is one the model holds elsewhere — a value, or the thread the summary names — and a\n  reader can follow it there. A line with nothing behind it is a slogan, and nothing on the page\n  tells one from the other except what backs it.\n- A `What it shows` cell states a fact that can be checked — a system, an organization, a\n  number, a named outcome. \"Extensive experience\" and \"deep knowledge\" are not evidence.\n- Evidence never restates the level. If removing the Level column would lose nothing, the row\n  is describing confidence rather than the work.\n- A row that says no more than its own `Experience` cell says nothing. It is dropped rather\n  than written.\n- One sentence per row, under forty words. The sentence does not repeat the period of the\n  experience its `Experience` column names; a period of the fact's own, shorter than that one,\n  stays in it.\n- Rows run in the order the Skills table lists the skills, and chronologically within a skill.\n- A level is weighed against the rows under it and the rung's own definition, not against how\n  long the person has done it. Rows that name different experiences show breadth, and breadth\n  is what the count is read for; the count never outranks the definition. Three rows that show\n  less than the rung asks for do not reach it, and one row that shows it does.\n- One row per skill claimed in `## Skills`, and every claim has at least one row under it in\n  `## Evidence`. A skill the person can name but not evidence has no row in either: the table\n  is the claim, and a claim needs something under it. The sections table declares it, `Under`,\n  and the instance checks hold it both ways (R16).\n- An `Experience` names a period this profile owns, and that experience lists this skill in its\n  `skills` field. Both are held by the instance checks from what the schemas declare: the\n  first as every name of an owned type is held to its owner, the second because the column\n  declares it, `skills` lists `Skill`. A miss has two repairs that claim different things,\n  adding the skill to the experience or naming another period, and which is true is the\n  writer's to say.\n- The Skills table is where a person's history with a skill lives. The skill file stays\n  person-neutral, so nothing here belongs there and nothing there belongs here.\n- One row per place in `## Also at`, and a place the person no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the person's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the person.\n- A person who holds a role claims the skills the role requires in their Skills table, with\n  evidence. Where they cannot, the gap stays visible: the validation pass reports it and\n  nothing here invents a row to close it.\n- The image is the person, recognizably, as the tagline is their own voice: not a logo, a team\n  or an illustration standing in for them. A profile whose nature is `agent` may carry one, and\n  then it shows what holds the profile; the rule below that an agent claims no skill does not\n  reach it.\n- `nature` says what holds the profile, never how well. A profile whose nature is `agent`\n  claims no skill and carries neither a Skills table nor an Evidence table: a claim is a\n  person's history with a capability, evidenced by work that stays true after the next\n  release, and an agent has no such history. What holds an agent to a seat is the rulebook it\n  runs under, never a row it wrote about itself.",
           "tables": []
         },
         {
@@ -2376,6 +2388,175 @@
       ],
       "owner": null,
       "path": "core/profile-schema.md"
+    },
+    {
+      "id": "core/question",
+      "type": "schema",
+      "name": "Question Schema",
+      "tagline": "Required structure for question files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Question]`",
+                  "Yes",
+                  "The question as a visitor asks it, ending in a question mark. Every reference to it uses this exact string."
+                ],
+                [
+                  "`> [Answer]`",
+                  "Yes",
+                  "One or two sentences that say where the answer lies and state no fact the model holds elsewhere"
+                ],
+                [
+                  "`## Rests on`",
+                  "No",
+                  "Table. One row per entity the answer comes from; its columns are declared below. Absent when the answer is mastered here."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Rests on` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "The type of the entity this row names, as its schema is named: `profile`, `strategic-objective`"
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type in Owner",
+                  "The entity the answer comes from, by its canonical name"
+                ],
+                [
+                  "`Owner`",
+                  "No",
+                  "string",
+                  "Where `Type` is an owned type, the entity that owns this one, by its canonical name; blank otherwise"
+                ],
+                [
+                  "`For`",
+                  "No",
+                  "string",
+                  "The part of the answer this entity carries, where the answer rests on more than one"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Question]`",
+                "Yes",
+                "The question as a visitor asks it, ending in a question mark. Every reference to it uses this exact string."
+              ],
+              [
+                "`> [Answer]`",
+                "Yes",
+                "One or two sentences that say where the answer lies and state no fact the model holds elsewhere"
+              ],
+              [
+                "`## Rests on`",
+                "No",
+                "Table. One row per entity the answer comes from; its columns are declared below. Absent when the answer is mastered here."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A question answers \"where in the model is the answer to what people actually ask?\" It is the bridge from a visitor's words to the company's. The facts stay where they are mastered, and the question names them, so a fact changed on its own page is changed for every question that rests on it and no answer goes stale. What no other entity holds, a stance, a boundary, a claim the model deliberately does not make, is mastered on the question itself.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 is worded as people ask, not as the model names things: \"Can Robert still write code himself?\", not \"Software engineering proficiency\". A question worded in the model's own vocabulary adds nothing the words search did not already find.\n- The answer routes. It may say what kind of thing the answer is and where it lies, and it may say what the model does not claim; it states no count, version, date or fact that another entity holds, because that would be a second copy nothing keeps true.\n- An answer with no `## Rests on` is mastered on the question. It states only what no other entity holds: a stance, a boundary, or a claim the model deliberately does not make. A fact that belongs on an entity is written on that entity, and the question rests on it.\n- Every entity the answer draws on has a row, and no row names an entity the answer does not draw on.\n- A question is not an alias. A concept's other names belong in its `## Also known as`; a question is how people ask, not what a thing is called.\n- Names and prose are American English (R14). A visitor asking in German is matched by the chat, not by a German question.\n- One question per thing asked. Two wordings of the same question are one file; the H1 takes the wording people use most.\n\nThe answer is required, because a question with no answer is an open issue and not an entity: what the model is asked and cannot answer yet is a change to the model, written as one, and the question follows it. `## Rests on` is optional, because some honest answers rest on nothing else in the model. What that costs is that no check can tell a question resting on nothing on purpose from one whose rows were forgotten; the writing rules and the owner's review of each question carry that, as they carry the rest of what an answer may say.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/questions/*.md`",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/question-schema.md"
     },
     {
       "id": "core/role",
@@ -4108,6 +4289,15 @@
     },
     {
       "from": "core/profile",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/question",
       "to": "core/source",
       "via": "source",
       "attrs": {

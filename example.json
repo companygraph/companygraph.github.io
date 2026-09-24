@@ -1,5 +1,5 @@
 {
-  "commit": "1dc6d81af51e74fcac1ac4a3aca965d1343667a6",
+  "commit": "e16645cae02fde34b6e3ea52d18e11a19d3f1e03",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -72,6 +72,12 @@
     {
       "type": "profile",
       "folder": "profiles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "question",
+      "folder": "questions",
       "owner": null,
       "singular": false
     },
@@ -1509,7 +1515,8 @@
         "nature": "agent",
         "roles": [
           "Reviewer"
-        ]
+        ],
+        "image": "ai-agent.png"
       },
       "sections": [
         {
@@ -2049,6 +2056,136 @@
         "start": "2022-02",
         "end": null
       }
+    },
+    {
+      "id": "questions/does-beacon-systems-publish-its-revenue",
+      "type": "question",
+      "name": "Does Beacon Systems publish its revenue?",
+      "tagline": "No. The model makes no claim about revenue, and none is published.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/questions/does-beacon-systems-publish-its-revenue.md"
+    },
+    {
+      "id": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "type": "question",
+      "name": "How do I find out why a line is on my invoice?",
+      "tagline": "The charge explanation shows where each line comes from, and the pricing rules say what it costs.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Charge explanation",
+                  "",
+                  "where a line comes from"
+                ],
+                [
+                  "feature",
+                  "Pricing rules",
+                  "",
+                  "what it costs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Charge explanation",
+                "",
+                "where a line comes from"
+              ],
+              [
+                "feature",
+                "Pricing rules",
+                "",
+                "what it costs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/questions/how-do-i-find-out-why-a-line-is-on-my-invoice.md"
+    },
+    {
+      "id": "questions/who-split-billing-out-of-the-monolith",
+      "type": "question",
+      "name": "Who split billing out of the monolith?",
+      "tagline": "The period in which the billing domain was split is Mira Halvorsen's, and it says what was done.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Splitting the billing domain",
+                  "Mira Halvorsen",
+                  "the period"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Splitting the billing domain",
+                "Mira Halvorsen",
+                "the period"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/questions/who-split-billing-out-of-the-monolith.md"
     },
     {
       "id": "roles/backend-engineer",
@@ -3361,6 +3498,54 @@
     {
       "from": "profiles/tomas-reyes",
       "to": "sources/google-workspace",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/does-beacon-systems-publish-its-revenue",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "to": "features/charge-explanation",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "where a line comes from"
+      }
+    },
+    {
+      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "to": "features/pricing-rules",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what it costs"
+      }
+    },
+    {
+      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/who-split-billing-out-of-the-monolith",
+      "to": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Mira Halvorsen",
+        "For": "the period"
+      }
+    },
+    {
+      "from": "questions/who-split-billing-out-of-the-monolith",
+      "to": "sources/local",
       "via": "source",
       "attrs": {}
     },
