@@ -208,8 +208,12 @@ const PAGES = [
     sameTab: ["intro/", "./", "../", "../model/", "../cli/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
+    // This page's German description is its tagline's data-de, read at run time, not a string
+    // in its de object, so translates cannot take it from the page; the spec names both.
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
-                  dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" } },
+                  dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
+                  title: "Vorträge · CompanyGraph",
+                  desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb einer Firma." },
     card: true, cardBase: SITE, internalLinks: true },
   // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
   // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
