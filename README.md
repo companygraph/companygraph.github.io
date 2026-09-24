@@ -88,6 +88,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   the stamps, and `og-check.mjs` reports which have drifted. `export-pdf.mjs`, alongside it at
   the root, renders the deck's two PDFs into `talks/intro/`.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
+- `LICENSE` — CC BY 4.0, see License below.
 - `verify/check.mjs` — the suite, covering every page in one run. Its shared page checks
   and `verify/design.mjs` come from `@robertblust/design`, imported by package specifier; edit
   them there, tag a release, and re-pin the tag in `package.json`. A `verify/design.mjs`
@@ -141,3 +142,7 @@ No type count, no type list, no status and no roadmap — those live in [`compan
 `/billing/` is the one place a commercial model is stated, and it states one that is not running: consulting, time and material, no rate, nobody to ask, and it may never happen at all. **The absent contact is deliberate** — adding one turns a described model into an offer. Nothing anywhere may imply a hosted product, a license fee, a seat count or a paid edition of the model; those are the four things the billing page rejects by name.
 
 See `AGENTS.md` for why each of those constraints exists, and what has already gone wrong when a page like this one didn't hold them.
+
+## License
+
+[CC BY 4.0](LICENSE) for everything written here: the pages, the talks and their narration, the share cards, and the scripts that build and check them. Use it, quote it, build on it; credit it. Three kinds of file are not written here and keep their own licenses: the faces under `fonts/`, `d3.v7.min.js` and the GitHub mark inlined in `chat.js` come from `@robertblust/design`, whose NOTICE names each one. The license grants no right to a name or a mark: CompanyGraph and its mark stay the project's.
