@@ -1,5 +1,5 @@
 {
-  "commit": "63627dda2e2556025d97bd9fbd939e94630d2d6a",
+  "commit": "f097d300cfd4ba88aa665b6a95e1cfea1e1cbd80",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -3752,6 +3752,59 @@
       "path": "model/questions/how-do-i-start.md"
     },
     {
+      "id": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
+      "type": "question",
+      "name": "How does content stay current when it comes from a wiki or another system?",
+      "tagline": "Every page declares the source it comes from, as every page here declares Local, and its id there where the source issues one, which is all a sync needs. The sync itself is the company's to choose, and the one we prefer is an agent reading the source over MCP, such as Atlassian's MCP server for Confluence and Jira, writing the pages the checks then hold.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "source",
+                  "Local",
+                  "",
+                  "what a page declares"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "source",
+                "Local",
+                "",
+                "what a page declares"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system.md"
+    },
+    {
       "id": "questions/is-anyone-besides-you-using-companygraph",
       "type": "question",
       "name": "Is anyone besides you using CompanyGraph?",
@@ -7181,6 +7234,22 @@
     },
     {
       "from": "questions/how-do-i-start",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
+      "to": "sources/local",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "source",
+        "Owner": "",
+        "For": "what a page declares"
+      }
+    },
+    {
+      "from": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
