@@ -145,4 +145,4 @@ See `AGENTS.md` for why each of those constraints exists, and what has already g
 
 ## License
 
-[CC BY 4.0](LICENSE) for everything written here: the pages, the talks and their narration, the share cards, and the scripts that build and check them. Use it, quote it, build on it; credit it. Three kinds of file are not written here and keep their own licenses: the faces under `fonts/`, `d3.v7.min.js` and the GitHub mark inlined in `chat.js` come from `@robertblust/design`, whose NOTICE names each one. The license grants no right to a name or a mark: CompanyGraph and its mark stay the project's.
+[CC BY 4.0](LICENSE) for everything written here: the pages, the talks and their narration, the share cards, and the scripts that build and check them. Use it, quote it, build on it; credit it. Three kinds of file are not written here and keep their own licenses, each in a text beside it: the faces under `fonts/`, `d3.v7.min.js` and the GitHub mark inlined in `chat.js` come from `@robertblust/design`, whose NOTICE names each one. The license grants no right to a name or a mark: CompanyGraph and its mark stay the project's.
