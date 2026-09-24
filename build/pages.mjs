@@ -48,7 +48,7 @@ const RENDERERS = [
   (d, o) => writePrinciples(d.company, { ...o, root: ROOT }),
   // The order the boards argue in: the work first, then how an outsider joins it. Core gives a
   // process no rank, so the page names it.
-  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering"] }),
+  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"] }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
 ];
 
