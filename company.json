@@ -1,5 +1,5 @@
 {
-  "commit": "7713a3b8f088bab44adc86e6c6be27e3782692da",
+  "commit": "9c1cef2bea0b27c2cb92b7475a39c5fed044dbed",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -48,6 +48,12 @@
     {
       "type": "profile",
       "folder": "profiles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "question",
+      "folder": "questions",
       "owner": null,
       "singular": false
     },
@@ -2972,6 +2978,935 @@
       "path": "model/profiles/ai-agent/ai-agent.md"
     },
     {
+      "id": "questions/can-i-trust-what-this-chat-says",
+      "type": "question",
+      "name": "Can I trust what this chat says?",
+      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "An agent answers as well as the person who runs the company",
+                  "",
+                  "what it would mean"
+                ],
+                [
+                  "process",
+                  "Answering",
+                  "",
+                  "how this chat is held to it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "An agent answers as well as the person who runs the company",
+                "",
+                "what it would mean"
+              ],
+              [
+                "process",
+                "Answering",
+                "",
+                "how this chat is held to it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-i-trust-what-this-chat-says.md"
+    },
+    {
+      "id": "questions/can-our-ai-agents-use-it",
+      "type": "question",
+      "name": "Can our AI agents use it?",
+      "tagline": "The feature says what an agent can ask a company's model, the strategy says why the server that answers only reads it, and the MCP server is one running now.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "An agent reads the model",
+                  "",
+                  "what an agent can ask"
+                ],
+                [
+                  "strategy",
+                  "Read-Only Server Strategy",
+                  "",
+                  "why it only reads"
+                ],
+                [
+                  "surface",
+                  "mcp.companygraph.io MCP server",
+                  "",
+                  "one running now"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "An agent reads the model",
+                "",
+                "what an agent can ask"
+              ],
+              [
+                "strategy",
+                "Read-Only Server Strategy",
+                "",
+                "why it only reads"
+              ],
+              [
+                "surface",
+                "mcp.companygraph.io MCP server",
+                "",
+                "one running now"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-our-ai-agents-use-it.md"
+    },
+    {
+      "id": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "type": "question",
+      "name": "Do I need your service to run CompanyGraph, and what does it cost?",
+      "tagline": "The value says what is free to take and what is paid for, and the instance says that a company's model is its own repository, which it runs without anyone else.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "value",
+                  "Adoption is not taxed",
+                  "",
+                  "what is free and what is paid"
+                ],
+                [
+                  "concept",
+                  "Instance",
+                  "",
+                  "a model runs in the company's own repository"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "value",
+                "Adoption is not taxed",
+                "",
+                "what is free and what is paid"
+              ],
+              [
+                "concept",
+                "Instance",
+                "",
+                "a model runs in the company's own repository"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost.md"
+    },
+    {
+      "id": "questions/how-do-i-contribute-to-companygraph",
+      "type": "question",
+      "name": "How do I contribute to CompanyGraph?",
+      "tagline": "A change you can write yourself goes in as a pull request through the Contribution process, and something you need but cannot write goes in as a feature request.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "process",
+                  "Contribution",
+                  "",
+                  "offering a change"
+                ],
+                [
+                  "process",
+                  "Feature request",
+                  "",
+                  "asking for what is missing"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "process",
+                "Contribution",
+                "",
+                "offering a change"
+              ],
+              [
+                "process",
+                "Feature request",
+                "",
+                "asking for what is missing"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-do-i-contribute-to-companygraph.md"
+    },
+    {
+      "id": "questions/how-do-i-start",
+      "type": "question",
+      "name": "How do I start?",
+      "tagline": "The feature says what the one command does, from starting a model to keeping it current, and the website's CLI page says how to run it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "An instance is made and kept from one command",
+                  "",
+                  "what the command does"
+                ],
+                [
+                  "surface",
+                  "companygraph.io website",
+                  "",
+                  "where the CLI page says how to run it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "An instance is made and kept from one command",
+                "",
+                "what the command does"
+              ],
+              [
+                "surface",
+                "companygraph.io website",
+                "",
+                "where the CLI page says how to run it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-do-i-start.md"
+    },
+    {
+      "id": "questions/is-anyone-besides-you-using-companygraph",
+      "type": "question",
+      "name": "Is anyone besides you using CompanyGraph?",
+      "tagline": "The objective says what would count as someone else using it, and the strategy says how the vocabulary grows from the companies described in it until then.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "A company we have never met keeps its own model",
+                  "",
+                  "what outside use would look like"
+                ],
+                [
+                  "strategy",
+                  "Instance-Led Strategy",
+                  "",
+                  "how it grows until then"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "A company we have never met keeps its own model",
+                "",
+                "what outside use would look like"
+              ],
+              [
+                "strategy",
+                "Instance-Led Strategy",
+                "",
+                "how it grows until then"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-anyone-besides-you-using-companygraph.md"
+    },
+    {
+      "id": "questions/is-companygraph-a-business-or-a-side-project",
+      "type": "question",
+      "name": "Is CompanyGraph a business, or a side project?",
+      "tagline": "The objective says whether anything is being sold and how the question of a business is being settled, and the value says what would be paid for if it were.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "Whether this is a business is answered",
+                  "",
+                  "whether it is a business"
+                ],
+                [
+                  "value",
+                  "Adoption is not taxed",
+                  "",
+                  "what would be paid for"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "Whether this is a business is answered",
+                "",
+                "whether it is a business"
+              ],
+              [
+                "value",
+                "Adoption is not taxed",
+                "",
+                "what would be paid for"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-companygraph-a-business-or-a-side-project.md"
+    },
+    {
+      "id": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "type": "question",
+      "name": "Isn't this just a wiki, or Notion with rules?",
+      "tagline": "The schema says what every page of a type must carry, a reference makes two pages an edge rather than a mention, and the checks say before a change lands whether the pages still hold.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Schema",
+                  "",
+                  "what a page must carry"
+                ],
+                [
+                  "concept",
+                  "Reference",
+                  "",
+                  "edges, not mentions"
+                ],
+                [
+                  "feature",
+                  "Checks an instance runs",
+                  "",
+                  "holding it before a change lands"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Schema",
+                "",
+                "what a page must carry"
+              ],
+              [
+                "concept",
+                "Reference",
+                "",
+                "edges, not mentions"
+              ],
+              [
+                "feature",
+                "Checks an instance runs",
+                "",
+                "holding it before a change lands"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/isn-t-this-just-a-wiki-or-notion-with-rules.md"
+    },
+    {
+      "id": "questions/what-does-a-company-s-model-actually-look-like",
+      "type": "question",
+      "name": "What does a company's model actually look like?",
+      "tagline": "An instance is one company's repository beside the core it took, the website shows a company described in it without cloning anything, and this model is one, since CompanyGraph runs on what it publishes.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Instance",
+                  "",
+                  "what one is"
+                ],
+                [
+                  "feature",
+                  "The vocabulary on the web",
+                  "",
+                  "seeing one in a browser"
+                ],
+                [
+                  "value",
+                  "Run on what we publish",
+                  "",
+                  "this model is one"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Instance",
+                "",
+                "what one is"
+              ],
+              [
+                "feature",
+                "The vocabulary on the web",
+                "",
+                "seeing one in a browser"
+              ],
+              [
+                "value",
+                "Run on what we publish",
+                "",
+                "this model is one"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-does-a-company-s-model-actually-look-like.md"
+    },
+    {
+      "id": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "type": "question",
+      "name": "What if the vocabulary doesn't fit our company?",
+      "tagline": "The objective says what core is working toward, a pack says where vocabulary only some companies need goes, and a feature request is how to ask for what is missing.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "Core holds a company without running out of vocabulary",
+                  "",
+                  "what core aims for"
+                ],
+                [
+                  "concept",
+                  "Pack",
+                  "",
+                  "vocabulary for some companies only"
+                ],
+                [
+                  "process",
+                  "Feature request",
+                  "",
+                  "asking for what is missing"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "Core holds a company without running out of vocabulary",
+                "",
+                "what core aims for"
+              ],
+              [
+                "concept",
+                "Pack",
+                "",
+                "vocabulary for some companies only"
+              ],
+              [
+                "process",
+                "Feature request",
+                "",
+                "asking for what is missing"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-if-the-vocabulary-doesn-t-fit-our-company.md"
+    },
+    {
+      "id": "questions/what-problem-does-companygraph-solve",
+      "type": "question",
+      "name": "What problem does CompanyGraph solve?",
+      "tagline": "The vision says what problem it is working against, and the core product says what takes its place.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "vision",
+                  "Written once, read by both",
+                  "",
+                  "the problem"
+                ],
+                [
+                  "product",
+                  "CompanyGraph Core",
+                  "",
+                  "what solves it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "vision",
+                "Written once, read by both",
+                "",
+                "the problem"
+              ],
+              [
+                "product",
+                "CompanyGraph Core",
+                "",
+                "what solves it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-problem-does-companygraph-solve.md"
+    },
+    {
+      "id": "questions/who-answers-this-chat",
+      "type": "question",
+      "name": "Who answers this chat?",
+      "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says it reads this very model through its MCP server.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Answerer",
+                  "",
+                  "who answers, and what it may never do"
+                ],
+                [
+                  "process",
+                  "Answering",
+                  "",
+                  "how an answer is made"
+                ],
+                [
+                  "surface",
+                  "chat.companygraph.io chat",
+                  "",
+                  "that it reads this model"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "role",
+                "Answerer",
+                "",
+                "who answers, and what it may never do"
+              ],
+              [
+                "process",
+                "Answering",
+                "",
+                "how an answer is made"
+              ],
+              [
+                "surface",
+                "chat.companygraph.io chat",
+                "",
+                "that it reads this model"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/who-answers-this-chat.md"
+    },
+    {
+      "id": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "type": "question",
+      "name": "Who keeps the model true when the company changes?",
+      "tagline": "The checks catch a page that no longer holds, while it is written and before it lands, the agent pass reads what no script can, and the Owner has the last word on every page.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks while a file is edited",
+                  "",
+                  "while a page is written"
+                ],
+                [
+                  "feature",
+                  "Checks an instance runs",
+                  "",
+                  "before a change lands"
+                ],
+                [
+                  "concept",
+                  "Agent pass",
+                  "",
+                  "what no script can read"
+                ],
+                [
+                  "role",
+                  "Owner",
+                  "",
+                  "who has the last word"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks while a file is edited",
+                "",
+                "while a page is written"
+              ],
+              [
+                "feature",
+                "Checks an instance runs",
+                "",
+                "before a change lands"
+              ],
+              [
+                "concept",
+                "Agent pass",
+                "",
+                "what no script can read"
+              ],
+              [
+                "role",
+                "Owner",
+                "",
+                "who has the last word"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/who-keeps-the-model-true-when-the-company-changes.md"
+    },
+    {
       "id": "roles/answerer",
       "type": "role",
       "name": "Answerer",
@@ -5491,6 +6426,414 @@
     },
     {
       "from": "profiles/ai-agent",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-i-trust-what-this-chat-says",
+      "to": "processes/answering",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "how this chat is held to it"
+      }
+    },
+    {
+      "from": "questions/can-i-trust-what-this-chat-says",
+      "to": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what it would mean"
+      }
+    },
+    {
+      "from": "questions/can-i-trust-what-this-chat-says",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-our-ai-agents-use-it",
+      "to": "features/an-agent-reads-the-model",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what an agent can ask"
+      }
+    },
+    {
+      "from": "questions/can-our-ai-agents-use-it",
+      "to": "strategies/read-only-server-strategy",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategy",
+        "Owner": "",
+        "For": "why it only reads"
+      }
+    },
+    {
+      "from": "questions/can-our-ai-agents-use-it",
+      "to": "surfaces/mcp-companygraph-io-mcp-server",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "one running now"
+      }
+    },
+    {
+      "from": "questions/can-our-ai-agents-use-it",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "concepts/instance",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "a model runs in the company's own repository"
+      }
+    },
+    {
+      "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "values/adoption-is-not-taxed",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "what is free and what is paid"
+      }
+    },
+    {
+      "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-contribute-to-companygraph",
+      "to": "processes/contribution",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "offering a change"
+      }
+    },
+    {
+      "from": "questions/how-do-i-contribute-to-companygraph",
+      "to": "processes/feature-request",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "asking for what is missing"
+      }
+    },
+    {
+      "from": "questions/how-do-i-contribute-to-companygraph",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-start",
+      "to": "features/an-instance-is-made-and-kept-from-one-command",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what the command does"
+      }
+    },
+    {
+      "from": "questions/how-do-i-start",
+      "to": "surfaces/companygraph-io-website",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "where the CLI page says how to run it"
+      }
+    },
+    {
+      "from": "questions/how-do-i-start",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-anyone-besides-you-using-companygraph",
+      "to": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what outside use would look like"
+      }
+    },
+    {
+      "from": "questions/is-anyone-besides-you-using-companygraph",
+      "to": "strategies/instance-led-strategy",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategy",
+        "Owner": "",
+        "For": "how it grows until then"
+      }
+    },
+    {
+      "from": "questions/is-anyone-besides-you-using-companygraph",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-companygraph-a-business-or-a-side-project",
+      "to": "strategic-objectives/whether-this-is-a-business-is-answered",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "whether it is a business"
+      }
+    },
+    {
+      "from": "questions/is-companygraph-a-business-or-a-side-project",
+      "to": "values/adoption-is-not-taxed",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "what would be paid for"
+      }
+    },
+    {
+      "from": "questions/is-companygraph-a-business-or-a-side-project",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "concepts/reference",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "edges, not mentions"
+      }
+    },
+    {
+      "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "concepts/schema",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what a page must carry"
+      }
+    },
+    {
+      "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "features/checks-an-instance-runs",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "holding it before a change lands"
+      }
+    },
+    {
+      "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-a-company-s-model-actually-look-like",
+      "to": "concepts/instance",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what one is"
+      }
+    },
+    {
+      "from": "questions/what-does-a-company-s-model-actually-look-like",
+      "to": "features/the-vocabulary-on-the-web",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "seeing one in a browser"
+      }
+    },
+    {
+      "from": "questions/what-does-a-company-s-model-actually-look-like",
+      "to": "values/run-on-what-we-publish",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "this model is one"
+      }
+    },
+    {
+      "from": "questions/what-does-a-company-s-model-actually-look-like",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "to": "concepts/pack",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "vocabulary for some companies only"
+      }
+    },
+    {
+      "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "to": "processes/feature-request",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "asking for what is missing"
+      }
+    },
+    {
+      "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "to": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what core aims for"
+      }
+    },
+    {
+      "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-problem-does-companygraph-solve",
+      "to": "products/companygraph-core",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "product",
+        "Owner": "",
+        "For": "what solves it"
+      }
+    },
+    {
+      "from": "questions/what-problem-does-companygraph-solve",
+      "to": "vision",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "vision",
+        "Owner": "",
+        "For": "the problem"
+      }
+    },
+    {
+      "from": "questions/what-problem-does-companygraph-solve",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "processes/answering",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "how an answer is made"
+      }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "roles/answerer",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "For": "who answers, and what it may never do"
+      }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "surfaces/chat-companygraph-io-chat",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "that it reads this model"
+      }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "to": "concepts/agent-pass",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what no script can read"
+      }
+    },
+    {
+      "from": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "to": "features/checks-an-instance-runs",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "before a change lands"
+      }
+    },
+    {
+      "from": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "to": "features/checks-while-a-file-is-edited",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "while a page is written"
+      }
+    },
+    {
+      "from": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "to": "roles/owner",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "For": "who has the last word"
+      }
+    },
+    {
+      "from": "questions/who-keeps-the-model-true-when-the-company-changes",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
