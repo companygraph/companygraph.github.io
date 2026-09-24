@@ -39,6 +39,16 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      # Nothing on a page says when its German was made, so an English sentence reworded in a
+      # pull request keeps a German that now says something else, and every check that reads
+      # the rendered page reads one language and passes. This compares the pull request's pages
+      # with its base by German value and fails where the German stayed and the English moved.
+      # A pull request's checkout is GitHub's merge of it into the base, so the base it was built
+      # on is that merge's first parent; a freshly fetched base could be newer and bring its own
+      # commits into the range.
+      - name: No German left behind an English edit
+        if: github.event_name == 'pull_request'
+        run: npx design german stale HEAD^1 HEAD
       # Every region this site derives from the model, held against the artifacts it derives
       # them from. After npm ci because the model pages' renderers come from
       # @robertblust/design; it still reaches no network, only the committed artifacts.

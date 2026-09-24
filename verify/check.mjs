@@ -72,9 +72,7 @@ const PAGES = [
       // The head, not just the body: this page carried an id="metadesc" that nothing acted
       // on, so a German visitor read an English title and description under lang="de".
       // Declared here so the swap cannot quietly go away again.
-      title: "CompanyGraph – ein Meta-Modell für den Betrieb eines Unternehmens",
-      desc: "Ein Meta-Modell für den Betrieb eines Unternehmens – die Struktur, die sein Wissen annimmt, damit Menschen und Agenten sich darauf verlassen können.",
-                  shows: ["Alles, was ein Unternehmen weiss", "Ein Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "12 Minuten · Deutsch oder Englisch",
+                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "12 Minuten · Deutsch oder Englisch",
                           "beschrieben in seinem eigenen Vokabular"],
                   hides: ["Everything a company", "Read the source", "Try the CLI", "described in its own vocabulary"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
@@ -108,8 +106,6 @@ const PAGES = [
   { path: "/cli/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CLI/, lang: "en", sourceLang: "en",
     contains: ["One command", "does it", "Run it", "What the menu does", "Make a model", "Obsidian plugin", "What Obsidian still asks", "Without the menu"],
     translates: { lang: "de",
-      title: "CLI – CompanyGraph",
-      desc: "Die Kommandozeile von CompanyGraph: Ein Befehl öffnet ein Menü, das das Modell eines Unternehmens anlegt, prüft, auf ein neueres Release bringt und das Obsidian-Plugin installiert.",
       shows: ["Ein Befehl", "Starten", "Was das Menü tut", "Ein Modell anlegen", "Was Obsidian noch fragt", "Ohne Menü"],
       hides: ["One command", "Run it", "What the menu does", "What Obsidian still asks", "Without the menu"] },
     links: ["https://github.com/companygraph/meta-model#readme", "https://nodejs.org/en/download"],
@@ -124,9 +120,7 @@ const PAGES = [
   { path: "/surfaces/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
     contains: ["Nothing kept beside", "model", "How to read it", "Generated from"],
     translates: { lang: "de",
-      title: "Surfaces – CompanyGraph",
-      desc: "Jeder Ort, an dem CompanyGraph sein Modell veröffentlicht, und wie er aus ihm entsteht: von Hand oder durch den Build eines Repositorys aus einem gepinnten Commit.",
-      shows: ["Wie man es liest", "HERKUNFT DER SURFACES", "Keine Linie ist getippt"], hides: ["How to read it", "SURFACE LINEAGE", "No line is typed"] },
+      shows: ["Wie man es liest", "HERKUNFT DER SURFACES", "Keine Linie ist von Hand gesetzt"], hides: ["How to read it", "SURFACE LINEAGE", "No line is typed"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -140,8 +134,6 @@ const PAGES = [
   { path: "/team/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
     contains: ["An agent does the work,", "every", "gate", "How to read it", "Generated from"],
     translates: { lang: "de",
-      title: "Team – CompanyGraph",
-      desc: "Wer bei CompanyGraph die Arbeit macht: Ein KI-Agent hält die meisten Sitze, und jedes Gate wird von einem Sitz freigegeben, den ein Mensch hält.",
       shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
@@ -156,8 +148,6 @@ const PAGES = [
   { path: "/principles/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["Written once", "read by", "Values", "Generated from"],
     translates: { lang: "de",
-      title: "Prinzipien – CompanyGraph",
-      desc: "Die Vision und die Werte, an die sich CompanyGraph, ein Meta-Modell für den Betrieb einer Firma, selbst hält – gelesen aus seinem eigenen Modell, nicht für diese Seite geschrieben.",
       shows: ["Werte"], hides: ["Values"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
@@ -184,8 +174,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../model/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
-    translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "Wie man es liest", "Seiten"], hides: ["One company", "How to read it"],
-                  title: "Beispiel – CompanyGraph" },
+    translates: { lang: "de", shows: ["Eine Firma", "gezeichnet", "So lesen Sie das Diagramm", "Seiten"], hides: ["One company", "How to read it"] },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
@@ -199,8 +188,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameTab: ["../talks/", "../example/", "../billing/", "../privacy/", "../", "./"],
     sameOrigin: true,
-    translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest"], hides: ["The model", "How to read it"],
-                  title: "Modell – CompanyGraph" },
+    translates: { lang: "de", shows: ["Das Modell", "gezeichnet", "Wie man es liest"], hides: ["The model", "How to read it"] },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, graph: true, divider: true },
@@ -220,10 +208,12 @@ const PAGES = [
     sameTab: ["intro/", "./", "../", "../model/", "../cli/", "../privacy/", "../billing/", "intro/companygraph-en.pdf"],
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
+    // This page's German description is its tagline's data-de, read at run time, not a string
+    // in its de object, so translates cannot take it from the page; the spec names both.
     translates: { lang: "de", shows: ["Vortrag", "Vorträge"], hides: ["Watch the talk"],
                   dlHref: { de: "intro/companygraph-de.pdf", en: "intro/companygraph-en.pdf" },
                   title: "Vorträge · CompanyGraph",
-                  desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb eines Unternehmens." },
+                  desc: "Vorträge über CompanyGraph, das quelloffene Meta-Modell für den Betrieb einer Firma." },
     card: true, cardBase: SITE, internalLinks: true },
   // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
   // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
@@ -264,9 +254,10 @@ const PAGES = [
     // `shows` names a string from the title slide's data-de, `hides` its English counterpart.
     // `hides` named "a talk by" until the byline became `Robert Blust · Software Engineer
     // & Architect`, matching every other deck. That string is gone from the slide now, so
-    // the assertion would have passed while checking nothing. "Architect"/"Architekt" is
-    // the replacement: one letter apart, present in exactly one language each.
-    translates: { lang: "de", shows: ["Unternehmen", "Architekt"], hides: ["Architect"], id: "langDe", backId: "langEn" },
+    // the assertion would have passed while checking nothing. The byline's title is English
+    // in both views now, so the pair is the title slide's subtitle: "Betrieb einer Firma"
+    // against "operating a company", present in exactly one language each.
+    translates: { lang: "de", shows: ["Betrieb einer Firma"], hides: ["operating a company"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
 ];
 
