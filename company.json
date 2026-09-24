@@ -1,5 +1,5 @@
 {
-  "commit": "9c1cef2bea0b27c2cb92b7475a39c5fed044dbed",
+  "commit": "9ef10177c9a978922536b130cc279baaa36314e7",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -3185,6 +3185,71 @@
       "path": "model/questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost.md"
     },
     {
+      "id": "questions/does-our-data-leave-our-hands",
+      "type": "question",
+      "name": "Does our data leave our hands?",
+      "tagline": "The strategy says where a company's model, its server and its chat run, and what a chat visitor sends leaves them; the instance says the model is the company's own repository.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategy",
+                  "Read-Only Server Strategy",
+                  "",
+                  "where it runs, and what leaves"
+                ],
+                [
+                  "concept",
+                  "Instance",
+                  "",
+                  "the model is the company's own"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategy",
+                "Read-Only Server Strategy",
+                "",
+                "where it runs, and what leaves"
+              ],
+              [
+                "concept",
+                "Instance",
+                "",
+                "the model is the company's own"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/does-our-data-leave-our-hands.md"
+    },
+    {
       "id": "questions/how-do-i-contribute-to-companygraph",
       "type": "question",
       "name": "How do I contribute to CompanyGraph?",
@@ -4819,7 +4884,7 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "The server reports what the model says and stops there. Every answer names the commit it was read at, so an answer can be checked against the same bytes later and two answers given a week apart can be told apart. Its tools are the vocabulary's own questions — which types a company declares, what one entity says, what evidence a claim rests on, which rule governs a page — so an agent asks the model the way the model is shaped rather than searching its text and hoping.\n\nIt serves any instance, not only ours, and the deployment we run points at the reference instance at a pinned commit. That is what keeps the server honest: the first model it has to answer about is one whose every claim we can be held to.\n\nNothing is summarized away. Where a claim has evidence the answer carries the evidence, and where it has none the answer says so rather than filling the gap with something plausible. The server is published under the same terms as everything else, because an access layer that costs money is a seat count wearing a different name.",
+          "text": "The server reports what the model says and stops there. Every answer names the commit it was read at, so an answer can be checked against the same bytes later and two answers given a week apart can be told apart. Its tools are the vocabulary's own questions — which types a company declares, what one entity says, what evidence a claim rests on, which rule governs a page — so an agent asks the model the way the model is shaped rather than searching its text and hoping.\n\nIt serves any instance, not only ours, and the deployment we run points at the reference instance at a pinned commit. That is what keeps the server honest: the first model it has to answer about is one whose every claim we can be held to.\n\nNothing is summarized away. Where a claim has evidence the answer carries the evidence, and where it has none the answer says so rather than filling the gap with something plausible. The server is published under the same terms as everything else, because an access layer that costs money is a seat count wearing a different name.\n\nA company runs all of it itself. Its model is a repository it keeps where it keeps its code, and the server and the chat beside it are deployed into the company's own cloud project from the parts this project publishes, so nothing a company writes passes through us. What leaves is what a chat visitor sends, which goes to the language model the deployment names: on Vertex AI in the company's own project, or to Anthropic under the company's own key.",
           "tables": []
         },
         {
@@ -6514,6 +6579,32 @@
     },
     {
       "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/does-our-data-leave-our-hands",
+      "to": "concepts/instance",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "the model is the company's own"
+      }
+    },
+    {
+      "from": "questions/does-our-data-leave-our-hands",
+      "to": "strategies/read-only-server-strategy",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategy",
+        "Owner": "",
+        "For": "where it runs, and what leaves"
+      }
+    },
+    {
+      "from": "questions/does-our-data-leave-our-hands",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
