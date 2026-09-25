@@ -1,5 +1,5 @@
 {
-  "commit": "78df3a6aa35b99a58f4fb5ee619f0e30ddd4ec65",
+  "commit": "0a0fb20dce735cb24d59f9c29fbf0096fe780475",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -961,6 +961,32 @@
       "sections": [],
       "owner": null,
       "path": "model/domains/core.md"
+    },
+    {
+      "id": "features/a-visitor-asks-the-model",
+      "type": "feature",
+      "name": "A visitor asks the model",
+      "tagline": "Someone on a page asks a company's model a question in their own words and gets an answer that names the entity each claim rests on.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Instance",
+          "Entity",
+          "Pin"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A chat over any instance's MCP server, opened from a button on a site's page: it asks the server's tools what the model says, writes the answer from what they returned, and names and links the entity each claim rests on, so a visitor can check it without connecting an agent of their own. It holds no model and pins no commit; it answers from whatever the server it is deployed beside serves. It stops at the question: what the model says is the server's, where it runs and what it may spend is each deployment's own, and where the model does not say, the answer says so rather than filling the gap.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-visitor-asks-the-model.md"
     },
     {
       "id": "features/a-vocabulary-to-describe-a-company-in",
@@ -5880,6 +5906,36 @@
     },
     {
       "from": "domains/core",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-visitor-asks-the-model",
+      "to": "concepts/entity",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-visitor-asks-the-model",
+      "to": "concepts/instance",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-visitor-asks-the-model",
+      "to": "concepts/pin",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-visitor-asks-the-model",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-visitor-asks-the-model",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
