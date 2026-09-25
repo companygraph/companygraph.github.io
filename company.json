@@ -1,5 +1,5 @@
 {
-  "commit": "0a0fb20dce735cb24d59f9c29fbf0096fe780475",
+  "commit": "c347632396bfc8b724404679775c5eaa8dc22043",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -961,6 +961,32 @@
       "sections": [],
       "owner": null,
       "path": "model/domains/core.md"
+    },
+    {
+      "id": "features/a-profile-is-written-from-a-person-s-documents",
+      "type": "feature",
+      "name": "A profile is written from a person's documents",
+      "tagline": "Someone hands an agent a folder of a person's CVs, diplomas, certificates and reference letters and gets back a profile the model can hold: the periods, the skills they show and the levels those skills earned.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Instance",
+          "Entity",
+          "Schema"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "A procedure an agent follows, shipped as a skill with every instance and moved with it on every upgrade, because what a period shows and what level a claim has earned are judgments no script makes. It asks whether to create a profile or extend one, reads every document in the folder, reuses the skills, levels, kinds and roles the model already holds and proposes only what is missing, writes the experiences and the profile against their schemas, and runs the checks and the agent pass. The operator decides every level, every seat and every sentence said in the person's own voice, and the commit is theirs. A CV is derived from what it writes: the profile says what the person claims and the experiences it owns say what happened, when and where, each claim resting on its evidence, so the CV is drawn from them and never kept beside them. Deriving one is not part of this feature. It stops at the documents: a fact no schema has a place for is left out and written down nowhere, and publishing the profile is a separate step.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-profile-is-written-from-a-person-s-documents.md"
     },
     {
       "id": "features/a-visitor-asks-the-model",
@@ -3713,6 +3739,71 @@
       "path": "model/questions/how-do-i-contribute-to-companygraph.md"
     },
     {
+      "id": "questions/how-do-i-create-my-own-profile",
+      "type": "question",
+      "name": "How do I create my own profile?",
+      "tagline": "The feature says how an agent writes a profile from a person's own documents, the profile a CV is derived from, and the command that starts an instance says how to get the model it is written into.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "A profile is written from a person's documents",
+                  "",
+                  "how a profile is written"
+                ],
+                [
+                  "feature",
+                  "An instance is made and kept from one command",
+                  "",
+                  "the model it is written into"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "A profile is written from a person's documents",
+                "",
+                "how a profile is written"
+              ],
+              [
+                "feature",
+                "An instance is made and kept from one command",
+                "",
+                "the model it is written into"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-do-i-create-my-own-profile.md"
+    },
+    {
       "id": "questions/how-do-i-start",
       "type": "question",
       "name": "How do I start?",
@@ -5911,6 +6002,36 @@
       "attrs": {}
     },
     {
+      "from": "features/a-profile-is-written-from-a-person-s-documents",
+      "to": "concepts/entity",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-profile-is-written-from-a-person-s-documents",
+      "to": "concepts/instance",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-profile-is-written-from-a-person-s-documents",
+      "to": "concepts/schema",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-profile-is-written-from-a-person-s-documents",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-profile-is-written-from-a-person-s-documents",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "features/a-visitor-asks-the-model",
       "to": "concepts/entity",
       "via": "concepts",
@@ -7264,6 +7385,32 @@
     },
     {
       "from": "questions/how-do-i-contribute-to-companygraph",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-create-my-own-profile",
+      "to": "features/a-profile-is-written-from-a-person-s-documents",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "how a profile is written"
+      }
+    },
+    {
+      "from": "questions/how-do-i-create-my-own-profile",
+      "to": "features/an-instance-is-made-and-kept-from-one-command",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "the model it is written into"
+      }
+    },
+    {
+      "from": "questions/how-do-i-create-my-own-profile",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
