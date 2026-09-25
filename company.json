@@ -1,5 +1,5 @@
 {
-  "commit": "f097d300cfd4ba88aa665b6a95e1cfea1e1cbd80",
+  "commit": "78df3a6aa35b99a58f4fb5ee619f0e30ddd4ec65",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -5256,7 +5256,7 @@
       "sections": [
         {
           "heading": "What it makes true",
-          "text": "Two instances exist and both are ours, which means every question the vocabulary has been asked so far was asked by someone who already knew the answer. When a company we have never met keeps its own model, the vocabulary has been read by people who owe it nothing, applied to facts we have never seen, and corrected where it did not fit — and the corrections arrive as questions we did not think to ask ourselves.\n\nIt holds when the model is still current after we stop looking. Adoption that needs us present is a consulting engagement and not evidence about the vocabulary; what settles this is a model that was updated in a month when nobody asked it to be, because someone found it cheaper to change the model than to work around it.\n\nWhat falls outside: how many companies, and whether any of them pay. One company keeping one model current satisfies this, and a hundred that tried it once and stopped does not. Also outside: whether they adopt all of it. A company that uses four types and ignores the rest has still described itself in the vocabulary, and a type nobody reaches for is a finding rather than a failure of this objective.",
+          "text": "Every instance so far is ours, which means every question the vocabulary has been asked so far was asked by someone who already knew the answer. When a company we have never met keeps its own model, the vocabulary has been read by people who owe it nothing, applied to facts we have never seen, and corrected where it did not fit — and the corrections arrive as questions we did not think to ask ourselves.\n\nIt holds when the model is still current after we stop looking. Adoption that needs us present is a consulting engagement and not evidence about the vocabulary; what settles this is a model that was updated in a month when nobody asked it to be, because someone found it cheaper to change the model than to work around it.\n\nWhat falls outside: how many companies, and whether any of them pay. One company keeping one model current satisfies this, and a hundred that tried it once and stopped does not. Also outside: whether they adopt all of it. A company that uses four types and ignores the rest has still described itself in the vocabulary, and a type nobody reaches for is a finding rather than a failure of this objective.",
           "tables": []
         }
       ],
@@ -5530,7 +5530,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and a second instance beside it describes a company of one the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, and nothing is kept beside the model, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.\n\nWe never ship a type we have not already had to use on ourselves.",
+          "text": "We describe ourselves in the vocabulary we publish, in the open, in a repository anyone can read — and the instances beside it describe a company of one and GuestGraph, a company whose product is not about modeling at all, the same way, so the vocabulary answers to more than one shape of company before it asks anyone else to adopt it. A type reaches core once a company has actually had to be described with it, which is why an instance is what finds a gap rather than a review of the schemas. Every surface we publish is derived from the model at a commit it names, and nothing is kept beside the model, so when a page and the model disagree it is the page that is wrong, and fixing it means fixing the model first.\n\nWe never ship a type we have not already had to use on ourselves.",
           "tables": []
         }
       ],
