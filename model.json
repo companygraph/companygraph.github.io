@@ -1,5 +1,5 @@
 {
-  "commit": "ea8e47cc7a9cbd657d78f0d735477d5e33be9603",
+  "commit": "d0f95b1b3ed1a4fcc29aa7a4eab7afcb8e028946",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -3564,6 +3564,12 @@
                   "No",
                   "string",
                   "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "ref → question-kind",
+                  "What the question is about, the H1 of a file in `question-kinds/`"
                 ]
               ]
             }
@@ -3588,6 +3594,12 @@
                 "No",
                 "string",
                 "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "ref → question-kind",
+                "What the question is about, the H1 of a file in `question-kinds/`"
               ]
             ]
           }
@@ -3690,7 +3702,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 is worded as people ask, not as the model names things: \"Can Robert still write code himself?\", not \"Software engineering proficiency\". A question worded in the model's own vocabulary adds nothing the words search did not already find.\n- The answer routes. It may say what kind of thing the answer is and where it lies, and it may say what the model does not claim; it states no count, version, date or fact that another entity holds, because that would be a second copy nothing keeps true.\n- An answer with no `## Rests on` is mastered on the question. It states only what no other entity holds: a stance, a boundary, or a claim the model deliberately does not make. A fact that belongs on an entity is written on that entity, and the question rests on it.\n- Every entity the answer draws on has a row, and no row names an entity the answer does not draw on.\n- A question is not an alias. A concept's other names belong in its `## Also known as`; a question is how people ask, not what a thing is called.\n- Names and prose are American English (R14). A visitor asking in German is matched by the chat, not by a German question.\n- One question per thing asked. Two wordings of the same question are one file; the H1 takes the wording people use most.\n\nThe answer is required, because a question with no answer is an open issue and not an entity: what the model is asked and cannot answer yet is a change to the model, written as one, and the question follows it. `## Rests on` is optional, because some honest answers rest on nothing else in the model. What that costs is that no check can tell a question resting on nothing on purpose from one whose rows were forgotten; the writing rules and the owner's review of each question carry that, as they carry the rest of what an answer may say.",
+          "text": "- The H1 is worded as people ask, not as the model names things: \"Can Robert still write code himself?\", not \"Software engineering proficiency\". A question worded in the model's own vocabulary adds nothing the words search did not already find.\n- The answer routes. It may say what kind of thing the answer is and where it lies, and it may say what the model does not claim; it states no count, version, date or fact that another entity holds, because that would be a second copy nothing keeps true.\n- An answer with no `## Rests on` is mastered on the question. It states only what no other entity holds: a stance, a boundary, or a claim the model deliberately does not make. A fact that belongs on an entity is written on that entity, and the question rests on it.\n- Every entity the answer draws on has a row, and no row names an entity the answer does not draw on.\n- A question is not an alias. A concept's other names belong in its `## Also known as`; a question is how people ask, not what a thing is called.\n- Names and prose are American English (R14). A visitor asking in German is matched by the chat, not by a German question.\n- One question per thing asked. Two wordings of the same question are one file; the H1 takes the wording people use most.\n- A question has one kind, the one a visitor would look under first. A question that seems to need two is either two questions or is filed where most visitors would look for it.\n\nThe answer is required, because a question with no answer is an open issue and not an entity: what the model is asked and cannot answer yet is a change to the model, written as one, and the question follows it. `## Rests on` is optional, because some honest answers rest on nothing else in the model. What that costs is that no check can tell a question resting on nothing on purpose from one whose rows were forgotten; the writing rules and the owner's review of each question carry that, as they carry the rest of what an answer may say.",
           "tables": []
         },
         {
@@ -3701,6 +3713,152 @@
       ],
       "owner": null,
       "path": "core/question-schema.md"
+    },
+    {
+      "id": "core/question-kind",
+      "type": "schema",
+      "name": "Question Kind Schema",
+      "tagline": "Required structure for question kind files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The kind's position wherever questions are drawn grouped. Spaced in tens so a kind can be added without renumbering the others."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The kind's position wherever questions are drawn grouped. Spaced in tens so a kind can be added without renumbering the others."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every question references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the questions of this kind are about"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "Which questions belong to this kind, and which do not"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every question references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the questions of this kind are about"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "Which questions belong to this kind, and which do not"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A kind answers \"what is this question about?\", the question a visitor asks of a list too long to read, when what they want is the part of it that concerns them. Its value is that the answer is a reference rather than a word: the kinds are nodes in the graph, a surface can draw the questions of one kind together or one from each, and the chat can say what the model answers about from the model rather than from its own reading.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` is written so that two readers filing the same question would file it under\n  the same kind, and it says what the kind excludes, since the boundary with the kind beside it\n  is where every disagreement will be.\n- A kind is about what the visitor has in mind when they ask, never about which entity the\n  answer rests on.\n- Name it as a visitor would read it above the questions it holds, `Career`, `Brand`, and never\n  for the type or the section the answers sit in.\n- `rank` orders kinds wherever questions are drawn grouped, and nothing else. The first kind is\n  the one most visitors come for, and two kinds never share a rank.\n- A kind holds at least two questions, unless the instance holds only one. One question alone is\n  filed under the nearest kind until a second arrives, because a group of one is a heading over a\n  single line.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/question-kinds/*.md`\n\nA kind owns nothing and nothing owns it: every question claims one of the same few, and what each kind covers lives here rather than being restated on every question. It sits at the container root beside `questions/`, because every question in the instance claims one of the same set.\n\nThe set is the instance's own, as an achievement kind's is. What a company's visitors ask about, a career, a product's fit, a hotel's matching and privacy, is a fact about that company, and a kind arriving later is one file here, not a change to this metamodel and a release of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/question-kind-schema.md"
     },
     {
       "id": "core/role",
@@ -5574,6 +5732,24 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "core/question-kind",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/question",
+      "to": "core/question-kind",
+      "via": "kind",
+      "attrs": {
+        "type": "ref → question-kind"
+      },
+      "label": "kind"
     },
     {
       "from": "core/question",
