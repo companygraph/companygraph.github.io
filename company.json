@@ -1,5 +1,5 @@
 {
-  "commit": "30670ca74f438f05b3b4504516d0ffae5169a202",
+  "commit": "397872af1312b0ebb8750ab04f2245c2693a1689",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -84,6 +84,12 @@
     {
       "type": "question",
       "folder": "questions",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "question-kind",
+      "folder": "question-kinds",
       "owner": null,
       "singular": false
     },
@@ -5160,12 +5166,108 @@
       "path": "model/profiles/german-voice/german-voice.md"
     },
     {
+      "id": "question-kinds/brand",
+      "type": "question-kind",
+      "name": "Brand",
+      "tagline": "Questions about how companygraph.io looks and what a visitor may reuse.",
+      "fields": {
+        "source": "Local",
+        "rank": "40"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the colors, the faces, the mark and the voice, and whether a visitor may use them. What a sentence on the site claims is the kind of the claim, not this one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/brand.md"
+    },
+    {
+      "id": "question-kinds/fit",
+      "type": "question-kind",
+      "name": "Fit",
+      "tagline": "Questions a company asks before it decides CompanyGraph is for it: what problem it solves, how it differs from what the company already has, and whether it fits the company's own shape.",
+      "fields": {
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the problem and the match: why a model rather than a wiki, what a company's model looks like, whether the vocabulary fits, where targets and actual numbers go, how content stays current and who keeps it true.\n\nHow to begin is Getting started. What it costs, who is behind it and how it proves itself is Terms.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/fit.md"
+    },
+    {
+      "id": "question-kinds/getting-started",
+      "type": "question-kind",
+      "name": "Getting started",
+      "tagline": "Questions from someone who has decided to try it: where to begin, how to write a first profile, what reads the model, and where the data stays.",
+      "fields": {
+        "source": "Local",
+        "rank": "20"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the first steps and what connects once the model exists: starting an instance, writing a profile, letting an agent read it, and whether the data leaves the company's hands when it runs.\n\nWhether it fits at all is Fit. Price, license and the people behind it are Terms.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/getting-started.md"
+    },
+    {
+      "id": "question-kinds/terms",
+      "type": "question-kind",
+      "name": "Terms",
+      "tagline": "Questions about what adopting CompanyGraph costs, who stands behind it, who else uses it, and how it shows that it works.",
+      "fields": {
+        "source": "Local",
+        "rank": "30"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the arrangement rather than the product: the license and the service, contributing, other adopters, whether it is a business, and the evidence that it works.\n\nWhat it does for a company is Fit, even where a term is the reason it fits.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/terms.md"
+    },
+    {
+      "id": "question-kinds/this-chat",
+      "type": "question-kind",
+      "name": "This chat",
+      "tagline": "Questions about the chat on companygraph.io: who answers, and how far to trust what it says.",
+      "fields": {
+        "source": "Local",
+        "rank": "50"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the chat itself, its seat and its measure. A question the chat is asked about CompanyGraph is the kind of what it asks about.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/this-chat.md"
+    },
+    {
       "id": "questions/can-i-trust-what-this-chat-says",
       "type": "question",
       "name": "Can I trust what this chat says?",
       "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it. Grounded Answer Rate says what is watched: whether an answer rested on the model, which shows grounding and not whether the answer was true.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "This chat"
       },
       "sections": [
         {
@@ -5242,7 +5344,8 @@
       "name": "Can I use CompanyGraph's colors and fonts for my own site?",
       "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Brand"
       },
       "sections": [
         {
@@ -5307,7 +5410,8 @@
       "name": "Can our AI agents use it?",
       "tagline": "The feature says what an agent can ask a company's model, the strategy says why the server that answers only reads it, and the MCP server is one running now.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Getting started"
       },
       "sections": [
         {
@@ -5384,7 +5488,8 @@
       "name": "Do I need your service to run CompanyGraph, and what does it cost?",
       "tagline": "The value says what is free to take and what is paid for, and the instance says that a company's model is its own repository, which it runs without anyone else.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Terms"
       },
       "sections": [
         {
@@ -5449,7 +5554,8 @@
       "name": "Does our data leave our hands?",
       "tagline": "The strategy says where a company's model, its server and its chat run, and what a chat visitor sends leaves them; the instance says the model is the company's own repository.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Getting started"
       },
       "sections": [
         {
@@ -5514,7 +5620,8 @@
       "name": "How do I contribute to CompanyGraph?",
       "tagline": "A change you can write yourself goes in as a pull request through the Contribution process, and something you need but cannot write goes in as a feature request.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Terms"
       },
       "sections": [
         {
@@ -5579,7 +5686,8 @@
       "name": "How do I create my own profile?",
       "tagline": "The feature says how an agent writes a profile from a person's own documents, the profile a CV is derived from, and the command that starts an instance says how to get the model it is written into.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Getting started"
       },
       "sections": [
         {
@@ -5644,7 +5752,8 @@
       "name": "How do I start?",
       "tagline": "The feature says what the one command does, from starting a model to keeping it current, and the website's CLI page says how to run it.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Getting started"
       },
       "sections": [
         {
@@ -5709,7 +5818,8 @@
       "name": "How do you know CompanyGraph is working?",
       "tagline": "Grounded Answer Rate watches whether the chat's answers rest on the model, as the objective of an agent answering as well as the person who runs the company asks, and the DORA KPIs define what is watched in how our changes reach production. The model holds their definitions and none of their values: the chat's report computes Grounded Answer Rate's, nothing measures the DORA KPIs yet, and our other objectives have no KPI yet.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Terms"
       },
       "sections": [
         {
@@ -5834,7 +5944,8 @@
       "name": "How does content stay current when it comes from a wiki or another system?",
       "tagline": "Every page declares the source it comes from, as every page here declares Local, and its id there where the source issues one, which is all a sync needs. The sync itself is the company's to choose, and the one we prefer is an agent reading the source over MCP, such as Atlassian's MCP server for Confluence and Jira, writing the pages the checks then hold.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [
         {
@@ -5887,7 +5998,8 @@
       "name": "Is anyone besides you using CompanyGraph?",
       "tagline": "The objective says what would count as someone else using it, and the strategy says how the vocabulary grows from the companies described in it until then.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Terms"
       },
       "sections": [
         {
@@ -5952,7 +6064,8 @@
       "name": "Is CompanyGraph a business, or a side project?",
       "tagline": "The objective says whether anything is being sold and how the question of a business is being settled, and the value says what would be paid for if it were.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Terms"
       },
       "sections": [
         {
@@ -6017,7 +6130,8 @@
       "name": "Isn't this just a wiki, or Notion with rules?",
       "tagline": "The schema says what every page of a type must carry, a reference makes two pages an edge rather than a mention, and the checks say before a change lands whether the pages still hold.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [
         {
@@ -6094,7 +6208,8 @@
       "name": "What do the colors on companygraph.io mean?",
       "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Brand"
       },
       "sections": [
         {
@@ -6147,7 +6262,8 @@
       "name": "What does a company's model actually look like?",
       "tagline": "An instance is one company's repository beside the core it took, the website shows a company described in it without cloning anything, and this model is one, since CompanyGraph runs on what it publishes.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [
         {
@@ -6224,7 +6340,8 @@
       "name": "What if the vocabulary doesn't fit our company?",
       "tagline": "The objective says what core is working toward, a pack says where vocabulary only some companies need goes, and a feature request is how to ask for what is missing.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [
         {
@@ -6301,7 +6418,8 @@
       "name": "What problem does CompanyGraph solve?",
       "tagline": "The vision says what problem it is working against, and the core product says what takes its place.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [
         {
@@ -6366,7 +6484,8 @@
       "name": "Where do our targets and actual numbers go?",
       "tagline": "The model holds a KPI's definition and none of its targets or values, because they move, and a KPI's References row says where they are kept, a sheet or a dashboard.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [],
       "owner": null,
@@ -6378,7 +6497,8 @@
       "name": "Who answers this chat?",
       "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says it reads this very model through its MCP server.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "This chat"
       },
       "sections": [
         {
@@ -6455,7 +6575,8 @@
       "name": "Who keeps the model true when the company changes?",
       "tagline": "The checks catch a page that no longer holds, while it is written and before it lands, the agent pass reads what no script can, and the Owner has the last word on every page.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Fit"
       },
       "sections": [
         {
@@ -9735,6 +9856,36 @@
       "attrs": {}
     },
     {
+      "from": "question-kinds/brand",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/fit",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/getting-started",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/terms",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/this-chat",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/can-i-trust-what-this-chat-says",
       "to": "kpis/grounded-answer-rate",
       "via": "Rests on.Entity",
@@ -9766,6 +9917,12 @@
     },
     {
       "from": "questions/can-i-trust-what-this-chat-says",
+      "to": "question-kinds/this-chat",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-i-trust-what-this-chat-says",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -9789,6 +9946,12 @@
         "Owner": "",
         "For": "where the design is seen whole"
       }
+    },
+    {
+      "from": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
+      "to": "question-kinds/brand",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
@@ -9828,6 +9991,12 @@
     },
     {
       "from": "questions/can-our-ai-agents-use-it",
+      "to": "question-kinds/getting-started",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-our-ai-agents-use-it",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -9851,6 +10020,12 @@
         "Owner": "",
         "For": "what is free and what is paid"
       }
+    },
+    {
+      "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "question-kinds/terms",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
@@ -9880,6 +10055,12 @@
     },
     {
       "from": "questions/does-our-data-leave-our-hands",
+      "to": "question-kinds/getting-started",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/does-our-data-leave-our-hands",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -9903,6 +10084,12 @@
         "Owner": "",
         "For": "asking for what is missing"
       }
+    },
+    {
+      "from": "questions/how-do-i-contribute-to-companygraph",
+      "to": "question-kinds/terms",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/how-do-i-contribute-to-companygraph",
@@ -9932,6 +10119,12 @@
     },
     {
       "from": "questions/how-do-i-create-my-own-profile",
+      "to": "question-kinds/getting-started",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-create-my-own-profile",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -9955,6 +10148,12 @@
         "Owner": "",
         "For": "where the CLI page says how to run it"
       }
+    },
+    {
+      "from": "questions/how-do-i-start",
+      "to": "question-kinds/getting-started",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/how-do-i-start",
@@ -10034,6 +10233,12 @@
     },
     {
       "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "question-kinds/terms",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -10047,6 +10252,12 @@
         "Owner": "",
         "For": "what a page declares"
       }
+    },
+    {
+      "from": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
@@ -10076,6 +10287,12 @@
     },
     {
       "from": "questions/is-anyone-besides-you-using-companygraph",
+      "to": "question-kinds/terms",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-anyone-besides-you-using-companygraph",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -10099,6 +10316,12 @@
         "Owner": "",
         "For": "what would be paid for"
       }
+    },
+    {
+      "from": "questions/is-companygraph-a-business-or-a-side-project",
+      "to": "question-kinds/terms",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/is-companygraph-a-business-or-a-side-project",
@@ -10138,6 +10361,12 @@
     },
     {
       "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -10151,6 +10380,12 @@
         "Owner": "",
         "For": "what each color role means and never does"
       }
+    },
+    {
+      "from": "questions/what-do-the-colors-on-companygraph-io-mean",
+      "to": "question-kinds/brand",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/what-do-the-colors-on-companygraph-io-mean",
@@ -10190,6 +10425,12 @@
     },
     {
       "from": "questions/what-does-a-company-s-model-actually-look-like",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-a-company-s-model-actually-look-like",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -10226,6 +10467,12 @@
     },
     {
       "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -10252,8 +10499,20 @@
     },
     {
       "from": "questions/what-problem-does-companygraph-solve",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-problem-does-companygraph-solve",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/where-do-our-targets-and-actual-numbers-go",
+      "to": "question-kinds/fit",
+      "via": "kind",
       "attrs": {}
     },
     {
@@ -10291,6 +10550,12 @@
         "Owner": "",
         "For": "that it reads this model"
       }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "question-kinds/this-chat",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/who-answers-this-chat",
@@ -10337,6 +10602,12 @@
         "Owner": "",
         "For": "who has the last word"
       }
+    },
+    {
+      "from": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/who-keeps-the-model-true-when-the-company-changes",

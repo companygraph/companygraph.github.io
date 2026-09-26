@@ -1,5 +1,5 @@
 {
-  "commit": "ea8e47cc7a9cbd657d78f0d735477d5e33be9603",
+  "commit": "d0f95b1b3ed1a4fcc29aa7a4eab7afcb8e028946",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -108,6 +108,12 @@
     {
       "type": "question",
       "folder": "questions",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "question-kind",
+      "folder": "question-kinds",
       "owner": null,
       "singular": false
     },
@@ -2637,12 +2643,51 @@
       }
     },
     {
+      "id": "question-kinds/company",
+      "type": "question-kind",
+      "name": "Company",
+      "tagline": "Questions about Beacon Systems as a company: what it publishes about itself and what it is like to work there.",
+      "fields": {
+        "source": "Local",
+        "rank": "20"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the company rather than what it sells: its figures, its ways of working, what it holds to. A candidate's questions are this kind.\n\nA question about a feature, an invoice or why the platform is built as it is is Product, even when a value of the company's explains the answer.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/question-kinds/company.md"
+    },
+    {
+      "id": "question-kinds/product",
+      "type": "question-kind",
+      "name": "Product",
+      "tagline": "Questions about what the billing platform does and how it came to be built the way it is.",
+      "fields": {
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question a customer or an engineer asks about the product itself: what a line on an invoice means, which feature explains it, why a part of the platform stands where it does. It is this kind even when a decision or a period answers it, because the visitor is asking about the product.\n\nA question about the company behind it, how it works, what it publishes about itself, what it is like inside, is Company.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/question-kinds/product.md"
+    },
+    {
       "id": "questions/does-beacon-systems-publish-its-revenue",
       "type": "question",
       "name": "Does Beacon Systems publish its revenue?",
       "tagline": "No. The model makes no claim about revenue, and none is published.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Company"
       },
       "sections": [],
       "owner": null,
@@ -2654,7 +2699,8 @@
       "name": "How do I find out why a line is on my invoice?",
       "tagline": "The charge explanation shows where each line comes from, and the pricing rules say what it costs.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Product"
       },
       "sections": [
         {
@@ -2714,12 +2760,79 @@
       "path": "example/model/questions/how-do-i-find-out-why-a-line-is-on-my-invoice.md"
     },
     {
+      "id": "questions/what-is-it-like-to-work-at-beacon-systems",
+      "type": "question",
+      "name": "What is it like to work at Beacon Systems?",
+      "tagline": "The company's values say what it holds to in its daily work: how it treats a deadline and when disagreement is still worth saying.",
+      "fields": {
+        "source": "Local",
+        "kind": "Company"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "value",
+                  "Craftsmanship",
+                  "",
+                  "how it treats a deadline"
+                ],
+                [
+                  "value",
+                  "Say The Hard Thing",
+                  "",
+                  "when disagreement is still worth saying"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "value",
+                "Craftsmanship",
+                "",
+                "how it treats a deadline"
+              ],
+              [
+                "value",
+                "Say The Hard Thing",
+                "",
+                "when disagreement is still worth saying"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/questions/what-is-it-like-to-work-at-beacon-systems.md"
+    },
+    {
       "id": "questions/who-split-billing-out-of-the-monolith",
       "type": "question",
       "name": "Who split billing out of the monolith?",
       "tagline": "The period in which the billing domain was split is Mira Halvorsen's, and it says what was done; the decision to split says why.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Product"
       },
       "sections": [
         {
@@ -4211,6 +4324,24 @@
       "attrs": {}
     },
     {
+      "from": "question-kinds/company",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/product",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/does-beacon-systems-publish-its-revenue",
+      "to": "question-kinds/company",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
       "from": "questions/does-beacon-systems-publish-its-revenue",
       "to": "sources/local",
       "via": "source",
@@ -4238,6 +4369,44 @@
     },
     {
       "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "to": "question-kinds/product",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
+      "to": "values/craftsmanship",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "how it treats a deadline"
+      }
+    },
+    {
+      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
+      "to": "values/say-the-hard-thing",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "when disagreement is still worth saying"
+      }
+    },
+    {
+      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
+      "to": "question-kinds/company",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -4261,6 +4430,12 @@
         "Owner": "Mira Halvorsen",
         "For": "the period"
       }
+    },
+    {
+      "from": "questions/who-split-billing-out-of-the-monolith",
+      "to": "question-kinds/product",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/who-split-billing-out-of-the-monolith",
