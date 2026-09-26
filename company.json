@@ -1,8 +1,14 @@
 {
-  "commit": "1a8955cbaade3a4e0a88d8374f174c60e4c95e10",
+  "commit": "0cd62db636f1c62b3dced2109eda65fd119b47f7",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
+    {
+      "type": "brand",
+      "folder": null,
+      "owner": null,
+      "singular": true
+    },
     {
       "type": "concept",
       "folder": "concepts",
@@ -113,6 +119,290 @@
     }
   ],
   "entities": [
+    {
+      "id": "brand",
+      "type": "brand",
+      "name": "CompanyGraph",
+      "tagline": "Everything a company knows, in one graph that its people and its agents read alike.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Mark",
+          "text": "The mark is two squares joined by a line, two entities and the edge between them, set in the accent color on the ground, and its master is `favicon.svg` in the site's repository; every other render, a tile a host is handed, a slide's corner, is made from that file and never drawn again. The mark's colors are the design tokens' ground and accent.\n\n- A tile is a full-bleed square with no rounded corner, because the host rounds it and a transparent corner shows as a checkerboard.\n- The mark fills about 60% of the tile, so it survives a circular crop.\n- A change to the mark is made in the favicon first and rendered everywhere else after.\n- Where a render carries values other than the tokens', the favicon included, the tokens are the master and the render follows.",
+          "tables": []
+        },
+        {
+          "heading": "Color",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Name",
+                "Means",
+                "Never"
+              ],
+              "rows": [
+                [
+                  "`--c-weak`",
+                  "A candidate: considered, not accepted",
+                  "Text, a border or an outline on its own, in either theme"
+                ],
+                [
+                  "`--c-mid`",
+                  "Anything interactive: a link, a control, the brand accent",
+                  "The resolved thing, which would then read as still open"
+                ],
+                [
+                  "`--c-firm`",
+                  "The resolved thing: the thesis, the current page",
+                  "A link, which would then read as settled"
+                ],
+                [
+                  "`--c-flag`",
+                  "A reversal, at most once per page",
+                  "Decoration"
+                ],
+                [
+                  "`--c-sum`",
+                  "A conclusion, what a section's figures add up to, as the line of a conclusion and at most once per section",
+                  "Text"
+                ],
+                [
+                  "`--c-path`",
+                  "Where you are and how you got here: the ancestors of the focused node and the line through them",
+                  "The resolved thing, which only happens to look alike"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Name",
+              "Means",
+              "Never"
+            ],
+            "rows": [
+              [
+                "`--c-weak`",
+                "A candidate: considered, not accepted",
+                "Text, a border or an outline on its own, in either theme"
+              ],
+              [
+                "`--c-mid`",
+                "Anything interactive: a link, a control, the brand accent",
+                "The resolved thing, which would then read as still open"
+              ],
+              [
+                "`--c-firm`",
+                "The resolved thing: the thesis, the current page",
+                "A link, which would then read as settled"
+              ],
+              [
+                "`--c-flag`",
+                "A reversal, at most once per page",
+                "Decoration"
+              ],
+              [
+                "`--c-sum`",
+                "A conclusion, what a section's figures add up to, as the line of a conclusion and at most once per section",
+                "Text"
+              ],
+              [
+                "`--c-path`",
+                "Where you are and how you got here: the ancestors of the focused node and the line through them",
+                "The resolved thing, which only happens to look alike"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Typography",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Face",
+                "Job"
+              ],
+              "rows": [
+                [
+                  "Instrument Sans",
+                  "Prose: the body of every page and every deck"
+                ],
+                [
+                  "Plex Mono",
+                  "The ledger and the chrome: the footer, the stage and a deck's transport"
+                ],
+                [
+                  "Bricolage Grotesque",
+                  "A section's mark: the small heading that names a principle, a seat or a surface"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Face",
+              "Job"
+            ],
+            "rows": [
+              [
+                "Instrument Sans",
+                "Prose: the body of every page and every deck"
+              ],
+              [
+                "Plex Mono",
+                "The ledger and the chrome: the footer, the stage and a deck's transport"
+              ],
+              [
+                "Bricolage Grotesque",
+                "A section's mark: the small heading that names a principle, a seat or a surface"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Voice",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Trait",
+                "Means",
+                "Never"
+              ],
+              "rows": [
+                [
+                  "Plain",
+                  "We say what a type holds in the words a person who runs a company uses for it",
+                  "An adjective that sells: nothing here is powerful, seamless or robust"
+                ],
+                [
+                  "Shown",
+                  "We claim what an instance shows, and we name the instance",
+                  "A count of types, entities or adopters, which moves the day it is written"
+                ],
+                [
+                  "Cause first",
+                  "We say why a rule exists before we say what it checks",
+                  "A rule with no reason beside it"
+                ],
+                [
+                  "Adoptable",
+                  "We say how to do it without us, in the same sentence that says what it is",
+                  "A step that only we can take"
+                ],
+                [
+                  "Read twice",
+                  "We would rather be read twice than skimmed once: one idea per sentence, the point in the first",
+                  "A header that segments a text which fits on a screen"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Trait",
+              "Means",
+              "Never"
+            ],
+            "rows": [
+              [
+                "Plain",
+                "We say what a type holds in the words a person who runs a company uses for it",
+                "An adjective that sells: nothing here is powerful, seamless or robust"
+              ],
+              [
+                "Shown",
+                "We claim what an instance shows, and we name the instance",
+                "A count of types, entities or adopters, which moves the day it is written"
+              ],
+              [
+                "Cause first",
+                "We say why a rule exists before we say what it checks",
+                "A rule with no reason beside it"
+              ],
+              [
+                "Adoptable",
+                "We say how to do it without us, in the same sentence that says what it is",
+                "A step that only we can take"
+              ],
+              [
+                "Read twice",
+                "We would rather be read twice than skimmed once: one idea per sentence, the point in the first",
+                "A header that segments a text which fits on a screen"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Design tokens",
+                  "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
+                ],
+                [
+                  "Mark",
+                  "https://github.com/companygraph/companygraph.github.io/blob/main/favicon.svg"
+                ],
+                [
+                  "Rulebook of the voice",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Typefaces, as the pages set them",
+                  "https://github.com/robertblust/design/blob/main/blocks/reset.css"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Design tokens",
+                "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
+              ],
+              [
+                "Mark",
+                "https://github.com/companygraph/companygraph.github.io/blob/main/favicon.svg"
+              ],
+              [
+                "Rulebook of the voice",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Typefaces, as the pages set them",
+                "https://github.com/robertblust/design/blob/main/blocks/reset.css"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/brand.md"
+    },
     {
       "id": "concepts/agent-pass",
       "type": "concept",
@@ -3865,6 +4155,71 @@
       "path": "model/questions/can-i-trust-what-this-chat-says.md"
     },
     {
+      "id": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
+      "type": "question",
+      "name": "Can I use CompanyGraph's colors and fonts for my own site?",
+      "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "brand",
+                  "CompanyGraph",
+                  "",
+                  "the roles, the faces, and where the values are"
+                ],
+                [
+                  "surface",
+                  "companygraph.io website",
+                  "",
+                  "where the design is seen whole"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "brand",
+                "CompanyGraph",
+                "",
+                "the roles, the faces, and where the values are"
+              ],
+              [
+                "surface",
+                "companygraph.io website",
+                "",
+                "where the design is seen whole"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site.md"
+    },
+    {
       "id": "questions/can-our-ai-agents-use-it",
       "type": "question",
       "name": "Can our AI agents use it?",
@@ -4650,6 +5005,59 @@
       ],
       "owner": null,
       "path": "model/questions/isn-t-this-just-a-wiki-or-notion-with-rules.md"
+    },
+    {
+      "id": "questions/what-do-the-colors-on-companygraph-io-mean",
+      "type": "question",
+      "name": "What do the colors on companygraph.io mean?",
+      "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "brand",
+                  "CompanyGraph",
+                  "",
+                  "what each color role means and never does"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "brand",
+                "CompanyGraph",
+                "",
+                "what each color role means and never does"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-do-the-colors-on-companygraph-io-mean.md"
     },
     {
       "id": "questions/what-does-a-company-s-model-actually-look-like",
@@ -6209,6 +6617,12 @@
     }
   ],
   "edges": [
+    {
+      "from": "brand",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
     {
       "from": "concepts/agent-pass",
       "to": "concepts/rule",
@@ -7965,6 +8379,32 @@
       "attrs": {}
     },
     {
+      "from": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
+      "to": "brand",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "brand",
+        "Owner": "",
+        "For": "the roles, the faces, and where the values are"
+      }
+    },
+    {
+      "from": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
+      "to": "surfaces/companygraph-io-website",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "where the design is seen whole"
+      }
+    },
+    {
+      "from": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/can-our-ai-agents-use-it",
       "to": "features/an-agent-reads-the-model",
       "via": "Rests on.Entity",
@@ -8306,6 +8746,22 @@
     },
     {
       "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-do-the-colors-on-companygraph-io-mean",
+      "to": "brand",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "brand",
+        "Owner": "",
+        "For": "what each color role means and never does"
+      }
+    },
+    {
+      "from": "questions/what-do-the-colors-on-companygraph-io-mean",
       "to": "sources/local",
       "via": "source",
       "attrs": {}

@@ -1,5 +1,5 @@
 {
-  "commit": "fe9cdae7168250f210bf96b46a434d36564ebe47",
+  "commit": "d7407a8ff1442ec3adec04930a3630cbd23f8a42",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -155,6 +155,284 @@
       ],
       "owner": null,
       "path": "core/achievement-kind-schema.md"
+    },
+    {
+      "id": "core/brand",
+      "type": "schema",
+      "name": "Brand Schema",
+      "tagline": "Required structure for the brand file — what the company looks and sounds like.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Name]`",
+                  "Yes",
+                  "The name the brand goes by — the one the mark spells and the lockup carries"
+                ],
+                [
+                  "`> [Promise]`",
+                  "Yes",
+                  "One-paragraph statement of what carrying this name promises a reader"
+                ],
+                [
+                  "`## Mark`",
+                  "Yes",
+                  "Bulleted. What the mark is, in a sentence, then one rule per item: clear space, minimum size, what it sits on"
+                ],
+                [
+                  "`## Color`",
+                  "Yes",
+                  "Table. One row per color role; its columns are declared below."
+                ],
+                [
+                  "`## Typography`",
+                  "Yes",
+                  "Table. One row per typeface; its columns are declared below."
+                ],
+                [
+                  "`## Voice`",
+                  "Yes",
+                  "Table. One row per trait of the company's voice; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "Yes",
+                  "Table. Where the values are: the tokens, the mark's file, the rulebook; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Color` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Name`",
+                  "Yes",
+                  "string",
+                  "The role's name as the place that masters its value spells it — a token, a swatch name"
+                ],
+                [
+                  "`Means`",
+                  "Yes",
+                  "string",
+                  "What a thing painted in it is saying"
+                ],
+                [
+                  "`Never`",
+                  "Yes",
+                  "string",
+                  "The one misuse it is most often put to"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Typography` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Face`",
+                  "Yes",
+                  "string",
+                  "The typeface's name as its foundry writes it"
+                ],
+                [
+                  "`Job`",
+                  "Yes",
+                  "string",
+                  "What it sets, and nothing about how"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Voice` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Trait`",
+                  "Yes",
+                  "string",
+                  "One word for a way the company writes"
+                ],
+                [
+                  "`Means`",
+                  "Yes",
+                  "string",
+                  "What a sentence with the trait does"
+                ],
+                [
+                  "`Never`",
+                  "Yes",
+                  "string",
+                  "What a sentence without it does, specifically"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of file — the tokens, the mark, the rulebook"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Name]`",
+                "Yes",
+                "The name the brand goes by — the one the mark spells and the lockup carries"
+              ],
+              [
+                "`> [Promise]`",
+                "Yes",
+                "One-paragraph statement of what carrying this name promises a reader"
+              ],
+              [
+                "`## Mark`",
+                "Yes",
+                "Bulleted. What the mark is, in a sentence, then one rule per item: clear space, minimum size, what it sits on"
+              ],
+              [
+                "`## Color`",
+                "Yes",
+                "Table. One row per color role; its columns are declared below."
+              ],
+              [
+                "`## Typography`",
+                "Yes",
+                "Table. One row per typeface; its columns are declared below."
+              ],
+              [
+                "`## Voice`",
+                "Yes",
+                "Table. One row per trait of the company's voice; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "Yes",
+                "Table. Where the values are: the tokens, the mark's file, the rulebook; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "The brand is what the company looks and sounds like wherever it appears, stated as meaning rather than measure, so that a person or an agent producing anything in the company's name reads one file, finds what each color, face, mark and trait is for, and follows a reference to the bytes. It answers \"what does this look and sound like, and why?\" for someone writing a post, cutting a tile or reviewing a draft. It is not the palette and not the stylesheet, which are built and kept where the References rows point, and it is not the positioning, which the identity's tagline, the vision and the values already hold.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- No hex code, size, weight, line height or file dimension anywhere in the file. A value moves\n  with a release, and a References row says where it is kept.\n- A `## Color` row is named as the place that masters its value names it, so a reader can find\n  it there by the same string.\n- A `Means` cell says what a thing in that color, or a sentence with that trait, is saying; a\n  `Never` cell names one specific misuse, not the absence of the trait. \"Never decoration\" can be\n  checked; \"never misused\" cannot.\n- A `Job` names what a face sets in the words the page uses for it — prose, the ledger, a section\n  mark — and says nothing about how it is set.\n- A trait is one a draft can fail. \"Plain\" fails a sentence with an adjective that sells;\n  \"professional\" fails nothing.\n- `## Voice` speaks in the company's first person, \"I\" for a company of one and \"We\" for a company\n  of more, the same one the instance's values use.\n- `## Mark` says where the shape is mastered and never carries a copy of it, so the mark has one\n  source and every render is made from it.\n- Positioning stays out: the promise is one paragraph, and what the company is, where it is going\n  and what it holds to are the identity's, the vision's and the values' to say.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/brand.md`\n\nA company has one brand, so the type is a file directly in the container rather than a folder (R6, R13), named for the type rather than for the slug of its H1 (R12), which leaves the H1 free to be the name the brand goes by.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/brand-schema.md"
     },
     {
       "id": "core/concept",
@@ -4200,6 +4478,15 @@
   "edges": [
     {
       "from": "core/achievement-kind",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/brand",
       "to": "core/source",
       "via": "source",
       "attrs": {
