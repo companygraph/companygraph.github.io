@@ -1,5 +1,5 @@
 {
-  "commit": "0cd62db636f1c62b3dced2109eda65fd119b47f7",
+  "commit": "30670ca74f438f05b3b4504516d0ffae5169a202",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -12,6 +12,24 @@
     {
       "type": "concept",
       "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision",
+      "folder": "decisions",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision-kind",
+      "folder": "decision-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision-status",
+      "folder": "decision-statuses",
       "owner": null,
       "singular": false
     },
@@ -1245,6 +1263,1070 @@
       ],
       "owner": null,
       "path": "model/concepts/type.md"
+    },
+    {
+      "id": "decision-kinds/architecture",
+      "type": "decision-kind",
+      "name": "Architecture",
+      "tagline": "A call about how the tooling that reads a model is built: the checker, the server, the plugin, the way core reaches an instance.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is a component and how it works: what a server may do, where core lives in an instance, what a checker reads. It is this kind even when it decides what a vocabulary rule can be enforced, because what was decided is the machinery.\n\nWhat the vocabulary says is Vocabulary. What it costs to adopt is Terms.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/architecture.md"
+    },
+    {
+      "id": "decision-kinds/terms",
+      "type": "decision-kind",
+      "name": "Terms",
+      "tagline": "A call about what adopting the meta-model costs and under which license, and what we are paid for.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is the relationship between us and a company that adopts the meta-model: the license, the price of anything, what is published and what is not. It is this kind even when it shapes what gets built, because what was decided is what adoption costs.\n\nWhat the vocabulary holds is Vocabulary; how the tooling is built is Architecture.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/terms.md"
+    },
+    {
+      "id": "decision-kinds/vocabulary",
+      "type": "decision-kind",
+      "name": "Vocabulary",
+      "tagline": "A call about what enters core and in what form: a type, a rule, a form of reference.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is the meta-model itself: whether a type exists, what a rule holds an instance to, how a reference resolves. It is this kind even when the tooling has to change to carry it, because what was decided is what a company can say.\n\nHow the tooling that reads a model is built is Architecture. What adopting the meta-model costs is Terms.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/vocabulary.md"
+    },
+    {
+      "id": "decision-statuses/dropped",
+      "type": "decision-status",
+      "name": "Dropped",
+      "tagline": "The call is no longer pursued, and nothing replaced it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Dropped when the call was given up without another decision taking its place: a proposed call declined, or a standing call abandoned because what it depended on went away. The file stays as written, and one dated sentence closing `## Consequences` says when and why it was dropped, since no later decision exists to say so. A reader treats the question as open again. A Dropped decision never returns to Standing: taking the call up again is a new decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/dropped.md"
+    },
+    {
+      "id": "decision-statuses/proposed",
+      "type": "decision-status",
+      "name": "Proposed",
+      "tagline": "The call is put forward with its alternatives and not yet made; nothing acts on it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Proposed from the day it is written until the seat named in `by` makes the call. It is written in full, the question, the alternatives and the reasons, so that it can be argued before it binds, and `decided` holds the date it was put forward. Nothing acts on a Proposed decision, and a reader treats the question as open. It leaves this state when the call is made, becoming Standing with `decided` set to the day of the call, or when it is declined, becoming Dropped.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/proposed.md"
+    },
+    {
+      "id": "decision-statuses/revised",
+      "type": "decision-status",
+      "name": "Revised",
+      "tagline": "A later decision replaced this call, and the call is read through that decision.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Revised when another decision names it in `supersedes`. Its file stays as it was written, because what was decided on that date does not stop having happened; what holds now is the decision that replaced it, and a reader who arrives here follows the reference forward. A Revised decision never returns to Standing: a change of mind is a third decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/revised.md"
+    },
+    {
+      "id": "decision-statuses/standing",
+      "type": "decision-status",
+      "name": "Standing",
+      "tagline": "The call holds as written, and the work follows it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Standing from the day it was made until a later decision replaces it or the call is given up. While it stands, a reader acts on it as written and re-opens it only by making a decision that names it in `supersedes`. It leaves this state the day that later decision is made, becoming Revised, or the day the call is given up with nothing in its place, becoming Dropped.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/standing.md"
+    },
+    {
+      "id": "decisions/2026-apache-2-0",
+      "type": "decision",
+      "name": "Everything under Apache 2.0, and consulting billed by the day",
+      "tagline": "The vocabulary, the tooling and the talks are published under licenses that ask nothing back, and what costs money is our time by the day, never what a company does with the model.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-08-23",
+        "kind": "Terms",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Adoption is not taxed"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "How a project that publishes a meta-model earns, and whether any of it may cost a company that adopts it. It had to be decided in the first specification, in August 2026, because the license travels with the first release and a license that closes later is read as one that will.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "A per-seat license",
+                  "It charges a company for being read, which a model meant for its people and its agents at once cannot bear."
+                ],
+                [
+                  "A per-entry price",
+                  "It charges a company for the completeness the model exists to produce."
+                ],
+                [
+                  "A hosted-only edition",
+                  "A company that must hand over its model to be served has been charged for adoption, and the read-only server exists so that it never has to."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "A per-seat license",
+                "It charges a company for being read, which a model meant for its people and its agents at once cannot bear."
+              ],
+              [
+                "A per-entry price",
+                "It charges a company for the completeness the model exists to produce."
+              ],
+              [
+                "A hosted-only edition",
+                "A company that must hand over its model to be served has been charged for adoption, and the read-only server exists so that it never has to."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "A meta-model is worth whatever gets adopted of it, so anything that makes adopting it cost more works against the one thing it was built to do. Doing it without us has to be the normal case, because a model most people need help to adopt has not been made adoptable.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "No proprietary edition, no hosted service as the paid half of a free thing, no per-seat price, and no license change later. Consulting by the day is the whole income. What has to stay true is that a company can adopt everything without ever speaking to us.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "strategy",
+                  "Instance-Led Strategy",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "strategy",
+                "Instance-Led Strategy",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The license",
+                  "https://github.com/companygraph/meta-model/blob/main/LICENSE"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The license",
+                "https://github.com/companygraph/meta-model/blob/main/LICENSE"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-apache-2-0.md"
+    },
+    {
+      "id": "decisions/2026-open-sections",
+      "type": "decision",
+      "name": "A section is open and a field is closed",
+      "tagline": "A page may carry sections its schema does not declare, which are read as prose, and may not carry a frontmatter field its schema does not declare, which is an error.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-19",
+        "kind": "Vocabulary",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether an instance may add to a page beyond what its schema declares, and where. It had to be decided in September 2026, when required sections were being held by the checker for the first time, because the checker needed to know whether an undeclared heading is a finding.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Both closed",
+                  "An instance could not carry a section of its own, and every local need would be a release of core."
+                ],
+                [
+                  "Both open",
+                  "A field left behind by a rename would render under the old name while every check reported green, which is the failure a closed field exists to prevent."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Both closed",
+                "An instance could not carry a section of its own, and every local need would be a release of core."
+              ],
+              [
+                "Both open",
+                "A field left behind by a rename would render under the old name while every check reported green, which is the failure a closed field exists to prevent."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "A field left over by a rename still renders as though it were the field, while a section of the page's own claims to be nothing the schema knows. The two failures are not alike, so the two rules are not: a field resolves references and satisfies requirements, and must be declared; a heading resolves nothing and draws no edge, and may be the page's own.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "An undeclared field is an error and a rename cannot half-happen; an undeclared heading is prose; an optional section written with a typo reads as one of the page's own, and only an editor that knows the schema can tell. What it gave up is the local field: an instance cannot carry one.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Schema",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Schema",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-19-required-sections-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-19-required-sections-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-open-sections.md"
+    },
+    {
+      "id": "decisions/2026-prose-schema",
+      "type": "decision",
+      "name": "The schema written as prose is the only schema",
+      "tagline": "A type's schema is one Markdown file, read whole by an agent and in its fixed shape by a script, and no second schema exists for the script.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-08-23",
+        "kind": "Vocabulary",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether the schemas are a stage on the way to a formal schema language or the working architecture of a model with hundreds of files. It had to be decided in the first specification, in August 2026, because every schema written after it would be written in one form or the other.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "A JSON Schema beside the prose",
+                  "Two schemas drift, the one a script reads wins over the one a person reads, and the writing rules, which only a person can hold a page to, would live in neither."
+                ],
+                [
+                  "A schema only a script reads",
+                  "An agent reading a page would have nothing to hold it to but the script's output, and the thesis the model ships under, that with the right meta-model you describe the facts as Markdown, would be contradicted by its own schemas."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "A JSON Schema beside the prose",
+                "Two schemas drift, the one a script reads wins over the one a person reads, and the writing rules, which only a person can hold a page to, would live in neither."
+              ],
+              [
+                "A schema only a script reads",
+                "An agent reading a page would have nothing to hold it to but the script's output, and the thesis the model ships under, that with the right meta-model you describe the facts as Markdown, would be contradicted by its own schemas."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The claim this model ships under is that a schema written as prose is the only schema, which an agent reads whole and a script reads where its shape is fixed. That holds only if the shape is checked, so the schema tables were written to one fixed shape and `verify` holds every schema to it; what a script cannot read, the writing rules, stays with the agent pass.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Every schema has the same columns, the same type vocabulary and the same word for required; a schema off the shape fails loudly; an instance is held to what its schema declares, and nothing beyond the schema decides which fields resolve. What it gave up is a machine-checkable schema for the prose half. It stays right for as long as the agent pass runs before every commit.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Schema",
+                  "",
+                  "made it"
+                ],
+                [
+                  "concept",
+                  "Check",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Schema",
+                "",
+                "made it"
+              ],
+              [
+                "concept",
+                "Check",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The first specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-08-23-companygraph-design.md"
+                ],
+                [
+                  "The schemas made normative",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-08-schemas-are-normative-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The first specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-08-23-companygraph-design.md"
+              ],
+              [
+                "The schemas made normative",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-08-schemas-are-normative-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-prose-schema.md"
+    },
+    {
+      "id": "decisions/2026-read-only-server",
+      "type": "decision",
+      "name": "The server only reads, and answers at one named commit",
+      "tagline": "An agent reaches a company's model through a server that reads it, answers every question at the commit it was read at, and adds nothing of its own.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-16",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Run on what we publish",
+          "Adoption is not taxed"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "What an agent may do to a company's model through the server, and how an answer can be checked later. It had to be decided when the server was designed, in September 2026, because a write path or a retrieval index would have shaped every tool on it.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "A write path",
+                  "A company would have to decide whether to trust an agent with its model, and no company should have to decide that to adopt one."
+                ],
+                [
+                  "An embedding index as the way in",
+                  "A retrieval layer answers with a paraphrase, and a paraphrase cannot be held to the evidence the model attached to the claim."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "A write path",
+                "A company would have to decide whether to trust an agent with its model, and no company should have to decide that to adopt one."
+              ],
+              [
+                "An embedding index as the way in",
+                "A retrieval layer answers with a paraphrase, and a paraphrase cannot be held to the evidence the model attached to the claim."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "Every answer names the commit it was read at, so an answer can be checked against the same bytes later and two answers a week apart can be told apart. The tools are the vocabulary's own questions, which types a company declares, what one entity says, what evidence a claim rests on, so an agent asks the model the way the model is shaped rather than searching its text and hoping.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "No answer about a model's current state in general, no reasoning the server does that the model cannot show, and nothing summarized away: where a claim has no evidence the answer says so. A company runs the server in its own cloud project from the parts we publish. What has to stay true is that the same question put to the person who runs the company and to the agent gets the same answer, followable to the page.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "strategy",
+                  "Read-Only Server Strategy",
+                  "",
+                  "made it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "strategy",
+                "Read-Only Server Strategy",
+                "",
+                "made it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The server",
+                  "https://github.com/companygraph/mcp-server"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The server",
+                "https://github.com/companygraph/mcp-server"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-read-only-server.md"
+    },
+    {
+      "id": "decisions/2026-typed-resolution",
+      "type": "decision",
+      "name": "A reference resolves by its declared type, never by name alone",
+      "tagline": "A tool resolves a reference by the type its schema declares and the name written, looks in no other type, and reports a name that exists only under another type as unresolvable.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-15",
+        "kind": "Vocabulary",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "What a tool does with a name that exists under two types, which a company of one forces, because the company and the only person in it are called the same thing. It had to be decided in September 2026, when the parser refused such a name as ambiguous and the reference instance could not be served.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "The first match across types",
+                  "Which entity a reference reaches would depend on the order the folders were walked, and a string field whose value happened to be a canonical name would draw an edge nobody declared."
+                ],
+                [
+                  "The nearest folder",
+                  "It resolves by where a file happens to sit, which R3 forbids a reference to depend on, and moves the edge when the file moves."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "The first match across types",
+                "Which entity a reference reaches would depend on the order the folders were walked, and a string field whose value happened to be a canonical name would draw an edge nobody declared."
+              ],
+              [
+                "The nearest folder",
+                "It resolves by where a file happens to sit, which R3 forbids a reference to depend on, and moves the edge when the file moves."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "Every schema already declares its references as `ref → <type>`, so a reference carries a type as well as a name, and the pair is what resolves. A name unique across the whole instance would have forced the company or the person to be called something nobody calls it, and the graph would then describe a naming workaround rather than the company.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "A name that exists only under another type is unresolvable, not ambiguous, and the error says which type was searched; the parser reads the type once and knows for every page which fields become edges. Every consumer re-pinned. What it gave up is the convenience of a bare name that means one thing everywhere.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Reference",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "concept",
+                  "Canonical name",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Reference",
+                "",
+                "changed it"
+              ],
+              [
+                "concept",
+                "Canonical name",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-15-typed-resolution-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-15-typed-resolution-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-typed-resolution.md"
+    },
+    {
+      "id": "decisions/2026-vendored-core",
+      "type": "decision",
+      "name": "Core is vendored into an instance at a release its manifest names",
+      "tagline": "An instance carries a copy of core at the release its manifest names, with a hash per file, and moves to a later release only when it decides to.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-08-25",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Run on what we publish"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "How the vocabulary reaches a company's model, and who decides when a change to it reaches theirs. It had to be decided when the tooling was designed, in August 2026, because `init`, `upgrade` and `check` all depend on the answer and the first instance was about to be written.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Resolve core at read time, from the newest release",
+                  "A change to the vocabulary would move under every model at once, and nobody could say which rules a page was written against."
+                ],
+                [
+                  "A git submodule pointing at core",
+                  "It pins a commit and not a release, carries no hash per file to tell drift from an edit, and asks every adopter to know submodules."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Resolve core at read time, from the newest release",
+                "A change to the vocabulary would move under every model at once, and nobody could say which rules a page was written against."
+              ],
+              [
+                "A git submodule pointing at core",
+                "It pins a commit and not a release, carries no hash per file to tell drift from an edit, and asks every adopter to know submodules."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The version number below 1.0 is doing work: the vocabulary is free to change, and an instance decides when to take a change because core is vendored at a release its manifest names rather than resolved at read time. A release can then say what an instance must do about it, and most say nothing, which is what lets the vocabulary keep moving without moving anyone's model underneath them.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "`upgrade` owns the vendored files and nothing else; a checker that is not the release the manifest names refuses to run; a file edited inside `meta/` shows as drift. What it gave up is a single current vocabulary: every instance may be at a release of its own, and every consumer names the one it reads. It stays right for as long as a release says what an instance must do about it.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Core",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "concept",
+                  "Pin",
+                  "",
+                  "made it"
+                ],
+                [
+                  "concept",
+                  "Instance",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Core",
+                "",
+                "changed it"
+              ],
+              [
+                "concept",
+                "Pin",
+                "",
+                "made it"
+              ],
+              [
+                "concept",
+                "Instance",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The tooling specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-08-25-companygraph-tooling-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The tooling specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-08-25-companygraph-tooling-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-vendored-core.md"
     },
     {
       "id": "domains/core",
@@ -6942,6 +8024,316 @@
       "from": "concepts/type",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/architecture",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/terms",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/vocabulary",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/dropped",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/proposed",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/revised",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/standing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-apache-2-0",
+      "to": "strategies/instance-led-strategy",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "strategy",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-apache-2-0",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-apache-2-0",
+      "to": "decision-kinds/terms",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-apache-2-0",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-apache-2-0",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-apache-2-0",
+      "to": "values/adoption-is-not-taxed",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-open-sections",
+      "to": "concepts/schema",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-open-sections",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-open-sections",
+      "to": "decision-kinds/vocabulary",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-open-sections",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-open-sections",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-prose-schema",
+      "to": "concepts/check",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-prose-schema",
+      "to": "concepts/schema",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-prose-schema",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-prose-schema",
+      "to": "decision-kinds/vocabulary",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-prose-schema",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-prose-schema",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "strategies/read-only-server-strategy",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "strategy",
+        "Owner": "",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "decision-kinds/architecture",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "values/adoption-is-not-taxed",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-read-only-server",
+      "to": "values/run-on-what-we-publish",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-typed-resolution",
+      "to": "concepts/canonical-name",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-typed-resolution",
+      "to": "concepts/reference",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-typed-resolution",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-typed-resolution",
+      "to": "decision-kinds/vocabulary",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-typed-resolution",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-typed-resolution",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "concepts/core",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "concepts/instance",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "concepts/pin",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "decision-kinds/architecture",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-vendored-core",
+      "to": "values/run-on-what-we-publish",
+      "via": "upholds",
       "attrs": {}
     },
     {

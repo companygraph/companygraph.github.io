@@ -1,5 +1,5 @@
 {
-  "commit": "d7407a8ff1442ec3adec04930a3630cbd23f8a42",
+  "commit": "ea8e47cc7a9cbd657d78f0d735477d5e33be9603",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -18,6 +18,24 @@
     {
       "type": "concept",
       "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision",
+      "folder": "decisions",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision-kind",
+      "folder": "decision-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision-status",
+      "folder": "decision-statuses",
       "owner": null,
       "singular": false
     },
@@ -940,6 +958,193 @@
       ],
       "owner": null,
       "path": "example/model/concepts/usage-record.md"
+    },
+    {
+      "id": "decision-kinds/architecture",
+      "type": "decision-kind",
+      "name": "Architecture",
+      "tagline": "A call about how the product is built: what is one service and what is two, what is stored and what is derived, what talks to what.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is the shape of the system rather than what it does for a customer: a boundary drawn, a store chosen, a protocol fixed. It is this kind even when a customer feels the result, because what was decided is the structure.\n\nA call about what the product does, which feature ships and for whom, is Product. A call that only picks a library inside a boundary already drawn is nobody's decision to record.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/decision-kinds/architecture.md"
+    },
+    {
+      "id": "decision-kinds/product",
+      "type": "decision-kind",
+      "name": "Product",
+      "tagline": "A call about what the product does and for whom: which capability ships, which customer it is for, what it will not do.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is the customer's side of the product: a feature taken on or refused, a market chosen, a promise made on the invoice page. It is this kind even when it forces a change in the structure, because what was decided is the offer.\n\nHow the system that carries it is built is Architecture. Which of two ways to build the same offer is chosen is Architecture too.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/decision-kinds/product.md"
+    },
+    {
+      "id": "decision-statuses/revised",
+      "type": "decision-status",
+      "name": "Revised",
+      "tagline": "A later decision replaced this call, and the call is read through that decision.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Revised when another decision names it in `supersedes`. Its file stays as it was written, because what was decided on that date does not stop having happened; what holds now is the decision that replaced it, and a reader who arrives here follows the reference forward. A Revised decision never returns to Standing: a company that changes its mind again makes a third decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/decision-statuses/revised.md"
+    },
+    {
+      "id": "decision-statuses/standing",
+      "type": "decision-status",
+      "name": "Standing",
+      "tagline": "The call holds as written, and the work follows it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Standing from the day it was made until a later decision replaces it. While it stands, a reader acts on it as written and re-opens it only by making a decision that names it in `supersedes`. It leaves this state the day that later decision is made, and becomes Revised.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/decision-statuses/standing.md"
+    },
+    {
+      "id": "decisions/2022-billing-leaves-the-monolith",
+      "type": "decision",
+      "name": "Billing leaves the monolith",
+      "tagline": "We take billing out of the one service three teams edit and make it a service of its own, owned by one team, with the invoice as its boundary.",
+      "fields": {
+        "source": "Local",
+        "decided": "2022-01",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Backend Engineer",
+        "upholds": [
+          "Craftsmanship"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Three teams edited one service, and the second waited on the first to merge before the third could start. Invoice work queued behind pricing work that had nothing to do with it. The question was where to cut, and it had to be decided in January 2022 because the next quarter's invoice changes would otherwise be written into the same service and make the cut dearer.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Keep one service and add a review rota",
+                  "The wait moves from the merge to the review and stays a wait, and three teams still ship one thing."
+                ],
+                [
+                  "Split by team rather than by domain",
+                  "Three services that each hold part of billing would share the invoice, and every price change would cross all three."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Keep one service and add a review rota",
+                "The wait moves from the merge to the review and stays a wait, and three teams still ship one thing."
+              ],
+              [
+                "Split by team rather than by domain",
+                "Three services that each hold part of billing would share the invoice, and every price change would cross all three."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The invoice is where the teams already stopped understanding each other's code, so it is the boundary that costs the least to draw and the most to leave. A service owned by one team can be released when that team is ready, which is the whole of what the second team was waiting for.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Two services where there was one, each released by its own team, and a third split still owed to the third team. Every price change now crosses a boundary, which the pricing rules have to be written to survive. The call stays right as long as one team owns the whole invoice; the day two teams edit the billing service, the cut was in the wrong place.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Splitting the billing domain",
+                  "Mira Halvorsen",
+                  "made it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Splitting the billing domain",
+                "Mira Halvorsen",
+                "made it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/decisions/2022-billing-leaves-the-monolith.md"
     },
     {
       "id": "domains/invoicing",
@@ -2512,7 +2717,7 @@
       "id": "questions/who-split-billing-out-of-the-monolith",
       "type": "question",
       "name": "Who split billing out of the monolith?",
-      "tagline": "The period in which the billing domain was split is Mira Halvorsen's, and it says what was done.",
+      "tagline": "The period in which the billing domain was split is Mira Halvorsen's, and it says what was done; the decision to split says why.",
       "fields": {
         "source": "Local"
       },
@@ -2535,6 +2740,12 @@
                   "Splitting the billing domain",
                   "Mira Halvorsen",
                   "the period"
+                ],
+                [
+                  "decision",
+                  "Billing leaves the monolith",
+                  "",
+                  "why"
                 ]
               ]
             }
@@ -2553,6 +2764,12 @@
                 "Splitting the billing domain",
                 "Mira Halvorsen",
                 "the period"
+              ],
+              [
+                "decision",
+                "Billing leaves the monolith",
+                "",
+                "why"
               ]
             ]
           }
@@ -3119,6 +3336,70 @@
       "from": "concepts/usage-record",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/architecture",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/product",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/revised",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/standing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2022-billing-leaves-the-monolith",
+      "to": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Mira Halvorsen",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2022-billing-leaves-the-monolith",
+      "to": "roles/backend-engineer",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2022-billing-leaves-the-monolith",
+      "to": "decision-kinds/architecture",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2022-billing-leaves-the-monolith",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2022-billing-leaves-the-monolith",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2022-billing-leaves-the-monolith",
+      "to": "values/craftsmanship",
+      "via": "upholds",
       "attrs": {}
     },
     {
@@ -3960,6 +4241,16 @@
       "to": "sources/local",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "questions/who-split-billing-out-of-the-monolith",
+      "to": "decisions/2022-billing-leaves-the-monolith",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why"
+      }
     },
     {
       "from": "questions/who-split-billing-out-of-the-monolith",

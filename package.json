@@ -23,7 +23,7 @@
     "pin:check": "node pin-check.mjs"
   },
   "dependencies": {
-    "companygraph-meta-model": "github:companygraph/meta-model#v0.48.0",
+    "companygraph-meta-model": "github:companygraph/meta-model#v0.51.0",
     "d3": "7.9.0"
   },
   "devDependencies": {
