@@ -1,5 +1,5 @@
 {
-  "commit": "a8563bb080ab3296340edcb74c5a45c196ddcd56",
+  "commit": "1a8955cbaade3a4e0a88d8374f174c60e4c95e10",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -3791,7 +3791,7 @@
       "id": "questions/can-i-trust-what-this-chat-says",
       "type": "question",
       "name": "Can I trust what this chat says?",
-      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it.",
+      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it. Grounded Answer Rate says what is watched: whether an answer rested on the model, which shows grounding and not whether the answer was true.",
       "fields": {
         "source": "Local"
       },
@@ -3820,6 +3820,12 @@
                   "Answering",
                   "",
                   "how this chat is held to it"
+                ],
+                [
+                  "kpi",
+                  "Grounded Answer Rate",
+                  "",
+                  "what is watched, grounding and not truth"
                 ]
               ]
             }
@@ -3844,6 +3850,12 @@
                 "Answering",
                 "",
                 "how this chat is held to it"
+              ],
+              [
+                "kpi",
+                "Grounded Answer Rate",
+                "",
+                "what is watched, grounding and not truth"
               ]
             ]
           }
@@ -4253,6 +4265,131 @@
       ],
       "owner": null,
       "path": "model/questions/how-do-i-start.md"
+    },
+    {
+      "id": "questions/how-do-you-know-companygraph-is-working",
+      "type": "question",
+      "name": "How do you know CompanyGraph is working?",
+      "tagline": "Grounded Answer Rate watches whether the chat's answers rest on the model, as the objective of an agent answering as well as the person who runs the company asks, and the DORA KPIs define what is watched in how our changes reach production. The model holds their definitions and none of their values: the chat's report computes Grounded Answer Rate's, nothing measures the DORA KPIs yet, and our other objectives have no KPI yet.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "An agent answers as well as the person who runs the company",
+                  "",
+                  "the objective the chat is held to"
+                ],
+                [
+                  "kpi",
+                  "Grounded Answer Rate",
+                  "",
+                  "whether answers rest on the model, and where its value is"
+                ],
+                [
+                  "kpi",
+                  "Deployment Frequency",
+                  "",
+                  "how often a change ships"
+                ],
+                [
+                  "kpi",
+                  "Change Lead Time",
+                  "",
+                  "how long a change takes to ship"
+                ],
+                [
+                  "kpi",
+                  "Change Fail Rate",
+                  "",
+                  "how often a deployment fails"
+                ],
+                [
+                  "kpi",
+                  "Failed Deployment Recovery Time",
+                  "",
+                  "how soon a failed deployment is recovered"
+                ],
+                [
+                  "kpi",
+                  "Deployment Rework Rate",
+                  "",
+                  "how much shipping is unplanned rework"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "An agent answers as well as the person who runs the company",
+                "",
+                "the objective the chat is held to"
+              ],
+              [
+                "kpi",
+                "Grounded Answer Rate",
+                "",
+                "whether answers rest on the model, and where its value is"
+              ],
+              [
+                "kpi",
+                "Deployment Frequency",
+                "",
+                "how often a change ships"
+              ],
+              [
+                "kpi",
+                "Change Lead Time",
+                "",
+                "how long a change takes to ship"
+              ],
+              [
+                "kpi",
+                "Change Fail Rate",
+                "",
+                "how often a deployment fails"
+              ],
+              [
+                "kpi",
+                "Failed Deployment Recovery Time",
+                "",
+                "how soon a failed deployment is recovered"
+              ],
+              [
+                "kpi",
+                "Deployment Rework Rate",
+                "",
+                "how much shipping is unplanned rework"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-do-you-know-companygraph-is-working.md"
     },
     {
       "id": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
@@ -4732,6 +4869,18 @@
       ],
       "owner": null,
       "path": "model/questions/what-problem-does-companygraph-solve.md"
+    },
+    {
+      "id": "questions/where-do-our-targets-and-actual-numbers-go",
+      "type": "question",
+      "name": "Where do our targets and actual numbers go?",
+      "tagline": "The model holds a KPI's definition and none of its targets or values, because they move, and a KPI's References row says where they are kept, a sheet or a dashboard.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/questions/where-do-our-targets-and-actual-numbers-go.md"
     },
     {
       "id": "questions/who-answers-this-chat",
@@ -7781,6 +7930,16 @@
     },
     {
       "from": "questions/can-i-trust-what-this-chat-says",
+      "to": "kpis/grounded-answer-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "what is watched, grounding and not truth"
+      }
+    },
+    {
+      "from": "questions/can-i-trust-what-this-chat-says",
       "to": "processes/answering",
       "via": "Rests on.Entity",
       "attrs": {
@@ -7967,6 +8126,82 @@
     },
     {
       "from": "questions/how-do-i-start",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "kpis/change-fail-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how often a deployment fails"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "kpis/change-lead-time",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how long a change takes to ship"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "kpis/deployment-frequency",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how often a change ships"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "kpis/deployment-rework-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how much shipping is unplanned rework"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "kpis/failed-deployment-recovery-time",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how soon a failed deployment is recovered"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "kpis/grounded-answer-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "whether answers rest on the model, and where its value is"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
+      "to": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "the objective the chat is held to"
+      }
+    },
+    {
+      "from": "questions/how-do-you-know-companygraph-is-working",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -8169,6 +8404,12 @@
     },
     {
       "from": "questions/what-problem-does-companygraph-solve",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/where-do-our-targets-and-actual-numbers-go",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
