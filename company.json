@@ -1,5 +1,5 @@
 {
-  "commit": "397872af1312b0ebb8750ab04f2245c2693a1689",
+  "commit": "b8cdc5ee2089b7f94d8fea1d31403c5764cb1e77",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -5408,7 +5408,7 @@
       "id": "questions/can-our-ai-agents-use-it",
       "type": "question",
       "name": "Can our AI agents use it?",
-      "tagline": "The feature says what an agent can ask a company's model, the strategy says why the server that answers only reads it, and the MCP server is one running now.",
+      "tagline": "The feature says what an agent can ask a company's model, the strategy says why the server that answers only reads it, the decision says what else was weighed, and the MCP server is one running now.",
       "fields": {
         "source": "Local",
         "kind": "Getting started"
@@ -5444,6 +5444,12 @@
                   "mcp.companygraph.io MCP server",
                   "",
                   "one running now"
+                ],
+                [
+                  "decision",
+                  "The server only reads, and answers at one named commit",
+                  "",
+                  "what else was weighed"
                 ]
               ]
             }
@@ -5474,6 +5480,12 @@
                 "mcp.companygraph.io MCP server",
                 "",
                 "one running now"
+              ],
+              [
+                "decision",
+                "The server only reads, and answers at one named commit",
+                "",
+                "what else was weighed"
               ]
             ]
           }
@@ -5486,7 +5498,7 @@
       "id": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
       "type": "question",
       "name": "Do I need your service to run CompanyGraph, and what does it cost?",
-      "tagline": "The value says what is free to take and what is paid for, and the instance says that a company's model is its own repository, which it runs without anyone else.",
+      "tagline": "The value says what is free to take and what is paid for, and the instance says that a company's model is its own repository, which it runs without anyone else; the decision says why nothing is asked back and time is billed by the day.",
       "fields": {
         "source": "Local",
         "kind": "Terms"
@@ -5516,6 +5528,12 @@
                   "Instance",
                   "",
                   "a model runs in the company's own repository"
+                ],
+                [
+                  "decision",
+                  "Everything under Apache 2.0, and consulting billed by the day",
+                  "",
+                  "why nothing is asked back"
                 ]
               ]
             }
@@ -5540,6 +5558,12 @@
                 "Instance",
                 "",
                 "a model runs in the company's own repository"
+              ],
+              [
+                "decision",
+                "Everything under Apache 2.0, and consulting billed by the day",
+                "",
+                "why nothing is asked back"
               ]
             ]
           }
@@ -6338,7 +6362,7 @@
       "id": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
       "type": "question",
       "name": "What if the vocabulary doesn't fit our company?",
-      "tagline": "The objective says what core is working toward, a pack says where vocabulary only some companies need goes, and a feature request is how to ask for what is missing.",
+      "tagline": "The objective says what core is working toward, a pack says where vocabulary only some companies need goes, the decision says what a page may carry beyond its schema today, and a feature request is how to ask for what is missing.",
       "fields": {
         "source": "Local",
         "kind": "Fit"
@@ -6370,6 +6394,12 @@
                   "vocabulary for some companies only"
                 ],
                 [
+                  "decision",
+                  "A section is open and a field is closed",
+                  "",
+                  "what a page may add on its own"
+                ],
+                [
                   "process",
                   "Feature request",
                   "",
@@ -6398,6 +6428,12 @@
                 "Pack",
                 "",
                 "vocabulary for some companies only"
+              ],
+              [
+                "decision",
+                "A section is open and a field is closed",
+                "",
+                "what a page may add on its own"
               ],
               [
                 "process",
@@ -6658,6 +6694,138 @@
       ],
       "owner": null,
       "path": "model/questions/who-keeps-the-model-true-when-the-company-changes.md"
+    },
+    {
+      "id": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
+      "type": "question",
+      "name": "Why is the schema written in Markdown instead of JSON Schema?",
+      "tagline": "The decision says why a type's schema is one prose file that both an agent and a script read, and what was weighed against a second schema beside it, and the schema says what one declares.",
+      "fields": {
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "The schema written as prose is the only schema",
+                  "",
+                  "why prose, and what else was weighed"
+                ],
+                [
+                  "concept",
+                  "Schema",
+                  "",
+                  "what a schema declares"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "decision",
+                "The schema written as prose is the only schema",
+                "",
+                "why prose, and what else was weighed"
+              ],
+              [
+                "concept",
+                "Schema",
+                "",
+                "what a schema declares"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/why-is-the-schema-written-in-markdown-instead-of-json-schema.md"
+    },
+    {
+      "id": "questions/will-a-new-companygraph-release-break-our-model",
+      "type": "question",
+      "name": "Will a new CompanyGraph release break our model?",
+      "tagline": "The decision says who decides when a new release of core reaches a company's model, and what was weighed against letting it arrive by itself, and the pin says how the model names the release it is written against.",
+      "fields": {
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "Core is vendored into an instance at a release its manifest names",
+                  "",
+                  "who decides, and what else was weighed"
+                ],
+                [
+                  "concept",
+                  "Pin",
+                  "",
+                  "how the release is named"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "decision",
+                "Core is vendored into an instance at a release its manifest names",
+                "",
+                "who decides, and what else was weighed"
+              ],
+              [
+                "concept",
+                "Pin",
+                "",
+                "how the release is named"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/will-a-new-companygraph-release-break-our-model.md"
     },
     {
       "id": "roles/answerer",
@@ -9961,6 +10129,16 @@
     },
     {
       "from": "questions/can-our-ai-agents-use-it",
+      "to": "decisions/2026-read-only-server",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "what else was weighed"
+      }
+    },
+    {
+      "from": "questions/can-our-ai-agents-use-it",
       "to": "features/an-agent-reads-the-model",
       "via": "Rests on.Entity",
       "attrs": {
@@ -10009,6 +10187,16 @@
         "Type": "concept",
         "Owner": "",
         "For": "a model runs in the company's own repository"
+      }
+    },
+    {
+      "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "decisions/2026-apache-2-0",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why nothing is asked back"
       }
     },
     {
@@ -10447,6 +10635,16 @@
     },
     {
       "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "to": "decisions/2026-open-sections",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "what a page may add on its own"
+      }
+    },
+    {
+      "from": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
       "to": "processes/feature-request",
       "via": "Rests on.Entity",
       "attrs": {
@@ -10611,6 +10809,70 @@
     },
     {
       "from": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
+      "to": "concepts/schema",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what a schema declares"
+      }
+    },
+    {
+      "from": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
+      "to": "decisions/2026-prose-schema",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why prose, and what else was weighed"
+      }
+    },
+    {
+      "from": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/will-a-new-companygraph-release-break-our-model",
+      "to": "concepts/pin",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "how the release is named"
+      }
+    },
+    {
+      "from": "questions/will-a-new-companygraph-release-break-our-model",
+      "to": "decisions/2026-vendored-core",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "who decides, and what else was weighed"
+      }
+    },
+    {
+      "from": "questions/will-a-new-companygraph-release-break-our-model",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/will-a-new-companygraph-release-break-our-model",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
