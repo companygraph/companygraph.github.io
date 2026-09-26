@@ -1,5 +1,5 @@
 {
-  "commit": "e16645cae02fde34b6e3ea52d18e11a19d3f1e03",
+  "commit": "fe9cdae7168250f210bf96b46a434d36564ebe47",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -44,6 +44,12 @@
       "folder": null,
       "owner": null,
       "singular": true
+    },
+    {
+      "type": "kpi",
+      "folder": "kpis",
+      "owner": null,
+      "singular": false
     },
     {
       "type": "phase",
@@ -989,6 +995,130 @@
       ],
       "owner": null,
       "path": "example/model/identity.md"
+    },
+    {
+      "id": "kpis/change-fail-rate",
+      "type": "kpi",
+      "name": "Change Fail Rate",
+      "tagline": "The share of releases that need immediate intervention once they are in production.",
+      "fields": {
+        "source": "Local",
+        "owner": "Backend Engineer",
+        "measures": "Delivery",
+        "unit": "percent of deployments",
+        "direction": "lower",
+        "read-with": [
+          "Change Lead Time"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is measured",
+          "text": "The releases of a calendar month that were followed, before the next planned release, by a rollback or a hotfix made because of them, divided by all releases of that month. A failure is what a customer or a check against production met, not a build that failed before anything shipped.",
+          "tables": []
+        },
+        {
+          "heading": "What it can hide",
+          "text": "It falls when fewer releases ship, and when a failure is folded into the next planned release instead of being named as one. Change Lead Time rising beside it shows the first.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "DORA's definition",
+                  "https://dora.dev/guides/dora-metrics/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "DORA's definition",
+                "https://dora.dev/guides/dora-metrics/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/kpis/change-fail-rate.md"
+    },
+    {
+      "id": "kpis/change-lead-time",
+      "type": "kpi",
+      "name": "Change Lead Time",
+      "tagline": "The time a change takes from its first commit to running in production.",
+      "fields": {
+        "source": "Local",
+        "owner": "Backend Engineer",
+        "measures": "Delivery",
+        "unit": "hours",
+        "direction": "lower",
+        "read-with": [
+          "Change Fail Rate"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is measured",
+          "text": "For each release the Release phase ships, the time from the earliest commit it carries that no earlier release carried to the moment the release is live for customers; the value is the median over the releases of a calendar month. The commits come from the repository's history and the live moment from the deployment log.",
+          "tables": []
+        },
+        {
+          "heading": "What it can hide",
+          "text": "It shortens when changes get smaller and when review gets thinner, and only the first is progress. Thinner review shows as a higher Change Fail Rate, which is why the two are read together. A median also hides the change that waited a week behind a release.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "DORA's definition",
+                  "https://dora.dev/guides/dora-metrics/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "DORA's definition",
+                "https://dora.dev/guides/dora-metrics/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/kpis/change-lead-time.md"
     },
     {
       "id": "processes/delivery",
@@ -2936,6 +3066,54 @@
     {
       "from": "identity",
       "to": "sources/google-workspace",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-fail-rate",
+      "to": "processes/delivery",
+      "via": "measures",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-fail-rate",
+      "to": "roles/backend-engineer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-fail-rate",
+      "to": "kpis/change-lead-time",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-fail-rate",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-lead-time",
+      "to": "processes/delivery",
+      "via": "measures",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-lead-time",
+      "to": "roles/backend-engineer",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-lead-time",
+      "to": "kpis/change-fail-rate",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-lead-time",
+      "to": "sources/local",
       "via": "source",
       "attrs": {}
     },
