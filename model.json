@@ -1,5 +1,5 @@
 {
-  "commit": "d7407a8ff1442ec3adec04930a3630cbd23f8a42",
+  "commit": "ea8e47cc7a9cbd657d78f0d735477d5e33be9603",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -641,6 +641,623 @@
       ],
       "owner": null,
       "path": "core/concept-schema.md"
+    },
+    {
+      "id": "core/decision",
+      "type": "schema",
+      "name": "Decision Schema",
+      "tagline": "Required structure for decision files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`decided`",
+                  "Yes",
+                  "date",
+                  "When the call was made, not when it was carried out. For a call still proposed, when it was put forward."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "ref → decision-kind",
+                  "What sort of call this is, the H1 of a file in `decision-kinds/`"
+                ],
+                [
+                  "`status`",
+                  "Yes",
+                  "ref → decision-status",
+                  "Whether the call is made and still holds, the H1 of a file in `decision-statuses/`"
+                ],
+                [
+                  "`by`",
+                  "Yes",
+                  "ref → role",
+                  "The seat that made the call, the H1 of a file in `roles/`. Never the person: who held the seat on that date is the profile's."
+                ],
+                [
+                  "`serves`",
+                  "No",
+                  "array of ref → strategic-objective",
+                  "The objectives this call was made for, each the H1 of a file in `strategic-objectives/`"
+                ],
+                [
+                  "`upholds`",
+                  "No",
+                  "array of ref → value",
+                  "The values the call was weighed against, each the H1 of a file in `values/`"
+                ],
+                [
+                  "`supersedes`",
+                  "No",
+                  "array of ref → decision",
+                  "Earlier calls this one replaces, each the H1 of a file in `decisions/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`decided`",
+                "Yes",
+                "date",
+                "When the call was made, not when it was carried out. For a call still proposed, when it was put forward."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "ref → decision-kind",
+                "What sort of call this is, the H1 of a file in `decision-kinds/`"
+              ],
+              [
+                "`status`",
+                "Yes",
+                "ref → decision-status",
+                "Whether the call is made and still holds, the H1 of a file in `decision-statuses/`"
+              ],
+              [
+                "`by`",
+                "Yes",
+                "ref → role",
+                "The seat that made the call, the H1 of a file in `roles/`. Never the person: who held the seat on that date is the profile's."
+              ],
+              [
+                "`serves`",
+                "No",
+                "array of ref → strategic-objective",
+                "The objectives this call was made for, each the H1 of a file in `strategic-objectives/`"
+              ],
+              [
+                "`upholds`",
+                "No",
+                "array of ref → value",
+                "The values the call was weighed against, each the H1 of a file in `values/`"
+              ],
+              [
+                "`supersedes`",
+                "No",
+                "array of ref → decision",
+                "Earlier calls this one replaces, each the H1 of a file in `decisions/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Decision]`",
+                  "Yes",
+                  "What was decided, stated as a call. Everything references the decision by this exact string."
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "One paragraph: the call, in the company's own first person"
+                ],
+                [
+                  "`## The question`",
+                  "Yes",
+                  "What had to be decided, and why it had to be decided then"
+                ],
+                [
+                  "`## Alternatives`",
+                  "Yes",
+                  "Table. The options that lost, one row each; its columns are declared below."
+                ],
+                [
+                  "`## Why`",
+                  "Yes",
+                  "What turned it: the reason the chosen option won, in the terms the call turned on"
+                ],
+                [
+                  "`## Consequences`",
+                  "Yes",
+                  "What the call committed the company to, what it gave up, and what has to stay true for the call to stay right"
+                ],
+                [
+                  "`## Bears on`",
+                  "No",
+                  "Table. The entities the call made, changed or ended; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can check the call against; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Alternatives` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Option`",
+                  "Yes",
+                  "string",
+                  "The option, stated as the call it would have been"
+                ],
+                [
+                  "`Why not`",
+                  "Yes",
+                  "string",
+                  "What taking it would have cost, in one or two sentences"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Bears on` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "The type of the entity this row names, as its schema is named: `product`, `experience`"
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type in Owner",
+                  "The entity the call bears on, by its canonical name"
+                ],
+                [
+                  "`Owner`",
+                  "No",
+                  "string",
+                  "Where `Type` is an owned type, the entity that owns this one, by its canonical name; blank otherwise"
+                ],
+                [
+                  "`How`",
+                  "No",
+                  "string",
+                  "What the call did to it: made it, changed it, ended it"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document, a specification, a contract, a pull request, a slide"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Decision]`",
+                "Yes",
+                "What was decided, stated as a call. Everything references the decision by this exact string."
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "One paragraph: the call, in the company's own first person"
+              ],
+              [
+                "`## The question`",
+                "Yes",
+                "What had to be decided, and why it had to be decided then"
+              ],
+              [
+                "`## Alternatives`",
+                "Yes",
+                "Table. The options that lost, one row each; its columns are declared below."
+              ],
+              [
+                "`## Why`",
+                "Yes",
+                "What turned it: the reason the chosen option won, in the terms the call turned on"
+              ],
+              [
+                "`## Consequences`",
+                "Yes",
+                "What the call committed the company to, what it gave up, and what has to stay true for the call to stay right"
+              ],
+              [
+                "`## Bears on`",
+                "No",
+                "Table. The entities the call made, changed or ended; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can check the call against; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A decision is a call the company made on a date, written with the options that lost, so that whoever arrives after it can disagree with a reason rather than a rewrite. It answers \"why is it this way and not the other way, who decided, and does it still hold?\" for someone about to re-open a question that was already closed, or about to act on a call that no longer stands. It is not a strategy, which is the route currently taken and is deleted when replaced; a decision is kept as written for as long as the company exists, and its status says whether it holds.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 states what was decided, never the topic: \"Core is vendored at a named release\", not\n  \"Core distribution\". A reader who sees only the name knows the call.\n- The statement is a call a reasonable company could have made differently. If no company\n  would have chosen otherwise, it describes the work rather than deciding anything.\n- `## The question` names what had to be decided and what made it have to be decided then, a\n  deadline, an offer, a finding, and states no reason for the answer; the reasons are `## Why`.\n- `## Alternatives` carries at least one row, and never the option taken. `Why not` names what\n  the option would have cost, in the terms the call turned on, not that it was worse.\n- `## Why` gives the reason the chosen option won, concretely enough that a reader could tell\n  whether it would still win today. A reason that would equally support any of the\n  alternatives supports none.\n- `## Consequences` names what the company is now committed to and what it gave up, and states\n  what has to stay true for the call to stay right, because that is what a reader watches for.\n- `decided` is the date the call was made, at the precision the source states, never the date\n  it was carried out. A call still proposed carries the date it was put forward, and takes the\n  date of the call when its status leaves the proposed state, the file renamed where the year\n  moved.\n- `by` names the seat, never the person, as a role is person-neutral. In a company of one that\n  is one seat; in a company of more it is the seat that answered for the call, and a call that\n  several seats made names the one that would have had the last word.\n- `upholds` names a value only where it actually turned the call. A value that would be cited\n  by any call the company makes tells a reader nothing.\n- `serves` names an objective only where the call was made for it; a call that serves no\n  written objective is still a decision, and gains no invented one.\n- A decision names the objective it serves, never the strategy it follows: which route a call\n  sits on is read from the strategy that serves the same objective, and a strategy the call\n  produced or changed is a `## Bears on` row.\n- Every row of `## Bears on` names an entity the call made, changed or ended. An entity the\n  call merely mentions is not borne on.\n- A decision is not rewritten to say something else. `status` is the one field that moves, and\n  `decided` with it once when a proposed call is made; what replaced the call is read from the\n  later decision's `supersedes`, and a call that another supersedes carries the status the\n  instance keeps for a replaced call. Where a call is dropped and nothing replaced it, one\n  dated sentence closing `## Consequences` says so.\n- Written in the company's own first person, \"I\" for a company of one, \"we\" otherwise, and the\n  same one throughout the instance.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/decisions/*.md`\n\nNothing owns a decision and a decision owns nothing: a call bears on entities of every type and belongs to none of them, as a question does. The filename is not the slug of the H1, which is what R12 does by default. It is the year in `decided`, then a `-`, then a slug naming the call, chosen as an experience's is: `2026-architect-role.md`, `2026-vendored-core.md`. The folder then sorts as a log and reads as one. The year must be the year in `decided`, the rest must be a slug by R12, and the two together must be unique in the folder.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/decision-schema.md"
+    },
+    {
+      "id": "core/decision-kind",
+      "type": "schema",
+      "name": "Decision Kind Schema",
+      "tagline": "Required structure for decision kind files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every decision references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the kind covers"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "Which calls belong to this kind, and which do not"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every decision references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the kind covers"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "Which calls belong to this kind, and which do not"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A kind answers \"what sort of call is this?\", the question a reader cannot otherwise ask of a folder that holds a hire, a license and a data model side by side. Its value is that the answer is a reference rather than a word: two decisions of one kind mean the same sort of thing, the kinds are visible in the graph as nodes, and a page can draw the calls of one kind together.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` is written so that two readers filing the same call would file it under\n  the same kind. A kind that cannot do that is not yet a kind.\n- It says what the kind excludes as well as what it covers, since the boundary with the kind\n  beside it is where every disagreement will be.\n- A kind is about the sort of call, never about how large it was, how it turned out or who\n  made it. Those belong to the decision.\n- Name it for what the calls are, `Architecture`, `Career`, and never for the section or the\n  type they sit in.\n- No rank: kinds never order anything inside a page, and two kinds are told apart by what they\n  cover, not by a number.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/decision-kinds/*.md`\n\nA kind owns nothing and nothing owns it: many decisions claim the same few, and what each kind means lives here rather than being restated on every call. It sits at the container root beside `experience-kinds/`, because every decision in the instance claims one of the same set.\n\nThe set is the instance's own, as an experience kind's is. Which sorts of call a company distinguishes, an architecture from a hire from a price, is a fact about that company, and a kind arriving later is one file here, not a change to this metamodel and a release of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/decision-kind-schema.md"
+    },
+    {
+      "id": "core/decision-status",
+      "type": "schema",
+      "name": "Decision Status Schema",
+      "tagline": "Required structure for decision status files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every decision references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the state means"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "When a call is in this state, when it leaves it, and what a reader may rely on while it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every decision references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the state means"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "When a call is in this state, when it leaves it, and what a reader may rely on while it is"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A status answers \"is this call made, and does it still hold?\" for someone about to act on it. A decision file is never rewritten to say something else, so the status is the one thing on it that moves, and what each state licenses a reader to do is written once here rather than guessed from a word.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` says what a reader may rely on: a proposed call is not acted on, a\n  standing call is, a replaced one is read through the decision that replaced it.\n- It says how a call leaves the state, which decision or event moves it on, so that a status\n  is never changed by hand without a reason the model can show.\n- An instance has exactly one status for a call that holds as written, and every other status\n  says which decision or event moves a call into it.\n- A status is about whether the call is made and holds, never about how well it went. What\n  came of a call is the next decision's question or a period's result.\n- Name it for the state of the call, `Standing`, `Revised`, and never for a verdict on it.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/decision-statuses/*.md`\n\nA status owns nothing and nothing owns it: every decision carries one, and what each state means lives here rather than in a token whose meaning every reader guesses. It sits at the container root beside `decision-kinds/`, because every decision in the instance is in one of the same set of states.\n\nThe set is the instance's own. Which states a company lets a call be in, whether a call can be proposed before it is made, whether a dropped call is told from a replaced one, is a fact about the company, and a state arriving later is one file here, not a change to this metamodel.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/decision-status-schema.md"
     },
     {
       "id": "core/domain",
@@ -4520,6 +5137,87 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "core/decision-kind",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/decision-status",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/role",
+      "via": "by",
+      "attrs": {
+        "type": "ref → role"
+      },
+      "label": "by"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/decision-kind",
+      "via": "kind",
+      "attrs": {
+        "type": "ref → decision-kind"
+      },
+      "label": "kind"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/strategic-objective",
+      "via": "serves",
+      "attrs": {
+        "type": "array of ref → strategic-objective"
+      },
+      "label": "serves"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/decision-status",
+      "via": "status",
+      "attrs": {
+        "type": "ref → decision-status"
+      },
+      "label": "status"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/decision",
+      "via": "supersedes",
+      "attrs": {
+        "type": "array of ref → decision"
+      },
+      "label": "supersedes"
+    },
+    {
+      "from": "core/decision",
+      "to": "core/value",
+      "via": "upholds",
+      "attrs": {
+        "type": "array of ref → value"
+      },
+      "label": "upholds"
     },
     {
       "from": "core/domain",
