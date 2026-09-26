@@ -273,10 +273,8 @@
      new tab — the index may cross to companygraph.io in place, but a deck that navigates
      away mid-talk is gone, and unlike the index it has no nav to come back through. That
      also puts it under verify's `links` check, which asserts the href exists rather than
-     just that it behaves. Styled here because nothing else in a slide is an anchor, so
-     left alone it would render in the browser's default blue. */
-  .stamp a{color:var(--c-firm); text-decoration:none; border-bottom:1px solid var(--c-weak)}
-  .stamp a:hover, .stamp a:focus-visible{border-bottom-color:var(--c-mid)}
+     just that it behaves. deck.css's link block draws them, as it draws every link in text
+     across the family. */
 
   /* breadth grid (domains overview) */
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 6cqmin; margin-top:4.4cqmin}
