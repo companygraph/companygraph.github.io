@@ -28,7 +28,7 @@ const SITE = "https://companygraph.io";
 const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy", "company.json"];
 
 const PAGES = [
-  { path: "/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", home: { model: "/company.json" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // fences is not empty here — this page keeps stage contract, its own glue to the model,
     // fenced as it always was. tokenVersion reads tokens.css's own opening comment whenever
@@ -65,11 +65,9 @@ const PAGES = [
     translates: { lang: "de",
       // The head, not just the body: this page carried an id="metadesc" that nothing acted
       // on, so a German visitor read an English title and description under lang="de".
-      // Declared here so the swap cannot quietly go away again. The vision section's third
-      // tile carries no data-de yet, so "Try the CLI" is not asserted either way: it stands
-      // in English under both languages until the site words' German follows.
-                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph"],
-                  hides: ["Everything a company"] },
+      // Declared here so the swap cannot quietly go away again.
+                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "DIE VISION", "Drei Werte – jeder mit dem", "Die CLI ausprobieren"],
+                  hides: ["Everything a company", "THE VISION", "Try the CLI"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
     // /example/ are: `graph` reads company.json, the file the page names, and walks what it
     // draws, so no name from the model is written here.

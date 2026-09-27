@@ -53,10 +53,7 @@ const RENDERERS = [
   // process no rank, so the page names it.
   (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"] }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
-  // The heading carries no German yet — the home page's own words, the kickers and the
-  // tiles among them, stay English until the owner has reviewed them rendered, the same gate
-  // every other page's words waited behind.
-  (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>." } }),
+  (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
