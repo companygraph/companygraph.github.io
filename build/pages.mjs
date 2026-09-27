@@ -14,6 +14,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeTeam } from "@robertblust/design/render/team";
+import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeHome } from "@robertblust/design/render/home";
 import { loadGerman } from "@robertblust/design/render/german";
@@ -51,7 +52,10 @@ const RENDERERS = [
   (d, o) => writePrinciples(d.company, { ...o, root: ROOT, de: german.de }),
   // The order the boards argue in: the work first, then how an outsider joins it. Core gives a
   // process no rank, so the page names it.
-  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"] }),
+  // Each board shows its process as the chat draws it, from the same drawer, over the artifact
+  // at the commit source.json pins, so the picture moves only when the pin does.
+  // Its nodes link to the home page, which draws the company.
+  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
   (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
 ];
