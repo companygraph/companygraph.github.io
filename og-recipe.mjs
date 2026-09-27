@@ -41,9 +41,9 @@ const DECK_HIDE = `.chrome,.bar,.notes,.langind,.hint,.rbchat-open{display:none!
   .slide.active > *{animation:none!important}`;
 
 // The landing page's figure is hidden not because it wouldn't fit; it would. The card's job is
-// the headline and the call to action, the thing a reader takes in before they've decided to
-// care. The figure is the argument that leads there, and an argument doesn't survive being
-// glanced at in a feed — it needs a page and a reader who has already arrived.
+// the headline and the opening claim of the vision, the thing a reader takes in before they've
+// decided to care. The figure is the argument that leads there, and an argument doesn't survive
+// being glanced at in a feed — it needs a page and a reader who has already arrived.
 const HOME_HIDE = ".figure{display:none} .rbchat-open{display:none!important}";
 
 // Rendered at 16:9 and the middle band taken: these pages lay themselves out in vmin, so

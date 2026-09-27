@@ -28,7 +28,7 @@ const SITE = "https://companygraph.io";
 const FOOTER = ["Robert Blust", "GitHub", "License", "Privacy", "company.json"];
 
 const PAGES = [
-  { path: "/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en",
+  { path: "/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CompanyGraph/, lang: "en", sourceLang: "en", home: { model: "/company.json" },
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // fences is not empty here — this page keeps stage contract, its own glue to the model,
     // fenced as it always was. tokenVersion reads tokens.css's own opening comment whenever
@@ -44,25 +44,19 @@ const PAGES = [
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
     contains: ["Everything a company knows", "One graph", "CompanyGraph", "CLI", "TALKS", "MODEL", "BILLING",
-               // The talk's call to action and the one fact this page is allowed to
-               // restate: its length. A call to action needs it in the moment, not one
-               // click away. The deck is in this repository now — `talks/intro/` — so the
-               // number and the thing it describes finally move in the same commit. It is
-               // still not derived from the deck's own timings, so re-cut the talk and this
-               // string has to be changed by hand; what changed is that nothing crosses a
-               // repository boundary to do it.
-               "Watch intro talk", "7 minutes · German or English", "Try the CLI",
-               // The hero's note says what the drawing below it is: CompanyGraph, in
-               // its own vocabulary. Only the words that carry it, so rewording the
-               // rest of the sentence does not fail the check.
-               "described in its own vocabulary"],
+               // The hero carries no button of its own — the talk is the nav's `TALKS` link,
+               // the CLI and the vocabulary are tiles in the vision section below. This is
+               // the vision section's third tile, named here rather than left to `internalLinks`
+               // because a tile's own words are worth holding, not only its target.
+               "Try the CLI"],
     links: ["https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
             "https://blust.ch/"],
     // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
     // page whole; what `sameTab` adds is the name. The nav gained one item and the check
     // that would have caught it opening elsewhere never mentioned it, so it is named here.
-    // The third call to action goes to the setup page, on this domain, so it stays in the tab.
+    // The vision section's third tile goes to the setup page, on this domain, so it stays in
+    // the tab.
     sameTab: ["model/", "cli/"],
     internalLinks: true,
     // The German half, named by what the reader must see and what must stop being
@@ -72,9 +66,8 @@ const PAGES = [
       // The head, not just the body: this page carried an id="metadesc" that nothing acted
       // on, so a German visitor read an English title and description under lang="de".
       // Declared here so the swap cannot quietly go away again.
-                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "7 Minuten · Deutsch oder Englisch",
-                          "beschrieben in seinem eigenen Vokabular"],
-                  hides: ["Everything a company", "Read the source", "Try the CLI", "described in its own vocabulary"] },
+                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "DIE VISION", "Drei Werte – jeder mit dem", "Die CLI ausprobieren"],
+                  hides: ["Everything a company", "THE VISION", "Try the CLI"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
     // /example/ are: `graph` reads company.json, the file the page names, and walks what it
     // draws, so no name from the model is written here.
@@ -143,12 +136,14 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, board: true },
   // CompanyGraph's vision and values, generated from company.json by @robertblust/design's
-  // writePrinciples. The model's words stay in the one language it is written in, so the German
-  // check reads the page's own words: the head and the one heading the region translates.
+  // writePrinciples. The model's own words now carry a German translation held to the exact
+  // English in build/principles.de.json, so the German check reads one of them: the note that
+  // says so, and a value's German name, with the note's English and that value's English gone.
   { path: "/principles/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["Written once", "read by", "Values", "Generated from"],
     translates: { lang: "de",
-      shows: ["Werte"], hides: ["Values"] },
+      shows: ["Werte", "übersetzt aus dem Englischen", "Das Muster beschreiben, nie die Firma"],
+      hides: ["Generated from the model, so", "Describe the pattern, never the company"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,

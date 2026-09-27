@@ -29,7 +29,8 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `index.html`, `cli/`, `billing/`, `privacy/` — the prose pages, each its own markup and prose,
   linking `tokens.css`, `page.css` and `page.js` for the chrome and tokens they share with every
   other page in the family. The landing page also carries a stage, described with the stage
-  pages below.
+  pages below, and a vision and values region `build/pages.mjs` writes from `company.json` with
+  `@robertblust/design/render/home`.
 - `talks/index.html` — the talks index, carrying this site's chrome so a visitor crossing into
   it meets no seam.
 - `talks/intro/` — the deck: `index.html`, linking `tokens.css` and `deck.css` and loading

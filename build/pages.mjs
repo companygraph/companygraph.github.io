@@ -15,6 +15,8 @@ import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeTeam } from "@robertblust/design/render/team";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
+import { writeHome } from "@robertblust/design/render/home";
+import { loadGerman } from "@robertblust/design/render/german";
 import { writeJsonLd } from "./jsonld.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -43,16 +45,24 @@ for (const [name, pinName] of Object.entries(ARTIFACTS)) {
 }
 
 const check = process.argv.includes("--check");
+const german = loadGerman(path.join(ROOT, "build", "principles.de.json"));
 const RENDERERS = [
   (d, o) => writeJsonLd(d, { ...o, repo }),
-  (d, o) => writePrinciples(d.company, { ...o, root: ROOT }),
+  (d, o) => writePrinciples(d.company, { ...o, root: ROOT, de: german.de }),
   // The order the boards argue in: the work first, then how an outsider joins it. Core gives a
   // process no rank, so the page names it.
   (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"] }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
+  (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
+
+const unused = german.unused();
+if (unused.length) {
+  console.error(`  ✗ build/principles.de.json holds German for English the model no longer says:\n${unused.map((en) => `    "${en}"`).join("\n")}`);
+  process.exit(1);
+}
 
 if (check) {
   if (stale.length) {
