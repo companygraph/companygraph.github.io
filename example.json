@@ -1,5 +1,5 @@
 {
-  "commit": "d0f95b1b3ed1a4fcc29aa7a4eab7afcb8e028946",
+  "commit": "435c07ed5116e0cb7b3b67b9baf17a4d0896340c",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -1779,8 +1779,48 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Build, all of these hold:\n\n- The suite passes on the branch.\n- Every review finding is resolved or recorded with a reason.\n- The branch does what the specification said, and nothing else.\n\nWhere they cannot be met, the Reviewer decides whether the branch is reworked or abandoned.",
+          "text": "To leave Build, all of these hold:\n\n- The suite passes on the branch.\n- Every review finding is resolved or recorded with a reason.\n- The branch does what the specification said, and nothing else.",
           "tables": []
+        },
+        {
+          "heading": "If not met",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Outcome",
+                "Leads to"
+              ],
+              "rows": [
+                [
+                  "reworked",
+                  "Build"
+                ],
+                [
+                  "abandoned",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Outcome",
+              "Leads to"
+            ],
+            "rows": [
+              [
+                "reworked",
+                "Build"
+              ],
+              [
+                "abandoned",
+                ""
+              ]
+            ]
+          }
         }
       ],
       "owner": "processes/delivery",
@@ -1864,8 +1904,40 @@
         },
         {
           "heading": "Gate",
-          "text": "Release is the last phase. The work is done when all of these hold:\n\n- The change is merged and tagged.\n- The page is live.\n- The change has been exercised in production without incident.\n\nWhere they cannot be met, the Reviewer decides whether the release is rolled back.",
+          "text": "Release is the last phase. The work is done when all of these hold:\n\n- The change is merged and tagged.\n- The page is live.\n- The change has been exercised in production without incident.",
           "tables": []
+        },
+        {
+          "heading": "If not met",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Outcome",
+                "Leads to"
+              ],
+              "rows": [
+                [
+                  "rolled back",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Outcome",
+              "Leads to"
+            ],
+            "rows": [
+              [
+                "rolled back",
+                ""
+              ]
+            ]
+          }
         }
       ],
       "owner": "processes/delivery",
@@ -1941,8 +2013,48 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Specify, all of these hold:\n\n- The request is stated as one sentence.\n- The approach is chosen and the rejected ones are named.\n- What the change will not do is written down.\n\nWhere they cannot be met, the Reviewer decides whether the request is reshaped or dropped.",
+          "text": "To leave Specify, all of these hold:\n\n- The request is stated as one sentence.\n- The approach is chosen and the rejected ones are named.\n- What the change will not do is written down.",
           "tables": []
+        },
+        {
+          "heading": "If not met",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Outcome",
+                "Leads to"
+              ],
+              "rows": [
+                [
+                  "reshaped",
+                  "Specify"
+                ],
+                [
+                  "dropped",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Outcome",
+              "Leads to"
+            ],
+            "rows": [
+              [
+                "reshaped",
+                "Specify"
+              ],
+              [
+                "dropped",
+                ""
+              ]
+            ]
+          }
         }
       ],
       "owner": "processes/delivery",
@@ -3775,6 +3887,14 @@
     },
     {
       "from": "processes/delivery/phases/build",
+      "to": "processes/delivery/phases/build",
+      "via": "If not met.Leads to",
+      "attrs": {
+        "Outcome": "reworked"
+      }
+    },
+    {
+      "from": "processes/delivery/phases/build",
       "to": "roles/reviewer",
       "via": "escalation-authority",
       "attrs": {}
@@ -3856,6 +3976,14 @@
       "to": "roles/backend-engineer",
       "via": "supported-by",
       "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/specify",
+      "to": "processes/delivery/phases/specify",
+      "via": "If not met.Leads to",
+      "attrs": {
+        "Outcome": "reshaped"
+      }
     },
     {
       "from": "processes/delivery/phases/specify",
