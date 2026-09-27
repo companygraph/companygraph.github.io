@@ -159,19 +159,17 @@
      it. Mirror the space above, and the box is symmetric about its own text. */
   /* Same control as the sibling sites: rests dim like any secondary text, brightens on
      hover, and marks whichever language is active with --c-firm — the resolved thing. */
-  /* The figure always sits on its own row under the hero, left-aligned with it, at every
-     width — never beside it. The page fits one screen at 1440×900 and scrolls slightly below
-     that; the vertical padding here is what keeps the hero clear of the header and the
-     caption clear of the footer at those smaller heights. It used to be twice this: the
-     header carried no bottom padding then, so this space did that job as well. Now the
-     header is the site's one header — 2rem top and bottom, like every other page — and
-     doubling up on the gap was what pushed 1440×900 off its single screen. */
+  /* The vision, values and graph sections now follow the hero, so the page scrolls on an
+     ordinary screen; the vertical padding here only keeps the hero clear of the header and
+     the graph section clear of the footer at a viewport short enough that it does not. It
+     used to be twice this: the header carried no bottom padding then, so this space did that
+     job as well. Now the header is the site's one header — 2rem top and bottom, like every
+     other page. */
   main{flex:1; display:flex; align-items:center; padding:clamp(1rem,2vh,3.5rem) 0}
-  /* No shell-level gap: the hero, the drawing and the caption need three different
-     distances from one another, not one row gap repeated between all three, so each
-     distance is that item's own margin-top instead — .hero's flex-basis is content, not a
-     row-layout width hint, or it would stretch to fill the leftover main-axis space that
-     used to be beside the figure and reopen the gap this exists to close. */
+  /* No shell-level gap: the hero needs none above it, and each section below sets its own
+     distance from the one before through .sec's margin-top in page.css — a row gap here would
+     also open above the hero, where none is wanted. .hero's flex-basis is content, not a
+     row-layout width hint, or it would stretch to fill the leftover main-axis space. */
   main .shell{display:flex; flex-direction:column; align-items:stretch; gap:0}
   /* Mono means data, and every item here is one: a URL, a license identifier, a name that
      is really a link. The check that guards mono deliberately does not reach the footer. */
@@ -193,25 +191,8 @@
   .hero h1 .r70{display:block; font-weight:300; color:var(--dim); text-wrap:balance}
   .hero h1 .rcl{display:block; font-weight:800}
   .hero h1 em{font-style:normal; color:var(--c-firm)}
-  /* The page's one reversal, flagged the way the model page flags its own: a visitor who
-     reads "graph" assumes records being matched, and this line says the opposite. Same rule,
-     same color, same slot under the tagline — a reader who has seen one recognizes the other. */
-  .note{margin-top:2rem; max-width:52ch; padding-left:1rem;
-        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
   .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.5rem); color:var(--dim);
            max-width:44ch; line-height:1.4}
-  .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
-  .btn{
-    font-size:.82rem; font-weight:500; letter-spacing:.07em;
-    text-decoration:none; padding:.9rem 1.25rem; border-radius:7px; border:1.5px solid var(--rule);
-    color:var(--ink); background:var(--raise); transition:border-color .18s ease, color .18s ease;
-  }
-  .btn:hover, .btn:focus-visible{border-color:var(--c-mid); color:var(--c-mid)}
-  .btn.primary{border-color:var(--c-mid); color:var(--c-mid)}
-  .btn.primary:hover, .btn.primary:focus-visible{background:var(--press)}
-  /* The talk's length and its languages, under the buttons. Mono because both are data —
-     a length and a language pair — and because it must not read as a third button. */
-  .ctameta{margin-top:1.1rem; font-size:.78rem; color:var(--dim); letter-spacing:.05em}
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
   /* ─── The figure: CompanyGraph's own model, drawn ───────────────────────────────

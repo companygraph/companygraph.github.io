@@ -21,9 +21,9 @@ No build. `npm run serve` (`python3 -m http.server 8000`), then `npm run verify`
 
 **Verify by rendering, not by reading the diff.** Check both OS color-scheme preferences and at least a phone width. The page's own palette is fixed — it does not redraw for `prefers-color-scheme: light` — but the browser's native chrome (scrollbar, form control, selection color) still follows the OS setting where the page states no opinion, and that gap is invisible in a source diff; it only shows up in a rendered window.
 
-## One screen, one job
+## Vision, values, graph
 
-The page says what CompanyGraph is and sends the visitor to `companygraph/meta-model`. That is the whole scope of `index.html`, and the list of what it must never say is longer than what it does say:
+The page opens on a headline and tagline saying what CompanyGraph is, then the vision — three tiles: Ask, which opens the chat; See the vocabulary, to `/model/`; and Try the CLI, to `/cli/` — then the values, then CompanyGraph's own model drawn as the graph under "CompanyGraph, described as CompanyGraph." That is the whole scope of `index.html`, and the list of what it must never say is longer than what it does say:
 
 - **No type count and no type list.** The model ships five types today and a planned
   eighteen; it moves fast, so any number here is wrong within a release. That sentence
@@ -62,17 +62,21 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   one region still rendered into each page, by `npm run pages`; each artifact carries the
   commit it was built from, so `pages.mjs` refuses to render against a missing or stale one
   rather than needing this document to say which command runs first, and `pages:check` fails
-  when a graph drifts. Nothing else on the example page names anything from the example,
-  nothing else on the model page names anything from the model, and nothing else on the
-  landing page names anything from CompanyGraph's own model.
+  when a graph drifts. Nothing else on the example page names anything from the example, and
+  nothing else on the model page names anything from the model. The landing page carries a
+  second derived region beside the JSON-LD graph: the vision and values `npm run pages` writes
+  from `company.json` with the design package's `render/home`, the same renderer and the same
+  pin `/principles/` draws from — nothing on the landing page names anything from CompanyGraph's
+  own model beyond those two regions.
 - **`/cli/` restates meta-model's command line, and is the one page allowed to.** A page about the command line that only linked to the README would not be one, so it shows the command, the menu it opens, what each entry does, what Obsidian still asks after the plugin is installed, and the subcommands with their flags. What keeps it true is what the page leaves out and one habit. It names no release: every command reads `#semver:*`, which npm resolves to the highest release tag when the command runs, and the drawn menu writes `<release>` where the tooling prints one, because a version written here is wrong at the next release. The drawing plays the menu's default flow, Make a model with the plugin and back to the menu, and every line it plays is one the tooling prints, with a placeholder such as `<n>`, `<core>` or `<plugin release>` wherever that line carries a count, a version or a list that moves. And every command on it was run from a release before it was written: when meta-model changes the menu, a command or a flag the page names, this page changes in the same wave, since nothing in this repository can see the change happen. Its prose is hand-written, so it is not a unit of the website surface in `companygraph/mental-model`.
 - **Team, Principles and Surfaces are generated regions around a hand-written shell.** Each is
   a page built from `/privacy/`'s shell whose model-derived region `npm run pages` writes from
   `company.json` with the design package's `render/team`, `render/principles` and
   `render/surfaces`; its CSS is `page.css`'s now, and its `model card` or `surfaces lineage`
-  fence still comes from `npm run design`. Those words are the model's own and
-  are not translated, which the page's generated note says; everything around them is the
-  page's, reviewed English with German made from it. Team's board order is the list
+  fence still comes from `npm run design`. Team's and Surfaces' words are the model's own and
+  are not translated, which those pages' generated note says; Principles' words are the model's
+  own too, but do carry a translation, as the German section below says. Everything around all
+  three is the page's, reviewed English with German made from it. Team's board order is the list
   `build/pages.mjs` passes as `order`, because core gives a process no rank. Team and Surfaces
   declare `STAGE_PAGE = "../"`, the landing page, which draws the instance, and the suite's
   `board` and `lineage` checks fail if that page stops drawing `company.json`.
@@ -212,10 +216,11 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   leads there, and an argument doesn't survive being glanced at in a feed regardless of whether
   the crop has room for it. A claim about geometry is a claim a future layout change can
   quietly falsify; a claim about what the card is *for* held through two of those. A third
-  change removed the hero's buttons from the page entirely — the CLI is now a tile in the
-  vision section, and nothing replaced the other two — so there is no call to action left for
-  the crop to reach, not a geometry change but a content one, and the comment now names the
-  vision's opening claim as what the headline leads into. Keep it naming what the crop
+  change removed the hero's buttons from the page entirely — Ask, See the vocabulary and Try
+  the CLI are now tiles in the vision section below the crop, See the vocabulary taking over
+  what the source link did — so the card's own call to action is gone, not a geometry change
+  but a content one, and the comment now names the vision's opening claim as what the headline
+  leads into. Keep it naming what the crop
   actually shows.
 
 - **The sitemap is flat, and stays flat.** It listed one page and carried a note saying it
@@ -251,7 +256,7 @@ Four more places carry German, and none of their names ends in `-de`. The `UI.de
 
 A page generated from a pinned model — blust.ch's `/model/`, companygraph.io's `/model/` and `/example/` — shows the model's own words in the one language the model is written in, and the German page shows them unchanged under `lang="de"`. Each of those pages says so in its note; the site's own words around them are bilingual like everything else. A translated copy would be a second thing to keep true, which is the argument each of those pages makes against it.
 
-`/principles/` on both sites is the one page generated from a pinned model that carries a translation anyway: the model still stays English, but each site's `build/principles.de.json` holds the German for the exact English string a value or the vision states, looked up rather than typed a second time, and the build refuses to run the moment the English moves and the German has not caught up. The page's own note says so — `NOTE_TRANSLATED_EN`/`NOTE_TRANSLATED_DE` in `@robertblust/design/render/note`, not the plain `NOTE_EN`/`NOTE_DE` that `/model/` and `/example/` still carry — and the `translates` check presses the language toggle and reads the German back.
+`/principles/` on both sites, and on companygraph.io the landing page's own vision and values region beside it, are generated from a pinned model that carries a translation anyway: the model still stays English, but each site's `build/principles.de.json` holds the German for the exact English string a value or the vision states, looked up rather than typed a second time, and the build refuses to run the moment the English moves and the German has not caught up. `/principles/`'s own note says so — `NOTE_TRANSLATED_EN`/`NOTE_TRANSLATED_DE` in `@robertblust/design/render/note`, not the plain `NOTE_EN`/`NOTE_DE` that `/model/` and `/example/` still carry — and the `translates` check presses the language toggle and reads the German back on both regions.
 
 `translates` is the check that clicks. Every other DOM check reads the page as it first renders, which is English; this one presses DE, asserts the German is there and the English is gone — body text, `<title>`, meta description and, on a talks index, the PDF link — then presses EN and requires the page back exactly as it was. It is shared, in `@robertblust/design`, and every page in `PAGES` declares a spec for it, because a page without one is a page whose German half no test has seen.
 
