@@ -143,12 +143,14 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, board: true },
   // CompanyGraph's vision and values, generated from company.json by @robertblust/design's
-  // writePrinciples. The model's words stay in the one language it is written in, so the German
-  // check reads the page's own words: the head and the one heading the region translates.
+  // writePrinciples. The model's own words now carry a German translation held to the exact
+  // English in build/principles.de.json, so the German check reads one of them: the note that
+  // says so, and a value's German name, with the note's English and that value's English gone.
   { path: "/principles/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["Written once", "read by", "Values", "Generated from"],
     translates: { lang: "de",
-      shows: ["Werte"], hides: ["Values"] },
+      shows: ["Werte", "übersetzt aus dem Englischen", "Das Muster beschreiben, nie die Firma"],
+      hides: ["Generated from the model, so", "Describe the pattern, never the company"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
