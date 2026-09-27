@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeTeam } from "@robertblust/design/render/team";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
+import { writeHome } from "@robertblust/design/render/home";
 import { loadGerman } from "@robertblust/design/render/german";
 import { writeJsonLd } from "./jsonld.mjs";
 
@@ -52,6 +53,10 @@ const RENDERERS = [
   // process no rank, so the page names it.
   (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"] }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
+  // The heading carries no German yet — the home page's own words, the kickers and the
+  // tiles among them, stay English until the owner has reviewed them rendered, the same gate
+  // every other page's words waited behind.
+  (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>." } }),
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
