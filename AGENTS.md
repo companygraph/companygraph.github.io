@@ -206,13 +206,17 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   swapped in a different geometric claim — that hiding it was necessary because the figure
   "needs room the card does not have" and would "cut the two trees off" — and that was
   disproved by literally rendering the card *without* hiding `.figure`: it fit inside the crop
-  fine. The comment now sits beside `HOME_HIDE` in `og-recipe.mjs`, which is where the rule
+  fine. The comment sits beside `HOME_HIDE` in `og-recipe.mjs`, which is where the rule
   itself moved, and it makes no claim about fit, cropping, or dimensions at
-  all: the card's job is the headline and the call to action, the figure is the argument that
+  all: the card's job is the headline and what leads it, the figure is the argument that
   leads there, and an argument doesn't survive being glanced at in a feed regardless of whether
-  the crop has room for it. If you touch this comment again, keep it that way — a claim about
-  geometry is a claim a future layout change can quietly falsify; a claim about what the card
-  is *for* can't be.
+  the crop has room for it. A claim about geometry is a claim a future layout change can
+  quietly falsify; a claim about what the card is *for* held through two of those. A third
+  change removed the hero's buttons from the page entirely — the CLI is now a tile in the
+  vision section, and nothing replaced the other two — so there is no call to action left for
+  the crop to reach, not a geometry change but a content one, and the comment now names the
+  vision's opening claim as what the headline leads into. Keep it naming what the crop
+  actually shows.
 
 - **The sitemap is flat, and stays flat.** It listed one page and carried a note saying it
   would become an index the day `companygraph/talks` shipped, because two repositories were
@@ -223,17 +227,13 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   org avatar. Upload `avatar.png` at Organization → Settings → Profile after regenerating it
   from `avatar.svg`.
 
-- **When the talk ships**, the page gains a nav item and a second button — the header markup
-  is already built so that this is an addition, not a redesign — and it inherits the sibling's
-  one restated fact: the talk's length, quoted inline because a call to action needs it in the
-  moment, not one click away. That obligation begins the day the talk repository exists, not
-  now; do not pre-write a "talk coming soon" in the meantime, which is exactly the kind of
-  status claim §3 above forbids.
-- **The length quoted is the one a visitor plays**: the narration of every clip plus the
-  player's pause between slides (`SETTLE_MS` and `READ_MS` in `deck.js`), rounded to the
-  minute and stated per language. It was 12 minutes until Sep 25, 2026, the length presented
-  live; a visitor never hears that version, so the owner chose the one they do. Re-measure
-  when a clip is regenerated.
+- **The talk has no button of its own on the home page.** It is reached from the nav's
+  `TALKS` link, and from `/talks/` and `/talks/intro/` directly. The home page's own call to
+  action is the vision section's tiles — Ask, See the vocabulary, Try the CLI — so nothing here
+  restates the talk's length; a visitor who wants it opens the talk page.
+- **A talk's own length, where one is quoted, is the one a visitor plays**: the narration of
+  every clip plus the player's pause between slides (`SETTLE_MS` and `READ_MS` in `deck.js`),
+  rounded to the minute and stated per language. Re-measure when a clip is regenerated.
 
 ## A page is en-US; a `-de` attribute is de-CH
 

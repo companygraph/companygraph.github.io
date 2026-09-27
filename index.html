@@ -312,15 +312,6 @@
   <section class="hero">
     <h1 data-de="<span class='r70'>Alles, was eine Firma weiss.</span><span class='rcl'>Ein einziger <em>Graph</em>.</span>"><span class="r70">Everything a company knows.</span><span class="rcl">One <em>graph</em>.</span></h1>
     <p class="tagline" data-de="Ein Meta-Modell für den Betrieb einer Firma – die Struktur, in der ihr Wissen abgelegt ist, damit sich Menschen wie Agenten darauf verlassen können.">A meta-model for operating a company — the structure its knowledge takes, so people and agents can both rely on it.</p>
-    <p class="note" id="heronote" data-de="Das ist CompanyGraph, beschrieben in seinem eigenen Vokabular: seine Ausrichtung, die Rollen und Prozesse, nach denen es arbeitet, und was es baut.">This is CompanyGraph, described in its own vocabulary: its direction, the roles and processes it works by, and what it builds.</p>
-    <div class="cta">
-      <a class="btn primary" href="talks/intro/"
-         data-de="Einführungsvortrag ansehen">Watch intro talk</a>
-      <a class="btn primary" href="cli/" data-de="CLI ausprobieren">Try the CLI</a>
-      <a class="btn" href="https://github.com/companygraph"
-         data-de="Quelltext lesen">Read the source</a>
-    </div>
-    <p class="ctameta mono" data-de="7 Minuten · Deutsch oder Englisch">7 minutes · German or English</p>
   </section>
 
   <section class="sec" id="vision">
@@ -332,7 +323,7 @@
     <div class="tiles">
       <button class="tile" type="button" data-chat-open><b>Ask</b><span>An agent that answers only from the model, and names the evidence under each answer.</span><i>Open the chat →</i></button>
       <a class="tile" href="model/"><b>See the vocabulary</b><span>The meta-model itself: one schema per type, drawn as the graph of what references what.</span><i>Open the vocabulary →</i></a>
-      <a class="tile" href="example/"><b>See the example</b><span>A fictional company described in CompanyGraph, exactly as its files say.</span><i>Open the example →</i></a>
+      <a class="tile" href="cli/"><b>Try the CLI</b><span>Make a company's model, check it and keep its vocabulary current, all from one menu.</span><i>Open the CLI →</i></a>
     </div>
   </section>
 
@@ -348,35 +339,39 @@
       <!-- values:end -->
   </section>
 
-  <figure class="figure figure-section">
-    <div class="stagehead" id="stagehead">
-      <p class="path mono" id="path"></p>
-      <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
-    </div>
-    <div class="stage" id="stage">
-      <div class="canvas">
-        <svg id="fig" role="group" aria-labelledby="heronote figcap"></svg>
-        <button class="recenter" id="recenter" type="button" data-de="Neu zentrieren">recenter</button>
+  <section class="sec" id="graph">
+    <p class="kicker">The graph</p>
+    <h2>CompanyGraph, described as <em>CompanyGraph</em>.</h2>
+    <figure class="figure figure-section">
+      <div class="stagehead" id="stagehead">
+        <p class="path mono" id="path"></p>
+        <button type="button" class="expand" id="expand" data-de="Vergrössern">Expand</button>
       </div>
-      <button class="gutter" id="gutter" type="button"
-              aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
-      <aside class="card" id="card" aria-live="polite">
-        <div class="cbody" id="cbody"></div>
-        <div class="cfoot" id="cfoot">
-          <span id="cfootlink"></span>
+      <div class="stage" id="stage">
+        <div class="canvas">
+          <svg id="fig" role="group" aria-labelledby="figcap"></svg>
+          <button class="recenter" id="recenter" type="button" data-de="Neu zentrieren">recenter</button>
         </div>
-      </aside>
-    </div>
-    <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
-    <figcaption class="figcap" id="figcap" data-de="Eine durchgezogene Linie bedeutet <b>besitzt</b>. Eine gestrichelte bedeutet <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Ein Klick rückt das Element in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the center.</figcaption>
-    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/companygraph/mental-model/tree/HEAD/model">companygraph/mental-model</a>@<span id="srccommit">HEAD</span> — <span data-de="das Vokabular, angewandt auf die Firma, die es veröffentlicht.">the vocabulary, used on the company that publishes it.</span></p>
+        <button class="gutter" id="gutter" type="button"
+                aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
+        <aside class="card" id="card" aria-live="polite">
+          <div class="cbody" id="cbody"></div>
+          <div class="cfoot" id="cfoot">
+            <span id="cfootlink"></span>
+          </div>
+        </aside>
+      </div>
+      <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
+      <figcaption class="figcap" id="figcap" data-de="Eine durchgezogene Linie bedeutet <b>besitzt</b>. Eine gestrichelte bedeutet <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Ein Klick rückt das Element in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the center.</figcaption>
+      <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/companygraph/mental-model/tree/HEAD/model">companygraph/mental-model</a>@<span id="srccommit">HEAD</span> — <span data-de="das Vokabular, angewandt auf die Firma, die es veröffentlicht.">the vocabulary, used on the company that publishes it.</span></p>
 
-    <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
-         same #path, #fig and #card — and moves them back on close. -->
-    <dialog id="stagemodal" class="modal" aria-label="CompanyGraph's model, expanded" data-de-aria="Das Modell von CompanyGraph, vergrössert">
-      <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
-    </dialog>
-  </figure>
+      <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
+           same #path, #fig and #card — and moves them back on close. -->
+      <dialog id="stagemodal" class="modal" aria-label="CompanyGraph's model, expanded" data-de-aria="Das Modell von CompanyGraph, vergrössert">
+        <button type="button" class="close" id="modalclose" aria-label="Close" data-de-aria="Schliessen">×</button>
+      </dialog>
+    </figure>
+  </section>
   </div>
 </main>
 <div class="shell">

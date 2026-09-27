@@ -44,25 +44,19 @@ const PAGES = [
     // "TALKS". Asserting the markup's casing fails against a page that is perfectly
     // correct — which is exactly what happened when this line was first written.
     contains: ["Everything a company knows", "One graph", "CompanyGraph", "CLI", "TALKS", "MODEL", "BILLING",
-               // The talk's call to action and the one fact this page is allowed to
-               // restate: its length. A call to action needs it in the moment, not one
-               // click away. The deck is in this repository now — `talks/intro/` — so the
-               // number and the thing it describes finally move in the same commit. It is
-               // still not derived from the deck's own timings, so re-cut the talk and this
-               // string has to be changed by hand; what changed is that nothing crosses a
-               // repository boundary to do it.
-               "Watch intro talk", "7 minutes · German or English", "Try the CLI",
-               // The hero's note says what the drawing below it is: CompanyGraph, in
-               // its own vocabulary. Only the words that carry it, so rewording the
-               // rest of the sentence does not fail the check.
-               "described in its own vocabulary"],
+               // The hero carries no button of its own — the talk is the nav's `TALKS` link,
+               // the CLI and the vocabulary are tiles in the vision section below. This is
+               // the vision section's third tile, named here rather than left to `internalLinks`
+               // because a tile's own words are worth holding, not only its target.
+               "Try the CLI"],
     links: ["https://github.com/companygraph",
             "https://github.com/companygraph/meta-model/blob/HEAD/LICENSE",
             "https://blust.ch/"],
     // `noNewTab` already asserts nothing outside a slide opens a new tab, which covers this
     // page whole; what `sameTab` adds is the name. The nav gained one item and the check
     // that would have caught it opening elsewhere never mentioned it, so it is named here.
-    // The third call to action goes to the setup page, on this domain, so it stays in the tab.
+    // The vision section's third tile goes to the setup page, on this domain, so it stays in
+    // the tab.
     sameTab: ["model/", "cli/"],
     internalLinks: true,
     // The German half, named by what the reader must see and what must stop being
@@ -71,10 +65,11 @@ const PAGES = [
     translates: { lang: "de",
       // The head, not just the body: this page carried an id="metadesc" that nothing acted
       // on, so a German visitor read an English title and description under lang="de".
-      // Declared here so the swap cannot quietly go away again.
-                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph", "Quelltext lesen", "Einführungsvortrag ansehen", "CLI ausprobieren", "7 Minuten · Deutsch oder Englisch",
-                          "beschrieben in seinem eigenen Vokabular"],
-                  hides: ["Everything a company", "Read the source", "Try the CLI", "described in its own vocabulary"] },
+      // Declared here so the swap cannot quietly go away again. The vision section's third
+      // tile carries no data-de yet, so "Try the CLI" is not asserted either way: it stands
+      // in English under both languages until the site words' German follows.
+                  shows: ["Alles, was eine Firma weiss", "Ein einziger Graph"],
+                  hides: ["Everything a company"] },
     // The landing page draws CompanyGraph's own model, so it is held to what /model/ and
     // /example/ are: `graph` reads company.json, the file the page names, and walks what it
     // draws, so no name from the model is written here.
