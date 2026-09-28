@@ -1,6 +1,6 @@
 {
-  "commit": "435c07ed5116e0cb7b3b67b9baf17a4d0896340c",
-  "core": "0.46.0",
+  "commit": "0d5eb20b2afb1ec609bd0149ed0cd9e867078442",
+  "core": "0.47.0",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -773,6 +773,38 @@
               ]
             ]
           }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "A standard",
+                  "https://standards.example.invalid/e-invoicing/core-invoice"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "A standard",
+                "https://standards.example.invalid/e-invoicing/core-invoice"
+              ]
+            ]
+          }
         }
       ],
       "owner": null,
@@ -1344,6 +1376,46 @@
           "heading": "Description",
           "text": "The copy is a file holding the invoice as issued, with every line and its explanation, and it matches what the page shows on the day it was issued and on every day after. It is a copy and nothing more: paying, disputing and asking a question about the invoice happen elsewhere.",
           "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Documentation",
+                  "https://docs.example.invalid/beacon/invoice-download"
+                ],
+                [
+                  "A place to use it",
+                  "https://beacon.example/invoices/sample"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Documentation",
+                "https://docs.example.invalid/beacon/invoice-download"
+              ],
+              [
+                "A place to use it",
+                "https://beacon.example/invoices/sample"
+              ]
+            ]
+          }
         }
       ],
       "owner": null,
@@ -2109,7 +2181,40 @@
         "domain": "Invoicing",
         "audience": "Payer"
       },
-      "sections": [],
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Documentation",
+                  "https://docs.example.invalid/beacon/invoice-page"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Documentation",
+                "https://docs.example.invalid/beacon/invoice-page"
+              ]
+            ]
+          }
+        }
+      ],
       "owner": null,
       "path": "example/model/products/invoice-page.md"
     },

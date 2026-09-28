@@ -1,5 +1,5 @@
 {
-  "commit": "435c07ed5116e0cb7b3b67b9baf17a4d0896340c",
+  "commit": "0d5eb20b2afb1ec609bd0149ed0cd9e867078442",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -107,6 +107,34 @@
                   "`## What it means`",
                   "Yes",
                   "Which achievements belong to this kind, and which do not"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a framework, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -133,6 +161,11 @@
                 "`## What it means`",
                 "Yes",
                 "Which achievements belong to this kind, and which do not"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
               ]
             ]
           }
@@ -536,6 +569,11 @@
                   "`## Relations`",
                   "No",
                   "Table. What this concept points at."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the term; its columns are declared below."
                 ]
               ]
             },
@@ -590,6 +628,29 @@
                   "The role the target plays in this relation. Required where two rows name the same concept, which is the only thing that tells them apart."
                 ]
               ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a standard, a glossary"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
             }
           ],
           "table": {
@@ -619,6 +680,11 @@
                 "`## Relations`",
                 "No",
                 "Table. What this concept points at."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the term; its columns are declared below."
               ]
             ]
           }
@@ -1076,6 +1142,34 @@
                   "`## What it means`",
                   "Yes",
                   "Which calls belong to this kind, and which do not"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a governance framework, a mandate"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -1102,6 +1196,11 @@
                 "`## What it means`",
                 "Yes",
                 "Which calls belong to this kind, and which do not"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
               ]
             ]
           }
@@ -1210,6 +1309,34 @@
                   "`## What it means`",
                   "Yes",
                   "When a call is in this state, when it leaves it, and what a reader may rely on while it is"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the status; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a governance framework, a mandate"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -1236,6 +1363,11 @@
                 "`## What it means`",
                 "Yes",
                 "When a call is in this state, when it leaves it, and what a reader may rely on while it is"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the status; its columns are declared below."
               ]
             ]
           }
@@ -1339,6 +1471,34 @@
                   "`> [Scope]`",
                   "Yes",
                   "One-paragraph statement of what this domain covers and what it leaves to another"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the area; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a charter, a map of the area"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -1360,6 +1520,11 @@
                 "`> [Scope]`",
                 "Yes",
                 "One-paragraph statement of what this domain covers and what it leaves to another"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the area; its columns are declared below."
               ]
             ]
           }
@@ -1748,6 +1913,34 @@
                   "`## What it means`",
                   "Yes",
                   "Which periods belong to this kind, and which do not"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a classification, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -1774,6 +1967,11 @@
                 "`## What it means`",
                 "Yes",
                 "Which periods belong to this kind, and which do not"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
               ]
             ]
           }
@@ -1906,6 +2104,34 @@
                   "`## Description`",
                   "Yes",
                   "What the feature does, and where it stops"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the feature; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — documentation, a demonstration, a place to use it"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -1932,6 +2158,11 @@
                 "`## Description`",
                 "Yes",
                 "What the feature does, and where it stops"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the feature; its columns are declared below."
               ]
             ]
           }
@@ -1943,7 +2174,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline says what someone can now do, in their words, and never names a screen, a service or a vendor.\n- `## Description` says where the feature stops as plainly as what it does, because the boundary is what tells two neighboring features apart.\n- A feature is named for the capability, not for the vendor that supplies it. Where a vendor is what varies, the vendor is a concept the feature names and not a feature of its own.\n- Nothing about a release, a ticket or a delivery date goes here: those move, and a feature outlives all three.",
+          "text": "- The tagline says what someone can now do, in their words, and never names a screen, a service or a vendor.\n- `## Description` says where the feature stops as plainly as what it does, because the boundary is what tells two neighboring features apart.\n- A feature is named for the capability, not for the vendor that supplies it. Where a vendor is what varies, the vendor is a concept the feature names and not a feature of its own.\n- Nothing about a release, a ticket or a delivery date goes here: those move, and a feature outlives all three.\n- `What` in `## References` names the kind of thing a row opens, never the surface, product or vendor by name.",
           "tables": []
         },
         {
@@ -2081,6 +2312,11 @@
                   "`## Also at`",
                   "No",
                   "Table. One row per presence the company maintains elsewhere; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the company; its columns are declared below."
                 ]
               ]
             },
@@ -2104,6 +2340,29 @@
                   "Yes",
                   "string",
                   "The company's own page there"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a register entry, articles of association"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -2135,6 +2394,11 @@
                 "`## Also at`",
                 "No",
                 "Table. One row per presence the company maintains elsewhere; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the company; its columns are declared below."
               ]
             ]
           }
@@ -2591,6 +2855,11 @@
                   "`## If not met`",
                   "Yes",
                   "Table. What the escalation authority may decide when the gate's criteria cannot be met, one row each, and where the work goes; its columns are declared below. A paragraph under the table may say what the rows cannot."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the phase; its columns are declared below."
                 ]
               ]
             },
@@ -2656,6 +2925,29 @@
                   "The phase the work goes to: this one, or one before it in the owning process's `## Phases`. Empty where the process stops."
                 ]
               ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a rulebook, a checklist"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
             }
           ],
           "table": {
@@ -2705,6 +2997,11 @@
                 "`## If not met`",
                 "Yes",
                 "Table. What the escalation authority may decide when the gate's criteria cannot be met, one row each, and where the work goes; its columns are declared below. A paragraph under the table may say what the rows cannot."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the phase; its columns are declared below."
               ]
             ]
           }
@@ -3077,6 +3374,34 @@
                   "`> [What it is]`",
                   "Yes",
                   "One-paragraph statement of what the product is and who opens it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the product; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — documentation, a release page"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -3098,6 +3423,11 @@
                 "`> [What it is]`",
                 "Yes",
                 "One-paragraph statement of what the product is and who opens it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the product; its columns are declared below."
               ]
             ]
           }
@@ -3218,6 +3548,34 @@
                   "`## What it means`",
                   "Yes",
                   "What someone at this level can actually do"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the level; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a competency framework, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -3244,6 +3602,11 @@
                 "`## What it means`",
                 "Yes",
                 "What someone at this level can actually do"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the level; its columns are declared below."
               ]
             ]
           }
@@ -3427,6 +3790,11 @@
                   "`## Also at`",
                   "No",
                   "Table. One row per presence the person maintains elsewhere; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the person; its columns are declared below."
                 ]
               ]
             },
@@ -3504,6 +3872,29 @@
                   "The person's own page there"
                 ]
               ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a register entry, a publication"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
             }
           ],
           "table": {
@@ -3543,6 +3934,11 @@
                 "`## Also at`",
                 "No",
                 "Table. One row per presence the person maintains elsewhere; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the person; its columns are declared below."
               ]
             ]
           }
@@ -3663,6 +4059,11 @@
                   "`## Rests on`",
                   "No",
                   "Table. One row per entity the answer comes from; its columns are declared below. Absent when the answer is mastered here."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the question; its columns are declared below."
                 ]
               ]
             },
@@ -3700,6 +4101,29 @@
                   "The part of the answer this entity carries, where the answer rests on more than one"
                 ]
               ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a post that answers it at length, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
             }
           ],
           "table": {
@@ -3724,6 +4148,11 @@
                 "`## Rests on`",
                 "No",
                 "Table. One row per entity the answer comes from; its columns are declared below. Absent when the answer is mastered here."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the question; its columns are declared below."
               ]
             ]
           }
@@ -3844,6 +4273,34 @@
                   "`## What it means`",
                   "Yes",
                   "Which questions belong to this kind, and which do not"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a classification, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -3870,6 +4327,11 @@
                 "`## What it means`",
                 "Yes",
                 "Which questions belong to this kind, and which do not"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
               ]
             ]
           }
@@ -4189,6 +4651,34 @@
                   "`## In practice`",
                   "No",
                   "What someone using this skill actually does"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the skill; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a framework, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -4215,6 +4705,11 @@
                 "`## In practice`",
                 "No",
                 "What someone using this skill actually does"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the skill; its columns are declared below."
               ]
             ]
           }
@@ -4306,6 +4801,34 @@
                   "`> [Description]`",
                   "No",
                   "One-paragraph description of what the source holds"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the source; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — its documentation, an export's format"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -4327,6 +4850,11 @@
                 "`> [Description]`",
                 "No",
                 "One-paragraph description of what the source holds"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the source; its columns are declared below."
               ]
             ]
           }
@@ -4459,6 +4987,34 @@
                   "`## What it makes true`",
                   "Yes",
                   "What is concretely different when it holds, and what falls outside it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the objective; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a plan, a board paper"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -4485,6 +5041,11 @@
                 "`## What it makes true`",
                 "Yes",
                 "What is concretely different when it holds, and what falls outside it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the objective; its columns are declared below."
               ]
             ]
           }
@@ -4639,6 +5200,34 @@
                   "`## What would show it is working`",
                   "Yes",
                   "What is observable, early enough to change course"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the strategy; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a plan, a board paper"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -4675,6 +5264,11 @@
                 "`## What would show it is working`",
                 "Yes",
                 "What is observable, early enough to change course"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the strategy; its columns are declared below."
               ]
             ]
           }
@@ -4829,6 +5423,34 @@
                   "`## Constraints`",
                   "No",
                   "Bulleted. What the published result must satisfy, each written so a reader can pass or fail it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the surface; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a platform's published limits, a style guide"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -4865,6 +5487,11 @@
                 "`## Constraints`",
                 "No",
                 "Bulleted. What the published result must satisfy, each written so a reader can pass or fail it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the surface; its columns are declared below."
               ]
             ]
           }
@@ -4970,6 +5597,34 @@
                   "`> [Produces]`",
                   "Yes",
                   "One-paragraph statement of what one pass down this track leaves behind"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the track; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a rulebook, a checklist"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -4991,6 +5646,11 @@
                 "`> [Produces]`",
                 "Yes",
                 "One-paragraph statement of what one pass down this track leaves behind"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the track; its columns are declared below."
               ]
             ]
           }
@@ -5099,6 +5759,34 @@
                   "`## In practice`",
                   "Yes",
                   "What following this value looks like, and what breaking it looks like"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the value; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a code of conduct, a handbook"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -5125,6 +5813,11 @@
                 "`## In practice`",
                 "Yes",
                 "What following this value looks like, and what breaking it looks like"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the value; its columns are declared below."
               ]
             ]
           }
@@ -5233,6 +5926,34 @@
                   "`## What it means`",
                   "Yes",
                   "What is true when it holds, and what it excludes"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the vision; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a talk, an article"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
                 ]
               ]
             }
@@ -5259,6 +5980,11 @@
                 "`## What it means`",
                 "Yes",
                 "What is true when it holds, and what it excludes"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the vision; its columns are declared below."
               ]
             ]
           }
