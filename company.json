@@ -1,5 +1,5 @@
 {
-  "commit": "8f6bec6ca127c4be3ca34b343ea2573bfa4aa966",
+  "commit": "e295b0a78a7133199839afe195af3bcbc879d589",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -147,7 +147,7 @@
       "id": "brand",
       "type": "brand",
       "name": "CompanyGraph",
-      "tagline": "Everything a company knows, in one graph that its people and its agents read alike.",
+      "tagline": "Your company doesn't compile.",
       "fields": {
         "source": "Local"
       },
@@ -1552,6 +1552,158 @@
       "path": "model/decisions/2026-apache-2-0.md"
     },
     {
+      "id": "decisions/2026-linkedin-page-nonprofit",
+      "type": "decision",
+      "name": "The LinkedIn company page is typed Nonprofit",
+      "tagline": "We give the LinkedIn company page the type Nonprofit, because it is the one type the network offers that claims no business, and nothing here is sold.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-28",
+        "kind": "Terms",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Which organization type the LinkedIn company page carries. The network demands one from a closed list when a page is made, every type on the list names a legal form, and no CompanyGraph company has been founded: whatever the page says is inexact, so the choice is which inexactness to publish. It had to be decided when the page was made, on 2026-09-28.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Self-Employed",
+                  "It says CompanyGraph is a business its owner runs for a living, and nobody runs it as one: nothing is sold and nobody is paid."
+                ],
+                [
+                  "Sole Proprietorship, Partnership or Privately Held",
+                  "Each names a founded company that does not exist, and a reader would look for a register entry and find none."
+                ],
+                [
+                  "Leave the type empty",
+                  "The network does not publish a page without one."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Self-Employed",
+                "It says CompanyGraph is a business its owner runs for a living, and nobody runs it as one: nothing is sold and nobody is paid."
+              ],
+              [
+                "Sole Proprietorship, Partnership or Privately Held",
+                "Each names a founded company that does not exist, and a reader would look for a register entry and find none."
+              ],
+              [
+                "Leave the type empty",
+                "The network does not publish a page without one."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "Nonprofit is the one type that says the page earns nothing, and that is true: the pages say plainly that nothing is being sold, and whether this becomes consulting at all is still open. Every other type claims either a business or a legal entity, and each of those is false in a way a reader could check.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "The page names a legal form no entity has, and we accept that as the least false of the types the network offers. It stays right only while nothing is sold. The call is revisited the day Whether this is a business is answered is settled, or a CompanyGraph company is founded, whichever comes first, since either makes a truer type available.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "surface",
+                  "LinkedIn company page",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "surface",
+                "LinkedIn company page",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The page",
+                  "https://www.linkedin.com/company/companygraph"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The page",
+                "https://www.linkedin.com/company/companygraph"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-linkedin-page-nonprofit.md"
+    },
+    {
       "id": "decisions/2026-open-sections",
       "type": "decision",
       "name": "A section is open and a field is closed",
@@ -2588,6 +2740,10 @@
                 [
                   "GitHub",
                   "https://github.com/companygraph"
+                ],
+                [
+                  "LinkedIn",
+                  "https://www.linkedin.com/company/companygraph"
                 ]
               ]
             }
@@ -2602,6 +2758,10 @@
               [
                 "GitHub",
                 "https://github.com/companygraph"
+              ],
+              [
+                "LinkedIn",
+                "https://www.linkedin.com/company/companygraph"
               ]
             ]
           }
@@ -8433,6 +8593,36 @@
       "path": "model/surfaces/companygraph-io-website.md"
     },
     {
+      "id": "surfaces/linkedin-company-page",
+      "type": "surface",
+      "name": "LinkedIn company page",
+      "tagline": "The page on the professional network that a person reaches from a post, a follower's feed or a search for the name, kept by hand.",
+      "fields": {
+        "source": "Local",
+        "production": "written",
+        "url": "https://www.linkedin.com/company/companygraph"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Name** — the identity's name.\n- **Tagline** — the brand's promise, and nothing beside it.\n- **Description** — the identity's tagline and its `## What it is`, rewritten in this surface's register.\n- **Website** — the identity's `url`.\n- **Industry** — one industry from the network's own list.\n- **Organization size** — one size from the network's own list.\n- **Organization type** — one type from the network's own list.\n- **Logo** — the brand's mark, as a tile.\n- **Cover image** — the brand's promise, set as the title the pages set a headline in.",
+          "tables": []
+        },
+        {
+          "heading": "Projection rules",
+          "text": "- Everything written for this surface is in the prose register of `conventions/WRITING.md`,\n  aimed at a visitor who has not decided to stay.\n- The Tagline is the brand's promise and nothing beside it, so it carries no product, audience or\n  place. The Description is where a visitor learns what the name is, and a tagline that tried to\n  say it as well would say it twice in two lengths.\n- The Description is written rather than copied. The identity was written for a reader who came\n  to read, and this surface is read by one who has not decided to. Its first sentence says what\n  CompanyGraph is and nothing more, and the shape it gives a company follows in a sentence of its\n  own, because a first sentence carrying every term the model uses is skimmed past. It then says\n  who CompanyGraph is for and what describing a company this way leaves where it was.\n- The Description closes on the vision in one sentence, in its own words shortened, because a\n  visitor deciding whether to follow a page follows where it is going, and the vision is the one\n  entity that says so.\n- The page is in English and in no other language. English is the model's language, and the\n  network shows a member whose language the page does not carry the page's default, so one\n  language reaches every member. A second language would translate the Name, the Tagline and the\n  Description together, and the brand's promise has no form in another language for the Tagline\n  to take.\n- The Website is the identity's `url` and no other address. The places of `## Also at` are\n  reached from the network in their own ways, and a second link would compete with the first.\n- The Industry is IT Services and IT Consulting, the owner's choice from the network's closed\n  list. The list has no entry for a published vocabulary, and this one names the consulting the\n  billing page describes, which is the only thing CompanyGraph would ever charge for.\n- The Organization size is 0-1 employees, the network's smallest band. No CompanyGraph company\n  has been founded, so nobody is employed by it, and the model describes no person who could be\n  counted.\n- The Organization type is Nonprofit, as the decision The LinkedIn company page is typed\n  Nonprofit records with the types it passed over, and changes only when that decision does.\n- The Logo is the mark's tile, made from the mark's master as `## Mark` in the brand says, and the\n  Cover image sets the promise in the brand's faces and colors, with the mark and the name in the\n  top left corner, because the network lays the Logo over the lower left of the cover.\n- The values, the strategic objectives, the strategies, the processes, the roles and the products\n  reach no unit. A page on the network is followed for its posts, and a visitor who wants what\n  the company holds to is sent to the Website, where every one of them is drawn.\n- The optional units the network offers and this file does not name stay empty: Year founded,\n  Specialties, Locations and Phone. The model holds no founding date, no list of specialties, no\n  address and no number, and this surface invents none.\n- Nothing else the model holds reaches this surface: the identity's `## Also at`, the brand's\n  colors, faces and voice as text, the sources and this file's own type. Each is either how the\n  model is kept, or already carried by the Logo, the Cover image and the register.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- The Tagline is at most 120 characters, the network's limit, read from its LinkedIn Learning\n  course Growing your business with LinkedIn Pages on 2026-09-28.\n- The Description is at most 2000 characters, read from the network's editor on 2026-09-28.\n- The Tagline reads exactly as the brand's promise does.\n- The Logo is a square of at least 400 by 400 pixels, and the Cover image is at least 1512 by 256\n  pixels in that ratio, each a PNG or a JPEG of at most 3 MB, read from LinkedIn Help's image\n  specifications for LinkedIn Pages on 2026-09-28.\n- The Description names no count of types, entities, releases or adopters.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/linkedin-company-page.md"
+    },
+    {
       "id": "surfaces/mcp-companygraph-io-mcp-server",
       "type": "surface",
       "name": "mcp.companygraph.io MCP server",
@@ -8955,6 +9145,40 @@
       "from": "decisions/2026-apache-2-0",
       "to": "values/adoption-is-not-taxed",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-linkedin-page-nonprofit",
+      "to": "surfaces/linkedin-company-page",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-linkedin-page-nonprofit",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-linkedin-page-nonprofit",
+      "to": "decision-kinds/terms",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-linkedin-page-nonprofit",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-linkedin-page-nonprofit",
+      "to": "decision-statuses/standing",
+      "via": "status",
       "attrs": {}
     },
     {
@@ -11719,6 +11943,12 @@
     },
     {
       "from": "surfaces/companygraph-io-website",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/linkedin-company-page",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
