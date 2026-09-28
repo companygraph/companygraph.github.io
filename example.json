@@ -1,5 +1,6 @@
 {
   "commit": "435c07ed5116e0cb7b3b67b9baf17a4d0896340c",
+  "core": "0.46.0",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
