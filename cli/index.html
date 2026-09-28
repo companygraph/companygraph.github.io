@@ -222,6 +222,19 @@
   .term-play .ipause, .term.playing .term-play .iplay{display:none}
   .term.playing .term-play .ipause{display:block}
 
+  /* The walk from nothing: numbered because the order is the content, each step a sentence to
+     read and, where there is one, the command to copy under it. */
+  .steps{margin-top:2rem; padding:0; list-style:none; counter-reset:step; display:grid; gap:1.8rem; max-width:68ch}
+  .steps > li{counter-increment:step; position:relative; min-width:0; padding-left:2.4rem; color:var(--dim); font-size:1rem}
+  .steps > li::before{content:counter(step); position:absolute; left:0; top:-.05rem; width:1.6rem; height:1.6rem;
+       display:grid; place-items:center; border-radius:50%; border:1.5px solid var(--c-firm);
+       color:var(--ink); font-size:.85rem; font-weight:600}
+  .steps > li b{font-weight:600; color:var(--ink)}
+  .steps .cmd{margin-top:.8rem}
+  .steps p{margin:0}
+  .steps code{font-size:.88em; color:var(--ink); background:var(--raise);
+       border:1px solid var(--rule); border-radius:5px; padding:.05em .35em; white-space:nowrap}
+
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
   .rules p b{font-weight:600; color:var(--ink)}
@@ -284,9 +297,38 @@
       <p class="note" data-de="Hier wird nichts aus einer Registry installiert. Der Befehl läuft direkt aus einem Release auf GitHub, und <code class='mono'>#semver:*</code> wählt es aus: npm liest die Release-Tags des Repositorys als Versionsnummern und nimmt die höchste. So läuft er mit dem neuesten Release an dem Tag, an dem Sie ihn ausführen. Die Anführungszeichen verhindern, dass die Shell den <code class='mono'>*</code> als Dateimuster liest, und <code class='mono'>--yes</code> beantwortet die Frage, die npx vor jedem Release stellt, das es noch nicht ausgeführt hat. Der Befehl braucht <a href='https://nodejs.org/en/download'>Node</a> 22 oder neuer.">Nothing here is installed from a registry. The command runs straight from a release on GitHub, and <code class="mono">#semver:*</code> is what picks it: npm reads the repository’s release tags as version numbers and takes the highest, so it runs the newest release on the day you run it. The quotes keep the shell from reading the <code class="mono">*</code> as a file pattern, and <code class="mono">--yes</code> answers the question npx asks before any release it has not run before. It needs <a href="https://nodejs.org/en/download">Node</a> 22 or newer.</p>
     </div>
 
+    <section id="from-nothing">
+      <h2 data-de="Von null zum Modell">From nothing to a model</h2>
+      <p class="lede" data-de="Für alle, die bei null anfangen. Die Schritte unten wurden auf einem Mac ausgeführt, von einem leeren Ordner bis zu einem Modell, das seine Prüfungen besteht.">For someone who has none of this yet. The walk below was run on a Mac, from an empty folder to a model that passes its checks.</p>
+      <div class="rules">
+        <p data-de="<b>Was Sie zuerst brauchen.</b> Ein Terminal: auf einem Mac die App Terminal, unter Programme → Dienstprogramme. Git, weil npm die CLI darüber von GitHub holt; ohne Git bricht der Befehl mit <code class='mono'>spawn git ENOENT</code> ab. <a href='https://nodejs.org/en/download'>Node</a> 22 oder neuer, das <code class='mono'>npx</code> gleich mitbringt. Mehr braucht es nicht, um ein Modell anzulegen und zu prüfen. <a href='https://obsidian.md/'>Obsidian</a> ist zum Schreiben da, ein GitHub-Konto dafür, dass die Prüfungen des Modells bei jedem Push laufen, <a href='https://claude.com/claude-code'>Claude Code</a> für die Skills, auf die das Modell ausgelegt ist, und Python 3 für zwei dieser Skills."><b>What you need first.</b> A terminal: on a Mac, Terminal, under Applications → Utilities. Git, because npm fetches the tooling from GitHub through it, and the command stops with <code class="mono">spawn git ENOENT</code> without it. <a href="https://nodejs.org/en/download">Node</a> 22 or newer, which brings <code class="mono">npx</code> with it. Nothing else is needed to make and check a model. <a href="https://obsidian.md/">Obsidian</a> is for writing it in, a GitHub account is for running its checks on every push, <a href="https://claude.com/claude-code">Claude Code</a> is for the skills the model is written for, and Python 3 is for two of those skills.</p>
+      </div>
+      <ol class="steps">
+        <li><p data-de="<b>Nachsehen, was schon da ist.</b> Öffnen Sie ein Terminal und fragen Sie beide Versionen ab. Fehlt Git auf einem Mac, bietet schon die erste Zeile an, die Befehlszeilen-Entwicklertools zu installieren; stimmen Sie zu und warten Sie, bis die Installation abgeschlossen ist. Nennt die zweite Zeile eine Version unter 22 oder gar keine, installieren Sie Node von seiner Download-Seite und öffnen Sie ein neues Terminal."><b>See what is there.</b> Open a terminal and ask for both versions. On a Mac without git, the first line offers to install the command line developer tools; say yes and wait for it to finish. Where the second says a version older than 22, or no version, install Node from its download page and open a new terminal.</p>
+          <pre class="cmd mono">git --version
+node --version</pre></li>
+        <li><p data-de="<b>Das Menü öffnen.</b> Führen Sie den Befehl in einem beliebigen Ordner aus. Beim ersten Mal dauert es einen Moment, weil npm die CLI zuerst holen muss."><b>Open the menu.</b> Run the command from any folder. The first run takes a moment, since npm fetches the tooling before it starts.</p>
+          <pre class="cmd mono">npx --yes 'github:companygraph/meta-model#semver:*'</pre></li>
+        <li><p data-de="<b>Das Modell anlegen.</b> Wählen Sie 1, Make a model. Geben Sie einen Ordner an, zum Beispiel <code class='mono'>~/git/acme</code>, und den Namen der Firma. Fehlt der Ordner, legt der Befehl ihn an. Er schreibt das Modell dorthin und sagt, was er geschrieben hat."><b>Make the model.</b> Pick 1, Make a model. Give it a folder, <code class="mono">~/git/acme</code> for example, which it makes if it is missing, and the company’s name. It writes the model there and says what it wrote.</p></li>
+        <li><p data-de="<b>In Obsidian öffnen, wenn Sie dort schreiben.</b> Fragt der Befehl, ob der Ordner ein Vault werden soll, stimmen Sie zu: Er installiert das Plugin und bietet an, den Vault zu öffnen. Fragt Obsidian, ob Sie dem Autor des Vaults vertrauen, bestätigen Sie; alles Weitere steht unter <a href='#what-obsidian-asks'>Was Obsidian noch fragt</a>. Ohne Obsidian genügt jeder Editor, mit dem sich Markdown bearbeiten lässt."><b>Open it in Obsidian, if you write there.</b> When it asks whether to make the folder a vault, say yes: it installs the plugin and offers to open the vault. Trust the vault’s author when Obsidian asks; <a href="#what-obsidian-asks">what Obsidian still asks</a> covers the rest. Without Obsidian, any editor that writes Markdown will do.</p></li>
+        <li><p data-de="<b>Die Firma beschreiben.</b> Beginnen Sie mit <code class='mono'>model/identity.md</code> und <code class='mono'>model/vision.md</code>, die schon da sind. Das README jedes Ordners nennt das Schema, dem seine Dateien folgen, und in Claude Code schreiben die eigenen Skills des Modells nach diesen Schemas."><b>Write the company.</b> Start with <code class="mono">model/identity.md</code> and <code class="mono">model/vision.md</code>, which are already there. Each folder’s README names the schema its files follow, and in Claude Code the model’s own skills write to those schemas.</p></li>
+        <li><p data-de="<b>Das Modell prüfen.</b> Wählen Sie 2, Check a model, jedes Mal, wenn sich das Modell ändert, oder rufen Sie die Prüfung über ihren Namen auf. Der Befehl sagt, was besteht, und nennt, was nicht besteht, Datei für Datei."><b>Check it.</b> Pick 2, Check a model, whenever the model changes, or run the check by name. It says what passes and names what does not, by file.</p>
+          <pre class="cmd mono">npx --yes 'github:companygraph/meta-model#semver:*' check ~/git/acme</pre></li>
+        <li><p data-de="<b>Mit Git versionieren.</b> Das Modell besteht aus gewöhnlichen Dateien, also führt Git seine Historie. Committen Sie es und <a href='https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github'>pushen Sie es danach in ein leeres Repository auf GitHub</a>. Von da an führt der mitgelieferte Workflow bei jedem Push und jedem Pull-Request dieselben Prüfungen aus."><b>Keep it in git.</b> The model is plain files, so git keeps its history. Commit it, then <a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">push it to an empty repository on GitHub</a>; from then on the workflow it came with runs the same checks on every push and pull request.</p>
+          <pre class="cmd mono">cd ~/git/acme
+git init -b main
+git add -A
+git commit -m "The model starts"</pre></li>
+        <li><p data-de="<b>Ein neues Release übernehmen, sobald eines erscheint.</b> Wählen Sie 3, Move a model. Der Befehl zeigt jede Datei, die er ändern würde, bevor er auch nur eine schreibt."><b>Take a new release when one comes.</b> Pick 3, Move a model. It shows every file it would change before it writes one.</p></li>
+      </ol>
+      <div class="rules">
+        <p id="where-it-runs" data-de="<b>Wo die CLI läuft.</b> Diese Schritte wurden nur auf macOS von Hand ausgeführt. Die automatisierten Tests der CLI laufen auch unter Linux und Windows, aber dort hat noch niemand ein Modell von null an angelegt. Schlägt ein Schritt auf Ihrem Rechner fehl, <a href='https://github.com/companygraph/meta-model/issues'>eröffnen Sie ein GitHub-Issue</a> mit dem Befehl und dem, was er ausgegeben hat, wie es der Prozess <a href='../team/#feature-request'>Feature-Request</a> beschreibt, oder schicken Sie die Korrektur als Pull-Request über den Prozess <a href='../team/#contribution'>Contribution</a>."><b>Where it runs.</b> This walk has been run by hand on macOS only. The tooling’s automated tests also run on Linux and Windows, but nobody has yet made a model there from nothing. If a step fails on your machine, <a href="https://github.com/companygraph/meta-model/issues">open an issue</a> with the command and what it printed, as the <a href="../team/#feature-request">Feature request</a> process describes, or send the fix as a pull request through the <a href="../team/#contribution">Contribution</a> process.</p>
+      </div>
+    </section>
+
     <section>
       <h2 data-de="Starten">Run it</h2>
-      <p class="lede" data-de="In einem Terminal, in einem beliebigen Ordner. Der Befehl öffnet ein Menü, fragt nach, was er braucht, und sagt, was er getan hat. Danach erscheint das Menü wieder, darüber die letzte Auswahl: grün, wenn sie gelungen ist, rot, wenn nicht. So geht es weiter, bis Sie Quit wählen, q tippen oder Ctrl+C drücken.">In a terminal, from any folder. It opens a menu, asks for what it needs, and says what it did. Then the menu comes back, with the latest pick above it, green when it went through and red when not, until you pick Quit, type q or press Ctrl+C.</p>
+      <p class="lede" data-de="In einem Terminal, in einem beliebigen Ordner. Der Befehl öffnet ein Menü, fragt ab, was er braucht, und sagt, was er getan hat. Danach erscheint das Menü wieder, darüber der zuletzt gewählte Eintrag: grün, wenn er gelungen ist, rot, wenn nicht. So geht es weiter, bis Sie Quit wählen, q tippen oder Ctrl+C drücken. Bei jeder Frage des Befehls führt b oder Ctrl+C zurück ins Menü.">In a terminal, from any folder. It opens a menu, asks for what it needs, and says what it did. Then the menu comes back, with the latest pick above it, green when it went through and red when not, until you pick Quit, type q or press Ctrl+C. At any of its questions, b or Ctrl+C comes back to the menu.</p>
       <pre class="cmd mono">npx --yes 'github:companygraph/meta-model#semver:*'</pre>
       <figure class="term mono" aria-label="The menu the command opens" data-de-aria="Das Menü, das der Befehl öffnet">
         <div class="term-top"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
@@ -308,10 +350,10 @@
             <pre>  <span class="a">1</span>  Make a model                <span class="d">a new instance in a folder, or beside the files already in one</span>
   <span class="a">2</span>  Check a model               <span class="d">the mechanical checks, as its CI runs them</span>
   <span class="a">3</span>  Move a model to &lt;release&gt;   <span class="d">its vendored core, skills, manifest and workflow tag together</span>
-  <span class="a">4</span>  Obsidian plugin             <span class="d">install it in a vault, or update it there</span>
+  <span class="a">4</span>  Obsidian                    <span class="d">make an instance a vault: the plugins, the graph, the panes, and Obsidian itself</span>
   <span class="a">5</span>  Quit                        <span class="d">or q, or Ctrl+C</span>
 
-<span class="a">›</span> <span class="k">Pick 1-5</span> <span class="cur"></span></pre>
+<span class="a">›</span> <span class="k">Pick 1-5</span> <span class="d">(b or Ctrl+C at any question comes back here)</span> <span class="cur"></span></pre>
           </div>
         </div>
       </figure>
@@ -320,11 +362,11 @@
     <section>
       <h2 data-de="Was das Menü tut">What the menu does</h2>
       <div class="rules">
-        <p data-de="<b>1 · Ein Modell anlegen.</b> Es fragt nach einem Ordner und dem Namen der Firma und schreibt die Instanz dorthin. Dazu gehören das Vokabular unter <code class='mono'>meta/core/</code>, ein Manifest mit einem Hash für jede Datei, die der Befehl verwaltet, ein Ordner pro Typ mit einem README, das sein Schema nennt, die Entitäten, ohne die keine Instanz die Prüfung besteht, ein CI-Workflow sowie für Claude ein <code class='mono'>AGENTS.md</code>, ein <code class='mono'>CLAUDE.md</code> und drei Skills. In einen Ordner, der schon Dateien enthält – ein Repository oder einen Obsidian-Vault –, schreibt es erst, wenn Sie zustimmen, und überschreibt nichts. Danach bietet es das Obsidian-Plugin an."><b>1 · Make a model.</b> It asks for a folder and the company’s name, and writes the instance there: the vocabulary under <code class="mono">meta/core/</code>, a manifest with a hash for every file it owns, a folder for each type with a README naming its schema, the entities no instance passes without, a CI workflow, and for Claude an <code class="mono">AGENTS.md</code>, a <code class="mono">CLAUDE.md</code> and three skills. A folder that already holds files, a repository or an Obsidian vault, is added to only once you say yes, and nothing in it is written over. Then it offers the Obsidian plugin.</p>
+        <p data-de="<b>1 · Ein Modell anlegen.</b> Es fragt nach einem Ordner und dem Namen der Firma und schreibt die Instanz dorthin. Dazu gehören das Vokabular unter <code class='mono'>meta/core/</code>, ein Manifest mit einem Hash für jede Datei, die der Befehl verwaltet, ein Ordner pro Typ mit einem README, das sein Schema nennt, die Entitäten, ohne die keine Instanz die Prüfung besteht, ein CI-Workflow sowie für Claude ein <code class='mono'>AGENTS.md</code>, ein <code class='mono'>CLAUDE.md</code> und die Skills, die nach den Schemas schreiben. In einen Ordner, der schon Dateien enthält – ein Repository oder einen Obsidian-Vault –, schreibt es erst, wenn Sie zustimmen, und überschreibt nichts. Danach bietet es an, den Ordner zu einem Vault zu machen."><b>1 · Make a model.</b> It asks for a folder and the company’s name, and writes the instance there: the vocabulary under <code class="mono">meta/core/</code>, a manifest with a hash for every file it owns, a folder for each type with a README naming its schema, the entities no instance passes without, a CI workflow, and for Claude an <code class="mono">AGENTS.md</code>, a <code class="mono">CLAUDE.md</code> and the skills that write to the schemas. A folder that already holds files, a repository or an Obsidian vault, is added to only once you say yes, and nothing in it is written over. Then it offers to make the folder a vault.</p>
         <p data-de="<b>2 · Ein Modell prüfen.</b> Die mechanischen Prüfungen, dieselben, die der Workflow bei jedem Push und jedem Pull-Request ausführt, sobald der Ordner ein Repository auf GitHub ist. Sie wenden die Regeln des Vokabulars an, das die Instanz kopiert hat – nie die eines neueren. Ob eine Entität die Schreibregeln ihres Schemas einhält, wird durch Lesen beurteilt; das übernimmt der Skill <code class='mono'>companygraph-validate</code>."><b>2 · Check a model.</b> The mechanical checks, the same ones the workflow runs on every push and pull request once the folder is a repository on GitHub. They apply the rules of the vocabulary the instance copied in, never a newer one. Whether an entity keeps its schema’s writing rules is judged by reading, which the <code class="mono">companygraph-validate</code> skill does.</p>
         <p data-de="<b>3 · Ein Modell auf ein neueres Release bringen.</b> Ein Release betrifft das Vokabular, die Skills, das Manifest und den Pin des Workflows, darum aktualisiert es alle vier zusammen. Es zeigt zuerst jede Datei, die es schreiben oder entfernen würde, und schreibt erst, wenn Sie zustimmen. Ist eine Vokabular-Datei in der Instanz geändert worden, bricht es ab und nennt die Datei; das Modell selbst, <code class='mono'>AGENTS.md</code> und <code class='mono'>CLAUDE.md</code> werden nie angerührt."><b>3 · Move a model to a newer release.</b> A release lands in the vocabulary, the skills, the manifest and the workflow’s pin, so it moves them together. It first shows every file it would write or remove, and writes only once you say yes. A vocabulary file edited inside the instance stops it and is named; the model itself, <code class="mono">AGENTS.md</code> and <code class="mono">CLAUDE.md</code> are never touched.</p>
-        <p data-de="<b>4 · Das Obsidian-Plugin.</b> Eine Instanz ist ein Ordner mit Markdown-Dateien – genau das ist ein Obsidian-Vault. Das Plugin prüft das Modell, während Sie tippen, ergänzt, was die Schemas deklarieren, und markiert Fehler dort, wo sie stehen. Es steht nicht im Community-Verzeichnis von Obsidian, darum installiert das Menü es: das neueste Release unter <code class='mono'>.obsidian/plugins/companygraph/</code>, eingeschaltet, und Plugins, die schon eingeschaltet sind, bleiben es. Bei erneutem Ausführen aktualisiert das Menü das Plugin und behält dessen Einstellungen."><b>4 · Obsidian plugin.</b> An instance is a folder of Markdown files, which is what an Obsidian vault is. The plugin checks the model as you type, completes what the schemas declare and marks what breaks where it is written. It is not in Obsidian’s community directory, so the menu installs it: the newest release into <code class="mono">.obsidian/plugins/companygraph/</code>, switched on, and any plugin already on stays on. Run again, it updates the plugin and keeps its settings.</p>
-        <p data-de="<b>Was Obsidian noch fragt.</b> Beim ersten Öffnen fragt Obsidian, ob Sie dem Autor des Vaults vertrauen – bestätigen Sie. Fehlt das Plugin danach unter Installed plugins, wurde der Vault einmal im eingeschränkten Modus geöffnet: Settings → Community plugins → Turn on community plugins. Diesen Schalter speichert Obsidian ausserhalb des Vaults, darum kann ihn kein Befehl setzen."><b>What Obsidian still asks.</b> The first time it opens the vault, Obsidian asks whether you trust the vault’s author; say yes. If the plugin is still not under Installed plugins, the vault was once opened in restricted mode: Settings → Community plugins → Turn on community plugins. Obsidian keeps that switch outside the vault, so no command can set it.</p>
+        <p data-de="<b>4 · Obsidian.</b> Eine Instanz ist ein Ordner mit Markdown-Dateien – genau das ist ein Obsidian-Vault. Darum macht dieser Eintrag sie zu einem. Er installiert das Plugin. Das Plugin prüft das Modell, während Sie tippen, ergänzt, was die Schemas deklarieren, und markiert Fehler dort, wo sie stehen. Es steht nicht im Community-Verzeichnis von Obsidian, darum legt das Menü das neueste Release unter <code class='mono'>.obsidian/plugins/companygraph/</code> ab und schaltet es ein; Plugins, die schon eingeschaltet sind, bleiben es. Zwei weitere Plugins bietet das Menü namentlich an: Claudian, das Claude Code in einem Bereich öffnet und Claude Code auf dem Rechner voraussetzt, und Terminal, das dasselbe für eine Shell tut. Hat der Vault noch keine Graphansicht und kein Layout, legt das Menü eine Graphansicht des Modells und ein Layout an: die Identität geöffnet, die Ansichten des Plugins daneben. Dann sucht es Obsidian. Fehlt Obsidian, fragt das Menü, ob es Obsidian über Homebrew auf dem Mac oder über winget unter Windows installieren soll; unter Linux nennt es den Download. Schliesslich bietet es an, den Vault zu öffnen. Wird der Eintrag erneut ausgeführt, aktualisiert das Menü die Plugins und behält deren Einstellungen."><b>4 · Obsidian.</b> An instance is a folder of Markdown files, which is what an Obsidian vault is, so this makes it one. It installs the plugin, which checks the model as you type, completes what the schemas declare and marks what breaks where it is written. The plugin is not in Obsidian’s community directory, so the newest release goes into <code class="mono">.obsidian/plugins/companygraph/</code>, switched on, and any plugin already on stays on. It offers two more by name, Claudian, which is Claude Code in a pane and needs Claude Code on the machine, and Terminal, a shell in one. It writes a graph view of the model and the panes, the identity open and the plugin’s views beside it, where the vault has none yet. Then it looks for Obsidian, and where it is missing asks to install it through Homebrew on a Mac or winget on Windows, or names the download on Linux, and offers to open the vault. Run again, it updates the plugins and keeps their settings.</p>
+        <p id="what-obsidian-asks" data-de="<b>Was Obsidian noch fragt.</b> Beim ersten Öffnen fragt Obsidian, ob Sie dem Autor des Vaults vertrauen – bestätigen Sie. Fehlt das Plugin danach unter Installed plugins, wurde der Vault einmal im eingeschränkten Modus geöffnet: Settings → Community plugins → Turn on community plugins. Diesen Schalter speichert Obsidian ausserhalb des Vaults, darum kann ihn kein Befehl setzen."><b>What Obsidian still asks.</b> The first time it opens the vault, Obsidian asks whether you trust the vault’s author; say yes. If the plugin is still not under Installed plugins, the vault was once opened in restricted mode: Settings → Community plugins → Turn on community plugins. Obsidian keeps that switch outside the vault, so no command can set it.</p>
       </div>
     </section>
 
@@ -336,7 +378,7 @@ npx --yes 'github:companygraph/meta-model#semver:*' check ~/git/acme
 npx --yes 'github:companygraph/meta-model#semver:*' upgrade ~/git/acme --dry-run
 npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
       <div class="rules">
-        <p data-de="<b>Die Flags.</b> <code class='mono'>init</code> nimmt <code class='mono'>--here</code>, um in einen Ordner zu schreiben, der schon Dateien enthält, und <code class='mono'>--folders values,processes</code>, um nur die genannten Typen zu schreiben. <code class='mono'>upgrade</code> nimmt <code class='mono'>--dry-run</code>, das nur zeigt, und <code class='mono'>--force</code>, das eine geänderte Vokabular-Datei überschreibt und dies meldet. <code class='mono'>obsidian</code> nimmt <code class='mono'>--release</code> für ein bestimmtes Release des Plugins. Das <a href='https://github.com/companygraph/meta-model#readme'>README des Meta-Modells</a> nennt sie alle."><b>The flags.</b> <code class="mono">init</code> takes <code class="mono">--here</code> to write into a folder that already holds files, and <code class="mono">--folders values,processes</code> to write only the types named. <code class="mono">upgrade</code> takes <code class="mono">--dry-run</code>, which only shows, and <code class="mono">--force</code>, which overwrites an edited vocabulary file and says so. <code class="mono">obsidian</code> takes <code class="mono">--release</code> for one release of the plugin. The <a href="https://github.com/companygraph/meta-model#readme">meta-model’s README</a> names them all.</p>
+        <p data-de="<b>Die Flags.</b> <code class='mono'>init</code> kennt <code class='mono'>--here</code>, um in einen Ordner zu schreiben, der schon Dateien enthält, und <code class='mono'>--folders values,processes</code>, um nur die genannten Typen zu schreiben. <code class='mono'>upgrade</code> kennt <code class='mono'>--dry-run</code>, das nur zeigt, und <code class='mono'>--force</code>, das eine geänderte Vokabular-Datei überschreibt und dies meldet. <code class='mono'>obsidian</code> kennt <code class='mono'>--release</code> für ein bestimmtes Release des Plugins, <code class='mono'>--plugins</code> oder <code class='mono'>--no-plugins</code>, um beide Angebote auf einmal anzunehmen oder abzulehnen, und <code class='mono'>--open</code>, um den Vault ungefragt zu öffnen. Das <a href='https://github.com/companygraph/meta-model#readme'>README des Meta-Modells</a> nennt sie alle."><b>The flags.</b> <code class="mono">init</code> takes <code class="mono">--here</code> to write into a folder that already holds files, and <code class="mono">--folders values,processes</code> to write only the types named. <code class="mono">upgrade</code> takes <code class="mono">--dry-run</code>, which only shows, and <code class="mono">--force</code>, which overwrites an edited vocabulary file and says so. <code class="mono">obsidian</code> takes <code class="mono">--release</code> for one release of the plugin, <code class="mono">--plugins</code> or <code class="mono">--no-plugins</code> to answer both offers at once, and <code class="mono">--open</code> to open the vault unasked. The <a href="https://github.com/companygraph/meta-model#readme">meta-model’s README</a> names them all.</p>
       </div>
     </section>
   </div>
@@ -465,7 +507,7 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
 <script src="../page.js" defer></script>
 <script>
 // The menu's default flow, played in the drawing: the command, Make a model with its questions
-// and what it prints, the plugin, then the menu back with the pick above it, and Quit. Every
+// and what it prints, the vault, then the menu back with the pick above it, and Quit. Every
 // line is the tooling's own; where it prints a release, a count or a list that moves with the
 // next release, the drawing writes a placeholder, as the static menu does. Without script the
 // figure keeps the menu as its markup draws it; with reduced motion it keeps it until Play.
@@ -481,28 +523,40 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
     '  <span class="a">1</span>  Make a model                <span class="d">a new instance in a folder, or beside the files already in one</span>',
     '  <span class="a">2</span>  Check a model               <span class="d">the mechanical checks, as its CI runs them</span>',
     '  <span class="a">3</span>  Move a model to &lt;release&gt;   <span class="d">its vendored core, skills, manifest and workflow tag together</span>',
-    '  <span class="a">4</span>  Obsidian plugin             <span class="d">install it in a vault, or update it there</span>',
+    '  <span class="a">4</span>  Obsidian                    <span class="d">make an instance a vault: the plugins, the graph, the panes, and Obsidian itself</span>',
     '  <span class="a">5</span>  Quit                        <span class="d">or q, or Ctrl+C</span>',
     ''];
   var FOLDER = [ask("Which folder?", "a path; it is made if it is missing"), "~/git/acme"];
   var NAME = [ask("What is the company called?"), "Acme"];
-  var PLUGIN = [ask("Install the Obsidian plugin in it, to write it in Obsidian?", "y/N"), "y"];
   var MADE = ['',
     '<span class="g">✓</span> &lt;n&gt; files written into ~/git/acme',
-    '  written for claude, with the companygraph-validate, -export and -surface skills; export and surface need Python 3',
+    '  written for claude, with the &lt;companygraph-…&gt; skills; export and surface need Python 3',
     '  core &lt;core&gt;, vendored under meta/core/',
     '  folders: &lt;one for each type core declares&gt;',
-    '  the model is empty but for its README files, its source and its two singular entities',
+    '  the model is empty but for its README files, its source and its singular entities',
     ''];
-  var INSTALLED = ['',
-    '<span class="g">✓</span> CompanyGraph &lt;plugin release&gt; installed in ~/git/acme, and switched on',
+  // After the model, the vault: a pair is a question and the answer typed into it, a string a
+  // line the tooling prints. Each question is answered with its default but the first.
+  var VAULT = [
+    [ask("Make it a vault, to write it in Obsidian?", "y/N"), "y"],
     '',
-    '<span class="k">Next, in Obsidian</span>',
-    '  <span class="a">1</span>  Open the folder as a vault, if it is not one yet: <span class="d">Open another vault → Open folder as vault</span>',
+    '<span class="g">✓</span> CompanyGraph &lt;plugin release&gt; installed in ~/git/acme, and switched on',
+    [ask("Install Claudian, Claude Code in a pane?", "y/N"), "n"],
+    '  Claudian left out; it needs Claude Code on this machine',
+    [ask("Install Terminal, a shell in a pane?", "y/N"), "n"],
+    '  Terminal left out',
+    '<span class="g">✓</span> graph.json written: the model, one color per folder',
+    '<span class="g">✓</span> workspace.json written: model/identity.md open, the plugin\'s views on the right',
+    '<span class="g">✓</span> Obsidian is at /Applications/Obsidian.app',
+    [ask("Open the vault in Obsidian?", "y/N"), "n"],
+    '  Obsidian does not know this folder yet; once opened there, obsidian://open?path=&lt;folder&gt; opens it',
+    '',
+    '<span class="k">Then, in Obsidian</span>',
+    '  <span class="a">1</span>  Open the folder as a vault: <span class="d">Open another vault → Open folder as vault → ~/git/acme</span>',
     '  <span class="a">2</span>  Trust the vault\'s author when Obsidian asks',
-    '  <span class="a">3</span>  CompanyGraph not under Installed plugins? <span class="d">Settings → Community plugins → Turn on community plugins</span>',
+    '  <span class="a">3</span>  The plugins not under Installed plugins? <span class="d">Settings → Community plugins → Turn on community plugins</span>',
     '     <span class="d">Obsidian keeps that switch itself, outside the vault, so no command can set it.</span>',
-    '  A vault Obsidian has open already takes the plugin on <span class="d">Reload app without saving</span>.'];
+    '  A vault Obsidian has open already takes the plugins on <span class="d">Reload app without saving</span>.'];
 
   var run = 0, paused = false, wake = null;
   function wait(ms, mine){
@@ -535,8 +589,17 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
     });
   }
   function menu(mine){ return lines(MENU, mine, 40); }
+  // A question is typed into, then a pause while the tooling works; a line is printed.
+  function vault(mine){
+    return VAULT.reduce(function(p, x){
+      return p.then(function(){
+        if (typeof x !== "string") return type(x[0], x[1], mine).then(function(){ return wait(x[1] === "y" ? 1400 : 500, mine); });
+        line(x); return wait(90, mine);
+      });
+    }, Promise.resolve());
+  }
   function panel(){
-    var said = [FOLDER[0] + FOLDER[1], NAME[0] + NAME[1]].concat(MADE, [PLUGIN[0] + PLUGIN[1]], INSTALLED);
+    var said = [FOLDER[0] + FOLDER[1], NAME[0] + NAME[1]].concat(MADE, VAULT.map(function(x){ return typeof x === "string" ? x : x[0] + x[1]; }));
     line('  <span class="g">╭─ ✓</span> <span class="k">Make a model</span>');
     said.forEach(function(html){ line('  <span class="g">│</span> ' + html); });
     line('  <span class="g">╰─</span>');
@@ -551,18 +614,16 @@ npx --yes 'github:companygraph/meta-model#semver:*' obsidian ~/git/acme</pre>
     return type('<span class="d">$</span> ', CMD, mine, 32)
       .then(function(){ return wait(900, mine); })
       .then(function(){ line(""); banner(); return menu(mine); })
-      .then(function(){ return type(ask("Pick 1-5"), "1", mine); })
+      .then(function(){ return type(ask("Pick 1-5", "b or Ctrl+C at any question comes back here"), "1", mine); })
       .then(function(){ clear(); line(""); banner(); line('  <span class="a">›</span> <span class="k">Make a model</span>'); line(""); return wait(500, mine); })
       .then(function(){ return type(FOLDER[0], FOLDER[1], mine); })
       .then(function(){ return type(NAME[0], NAME[1], mine); })
       .then(function(){ return wait(900, mine); })
       .then(function(){ return lines(MADE, mine, 120); })
-      .then(function(){ return type(PLUGIN[0], PLUGIN[1], mine); })
-      .then(function(){ return wait(1400, mine); })
-      .then(function(){ return lines(INSTALLED, mine, 90); })
+      .then(function(){ return vault(mine); })
       .then(function(){ return wait(3200, mine); })
       .then(function(){ clear(); line(""); banner(); panel(); return menu(mine); })
-      .then(function(){ return type(ask("Pick 1-5"), "q", mine, 85, 5000); })
+      .then(function(){ return type(ask("Pick 1-5", "b or Ctrl+C at any question comes back here"), "q", mine, 85, 5000); })
       .then(function(){ clear(); line('<span class="d">$</span> <span class="cur"></span>'); return wait(2800, mine); })
       .then(function(){ return play(); })
       .catch(function(stale){ if (typeof stale !== "number") throw stale; });
