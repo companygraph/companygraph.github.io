@@ -316,8 +316,9 @@ const CHECKS = {
     await page.goto(BASE + "/?stage=expanded#" + first.id);
     try { await page.waitForFunction((name) => { const b = document.getElementById("cbody"); return b && b.textContent.includes(name); }, first.name, { timeout: 8000 }); }
     catch { return `a cite's address /?stage=expanded#${first.id} did not open the card of ${first.name}`; }
-    const open = await page.evaluate(() => { const m = document.getElementById("stagemodal"); return !!(m && m.open); });
-    if (!open) return "the card opened but the stage is not expanded, which is what the cite asked for";
+    // Expanded is the family's one modal holding the stage, fetched on arrival, so it is waited for.
+    try { await page.waitForFunction(() => { const m = document.querySelector("dialog.rbmodal[open]"); return !!(m && m.contains(document.getElementById("fig"))); }, null, { timeout: 8000 }); }
+    catch { await page.goto(BASE + spec.path); return "the card opened but the stage is not expanded, which is what the cite asked for"; }
     await page.goto(BASE + spec.path);
     return null;
   },
