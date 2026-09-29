@@ -158,6 +158,10 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   design` overwrites it; change it in the package, tag a release, then run `npm run design
   && npm run og` here. `npm run design:check` runs in CI before the browser suite, so a page
   that drifts from the pinned release goes red without anyone going looking.
+  When the release moves `chat.js` or Mermaid, run `npm run pages && npm run pictures &&
+  npm run pages` too and commit `team/pictures/`: the team page's process pictures are drawn
+  when the site builds, by `build/pictures.mjs`, and `npm run pages:check` fails until they
+  are drawn from what the page shows now.
 
   A handful of fences remain, for what a whole file cannot cover: `theme boot`, because it
   is the one script that has to run inline in `<head>`, before the first paint, so every
