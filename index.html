@@ -279,6 +279,7 @@
   }
 </style>
 <script>/* Start the fonts before the first layout needs them, so the first frame has them. */try{document.fonts.forEach(function(f){f.load()})}catch(e){}</script>
+<script type="module" blocking="render">/* Hold the first paint until the fonts have loaded, for at most 300ms: a page painted before them shows its text in another face and then moves it. */try{await Promise.race([Promise.all([...document.fonts].map(function(f){return f.load()})),new Promise(function(r){setTimeout(r,300)})])}catch(e){}</script>
 <!-- The stage — figure, card, expand dialog — is the component the stage pages share, so it
      is a file, not a copy in each page. It comes after the inline block above so the tokens
      it names are already defined. -->
