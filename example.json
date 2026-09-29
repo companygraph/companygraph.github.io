@@ -1,6 +1,6 @@
 {
-  "commit": "0d5eb20b2afb1ec609bd0149ed0cd9e867078442",
-  "core": "0.47.0",
+  "commit": "6813954c871090095e2f297fb41725c225404609",
+  "core": "0.48.0",
   "root": "Beacon Systems",
   "rootId": "identity",
   "types": [
@@ -1599,6 +1599,9 @@
         "direction": "lower",
         "read-with": [
           "Change Fail Rate"
+        ],
+        "can-cost": [
+          "Craftsmanship"
         ]
       },
       "sections": [
@@ -3953,6 +3956,12 @@
       "from": "kpis/change-fail-rate",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-lead-time",
+      "to": "values/craftsmanship",
+      "via": "can-cost",
       "attrs": {}
     },
     {
