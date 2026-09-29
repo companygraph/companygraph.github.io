@@ -125,8 +125,11 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   in its head, `<link rel="preload" as="font" type="font/woff2" href="…" crossorigin>`,
   and declared `font-display: fallback`: a page painted before its font file was ready
   showed one frame in the fallback font and then swapped, on every page change, and with
-  the preload the first frame is already in the right font. A new page copies both from
-  its neighbor.
+  the preload the first frame is already in the right font. Right after its `@font-face`
+  rules it also starts loading them, `document.fonts.forEach(function(f){f.load()})`: a
+  browser loads a face only when a layout first asks for it, and even from its cache that
+  lands a frame after the first paint, so without the call the first frame of every page
+  showed its text without its font. A new page copies all three from its neighbor.
 - **Self-contained. No external asset at all** — fonts are served from `fonts/`, referenced
   relatively (`fonts/…`, not `/fonts/…`). A root-absolute path works on the domain and breaks
   under `file://`, which is the one failure mode nobody opens a browser to find. `verify`
