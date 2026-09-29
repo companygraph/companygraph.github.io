@@ -1,5 +1,5 @@
 {
-  "commit": "f4dad1201fbcb8846850e7bed332008a2b992a12",
+  "commit": "0d824fd82254649a04746f68bf73379059133865",
   "core": "0.48.0",
   "root": "CompanyGraph",
   "rootId": "identity",
@@ -380,6 +380,10 @@
               ],
               "rows": [
                 [
+                  "Design system",
+                  "https://github.com/robertblust/design/tree/main/docs/design-system"
+                ],
+                [
                   "Design tokens",
                   "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
                 ],
@@ -405,6 +409,10 @@
               "URL"
             ],
             "rows": [
+              [
+                "Design system",
+                "https://github.com/robertblust/design/tree/main/docs/design-system"
+              ],
               [
                 "Design tokens",
                 "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
@@ -1673,6 +1681,165 @@
       "path": "model/decisions/2026-apache-2-0.md"
     },
     {
+      "id": "decisions/2026-claude-first",
+      "type": "decision",
+      "name": "Claude is the first agent an instance supports, and not the only one",
+      "tagline": "An instance's skills are written for Claude first, so the idea can be validated before the work of supporting every agent is spent on it; the other agents follow, and supporting Claude alone is a stage and not the design.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Whether this is a business is answered",
+          "A company keeps its model with whichever agent it chooses"
+        ],
+        "upholds": [
+          "Run on what we publish"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Which agent the skills an instance ships are written for, when `init` first installed them. Each agent looks for its procedures in its own place and its own form, so the first skills had to be written for one agent or for several. It had to be decided then because the idea was not validated yet: whether a company keeps a model at all is the question the ideas page puts, and every agent supported before that is answered is work spent on an idea that may get a clean no.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Every agent from the first release: Claude, ChatGPT and Gemini",
+                  "Three places for every procedure and three agents to test every skill against, all before anyone outside had kept a model, and multiplied by every skill that changed while the idea was still moving."
+                ],
+                [
+                  "No skills, only the vocabulary and the checks",
+                  "The procedures that build an instance from documents or from a web address are the judgment no script makes; without them nobody could try the idea at the cost the ideas page asks about."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Every agent from the first release: Claude, ChatGPT and Gemini",
+                "Three places for every procedure and three agents to test every skill against, all before anyone outside had kept a model, and multiplied by every skill that changed while the idea was still moving."
+              ],
+              [
+                "No skills, only the vocabulary and the checks",
+                "The procedures that build an instance from documents or from a web address are the judgment no script makes; without them nobody could try the idea at the cost the ideas page asks about."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The work is validating the idea, and a skill written for one agent validates it as well as a skill written for three: what is being tested is whether a company keeps its model, not which agent it keeps it with. Claude took the first place because it is the agent our own three instances are written and kept with, so every skill runs on real models before it ships.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "An instance made today can be kept with Claude and no other agent, and a company working with another agent reads that as \"not for us\"; the command-line page says so and says others are planned. `init` already takes the agent as an option, so adding one is a release and not a redesign. For the call to stay right, the model has to stay plain Markdown that no agent owns, and no skill may come to depend on something only Claude can do, or the second agent becomes a rewrite. The call ends when the idea is validated or work on a second agent starts, whichever comes first, and a later decision supersedes it.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "An agent does the work no script can, by the skills an instance ships",
+                  "",
+                  "made it for Claude first"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "feature",
+                "An agent does the work no script can, by the skills an instance ships",
+                "",
+                "made it for Claude first"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The ideas and the questions validation has to answer",
+                  "https://blust.ch/ideas/"
+                ],
+                [
+                  "The note that Claude is the only agent today",
+                  "https://companygraph.io/cli/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The ideas and the questions validation has to answer",
+                "https://blust.ch/ideas/"
+              ],
+              [
+                "The note that Claude is the only agent today",
+                "https://companygraph.io/cli/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-claude-first.md"
+    },
+    {
       "id": "decisions/2026-commits-by-seat",
       "type": "decision",
       "name": "An agent's commit is authored by the seat it held",
@@ -2936,6 +3103,104 @@
       ],
       "owner": null,
       "path": "model/features/a-vocabulary-to-describe-a-company-in.md"
+    },
+    {
+      "id": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "type": "feature",
+      "name": "An agent does the work no script can, by the skills an instance ships",
+      "tagline": "Someone asks an agent to build a company's model from its web address, write a person's profile from their documents, check every page against its schema's writing rules or publish the model somewhere, and the agent follows the procedure that ships with the instance instead of improvising one.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Instance",
+          "Agent pass",
+          "Release"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The procedures an agent follows where the work is a judgment and not a rule: building an instance from what a company publishes, writing or extending a profile from a person's documents, recording the terms a source is published under and the consent it needs, validating an instance with the agent pass beside the mechanical checks, producing the content of a surface, and exporting the instance for an agent or a notebook to read. `init` installs them, each where the agent the instance was made for reads it, and every upgrade moves them with core, so an instance follows the procedures of the release it names. Each skill proposes, writes against the schemas and runs the checks; the operator decides every level, seat and sentence, and the commit is theirs. It stops at the files: merging stays with a person, and a procedure a company writes for itself is its own and not part of this feature.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The procedure that builds an instance from a company's web address",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-company/SKILL.md"
+                ],
+                [
+                  "The procedure that records a source's terms and consent",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-consent/SKILL.md"
+                ],
+                [
+                  "The procedure that exports an instance",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-export/SKILL.md"
+                ],
+                [
+                  "The procedure that writes a profile from a person's documents",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-profile/SKILL.md"
+                ],
+                [
+                  "The procedure that produces a surface's content",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-surface/SKILL.md"
+                ],
+                [
+                  "The procedure that validates an instance",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-validate/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The procedure that builds an instance from a company's web address",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-company/SKILL.md"
+              ],
+              [
+                "The procedure that records a source's terms and consent",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-consent/SKILL.md"
+              ],
+              [
+                "The procedure that exports an instance",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-export/SKILL.md"
+              ],
+              [
+                "The procedure that writes a profile from a person's documents",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-profile/SKILL.md"
+              ],
+              [
+                "The procedure that produces a surface's content",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-surface/SKILL.md"
+              ],
+              [
+                "The procedure that validates an instance",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-validate/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships.md"
     },
     {
       "id": "features/an-agent-reads-the-model",
@@ -6067,7 +6332,7 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "It holds every seat in Delivery but the Owner's, and none in the two processes that begin outside the company: a request is raised by a person and a change is offered by one. Whichever model runs it, the rulebooks are the same, every question it parks ends with the Owner's word, and nothing it produces reaches the default branch without the Owner merging it.\n\nThis profile is here so the model can say what holds a seat. A seat no profile names is held by a person, and which person is a fact this repository does not carry.",
+          "text": "It holds every seat in Delivery but the Owner's, and none in the two processes that begin outside the company: a request is raised by a person and a change is offered by one. Whichever model runs it, the rulebooks are the same, every question it parks ends with the Owner's word, and nothing it produces reaches the default branch without the Owner merging it.\n\nThis profile is here so the model can say what holds a seat, as Robert Blust's says who holds the Owner's; a seat no profile names is held by whichever person brings the work to it.",
           "tables": []
         }
       ],
@@ -6254,9 +6519,45 @@
       "fields": {
         "source": "Local",
         "nature": "human",
-        "email": "robert@blust.ch"
+        "email": "robert@blust.ch",
+        "roles": [
+          "Owner"
+        ]
       },
-      "sections": [],
+      "sections": [
+        {
+          "heading": "Also at",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Where",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "blust.ch",
+                  "https://blust.ch"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Where",
+              "URL"
+            ],
+            "rows": [
+              [
+                "blust.ch",
+                "https://blust.ch"
+              ]
+            ]
+          }
+        }
+      ],
       "owner": null,
       "path": "model/profiles/robert-blust/robert-blust.md"
     },
@@ -6291,7 +6592,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A question about the problem and the match: why a model rather than a wiki, what a company's model looks like, whether the vocabulary fits, where targets and actual numbers go, how content stays current and who keeps it true.\n\nHow to begin is Getting started. What it costs, who is behind it and how it proves itself is Terms.",
+          "text": "A question about the problem and the match: why a model rather than a wiki, what a company's model looks like, whether the vocabulary fits, where targets and actual numbers go, how content stays current and who keeps it true, and whether it works with the agent and the graph database a company already runs.\n\nHow to begin is Getting started. What it costs, who is behind it and how it proves itself is Terms.",
           "tables": []
         }
       ],
@@ -6590,6 +6891,60 @@
       "path": "model/questions/can-our-ai-agents-use-it.md"
     },
     {
+      "id": "questions/can-we-load-our-model-into-a-graph-database-like-neo4j",
+      "type": "question",
+      "name": "Can we load our model into a graph database like Neo4j?",
+      "tagline": "The objective says what has to become true for any graph database to hold a company's model with no work of its own; it is a target we have set, and nothing ships that loads one today.",
+      "fields": {
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "A company's model belongs to no tool, and any graph database can hold it",
+                  "",
+                  "what any graph database can hold"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "A company's model belongs to no tool, and any graph database can hold it",
+                "",
+                "what any graph database can hold"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-we-load-our-model-into-a-graph-database-like-neo4j.md"
+    },
+    {
       "id": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
       "type": "question",
       "name": "Do I need your service to run CompanyGraph, and what does it cost?",
@@ -6744,6 +7099,72 @@
       ],
       "owner": null,
       "path": "model/questions/do-our-people-have-to-write-these-files-by-hand.md"
+    },
+    {
+      "id": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
+      "type": "question",
+      "name": "Does it only work with Claude, or can we use ChatGPT or Gemini?",
+      "tagline": "The objective says the agent is the company's choice and can be changed at any time, and the decision says why Claude is the one supported first and what ends that.",
+      "fields": {
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "A company keeps its model with whichever agent it chooses",
+                  "",
+                  "the agent is the company's choice"
+                ],
+                [
+                  "decision",
+                  "Claude is the first agent an instance supports, and not the only one",
+                  "",
+                  "why Claude first, and until when"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "A company keeps its model with whichever agent it chooses",
+                "",
+                "the agent is the company's choice"
+              ],
+              [
+                "decision",
+                "Claude is the first agent an instance supports, and not the only one",
+                "",
+                "why Claude first, and until when"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini.md"
     },
     {
       "id": "questions/does-our-data-leave-our-hands",
@@ -7398,6 +7819,84 @@
       ],
       "owner": null,
       "path": "model/questions/isn-t-this-just-a-wiki-or-notion-with-rules.md"
+    },
+    {
+      "id": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
+      "type": "question",
+      "name": "What can an agent do with our model besides answering questions?",
+      "tagline": "The first feature says which procedures an agent follows on an instance, from building it to validating and publishing it, the second says what it can ask the model, and the decision says which agent they are written for first.",
+      "fields": {
+        "source": "Local",
+        "kind": "Getting started"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "An agent does the work no script can, by the skills an instance ships",
+                  "",
+                  "the procedures"
+                ],
+                [
+                  "feature",
+                  "An agent reads the model",
+                  "",
+                  "what it can ask"
+                ],
+                [
+                  "decision",
+                  "Claude is the first agent an instance supports, and not the only one",
+                  "",
+                  "which agent first"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "An agent does the work no script can, by the skills an instance ships",
+                "",
+                "the procedures"
+              ],
+              [
+                "feature",
+                "An agent reads the model",
+                "",
+                "what it can ask"
+              ],
+              [
+                "decision",
+                "Claude is the first agent an instance supports, and not the only one",
+                "",
+                "which agent first"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-can-an-agent-do-with-our-model-besides-answering-questions.md"
     },
     {
       "id": "questions/what-do-the-colors-on-companygraph-io-mean",
@@ -8849,6 +9348,76 @@
       "path": "model/sources/local.md"
     },
     {
+      "id": "strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses",
+      "type": "strategic-objective",
+      "name": "A company keeps its model with whichever agent it chooses",
+      "tagline": "The agent a company works with is chosen when its instance is made and can be changed at any time after, and whichever it chooses — Anthropic's Claude, OpenAI's ChatGPT, Google's Gemini or another — reads, writes and checks the model under the same rulebooks, with nothing lost in the change.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-29"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "Every procedure an instance ships is installed where the chosen agent reads it, and changing agents later is one command that leaves the model, its history and its checks untouched. It fails the day a company has to rewrite a page or give up a procedure because it changed agents, or the day a procedure ships that only one agent can follow.\n\nWhat falls outside: which agent is best at the work, which is the company's call and not ours, and the agents' own terms and prices. Also outside: the model itself, which is Markdown and belongs to no agent already; this objective is about everything that works on it. And the model behind the chat we run on our own sites, which is a call about our deployment and not about what a company adopts.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses.md"
+    },
+    {
+      "id": "strategic-objectives/a-company-s-model-belongs-to-no-tool-and-any-graph-database-can-hold-it",
+      "type": "strategic-objective",
+      "name": "A company's model belongs to no tool, and any graph database can hold it",
+      "tagline": "A company's model is Markdown files that any tool can read for as long as text can be read, and loading an instance into a graph database — Neo4j, Amazon Neptune, Ontotext GraphDB, Memgraph or another — takes no work of the company's own: no mapping to write, no code, and no page changed.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-29"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "The files stay the master, and a graph database holds a copy drawn from them that can be rebuilt at any commit, so a company that queries its model in one database can move it to another or drop the database without losing a fact. It holds when both kinds of graph database a company is likely to run can load an instance from what the tooling produces: a property graph queried in Cypher or GQL, and an RDF store queried in SPARQL. The copy then answers what the model says at that commit. It fails the day a fact lives only in a database, or the day a company has to write its own mapping for a type core ships.\n\nWhat falls outside: running or hosting the database, and choosing one. Also outside: writing back. A change made in the database is not a change to the model, and it reaches the model only as any change does, through a person's approval.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The graph database ranking the names come from",
+                  "https://db-engines.com/en/ranking/graph+dbms"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The graph database ranking the names come from",
+                "https://db-engines.com/en/ranking/graph+dbms"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/a-company-s-model-belongs-to-no-tool-and-any-graph-database-can-hold-it.md"
+    },
+    {
       "id": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
       "type": "strategic-objective",
       "name": "A company we have never met keeps its own model",
@@ -9668,6 +10237,58 @@
       "attrs": {}
     },
     {
+      "from": "decisions/2026-claude-first",
+      "to": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "How": "made it for Claude first"
+      }
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "decision-kinds/architecture",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "strategic-objectives/whether-this-is-a-business-is-answered",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-first",
+      "to": "values/run-on-what-we-publish",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
       "from": "decisions/2026-commits-by-seat",
       "to": "roles/implementer",
       "via": "Bears on.Entity",
@@ -10117,6 +10738,36 @@
     },
     {
       "from": "features/a-vocabulary-to-describe-a-company-in",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "to": "concepts/agent-pass",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "to": "concepts/instance",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "to": "concepts/release",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "to": "products/companygraph-core",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -11531,6 +12182,12 @@
     },
     {
       "from": "profiles/robert-blust",
+      "to": "roles/owner",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -11692,6 +12349,28 @@
       "attrs": {}
     },
     {
+      "from": "questions/can-we-load-our-model-into-a-graph-database-like-neo4j",
+      "to": "strategic-objectives/a-company-s-model-belongs-to-no-tool-and-any-graph-database-can-hold-it",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what any graph database can hold"
+      }
+    },
+    {
+      "from": "questions/can-we-load-our-model-into-a-graph-database-like-neo4j",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-we-load-our-model-into-a-graph-database-like-neo4j",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
       "to": "concepts/instance",
       "via": "Rests on.Entity",
@@ -11771,6 +12450,38 @@
     },
     {
       "from": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
+      "to": "decisions/2026-claude-first",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why Claude first, and until when"
+      }
+    },
+    {
+      "from": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
+      "to": "strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "the agent is the company's choice"
+      }
+    },
+    {
+      "from": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -12109,6 +12820,48 @@
     },
     {
       "from": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
+      "to": "decisions/2026-claude-first",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "which agent first"
+      }
+    },
+    {
+      "from": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
+      "to": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "the procedures"
+      }
+    },
+    {
+      "from": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
+      "to": "features/an-agent-reads-the-model",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what it can ask"
+      }
+    },
+    {
+      "from": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
+      "to": "question-kinds/getting-started",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -12505,6 +13258,18 @@
     },
     {
       "from": "roles/writer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/a-company-s-model-belongs-to-no-tool-and-any-graph-database-can-hold-it",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
