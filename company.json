@@ -1,6 +1,6 @@
 {
-  "commit": "efc96f23c1ac0d8eb763c9f60c120a955bba2d9f",
-  "core": "0.47.0",
+  "commit": "f4dad1201fbcb8846850e7bed332008a2b992a12",
+  "core": "0.48.0",
   "root": "CompanyGraph",
   "rootId": "identity",
   "types": [
@@ -1398,6 +1398,126 @@
       "path": "model/decision-statuses/standing.md"
     },
     {
+      "id": "decisions/2026-agents-write-a-person-approves",
+      "type": "decision",
+      "name": "Agents write the model, and a person approves every change to it",
+      "tagline": "The pages of a company's model are written by agents, on a person's request or in a workflow that runs on its own, and no change enters the model until a person who answers for it has approved it; the checks prove a change has the right shape, and only the person approving it says it is true.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-29",
+        "kind": "Vocabulary",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "A company we have never met keeps its own model",
+          "Every gate an agent's work passes is held by a person"
+        ],
+        "upholds": [
+          "Adoption is not taxed",
+          "Run on what we publish"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Who writes a company's model, and who lets a change into it. Core's conventions read as though a person types every page, and two critiques of our published schemas, heard on September 29, 2026, read them that way: they found the slugs, the headings and the evidence rules too heavy for the people who run a company, and proposed hooks, draft states and a gentler vocabulary to spare those people the format. It had to be decided then, because each proposal was tooling, and which tooling to build depends on who does the writing.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "People write the pages, and tooling eases the format for them: a hook that names and files each page, a draft state, business words for the pull request",
+                  "Every rule stays a cost a person pays by hand, and the effort goes into sparing people a format an agent writes without effort."
+                ],
+                [
+                  "Agents write, and a change from a workflow that runs on its own merges once the checks pass",
+                  "A check proves a page has the right shape, not that it is true, and a check that asks for evidence can be satisfied by an agent that writes something shaped like evidence. Nobody would answer for what the model then claims."
+                ],
+                [
+                  "An editing application in front of the files, a form per type for a person to fill in",
+                  "A second way of writing to build and keep in step with every schema, and the person is still the one writing, only through a different window."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "People write the pages, and tooling eases the format for them: a hook that names and files each page, a draft state, business words for the pull request",
+                "Every rule stays a cost a person pays by hand, and the effort goes into sparing people a format an agent writes without effort."
+              ],
+              [
+                "Agents write, and a change from a workflow that runs on its own merges once the checks pass",
+                "A check proves a page has the right shape, not that it is true, and a check that asks for evidence can be satisfied by an agent that writes something shaped like evidence. Nobody would answer for what the model then claims."
+              ],
+              [
+                "An editing application in front of the files, a form per type for a person to fill in",
+                "A second way of writing to build and keep in step with every schema, and the person is still the one writing, only through a different window."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The format is exact because agents read it, and an agent writes it just as exactly, from documents a company already has, from a request, or from an event a workflow notices. What only a person can supply is whether a change is true and whether the company means it. Putting the writing with agents and the approving with people spends a person's time on the one part nobody else can do, which is what lets a company keep its model current without us in the room. It is also how our own model is already written: seats draft and implement, and the Owner merges, so the call states what we have run on rather than what we expect to work.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Every change reaches the model through a person's approval, whether a person asked for it or a workflow made it, and nothing merges on the checks alone. Answering is not a change: an answer reads the model and changes nothing, so it still goes out without anyone reading it first. Core's conventions are written for the agent that writes a page and the check that reads it, and where they still say a rule must be one a person can apply by hand, that sentence is ours to revisit. A person may still edit a page by hand, and the format is not shaped around it.\n\nWhat we are committed to building is the view a person approves from: a change shown as what it does to the company, the objectives it serves, the entities it makes, changes or ends, and the claims whose evidence is thin, rather than as a diff of files. Until that view exists, a person approves by reading the diff, which is the cost the critiques were right about. The call stays right for as long as the person approving actually judges each change; an approval given without reading leaves the model's claims with no one answering for them, and the checks cannot tell the difference.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The conventions the call changes",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The conventions the call changes",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-agents-write-a-person-approves.md"
+    },
+    {
       "id": "decisions/2026-apache-2-0",
       "type": "decision",
       "name": "Everything under Apache 2.0, and consulting billed by the day",
@@ -1644,7 +1764,7 @@
         },
         {
           "heading": "Consequences",
-          "text": "Every seat that commits needs an address on our domain, a mail alias onto the owner's mailbox verified on the owner's GitHub account. The Owner, the Controller, the Reviewer, the Answerer, the Visitor, the Contributor and the Requestor get none, because they never commit as a seat: the owner commits under the owner's own name, the Controller writes nothing, the Reviewer returns findings, the Answerer answers at runtime, and a Visitor, a Contributor or a Requestor commits under their own name. The hook stays off in our repositories until companygraph.io receives mail. The owner's own commits are authored as robert@blust.ch, the address our identity carries, so the report counts them as the owner's. Commits made before the rule keep the author they have, because rewriting published history would force-push every repository. The call stays right for as long as agents do the work under seats our processes name, and the processes stay what the check reads.",
+          "text": "Every seat that commits needs an address on our domain, a mail alias onto the owner's mailbox verified on the owner's GitHub account. The Owner, the Controller, the Reviewer, the Answerer, the Visitor, the Contributor and the Requestor get none, because they never commit as a seat: the owner commits under the owner's own name, the Controller writes nothing, the Reviewer returns findings, the Answerer answers at runtime, and a Visitor, a Contributor or a Requestor commits under their own name. companygraph.io receives mail, so the hook is on in our repositories, in every clone that has run `conventions-sync`. The owner's own commits are authored as robert@blust.ch, the address the owner's profile carries, so the report counts them as the owner's. Commits made before the rule keep the author they have, because rewriting published history would force-push every repository. The call stays right for as long as agents do the work under seats our processes name, and the processes stay what the check reads.",
           "tables": []
         },
         {
@@ -2958,7 +3078,7 @@
       "tagline": "The open-source meta-model for operating a company: the structure a company's knowledge takes, so that the people who run it and the agents working beside them can both rely on it.",
       "fields": {
         "source": "Local",
-        "email": "robert@blust.ch",
+        "email": "info@companygraph.io",
         "url": "https://companygraph.io"
       },
       "sections": [
@@ -6127,6 +6247,20 @@
       "path": "model/profiles/german-voice/german-voice.md"
     },
     {
+      "id": "profiles/robert-blust",
+      "type": "profile",
+      "name": "Robert Blust",
+      "tagline": "Maintainer of CompanyGraph.",
+      "fields": {
+        "source": "Local",
+        "nature": "human",
+        "email": "robert@blust.ch"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/profiles/robert-blust/robert-blust.md"
+    },
+    {
       "id": "question-kinds/brand",
       "type": "question-kind",
       "name": "Brand",
@@ -6532,6 +6666,84 @@
       ],
       "owner": null,
       "path": "model/questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost.md"
+    },
+    {
+      "id": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "type": "question",
+      "name": "Do our people have to write these files by hand?",
+      "tagline": "The decision says who writes the model and who approves each change to it, the objective says every gate an agent's work passes is held by a person, and the feature is one case of it: an agent writing a profile from documents a person already has.",
+      "fields": {
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "Agents write the model, and a person approves every change to it",
+                  "",
+                  "who writes and who approves"
+                ],
+                [
+                  "strategic-objective",
+                  "Every gate an agent's work passes is held by a person",
+                  "",
+                  "who holds each gate"
+                ],
+                [
+                  "feature",
+                  "A profile is written from a person's documents",
+                  "",
+                  "one case of an agent writing"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "decision",
+                "Agents write the model, and a person approves every change to it",
+                "",
+                "who writes and who approves"
+              ],
+              [
+                "strategic-objective",
+                "Every gate an agent's work passes is held by a person",
+                "",
+                "who holds each gate"
+              ],
+              [
+                "feature",
+                "A profile is written from a person's documents",
+                "",
+                "one case of an agent writing"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/do-our-people-have-to-write-these-files-by-hand.md"
     },
     {
       "id": "questions/does-our-data-leave-our-hands",
@@ -8694,6 +8906,25 @@
       "path": "model/strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary.md"
     },
     {
+      "id": "strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person",
+      "type": "strategic-objective",
+      "name": "Every gate an agent's work passes is held by a person",
+      "tagline": "Agents do the work of a company's processes, and at every gate that work reaches, a person who answers for it decides whether it goes on; no agent's work passes a gate on the strength of the checks alone, whether a person asked for it or a workflow started it.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-29"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "Each gate a process names has a person among its approvers, and every passage through it can be traced to the person who let it through and when. A change to the model is one such gate, a release another, and a workflow that runs on its own meets the same gates as work somebody asked for. It fails the day agent work passes a gate that no person approved, or passes one on an approval nobody can trace.\n\nWhat falls outside: how the person judges what is in front of them, which is for the strategies and the tooling beneath this objective to serve, and how fast or how often gates are passed, because a gate measured by throughput rewards letting things through. Also outside: answers, which change nothing and pass no gate.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person.md"
+    },
+    {
       "id": "strategic-objectives/whether-this-is-a-business-is-answered",
       "type": "strategic-objective",
       "name": "Whether this is a business is answered",
@@ -9346,6 +9577,54 @@
       "from": "decision-statuses/standing",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "decision-kinds/vocabulary",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "values/adoption-is-not-taxed",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "values/run-on-what-we-publish",
+      "via": "upholds",
       "attrs": {}
     },
     {
@@ -11251,6 +11530,12 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "question-kinds/brand",
       "to": "sources/local",
       "via": "source",
@@ -11444,6 +11729,48 @@
     },
     {
       "from": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "to": "decisions/2026-agents-write-a-person-approves",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "who writes and who approves"
+      }
+    },
+    {
+      "from": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "to": "features/a-profile-is-written-from-a-person-s-documents",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "one case of an agent writing"
+      }
+    },
+    {
+      "from": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "to": "strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "who holds each gate"
+      }
+    },
+    {
+      "from": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "to": "question-kinds/fit",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/do-our-people-have-to-write-these-files-by-hand",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -12196,6 +12523,12 @@
     },
     {
       "from": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person",
       "to": "sources/local",
       "via": "source",
       "attrs": {}

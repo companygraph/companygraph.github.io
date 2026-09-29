@@ -1,5 +1,5 @@
 {
-  "commit": "0d5eb20b2afb1ec609bd0149ed0cd9e867078442",
+  "commit": "6813954c871090095e2f297fb41725c225404609",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -2222,7 +2222,7 @@
                   "`email`",
                   "No",
                   "string",
-                  "Where to reach the company"
+                  "Where to reach the company — a role address such as `info@` serves. No commit is judged by it: a person commits under their profile's `email`."
                 ],
                 [
                   "`location`",
@@ -2264,7 +2264,7 @@
                 "`email`",
                 "No",
                 "string",
-                "Where to reach the company"
+                "Where to reach the company — a role address such as `info@` serves. No commit is judged by it: a person commits under their profile's `email`."
               ],
               [
                 "`location`",
@@ -2410,7 +2410,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 is the company's name as the company writes it, not a description of it. A company of\n  one may name a person, and then a profile of the same person carries the same name — that is\n  expected, not a collision to resolve: the types are different, and a reference carries the\n  type it resolves under (R4), so the shared name sends no reader to the wrong page.\n- The tagline says what the company is, not what it aspires to. Where it is going is the\n  vision's business.\n- `## What it is` says what the company does and for whom, in the company's own voice. It is\n  not a history and not a pitch; an achievement belongs to a profile's experience.\n- A fact lives in one place. Where identity and a profile would state the same thing —\n  an address, a mail address — identity holds it, and the profile carries its own only where it\n  differs.\n- One row per place in `## Also at`, and a place the company no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the company's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the company.",
+          "text": "- The H1 is the company's name as the company writes it, not a description of it. A company of\n  one may name a person, and then a profile of the same person carries the same name — that is\n  expected, not a collision to resolve: the types are different, and a reference carries the\n  type it resolves under (R4), so the shared name sends no reader to the wrong page.\n- The tagline says what the company is, not what it aspires to. Where it is going is the\n  vision's business.\n- `## What it is` says what the company does and for whom, in the company's own voice. It is\n  not a history and not a pitch; an achievement belongs to a profile's experience.\n- A fact lives in one place. Where identity and a profile would state the same thing — an\n  address — identity holds it, and the profile carries its own only where it differs. A mail\n  address is two facts, not one: identity's is where to reach the company, and a human's\n  profile carries the person's own, the one their commits are authored under.\n- One row per place in `## Also at`, and a place the company no longer maintains has no row:\n  the table is what a reader will follow.\n- The URL in `## Also at` is the page that is the company's own on that place, not a search, a\n  feed or a post. What a reader lands on has to be the company.",
           "tables": []
         },
         {
@@ -2489,6 +2489,12 @@
                   "No",
                   "array of ref → kpi",
                   "The KPIs it is read beside, because each can be moved alone at the other's cost — the H1 of a file in `kpis/`"
+                ],
+                [
+                  "`can-cost`",
+                  "No",
+                  "array of ref → value",
+                  "The values that pushing this number can wear down, each the H1 of a file in `values/`"
                 ]
               ]
             }
@@ -2549,6 +2555,12 @@
                 "No",
                 "array of ref → kpi",
                 "The KPIs it is read beside, because each can be moved alone at the other's cost — the H1 of a file in `kpis/`"
+              ],
+              [
+                "`can-cost`",
+                "No",
+                "array of ref → value",
+                "The values that pushing this number can wear down, each the H1 of a file in `values/`"
               ]
             ]
           }
@@ -2659,7 +2671,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- No target, threshold, baseline or measured value, ever. Each moves, and a number that moves\n  goes stale in the model without a sound; a References row says where they are kept.\n- Named for the quantity, not for the dashboard or tool that shows it: `Change Lead Time`, not\n  `the lead-time chart`.\n- Person-neutral, as a role is: the definition names seats and never who holds them.\n- `## How it is measured` says what counts as the event in this company's terms — what a\n  deployment is here, what a failure is — concretely enough that two people counting would get\n  the same number. A definition that leaves the event open lets every reader count a different\n  thing under one name.\n- `## What it can hide` names a specific way the number improves while the work does not. \"It\n  can be misread\" hides nothing a reader can check.\n- `read-with` names a KPI that moves against this one when this one is gamed, never the KPI\n  itself and not every KPI of the same process.\n- `direction: target` is written only where both too high and too low are worse; an indicator\n  that is better lower down to some floor is `lower`.\n- `unit` names the period wherever the value is a rate: `deployments per week`, not `count`.\n- `serves` names an objective only where the KPI moving would actually tell whether that\n  objective holds. A KPI that indicates no objective has none, and is still a KPI the company\n  watches.\n- A KPI that nothing measures yet is a valid definition. It carries no References row for\n  values until one exists, and it gains no invented one.\n- Names and prose are American English (R14).",
+          "text": "- No target, threshold, baseline or measured value, ever. Each moves, and a number that moves\n  goes stale in the model without a sound; a References row says where they are kept.\n- Named for the quantity, not for the dashboard or tool that shows it: `Change Lead Time`, not\n  `the lead-time chart`.\n- Person-neutral, as a role is: the definition names seats and never who holds them.\n- `## How it is measured` says what counts as the event in this company's terms — what a\n  deployment is here, what a failure is — concretely enough that two people counting would get\n  the same number. A definition that leaves the event open lets every reader count a different\n  thing under one name.\n- `## What it can hide` names a specific way the number improves while the work does not. \"It\n  can be misread\" hides nothing a reader can check.\n- `read-with` names a KPI that moves against this one when this one is gamed, never the KPI\n  itself and not every KPI of the same process.\n- `can-cost` names a value only where `## What it can hide` says how pushing the number wears\n  it down. The field is the edge; the section is the reason, and a name with no reason under it\n  is a claim nothing backs.\n- A value any KPI could cost tells a reader nothing, and is not named.\n- `direction: target` is written only where both too high and too low are worse; an indicator\n  that is better lower down to some floor is `lower`.\n- `unit` names the period wherever the value is a rate: `deployments per week`, not `count`.\n- `serves` names an objective only where the KPI moving would actually tell whether that\n  objective holds. A KPI that indicates no objective has none, and is still a KPI the company\n  watches.\n- A KPI that nothing measures yet is a valid definition. It carries no References row for\n  values until one exists, and it gains no invented one.\n- Names and prose are American English (R14).",
           "tables": []
         },
         {
@@ -3678,7 +3690,7 @@
                   "`email`",
                   "No",
                   "string",
-                  "Contact address"
+                  "Contact address. On a profile whose `nature` is `human`, also the address the person's own commits are authored under: a commit from it is that person's, whatever seats the profile holds, and passes without trailers."
                 ],
                 [
                   "`location`",
@@ -3732,7 +3744,7 @@
                 "`email`",
                 "No",
                 "string",
-                "Contact address"
+                "Contact address. On a profile whose `nature` is `human`, also the address the person's own commits are authored under: a commit from it is that person's, whatever seats the profile holds, and passes without trailers."
               ],
               [
                 "`location`",
@@ -6241,6 +6253,15 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "core/kpi",
+      "to": "core/value",
+      "via": "can-cost",
+      "attrs": {
+        "type": "array of ref → value"
+      },
+      "label": "can-cost"
     },
     {
       "from": "core/kpi",
