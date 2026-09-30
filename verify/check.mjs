@@ -254,6 +254,24 @@ const PAGES = [
     // against "operating a company", present in exactly one language each.
     translates: { lang: "de", shows: ["Betrieb einer Firma"], hides: ["operating a company"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  // The second deck, built as the first and checked the same way. Its outbound links are the
+  // chrome's blust.ch and the closing slide's two repositories; its rests-on chips are links into
+  // the graph on this site, which internalLinks covers.
+  { path: "/talks/obsidian-plugin/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /Obsidian plugin/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/",
+            "https://github.com/companygraph/obsidian-plugin",
+            "https://github.com/companygraph/mental-model"],
+    slides: 19,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["gelesen aus dem Modell"], hides: ["read from the model it edits"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {

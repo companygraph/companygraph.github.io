@@ -69,6 +69,7 @@ export const PAGES = [
   { file: "surfaces/index.html", head: PAGE_HEAD },
   { file: "talks/index.html", head: PAGE_HEAD },
   { file: "talks/intro/index.html", head: PAGE_HEAD },
+  { file: "talks/obsidian-plugin/index.html", head: PAGE_HEAD },
 ];
 
 export function terms(model, repo) {

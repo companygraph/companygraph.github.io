@@ -9,6 +9,7 @@
   ],
   "verify": [
     "(cd talks/intro/tts && ./generate.py --dry-run)",
+    "(cd talks/obsidian-plugin/tts && ./generate.py --dry-run)",
     "npm run pages:check",
     "npm run pin:check",
     "npm run build:check",

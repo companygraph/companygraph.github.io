@@ -63,6 +63,7 @@ export const cards = [
   { dir: ".", ...FRAME, hide: HOME_HIDE, titleSlide: false, settle: "reduced-motion" },
   { dir: "talks", ...FRAME, hide: DECK_HIDE, titleSlide: false, settle: "wait:900" },
   { dir: "talks/intro", ...FRAME, hide: DECK_HIDE, titleSlide: true, settle: "wait:900" },
+  { dir: "talks/obsidian-plugin", ...FRAME, hide: DECK_HIDE, titleSlide: true, settle: "wait:900" },
   // The two stage pages. Reduced motion makes every d3 transition 0 ms, so the root-focus
   // state the script draws on load is already settled by the time the exporter takes its
   // shot: the card renders that settled state.
