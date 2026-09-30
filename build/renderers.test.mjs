@@ -17,17 +17,18 @@ const FIXTURE = {
 const SCHEMAS = {
   ...FIXTURE,
   model: { ...FIXTURE.model, entities: [
-    { id: "core/experience", type: "schema", name: "Experience Schema",
+    { id: "11111111-1111-4111-8111-111111111111", address: "core/experience", type: "schema", name: "Experience Schema",
       tagline: "Required structure for experience files.", path: "core/experience-schema.md", sections: [] },
-    { id: "core/skill", type: "schema", name: "Skill Schema",
+    { id: "22222222-2222-4222-8222-222222222222", address: "core/skill", type: "schema", name: "Skill Schema",
       tagline: "Required structure for skill files.", path: "core/skill-schema.md", sections: [] },
   ] },
 };
 
-test("terms takes its code from the id and its url from the path", () => {
+test("terms takes its code from the address and its url from the path", () => {
   const [first] = terms(SCHEMAS.model, "example/meta");
   assert.equal(first.name, "Experience Schema");
   assert.equal(first.description, "Required structure for experience files.");
+  assert.equal(first["@id"], "https://companygraph.io/model/#term-experience");
   assert.equal(first.termCode, "experience");
   assert.equal(first.url,
     `https://github.com/example/meta/blob/${SCHEMAS.model.commit}/core/experience-schema.md`);
