@@ -64,10 +64,10 @@ export const PAGES = [
 export function terms(model, repo) {
   return model.entities.map((e) => ({
     "@type": "DefinedTerm",
-    "@id": `${SITE}/model/#term-${e.id.split("/").pop()}`,
+    "@id": `${SITE}/model/#term-${(e.address ?? e.id).split("/").pop()}`,
     name: e.name,
     description: e.tagline,
-    termCode: e.id.split("/").pop(),
+    termCode: (e.address ?? e.id).split("/").pop(),
     url: `https://github.com/${repo}/blob/${model.commit}/${e.path}`,
     inDefinedTermSet: { "@id": `${SITE}/model/#vocabulary` },
   }));
