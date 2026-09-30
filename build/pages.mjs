@@ -18,6 +18,7 @@ import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeHome } from "@robertblust/design/render/home";
 import { loadGerman } from "@robertblust/design/render/german";
+import { writeIdPages } from "@robertblust/design/render/ids";
 import { writeJsonLd } from "./jsonld.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -58,6 +59,10 @@ const RENDERERS = [
   (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
   (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
+  // One redirect page per entity of the company with a stable id, sending the reader on to its
+  // place on the home page's stage, which draws company.json. The example and the core
+  // vocabulary are not the company's entities and get none.
+  (d, o) => writeIdPages(d.company, { ...o, root: ROOT, origin: "https://companygraph.io", stage: "/" }),
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));

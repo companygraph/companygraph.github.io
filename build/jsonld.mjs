@@ -25,20 +25,30 @@
 // them.
 //
 // This renderer owns the tail of each graph, not the head. The nodes before it are this site's
-// own and stay hand-written, so the node is appended and the head is passed through untouched.
+// own and stay hand-written, so the node is appended and the head is passed through untouched,
+// but for one thing: the company's @id. The Organization is CompanyGraph, the identity at the
+// root of company.json, and its @id is that identity's stable id as `npm run pages` publishes
+// it, <site>/id/<uuid>, so the @id a crawler keeps outlives a rename. Every `{ "@id": … }` that
+// names the company by the fragment it carried before is rewritten to it, head and tail alike.
 // Each page names its head: the stage pages open with Organization, WebSite, WebPage,
 // BreadcrumbList, and the landing page, which has no breadcrumb, with the person, the
 // organization, the website, the software and the page.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { idUrl } from "@robertblust/design/render/ids";
 
 const HERE = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://companygraph.io";
 const LICENSE = "https://www.apache.org/licenses/LICENSE-2.0";
 // companygraph/mental-model is CC BY 4.0, not the meta-model's Apache 2.0.
 const INSTANCE_LICENSE = "https://creativecommons.org/licenses/by/4.0/";
-const CREATOR = { "@id": `${SITE}/#organization` };
+// The fragment the company carried before its stable id; an identity without one keeps it, since
+// no page would stand behind an /id/ address for it.
+const LEGACY_ORGANIZATION = `${SITE}/#organization`;
+export function organizationId(company) {
+  return idUrl(company.entities.find((e) => e.id === company.rootId), SITE) ?? LEGACY_ORGANIZATION;
+}
 
 // Every page that carries a graph, the nodes it writes by hand in the order it carries them,
 // and the artifact whose own node follows them, if any. The renderer replaces what follows the
@@ -74,6 +84,7 @@ export function terms(model, repo) {
 }
 
 function nodeFor(dir, data, repo) {
+  const CREATOR = { "@id": organizationId(data.company) };
   if (dir === "company") {
     return {
       "@type": "Dataset",
@@ -161,7 +172,12 @@ export function writeJsonLd(data, { check = false, root = HERE, repo, pages = PA
     if (foreign.length) {
       throw new Error(`${rel}: @graph carries ${foreign.length} node(s) after ${HEAD.join(", ")} that this renderer does not own — ${foreign.map((n) => (n && n["@id"]) || "an untyped node").join(", ")}`);
     }
-    doc["@graph"] = [...doc["@graph"].slice(0, HEAD.length), ...nodes];
+    const organization = organizationId(data.company);
+    const follow = (v) => Array.isArray(v) ? v.map(follow)
+      : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) =>
+        [k, k === "@id" && x === LEGACY_ORGANIZATION ? organization : follow(x)]))
+      : v;
+    doc["@graph"] = [...doc["@graph"].slice(0, HEAD.length).map(follow), ...nodes];
     // The terms carry upstream `name` and `description` text into a script element, and a
     // `</` inside a JSON string would end that element early in the browser while the JSON
     // still parses. The re-parse below cannot see it: it re-extracts on a newline before

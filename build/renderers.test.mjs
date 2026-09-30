@@ -98,6 +98,27 @@ test("writeJsonLd appends its node and leaves the four existing ones untouched",
   assert.deepEqual(read("talks/intro")[4], home[5], "the deck carries it too");
 });
 
+// An identity with a stable id is the company at <site>/id/<uuid>, the page render/ids writes for
+// it, and every pointer at the company follows it, the hand-written head's included.
+test("writeJsonLd gives the company its identity's stable id, and every pointer follows it", () => {
+  const { dir } = ldScratch();
+  const uuid = "01a0c152-e370-71a3-8bba-4bf6458989e1";
+  const stable = { ...SCHEMAS, company: { ...SCHEMAS.company, rootId: uuid,
+    entities: [{ id: uuid, address: "identity", type: "identity", name: "Acme", sections: [] }] } };
+  const home = path.join(dir, "index.html");
+  const landing = JSON.parse(fs.readFileSync(home, "utf8").match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1]);
+  landing["@graph"][2].publisher = { "@id": "https://companygraph.io/#organization" };
+  fs.writeFileSync(home, `<head>\n<script type="application/ld+json">\n${JSON.stringify(landing, null, 2)}\n</script>\n</head>\n`);
+  writeJsonLd(stable, { check: false, root: dir, repo: "example/meta" });
+  const graph = JSON.parse(fs.readFileSync(home, "utf8")
+    .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
+  const id = `https://companygraph.io/id/${uuid}`;
+  assert.equal(graph[1]["@id"], id, "the Organization carries the identity's stable id");
+  assert.equal(graph[2].publisher["@id"], id, "the head's own pointer follows it");
+  assert.equal(graph[5].creator["@id"], id, "the company's Dataset names it as creator");
+  assert.equal(graph[0]["@id"], "https://blust.ch/#person", "a node that is not the company is left alone");
+});
+
 // Every page with a graph is on the renderer's list, so a page added later cannot go without
 // the company's node without this failing. Read from the committed pages, as the pin test is.
 test("every page that carries JSON-LD is one the renderer writes", () => {
