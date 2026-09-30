@@ -56,7 +56,7 @@ function ldScratch() {
   }
   // The landing page opens its graph with five nodes of its own and no breadcrumb.
   const landing = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone" },
+    { "@type": "Person", "@id": "https://blust.ch/id/01a03d9b-e108-7712-830f-6e315eeab5c9", name: "Someone" },
     { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
     { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
     { "@type": "SoftwareSourceCode", "@id": "https://companygraph.io/#software", name: "CompanyGraph" },
@@ -116,7 +116,7 @@ test("writeJsonLd gives the company its identity's stable id, and every pointer 
   assert.equal(graph[1]["@id"], id, "the Organization carries the identity's stable id");
   assert.equal(graph[2].publisher["@id"], id, "the head's own pointer follows it");
   assert.equal(graph[5].creator["@id"], id, "the company's Dataset names it as creator");
-  assert.equal(graph[0]["@id"], "https://blust.ch/#person", "a node that is not the company is left alone");
+  assert.equal(graph[0]["@id"], "https://blust.ch/id/01a03d9b-e108-7712-830f-6e315eeab5c9", "a node that is not the company is left alone");
 });
 
 // Every page with a graph is on the renderer's list, so a page added later cannot go without
@@ -209,10 +209,10 @@ test("writeJsonLd refuses a single trailing node it does not own, rather than re
     { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
     { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
     { "@type": "BreadcrumbList", "@id": "https://companygraph.io/model/#breadcrumb", itemListElement: [] },
-    { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone hand-written" },
+    { "@type": "Person", "@id": "https://blust.ch/id/01a03d9b-e108-7712-830f-6e315eeab5c9", name: "Someone hand-written" },
   ]);
   assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
-    /does not own — https:\/\/blust\.ch\/#person/);
+    /does not own — https:\/\/blust\.ch\/id\/01a03d9b-e108-7712-830f-6e315eeab5c9/);
 });
 
 test("writeJsonLd refuses a graph carrying more than one node after the four it passes through, rather than deleting the rest", () => {
