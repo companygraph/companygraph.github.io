@@ -1,6 +1,6 @@
 {
-  "commit": "88e0652dcd01de209e6e21d43871645e5adc4d5c",
-  "core": "0.49.0",
+  "commit": "1b452d5d562b7367340c648e682efeedd49178ec",
+  "core": "0.50.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -81,6 +81,12 @@
       "folder": "kpis",
       "owner": null,
       "singular": false
+    },
+    {
+      "type": "localization",
+      "folder": null,
+      "owner": null,
+      "singular": true
     },
     {
       "type": "phase",
@@ -1737,6 +1743,53 @@
       ],
       "owner": null,
       "path": "example/model/kpis/change-lead-time.md"
+    },
+    {
+      "id": "01a0f254-3527-78bd-9d78-ee022ef66188",
+      "address": "localization",
+      "type": "localization",
+      "name": "Languages",
+      "tagline": "Beacon Systems writes its model in American English for everyone who reads it, people and agents alike.",
+      "fields": {
+        "id": "01a0f254-3527-78bd-9d78-ee022ef66188",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Locales",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Locale",
+                "Role"
+              ],
+              "rows": [
+                [
+                  "en-US",
+                  "primary"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Locale",
+              "Role"
+            ],
+            "rows": [
+              [
+                "en-US",
+                "primary"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/localization.md"
     },
     {
       "id": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
@@ -4955,6 +5008,12 @@
     {
       "from": "01a0f10b-91d2-7004-96e6-daffc70ee0c1",
       "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f254-3527-78bd-9d78-ee022ef66188",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     }

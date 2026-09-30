@@ -1,5 +1,5 @@
 {
-  "commit": "88e0652dcd01de209e6e21d43871645e5adc4d5c",
+  "commit": "1b452d5d562b7367340c648e682efeedd49178ec",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -11,7 +11,7 @@
   ],
   "entities": [
     {
-      "id": "core/achievement-kind",
+      "id": "01a0b09c-6e48-7e25-abfc-8efc23e2d25a",
       "address": "core/achievement-kind",
       "type": "schema",
       "name": "Achievement Kind Schema",
@@ -203,7 +203,7 @@
       "path": "core/achievement-kind-schema.md"
     },
     {
-      "id": "core/brand",
+      "id": "01a0d905-a160-77e9-b344-4f37b52b849e",
       "address": "core/brand",
       "type": "schema",
       "name": "Brand Schema",
@@ -494,7 +494,7 @@
       "path": "core/brand-schema.md"
     },
     {
-      "id": "core/concept",
+      "id": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
       "address": "core/concept",
       "type": "schema",
       "name": "Concept Schema",
@@ -735,7 +735,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The definition says what the thing is, not what a system does with it, and it is written so that someone outside the company could tell one of these from something adjacent.\n- A concept this one hangs off belongs in `## Relations`, where it resolves, and never in the definition dressed as a link.\n- A relation is written on one side only. Where it reads better the other way round, write it on the other concept and not here as well.\n- `As` is the name the target goes by in this relation, written as the company says it: `booker`, `primary guest`, `included services`.\n- An alias is never used as a reference anywhere in the model. It is there so a reader searching the wrong word finds the right page.\n- A deprecated alias stays until nothing outside the model uses the old name, and then it goes; it is not a history of the name.",
+          "text": "- The definition says what the thing is, not what a system does with it, and it is written so that someone outside the company could tell one of these from something adjacent.\n- A concept this one hangs off belongs in `## Relations`, where it resolves, and never in the definition dressed as a link.\n- A relation is written on one side only. Where it reads better the other way round, write it on the other concept and not here as well.\n- `As` is the name the target goes by in this relation, written as the company says it: `booker`, `primary guest`, `included services`.\n- An alias is never used as a reference anywhere in the model. It is there so a reader searching the wrong word finds the right page.\n- A deprecated alias stays until nothing outside the model uses the old name, and then it goes; it is not a history of the name.\n- An alias of kind `translation` is for a language the instance does not declare in `model/localization.md`; in a declared language the concept's name is the `### Name` of that language's section (R19).",
           "tables": []
         },
         {
@@ -748,7 +748,7 @@
       "path": "core/concept-schema.md"
     },
     {
-      "id": "core/decision",
+      "id": "01a0dd34-8da0-7631-83df-1cf924855e48",
       "address": "core/decision",
       "type": "schema",
       "name": "Decision Schema",
@@ -1110,7 +1110,7 @@
       "path": "core/decision-schema.md"
     },
     {
-      "id": "core/decision-kind",
+      "id": "01a0dd34-8da0-7615-9223-70458cc2b8b0",
       "address": "core/decision-kind",
       "type": "schema",
       "name": "Decision Kind Schema",
@@ -1290,7 +1290,7 @@
       "path": "core/decision-kind-schema.md"
     },
     {
-      "id": "core/decision-status",
+      "id": "01a0dd34-8da0-7db6-9762-c04c62f55fe0",
       "address": "core/decision-status",
       "type": "schema",
       "name": "Decision Status Schema",
@@ -1470,7 +1470,7 @@
       "path": "core/decision-status-schema.md"
     },
     {
-      "id": "core/domain",
+      "id": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
       "address": "core/domain",
       "type": "schema",
       "name": "Domain Schema",
@@ -1640,7 +1640,7 @@
       "path": "core/domain-schema.md"
     },
     {
-      "id": "core/experience",
+      "id": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
       "address": "core/experience",
       "type": "schema",
       "name": "Experience Schema",
@@ -1933,7 +1933,7 @@
       "path": "core/experience-schema.md"
     },
     {
-      "id": "core/experience-kind",
+      "id": "01a06385-9d00-7eef-86a5-d2218d053998",
       "address": "core/experience-kind",
       "type": "schema",
       "name": "Experience Kind Schema",
@@ -2113,7 +2113,7 @@
       "path": "core/experience-kind-schema.md"
     },
     {
-      "id": "core/feature",
+      "id": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
       "address": "core/feature",
       "type": "schema",
       "name": "Feature Schema",
@@ -2317,7 +2317,7 @@
       "path": "core/feature-schema.md"
     },
     {
-      "id": "core/identifier",
+      "id": "01a0f10d-64f0-71c7-8329-86453b047994",
       "address": "core/identifier",
       "type": "schema",
       "name": "Identifier Schema",
@@ -2499,7 +2499,7 @@
       "path": "core/identifier-schema.md"
     },
     {
-      "id": "core/identity",
+      "id": "01a04c7b-6b80-73dc-8007-6a193b1138d3",
       "address": "core/identity",
       "type": "schema",
       "name": "Identity Schema",
@@ -2748,7 +2748,7 @@
       "path": "core/identity-schema.md"
     },
     {
-      "id": "core/kpi",
+      "id": "01a0d896-7c40-707d-92ca-c0568838830a",
       "address": "core/kpi",
       "type": "schema",
       "name": "KPI Schema",
@@ -3022,7 +3022,198 @@
       "path": "core/kpi-schema.md"
     },
     {
-      "id": "core/phase",
+      "id": "01a0f254-34f0-709f-b36c-1c67dcc7ae30",
+      "address": "core/localization",
+      "type": "schema",
+      "name": "Localization Schema",
+      "tagline": "Required structure for the localization file: the language an instance is written in, and the ones it is translated into.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Name]`",
+                  "Yes",
+                  "What the instance calls its languages"
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "One paragraph on who reads the model in which language"
+                ],
+                [
+                  "`## Locales`",
+                  "Yes",
+                  "Table. The primary language and every translated one; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The standard the tags follow; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Locales` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Locale`",
+                  "Yes",
+                  "string",
+                  "A BCP 47 language tag, `de-CH` or `en-US`"
+                ],
+                [
+                  "`Role`",
+                  "Yes",
+                  "enum",
+                  "`primary` or `translated`. The primary is the language the pages are written in; a translated locale is one every page carries a section for."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a standard, a registry"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Name]`",
+                "Yes",
+                "What the instance calls its languages"
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "One paragraph on who reads the model in which language"
+              ],
+              [
+                "`## Locales`",
+                "Yes",
+                "Table. The primary language and every translated one; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The standard the tags follow; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "The localization file says which language the pages are written in and which ones each page is translated into, so that a reader, an agent or a check knows which sections a page carries and which language an answer can be grounded in. How a translation is written is R19's, not this page's.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- Exactly one row is `primary`, and no tag is written twice.\n- A language is written on a branch and declared `translated` in the same pull request that completes it, since a page may not carry a section for a language the file does not declare.\n- The statement names who reads the model in which language: the owner, a customer, an agent answering in it.\n- Names and prose are in the primary locale (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/localization.md`\n\nAn instance has one set of languages, so the type is a file directly in the container rather than a folder (R6, R13), named for the type rather than for the slug of its H1 (R12), which leaves the H1 free to be a name.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/localization-schema.md"
+    },
+    {
+      "id": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
       "address": "core/phase",
       "type": "schema",
       "name": "Phase Schema",
@@ -3389,7 +3580,7 @@
       "path": "core/phase-schema.md"
     },
     {
-      "id": "core/process",
+      "id": "01a0a8b4-7978-7026-a388-b10e041b45b5",
       "address": "core/process",
       "type": "schema",
       "name": "Process Schema",
@@ -3647,7 +3838,7 @@
       "path": "core/process-schema.md"
     },
     {
-      "id": "core/product",
+      "id": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
       "address": "core/product",
       "type": "schema",
       "name": "Product Schema",
@@ -3841,7 +4032,7 @@
       "path": "core/product-schema.md"
     },
     {
-      "id": "core/proficiency-level",
+      "id": "01a02f8b-db90-7d28-8506-23282bf3a383",
       "address": "core/proficiency-level",
       "type": "schema",
       "name": "Proficiency Level Schema",
@@ -4033,7 +4224,7 @@
       "path": "core/proficiency-level-schema.md"
     },
     {
-      "id": "core/profile",
+      "id": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
       "address": "core/profile",
       "type": "schema",
       "name": "Profile Schema",
@@ -4378,7 +4569,7 @@
       "path": "core/profile-schema.md"
     },
     {
-      "id": "core/question",
+      "id": "01a0d1c8-57f8-7233-ac27-d1160347d7a8",
       "address": "core/question",
       "type": "schema",
       "name": "Question Schema",
@@ -4605,7 +4796,7 @@
       "path": "core/question-schema.md"
     },
     {
-      "id": "core/question-kind",
+      "id": "01a0ddf7-ed40-7c28-9b18-65b95ea6de95",
       "address": "core/question-kind",
       "type": "schema",
       "name": "Question Kind Schema",
@@ -4797,7 +4988,7 @@
       "path": "core/question-kind-schema.md"
     },
     {
-      "id": "core/role",
+      "id": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "address": "core/role",
       "type": "schema",
       "name": "Role Schema",
@@ -5009,7 +5200,7 @@
       "path": "core/role-schema.md"
     },
     {
-      "id": "core/skill",
+      "id": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "address": "core/skill",
       "type": "schema",
       "name": "Skill Schema",
@@ -5201,7 +5392,7 @@
       "path": "core/skill-schema.md"
     },
     {
-      "id": "core/source",
+      "id": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "address": "core/source",
       "type": "schema",
       "name": "Source Schema",
@@ -5359,7 +5550,7 @@
       "path": "core/source-schema.md"
     },
     {
-      "id": "core/strategic-objective",
+      "id": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "address": "core/strategic-objective",
       "type": "schema",
       "name": "Strategic Objective Schema",
@@ -5563,7 +5754,7 @@
       "path": "core/strategic-objective-schema.md"
     },
     {
-      "id": "core/strategy",
+      "id": "01a0a48b-9818-7d5d-a7eb-46aee2dfe2a7",
       "address": "core/strategy",
       "type": "schema",
       "name": "Strategy Schema",
@@ -5799,7 +5990,7 @@
       "path": "core/strategy-schema.md"
     },
     {
-      "id": "core/surface",
+      "id": "01a08666-4360-7bac-8ac9-4b7c234e01fc",
       "address": "core/surface",
       "type": "schema",
       "name": "Surface Schema",
@@ -6035,7 +6226,7 @@
       "path": "core/surface-schema.md"
     },
     {
-      "id": "core/track",
+      "id": "01a0bfb0-acf0-79e1-bc25-474cf0bd7ac0",
       "address": "core/track",
       "type": "schema",
       "name": "Track Schema",
@@ -6207,7 +6398,7 @@
       "path": "core/track-schema.md"
     },
     {
-      "id": "core/value",
+      "id": "01a02f39-6248-779b-b3d9-aed29f14e367",
       "address": "core/value",
       "type": "schema",
       "name": "Value Schema",
@@ -6387,7 +6578,7 @@
       "path": "core/value-schema.md"
     },
     {
-      "id": "core/vision",
+      "id": "01a04c7b-6b80-711e-bc03-252a77c875ab",
       "address": "core/vision",
       "type": "schema",
       "name": "Vision Schema",
@@ -6569,8 +6760,8 @@
   ],
   "edges": [
     {
-      "from": "core/achievement-kind",
-      "to": "core/source",
+      "from": "01a0b09c-6e48-7e25-abfc-8efc23e2d25a",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6578,8 +6769,8 @@
       "label": "source"
     },
     {
-      "from": "core/brand",
-      "to": "core/source",
+      "from": "01a0d905-a160-77e9-b344-4f37b52b849e",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6587,8 +6778,8 @@
       "label": "source"
     },
     {
-      "from": "core/concept",
-      "to": "core/concept",
+      "from": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "to": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
       "via": "Relations.Concept",
       "attrs": {
         "type": "ref → concept"
@@ -6596,8 +6787,8 @@
       "label": "Relations.Concept"
     },
     {
-      "from": "core/concept",
-      "to": "core/domain",
+      "from": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "to": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
       "via": "domain",
       "attrs": {
         "type": "ref → domain"
@@ -6605,8 +6796,8 @@
       "label": "domain"
     },
     {
-      "from": "core/concept",
-      "to": "core/source",
+      "from": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6614,8 +6805,8 @@
       "label": "source"
     },
     {
-      "from": "core/decision-kind",
-      "to": "core/source",
+      "from": "01a0dd34-8da0-7615-9223-70458cc2b8b0",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6623,8 +6814,8 @@
       "label": "source"
     },
     {
-      "from": "core/decision-status",
-      "to": "core/source",
+      "from": "01a0dd34-8da0-7db6-9762-c04c62f55fe0",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6632,8 +6823,8 @@
       "label": "source"
     },
     {
-      "from": "core/decision",
-      "to": "core/role",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "by",
       "attrs": {
         "type": "ref → role"
@@ -6641,8 +6832,8 @@
       "label": "by"
     },
     {
-      "from": "core/decision",
-      "to": "core/decision-kind",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a0dd34-8da0-7615-9223-70458cc2b8b0",
       "via": "kind",
       "attrs": {
         "type": "ref → decision-kind"
@@ -6650,8 +6841,8 @@
       "label": "kind"
     },
     {
-      "from": "core/decision",
-      "to": "core/strategic-objective",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "via": "serves",
       "attrs": {
         "type": "array of ref → strategic-objective"
@@ -6659,8 +6850,8 @@
       "label": "serves"
     },
     {
-      "from": "core/decision",
-      "to": "core/source",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6668,8 +6859,8 @@
       "label": "source"
     },
     {
-      "from": "core/decision",
-      "to": "core/decision-status",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a0dd34-8da0-7db6-9762-c04c62f55fe0",
       "via": "status",
       "attrs": {
         "type": "ref → decision-status"
@@ -6677,8 +6868,8 @@
       "label": "status"
     },
     {
-      "from": "core/decision",
-      "to": "core/decision",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a0dd34-8da0-7631-83df-1cf924855e48",
       "via": "supersedes",
       "attrs": {
         "type": "array of ref → decision"
@@ -6686,8 +6877,8 @@
       "label": "supersedes"
     },
     {
-      "from": "core/decision",
-      "to": "core/value",
+      "from": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "to": "01a02f39-6248-779b-b3d9-aed29f14e367",
       "via": "upholds",
       "attrs": {
         "type": "array of ref → value"
@@ -6695,8 +6886,8 @@
       "label": "upholds"
     },
     {
-      "from": "core/domain",
-      "to": "core/source",
+      "from": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6704,8 +6895,8 @@
       "label": "source"
     },
     {
-      "from": "core/experience-kind",
-      "to": "core/source",
+      "from": "01a06385-9d00-7eef-86a5-d2218d053998",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6713,8 +6904,8 @@
       "label": "source"
     },
     {
-      "from": "core/experience",
-      "to": "core/achievement-kind",
+      "from": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
+      "to": "01a0b09c-6e48-7e25-abfc-8efc23e2d25a",
       "via": "Achievements.Kind",
       "attrs": {
         "type": "ref → achievement-kind"
@@ -6722,8 +6913,8 @@
       "label": "Achievements.Kind"
     },
     {
-      "from": "core/experience",
-      "to": "core/experience-kind",
+      "from": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
+      "to": "01a06385-9d00-7eef-86a5-d2218d053998",
       "via": "kind",
       "attrs": {
         "type": "ref → experience-kind"
@@ -6731,8 +6922,8 @@
       "label": "kind"
     },
     {
-      "from": "core/experience",
-      "to": "core/identity",
+      "from": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
+      "to": "01a04c7b-6b80-73dc-8007-6a193b1138d3",
       "via": "organization",
       "attrs": {
         "type": "ref? → identity"
@@ -6740,15 +6931,15 @@
       "label": "organization"
     },
     {
-      "from": "core/experience",
-      "to": "core/profile",
+      "from": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
+      "to": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
       "via": "owner",
       "attrs": {},
       "label": "owner"
     },
     {
-      "from": "core/experience",
-      "to": "core/skill",
+      "from": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
+      "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "via": "skills",
       "attrs": {
         "type": "array of ref → skill"
@@ -6756,8 +6947,8 @@
       "label": "skills"
     },
     {
-      "from": "core/experience",
-      "to": "core/source",
+      "from": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6765,8 +6956,8 @@
       "label": "source"
     },
     {
-      "from": "core/feature",
-      "to": "core/concept",
+      "from": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "to": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
       "via": "concepts",
       "attrs": {
         "type": "array of ref → concept"
@@ -6774,8 +6965,8 @@
       "label": "concepts"
     },
     {
-      "from": "core/feature",
-      "to": "core/product",
+      "from": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "to": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
       "via": "products",
       "attrs": {
         "type": "array of ref → product"
@@ -6783,8 +6974,8 @@
       "label": "products"
     },
     {
-      "from": "core/feature",
-      "to": "core/source",
+      "from": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6792,8 +6983,8 @@
       "label": "source"
     },
     {
-      "from": "core/identifier",
-      "to": "core/source",
+      "from": "01a0f10d-64f0-71c7-8329-86453b047994",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6801,8 +6992,8 @@
       "label": "source"
     },
     {
-      "from": "core/identity",
-      "to": "core/source",
+      "from": "01a04c7b-6b80-73dc-8007-6a193b1138d3",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6810,8 +7001,8 @@
       "label": "source"
     },
     {
-      "from": "core/kpi",
-      "to": "core/value",
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a02f39-6248-779b-b3d9-aed29f14e367",
       "via": "can-cost",
       "attrs": {
         "type": "array of ref → value"
@@ -6819,8 +7010,8 @@
       "label": "can-cost"
     },
     {
-      "from": "core/kpi",
-      "to": "core/process",
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a0a8b4-7978-7026-a388-b10e041b45b5",
       "via": "measures",
       "attrs": {
         "type": "ref → process"
@@ -6828,8 +7019,8 @@
       "label": "measures"
     },
     {
-      "from": "core/kpi",
-      "to": "core/role",
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
         "type": "ref → role"
@@ -6837,8 +7028,8 @@
       "label": "owner"
     },
     {
-      "from": "core/kpi",
-      "to": "core/kpi",
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a0d896-7c40-707d-92ca-c0568838830a",
       "via": "read-with",
       "attrs": {
         "type": "array of ref → kpi"
@@ -6846,8 +7037,8 @@
       "label": "read-with"
     },
     {
-      "from": "core/kpi",
-      "to": "core/strategic-objective",
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "via": "serves",
       "attrs": {
         "type": "array of ref → strategic-objective"
@@ -6855,8 +7046,8 @@
       "label": "serves"
     },
     {
-      "from": "core/kpi",
-      "to": "core/source",
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6864,8 +7055,17 @@
       "label": "source"
     },
     {
-      "from": "core/phase",
-      "to": "core/track",
+      "from": "01a0f254-34f0-709f-b36c-1c67dcc7ae30",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0bfb0-acf0-79e1-bc25-474cf0bd7ac0",
       "via": "Activities.Track",
       "attrs": {
         "type": "ref → track"
@@ -6873,8 +7073,8 @@
       "label": "Activities.Track"
     },
     {
-      "from": "core/phase",
-      "to": "core/phase",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
       "via": "If not met.Leads to",
       "attrs": {
         "type": "ref → phase"
@@ -6882,8 +7082,8 @@
       "label": "If not met.Leads to"
     },
     {
-      "from": "core/phase",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "escalation-authority",
       "attrs": {
         "type": "ref → role"
@@ -6891,8 +7091,8 @@
       "label": "escalation-authority"
     },
     {
-      "from": "core/phase",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "executed-by",
       "attrs": {
         "type": "array of ref → role"
@@ -6900,8 +7100,8 @@
       "label": "executed-by"
     },
     {
-      "from": "core/phase",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "gate-approvers",
       "attrs": {
         "type": "array of ref → role"
@@ -6909,8 +7109,8 @@
       "label": "gate-approvers"
     },
     {
-      "from": "core/phase",
-      "to": "core/phase",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
       "via": "gate-to",
       "attrs": {
         "type": "ref → phase"
@@ -6918,15 +7118,15 @@
       "label": "gate-to"
     },
     {
-      "from": "core/phase",
-      "to": "core/process",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a8b4-7978-7026-a388-b10e041b45b5",
       "via": "owner",
       "attrs": {},
       "label": "owner"
     },
     {
-      "from": "core/phase",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
         "type": "ref → role"
@@ -6934,8 +7134,8 @@
       "label": "owner"
     },
     {
-      "from": "core/phase",
-      "to": "core/source",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6943,8 +7143,8 @@
       "label": "source"
     },
     {
-      "from": "core/phase",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "supported-by",
       "attrs": {
         "type": "array of ref → role"
@@ -6952,8 +7152,8 @@
       "label": "supported-by"
     },
     {
-      "from": "core/process",
-      "to": "core/phase",
+      "from": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "to": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
       "via": "Phases.Phase",
       "attrs": {
         "type": "ref → phase"
@@ -6961,8 +7161,8 @@
       "label": "Phases.Phase"
     },
     {
-      "from": "core/process",
-      "to": "core/track",
+      "from": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "to": "01a0bfb0-acf0-79e1-bc25-474cf0bd7ac0",
       "via": "Tracks.Track",
       "attrs": {
         "type": "ref → track"
@@ -6970,8 +7170,8 @@
       "label": "Tracks.Track"
     },
     {
-      "from": "core/process",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
         "type": "ref → role"
@@ -6979,8 +7179,8 @@
       "label": "owner"
     },
     {
-      "from": "core/process",
-      "to": "core/source",
+      "from": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -6988,8 +7188,8 @@
       "label": "source"
     },
     {
-      "from": "core/process",
-      "to": "core/role",
+      "from": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "supported-by",
       "attrs": {
         "type": "array of ref → role"
@@ -6997,8 +7197,8 @@
       "label": "supported-by"
     },
     {
-      "from": "core/product",
-      "to": "core/domain",
+      "from": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
+      "to": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
       "via": "domain",
       "attrs": {
         "type": "ref → domain"
@@ -7006,8 +7206,8 @@
       "label": "domain"
     },
     {
-      "from": "core/product",
-      "to": "core/source",
+      "from": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7015,8 +7215,8 @@
       "label": "source"
     },
     {
-      "from": "core/proficiency-level",
-      "to": "core/source",
+      "from": "01a02f8b-db90-7d28-8506-23282bf3a383",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7024,8 +7224,8 @@
       "label": "source"
     },
     {
-      "from": "core/profile",
-      "to": "core/experience",
+      "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "to": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
       "via": "Evidence.Experience",
       "attrs": {
         "type": "qualifier → experience"
@@ -7033,8 +7233,8 @@
       "label": "Evidence.Experience"
     },
     {
-      "from": "core/profile",
-      "to": "core/skill",
+      "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "via": "Evidence.Skill",
       "attrs": {
         "type": "ref → skill"
@@ -7042,8 +7242,8 @@
       "label": "Evidence.Skill"
     },
     {
-      "from": "core/profile",
-      "to": "core/proficiency-level",
+      "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "to": "01a02f8b-db90-7d28-8506-23282bf3a383",
       "via": "Skills.Level",
       "attrs": {
         "type": "qualifier → proficiency-level"
@@ -7051,8 +7251,8 @@
       "label": "Skills.Level"
     },
     {
-      "from": "core/profile",
-      "to": "core/skill",
+      "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "via": "Skills.Skill",
       "attrs": {
         "type": "ref → skill"
@@ -7060,8 +7260,8 @@
       "label": "Skills.Skill"
     },
     {
-      "from": "core/profile",
-      "to": "core/role",
+      "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "roles",
       "attrs": {
         "type": "array of ref → role"
@@ -7069,8 +7269,8 @@
       "label": "roles"
     },
     {
-      "from": "core/profile",
-      "to": "core/source",
+      "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7078,8 +7278,8 @@
       "label": "source"
     },
     {
-      "from": "core/question-kind",
-      "to": "core/source",
+      "from": "01a0ddf7-ed40-7c28-9b18-65b95ea6de95",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7087,8 +7287,8 @@
       "label": "source"
     },
     {
-      "from": "core/question",
-      "to": "core/question-kind",
+      "from": "01a0d1c8-57f8-7233-ac27-d1160347d7a8",
+      "to": "01a0ddf7-ed40-7c28-9b18-65b95ea6de95",
       "via": "kind",
       "attrs": {
         "type": "ref → question-kind"
@@ -7096,8 +7296,8 @@
       "label": "kind"
     },
     {
-      "from": "core/question",
-      "to": "core/source",
+      "from": "01a0d1c8-57f8-7233-ac27-d1160347d7a8",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7105,8 +7305,8 @@
       "label": "source"
     },
     {
-      "from": "core/role",
-      "to": "core/skill",
+      "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "via": "requires",
       "attrs": {
         "type": "array of ref → skill"
@@ -7114,8 +7314,8 @@
       "label": "requires"
     },
     {
-      "from": "core/role",
-      "to": "core/source",
+      "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7123,8 +7323,8 @@
       "label": "source"
     },
     {
-      "from": "core/skill",
-      "to": "core/source",
+      "from": "01a02f31-3488-773e-a919-f51e729f2ba4",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7132,8 +7332,8 @@
       "label": "source"
     },
     {
-      "from": "core/strategic-objective",
-      "to": "core/source",
+      "from": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7141,8 +7341,8 @@
       "label": "source"
     },
     {
-      "from": "core/strategy",
-      "to": "core/strategic-objective",
+      "from": "01a0a48b-9818-7d5d-a7eb-46aee2dfe2a7",
+      "to": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "via": "serves",
       "attrs": {
         "type": "array of ref → strategic-objective"
@@ -7150,8 +7350,8 @@
       "label": "serves"
     },
     {
-      "from": "core/strategy",
-      "to": "core/source",
+      "from": "01a0a48b-9818-7d5d-a7eb-46aee2dfe2a7",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7159,8 +7359,8 @@
       "label": "source"
     },
     {
-      "from": "core/strategy",
-      "to": "core/value",
+      "from": "01a0a48b-9818-7d5d-a7eb-46aee2dfe2a7",
+      "to": "01a02f39-6248-779b-b3d9-aed29f14e367",
       "via": "upholds",
       "attrs": {
         "type": "array of ref → value"
@@ -7168,8 +7368,8 @@
       "label": "upholds"
     },
     {
-      "from": "core/surface",
-      "to": "core/source",
+      "from": "01a08666-4360-7bac-8ac9-4b7c234e01fc",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7177,15 +7377,15 @@
       "label": "source"
     },
     {
-      "from": "core/track",
-      "to": "core/process",
+      "from": "01a0bfb0-acf0-79e1-bc25-474cf0bd7ac0",
+      "to": "01a0a8b4-7978-7026-a388-b10e041b45b5",
       "via": "owner",
       "attrs": {},
       "label": "owner"
     },
     {
-      "from": "core/track",
-      "to": "core/source",
+      "from": "01a0bfb0-acf0-79e1-bc25-474cf0bd7ac0",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7193,8 +7393,8 @@
       "label": "source"
     },
     {
-      "from": "core/value",
-      "to": "core/source",
+      "from": "01a02f39-6248-779b-b3d9-aed29f14e367",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
@@ -7202,8 +7402,8 @@
       "label": "source"
     },
     {
-      "from": "core/vision",
-      "to": "core/source",
+      "from": "01a04c7b-6b80-711e-bc03-252a77c875ab",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
         "type": "ref → source"
