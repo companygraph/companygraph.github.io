@@ -1,5 +1,5 @@
 {
-  "commit": "6813954c871090095e2f297fb41725c225404609",
+  "commit": "88e0652dcd01de209e6e21d43871645e5adc4d5c",
   "root": "Core",
   "rootId": null,
   "types": [
@@ -31,6 +31,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -60,6 +66,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -210,6 +222,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -233,6 +251,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -488,6 +512,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -517,6 +547,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -729,6 +765,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -794,6 +836,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -1078,6 +1126,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -1101,6 +1155,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -1245,6 +1305,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -1268,6 +1334,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -1412,6 +1484,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -1435,6 +1513,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -1571,6 +1655,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -1636,6 +1726,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -1849,6 +1945,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -1872,6 +1974,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -2016,6 +2124,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -2051,6 +2165,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -2187,6 +2307,187 @@
       "path": "core/feature-schema.md"
     },
     {
+      "id": "core/identifier",
+      "type": "schema",
+      "name": "Identifier Schema",
+      "tagline": "Required structure for the identifier file: what an entity's id looks like in this instance.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+                ],
+                [
+                  "`format`",
+                  "Yes",
+                  "enum",
+                  "`uuidv7` or `pattern`. `uuidv7` is a UUID version 7 (RFC 9562), written in lowercase; `pattern` is whatever the `pattern` field matches."
+                ],
+                [
+                  "`pattern`",
+                  "No",
+                  "string",
+                  "A regular expression every id matches in full, from `^` to `$`. Written when `format` is `pattern`, and absent otherwise."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+              ],
+              [
+                "`format`",
+                "Yes",
+                "enum",
+                "`uuidv7` or `pattern`. `uuidv7` is a UUID version 7 (RFC 9562), written in lowercase; `pattern` is whatever the `pattern` field matches."
+              ],
+              [
+                "`pattern`",
+                "No",
+                "string",
+                "A regular expression every id matches in full, from `^` to `$`. Written when `format` is `pattern`, and absent otherwise."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Name]`",
+                  "Yes",
+                  "What the instance calls its ids"
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "One paragraph on what an id here is for, and who holds on to one"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The specification the format follows; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a specification, a registry"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Name]`",
+                "Yes",
+                "What the instance calls its ids"
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "One paragraph on what an id here is for, and who holds on to one"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The specification the format follows; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "The identifier file says what shape the `id` on every page takes, so that a person, an agent or an outside system holding an id knows what it is, and so that the checks can hold every page to that shape. The rules an id obeys are the same in every instance and are R18's, not this page's: it is set once, never changed and never reused.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- A `pattern` matches nothing taken from the entity: not its name, its type, its language or its owner, since each of those can change and the id cannot.\n- The statement names who relies on the id: a tracker, a graph, a link somebody wrote down.\n- An instance that declares `pattern` says in its own agent file how a new id is made, since the tooling makes only UUID version 7.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/identifier.md`\n\nAn instance has one way of writing ids, so the type is a file directly in the container rather than a folder (R6, R13), named for the type rather than for the slug of its H1 (R12), which leaves the H1 free to be a name.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/identifier-schema.md"
+    },
+    {
       "id": "core/identity",
       "type": "schema",
       "name": "Identity Schema",
@@ -2206,6 +2507,12 @@
                 "Description"
               ],
               "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
                 [
                   "`source`",
                   "Yes",
@@ -2248,6 +2555,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -2443,6 +2756,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -2508,6 +2827,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -2706,6 +3031,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -2765,6 +3096,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -3058,6 +3395,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -3093,6 +3436,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -3303,6 +3652,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -3338,6 +3693,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -3484,6 +3845,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -3513,6 +3880,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -3663,6 +4036,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -3716,6 +4095,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -3995,6 +4380,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -4024,6 +4415,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -4209,6 +4606,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -4238,6 +4641,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -4388,6 +4797,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -4417,6 +4832,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -4587,6 +5008,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -4616,6 +5043,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -4766,6 +5199,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`url`",
                   "No",
                   "string",
@@ -4783,6 +5222,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`url`",
                 "No",
@@ -4911,6 +5356,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -4946,6 +5397,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -5102,6 +5559,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -5143,6 +5606,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -5325,6 +5794,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -5366,6 +5841,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -5550,6 +6031,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -5573,6 +6060,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -5707,6 +6200,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -5730,6 +6229,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -5874,6 +6379,12 @@
               ],
               "rows": [
                 [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
                   "`source`",
                   "Yes",
                   "ref → source",
@@ -5897,6 +6408,12 @@
               "Description"
             ],
             "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
               [
                 "`source`",
                 "Yes",
@@ -6238,6 +6755,15 @@
     },
     {
       "from": "core/feature",
+      "to": "core/source",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "core/identifier",
       "to": "core/source",
       "via": "source",
       "attrs": {

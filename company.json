@@ -146,6 +146,7 @@
   "entities": [
     {
       "id": "brand",
+      "address": "brand",
       "type": "brand",
       "name": "CompanyGraph",
       "tagline": "Your company doesn't compile.",
@@ -438,6 +439,7 @@
     },
     {
       "id": "concepts/agent-pass",
+      "address": "concepts/agent-pass",
       "type": "concept",
       "name": "Agent pass",
       "tagline": "An agent reading a company's pages against every rule and every schema's writing rules: the half of validation every repository has, and the only one that reaches what no script can, such as whether a definition says what a thing is.",
@@ -498,6 +500,7 @@
     },
     {
       "id": "concepts/canonical-name",
+      "address": "concepts/canonical-name",
       "type": "concept",
       "name": "Canonical name",
       "tagline": "The one name an entity goes by: its first heading, exactly as written, and never a field, its filename or any fallback between them.",
@@ -544,6 +547,7 @@
     },
     {
       "id": "concepts/check",
+      "address": "concepts/check",
       "type": "concept",
       "name": "Check",
       "tagline": "One assertion a script makes about a page or a schema, holding part of one rule and naming it when it fails, read from the same schemas an agent reads rather than from a copy of its own.",
@@ -594,6 +598,7 @@
     },
     {
       "id": "concepts/core",
+      "address": "concepts/core",
       "type": "concept",
       "name": "Core",
       "tagline": "The vocabulary any company can be described in, shipped as one unit — its types, a schema for each and the conventions — and copied whole into an instance, never edited there.",
@@ -644,6 +649,7 @@
     },
     {
       "id": "concepts/entity",
+      "address": "concepts/entity",
       "type": "concept",
       "name": "Entity",
       "tagline": "One thing a company knows about, written down as one Markdown file: fields in its frontmatter, prose in its body, and its name in its first heading.",
@@ -736,6 +742,7 @@
     },
     {
       "id": "concepts/instance",
+      "address": "concepts/instance",
       "type": "concept",
       "name": "Instance",
       "tagline": "One company described in the vocabulary: a repository of its own holding the core it took, at the release it names, beside the company's own pages, so a graph written last year still says what it meant.",
@@ -838,6 +845,7 @@
     },
     {
       "id": "concepts/ownership",
+      "address": "concepts/ownership",
       "type": "concept",
       "name": "Ownership",
       "tagline": "One type's entities belonging to an entity of another so completely that they mean nothing without it: an experience without its person, a phase without its process. What is owned sits inside its owner's folder.",
@@ -898,6 +906,7 @@
     },
     {
       "id": "concepts/pack",
+      "address": "concepts/pack",
       "type": "concept",
       "name": "Pack",
       "tagline": "Vocabulary only some kinds of company need at all, shipped beside core as a unit of its own: types a company without that need should not carry, rather than types it may leave empty.",
@@ -948,6 +957,7 @@
     },
     {
       "id": "concepts/pin",
+      "address": "concepts/pin",
       "type": "concept",
       "name": "Pin",
       "tagline": "The visible line in which one repository takes another's release or commit, moved only when someone decides it should move, so a pin that is behind is intent until that someone calls it drift.",
@@ -998,6 +1008,7 @@
     },
     {
       "id": "concepts/reference",
+      "address": "concepts/reference",
       "type": "concept",
       "name": "Reference",
       "tagline": "One entity naming another in a field or a table cell the schema declares, which makes the two an edge of the graph rather than two pages that happen to mention each other.",
@@ -1058,6 +1069,7 @@
     },
     {
       "id": "concepts/release",
+      "address": "concepts/release",
       "type": "concept",
       "name": "Release",
       "tagline": "A version of the vocabulary fixed under a tag, with notes saying what changed for whoever takes it, what breaks and how to take it; the tag is the whole of it, and nothing is published anywhere else.",
@@ -1140,6 +1152,7 @@
     },
     {
       "id": "concepts/rule",
+      "address": "concepts/rule",
       "type": "concept",
       "name": "Rule",
       "tagline": "One of the numbered conventions every instance is held to — one entity per file, a reference that resolves — each with its reason, as against a schema's writing rules, which say what makes one entity of a type a good one.",
@@ -1186,6 +1199,7 @@
     },
     {
       "id": "concepts/schema",
+      "address": "concepts/schema",
       "type": "concept",
       "name": "Schema",
       "tagline": "The Markdown page that says what every entity of one type carries: the fields its frontmatter holds, the sections its body has, and what separates a good entity of the type from one that merely has the shape.",
@@ -1199,6 +1213,7 @@
     },
     {
       "id": "concepts/type",
+      "address": "concepts/type",
       "type": "concept",
       "name": "Type",
       "tagline": "A kind of thing a company knows about — a value, a role, a process — named in the singular, whose entities are kept together in a folder named in the plural.",
@@ -1281,6 +1296,7 @@
     },
     {
       "id": "decision-kinds/architecture",
+      "address": "decision-kinds/architecture",
       "type": "decision-kind",
       "name": "Architecture",
       "tagline": "A call about how the tooling that reads a model is built: the checker, the server, the plugin, the way core reaches an instance.",
@@ -1299,6 +1315,7 @@
     },
     {
       "id": "decision-kinds/terms",
+      "address": "decision-kinds/terms",
       "type": "decision-kind",
       "name": "Terms",
       "tagline": "A call about what adopting the meta-model costs and under which license, and what we are paid for.",
@@ -1317,6 +1334,7 @@
     },
     {
       "id": "decision-kinds/vocabulary",
+      "address": "decision-kinds/vocabulary",
       "type": "decision-kind",
       "name": "Vocabulary",
       "tagline": "A call about what enters core and in what form: a type, a rule, a form of reference.",
@@ -1335,6 +1353,7 @@
     },
     {
       "id": "decision-statuses/dropped",
+      "address": "decision-statuses/dropped",
       "type": "decision-status",
       "name": "Dropped",
       "tagline": "The call is no longer pursued, and nothing replaced it.",
@@ -1353,6 +1372,7 @@
     },
     {
       "id": "decision-statuses/proposed",
+      "address": "decision-statuses/proposed",
       "type": "decision-status",
       "name": "Proposed",
       "tagline": "The call is put forward with its alternatives and not yet made; nothing acts on it.",
@@ -1371,6 +1391,7 @@
     },
     {
       "id": "decision-statuses/revised",
+      "address": "decision-statuses/revised",
       "type": "decision-status",
       "name": "Revised",
       "tagline": "A later decision replaced this call, and the call is read through that decision.",
@@ -1389,6 +1410,7 @@
     },
     {
       "id": "decision-statuses/standing",
+      "address": "decision-statuses/standing",
       "type": "decision-status",
       "name": "Standing",
       "tagline": "The call holds as written, and the work follows it.",
@@ -1407,6 +1429,7 @@
     },
     {
       "id": "decisions/2026-agents-write-a-person-approves",
+      "address": "decisions/2026-agents-write-a-person-approves",
       "type": "decision",
       "name": "Agents write the model, and a person approves every change to it",
       "tagline": "The pages of a company's model are written by agents, on a person's request or in a workflow that runs on its own, and no change enters the model until a person who answers for it has approved it; the checks prove a change has the right shape, and only the person approving it says it is true.",
@@ -1527,6 +1550,7 @@
     },
     {
       "id": "decisions/2026-apache-2-0",
+      "address": "decisions/2026-apache-2-0",
       "type": "decision",
       "name": "Everything under Apache 2.0, and consulting billed by the day",
       "tagline": "The vocabulary, the tooling and the talks are published under licenses that ask nothing back, and what costs money is our time by the day, never what a company does with the model.",
@@ -1682,6 +1706,7 @@
     },
     {
       "id": "decisions/2026-claude-first",
+      "address": "decisions/2026-claude-first",
       "type": "decision",
       "name": "Claude is the first agent an instance supports, and not the only one",
       "tagline": "An instance's skills are written for Claude first, so the idea can be validated before the work of supporting every agent is spent on it; the other agents follow, and supporting Claude alone is a stage and not the design.",
@@ -1841,6 +1866,7 @@
     },
     {
       "id": "decisions/2026-commits-by-seat",
+      "address": "decisions/2026-commits-by-seat",
       "type": "decision",
       "name": "An agent's commit is authored by the seat it held",
       "tagline": "A commit an agent makes in our repositories is authored by the seat it held, at our domain, as `Implementer <implementer@companygraph.io>`, and names the process, phase and track it was made in; the owner's own commits stay the owner's, and a check refuses a seat the named phase does not list.",
@@ -2080,6 +2106,7 @@
     },
     {
       "id": "decisions/2026-linkedin-page-nonprofit",
+      "address": "decisions/2026-linkedin-page-nonprofit",
       "type": "decision",
       "name": "The LinkedIn company page is typed Nonprofit",
       "tagline": "We give the LinkedIn company page the type Nonprofit, because it is the one type the network offers that claims no business, and nothing here is sold.",
@@ -2232,6 +2259,7 @@
     },
     {
       "id": "decisions/2026-open-sections",
+      "address": "decisions/2026-open-sections",
       "type": "decision",
       "name": "A section is open and a field is closed",
       "tagline": "A page may carry sections its schema does not declare, which are read as prose, and may not carry a frontmatter field its schema does not declare, which is an error.",
@@ -2376,6 +2404,7 @@
     },
     {
       "id": "decisions/2026-prose-schema",
+      "address": "decisions/2026-prose-schema",
       "type": "decision",
       "name": "The schema written as prose is the only schema",
       "tagline": "A type's schema is one Markdown file, read whole by an agent and in its fixed shape by a script, and no second schema exists for the script.",
@@ -2540,6 +2569,7 @@
     },
     {
       "id": "decisions/2026-read-only-server",
+      "address": "decisions/2026-read-only-server",
       "type": "decision",
       "name": "The server only reads, and answers at one named commit",
       "tagline": "An agent reaches a company's model through a server that reads it, answers every question at the commit it was read at, and adds nothing of its own.",
@@ -2688,6 +2718,7 @@
     },
     {
       "id": "decisions/2026-typed-resolution",
+      "address": "decisions/2026-typed-resolution",
       "type": "decision",
       "name": "A reference resolves by its declared type, never by name alone",
       "tagline": "A tool resolves a reference by the type its schema declares and the name written, looks in no other type, and reports a name that exists only under another type as unresolvable.",
@@ -2844,6 +2875,7 @@
     },
     {
       "id": "decisions/2026-vendored-core",
+      "address": "decisions/2026-vendored-core",
       "type": "decision",
       "name": "Core is vendored into an instance at a release its manifest names",
       "tagline": "An instance carries a copy of core at the release its manifest names, with a hash per file, and moves to a later release only when it decides to.",
@@ -3015,6 +3047,7 @@
     },
     {
       "id": "domains/core",
+      "address": "domains/core",
       "type": "domain",
       "name": "Core",
       "tagline": "The words we mean something exact by when we describe a company: what its graph is made of, how our vocabulary reaches it and stays fixed there, and how the graph is held to its schemas. What only some kinds of company need is left to packs.",
@@ -3027,6 +3060,7 @@
     },
     {
       "id": "features/a-profile-is-written-from-a-person-s-documents",
+      "address": "features/a-profile-is-written-from-a-person-s-documents",
       "type": "feature",
       "name": "A profile is written from a person's documents",
       "tagline": "Someone hands an agent a folder of a person's CVs, diplomas, certificates and reference letters and gets back a profile the model can hold: the periods, the skills they show and the levels those skills earned.",
@@ -3053,6 +3087,7 @@
     },
     {
       "id": "features/a-visitor-asks-the-model",
+      "address": "features/a-visitor-asks-the-model",
       "type": "feature",
       "name": "A visitor asks the model",
       "tagline": "Someone on a page asks a company's model a question in their own words and gets an answer that names the entity each claim rests on.",
@@ -3079,6 +3114,7 @@
     },
     {
       "id": "features/a-vocabulary-to-describe-a-company-in",
+      "address": "features/a-vocabulary-to-describe-a-company-in",
       "type": "feature",
       "name": "A vocabulary to describe a company in",
       "tagline": "A company can write down what it knows as entities of named types, each held to a schema, instead of in whatever shape the last tool left it in.",
@@ -3106,6 +3142,7 @@
     },
     {
       "id": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
+      "address": "features/an-agent-does-the-work-no-script-can-by-the-skills-an-instance-ships",
       "type": "feature",
       "name": "An agent does the work no script can, by the skills an instance ships",
       "tagline": "Someone asks an agent to build a company's model from its web address, write a person's profile from their documents, check every page against its schema's writing rules or publish the model somewhere, and the agent follows the procedure that ships with the instance instead of improvising one.",
@@ -3204,6 +3241,7 @@
     },
     {
       "id": "features/an-agent-reads-the-model",
+      "address": "features/an-agent-reads-the-model",
       "type": "feature",
       "name": "An agent reads the model",
       "tagline": "An agent asks a company's model which types it declares, what one entity says and what evidence a claim rests on, and gets the answer the model gives at one commit.",
@@ -3231,6 +3269,7 @@
     },
     {
       "id": "features/an-instance-is-made-and-kept-from-one-command",
+      "address": "features/an-instance-is-made-and-kept-from-one-command",
       "type": "feature",
       "name": "An instance is made and kept from one command",
       "tagline": "Someone starts a company's model, checks it, moves it to a newer vocabulary and puts the editor beside it, from one menu and without installing anything first.",
@@ -3257,6 +3296,7 @@
     },
     {
       "id": "features/checks-an-instance-runs",
+      "address": "features/checks-an-instance-runs",
       "type": "feature",
       "name": "Checks an instance runs",
       "tagline": "A company finds out before a change lands whether its pages still hold to the schemas it adopted.",
@@ -3285,6 +3325,7 @@
     },
     {
       "id": "features/checks-while-a-file-is-edited",
+      "address": "features/checks-while-a-file-is-edited",
       "type": "feature",
       "name": "Checks while a file is edited",
       "tagline": "Someone writing a page sees what its schema requires, and what they broke, while they type rather than when the change is pushed.",
@@ -3312,6 +3353,7 @@
     },
     {
       "id": "features/the-vocabulary-on-the-web",
+      "address": "features/the-vocabulary-on-the-web",
       "type": "feature",
       "name": "The vocabulary on the web",
       "tagline": "Anyone can read the vocabulary, and see it describe a company, in a browser and without cloning a repository.",
@@ -3338,6 +3380,7 @@
     },
     {
       "id": "identity",
+      "address": "identity",
       "type": "identity",
       "name": "CompanyGraph",
       "tagline": "The open-source meta-model for operating a company: the structure a company's knowledge takes, so that the people who run it and the agents working beside them can both rely on it.",
@@ -3398,6 +3441,7 @@
     },
     {
       "id": "kpis/change-fail-rate",
+      "address": "kpis/change-fail-rate",
       "type": "kpi",
       "name": "Change Fail Rate",
       "tagline": "The share of deployments that need immediate intervention once they are in production.",
@@ -3460,6 +3504,7 @@
     },
     {
       "id": "kpis/change-lead-time",
+      "address": "kpis/change-lead-time",
       "type": "kpi",
       "name": "Change Lead Time",
       "tagline": "The time a change takes from being committed to version control to running in production.",
@@ -3522,6 +3567,7 @@
     },
     {
       "id": "kpis/deployment-frequency",
+      "address": "kpis/deployment-frequency",
       "type": "kpi",
       "name": "Deployment Frequency",
       "tagline": "How often a change reaches production.",
@@ -3584,6 +3630,7 @@
     },
     {
       "id": "kpis/deployment-rework-rate",
+      "address": "kpis/deployment-rework-rate",
       "type": "kpi",
       "name": "Deployment Rework Rate",
       "tagline": "The share of deployments that were not planned and happened because of an incident in production.",
@@ -3646,6 +3693,7 @@
     },
     {
       "id": "kpis/failed-deployment-recovery-time",
+      "address": "kpis/failed-deployment-recovery-time",
       "type": "kpi",
       "name": "Failed Deployment Recovery Time",
       "tagline": "The time it takes to recover from a deployment that fails and needs immediate intervention.",
@@ -3708,6 +3756,7 @@
     },
     {
       "id": "kpis/grounded-answer-rate",
+      "address": "kpis/grounded-answer-rate",
       "type": "kpi",
       "name": "Grounded Answer Rate",
       "tagline": "The share of a week's questions, asked at any chat that answers from the model, whose answer rested on what the model's tools returned.",
@@ -3778,6 +3827,7 @@
     },
     {
       "id": "processes/answering",
+      "address": "processes/answering",
       "type": "process",
       "name": "Answering",
       "tagline": "How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.",
@@ -3893,6 +3943,7 @@
     },
     {
       "id": "processes/answering/phases/answer",
+      "address": "processes/answering/phases/answer",
       "type": "phase",
       "name": "Answer",
       "tagline": "Give the visitor what the model says, in their words, and not a claim more.",
@@ -4001,6 +4052,7 @@
     },
     {
       "id": "processes/answering/tracks/reply",
+      "address": "processes/answering/tracks/reply",
       "type": "track",
       "name": "Reply",
       "tagline": "One answer in a visitor's tab, in their language, read from the model at the host's commit and kept nowhere.",
@@ -4013,6 +4065,7 @@
     },
     {
       "id": "processes/contribution",
+      "address": "processes/contribution",
       "type": "process",
       "name": "Contribution",
       "tagline": "How a change offered from outside as a pull request is reviewed and taken, under the same rules a change from inside is held to.",
@@ -4166,6 +4219,7 @@
     },
     {
       "id": "processes/contribution/phases/consider",
+      "address": "processes/contribution/phases/consider",
       "type": "phase",
       "name": "Consider",
       "tagline": "Establish what the change is for, before anyone spends time on how it is written.",
@@ -4275,6 +4329,7 @@
     },
     {
       "id": "processes/contribution/phases/integrate",
+      "address": "processes/contribution/phases/integrate",
       "type": "phase",
       "name": "Integrate",
       "tagline": "Take the change into the default branch, and carry it to whoever vendors what it touched.",
@@ -4388,6 +4443,7 @@
     },
     {
       "id": "processes/contribution/phases/propose",
+      "address": "processes/contribution/phases/propose",
       "type": "phase",
       "name": "Propose",
       "tagline": "Offer the change, under the address the Contributor means to be known by.",
@@ -4502,6 +4558,7 @@
     },
     {
       "id": "processes/contribution/phases/review",
+      "address": "processes/contribution/phases/review",
       "type": "phase",
       "name": "Review",
       "tagline": "Find what is wrong with the change, and hand it to whoever merges as findings rather than as a verdict.",
@@ -4628,6 +4685,7 @@
     },
     {
       "id": "processes/contribution/tracks/change",
+      "address": "processes/contribution/tracks/change",
       "type": "track",
       "name": "Change",
       "tagline": "A change to what this company publishes, offered from outside as a pull request, in code or in prose.",
@@ -4640,6 +4698,7 @@
     },
     {
       "id": "processes/delivery",
+      "address": "processes/delivery",
       "type": "process",
       "name": "Delivery",
       "tagline": "How anything we publish is shaped, specified, planned, made and merged, in code and in prose.",
@@ -4793,6 +4852,7 @@
     },
     {
       "id": "processes/delivery/phases/implement",
+      "address": "processes/delivery/phases/implement",
       "type": "phase",
       "name": "Implement",
       "tagline": "Make the thing, and let nothing go forward unread.",
@@ -4931,6 +4991,7 @@
     },
     {
       "id": "processes/delivery/phases/integrate",
+      "address": "processes/delivery/phases/integrate",
       "type": "phase",
       "name": "Integrate",
       "tagline": "Put the change where it binds, release what other repositories take from it, and move everything that names it.",
@@ -5062,6 +5123,7 @@
     },
     {
       "id": "processes/delivery/phases/plan",
+      "address": "processes/delivery/phases/plan",
       "type": "phase",
       "name": "Plan",
       "tagline": "Cut the approved specification into pieces that can be worked one at a time.",
@@ -5179,6 +5241,7 @@
     },
     {
       "id": "processes/delivery/phases/shape",
+      "address": "processes/delivery/phases/shape",
       "type": "phase",
       "name": "Shape",
       "tagline": "Decide what kind of change this is, how far it reaches, and how much of it gets written down.",
@@ -5317,6 +5380,7 @@
     },
     {
       "id": "processes/delivery/phases/spec",
+      "address": "processes/delivery/phases/spec",
       "type": "phase",
       "name": "Spec",
       "tagline": "Write what the change must do, completely enough that nobody downstream has to guess.",
@@ -5450,6 +5514,7 @@
     },
     {
       "id": "processes/delivery/tracks/code",
+      "address": "processes/delivery/tracks/code",
       "type": "track",
       "name": "Code",
       "tagline": "A merged change to one of the repositories we publish, with its checks green, and where it changes what another repository vendors, the release that carries it.",
@@ -5462,6 +5527,7 @@
     },
     {
       "id": "processes/delivery/tracks/prose",
+      "address": "processes/delivery/tracks/prose",
       "type": "track",
       "name": "Prose",
       "tagline": "An entry of the model, a schema, a README or a page of a site, in English the Owner has reviewed, and in Swiss Standard German where the surface carries it.",
@@ -5474,6 +5540,7 @@
     },
     {
       "id": "processes/feature-request",
+      "address": "processes/feature-request",
       "type": "process",
       "name": "Feature request",
       "tagline": "How somebody outside asks for vocabulary or tooling that is not there, as a GitHub issue, and gets an answer they can act on.",
@@ -5618,6 +5685,7 @@
     },
     {
       "id": "processes/feature-request/phases/answer",
+      "address": "processes/feature-request/phases/answer",
       "type": "phase",
       "name": "Answer",
       "tagline": "Give the asker something they can act on, whether or not anything will be built.",
@@ -5726,6 +5794,7 @@
     },
     {
       "id": "processes/feature-request/phases/raise",
+      "address": "processes/feature-request/phases/raise",
       "type": "phase",
       "name": "Raise",
       "tagline": "Say where it can be answered that the vocabulary would not carry something.",
@@ -5832,6 +5901,7 @@
     },
     {
       "id": "processes/feature-request/phases/triage",
+      "address": "processes/feature-request/phases/triage",
       "type": "phase",
       "name": "Triage",
       "tagline": "Decide what kind of thing the gap is, and whether it is ours to fill.",
@@ -5938,6 +6008,7 @@
     },
     {
       "id": "processes/feature-request/phases/understand",
+      "address": "processes/feature-request/phases/understand",
       "type": "phase",
       "name": "Understand",
       "tagline": "Turn what somebody asked for into the page they could not write.",
@@ -6047,6 +6118,7 @@
     },
     {
       "id": "processes/feature-request/tracks/decision",
+      "address": "processes/feature-request/tracks/decision",
       "type": "track",
       "name": "Decision",
       "tagline": "An answer written where the request was made, in the words the request used, saying what was decided and why.",
@@ -6059,6 +6131,7 @@
     },
     {
       "id": "processes/narrating",
+      "address": "processes/narrating",
       "type": "process",
       "name": "Narrating",
       "tagline": "How a talk's reviewed speaker notes become the clips a visitor hears, in English and in German, with every clip heard by the Owner before it ships.",
@@ -6174,6 +6247,7 @@
     },
     {
       "id": "processes/narrating/phases/narrate",
+      "address": "processes/narrating/phases/narrate",
       "type": "phase",
       "name": "Narrate",
       "tagline": "Turn each changed note into a clip in its language, and let none of them out unheard.",
@@ -6287,6 +6361,7 @@
     },
     {
       "id": "processes/narrating/tracks/clip",
+      "address": "processes/narrating/tracks/clip",
       "type": "track",
       "name": "Clip",
       "tagline": "One slide's note, spoken in one language, beside the deck it belongs to and stamped with what it was spoken from.",
@@ -6299,6 +6374,7 @@
     },
     {
       "id": "products/companygraph-core",
+      "address": "products/companygraph-core",
       "type": "product",
       "name": "CompanyGraph Core",
       "tagline": "The vocabulary for describing a company as a graph of Markdown files, with the checks, the agent access and the editing support that read it, used by the people who run a company and the agents working beside them.",
@@ -6312,6 +6388,7 @@
     },
     {
       "id": "profiles/ai-agent",
+      "address": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
       "tagline": "Specifies, plans, runs, implements, reviews, drafts and translates what this company publishes, answers whoever asks about it, under a rulebook for each, and decides nothing.",
@@ -6341,6 +6418,7 @@
     },
     {
       "id": "profiles/english-voice",
+      "address": "profiles/english-voice",
       "type": "profile",
       "name": "English Voice",
       "tagline": "Speaks the English of every talk, from the reviewed notes, under the rulebook, and decides nothing.",
@@ -6427,6 +6505,7 @@
     },
     {
       "id": "profiles/german-voice",
+      "address": "profiles/german-voice",
       "type": "profile",
       "name": "German Voice",
       "tagline": "Speaks the German of every talk, from the reviewed notes, under the rulebook, and decides nothing.",
@@ -6513,6 +6592,7 @@
     },
     {
       "id": "profiles/robert-blust",
+      "address": "profiles/robert-blust",
       "type": "profile",
       "name": "Robert Blust",
       "tagline": "Maintainer of CompanyGraph.",
@@ -6563,6 +6643,7 @@
     },
     {
       "id": "question-kinds/brand",
+      "address": "question-kinds/brand",
       "type": "question-kind",
       "name": "Brand",
       "tagline": "Questions about how companygraph.io looks and what a visitor may reuse.",
@@ -6582,6 +6663,7 @@
     },
     {
       "id": "question-kinds/fit",
+      "address": "question-kinds/fit",
       "type": "question-kind",
       "name": "Fit",
       "tagline": "Questions a company asks before it decides CompanyGraph is for it: what problem it solves, how it differs from what the company already has, and whether it fits the company's own shape.",
@@ -6601,6 +6683,7 @@
     },
     {
       "id": "question-kinds/getting-started",
+      "address": "question-kinds/getting-started",
       "type": "question-kind",
       "name": "Getting started",
       "tagline": "Questions from someone who has decided to try it: where to begin, how to write a first profile, what reads the model, and where the data stays.",
@@ -6620,6 +6703,7 @@
     },
     {
       "id": "question-kinds/terms",
+      "address": "question-kinds/terms",
       "type": "question-kind",
       "name": "Terms",
       "tagline": "Questions about what adopting CompanyGraph costs, who stands behind it, who else uses it, and how it shows that it works.",
@@ -6639,6 +6723,7 @@
     },
     {
       "id": "question-kinds/this-chat",
+      "address": "question-kinds/this-chat",
       "type": "question-kind",
       "name": "This chat",
       "tagline": "Questions about the chat on companygraph.io: who answers, and how far to trust what it says.",
@@ -6658,6 +6743,7 @@
     },
     {
       "id": "questions/can-i-trust-what-this-chat-says",
+      "address": "questions/can-i-trust-what-this-chat-says",
       "type": "question",
       "name": "Can I trust what this chat says?",
       "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it. Grounded Answer Rate says what is watched: whether an answer rested on the model, which shows grounding and not whether the answer was true.",
@@ -6736,6 +6822,7 @@
     },
     {
       "id": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
+      "address": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
       "type": "question",
       "name": "Can I use CompanyGraph's colors and fonts for my own site?",
       "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
@@ -6802,6 +6889,7 @@
     },
     {
       "id": "questions/can-our-ai-agents-use-it",
+      "address": "questions/can-our-ai-agents-use-it",
       "type": "question",
       "name": "Can our AI agents use it?",
       "tagline": "The feature says what an agent can ask a company's model, the strategy says why the server that answers only reads it, the decision says what else was weighed, and the MCP server is one running now.",
@@ -6892,6 +6980,7 @@
     },
     {
       "id": "questions/can-we-load-our-model-into-a-graph-database-like-neo4j",
+      "address": "questions/can-we-load-our-model-into-a-graph-database-like-neo4j",
       "type": "question",
       "name": "Can we load our model into a graph database like Neo4j?",
       "tagline": "The objective says what has to become true for any graph database to hold a company's model with no work of its own; it is a target we have set, and nothing ships that loads one today.",
@@ -6946,6 +7035,7 @@
     },
     {
       "id": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
+      "address": "questions/do-i-need-your-service-to-run-companygraph-and-what-does-it-cost",
       "type": "question",
       "name": "Do I need your service to run CompanyGraph, and what does it cost?",
       "tagline": "The value says what is free to take and what is paid for, and the instance says that a company's model is its own repository, which it runs without anyone else; the decision says why nothing is asked back and time is billed by the day.",
@@ -7024,6 +7114,7 @@
     },
     {
       "id": "questions/do-our-people-have-to-write-these-files-by-hand",
+      "address": "questions/do-our-people-have-to-write-these-files-by-hand",
       "type": "question",
       "name": "Do our people have to write these files by hand?",
       "tagline": "The decision says who writes the model and who approves each change to it, the objective says every gate an agent's work passes is held by a person, and the feature is one case of it: an agent writing a profile from documents a person already has.",
@@ -7102,6 +7193,7 @@
     },
     {
       "id": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
+      "address": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
       "type": "question",
       "name": "Does it only work with Claude, or can we use ChatGPT or Gemini?",
       "tagline": "The objective says the agent is the company's choice and can be changed at any time, and the decision says why Claude is the one supported first and what ends that.",
@@ -7168,6 +7260,7 @@
     },
     {
       "id": "questions/does-our-data-leave-our-hands",
+      "address": "questions/does-our-data-leave-our-hands",
       "type": "question",
       "name": "Does our data leave our hands?",
       "tagline": "The strategy says where a company's model, its server and its chat run, and what a chat visitor sends leaves them; the instance says the model is the company's own repository.",
@@ -7234,6 +7327,7 @@
     },
     {
       "id": "questions/how-do-i-contribute-to-companygraph",
+      "address": "questions/how-do-i-contribute-to-companygraph",
       "type": "question",
       "name": "How do I contribute to CompanyGraph?",
       "tagline": "A change you can write yourself goes in as a pull request through the Contribution process, and something you need but cannot write goes in as a feature request.",
@@ -7300,6 +7394,7 @@
     },
     {
       "id": "questions/how-do-i-create-my-own-profile",
+      "address": "questions/how-do-i-create-my-own-profile",
       "type": "question",
       "name": "How do I create my own profile?",
       "tagline": "The feature says how an agent writes a profile from a person's own documents, the profile a CV is derived from, and the command that starts an instance says how to get the model it is written into.",
@@ -7366,6 +7461,7 @@
     },
     {
       "id": "questions/how-do-i-start",
+      "address": "questions/how-do-i-start",
       "type": "question",
       "name": "How do I start?",
       "tagline": "The feature says what the one command does, from starting a model to keeping it current, and the website's CLI page says how to run it.",
@@ -7432,6 +7528,7 @@
     },
     {
       "id": "questions/how-do-you-know-companygraph-is-working",
+      "address": "questions/how-do-you-know-companygraph-is-working",
       "type": "question",
       "name": "How do you know CompanyGraph is working?",
       "tagline": "Grounded Answer Rate watches whether the chat's answers rest on the model, as the objective of an agent answering as well as the person who runs the company asks, and the DORA KPIs define what is watched in how our changes reach production. The model holds their definitions and none of their values: the chat's report computes Grounded Answer Rate's, nothing measures the DORA KPIs yet, and our other objectives have no KPI yet.",
@@ -7558,6 +7655,7 @@
     },
     {
       "id": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
+      "address": "questions/how-does-content-stay-current-when-it-comes-from-a-wiki-or-another-system",
       "type": "question",
       "name": "How does content stay current when it comes from a wiki or another system?",
       "tagline": "Every page declares the source it comes from, as every page here declares Local, and its id there where the source issues one, which is all a sync needs. The sync itself is the company's to choose, and the one we prefer is an agent reading the source over MCP, such as Atlassian's MCP server for Confluence and Jira, writing the pages the checks then hold.",
@@ -7612,6 +7710,7 @@
     },
     {
       "id": "questions/is-anyone-besides-you-using-companygraph",
+      "address": "questions/is-anyone-besides-you-using-companygraph",
       "type": "question",
       "name": "Is anyone besides you using CompanyGraph?",
       "tagline": "The objective says what would count as someone else using it, and the strategy says how the vocabulary grows from the companies described in it until then.",
@@ -7678,6 +7777,7 @@
     },
     {
       "id": "questions/is-companygraph-a-business-or-a-side-project",
+      "address": "questions/is-companygraph-a-business-or-a-side-project",
       "type": "question",
       "name": "Is CompanyGraph a business, or a side project?",
       "tagline": "The objective says whether anything is being sold and how the question of a business is being settled, and the value says what would be paid for if it were.",
@@ -7744,6 +7844,7 @@
     },
     {
       "id": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
+      "address": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
       "type": "question",
       "name": "Isn't this just a wiki, or Notion with rules?",
       "tagline": "The schema says what every page of a type must carry, a reference makes two pages an edge rather than a mention, and the checks say before a change lands whether the pages still hold.",
@@ -7822,6 +7923,7 @@
     },
     {
       "id": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
+      "address": "questions/what-can-an-agent-do-with-our-model-besides-answering-questions",
       "type": "question",
       "name": "What can an agent do with our model besides answering questions?",
       "tagline": "The first feature says which procedures an agent follows on an instance, from building it to validating and publishing it, the second says what it can ask the model, and the decision says which agent they are written for first.",
@@ -7900,6 +8002,7 @@
     },
     {
       "id": "questions/what-do-the-colors-on-companygraph-io-mean",
+      "address": "questions/what-do-the-colors-on-companygraph-io-mean",
       "type": "question",
       "name": "What do the colors on companygraph.io mean?",
       "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
@@ -7954,6 +8057,7 @@
     },
     {
       "id": "questions/what-does-a-company-s-model-actually-look-like",
+      "address": "questions/what-does-a-company-s-model-actually-look-like",
       "type": "question",
       "name": "What does a company's model actually look like?",
       "tagline": "An instance is one company's repository beside the core it took, the website shows a company described in it without cloning anything, and this model is one, since CompanyGraph runs on what it publishes.",
@@ -8032,6 +8136,7 @@
     },
     {
       "id": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
+      "address": "questions/what-if-the-vocabulary-doesn-t-fit-our-company",
       "type": "question",
       "name": "What if the vocabulary doesn't fit our company?",
       "tagline": "The objective says what core is working toward, a pack says where vocabulary only some companies need goes, the decision says what a page may carry beyond its schema today, and a feature request is how to ask for what is missing.",
@@ -8122,6 +8227,7 @@
     },
     {
       "id": "questions/what-problem-does-companygraph-solve",
+      "address": "questions/what-problem-does-companygraph-solve",
       "type": "question",
       "name": "What problem does CompanyGraph solve?",
       "tagline": "The vision says what problem it is working against, and the core product says what takes its place.",
@@ -8188,6 +8294,7 @@
     },
     {
       "id": "questions/where-do-our-targets-and-actual-numbers-go",
+      "address": "questions/where-do-our-targets-and-actual-numbers-go",
       "type": "question",
       "name": "Where do our targets and actual numbers go?",
       "tagline": "The model holds a KPI's definition and none of its targets or values, because they move, and a KPI's References row says where they are kept, a sheet or a dashboard.",
@@ -8201,6 +8308,7 @@
     },
     {
       "id": "questions/who-answers-this-chat",
+      "address": "questions/who-answers-this-chat",
       "type": "question",
       "name": "Who answers this chat?",
       "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says it reads this very model through its MCP server.",
@@ -8279,6 +8387,7 @@
     },
     {
       "id": "questions/who-keeps-the-model-true-when-the-company-changes",
+      "address": "questions/who-keeps-the-model-true-when-the-company-changes",
       "type": "question",
       "name": "Who keeps the model true when the company changes?",
       "tagline": "The checks catch a page that no longer holds, while it is written and before it lands, the agent pass reads what no script can, and the Owner has the last word on every page.",
@@ -8369,6 +8478,7 @@
     },
     {
       "id": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
+      "address": "questions/why-is-the-schema-written-in-markdown-instead-of-json-schema",
       "type": "question",
       "name": "Why is the schema written in Markdown instead of JSON Schema?",
       "tagline": "The decision says why a type's schema is one prose file that both an agent and a script read, and what was weighed against a second schema beside it, and the schema says what one declares.",
@@ -8435,6 +8545,7 @@
     },
     {
       "id": "questions/will-a-new-companygraph-release-break-our-model",
+      "address": "questions/will-a-new-companygraph-release-break-our-model",
       "type": "question",
       "name": "Will a new CompanyGraph release break our model?",
       "tagline": "The decision says who decides when a new release of core reaches a company's model, and what was weighed against letting it arrive by itself, and the pin says how the model names the release it is written against.",
@@ -8501,6 +8612,7 @@
     },
     {
       "id": "roles/answerer",
+      "address": "roles/answerer",
       "type": "role",
       "name": "Answerer",
       "tagline": "The seat that answers a visitor's question from what the model's tools return, names the entity each claim rests on, and says that the model does not say where it does not.",
@@ -8569,6 +8681,7 @@
     },
     {
       "id": "roles/contributor",
+      "address": "roles/contributor",
       "type": "role",
       "name": "Contributor",
       "tagline": "Someone outside the company who offers a change to what it publishes, under the same rules a change from inside is held to.",
@@ -8629,6 +8742,7 @@
     },
     {
       "id": "roles/controller",
+      "address": "roles/controller",
       "type": "role",
       "name": "Controller",
       "tagline": "The seat that runs a plan one brief at a time, reads every report as a claim, and writes nothing itself.",
@@ -8689,6 +8803,7 @@
     },
     {
       "id": "roles/implementer",
+      "address": "roles/implementer",
       "type": "role",
       "name": "Implementer",
       "tagline": "The seat that turns one task brief into a tested commit and a report, and nothing beyond the brief.",
@@ -8749,6 +8864,7 @@
     },
     {
       "id": "roles/narrator",
+      "address": "roles/narrator",
       "type": "role",
       "name": "Narrator",
       "tagline": "The seat that speaks a talk's reviewed speaker notes, one clip per slide in each language, so the talk can be heard without its presenter.",
@@ -8817,6 +8933,7 @@
     },
     {
       "id": "roles/owner",
+      "address": "roles/owner",
       "type": "role",
       "name": "Owner",
       "tagline": "The seat that decides what the project is for, says the last word on every page, and is the only one that merges, tags and releases.",
@@ -8885,6 +9002,7 @@
     },
     {
       "id": "roles/planner",
+      "address": "roles/planner",
       "type": "role",
       "name": "Planner",
       "tagline": "The seat that cuts an approved specification into task briefs, each whole on its own, and writes none of them.",
@@ -8945,6 +9063,7 @@
     },
     {
       "id": "roles/requestor",
+      "address": "roles/requestor",
       "type": "role",
       "name": "Requestor",
       "tagline": "Someone outside the company who could not describe something in the vocabulary, and says so where it can be answered.",
@@ -9005,6 +9124,7 @@
     },
     {
       "id": "roles/reviewer",
+      "address": "roles/reviewer",
       "type": "role",
       "name": "Reviewer",
       "tagline": "The seat that reads one diff against its brief, returns findings with a severity and changes nothing.",
@@ -9073,6 +9193,7 @@
     },
     {
       "id": "roles/specifier",
+      "address": "roles/specifier",
       "type": "role",
       "name": "Specifier",
       "tagline": "The seat that turns a shaped request into a specification nobody has to guess at, and builds nothing.",
@@ -9141,6 +9262,7 @@
     },
     {
       "id": "roles/translator",
+      "address": "roles/translator",
       "type": "role",
       "name": "Translator",
       "tagline": "The seat that makes the Swiss Standard German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
@@ -9225,6 +9347,7 @@
     },
     {
       "id": "roles/visitor",
+      "address": "roles/visitor",
       "type": "role",
       "name": "Visitor",
       "tagline": "Someone who asks about the company in their own words, on its site or through an agent of their own, and is owed what the model says and nothing else.",
@@ -9253,6 +9376,7 @@
     },
     {
       "id": "roles/writer",
+      "address": "roles/writer",
       "type": "role",
       "name": "Writer",
       "tagline": "The seat that drafts English in the family voice from a brief, so the Owner reviews a draft instead of writing one.",
@@ -9337,6 +9461,7 @@
     },
     {
       "id": "sources/local",
+      "address": "sources/local",
       "type": "source",
       "name": "Local",
       "tagline": "Written and kept in this repository, which masters every page in the model. Nothing syncs it, and it issues no identifiers, so no page carries a `source-id`.",
@@ -9349,6 +9474,7 @@
     },
     {
       "id": "strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses",
+      "address": "strategic-objectives/a-company-keeps-its-model-with-whichever-agent-it-chooses",
       "type": "strategic-objective",
       "name": "A company keeps its model with whichever agent it chooses",
       "tagline": "The agent a company works with is chosen when its instance is made and can be changed at any time after, and whichever it chooses — Anthropic's Claude, OpenAI's ChatGPT, Google's Gemini or another — reads, writes and checks the model under the same rulebooks, with nothing lost in the change.",
@@ -9368,6 +9494,7 @@
     },
     {
       "id": "strategic-objectives/a-company-s-model-belongs-to-no-tool-and-any-graph-database-can-hold-it",
+      "address": "strategic-objectives/a-company-s-model-belongs-to-no-tool-and-any-graph-database-can-hold-it",
       "type": "strategic-objective",
       "name": "A company's model belongs to no tool, and any graph database can hold it",
       "tagline": "A company's model is Markdown files that any tool can read for as long as text can be read, and loading an instance into a graph database — Neo4j, Amazon Neptune, Ontotext GraphDB, Memgraph or another — takes no work of the company's own: no mapping to write, no code, and no page changed.",
@@ -9419,6 +9546,7 @@
     },
     {
       "id": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
+      "address": "strategic-objectives/a-company-we-have-never-met-keeps-its-own-model",
       "type": "strategic-objective",
       "name": "A company we have never met keeps its own model",
       "tagline": "A company nobody here has worked with describes itself in this vocabulary and keeps that description current, without us in the room.",
@@ -9438,6 +9566,7 @@
     },
     {
       "id": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
+      "address": "strategic-objectives/an-agent-answers-as-well-as-the-person-who-runs-the-company",
       "type": "strategic-objective",
       "name": "An agent answers as well as the person who runs the company",
       "tagline": "An agent asked about a company answers from the model alone, and is held to the same evidence the person who runs it would have to show.",
@@ -9457,6 +9586,7 @@
     },
     {
       "id": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
+      "address": "strategic-objectives/core-holds-a-company-without-running-out-of-vocabulary",
       "type": "strategic-objective",
       "name": "Core holds a company without running out of vocabulary",
       "tagline": "Someone describing their company reaches the end of it without meeting a fact that no type can carry.",
@@ -9476,6 +9606,7 @@
     },
     {
       "id": "strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person",
+      "address": "strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person",
       "type": "strategic-objective",
       "name": "Every gate an agent's work passes is held by a person",
       "tagline": "Agents do the work of a company's processes, and at every gate that work reaches, a person who answers for it decides whether it goes on; no agent's work passes a gate on the strength of the checks alone, whether a person asked for it or a workflow started it.",
@@ -9495,6 +9626,7 @@
     },
     {
       "id": "strategic-objectives/whether-this-is-a-business-is-answered",
+      "address": "strategic-objectives/whether-this-is-a-business-is-answered",
       "type": "strategic-objective",
       "name": "Whether this is a business is answered",
       "tagline": "The question of whether any of this earns anything is settled, in either direction, rather than left open while the work continues.",
@@ -9514,6 +9646,7 @@
     },
     {
       "id": "strategies/instance-led-strategy",
+      "address": "strategies/instance-led-strategy",
       "type": "strategy",
       "name": "Instance-Led Strategy",
       "tagline": "The vocabulary grows from companies actually being described in it, one cluster at a time, and stays below 1.0 for as long as the instances are still finding things.",
@@ -9552,6 +9685,7 @@
     },
     {
       "id": "strategies/read-only-server-strategy",
+      "address": "strategies/read-only-server-strategy",
       "type": "strategy",
       "name": "Read-Only Server Strategy",
       "tagline": "An agent reaches a company's model through a server that only reads it, answers at one named commit, and adds nothing of its own.",
@@ -9588,6 +9722,7 @@
     },
     {
       "id": "surfaces/chat-companygraph-io-chat",
+      "address": "surfaces/chat-companygraph-io-chat",
       "type": "surface",
       "name": "chat.companygraph.io chat",
       "tagline": "The chat a visitor opens on companygraph.io to ask about what we know, answered from what the mcp.companygraph.io MCP server says at its pinned commit, and the page a person reaches at the same address.",
@@ -9609,6 +9744,7 @@
     },
     {
       "id": "surfaces/companygraph-io-website",
+      "address": "surfaces/companygraph-io-website",
       "type": "surface",
       "name": "companygraph.io website",
       "tagline": "The project's own site, in English and Swiss Standard German, where a visitor, a search engine or an agent meets the vocabulary and the company that publishes it, rebuilt from pinned commits of the models it draws.",
@@ -9635,6 +9771,7 @@
     },
     {
       "id": "surfaces/linkedin-company-page",
+      "address": "surfaces/linkedin-company-page",
       "type": "surface",
       "name": "LinkedIn company page",
       "tagline": "The page on the professional network that a person reaches from a post, a follower's feed or a search for the name, kept by hand.",
@@ -9665,6 +9802,7 @@
     },
     {
       "id": "surfaces/mcp-companygraph-io-mcp-server",
+      "address": "surfaces/mcp-companygraph-io-mcp-server",
       "type": "surface",
       "name": "mcp.companygraph.io MCP server",
       "tagline": "The server an agent connects to for answers about what we know, and the page a person reaches at the same address, reading a pinned commit of our model and adding nothing to it.",
@@ -9686,6 +9824,7 @@
     },
     {
       "id": "surfaces/mcp-registry-listing",
+      "address": "surfaces/mcp-registry-listing",
       "type": "surface",
       "name": "MCP Registry listing",
       "tagline": "The entry an agent client finds when it searches the public MCP Registry, pointing it at the MCP server.",
@@ -9707,6 +9846,7 @@
     },
     {
       "id": "values/adoption-is-not-taxed",
+      "address": "values/adoption-is-not-taxed",
       "type": "value",
       "name": "Adoption is not taxed",
       "tagline": "A meta-model is worth whatever gets adopted of it, so anything that makes adopting it cost more works against the one thing it was built to do.",
@@ -9725,6 +9865,7 @@
     },
     {
       "id": "values/describe-the-pattern-never-the-company",
+      "address": "values/describe-the-pattern-never-the-company",
       "type": "value",
       "name": "Describe the pattern, never the company",
       "tagline": "A meta-model that carries one company's tooling in its conventions has stopped being one, so the vocabulary states the shape and never who was found holding it.",
@@ -9743,6 +9884,7 @@
     },
     {
       "id": "values/run-on-what-we-publish",
+      "address": "values/run-on-what-we-publish",
       "type": "value",
       "name": "Run on what we publish",
       "tagline": "A vocabulary its authors have not had to use is a proposal, and the only evidence that a type holds a real company is a real company being held by it.",
@@ -9761,6 +9903,7 @@
     },
     {
       "id": "vision",
+      "address": "vision",
       "type": "vision",
       "name": "Written once, read by both",
       "tagline": "We are working toward companies whose knowledge is written once, in a structure that the people who run them and the agents working beside them can both rely on — so that what a company knows can be read, checked and acted on where it is needed, rather than reassembled out of wikis, decks, tickets and chat threads every time somebody asks.",

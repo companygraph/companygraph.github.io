@@ -1,8 +1,8 @@
 {
-  "commit": "6813954c871090095e2f297fb41725c225404609",
-  "core": "0.48.0",
+  "commit": "88e0652dcd01de209e6e21d43871645e5adc4d5c",
+  "core": "0.49.0",
   "root": "Beacon Systems",
-  "rootId": "identity",
+  "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
     {
       "type": "achievement-kind",
@@ -63,6 +63,12 @@
       "folder": "features",
       "owner": null,
       "singular": false
+    },
+    {
+      "type": "identifier",
+      "folder": null,
+      "owner": null,
+      "singular": true
     },
     {
       "type": "identity",
@@ -175,11 +181,13 @@
   ],
   "entities": [
     {
-      "id": "achievement-kinds/decisions",
+      "id": "01a0b0b8-a108-7599-9272-b4401bbf7084",
+      "address": "achievement-kinds/decisions",
       "type": "achievement-kind",
       "name": "Decisions",
       "tagline": "A call that set what the work would be — what to build, in what order and what to stop.",
       "fields": {
+        "id": "01a0b0b8-a108-7599-9272-b4401bbf7084",
         "source": "Local",
         "rank": "10"
       },
@@ -194,11 +202,13 @@
       "path": "example/model/achievement-kinds/decisions.md"
     },
     {
-      "id": "achievement-kinds/delivery",
+      "id": "01a0b0b8-a108-7e20-8c94-a5323dc3e63b",
+      "address": "achievement-kinds/delivery",
       "type": "achievement-kind",
       "name": "Delivery",
       "tagline": "Something built, changed or taken apart, and in the hands of the people it was for.",
       "fields": {
+        "id": "01a0b0b8-a108-7e20-8c94-a5323dc3e63b",
         "source": "Local",
         "rank": "20"
       },
@@ -213,11 +223,13 @@
       "path": "example/model/achievement-kinds/delivery.md"
     },
     {
-      "id": "achievement-kinds/results",
+      "id": "01a0b0b8-a108-7db9-b6d4-ab3e08e2c1c8",
+      "address": "achievement-kinds/results",
       "type": "achievement-kind",
       "name": "Results",
       "tagline": "What came of the work — an effect measured, a finding established or an outcome still owed.",
       "fields": {
+        "id": "01a0b0b8-a108-7db9-b6d4-ab3e08e2c1c8",
         "source": "Local",
         "rank": "40"
       },
@@ -232,11 +244,13 @@
       "path": "example/model/achievement-kinds/results.md"
     },
     {
-      "id": "achievement-kinds/sharing",
+      "id": "01a0b0b8-a108-7a00-8d86-e683919c26ba",
+      "address": "achievement-kinds/sharing",
       "type": "achievement-kind",
       "name": "Sharing",
       "tagline": "What was learned, handed to people outside the work — a talk, a written case, a session taught.",
       "fields": {
+        "id": "01a0b0b8-a108-7a00-8d86-e683919c26ba",
         "source": "Local",
         "rank": "30"
       },
@@ -251,11 +265,13 @@
       "path": "example/model/achievement-kinds/sharing.md"
     },
     {
-      "id": "brand",
+      "id": "01a0d907-1478-7032-8b40-57789e97c388",
+      "address": "brand",
       "type": "brand",
       "name": "Beacon",
       "tagline": "An invoice carrying this name can be read without calling us, and everything else we put the name on is held to the same test.",
       "fields": {
+        "id": "01a0d907-1478-7032-8b40-57789e97c388",
         "source": "Local"
       },
       "sections": [
@@ -489,11 +505,13 @@
       "path": "example/model/brand.md"
     },
     {
-      "id": "concepts/billing-period",
+      "id": "01a0c25c-19f8-72d5-bef8-bc1574eb03f4",
+      "address": "concepts/billing-period",
       "type": "concept",
       "name": "Billing period",
       "tagline": "The stretch of time one invoice charges for, set by the contract, with a first and a last day.",
       "fields": {
+        "id": "01a0c25c-19f8-72d5-bef8-bc1574eb03f4",
         "source": "Local",
         "domain": "Invoicing"
       },
@@ -502,11 +520,13 @@
       "path": "example/model/concepts/billing-period.md"
     },
     {
-      "id": "concepts/contract",
+      "id": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "address": "concepts/contract",
       "type": "concept",
       "name": "Contract",
       "tagline": "The terms a customer agreed to buy under, in the words both sides signed, from the day they take effect until they are replaced or ended.",
       "fields": {
+        "id": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
         "source": "Local",
         "domain": "Pricing"
       },
@@ -572,11 +592,13 @@
       "path": "example/model/concepts/contract.md"
     },
     {
-      "id": "concepts/credit-note",
+      "id": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "address": "concepts/credit-note",
       "type": "concept",
       "name": "Credit note",
       "tagline": "A document that lowers what a customer owes on an invoice already issued, leaving that invoice as it was.",
       "fields": {
+        "id": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
         "source": "Local",
         "domain": "Invoicing"
       },
@@ -664,11 +686,13 @@
       "path": "example/model/concepts/credit-note.md"
     },
     {
-      "id": "concepts/customer",
+      "id": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "address": "concepts/customer",
       "type": "concept",
       "name": "Customer",
       "tagline": "A person or company that has agreed to a contract or pays under one — the party an invoice is addressed to, never the company that issues it.",
       "fields": {
+        "id": "01a0c25c-19f8-716b-846a-8c5f00818198",
         "source": "Local",
         "domain": "Pricing"
       },
@@ -677,11 +701,13 @@
       "path": "example/model/concepts/customer.md"
     },
     {
-      "id": "concepts/invoice",
+      "id": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "address": "concepts/invoice",
       "type": "concept",
       "name": "Invoice",
       "tagline": "What one customer is asked to pay for one billing period, as a document that stays as it was issued.",
       "fields": {
+        "id": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
         "source": "Local",
         "domain": "Invoicing"
       },
@@ -811,11 +837,13 @@
       "path": "example/model/concepts/invoice.md"
     },
     {
-      "id": "concepts/invoice-line",
+      "id": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "address": "concepts/invoice-line",
       "type": "concept",
       "name": "Invoice line",
       "tagline": "One charge on an invoice: an amount, and the reason for that amount in terms the customer agreed to.",
       "fields": {
+        "id": "01a0c25c-19f8-788e-8b44-ada689a92da4",
         "source": "Local",
         "domain": "Invoicing"
       },
@@ -871,11 +899,13 @@
       "path": "example/model/concepts/invoice-line.md"
     },
     {
-      "id": "concepts/pricing-rule",
+      "id": "01a0c25c-19f8-7980-a019-46b608819370",
+      "address": "concepts/pricing-rule",
       "type": "concept",
       "name": "Pricing rule",
       "tagline": "One term of a contract in a form that can be applied: what it charges for, at what price and under which conditions, named as the contract names it.",
       "fields": {
+        "id": "01a0c25c-19f8-7980-a019-46b608819370",
         "source": "Local",
         "domain": "Pricing"
       },
@@ -917,11 +947,13 @@
       "path": "example/model/concepts/pricing-rule.md"
     },
     {
-      "id": "concepts/usage-record",
+      "id": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "address": "concepts/usage-record",
       "type": "concept",
       "name": "Usage record",
       "tagline": "One thing a customer used that a contract charges for — a call made, a seat held, a gigabyte stored — with when it happened and how much of it there was.",
       "fields": {
+        "id": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
         "source": "Local",
         "domain": "Pricing"
       },
@@ -999,11 +1031,13 @@
       "path": "example/model/concepts/usage-record.md"
     },
     {
-      "id": "decision-kinds/architecture",
+      "id": "01a0dd35-9358-72cf-a4bd-360593010506",
+      "address": "decision-kinds/architecture",
       "type": "decision-kind",
       "name": "Architecture",
       "tagline": "A call about how the product is built: what is one service and what is two, what is stored and what is derived, what talks to what.",
       "fields": {
+        "id": "01a0dd35-9358-72cf-a4bd-360593010506",
         "source": "Local"
       },
       "sections": [
@@ -1017,11 +1051,13 @@
       "path": "example/model/decision-kinds/architecture.md"
     },
     {
-      "id": "decision-kinds/product",
+      "id": "01a0dd35-9358-70ac-a19f-441d4e7e8183",
+      "address": "decision-kinds/product",
       "type": "decision-kind",
       "name": "Product",
       "tagline": "A call about what the product does and for whom: which capability ships, which customer it is for, what it will not do.",
       "fields": {
+        "id": "01a0dd35-9358-70ac-a19f-441d4e7e8183",
         "source": "Local"
       },
       "sections": [
@@ -1035,11 +1071,13 @@
       "path": "example/model/decision-kinds/product.md"
     },
     {
-      "id": "decision-statuses/revised",
+      "id": "01a0dd35-9358-7c8f-a3e8-0a4b022e70b7",
+      "address": "decision-statuses/revised",
       "type": "decision-status",
       "name": "Revised",
       "tagline": "A later decision replaced this call, and the call is read through that decision.",
       "fields": {
+        "id": "01a0dd35-9358-7c8f-a3e8-0a4b022e70b7",
         "source": "Local"
       },
       "sections": [
@@ -1053,11 +1091,13 @@
       "path": "example/model/decision-statuses/revised.md"
     },
     {
-      "id": "decision-statuses/standing",
+      "id": "01a0dd35-9358-7359-89d0-a3a4afb3d24d",
+      "address": "decision-statuses/standing",
       "type": "decision-status",
       "name": "Standing",
       "tagline": "The call holds as written, and the work follows it.",
       "fields": {
+        "id": "01a0dd35-9358-7359-89d0-a3a4afb3d24d",
         "source": "Local"
       },
       "sections": [
@@ -1071,11 +1111,13 @@
       "path": "example/model/decision-statuses/standing.md"
     },
     {
-      "id": "decisions/2022-billing-leaves-the-monolith",
+      "id": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "address": "decisions/2022-billing-leaves-the-monolith",
       "type": "decision",
       "name": "Billing leaves the monolith",
       "tagline": "We take billing out of the one service three teams edit and make it a service of its own, owned by one team, with the invoice as its boundary.",
       "fields": {
+        "id": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
         "source": "Local",
         "decided": "2022-01",
         "kind": "Architecture",
@@ -1186,11 +1228,13 @@
       "path": "example/model/decisions/2022-billing-leaves-the-monolith.md"
     },
     {
-      "id": "domains/invoicing",
+      "id": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "address": "domains/invoicing",
       "type": "domain",
       "name": "Invoicing",
       "tagline": "What a customer is asked to pay, for which period and on which document, and how a document already issued is corrected. What a term of a contract means, and the amount it produces, is left to Pricing.",
       "fields": {
+        "id": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
         "source": "Local"
       },
       "sections": [],
@@ -1198,11 +1242,13 @@
       "path": "example/model/domains/invoicing.md"
     },
     {
-      "id": "domains/pricing",
+      "id": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "address": "domains/pricing",
       "type": "domain",
       "name": "Pricing",
       "tagline": "What a customer agreed to pay for, and how each term of that agreement turns what they used into an amount. Which invoice an amount lands on, and when it is issued, is left to Invoicing.",
       "fields": {
+        "id": "01a0c25c-19f8-70f4-803c-9899401b89dd",
         "source": "Local"
       },
       "sections": [],
@@ -1210,11 +1256,13 @@
       "path": "example/model/domains/pricing.md"
     },
     {
-      "id": "experience-kinds/community",
+      "id": "01a06385-9d00-7fff-ab77-615f9b902c2f",
+      "address": "experience-kinds/community",
       "type": "experience-kind",
       "name": "Community",
       "tagline": "Work done in public — a talk, a seat, a working group, a published case.",
       "fields": {
+        "id": "01a06385-9d00-7fff-ab77-615f9b902c2f",
         "source": "Local"
       },
       "sections": [
@@ -1228,11 +1276,13 @@
       "path": "example/model/experience-kinds/community.md"
     },
     {
-      "id": "experience-kinds/education",
+      "id": "01a06385-9d00-7fa8-9e3b-5082c9904037",
+      "address": "experience-kinds/education",
       "type": "experience-kind",
       "name": "Education",
       "tagline": "A degree, a certification, a course.",
       "fields": {
+        "id": "01a06385-9d00-7fa8-9e3b-5082c9904037",
         "source": "Local"
       },
       "sections": [
@@ -1246,11 +1296,13 @@
       "path": "example/model/experience-kinds/education.md"
     },
     {
-      "id": "experience-kinds/project",
+      "id": "01a06385-9d00-77bd-944c-8d4ba61288db",
+      "address": "experience-kinds/project",
       "type": "experience-kind",
       "name": "Project",
       "tagline": "A delivery worth naming on its own, inside a role or beside one.",
       "fields": {
+        "id": "01a06385-9d00-77bd-944c-8d4ba61288db",
         "source": "Local"
       },
       "sections": [
@@ -1264,11 +1316,13 @@
       "path": "example/model/experience-kinds/project.md"
     },
     {
-      "id": "experience-kinds/role",
+      "id": "01a06385-9d00-7cf7-8d01-185357324476",
+      "address": "experience-kinds/role",
       "type": "experience-kind",
       "name": "Role",
       "tagline": "A position held in an organization — the employment history.",
       "fields": {
+        "id": "01a06385-9d00-7cf7-8d01-185357324476",
         "source": "Local"
       },
       "sections": [
@@ -1282,11 +1336,13 @@
       "path": "example/model/experience-kinds/role.md"
     },
     {
-      "id": "features/billing-run",
+      "id": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "address": "features/billing-run",
       "type": "feature",
       "name": "Billing run",
       "tagline": "A finance team can close a billing period and have every invoice for it issued at once, the same whoever runs it.",
       "fields": {
+        "id": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
         "source": "Local",
         "products": [
           "Billing Console"
@@ -1308,11 +1364,13 @@
       "path": "example/model/features/billing-run.md"
     },
     {
-      "id": "features/charge-explanation",
+      "id": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "address": "features/charge-explanation",
       "type": "feature",
       "name": "Charge explanation",
       "tagline": "Anyone reading an invoice can tell how each charge was reached, in the words of the contract they agreed to.",
       "fields": {
+        "id": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
         "source": "Local",
         "products": [
           "Invoice Page",
@@ -1335,11 +1393,13 @@
       "path": "example/model/features/charge-explanation.md"
     },
     {
-      "id": "features/credit-notes",
+      "id": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "address": "features/credit-notes",
       "type": "feature",
       "name": "Credit notes",
       "tagline": "A finance team can correct an invoice already sent, and the payer can read what changed and why.",
       "fields": {
+        "id": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
         "source": "Local",
         "products": [
           "Billing Console",
@@ -1361,11 +1421,13 @@
       "path": "example/model/features/credit-notes.md"
     },
     {
-      "id": "features/invoice-download",
+      "id": "01a0c25c-19f8-77ee-8656-f16c523bdc15",
+      "address": "features/invoice-download",
       "type": "feature",
       "name": "Invoice download",
       "tagline": "Whoever pays an invoice can keep a copy of it in their own books, exactly as it was issued.",
       "fields": {
+        "id": "01a0c25c-19f8-77ee-8656-f16c523bdc15",
         "source": "Local",
         "products": [
           "Invoice Page"
@@ -1422,11 +1484,13 @@
       "path": "example/model/features/invoice-download.md"
     },
     {
-      "id": "features/pricing-rules",
+      "id": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "address": "features/pricing-rules",
       "type": "feature",
       "name": "Pricing rules",
       "tagline": "A finance team can write each term of a contract as a rule every billing run applies, named as the contract names it.",
       "fields": {
+        "id": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
         "source": "Local",
         "products": [
           "Billing Console"
@@ -1447,11 +1511,13 @@
       "path": "example/model/features/pricing-rules.md"
     },
     {
-      "id": "features/usage-reporting",
+      "id": "01a0c25c-19f8-7f6b-8c83-ceaa8f5973f9",
+      "address": "features/usage-reporting",
       "type": "feature",
       "name": "Usage reporting",
       "tagline": "Usage can be reported by the systems that see it happen, as it happens, so nobody types it in at the end of the month.",
       "fields": {
+        "id": "01a0c25c-19f8-7f6b-8c83-ceaa8f5973f9",
         "source": "Local",
         "products": [
           "Usage API"
@@ -1472,11 +1538,28 @@
       "path": "example/model/features/usage-reporting.md"
     },
     {
-      "id": "identity",
+      "id": "01a0f10b-91d2-7004-96e6-daffc70ee0c1",
+      "address": "identifier",
+      "type": "identifier",
+      "name": "Entity id",
+      "tagline": "An entity keeps this id through every rename and every language it is written in, so whatever holds one outside the model still finds the entity.",
+      "fields": {
+        "id": "01a0f10b-91d2-7004-96e6-daffc70ee0c1",
+        "source": "Google Workspace",
+        "format": "uuidv7"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/identifier.md"
+    },
+    {
+      "id": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
+      "address": "identity",
       "type": "identity",
       "name": "Beacon Systems",
       "tagline": "Billing software for companies whose pricing outgrew their spreadsheets.",
       "fields": {
+        "id": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
         "source": "Google Workspace",
         "email": "hello@beacon.example",
         "location": "Rotterdam, Netherlands",
@@ -1525,11 +1608,13 @@
       "path": "example/model/identity.md"
     },
     {
-      "id": "kpis/change-fail-rate",
+      "id": "01a0d888-d040-7226-b4e2-24993ad80baf",
+      "address": "kpis/change-fail-rate",
       "type": "kpi",
       "name": "Change Fail Rate",
       "tagline": "The share of releases that need immediate intervention once they are in production.",
       "fields": {
+        "id": "01a0d888-d040-7226-b4e2-24993ad80baf",
         "source": "Local",
         "owner": "Backend Engineer",
         "measures": "Delivery",
@@ -1587,11 +1672,13 @@
       "path": "example/model/kpis/change-fail-rate.md"
     },
     {
-      "id": "kpis/change-lead-time",
+      "id": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "address": "kpis/change-lead-time",
       "type": "kpi",
       "name": "Change Lead Time",
       "tagline": "The time a change takes from its first commit to running in production.",
       "fields": {
+        "id": "01a0d888-d040-77b2-940d-11f931f3b8b4",
         "source": "Local",
         "owner": "Backend Engineer",
         "measures": "Delivery",
@@ -1652,11 +1739,13 @@
       "path": "example/model/kpis/change-lead-time.md"
     },
     {
-      "id": "processes/delivery",
+      "id": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "address": "processes/delivery",
       "type": "process",
       "name": "Delivery",
       "tagline": "How a change to the platform is specified, built and released.",
       "fields": {
+        "id": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
         "source": "Local",
         "owner": "Backend Engineer",
         "supported-by": [
@@ -1780,11 +1869,13 @@
       "path": "example/model/processes/delivery/delivery.md"
     },
     {
-      "id": "processes/delivery/phases/build",
+      "id": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "address": "processes/delivery/phases/build",
       "type": "phase",
       "name": "Build",
       "tagline": "Make the change and have it read, one track at a time.",
       "fields": {
+        "id": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
         "source": "Local",
         "owner": "Backend Engineer",
         "executed-by": [
@@ -1899,15 +1990,17 @@
           }
         }
       ],
-      "owner": "processes/delivery",
+      "owner": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
       "path": "example/model/processes/delivery/phases/build.md"
     },
     {
-      "id": "processes/delivery/phases/release",
+      "id": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "address": "processes/delivery/phases/release",
       "type": "phase",
       "name": "Release",
       "tagline": "Put the change in front of the platform's users, and the page with it.",
       "fields": {
+        "id": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
         "source": "Local",
         "owner": "Reviewer",
         "executed-by": [
@@ -2016,15 +2109,17 @@
           }
         }
       ],
-      "owner": "processes/delivery",
+      "owner": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
       "path": "example/model/processes/delivery/phases/release.md"
     },
     {
-      "id": "processes/delivery/phases/specify",
+      "id": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "address": "processes/delivery/phases/specify",
       "type": "phase",
       "name": "Specify",
       "tagline": "Write down what the change must do, before anyone writes how it does it.",
       "fields": {
+        "id": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
         "source": "Local",
         "owner": "Backend Engineer",
         "executed-by": [
@@ -2133,39 +2228,45 @@
           }
         }
       ],
-      "owner": "processes/delivery",
+      "owner": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
       "path": "example/model/processes/delivery/phases/specify.md"
     },
     {
-      "id": "processes/delivery/tracks/code",
+      "id": "01a0bfb0-acf0-74cd-b00c-e4476b81e56e",
+      "address": "processes/delivery/tracks/code",
       "type": "track",
       "name": "Code",
       "tagline": "A merged change to the platform.",
       "fields": {
+        "id": "01a0bfb0-acf0-74cd-b00c-e4476b81e56e",
         "source": "Local"
       },
       "sections": [],
-      "owner": "processes/delivery",
+      "owner": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
       "path": "example/model/processes/delivery/tracks/code.md"
     },
     {
-      "id": "processes/delivery/tracks/docs",
+      "id": "01a0bfb0-acf0-7fa9-9817-8993fc642da6",
+      "address": "processes/delivery/tracks/docs",
       "type": "track",
       "name": "Docs",
       "tagline": "A published page on the customer site.",
       "fields": {
+        "id": "01a0bfb0-acf0-7fa9-9817-8993fc642da6",
         "source": "Local"
       },
       "sections": [],
-      "owner": "processes/delivery",
+      "owner": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
       "path": "example/model/processes/delivery/tracks/docs.md"
     },
     {
-      "id": "products/billing-console",
+      "id": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "address": "products/billing-console",
       "type": "product",
       "name": "Billing Console",
       "tagline": "The web application where the finance team of a company billing through Beacon keeps its pricing, runs its billing and answers for every invoice that goes out.",
       "fields": {
+        "id": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
         "source": "Local",
         "domain": "Pricing",
         "audience": "Finance"
@@ -2175,11 +2276,13 @@
       "path": "example/model/products/billing-console.md"
     },
     {
-      "id": "products/invoice-page",
+      "id": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "address": "products/invoice-page",
       "type": "product",
       "name": "Invoice Page",
       "tagline": "The page every invoice links to, opened by whoever has to pay it.",
       "fields": {
+        "id": "01a0c25c-19f8-764b-a67b-1073041d82ed",
         "source": "Local",
         "domain": "Invoicing",
         "audience": "Payer"
@@ -2222,11 +2325,13 @@
       "path": "example/model/products/invoice-page.md"
     },
     {
-      "id": "products/usage-api",
+      "id": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
+      "address": "products/usage-api",
       "type": "product",
       "name": "Usage API",
       "tagline": "The interface the systems of a company billing through Beacon send usage to, set up by the developers who connect them.",
       "fields": {
+        "id": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
         "source": "Local",
         "domain": "Pricing",
         "audience": "Developer"
@@ -2236,11 +2341,13 @@
       "path": "example/model/products/usage-api.md"
     },
     {
-      "id": "proficiency-levels/competent",
+      "id": "01a02f8b-db90-7f26-8c18-79e44090fddb",
+      "address": "proficiency-levels/competent",
       "type": "proficiency-level",
       "name": "Competent",
       "tagline": "Reliable alone. Unsupervised work with a predictable result.",
       "fields": {
+        "id": "01a02f8b-db90-7f26-8c18-79e44090fddb",
         "source": "Local",
         "rank": "20"
       },
@@ -2255,11 +2362,13 @@
       "path": "example/model/proficiency-levels/competent.md"
     },
     {
-      "id": "proficiency-levels/expert",
+      "id": "01a02f8b-db90-7a8b-815a-989dfd3ff84b",
+      "address": "proficiency-levels/expert",
       "type": "proficiency-level",
       "name": "Expert",
       "tagline": "Knows the limits. Has worked below the surface, shaped it, or taught it.",
       "fields": {
+        "id": "01a02f8b-db90-7a8b-815a-989dfd3ff84b",
         "source": "Local",
         "rank": "40"
       },
@@ -2274,11 +2383,13 @@
       "path": "example/model/proficiency-levels/expert.md"
     },
     {
-      "id": "proficiency-levels/familiar",
+      "id": "01a02f8b-db90-71f9-a22d-205ad39ac4f8",
+      "address": "proficiency-levels/familiar",
       "type": "proficiency-level",
       "name": "Familiar",
       "tagline": "Needs support. Real use, with guidance or frequent reference.",
       "fields": {
+        "id": "01a02f8b-db90-71f9-a22d-205ad39ac4f8",
         "source": "Local",
         "rank": "10"
       },
@@ -2293,11 +2404,13 @@
       "path": "example/model/proficiency-levels/familiar.md"
     },
     {
-      "id": "proficiency-levels/proficient",
+      "id": "01a02f8b-db90-7e41-8fe9-9672700145e0",
+      "address": "proficiency-levels/proficient",
       "type": "proficiency-level",
       "name": "Proficient",
       "tagline": "Exercises judgment. Chooses between alternatives and can say why.",
       "fields": {
+        "id": "01a02f8b-db90-7e41-8fe9-9672700145e0",
         "source": "Local",
         "rank": "30"
       },
@@ -2312,11 +2425,13 @@
       "path": "example/model/proficiency-levels/proficient.md"
     },
     {
-      "id": "profiles/ai-agent",
+      "id": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
+      "address": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
       "tagline": "Whichever agent reviews a change at Beacon Systems today, held to the same seat whichever model it is.",
       "fields": {
+        "id": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
         "source": "Local",
         "nature": "agent",
         "roles": [
@@ -2335,11 +2450,13 @@
       "path": "example/model/profiles/ai-agent/ai-agent.md"
     },
     {
-      "id": "profiles/mira-halvorsen",
+      "id": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "address": "profiles/mira-halvorsen",
       "type": "profile",
       "name": "Mira Halvorsen",
       "tagline": "Backend engineer who ended up owning the parts nobody else wanted to.",
       "fields": {
+        "id": "01a02f53-2408-7291-ac16-087fcdee4d71",
         "source": "Google Workspace",
         "source-id": "104857613902",
         "nature": "human",
@@ -2488,11 +2605,13 @@
       "path": "example/model/profiles/mira-halvorsen/mira-halvorsen.md"
     },
     {
-      "id": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
+      "id": "01a02f53-2408-729e-aa93-95bce1b59a93",
+      "address": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
       "type": "experience",
       "name": "Rebuilding the order pipeline",
       "tagline": "Four years replacing a nightly batch with something that ran when the order did.",
       "fields": {
+        "id": "01a02f53-2408-729e-aa93-95bce1b59a93",
         "source": "Local",
         "kind": "Role",
         "start": "2018-03",
@@ -2515,7 +2634,7 @@
           "tables": []
         }
       ],
-      "owner": "profiles/mira-halvorsen",
+      "owner": "01a02f53-2408-7291-ac16-087fcdee4d71",
       "path": "example/model/profiles/mira-halvorsen/experiences/2018-northwind-atelier.md",
       "stamp": {
         "kind": "Role",
@@ -2524,11 +2643,13 @@
       }
     },
     {
-      "id": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
+      "id": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "address": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
       "type": "experience",
       "name": "Splitting the billing domain",
       "tagline": "Ongoing. Taking one service that three teams edited and making it two, each owned by one team.",
       "fields": {
+        "id": "01a02f53-2408-7b1e-bad3-c39aa223228c",
         "source": "Local",
         "kind": "Role",
         "start": "2022-02",
@@ -2585,7 +2706,7 @@
           }
         }
       ],
-      "owner": "profiles/mira-halvorsen",
+      "owner": "01a02f53-2408-7291-ac16-087fcdee4d71",
       "path": "example/model/profiles/mira-halvorsen/experiences/2022-beacon-systems.md",
       "stamp": {
         "kind": "Role",
@@ -2594,11 +2715,13 @@
       }
     },
     {
-      "id": "profiles/tomas-reyes",
+      "id": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "address": "profiles/tomas-reyes",
       "type": "profile",
       "name": "Tomas Reyes",
       "tagline": "Product person who learned to read the code so the conversation with engineering stayed honest.",
       "fields": {
+        "id": "01a03a2c-2de8-73b4-9058-8664caea919a",
         "source": "Google Workspace",
         "source-id": "104857613947",
         "nature": "human",
@@ -2740,11 +2863,13 @@
       "path": "example/model/profiles/tomas-reyes/tomas-reyes.md"
     },
     {
-      "id": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
+      "id": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2",
+      "address": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
       "type": "experience",
       "name": "Finding out what the order pipeline was for",
       "tagline": "Three years learning that the speed-up nobody had asked for was still the right thing to build.",
       "fields": {
+        "id": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2",
         "source": "Local",
         "kind": "Role",
         "start": "2019-06",
@@ -2761,7 +2886,7 @@
           "tables": []
         }
       ],
-      "owner": "profiles/tomas-reyes",
+      "owner": "01a03a2c-2de8-73b4-9058-8664caea919a",
       "path": "example/model/profiles/tomas-reyes/experiences/2019-northwind-atelier.md",
       "stamp": {
         "kind": "Role",
@@ -2770,11 +2895,13 @@
       }
     },
     {
-      "id": "profiles/tomas-reyes/experiences/2021-orbit-conference",
+      "id": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8",
+      "address": "profiles/tomas-reyes/experiences/2021-orbit-conference",
       "type": "experience",
       "name": "Conference talk — the speed-up nobody asked for",
       "tagline": "A talk about a rebuild whose measured win was not the one it had been funded for.",
       "fields": {
+        "id": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8",
         "source": "Local",
         "kind": "Community",
         "start": "2021-09",
@@ -2825,7 +2952,7 @@
           }
         }
       ],
-      "owner": "profiles/tomas-reyes",
+      "owner": "01a03a2c-2de8-73b4-9058-8664caea919a",
       "path": "example/model/profiles/tomas-reyes/experiences/2021-orbit-conference.md",
       "stamp": {
         "kind": "Community",
@@ -2834,11 +2961,13 @@
       }
     },
     {
-      "id": "profiles/tomas-reyes/experiences/2022-beacon-systems",
+      "id": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "address": "profiles/tomas-reyes/experiences/2022-beacon-systems",
       "type": "experience",
       "name": "Deciding which billing goes first",
       "tagline": "Ongoing. Choosing which of the two billing contexts serves customers first, and saying why.",
       "fields": {
+        "id": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
         "source": "Local",
         "kind": "Role",
         "start": "2022-02",
@@ -2855,7 +2984,7 @@
           "tables": []
         }
       ],
-      "owner": "profiles/tomas-reyes",
+      "owner": "01a03a2c-2de8-73b4-9058-8664caea919a",
       "path": "example/model/profiles/tomas-reyes/experiences/2022-beacon-systems.md",
       "stamp": {
         "kind": "Role",
@@ -2864,11 +2993,13 @@
       }
     },
     {
-      "id": "question-kinds/company",
+      "id": "01a0ddfe-36a0-76b9-8696-11dd3f43cad7",
+      "address": "question-kinds/company",
       "type": "question-kind",
       "name": "Company",
       "tagline": "Questions about Beacon Systems as a company: what it publishes about itself and what it is like to work there.",
       "fields": {
+        "id": "01a0ddfe-36a0-76b9-8696-11dd3f43cad7",
         "source": "Local",
         "rank": "20"
       },
@@ -2883,11 +3014,13 @@
       "path": "example/model/question-kinds/company.md"
     },
     {
-      "id": "question-kinds/product",
+      "id": "01a0ddfe-36a0-7779-a302-cbbaa288765c",
+      "address": "question-kinds/product",
       "type": "question-kind",
       "name": "Product",
       "tagline": "Questions about what the billing platform does and how it came to be built the way it is.",
       "fields": {
+        "id": "01a0ddfe-36a0-7779-a302-cbbaa288765c",
         "source": "Local",
         "rank": "10"
       },
@@ -2902,11 +3035,13 @@
       "path": "example/model/question-kinds/product.md"
     },
     {
-      "id": "questions/does-beacon-systems-publish-its-revenue",
+      "id": "01a0d1c8-57f8-7401-af19-6456db3c051b",
+      "address": "questions/does-beacon-systems-publish-its-revenue",
       "type": "question",
       "name": "Does Beacon Systems publish its revenue?",
       "tagline": "No. The model makes no claim about revenue, and none is published.",
       "fields": {
+        "id": "01a0d1c8-57f8-7401-af19-6456db3c051b",
         "source": "Local",
         "kind": "Company"
       },
@@ -2915,11 +3050,13 @@
       "path": "example/model/questions/does-beacon-systems-publish-its-revenue.md"
     },
     {
-      "id": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
+      "id": "01a0d1c8-57f8-791a-aa3a-6c23955e4a5f",
+      "address": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
       "type": "question",
       "name": "How do I find out why a line is on my invoice?",
       "tagline": "The charge explanation shows where each line comes from, and the pricing rules say what it costs.",
       "fields": {
+        "id": "01a0d1c8-57f8-791a-aa3a-6c23955e4a5f",
         "source": "Local",
         "kind": "Product"
       },
@@ -2981,11 +3118,13 @@
       "path": "example/model/questions/how-do-i-find-out-why-a-line-is-on-my-invoice.md"
     },
     {
-      "id": "questions/what-is-it-like-to-work-at-beacon-systems",
+      "id": "01a0ddfe-36a0-7c39-a842-8ffce211182a",
+      "address": "questions/what-is-it-like-to-work-at-beacon-systems",
       "type": "question",
       "name": "What is it like to work at Beacon Systems?",
       "tagline": "The company's values say what it holds to in its daily work: how it treats a deadline and when disagreement is still worth saying.",
       "fields": {
+        "id": "01a0ddfe-36a0-7c39-a842-8ffce211182a",
         "source": "Local",
         "kind": "Company"
       },
@@ -3047,11 +3186,13 @@
       "path": "example/model/questions/what-is-it-like-to-work-at-beacon-systems.md"
     },
     {
-      "id": "questions/who-split-billing-out-of-the-monolith",
+      "id": "01a0d1c8-57f8-73a4-b61f-7b03c32060dc",
+      "address": "questions/who-split-billing-out-of-the-monolith",
       "type": "question",
       "name": "Who split billing out of the monolith?",
       "tagline": "The period in which the billing domain was split is Mira Halvorsen's, and it says what was done; the decision to split says why.",
       "fields": {
+        "id": "01a0d1c8-57f8-73a4-b61f-7b03c32060dc",
         "source": "Local",
         "kind": "Product"
       },
@@ -3113,11 +3254,13 @@
       "path": "example/model/questions/who-split-billing-out-of-the-monolith.md"
     },
     {
-      "id": "roles/backend-engineer",
+      "id": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "address": "roles/backend-engineer",
       "type": "role",
       "name": "Backend Engineer",
       "tagline": "The seat that keeps the services the product runs on correct, and answers for them when they are not.",
       "fields": {
+        "id": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
         "source": "Local",
         "requires": [
           "Java Programming"
@@ -3144,11 +3287,13 @@
       "path": "example/model/roles/backend-engineer.md"
     },
     {
-      "id": "roles/reviewer",
+      "id": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "address": "roles/reviewer",
       "type": "role",
       "name": "Reviewer",
       "tagline": "The seat that reads one change against what was asked, returns findings with a severity and changes nothing.",
       "fields": {
+        "id": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
         "source": "Local",
         "requires": [
           "Domain-Driven Design"
@@ -3207,11 +3352,13 @@
       "path": "example/model/roles/reviewer.md"
     },
     {
-      "id": "skills/domain-driven-design",
+      "id": "01a02f53-2408-7255-a610-b931d033c1d4",
+      "address": "skills/domain-driven-design",
       "type": "skill",
       "name": "Domain-Driven Design",
       "tagline": "Modeling software around the language the business already speaks.",
       "fields": {
+        "id": "01a02f53-2408-7255-a610-b931d033c1d4",
         "source": "Local",
         "group": "Software Design"
       },
@@ -3226,11 +3373,13 @@
       "path": "example/model/skills/domain-driven-design.md"
     },
     {
-      "id": "skills/java-programming",
+      "id": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
+      "address": "skills/java-programming",
       "type": "skill",
       "name": "Java Programming",
       "tagline": "Building and maintaining server-side systems on the JVM.",
       "fields": {
+        "id": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
         "source": "Local",
         "group": "Programming Languages"
       },
@@ -3245,11 +3394,13 @@
       "path": "example/model/skills/java-programming.md"
     },
     {
-      "id": "skills/product-discovery",
+      "id": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
+      "address": "skills/product-discovery",
       "type": "skill",
       "name": "Product Discovery",
       "tagline": "Finding out what is worth building before building it.",
       "fields": {
+        "id": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
         "source": "Local",
         "group": "Product"
       },
@@ -3264,11 +3415,13 @@
       "path": "example/model/skills/product-discovery.md"
     },
     {
-      "id": "sources/google-workspace",
+      "id": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
+      "address": "sources/google-workspace",
       "type": "source",
       "name": "Google Workspace",
       "tagline": "The company's directory and documents; people and groups are synced from here. A `source-id` is the directory's user id.",
       "fields": {
+        "id": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
         "url": "https://workspace.google.com/"
       },
       "sections": [],
@@ -3276,21 +3429,26 @@
       "path": "example/model/sources/google-workspace.md"
     },
     {
-      "id": "sources/local",
+      "id": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "address": "sources/local",
       "type": "source",
       "name": "Local",
       "tagline": "Written and kept in this repository; nothing syncs it.",
-      "fields": {},
+      "fields": {
+        "id": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98"
+      },
       "sections": [],
       "owner": null,
       "path": "example/model/sources/local.md"
     },
     {
-      "id": "strategic-objectives/support-stops-explaining-invoices",
+      "id": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
+      "address": "strategic-objectives/support-stops-explaining-invoices",
       "type": "strategic-objective",
       "name": "Support stops explaining invoices",
       "tagline": "A customer who opens an invoice gets the same explanation support would have given, without the call.",
       "fields": {
+        "id": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
         "source": "Local",
         "adopted": "2026-01",
         "horizon": "2027-06"
@@ -3306,11 +3464,13 @@
       "path": "example/model/strategic-objectives/support-stops-explaining-invoices.md"
     },
     {
-      "id": "strategies/invoicing-strategy",
+      "id": "01a0a48f-60d8-770f-9cb8-e4bbbd846a66",
+      "address": "strategies/invoicing-strategy",
       "type": "strategy",
       "name": "Invoicing Strategy",
       "tagline": "The invoice is rendered from the pricing rules themselves, so its explanation is generated rather than written.",
       "fields": {
+        "id": "01a0a48f-60d8-770f-9cb8-e4bbbd846a66",
         "source": "Local",
         "adopted": "2026-01",
         "serves": [
@@ -3341,11 +3501,13 @@
       "path": "example/model/strategies/invoicing-strategy.md"
     },
     {
-      "id": "surfaces/beacon-systems-website",
+      "id": "01a0ae17-9058-7ce4-a36c-49a68628ca76",
+      "address": "surfaces/beacon-systems-website",
       "type": "surface",
       "name": "Beacon Systems website",
       "tagline": "The company's own site, where a buyer who has heard the name lands first, rebuilt from the model on every change.",
       "fields": {
+        "id": "01a0ae17-9058-7ce4-a36c-49a68628ca76",
         "source": "Local",
         "production": "built",
         "built-by": "https://git.beacon.example/website",
@@ -3362,11 +3524,13 @@
       "path": "example/model/surfaces/beacon-systems-website.md"
     },
     {
-      "id": "surfaces/partner-directory",
+      "id": "01a08666-4360-706e-bfcc-98887db97e16",
+      "address": "surfaces/partner-directory",
       "type": "surface",
       "name": "Partner directory",
       "tagline": "The listing a buyer reaches from the directory's search, maintained by hand because the directory takes no feed.",
       "fields": {
+        "id": "01a08666-4360-706e-bfcc-98887db97e16",
         "source": "Local",
         "production": "written",
         "url": "https://directory.example.invalid/beacon-systems"
@@ -3392,11 +3556,13 @@
       "path": "example/model/surfaces/partner-directory.md"
     },
     {
-      "id": "values/craftsmanship",
+      "id": "01a02f53-2408-79ce-829d-b6012ab3c389",
+      "address": "values/craftsmanship",
       "type": "value",
       "name": "Craftsmanship",
       "tagline": "We would rather ship one thing that holds up than three that need watching.",
       "fields": {
+        "id": "01a02f53-2408-79ce-829d-b6012ab3c389",
         "source": "Local"
       },
       "sections": [
@@ -3410,11 +3576,13 @@
       "path": "example/model/values/craftsmanship.md"
     },
     {
-      "id": "values/say-the-hard-thing",
+      "id": "01a02f53-2408-78fd-89ea-6fdf7e9a6be6",
+      "address": "values/say-the-hard-thing",
       "type": "value",
       "name": "Say The Hard Thing",
       "tagline": "Disagreement that arrives after the decision is not disagreement, it is commentary.",
       "fields": {
+        "id": "01a02f53-2408-78fd-89ea-6fdf7e9a6be6",
         "source": "Local"
       },
       "sections": [
@@ -3428,11 +3596,13 @@
       "path": "example/model/values/say-the-hard-thing.md"
     },
     {
-      "id": "vision",
+      "id": "01a04c7b-6b80-7b10-9aa6-0be3d4a2ce75",
+      "address": "vision",
       "type": "vision",
       "name": "Billing nobody has to explain",
       "tagline": "A customer reading one of our invoices can tell how the number was reached, without calling us and without a spreadsheet beside it.",
       "fields": {
+        "id": "01a04c7b-6b80-7b10-9aa6-0be3d4a2ce75",
         "source": "Local"
       },
       "sections": [
@@ -3448,1061 +3618,192 @@
   ],
   "edges": [
     {
-      "from": "achievement-kinds/decisions",
-      "to": "sources/local",
+      "from": "01a02f53-2408-7255-a610-b931d033c1d4",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "achievement-kinds/delivery",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "achievement-kinds/results",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "achievement-kinds/sharing",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "brand",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/billing-period",
-      "to": "domains/invoicing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/billing-period",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/contract",
-      "to": "concepts/customer",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one",
-        "As": "signing customer"
-      }
-    },
-    {
-      "from": "concepts/contract",
-      "to": "concepts/customer",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "maybe one",
-        "As": "paying customer"
-      }
-    },
-    {
-      "from": "concepts/contract",
-      "to": "concepts/pricing-rule",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one to many",
-        "As": "terms"
-      }
-    },
-    {
-      "from": "concepts/contract",
-      "to": "domains/pricing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/contract",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/credit-note",
-      "to": "concepts/invoice",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one",
-        "As": "corrected invoice"
-      }
-    },
-    {
-      "from": "concepts/credit-note",
-      "to": "concepts/invoice-line",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one to many",
-        "As": "lines"
-      }
-    },
-    {
-      "from": "concepts/credit-note",
-      "to": "domains/invoicing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/credit-note",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/customer",
-      "to": "domains/pricing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/customer",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/invoice-line",
-      "to": "concepts/pricing-rule",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one",
-        "As": "rule"
-      }
-    },
-    {
-      "from": "concepts/invoice-line",
-      "to": "concepts/usage-record",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "many",
-        "As": "usage read"
-      }
-    },
-    {
-      "from": "concepts/invoice-line",
-      "to": "domains/invoicing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/invoice-line",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/invoice",
-      "to": "concepts/billing-period",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one",
-        "As": ""
-      }
-    },
-    {
-      "from": "concepts/invoice",
-      "to": "concepts/customer",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one",
-        "As": "billed customer"
-      }
-    },
-    {
-      "from": "concepts/invoice",
-      "to": "concepts/invoice-line",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one to many",
-        "As": "lines"
-      }
-    },
-    {
-      "from": "concepts/invoice",
-      "to": "domains/invoicing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/invoice",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/pricing-rule",
-      "to": "domains/pricing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/pricing-rule",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/usage-record",
-      "to": "concepts/contract",
-      "via": "Relations.Concept",
-      "attrs": {
-        "Cardinality": "one",
-        "As": ""
-      }
-    },
-    {
-      "from": "concepts/usage-record",
-      "to": "domains/pricing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "concepts/usage-record",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "decision-kinds/architecture",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "decision-kinds/product",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "decision-statuses/revised",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "decision-statuses/standing",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "decisions/2022-billing-leaves-the-monolith",
-      "to": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "via": "Bears on.Entity",
-      "attrs": {
-        "Type": "experience",
-        "Owner": "Mira Halvorsen",
-        "How": "made it"
-      }
-    },
-    {
-      "from": "decisions/2022-billing-leaves-the-monolith",
-      "to": "roles/backend-engineer",
-      "via": "by",
-      "attrs": {}
-    },
-    {
-      "from": "decisions/2022-billing-leaves-the-monolith",
-      "to": "decision-kinds/architecture",
-      "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "decisions/2022-billing-leaves-the-monolith",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "decisions/2022-billing-leaves-the-monolith",
-      "to": "decision-statuses/standing",
-      "via": "status",
-      "attrs": {}
-    },
-    {
-      "from": "decisions/2022-billing-leaves-the-monolith",
-      "to": "values/craftsmanship",
-      "via": "upholds",
-      "attrs": {}
-    },
-    {
-      "from": "domains/invoicing",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "domains/pricing",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "experience-kinds/community",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "experience-kinds/education",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "experience-kinds/project",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "experience-kinds/role",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "features/billing-run",
-      "to": "concepts/billing-period",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/billing-run",
-      "to": "concepts/contract",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/billing-run",
-      "to": "concepts/invoice",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/billing-run",
-      "to": "products/billing-console",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/billing-run",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "features/charge-explanation",
-      "to": "concepts/invoice-line",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/charge-explanation",
-      "to": "concepts/pricing-rule",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/charge-explanation",
-      "to": "concepts/usage-record",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/charge-explanation",
-      "to": "products/billing-console",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/charge-explanation",
-      "to": "products/invoice-page",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/charge-explanation",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "features/credit-notes",
-      "to": "concepts/credit-note",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/credit-notes",
-      "to": "concepts/invoice",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/credit-notes",
-      "to": "products/billing-console",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/credit-notes",
-      "to": "products/invoice-page",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/credit-notes",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "features/invoice-download",
-      "to": "products/invoice-page",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/invoice-download",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "features/pricing-rules",
-      "to": "concepts/contract",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/pricing-rules",
-      "to": "concepts/pricing-rule",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/pricing-rules",
-      "to": "products/billing-console",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/pricing-rules",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "features/usage-reporting",
-      "to": "concepts/contract",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/usage-reporting",
-      "to": "concepts/usage-record",
-      "via": "concepts",
-      "attrs": {}
-    },
-    {
-      "from": "features/usage-reporting",
-      "to": "products/usage-api",
-      "via": "products",
-      "attrs": {}
-    },
-    {
-      "from": "features/usage-reporting",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "identity",
-      "to": "sources/google-workspace",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-fail-rate",
-      "to": "processes/delivery",
-      "via": "measures",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-fail-rate",
-      "to": "roles/backend-engineer",
-      "via": "owner",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-fail-rate",
-      "to": "kpis/change-lead-time",
-      "via": "read-with",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-fail-rate",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-lead-time",
-      "to": "values/craftsmanship",
-      "via": "can-cost",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-lead-time",
-      "to": "processes/delivery",
-      "via": "measures",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-lead-time",
-      "to": "roles/backend-engineer",
-      "via": "owner",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-lead-time",
-      "to": "kpis/change-fail-rate",
-      "via": "read-with",
-      "attrs": {}
-    },
-    {
-      "from": "kpis/change-lead-time",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "processes/delivery/tracks/code",
-      "via": "Activities.Track",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "processes/delivery/tracks/docs",
-      "via": "Activities.Track",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "processes/delivery/phases/build",
-      "via": "If not met.Leads to",
-      "attrs": {
-        "Outcome": "reworked"
-      }
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "roles/reviewer",
-      "via": "escalation-authority",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "roles/backend-engineer",
-      "via": "executed-by",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "roles/reviewer",
-      "via": "executed-by",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "roles/reviewer",
-      "via": "gate-approvers",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "processes/delivery/phases/release",
-      "via": "gate-to",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "roles/backend-engineer",
-      "via": "owner",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/build",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "roles/reviewer",
-      "via": "escalation-authority",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "roles/reviewer",
-      "via": "executed-by",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "roles/backend-engineer",
-      "via": "gate-approvers",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "roles/reviewer",
-      "via": "gate-approvers",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "roles/reviewer",
-      "via": "owner",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/release",
-      "to": "roles/backend-engineer",
-      "via": "supported-by",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "processes/delivery/phases/specify",
-      "via": "If not met.Leads to",
-      "attrs": {
-        "Outcome": "reshaped"
-      }
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "roles/reviewer",
-      "via": "escalation-authority",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "roles/backend-engineer",
-      "via": "executed-by",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "roles/reviewer",
-      "via": "gate-approvers",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "processes/delivery/phases/build",
-      "via": "gate-to",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "roles/backend-engineer",
-      "via": "owner",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/phases/specify",
-      "to": "roles/reviewer",
-      "via": "supported-by",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/tracks/code",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery/tracks/docs",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "processes/delivery/phases/build",
-      "via": "Phases.Phase",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "processes/delivery/phases/release",
-      "via": "Phases.Phase",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "processes/delivery/phases/specify",
-      "via": "Phases.Phase",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "processes/delivery/tracks/code",
-      "via": "Tracks.Track",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "processes/delivery/tracks/docs",
-      "via": "Tracks.Track",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "roles/backend-engineer",
-      "via": "owner",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "roles/reviewer",
-      "via": "supported-by",
-      "attrs": {}
-    },
-    {
-      "from": "products/billing-console",
-      "to": "domains/pricing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "products/billing-console",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "products/invoice-page",
-      "to": "domains/invoicing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "products/invoice-page",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "products/usage-api",
-      "to": "domains/pricing",
-      "via": "domain",
-      "attrs": {}
-    },
-    {
-      "from": "products/usage-api",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "proficiency-levels/competent",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "proficiency-levels/expert",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "proficiency-levels/familiar",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "proficiency-levels/proficient",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/ai-agent",
-      "to": "roles/reviewer",
-      "via": "roles",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/ai-agent",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
-      "to": "achievement-kinds/delivery",
-      "via": "Achievements.Kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
-      "to": "achievement-kinds/results",
-      "via": "Achievements.Kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
-      "to": "experience-kinds/role",
-      "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
-      "to": "skills/java-programming",
-      "via": "skills",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2018-northwind-atelier",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "achievement-kinds/delivery",
-      "via": "Achievements.Kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "achievement-kinds/results",
-      "via": "Achievements.Kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "experience-kinds/role",
-      "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "identity",
-      "via": "organization",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "skills/domain-driven-design",
-      "via": "skills",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "skills/java-programming",
-      "via": "skills",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/mira-halvorsen",
-      "to": "skills/domain-driven-design",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Split the billing domain into two bounded contexts; the seams have held under two years of change.",
-        "Experience": "profiles/mira-halvorsen/experiences/2022-beacon-systems"
+        "Experience": "01a02f53-2408-7b1e-bad3-c39aa223228c"
       }
     },
     {
-      "from": "profiles/mira-halvorsen",
-      "to": "skills/java-programming",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Owned the JVM services two other teams built on, and was the one called when they stopped.",
-        "Experience": "profiles/mira-halvorsen/experiences/2018-northwind-atelier"
+        "Experience": "01a02f53-2408-729e-aa93-95bce1b59a93"
       }
     },
     {
-      "from": "profiles/mira-halvorsen",
-      "to": "skills/java-programming",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Replaced a nightly batch with a pipeline that ran when the order did, taking visibility from the next morning to seconds.",
-        "Experience": "profiles/mira-halvorsen/experiences/2018-northwind-atelier"
+        "Experience": "01a02f53-2408-729e-aa93-95bce1b59a93"
       }
     },
     {
-      "from": "profiles/mira-halvorsen",
-      "to": "skills/domain-driven-design",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/competent"
+        "Level": "01a02f8b-db90-7f26-8c18-79e44090fddb"
       }
     },
     {
-      "from": "profiles/mira-halvorsen",
-      "to": "skills/java-programming",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/proficient"
+        "Level": "01a02f8b-db90-7e41-8fe9-9672700145e0"
       }
     },
     {
-      "from": "profiles/mira-halvorsen",
-      "to": "roles/backend-engineer",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
       "via": "roles",
       "attrs": {}
     },
     {
-      "from": "profiles/mira-halvorsen",
-      "to": "sources/google-workspace",
+      "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
-      "to": "achievement-kinds/decisions",
+      "from": "01a02f53-2408-729e-aa93-95bce1b59a93",
+      "to": "01a0b0b8-a108-7db9-b6d4-ab3e08e2c1c8",
       "via": "Achievements.Kind",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
-      "to": "experience-kinds/role",
+      "from": "01a02f53-2408-729e-aa93-95bce1b59a93",
+      "to": "01a0b0b8-a108-7e20-8c94-a5323dc3e63b",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a02f53-2408-729e-aa93-95bce1b59a93",
+      "to": "01a06385-9d00-7cf7-8d01-185357324476",
       "via": "kind",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
-      "to": "skills/product-discovery",
+      "from": "01a02f53-2408-729e-aa93-95bce1b59a93",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "skills",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2019-northwind-atelier",
-      "to": "sources/local",
+      "from": "01a02f53-2408-729e-aa93-95bce1b59a93",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
-      "to": "achievement-kinds/sharing",
-      "via": "Achievements.Kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
-      "to": "experience-kinds/community",
-      "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
-      "to": "skills/product-discovery",
-      "via": "skills",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/tomas-reyes/experiences/2021-orbit-conference",
-      "to": "sources/local",
+      "from": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "achievement-kinds/decisions",
+      "from": "01a02f53-2408-78fd-89ea-6fdf7e9a6be6",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a02f53-2408-79ce-829d-b6012ab3c389",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a0b0b8-a108-7db9-b6d4-ab3e08e2c1c8",
       "via": "Achievements.Kind",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "achievement-kinds/results",
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a0b0b8-a108-7e20-8c94-a5323dc3e63b",
       "via": "Achievements.Kind",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "experience-kinds/role",
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a06385-9d00-7cf7-8d01-185357324476",
       "via": "kind",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "identity",
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
       "via": "organization",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "skills/domain-driven-design",
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
       "via": "skills",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "skills/product-discovery",
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "skills",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes/experiences/2022-beacon-systems",
-      "to": "sources/local",
+      "from": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/domain-driven-design",
+      "from": "01a02f8b-db90-71f9-a22d-205ad39ac4f8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a02f8b-db90-7a8b-815a-989dfd3ff84b",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a02f8b-db90-7e41-8fe9-9672700145e0",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a02f8b-db90-7f26-8c18-79e44090fddb",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Sat in the billing-context sessions and can follow a context map; has never drawn one.",
-        "Experience": "profiles/tomas-reyes/experiences/2022-beacon-systems"
+        "Experience": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/java-programming",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Reads pull requests well enough to ask the right question, and has merged none.",
@@ -4510,163 +3811,906 @@
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/product-discovery",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Ran the conversations that showed visibility, not speed, was what the pipeline rebuild bought, and rewrote the roadmap around it.",
-        "Experience": "profiles/tomas-reyes/experiences/2019-northwind-atelier"
+        "Experience": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/product-discovery",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Told a room that the rebuild's measured win was not the one it had been funded for.",
-        "Experience": "profiles/tomas-reyes/experiences/2021-orbit-conference"
+        "Experience": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/product-discovery",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Killed two of the three features on the 2023 roadmap after twenty customer conversations; the third shipped and is the one customers name.",
-        "Experience": "profiles/tomas-reyes/experiences/2022-beacon-systems"
+        "Experience": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/domain-driven-design",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/familiar"
+        "Level": "01a02f8b-db90-71f9-a22d-205ad39ac4f8"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/java-programming",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/familiar"
+        "Level": "01a02f8b-db90-71f9-a22d-205ad39ac4f8"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "skills/product-discovery",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/expert"
+        "Level": "01a02f8b-db90-7a8b-815a-989dfd3ff84b"
       }
     },
     {
-      "from": "profiles/tomas-reyes",
-      "to": "sources/google-workspace",
+      "from": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "question-kinds/company",
-      "to": "sources/local",
+      "from": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "question-kinds/product",
-      "to": "sources/local",
-      "via": "source",
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a0b0b8-a108-7599-9272-b4401bbf7084",
+      "via": "Achievements.Kind",
       "attrs": {}
     },
     {
-      "from": "questions/does-beacon-systems-publish-its-revenue",
-      "to": "question-kinds/company",
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a0b0b8-a108-7db9-b6d4-ab3e08e2c1c8",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a06385-9d00-7cf7-8d01-185357324476",
       "via": "kind",
       "attrs": {}
     },
     {
-      "from": "questions/does-beacon-systems-publish-its-revenue",
-      "to": "sources/local",
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
+      "via": "organization",
+      "attrs": {}
+    },
+    {
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a03a2c-2de8-7b8e-bec7-3618c8fbf2de",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
-      "to": "features/charge-explanation",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "feature",
-        "Owner": "",
-        "For": "where a line comes from"
-      }
+      "from": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2",
+      "to": "01a0b0b8-a108-7599-9272-b4401bbf7084",
+      "via": "Achievements.Kind",
+      "attrs": {}
     },
     {
-      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
-      "to": "features/pricing-rules",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "feature",
-        "Owner": "",
-        "For": "what it costs"
-      }
-    },
-    {
-      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
-      "to": "question-kinds/product",
+      "from": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2",
+      "to": "01a06385-9d00-7cf7-8d01-185357324476",
       "via": "kind",
       "attrs": {}
     },
     {
-      "from": "questions/how-do-i-find-out-why-a-line-is-on-my-invoice",
-      "to": "sources/local",
+      "from": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a03a2c-2de8-7d5f-bdd5-54911ee6ace2",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
-      "to": "values/craftsmanship",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "value",
-        "Owner": "",
-        "For": "how it treats a deadline"
-      }
+      "from": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8",
+      "to": "01a0b0b8-a108-7a00-8d86-e683919c26ba",
+      "via": "Achievements.Kind",
+      "attrs": {}
     },
     {
-      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
-      "to": "values/say-the-hard-thing",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "value",
-        "Owner": "",
-        "For": "when disagreement is still worth saying"
-      }
-    },
-    {
-      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
-      "to": "question-kinds/company",
+      "from": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8",
+      "to": "01a06385-9d00-7fff-ab77-615f9b902c2f",
       "via": "kind",
       "attrs": {}
     },
     {
-      "from": "questions/what-is-it-like-to-work-at-beacon-systems",
-      "to": "sources/local",
+      "from": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8",
+      "to": "01a03a2c-2de8-7464-ae57-ae7a44c2b395",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a047a6-f070-7bcb-a970-75d3ff9b6bf8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "questions/who-split-billing-out-of-the-monolith",
-      "to": "decisions/2022-billing-leaves-the-monolith",
-      "via": "Rests on.Entity",
+      "from": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
+      "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a04c7b-6b80-7b10-9aa6-0be3d4a2ce75",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a06385-9d00-77bd-944c-8d4ba61288db",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a06385-9d00-7cf7-8d01-185357324476",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a06385-9d00-7fa8-9e3b-5082c9904037",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a06385-9d00-7fff-ab77-615f9b902c2f",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a08666-4360-706e-bfcc-98887db97e16",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a48f-60d8-770f-9cb8-e4bbbd846a66",
+      "to": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a48f-60d8-770f-9cb8-e4bbbd846a66",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a48f-60d8-770f-9cb8-e4bbbd846a66",
+      "to": "01a02f53-2408-79ce-829d-b6012ab3c389",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "to": "01a02f53-2408-7255-a610-b931d033c1d4",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "to": "01a02f53-2408-76c1-aee5-cc97a65fcc78",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0bfb0-acf0-74cd-b00c-e4476b81e56e",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0bfb0-acf0-7fa9-9817-8993fc642da6",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "via": "If not met.Leads to",
       "attrs": {
-        "Type": "decision",
-        "Owner": "",
-        "For": "why"
+        "Outcome": "reworked"
       }
     },
     {
-      "from": "questions/who-split-billing-out-of-the-monolith",
-      "to": "profiles/mira-halvorsen/experiences/2022-beacon-systems",
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0bfb0-acf0-74cd-b00c-e4476b81e56e",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0bfb0-acf0-7fa9-9817-8993fc642da6",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "via": "If not met.Leads to",
+      "attrs": {
+        "Outcome": "reshaped"
+      }
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a8c7-74d8-774b-ad7c-383aad1f52ec",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a8c7-74d8-7c8a-9e3a-0d72ef94fce1",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0ae17-9058-7ce4-a36c-49a68628ca76",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0b0b8-a108-7599-9272-b4401bbf7084",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0b0b8-a108-7a00-8d86-e683919c26ba",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0b0b8-a108-7db9-b6d4-ab3e08e2c1c8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0b0b8-a108-7e20-8c94-a5323dc3e63b",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0bfb0-acf0-74cd-b00c-e4476b81e56e",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0bfb0-acf0-7fa9-9817-8993fc642da6",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "to": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "billed customer"
+      }
+    },
+    {
+      "from": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "to": "01a0c25c-19f8-72d5-bef8-bc1574eb03f4",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "to": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "lines"
+      }
+    },
+    {
+      "from": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-72d5-bef8-bc1574eb03f4",
+      "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-72d5-bef8-bc1574eb03f4",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "to": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "corrected invoice"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "to": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "lines"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "to": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "to": "01a0c25c-19f8-7980-a019-46b608819370",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "to": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "to": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "to": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "to": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "to": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "to": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "to": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-77ee-8656-f16c523bdc15",
+      "to": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-77ee-8656-f16c523bdc15",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "to": "01a0c25c-19f8-7980-a019-46b608819370",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "rule"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "to": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": "usage read"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7980-a019-46b608819370",
+      "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7980-a019-46b608819370",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "to": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "to": "01a0c25c-19f8-7980-a019-46b608819370",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "to": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "to": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "to": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "to": "01a0c25c-19f8-72d5-bef8-bc1574eb03f4",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "to": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "to": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "to": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "signing customer"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "to": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "maybe one",
+        "As": "paying customer"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "to": "01a0c25c-19f8-7980-a019-46b608819370",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": "terms"
+      }
+    },
+    {
+      "from": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
+      "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6b-8c83-ceaa8f5973f9",
+      "to": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6b-8c83-ceaa8f5973f9",
+      "to": "01a0c25c-19f8-7ccf-b892-f4144684c95f",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6b-8c83-ceaa8f5973f9",
+      "to": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6b-8c83-ceaa8f5973f9",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d1c8-57f8-73a4-b61f-7b03c32060dc",
+      "to": "01a02f53-2408-7b1e-bad3-c39aa223228c",
       "via": "Rests on.Entity",
       "attrs": {
         "Type": "experience",
@@ -4675,110 +4719,242 @@
       }
     },
     {
-      "from": "questions/who-split-billing-out-of-the-monolith",
-      "to": "question-kinds/product",
+      "from": "01a0d1c8-57f8-73a4-b61f-7b03c32060dc",
+      "to": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why"
+      }
+    },
+    {
+      "from": "01a0d1c8-57f8-73a4-b61f-7b03c32060dc",
+      "to": "01a0ddfe-36a0-7779-a302-cbbaa288765c",
       "via": "kind",
       "attrs": {}
     },
     {
-      "from": "questions/who-split-billing-out-of-the-monolith",
-      "to": "sources/local",
+      "from": "01a0d1c8-57f8-73a4-b61f-7b03c32060dc",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "roles/backend-engineer",
-      "to": "skills/java-programming",
-      "via": "requires",
+      "from": "01a0d1c8-57f8-7401-af19-6456db3c051b",
+      "to": "01a0ddfe-36a0-76b9-8696-11dd3f43cad7",
+      "via": "kind",
       "attrs": {}
     },
     {
-      "from": "roles/backend-engineer",
-      "to": "sources/local",
+      "from": "01a0d1c8-57f8-7401-af19-6456db3c051b",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "roles/reviewer",
-      "to": "skills/domain-driven-design",
-      "via": "requires",
+      "from": "01a0d1c8-57f8-791a-aa3a-6c23955e4a5f",
+      "to": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "where a line comes from"
+      }
+    },
+    {
+      "from": "01a0d1c8-57f8-791a-aa3a-6c23955e4a5f",
+      "to": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what it costs"
+      }
+    },
+    {
+      "from": "01a0d1c8-57f8-791a-aa3a-6c23955e4a5f",
+      "to": "01a0ddfe-36a0-7779-a302-cbbaa288765c",
+      "via": "kind",
       "attrs": {}
     },
     {
-      "from": "roles/reviewer",
-      "to": "sources/local",
+      "from": "01a0d1c8-57f8-791a-aa3a-6c23955e4a5f",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "skills/domain-driven-design",
-      "to": "sources/local",
+      "from": "01a0d888-d040-7226-b4e2-24993ad80baf",
+      "to": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "via": "measures",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-7226-b4e2-24993ad80baf",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-7226-b4e2-24993ad80baf",
+      "to": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-7226-b4e2-24993ad80baf",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "skills/java-programming",
-      "to": "sources/local",
+      "from": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "to": "01a02f53-2408-79ce-829d-b6012ab3c389",
+      "via": "can-cost",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "to": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "via": "measures",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "to": "01a0d888-d040-7226-b4e2-24993ad80baf",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d888-d040-77b2-940d-11f931f3b8b4",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "skills/product-discovery",
-      "to": "sources/local",
+      "from": "01a0d907-1478-7032-8b40-57789e97c388",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "strategic-objectives/support-stops-explaining-invoices",
-      "to": "sources/local",
+      "from": "01a0dd35-9358-70ac-a19f-441d4e7e8183",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "strategies/invoicing-strategy",
-      "to": "strategic-objectives/support-stops-explaining-invoices",
-      "via": "serves",
-      "attrs": {}
-    },
-    {
-      "from": "strategies/invoicing-strategy",
-      "to": "sources/local",
+      "from": "01a0dd35-9358-72cf-a4bd-360593010506",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "strategies/invoicing-strategy",
-      "to": "values/craftsmanship",
+      "from": "01a0dd35-9358-7359-89d0-a3a4afb3d24d",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0dd35-9358-7c8f-a3e8-0a4b022e70b7",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "to": "01a02f53-2408-7b1e-bad3-c39aa223228c",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Mira Halvorsen",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "to": "01a0dd35-9358-72cf-a4bd-360593010506",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "to": "01a0dd35-9358-7359-89d0-a3a4afb3d24d",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a0dd35-9358-7f34-b9f9-9c998df35ff1",
+      "to": "01a02f53-2408-79ce-829d-b6012ab3c389",
       "via": "upholds",
       "attrs": {}
     },
     {
-      "from": "surfaces/beacon-systems-website",
-      "to": "sources/local",
+      "from": "01a0ddfe-36a0-76b9-8696-11dd3f43cad7",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "surfaces/partner-directory",
-      "to": "sources/local",
+      "from": "01a0ddfe-36a0-7779-a302-cbbaa288765c",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "values/craftsmanship",
-      "to": "sources/local",
+      "from": "01a0ddfe-36a0-7c39-a842-8ffce211182a",
+      "to": "01a02f53-2408-78fd-89ea-6fdf7e9a6be6",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "when disagreement is still worth saying"
+      }
+    },
+    {
+      "from": "01a0ddfe-36a0-7c39-a842-8ffce211182a",
+      "to": "01a02f53-2408-79ce-829d-b6012ab3c389",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "how it treats a deadline"
+      }
+    },
+    {
+      "from": "01a0ddfe-36a0-7c39-a842-8ffce211182a",
+      "to": "01a0ddfe-36a0-76b9-8696-11dd3f43cad7",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0ddfe-36a0-7c39-a842-8ffce211182a",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
     },
     {
-      "from": "values/say-the-hard-thing",
-      "to": "sources/local",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "vision",
-      "to": "sources/local",
+      "from": "01a0f10b-91d2-7004-96e6-daffc70ee0c1",
+      "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
       "via": "source",
       "attrs": {}
     }
