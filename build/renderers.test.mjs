@@ -17,17 +17,18 @@ const FIXTURE = {
 const SCHEMAS = {
   ...FIXTURE,
   model: { ...FIXTURE.model, entities: [
-    { id: "core/experience", type: "schema", name: "Experience Schema",
+    { id: "11111111-1111-4111-8111-111111111111", address: "core/experience", type: "schema", name: "Experience Schema",
       tagline: "Required structure for experience files.", path: "core/experience-schema.md", sections: [] },
-    { id: "core/skill", type: "schema", name: "Skill Schema",
+    { id: "22222222-2222-4222-8222-222222222222", address: "core/skill", type: "schema", name: "Skill Schema",
       tagline: "Required structure for skill files.", path: "core/skill-schema.md", sections: [] },
   ] },
 };
 
-test("terms takes its code from the id and its url from the path", () => {
+test("terms takes its code from the address and its url from the path", () => {
   const [first] = terms(SCHEMAS.model, "example/meta");
   assert.equal(first.name, "Experience Schema");
   assert.equal(first.description, "Required structure for experience files.");
+  assert.equal(first["@id"], "https://companygraph.io/model/#term-experience");
   assert.equal(first.termCode, "experience");
   assert.equal(first.url,
     `https://github.com/example/meta/blob/${SCHEMAS.model.commit}/core/experience-schema.md`);
@@ -56,7 +57,7 @@ function ldScratch() {
   }
   // The landing page opens its graph with five nodes of its own and no breadcrumb.
   const landing = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone" },
+    { "@type": "Person", "@id": "https://blust.ch/id/01a03d9b-e108-7712-830f-6e315eeab5c9", name: "Someone" },
     { "@type": "Organization", "@id": "https://companygraph.io/#organization", name: "CompanyGraph" },
     { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
     { "@type": "SoftwareSourceCode", "@id": "https://companygraph.io/#software", name: "CompanyGraph" },
@@ -96,6 +97,27 @@ test("writeJsonLd appends its node and leaves the four existing ones untouched",
   assert.equal(privacy.length, 5);
   assert.deepEqual(privacy[4], home[5]);
   assert.deepEqual(read("talks/intro")[4], home[5], "the deck carries it too");
+});
+
+// An identity with a stable id is the company at <site>/id/<uuid>, the page render/ids writes for
+// it, and every pointer at the company follows it, the hand-written head's included.
+test("writeJsonLd gives the company its identity's stable id, and every pointer follows it", () => {
+  const { dir } = ldScratch();
+  const uuid = "01a0c152-e370-71a3-8bba-4bf6458989e1";
+  const stable = { ...SCHEMAS, company: { ...SCHEMAS.company, rootId: uuid,
+    entities: [{ id: uuid, address: "identity", type: "identity", name: "Acme", sections: [] }] } };
+  const home = path.join(dir, "index.html");
+  const landing = JSON.parse(fs.readFileSync(home, "utf8").match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1]);
+  landing["@graph"][2].publisher = { "@id": "https://companygraph.io/#organization" };
+  fs.writeFileSync(home, `<head>\n<script type="application/ld+json">\n${JSON.stringify(landing, null, 2)}\n</script>\n</head>\n`);
+  writeJsonLd(stable, { check: false, root: dir, repo: "example/meta" });
+  const graph = JSON.parse(fs.readFileSync(home, "utf8")
+    .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
+  const id = `https://companygraph.io/id/${uuid}`;
+  assert.equal(graph[1]["@id"], id, "the Organization carries the identity's stable id");
+  assert.equal(graph[2].publisher["@id"], id, "the head's own pointer follows it");
+  assert.equal(graph[5].creator["@id"], id, "the company's Dataset names it as creator");
+  assert.equal(graph[0]["@id"], "https://blust.ch/id/01a03d9b-e108-7712-830f-6e315eeab5c9", "a node that is not the company is left alone");
 });
 
 // Every page with a graph is on the renderer's list, so a page added later cannot go without
@@ -188,10 +210,10 @@ test("writeJsonLd refuses a single trailing node it does not own, rather than re
     { "@type": "WebSite", "@id": "https://companygraph.io/#website", name: "CompanyGraph" },
     { "@type": "WebPage", "@id": "https://companygraph.io/model/#webpage", name: "Kept" },
     { "@type": "BreadcrumbList", "@id": "https://companygraph.io/model/#breadcrumb", itemListElement: [] },
-    { "@type": "Person", "@id": "https://blust.ch/#person", name: "Someone hand-written" },
+    { "@type": "Person", "@id": "https://blust.ch/id/01a03d9b-e108-7712-830f-6e315eeab5c9", name: "Someone hand-written" },
   ]);
   assert.throws(() => writeJsonLd(SCHEMAS, { check: true, root: dir, repo: "example/meta" }),
-    /does not own — https:\/\/blust\.ch\/#person/);
+    /does not own — https:\/\/blust\.ch\/id\/01a03d9b-e108-7712-830f-6e315eeab5c9/);
 });
 
 test("writeJsonLd refuses a graph carrying more than one node after the four it passes through, rather than deleting the rest", () => {
