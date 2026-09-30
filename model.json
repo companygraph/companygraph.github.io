@@ -12,6 +12,7 @@
   "entities": [
     {
       "id": "core/achievement-kind",
+      "address": "core/achievement-kind",
       "type": "schema",
       "name": "Achievement Kind Schema",
       "tagline": "Required structure for achievement kind files.",
@@ -203,6 +204,7 @@
     },
     {
       "id": "core/brand",
+      "address": "core/brand",
       "type": "schema",
       "name": "Brand Schema",
       "tagline": "Required structure for the brand file — what the company looks and sounds like.",
@@ -493,6 +495,7 @@
     },
     {
       "id": "core/concept",
+      "address": "core/concept",
       "type": "schema",
       "name": "Concept Schema",
       "tagline": "Required structure for concept files.",
@@ -746,6 +749,7 @@
     },
     {
       "id": "core/decision",
+      "address": "core/decision",
       "type": "schema",
       "name": "Decision Schema",
       "tagline": "Required structure for decision files.",
@@ -1107,6 +1111,7 @@
     },
     {
       "id": "core/decision-kind",
+      "address": "core/decision-kind",
       "type": "schema",
       "name": "Decision Kind Schema",
       "tagline": "Required structure for decision kind files.",
@@ -1286,6 +1291,7 @@
     },
     {
       "id": "core/decision-status",
+      "address": "core/decision-status",
       "type": "schema",
       "name": "Decision Status Schema",
       "tagline": "Required structure for decision status files.",
@@ -1465,6 +1471,7 @@
     },
     {
       "id": "core/domain",
+      "address": "core/domain",
       "type": "schema",
       "name": "Domain Schema",
       "tagline": "Required structure for domain files.",
@@ -1634,6 +1641,7 @@
     },
     {
       "id": "core/experience",
+      "address": "core/experience",
       "type": "schema",
       "name": "Experience Schema",
       "tagline": "Required structure for experience files.",
@@ -1926,6 +1934,7 @@
     },
     {
       "id": "core/experience-kind",
+      "address": "core/experience-kind",
       "type": "schema",
       "name": "Experience Kind Schema",
       "tagline": "Required structure for experience kind files.",
@@ -2105,6 +2114,7 @@
     },
     {
       "id": "core/feature",
+      "address": "core/feature",
       "type": "schema",
       "name": "Feature Schema",
       "tagline": "Required structure for feature files.",
@@ -2308,6 +2318,7 @@
     },
     {
       "id": "core/identifier",
+      "address": "core/identifier",
       "type": "schema",
       "name": "Identifier Schema",
       "tagline": "Required structure for the identifier file: what an entity's id looks like in this instance.",
@@ -2489,6 +2500,7 @@
     },
     {
       "id": "core/identity",
+      "address": "core/identity",
       "type": "schema",
       "name": "Identity Schema",
       "tagline": "Required structure for the identity file — who the company is.",
@@ -2737,6 +2749,7 @@
     },
     {
       "id": "core/kpi",
+      "address": "core/kpi",
       "type": "schema",
       "name": "KPI Schema",
       "tagline": "Required structure for KPI files.",
@@ -3010,6 +3023,7 @@
     },
     {
       "id": "core/phase",
+      "address": "core/phase",
       "type": "schema",
       "name": "Phase Schema",
       "tagline": "Required structure for phase files.",
@@ -3376,6 +3390,7 @@
     },
     {
       "id": "core/process",
+      "address": "core/process",
       "type": "schema",
       "name": "Process Schema",
       "tagline": "Required structure for process files.",
@@ -3633,6 +3648,7 @@
     },
     {
       "id": "core/product",
+      "address": "core/product",
       "type": "schema",
       "name": "Product Schema",
       "tagline": "Required structure for product files.",
@@ -3826,6 +3842,7 @@
     },
     {
       "id": "core/proficiency-level",
+      "address": "core/proficiency-level",
       "type": "schema",
       "name": "Proficiency Level Schema",
       "tagline": "Required structure for proficiency level files.",
@@ -4017,6 +4034,7 @@
     },
     {
       "id": "core/profile",
+      "address": "core/profile",
       "type": "schema",
       "name": "Profile Schema",
       "tagline": "Required structure for profile files.",
@@ -4361,6 +4379,7 @@
     },
     {
       "id": "core/question",
+      "address": "core/question",
       "type": "schema",
       "name": "Question Schema",
       "tagline": "Required structure for question files.",
@@ -4587,6 +4606,7 @@
     },
     {
       "id": "core/question-kind",
+      "address": "core/question-kind",
       "type": "schema",
       "name": "Question Kind Schema",
       "tagline": "Required structure for question kind files.",
@@ -4778,6 +4798,7 @@
     },
     {
       "id": "core/role",
+      "address": "core/role",
       "type": "schema",
       "name": "Role Schema",
       "tagline": "Required structure for role files.",
@@ -4989,6 +5010,7 @@
     },
     {
       "id": "core/skill",
+      "address": "core/skill",
       "type": "schema",
       "name": "Skill Schema",
       "tagline": "Required structure for skill files.",
@@ -5180,6 +5202,7 @@
     },
     {
       "id": "core/source",
+      "address": "core/source",
       "type": "schema",
       "name": "Source Schema",
       "tagline": "Required structure for source files.",
@@ -5337,6 +5360,7 @@
     },
     {
       "id": "core/strategic-objective",
+      "address": "core/strategic-objective",
       "type": "schema",
       "name": "Strategic Objective Schema",
       "tagline": "Required structure for strategic objective files.",
@@ -5540,6 +5564,7 @@
     },
     {
       "id": "core/strategy",
+      "address": "core/strategy",
       "type": "schema",
       "name": "Strategy Schema",
       "tagline": "Required structure for strategy files.",
@@ -5775,6 +5800,7 @@
     },
     {
       "id": "core/surface",
+      "address": "core/surface",
       "type": "schema",
       "name": "Surface Schema",
       "tagline": "Required structure for surface files.",
@@ -6010,6 +6036,7 @@
     },
     {
       "id": "core/track",
+      "address": "core/track",
       "type": "schema",
       "name": "Track Schema",
       "tagline": "Required structure for track files.",
@@ -6181,6 +6208,7 @@
     },
     {
       "id": "core/value",
+      "address": "core/value",
       "type": "schema",
       "name": "Value Schema",
       "tagline": "Required structure for value files.",
@@ -6360,6 +6388,7 @@
     },
     {
       "id": "core/vision",
+      "address": "core/vision",
       "type": "schema",
       "name": "Vision Schema",
       "tagline": "Required structure for the vision file — the future the company is working toward.",
