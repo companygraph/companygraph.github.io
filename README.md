@@ -11,6 +11,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/` | The landing page: what CompanyGraph is, and CompanyGraph's own model, drawn on the stage. |
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
+| `/talks/obsidian-plugin/` | CompanyGraph explains its own Obsidian plugin, pane by pane, with an animated window beside each feature — English and German, narrated, with a PDF in each language. |
 | `/cli/` | The command line: one command opens a menu that makes a model, checks it, moves it to a newer release and installs the Obsidian plugin, and each entry is also a subcommand. First in the nav, by the owner's decision. |
 | `/team/` | Who does CompanyGraph's work: one board per process, generated from `company.json` by the design package's `render/team`, each opening on the process's owner. |
 | `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
@@ -40,6 +41,10 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   with the other three. Nothing here requires the deck to open from `file://` any more — it is
   normally read served, like every other page — though it still does, checked rather than
   assumed.
+- `talks/obsidian-plugin/` — the second deck, built the same way, plus `scenes.js`: the
+  animated Obsidian windows beside each feature, drawn in the site's tokens. A scene runs while
+  its slide is shown and paints one still frame under reduced motion and in a browser driven by
+  a script, which is what the PDFs, the share card and the verify suite see.
 - `tokens.css`, `page.css`, `page.js`, `deck.css`, `deck.js` — five whole files `npm run design`
   writes from `@robertblust/design` at the pinned tag: the tokens, the chrome and the runtime
   every prose page or the deck links and loads instead of carrying a fenced copy. Editing one
@@ -81,13 +86,13 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   each is behind.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
-- `og.png`, `talks/og.png`, `talks/intro/og.png`, `model/og.png`, `example/og.png`,
+- `og.png`, `talks/og.png`, `talks/intro/og.png`, `talks/obsidian-plugin/og.png`, `model/og.png`, `example/og.png`,
   `billing/og.png`, `privacy/og.png`, `cli/og.png`, `principles/og.png`, `team/og.png`, `surfaces/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
   `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders every one and writes
   the stamps, and `og-check.mjs` reports which have drifted. `export-pdf.mjs`, alongside it at
-  the root, renders the deck's two PDFs into `talks/intro/`.
+  the root, renders each deck's two PDFs into its folder.
 - `CNAME`, `robots.txt`, `sitemap.xml` — the domain, and one flat list of every URL on it.
 - `LICENSE` — CC BY 4.0, see License below.
 - `verify/check.mjs` — the suite, covering every page in one run. Its shared page checks
