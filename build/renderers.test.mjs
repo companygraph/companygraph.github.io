@@ -237,9 +237,13 @@ test("company.json is the instance at the pin, with a root and edges", () => {
   // companygraph/meta-model when repo is missing, which is the wrong repository here.
   assert.equal(data.repo, pins["mental-model"].repo);
   assert.equal(data.root, "CompanyGraph");
-  assert.equal(data.rootId, "identity");
+  // Every page now carries a stable UUID id, so the root is found by its address rather than
+  // by a hardcoded id, and rootId is asserted to be that entity's (UUID) id.
   assert.ok(data.entities.length > 0, "entities");
   assert.ok(data.edges.length > 0, "edges");
+  const rootEntity = data.entities.find((e) => e.address === "identity");
+  assert.ok(rootEntity, "root entity (address identity) exists");
+  assert.equal(data.rootId, rootEntity.id);
   const ids = new Set(data.entities.map((e) => e.id));
   for (const edge of data.edges) {
     assert.ok(ids.has(edge.from), `edge from ${edge.from}`);
