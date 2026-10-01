@@ -1,5 +1,5 @@
 {
-  "commit": "beb0f0292fe7aa2c1e75ce42f30c817fc9eb7d60",
+  "commit": "bd529f5bf281380dfe5843cd7f1eea650fd514dc",
   "core": "0.50.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -2297,6 +2297,211 @@
       "path": "model/decisions/2026-linkedin-page-nonprofit.md"
     },
     {
+      "id": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "address": "decisions/2026-one-language-per-model",
+      "type": "decision",
+      "name": "A model is written in one language",
+      "tagline": "A model is written in the one language its localization page names, and is never translated inside itself; another language is a rendering of it, not a second copy in it.",
+      "fields": {
+        "id": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+        "source": "Local",
+        "decided": "2026-10-01",
+        "kind": "Vocabulary",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "A company we have never met keeps its own model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether one entity carries its name and prose in several languages. An adopter asked in meta-model #195 for a model written in German and for one model kept in seven languages, and v0.66.0 gave every page a section for each translated language. It had to be decided again on October 1, 2026, when the rule was tried on a profile and the page carried a second copy of itself, before any instance had declared a translated language.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "A section per language at the foot of each page",
+                  "A second copy of the page under English headings, every table repeated whole to keep its rows aligned, and a declared language binding every page of every type."
+                ],
+                [
+                  "A sibling file per language",
+                  "One entity becomes two texts that have to be kept the same."
+                ],
+                [
+                  "A column per language in each table",
+                  "Every table grows a column for every language it is read in."
+                ],
+                [
+                  "The translated languages declared per type",
+                  "Every page of a listed type is still two texts, and the model is half in one language and half in two."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "A section per language at the foot of each page",
+                "A second copy of the page under English headings, every table repeated whole to keep its rows aligned, and a declared language binding every page of every type."
+              ],
+              [
+                "A sibling file per language",
+                "One entity becomes two texts that have to be kept the same."
+              ],
+              [
+                "A column per language in each table",
+                "Every table grows a column for every language it is read in."
+              ],
+              [
+                "The translated languages declared per type",
+                "Every page of a listed type is still two texts, and the model is half in one language and half in two."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "A model is kept in one language, as UML, SysML and an XML schema are: the vocabulary is English, and the content is in whatever language the company thinks in. Translating content is what a documentation system or a translation tool does, and doing it inside the model doubled every page it touched.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "`model/localization.md` names the model's language in `locale`, and R19 and its checks are gone. A company writes its model in German if German is what it thinks in; one that needs seven languages renders them outside the model. Given up: a chat answering in Polish from Polish text the model holds. The call stays right for as long as a reader in another language is served by a rendering, and no adopter needs two languages to carry the same claim with equal standing inside one model.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "localization",
+                  "Languages",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "feature",
+                  "Checks an instance runs",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "role",
+                  "Translator",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "localization",
+                "Languages",
+                "",
+                "changed it"
+              ],
+              [
+                "feature",
+                "Checks an instance runs",
+                "",
+                "changed it"
+              ],
+              [
+                "role",
+                "Translator",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The issue",
+                  "https://github.com/companygraph/meta-model/issues/195"
+                ],
+                [
+                  "The specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-10-01-one-language-per-model-design.md"
+                ],
+                [
+                  "The specification it replaces",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-30-a-model-in-several-languages-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The issue",
+                "https://github.com/companygraph/meta-model/issues/195"
+              ],
+              [
+                "The specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-10-01-one-language-per-model-design.md"
+              ],
+              [
+                "The specification it replaces",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-30-a-model-in-several-languages-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-one-language-per-model.md"
+    },
+    {
       "id": "01a0dd52-bc30-71d8-972a-15358951f921",
       "address": "decisions/2026-open-sections",
       "type": "decision",
@@ -2933,7 +3138,7 @@
       "address": "decisions/2026-stable-entity-id",
       "type": "decision",
       "name": "Every entity carries an id that outlives its name",
-      "tagline": "Every entity carries an id in its frontmatter, set once and never changed or reused, in the format the instance's identifier file declares, and every tool returns that id, so a link from outside the model survives a rename and a translation.",
+      "tagline": "Every entity carries an id in its frontmatter, set once and never changed or reused, in the format the instance's identifier file declares, and every tool returns that id, so a link from outside the model survives a rename.",
       "fields": {
         "id": "01a0f0ed-5db8-7589-9ab1-df069dbad08c",
         "source": "Local",
@@ -2948,7 +3153,7 @@
       "sections": [
         {
           "heading": "The question",
-          "text": "What an outside system holds on to when it links to an entity: a task to the feature it delivers, a commit to the decision it carries out, a node in a graph to the page it was loaded from. The only id the model offered was the folder and the slug of the H1, which changes the day the entity is renamed and differs in every language the entity is written in. It had to be decided in September 2026, when an adopter asked it in meta-model #194 and the chat answered that the model does not say.",
+          "text": "What an outside system holds on to when it links to an entity: a task to the feature it delivers, a commit to the decision it carries out, a node in a graph to the page it was loaded from. The only id the model offered was the folder and the slug of the H1, which changes the day the entity is renamed. It had to be decided in September 2026, when an adopter asked it in meta-model #194 and the chat answered that the model does not say.",
           "tables": []
         },
         {
@@ -7284,7 +7489,7 @@
       "address": "questions/can-a-system-outside-our-model-keep-a-link-to-an-entity-after-it-is-renamed",
       "type": "question",
       "name": "Can a system outside our model keep a link to an entity after it is renamed?",
-      "tagline": "The decision says why a link survives a rename and a translation, and the feature says how an agent finds the entity from the id it holds.",
+      "tagline": "The decision says why a link survives a rename, and the feature says how an agent finds the entity from the id it holds.",
       "fields": {
         "id": "01a0f0ed-5db8-709b-8c82-3c11c5701177",
         "source": "Local",
@@ -14371,6 +14576,66 @@
       "from": "01a0f340-455c-733e-9f3a-6c8070c48bb2",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0c202-d668-7097-ae17-e5105721e87c",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0f340-455c-733e-9f3a-6c8070c48bb2",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "localization",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0dd52-bc30-74da-a88b-7364f9b19f0e",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0c1e8-beb8-7cb4-a246-4ed416d4155c",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
+      "via": "status",
       "attrs": {}
     }
   ],
