@@ -409,6 +409,7 @@
 <div class="deck" id="deck">
 
   <section class="slide title-slide" id="s-cover" data-say-title="no"
+    data-time="0:00"
     data-notes="<em class='cue'>The title stays up while I open.</em> A company's knowledge can be written down once, in a structure people and agents both read. How far that writing reaches is a separate question: it can sit in one folder on a laptop, or it can drive the checks on every change, answer an agent, and draw a website. This talk walks the levels from the first command to a model that everything else is drawn from. Every level is real today, and each slide says which pages of our own model it rests on."
     data-notes-de="<em class='cue'>Der Titel bleibt stehen, während ich eröffne.</em> Das Wissen einer Firma lässt sich einmal aufschreiben, in einer Struktur, die Menschen und Agenten gleichermassen lesen. Wie weit dieses Geschriebene reicht, ist eine andere Frage. Es kann in einem Ordner auf einem Laptop liegen. Oder es kann die Prüfungen bei jeder Änderung steuern, einem Agenten antworten und eine Website speisen. Dieser Vortrag geht die Stufen durch, vom ersten Befehl bis zu einem Modell, aus dem alles andere abgeleitet wird. Jede Stufe gibt es heute schon, und jede Folie nennt die Seiten unseres eigenen Modells, auf denen sie beruht.">
     <div class="kicker mono" data-n="00"></div>
@@ -422,6 +423,7 @@
   </section>
 
   <section class="slide" id="s-ladder"
+    data-time="0:45"
     data-notes="Here is the whole ladder. At the bottom, the model: the pages themselves, held to a vocabulary. Then gated: every change is checked before it lands. Then governed: the repositories around the model follow one form and declare what they take from each other. Then served: an agent or a chat asks the model and gets an answer at a named commit. And at the top, published: pages on the web drawn from the same files. Each level reads the one model. None of them is a second copy to keep in step."
     data-notes-de="Hier ist die ganze Leiter. Ganz unten das Modell: die Seiten selbst, an ein Vokabular gebunden. Dann geprüft: Jede Änderung wird geprüft, bevor sie übernommen wird. Dann geregelt: Die Repositorys rund um das Modell folgen einer einheitlichen Form und deklarieren, was sie voneinander übernehmen. Dann bereitgestellt: Ein Agent oder ein Chat fragt das Modell und bekommt eine Antwort auf dem Stand eines benannten Commits. Und ganz oben veröffentlicht: Seiten im Web, abgeleitet aus denselben Dateien. Jede Stufe liest das eine Modell. Keine davon ist eine zweite Kopie, die man nachführen muss.">
     <div class="kicker mono" data-n="01"></div>
@@ -430,6 +432,7 @@
   </section>
 
   <section class="slide" id="s-model" data-scene="init"
+    data-time="0:45"
     data-notes="Level one is one command. Init writes a new instance: the vocabulary, which we call core, copied in at a named release; a manifest that records that release and a hash of every file it copied, so an edit to core shows up as an edit; the check that holds every page to its schema; the skills an agent uses to read and write the model; and a commit hook. What you get is a folder of Markdown. You can stop here and still have something: a model that a check holds together and an agent can read."
     data-notes-de="Stufe eins ist ein einziger Befehl. Init schreibt eine neue Instanz. Dazu gehört das Vokabular, das wir core nennen, kopiert aus einem benannten Release. Dazu gehört ein Manifest, das dieses Release und einen Hash jeder kopierten Datei festhält, sodass eine Änderung am core als Änderung sichtbar wird. Dazu gehören die Prüfung, die jede Seite an ihrem Schema misst, die Skills, mit denen ein Agent das Modell liest und schreibt, und ein Commit-Hook. Was Sie bekommen, ist ein Ordner mit Markdown. Sie können hier aufhören und haben trotzdem etwas: ein Modell, das eine Prüfung zusammenhält und das ein Agent lesen kann.">
     <div class="kicker mono" data-n="02"></div>
@@ -438,6 +441,7 @@
   </section>
 
   <section class="slide" id="s-gated" data-scene="checks"
+    data-time="0:40"
     data-notes="Level two puts the folder in a repository. Init already wrote the workflow; it runs the same check on every pull request, at exactly the release the manifest names, so the check never changes under you. Protect the main branch and require that check, and a page that names something that does not exist cannot land. This is where a model stops being a document and starts being something a team can rely on: what is on main has been checked."
     data-notes-de="Auf Stufe zwei kommt der Ordner in ein Repository. Den Workflow hat init bereits geschrieben. Er führt bei jedem Pull-Request dieselbe Prüfung aus, und zwar genau mit dem Release, das das Manifest nennt. Die Prüfung ändert sich also nie, ohne dass Sie es wollen. Schützen Sie den Branch main und machen Sie diese Prüfung zur Pflicht. Dann kann eine Seite, die etwas nennt, das es nicht gibt, nicht mehr übernommen werden. Hier hört ein Modell auf, ein Dokument zu sein, und wird zu etwas, worauf sich ein Team verlassen kann: Was auf main steht, ist geprüft.">
     <div class="kicker mono" data-n="03"></div>
@@ -446,6 +450,7 @@
   </section>
 
   <section class="slide" id="s-governed" data-scene="pins"
+    data-time="0:50"
     data-notes="Level three is about everything around the model: the site, the services, the server. They all follow one Markdown form, checked locally and in CI. Each declares what it takes from another repository, a release or a commit, in a file called pins dot json, and companygraph pins says which of them are behind; it reports, it moves nothing. A repository with no model of its own takes the same machinery with adopt. We built this for ourselves first, and then took it out of our own conventions so that a company outside our family can use it with its own rules and its own seats."
     data-notes-de="Auf Stufe drei geht es um alles rund um das Modell: die Website, die Services, den Server. Sie alle folgen einer einheitlichen Markdown-Form, lokal und in der CI geprüft. Jedes Repository deklariert in einer Datei namens pins punkt json, was es von einem anderen übernimmt, ein Release oder einen Commit. Und companygraph pins sagt, welche davon im Rückstand sind. Der Befehl meldet nur, er verschiebt nichts. Ein Repository ohne eigenes Modell bekommt dieselben Werkzeuge mit adopt. Wir haben das zuerst für uns selbst gebaut und es dann aus unseren eigenen Konventionen herausgelöst. So kann es auch eine Firma ausserhalb unserer Familie nutzen, mit ihren eigenen Regeln und ihren eigenen Sitzen.">
     <div class="kicker mono" data-n="04"></div>
@@ -454,6 +459,7 @@
   </section>
 
   <section class="slide" id="s-rules"
+    data-time="0:50"
     data-notes="Governance has a place in the model as well. A rule says what must, must not or may happen, and why, and which roles, processes and phases it binds. A risk is an event that could go wrong, with a cause, a consequence and an owner, and no score on the page. A control mitigates a risk, enforces a rule, or both, and says how it is carried out: by a person, or by a machine. Where a machine does it, the control points at the hook or the workflow, so the model says why the check exists and the repository says how it runs."
     data-notes-de="Auch die Governance hat ihren Platz im Modell. Eine Regel sagt, was geboten, was verboten und was erlaubt ist, und warum. Und sie sagt, welche Rollen, Prozesse und Phasen sie bindet. Ein Risiko ist ein Ereignis, das schiefgehen könnte, mit einer Ursache, einer Folge und einem Owner, aber ohne Bewertung auf der Seite. Eine Kontrolle mindert ein Risiko, setzt eine Regel durch oder beides, und sie sagt, wie sie ausgeführt wird: von einem Menschen oder von einer Maschine. Übernimmt das eine Maschine, verweist die Kontrolle auf den Hook oder den Workflow. So sagt das Modell, warum es die Prüfung gibt, und das Repository, wie sie läuft.">
     <div class="kicker mono" data-n="05"></div>
@@ -462,6 +468,7 @@
   </section>
 
   <section class="slide" id="s-served" data-scene="mcp"
+    data-time="0:45"
     data-notes="Level four serves the model. A read-only server answers an agent over MCP: it lists the types, returns an entity, finds the evidence for a claim, and every answer names the commit it comes from. A chat on the website asks that same server and cites the pages its answer rests on. Ask ours what Resolution is, and it answers from our own bounded context. Nothing here is a second store: rebuild the server at a newer commit, and it says something new."
     data-notes-de="Auf Stufe vier wird das Modell bereitgestellt. Ein nur lesender Server antwortet einem Agenten über MCP. Er listet die Typen auf, gibt eine Entität zurück, findet den Beleg für einen Anspruch, und jede Antwort nennt den Commit, aus dem sie stammt. Ein Chat auf der Website fragt denselben Server und nennt die Seiten, auf denen seine Antwort beruht. Fragen Sie unseren Chat, was Resolution ist, dann antwortet er aus unserem eigenen Bounded Context. Nichts davon ist ein zweiter Datenspeicher: Bauen Sie den Server mit einem neueren Commit neu, und er sagt etwas Neues.">
     <div class="kicker mono" data-n="06"></div>
@@ -470,6 +477,7 @@
   </section>
 
   <section class="slide" id="s-published"
+    data-time="0:35"
     data-notes="Level five is publishing. Our website draws its landing stage, its model pages and the structured data a search engine reads from the same files, at a pinned commit. The Obsidian plugin lets a person edit those files with the schema beside them. What a visitor reads and what an agent reads come from one place, and moving a pin is how a change reaches either of them."
     data-notes-de="Stufe fünf ist das Veröffentlichen. Unsere Website leitet drei Dinge aus denselben Dateien ab, auf dem Stand eines gepinnten Commits: den Graphen auf ihrer Startseite, ihre Modellseiten und die strukturierten Daten, die eine Suchmaschine liest. Mit dem Obsidian-Plugin bearbeitet ein Mensch diese Dateien und hat das Schema daneben. Was ein Besucher liest und was ein Agent liest, kommt aus einer einzigen Quelle. Und eine Änderung erreicht jeden der beiden, indem ein Pin verschoben wird.">
     <div class="kicker mono" data-n="07"></div>
@@ -478,6 +486,7 @@
   </section>
 
   <section class="slide" id="s-pack" data-scene="climb"
+    data-time="0:45"
     data-notes="Here is one change climbing the whole ladder. On the second of October we released the first pack, vocabulary for a company that builds software. Our own model took it with one command and gained its first bounded context, Resolution, the part of our parser that turns names into edges. Then the website drew it, the server served it, and the editor learned to read it, each by moving one pin. That is what eating your own cooking looks like in this setup: what we ship, we describe in it first."
     data-notes-de="Hier steigt eine einzige Änderung die ganze Leiter hinauf. Am zweiten Oktober haben wir das erste Paket veröffentlicht, ein Vokabular für eine Firma, die Software baut. Unser eigenes Modell hat es mit einem Befehl übernommen und dabei seinen ersten Bounded Context bekommen: Resolution, den Teil unseres Parsers, der aus Namen Kanten macht. Danach hat die Website ihn abgeleitet, der Server ihn bereitgestellt, und der Editor hat gelernt, ihn zu lesen, jedes Mal, indem ein Pin verschoben wurde. So verwenden wir selbst, was wir anbieten: Was wir ausliefern, beschreiben wir zuerst in unserem eigenen Modell.">
     <div class="kicker mono" data-n="08"></div>
@@ -486,6 +495,7 @@
   </section>
 
   <section class="slide" id="s-pins"
+    data-time="0:45"
     data-notes="What holds the levels together is pins. Each level takes the one below it at a tag, for code it runs, or at a commit, for content it shows, and a pin moves only when someone decides it should. That is also what makes failures honest. The day our first bounded context landed, one pin we had not moved, the release our conventions checked commits with, could not read the new pack, and every pull request in the organization went red. Nothing was hidden: one line had to move, and moving it fixed every check at once."
     data-notes-de="Was die Stufen zusammenhält, sind Pins. Jede Stufe übernimmt die darunter auf einem bestimmten Stand: auf einem Tag für Code, den sie ausführt, oder auf einem Commit für Inhalt, den sie zeigt. Und ein Pin wird erst verschoben, wenn jemand entscheidet, dass er verschoben werden soll. Das sorgt auch dafür, dass ein Fehler offen zutage tritt. An dem Tag, an dem unser erster Bounded Context dazukam, konnte ein Pin, den wir nicht verschoben hatten, das neue Paket nicht lesen. Es war das Release, mit dem unsere Konventionen die Commits prüften. Darauf schlug jeder Pull-Request in der Organisation fehl. Nichts war verborgen: Eine Zeile musste sich ändern, und diese eine Änderung brachte jede Prüfung auf einmal wieder in Ordnung.">
     <div class="kicker mono" data-n="09"></div>
@@ -496,6 +506,7 @@
   </section>
 
   <section class="slide" id="s-where"
+    data-time="0:35"
     data-notes="So, where are you? You do not need all five levels to get value: a model with a check is already worth having, and each level pays for itself before you take the next. If you have none of them yet, the first step is one command. And if a level here does not fit the way your company works, tell us; that is how the last one changed."
     data-notes-de="Also: Wo stehen Sie? Sie brauchen nicht alle fünf Stufen, damit es sich lohnt. Schon ein Modell mit einer Prüfung ist etwas wert, und jede Stufe macht sich bezahlt, bevor Sie die nächste nehmen. Haben Sie noch keine davon, ist der erste Schritt ein einziger Befehl. Und wenn eine Stufe hier nicht zur Arbeitsweise Ihrer Firma passt, sagen Sie es uns. So hat sich die letzte verändert.">
     <div class="kicker mono" data-n="10"></div>
