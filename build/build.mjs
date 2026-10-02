@@ -6,7 +6,7 @@
 // touching either. `source.json`, at the repository root, holds the site's pins by name, and
 // each target names the pin it is drawn from: `example.json` and `model.json` come from the
 // `meta-model` pin's one commit of `companygraph/meta-model` — the example from `example/`, the
-// vocabulary from `core/` — and `company.json` from the `mental-model` pin's commit of
+// vocabulary from `core/` and `packs/` — and `company.json` from the `mental-model` pin's commit of
 // `companygraph/mental-model`.
 //
 // Each is read at exactly the commit its pin names: from a local checkout when the pin's
@@ -50,14 +50,30 @@ const LOCAL_ENV = { "meta-model": "META_MODEL", "mental-model": "MENTAL_MODEL" }
 // needs no such step, so it carries none.
 const TARGETS = [
   { dir: "example", pin: "meta-model", parse: parseInstance, sub: "example/model/", schemas: "core/" },
+  // The vocabulary is core and every pack beside it: `packs` is read too, and each pack's
+  // files reach the parser under `<pack>/`, the key it reads a pack's schema by (R20), so a
+  // pack released upstream is drawn at the next re-pin without a line changing here. The stage
+  // files an entity under the folder its type names, and every schema parses to the one type
+  // `schema` in the one folder `core`, so `finish` gives each unit a type of its own, named
+  // for the unit: one root, a folder per unit, a pack's references into core crossing between
+  // them. The path the parser builds from `sub` is core's; a pack's is put back under `packs/`
+  // so its card and its JSON-LD term link to the file that is there.
   {
-    dir: "model", pin: "meta-model", parse: parseSchemas, sub: "core/",
+    dir: "model", pin: "meta-model", parse: parseSchemas, sub: "core/", packs: "packs/",
     finish(data) {
       for (const e of data.edges) e.label = e.via;
+      const units = new Set();
       for (const en of data.entities) {
+        const unit = en.address.slice(0, en.address.indexOf("/"));
+        units.add(unit);
+        en.type = unit;
+        if (unit !== "core") en.path = `packs/${en.path.slice("core/".length)}`;
         const i = en.sections.findIndex((s) => s.heading === "File Location");
         if (i >= 0) en.sections.push(...en.sections.splice(i, 1));
       }
+      data.root = "Meta-model";
+      data.types = [...units].sort((a, b) => (a === "core" ? -1 : b === "core" ? 1 : a < b ? -1 : 1))
+        .map((unit) => ({ type: unit, folder: unit, owner: null }));
     },
   },
   // CompanyGraph's own instance, drawn on the landing page. An instance carries the core it is
@@ -65,7 +81,7 @@ const TARGETS = [
   // its pages, as blust.ch reads the reference instance. It also carries the packs its
   // `.companygraph/manifest.json` lists, vendored beside core, so `instance: true` reads
   // schemas through the manifest (`build/schemas.mjs`) rather than from `meta/core/` alone: a
-  // pack's types reach company.json and so the landing stage, and /model/ stays core's. It is
+  // pack's types reach company.json and so the landing stage, as they reach /model/ through `packs`. It is
   // the one artifact from another repository, so it names that repository: `card.js` and
   // `stage.js` link a card to its file through `repo` and fall back to the meta-model without
   // it. The other two need no `repo`, because that fallback is already theirs.
@@ -138,6 +154,7 @@ for (const target of TARGETS) {
     return (await readRemote(pin, rel)).get("");
   };
   const files = await read(target.sub);
+  if (target.packs) for (const [file, text] of await read(target.packs)) files.set(file, text);
   // The example is read beside the core it is written against: at 0.22.0 the parser resolves
   // a reference by the type its schema declares, so the schemas travel with the pages. The
   // model target parses the schemas themselves and names none.

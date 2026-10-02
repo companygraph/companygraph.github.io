@@ -1,11 +1,16 @@
 {
-  "commit": "1be6f71ceaccee4f3887fb54e5185ffe81433151",
-  "root": "Core",
+  "commit": "4f606c7c760ee5904818daba0ab4eea64a676517",
+  "root": "Meta-model",
   "rootId": null,
   "types": [
     {
-      "type": "schema",
+      "type": "core",
       "folder": "core",
+      "owner": null
+    },
+    {
+      "type": "software",
+      "folder": "software",
       "owner": null
     }
   ],
@@ -13,7 +18,7 @@
     {
       "id": "01a0b09c-6e48-7e25-abfc-8efc23e2d25a",
       "address": "core/achievement-kind",
-      "type": "schema",
+      "type": "core",
       "name": "Achievement Kind Schema",
       "tagline": "Required structure for achievement kind files.",
       "fields": {},
@@ -205,7 +210,7 @@
     {
       "id": "01a0d905-a160-77e9-b344-4f37b52b849e",
       "address": "core/brand",
-      "type": "schema",
+      "type": "core",
       "name": "Brand Schema",
       "tagline": "Required structure for the brand file — what the company looks and sounds like.",
       "fields": {},
@@ -496,7 +501,7 @@
     {
       "id": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
       "address": "core/concept",
-      "type": "schema",
+      "type": "core",
       "name": "Concept Schema",
       "tagline": "Required structure for concept files.",
       "fields": {},
@@ -735,7 +740,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The definition says what the thing is, not what a system does with it, and it is written so that someone outside the company could tell one of these from something adjacent.\n- A concept this one hangs off belongs in `## Relations`, where it resolves, and never in the definition dressed as a link.\n- A relation is written on one side only. Where it reads better the other way round, write it on the other concept and not here as well.\n- `As` is the name the target goes by in this relation, written as the company says it: `booker`, `primary guest`, `included services`.\n- An alias is never used as a reference anywhere in the model. It is there so a reader searching the wrong word finds the right page.\n- A deprecated alias stays until nothing outside the model uses the old name, and then it goes; it is not a history of the name.\n- An alias of kind `translation` is for a language the instance does not declare in `model/localization.md`; in a declared language the concept's name is the `### Name` of that language's section (R19).",
+          "text": "- The definition says what the thing is, not what a system does with it, and it is written so that someone outside the company could tell one of these from something adjacent.\n- A concept this one hangs off belongs in `## Relations`, where it resolves, and never in the definition dressed as a link.\n- A relation is written on one side only. Where it reads better the other way round, write it on the other concept and not here as well.\n- `As` is the name the target goes by in this relation, written as the company says it: `booker`, `primary guest`, `included services`.\n- An alias is never used as a reference anywhere in the model. It is there so a reader searching the wrong word finds the right page.\n- A deprecated alias stays until nothing outside the model uses the old name, and then it goes; it is not a history of the name.\n- An alias of kind `translation` is the concept's name in a language other than the one the model is written in: what a French customer calls it, in a model kept in English.",
           "tables": []
         },
         {
@@ -748,9 +753,288 @@
       "path": "core/concept-schema.md"
     },
     {
+      "id": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
+      "address": "core/control",
+      "type": "core",
+      "name": "Control Schema",
+      "tagline": "Required structure for control files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "enum",
+                  "`preventive`, `detective` or `corrective`. Whether it stops the event, finds it, or repairs what it did (COSO; ISO/IEC 27002 control type)."
+                ],
+                [
+                  "`mode`",
+                  "Yes",
+                  "enum",
+                  "`automated` or `manual`. Whether a machine or a person carries it out (COSO)."
+                ],
+                [
+                  "`mitigates`",
+                  "No",
+                  "array of ref → risk",
+                  "The risks it makes less likely or less harmful, each the H1 of a file in `risks/`"
+                ],
+                [
+                  "`enforces`",
+                  "No",
+                  "array of ref → rule",
+                  "The rules it holds a change or an action to, each the H1 of a file in `rules/`"
+                ],
+                [
+                  "`performed-by`",
+                  "No",
+                  "ref → role",
+                  "The seat that carries it out, for a manual control, the H1 of a file in `roles/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "enum",
+                "`preventive`, `detective` or `corrective`. Whether it stops the event, finds it, or repairs what it did (COSO; ISO/IEC 27002 control type)."
+              ],
+              [
+                "`mode`",
+                "Yes",
+                "enum",
+                "`automated` or `manual`. Whether a machine or a person carries it out (COSO)."
+              ],
+              [
+                "`mitigates`",
+                "No",
+                "array of ref → risk",
+                "The risks it makes less likely or less harmful, each the H1 of a file in `risks/`"
+              ],
+              [
+                "`enforces`",
+                "No",
+                "array of ref → rule",
+                "The rules it holds a change or an action to, each the H1 of a file in `rules/`"
+              ],
+              [
+                "`performed-by`",
+                "No",
+                "ref → role",
+                "The seat that carries it out, for a manual control, the H1 of a file in `roles/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Control]`",
+                  "Yes",
+                  "The control's name. Everything references the control by this exact string."
+                ],
+                [
+                  "`> [What it does]`",
+                  "Yes",
+                  "What the control does, in one sentence"
+                ],
+                [
+                  "`## How it is carried out`",
+                  "Yes",
+                  "What does the work and when, as a reader could check"
+                ],
+                [
+                  "`## Applies to`",
+                  "No",
+                  "Table. The seats, processes and phases it applies in; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The hook, the workflow, the command or the checklist, and where its results are kept; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Applies to` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "The type of the entity this row names, as its schema is named: `role`, `process` or `phase`"
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type in Owner",
+                  "The seat, process or phase, by its canonical name"
+                ],
+                [
+                  "`Owner`",
+                  "No",
+                  "string",
+                  "For a phase, the process that owns it, by its canonical name; blank otherwise"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of thing, a hook, a workflow, a checklist, a test report"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Control]`",
+                "Yes",
+                "The control's name. Everything references the control by this exact string."
+              ],
+              [
+                "`> [What it does]`",
+                "Yes",
+                "What the control does, in one sentence"
+              ],
+              [
+                "`## How it is carried out`",
+                "Yes",
+                "What does the work and when, as a reader could check"
+              ],
+              [
+                "`## Applies to`",
+                "No",
+                "Table. The seats, processes and phases it applies in; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The hook, the workflow, the command or the checklist, and where its results are kept; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A control is what the company does, or has a machine do, so that a risk is less likely or less harmful, or a rule is kept (ISO 31000: a measure that maintains or modifies risk; COSO's control activities). It answers \"what actually stops this, finds it, or repairs it, and is it a machine or a person?\" The control is the entity: a gate's criteria and a check's code stay where they are, and the control says in prose how it is carried out and points at the file that does it. How well it works is measured, where the company measures it, by a KPI, never by a number on this page.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- A control names at least one risk it mitigates or one rule it enforces. The grammar declares each field on its own, so this rule is the agent pass's to hold.\n- `## How it is carried out` says what does the work and when, as a reader could check: \"the seat check, run by the commit hook and again by the instance check on every pull request, refuses a commit whose seat the named phase does not list\". The hook, the workflow or the command it names goes in `## References`.\n- A gate is a control where the phase's gate is one: the control names the phase in `## Applies to`, and the gate's criteria stay the phase's bullets.\n- `performed-by` names a seat for a manual control, never a person; an automated control names none.\n- An `## Applies to` row names a role, a process or a phase; the grammar reads any type in the Type column, so this is the agent pass's to hold.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/controls/*.md`\n\nNothing owns a control and a control owns nothing: it reaches across the processes and phases it applies in and names the risks and rules it answers to.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/control-schema.md"
+    },
+    {
       "id": "01a0dd34-8da0-7631-83df-1cf924855e48",
       "address": "core/decision",
-      "type": "schema",
+      "type": "core",
       "name": "Decision Schema",
       "tagline": "Required structure for decision files.",
       "fields": {},
@@ -1112,7 +1396,7 @@
     {
       "id": "01a0dd34-8da0-7615-9223-70458cc2b8b0",
       "address": "core/decision-kind",
-      "type": "schema",
+      "type": "core",
       "name": "Decision Kind Schema",
       "tagline": "Required structure for decision kind files.",
       "fields": {},
@@ -1292,7 +1576,7 @@
     {
       "id": "01a0dd34-8da0-7db6-9762-c04c62f55fe0",
       "address": "core/decision-status",
-      "type": "schema",
+      "type": "core",
       "name": "Decision Status Schema",
       "tagline": "Required structure for decision status files.",
       "fields": {},
@@ -1472,7 +1756,7 @@
     {
       "id": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
       "address": "core/domain",
-      "type": "schema",
+      "type": "core",
       "name": "Domain Schema",
       "tagline": "Required structure for domain files.",
       "fields": {},
@@ -1642,7 +1926,7 @@
     {
       "id": "01a02f41-4da0-7f80-93be-7ae6d0bfc85d",
       "address": "core/experience",
-      "type": "schema",
+      "type": "core",
       "name": "Experience Schema",
       "tagline": "Required structure for experience files.",
       "fields": {
@@ -1935,7 +2219,7 @@
     {
       "id": "01a06385-9d00-7eef-86a5-d2218d053998",
       "address": "core/experience-kind",
-      "type": "schema",
+      "type": "core",
       "name": "Experience Kind Schema",
       "tagline": "Required structure for experience kind files.",
       "fields": {},
@@ -2115,7 +2399,7 @@
     {
       "id": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
       "address": "core/feature",
-      "type": "schema",
+      "type": "core",
       "name": "Feature Schema",
       "tagline": "Required structure for feature files.",
       "fields": {},
@@ -2319,7 +2603,7 @@
     {
       "id": "01a0f10d-64f0-71c7-8329-86453b047994",
       "address": "core/identifier",
-      "type": "schema",
+      "type": "core",
       "name": "Identifier Schema",
       "tagline": "Required structure for the identifier file: what an entity's id looks like in this instance.",
       "fields": {},
@@ -2501,7 +2785,7 @@
     {
       "id": "01a04c7b-6b80-73dc-8007-6a193b1138d3",
       "address": "core/identity",
-      "type": "schema",
+      "type": "core",
       "name": "Identity Schema",
       "tagline": "Required structure for the identity file — who the company is.",
       "fields": {},
@@ -2750,7 +3034,7 @@
     {
       "id": "01a0d896-7c40-707d-92ca-c0568838830a",
       "address": "core/kpi",
-      "type": "schema",
+      "type": "core",
       "name": "KPI Schema",
       "tagline": "Required structure for KPI files.",
       "fields": {},
@@ -3024,9 +3308,9 @@
     {
       "id": "01a0f254-34f0-709f-b36c-1c67dcc7ae30",
       "address": "core/localization",
-      "type": "schema",
+      "type": "core",
       "name": "Localization Schema",
-      "tagline": "Required structure for the localization file: the language an instance is written in, and the ones it is translated into.",
+      "tagline": "Required structure for the localization file: the one language an instance is written in.",
       "fields": {},
       "sections": [
         {
@@ -3053,6 +3337,12 @@
                   "Yes",
                   "ref → source",
                   "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+                ],
+                [
+                  "`locale`",
+                  "Yes",
+                  "string",
+                  "The language the model is written in, as a BCP 47 language tag: `en-US`, `de-CH`"
                 ]
               ]
             }
@@ -3077,6 +3367,12 @@
                 "Yes",
                 "ref → source",
                 "Where this page's facts are mastered — the H1 of a file in `model/sources/`"
+              ],
+              [
+                "`locale`",
+                "Yes",
+                "string",
+                "The language the model is written in, as a BCP 47 language tag: `en-US`, `de-CH`"
               ]
             ]
           }
@@ -3096,45 +3392,17 @@
                 [
                   "`# [Name]`",
                   "Yes",
-                  "What the instance calls its languages"
+                  "What the instance calls its language"
                 ],
                 [
                   "`> [Statement]`",
                   "Yes",
-                  "One paragraph on who reads the model in which language"
-                ],
-                [
-                  "`## Locales`",
-                  "Yes",
-                  "Table. The primary language and every translated one; its columns are declared below."
+                  "One paragraph on who reads the model in that language"
                 ],
                 [
                   "`## References`",
                   "No",
-                  "Table. The standard the tags follow; its columns are declared below."
-                ]
-              ]
-            },
-            {
-              "caption": "`## Locales` is a table with these columns:",
-              "columns": [
-                "Column",
-                "Required",
-                "Type",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "`Locale`",
-                  "Yes",
-                  "string",
-                  "A BCP 47 language tag, `de-CH` or `en-US`"
-                ],
-                [
-                  "`Role`",
-                  "Yes",
-                  "enum",
-                  "`primary` or `translated`. The primary is the language the pages are written in; a translated locale is one every page carries a section for."
+                  "Table. The standard the tag follows; its columns are declared below."
                 ]
               ]
             },
@@ -3173,39 +3441,34 @@
               [
                 "`# [Name]`",
                 "Yes",
-                "What the instance calls its languages"
+                "What the instance calls its language"
               ],
               [
                 "`> [Statement]`",
                 "Yes",
-                "One paragraph on who reads the model in which language"
-              ],
-              [
-                "`## Locales`",
-                "Yes",
-                "Table. The primary language and every translated one; its columns are declared below."
+                "One paragraph on who reads the model in that language"
               ],
               [
                 "`## References`",
                 "No",
-                "Table. The standard the tags follow; its columns are declared below."
+                "Table. The standard the tag follows; its columns are declared below."
               ]
             ]
           }
         },
         {
           "heading": "Purpose",
-          "text": "The localization file says which language the pages are written in and which ones each page is translated into, so that a reader, an agent or a check knows which sections a page carries and which language an answer can be grounded in. How a translation is written is R19's, not this page's.",
+          "text": "The localization file says which language the model is written in, so that a reader, an agent or a check knows the language every page's names and prose are in, and which language an answer grounded in the model is grounded in. A model is written in one language and is never translated inside itself; a reader in another language reads a rendering of it.",
           "tables": []
         },
         {
           "heading": "Writing rules",
-          "text": "- Exactly one row is `primary`, and no tag is written twice.\n- A language is written on a branch and declared `translated` in the same pull request that completes it, since a page may not carry a section for a language the file does not declare.\n- The statement names who reads the model in which language: the owner, a customer, an agent answering in it.\n- Names and prose are in the primary locale (R14).",
+          "text": "- `locale` is one language tag. Which tags exist is the registry's, and the check holds only the shape.\n- The statement names who reads the model in that language: the owner, a customer, an agent answering in it.\n- Names and prose are in the language `locale` names (R14).",
           "tables": []
         },
         {
           "heading": "File Location",
-          "text": "`model/localization.md`\n\nAn instance has one set of languages, so the type is a file directly in the container rather than a folder (R6, R13), named for the type rather than for the slug of its H1 (R12), which leaves the H1 free to be a name.",
+          "text": "`model/localization.md`\n\nAn instance is written in one language, so the type is a file directly in the container rather than a folder (R6, R13), named for the type rather than for the slug of its H1 (R12), which leaves the H1 free to be a name.",
           "tables": []
         }
       ],
@@ -3215,7 +3478,7 @@
     {
       "id": "01a0a8b4-7978-7d24-aac9-850b3c9a4d9c",
       "address": "core/phase",
-      "type": "schema",
+      "type": "core",
       "name": "Phase Schema",
       "tagline": "Required structure for phase files.",
       "fields": {
@@ -3582,7 +3845,7 @@
     {
       "id": "01a0a8b4-7978-7026-a388-b10e041b45b5",
       "address": "core/process",
-      "type": "schema",
+      "type": "core",
       "name": "Process Schema",
       "tagline": "Required structure for process files.",
       "fields": {},
@@ -3840,7 +4103,7 @@
     {
       "id": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
       "address": "core/product",
-      "type": "schema",
+      "type": "core",
       "name": "Product Schema",
       "tagline": "Required structure for product files.",
       "fields": {},
@@ -4034,7 +4297,7 @@
     {
       "id": "01a02f8b-db90-7d28-8506-23282bf3a383",
       "address": "core/proficiency-level",
-      "type": "schema",
+      "type": "core",
       "name": "Proficiency Level Schema",
       "tagline": "Required structure for proficiency level files.",
       "fields": {},
@@ -4226,7 +4489,7 @@
     {
       "id": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
       "address": "core/profile",
-      "type": "schema",
+      "type": "core",
       "name": "Profile Schema",
       "tagline": "Required structure for profile files.",
       "fields": {},
@@ -4571,7 +4834,7 @@
     {
       "id": "01a0d1c8-57f8-7233-ac27-d1160347d7a8",
       "address": "core/question",
-      "type": "schema",
+      "type": "core",
       "name": "Question Schema",
       "tagline": "Required structure for question files.",
       "fields": {},
@@ -4798,7 +5061,7 @@
     {
       "id": "01a0ddf7-ed40-7c28-9b18-65b95ea6de95",
       "address": "core/question-kind",
-      "type": "schema",
+      "type": "core",
       "name": "Question Kind Schema",
       "tagline": "Required structure for question kind files.",
       "fields": {},
@@ -4988,9 +5251,223 @@
       "path": "core/question-kind-schema.md"
     },
     {
+      "id": "01a0fb19-9552-78c5-9105-3fa9c4659b23",
+      "address": "core/risk",
+      "type": "core",
+      "name": "Risk Schema",
+      "tagline": "Required structure for risk files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`owner`",
+                  "Yes",
+                  "ref → role",
+                  "The seat accountable for the risk, the H1 of a file in `roles/`"
+                ],
+                [
+                  "`threatens`",
+                  "No",
+                  "array of ref → strategic-objective",
+                  "The objectives it would affect, each the H1 of a file in `strategic-objectives/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`owner`",
+                "Yes",
+                "ref → role",
+                "The seat accountable for the risk, the H1 of a file in `roles/`"
+              ],
+              [
+                "`threatens`",
+                "No",
+                "array of ref → strategic-objective",
+                "The objectives it would affect, each the H1 of a file in `strategic-objectives/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Risk]`",
+                  "Yes",
+                  "The risk's name, stated as the event. Everything references the risk by this exact string."
+                ],
+                [
+                  "`> [What could happen]`",
+                  "Yes",
+                  "What could happen, in one sentence"
+                ],
+                [
+                  "`## Cause`",
+                  "Yes",
+                  "What would bring it about (ISO 31000: risk source)"
+                ],
+                [
+                  "`## Consequence`",
+                  "Yes",
+                  "What it would do to the company's objectives (ISO 31000: consequence)"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The register or tracker that keeps its current rating and its history; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document, a risk register, a tracker"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Risk]`",
+                "Yes",
+                "The risk's name, stated as the event. Everything references the risk by this exact string."
+              ],
+              [
+                "`> [What could happen]`",
+                "Yes",
+                "What could happen, in one sentence"
+              ],
+              [
+                "`## Cause`",
+                "Yes",
+                "What would bring it about (ISO 31000: risk source)"
+              ],
+              [
+                "`## Consequence`",
+                "Yes",
+                "What it would do to the company's objectives (ISO 31000: consequence)"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The register or tracker that keeps its current rating and its history; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A risk is what could go wrong: an event that would affect the company's objectives, from a cause, with a consequence (ISO 31000's risk source, event and consequence; BMM's risk as a potential impact of loss). It answers \"what are we guarding against, and who answers for it?\" A downside only: an opportunity is what an objective or a strategy already pursues. The controls that mitigate it and the rules it motivates name it; it names none of them.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- A risk is written as an event, not as a feeling or a gap: \"a secret reaches a transcript\", not \"security\".\n- It carries no likelihood, impact or score. Those are assessments that move, and the model holds how things are made and not their state (R17), as a KPI holds its definition and none of its values. Where the company rates its risks, `## References` points at where it does.\n- `owner` names the seat, never the person, as a role is person-neutral.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/risks/*.md`\n\nNothing owns a risk and a risk owns nothing: what could go wrong reaches across the company, and its owner is a seat it names, not a folder it sits in.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/risk-schema.md"
+    },
+    {
       "id": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "address": "core/role",
-      "type": "schema",
+      "type": "core",
       "name": "Role Schema",
       "tagline": "Required structure for role files.",
       "fields": {},
@@ -5200,9 +5677,276 @@
       "path": "core/role-schema.md"
     },
     {
+      "id": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "address": "core/rule",
+      "type": "core",
+      "name": "Rule Schema",
+      "tagline": "Required structure for rule files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`modality`",
+                  "Yes",
+                  "enum",
+                  "`must`, `must not` or `may`. What the statement does: obliges, forbids or permits (SBVR's obligation, prohibition and restricted permission)."
+                ],
+                [
+                  "`protects`",
+                  "No",
+                  "array of ref → value",
+                  "The values the rule keeps from being broken, each the H1 of a file in `values/`"
+                ],
+                [
+                  "`serves`",
+                  "No",
+                  "array of ref → strategic-objective",
+                  "The objectives the rule serves, each the H1 of a file in `strategic-objectives/` (BMM: a directive supports a goal)"
+                ],
+                [
+                  "`motivated-by`",
+                  "No",
+                  "array of ref → risk",
+                  "The risks that are the reason for it, each the H1 of a file in `risks/` (BMM: a directive is motivated by a potential impact)"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`modality`",
+                "Yes",
+                "enum",
+                "`must`, `must not` or `may`. What the statement does: obliges, forbids or permits (SBVR's obligation, prohibition and restricted permission)."
+              ],
+              [
+                "`protects`",
+                "No",
+                "array of ref → value",
+                "The values the rule keeps from being broken, each the H1 of a file in `values/`"
+              ],
+              [
+                "`serves`",
+                "No",
+                "array of ref → strategic-objective",
+                "The objectives the rule serves, each the H1 of a file in `strategic-objectives/` (BMM: a directive supports a goal)"
+              ],
+              [
+                "`motivated-by`",
+                "No",
+                "array of ref → risk",
+                "The risks that are the reason for it, each the H1 of a file in `risks/` (BMM: a directive is motivated by a potential impact)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Rule]`",
+                  "Yes",
+                  "The rule's name. Everything references the rule by this exact string."
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "The rule itself, written so that it can be kept or broken"
+                ],
+                [
+                  "`## Why`",
+                  "Yes",
+                  "The reason for the rule, in a paragraph"
+                ],
+                [
+                  "`## Applies to`",
+                  "No",
+                  "Table. The seats the rule binds and the processes and phases it applies in; its columns are declared below. A rule with no rows applies everywhere."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The law, standard or document it complies with, or where it came from; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Applies to` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "The type of the entity this row names, as its schema is named: `role`, `process` or `phase`"
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type in Owner",
+                  "The seat, process or phase, by its canonical name"
+                ],
+                [
+                  "`Owner`",
+                  "No",
+                  "string",
+                  "For a phase, the process that owns it, by its canonical name; blank otherwise"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document, a law, a standard, a policy"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Rule]`",
+                "Yes",
+                "The rule's name. Everything references the rule by this exact string."
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "The rule itself, written so that it can be kept or broken"
+              ],
+              [
+                "`## Why`",
+                "Yes",
+                "The reason for the rule, in a paragraph"
+              ],
+              [
+                "`## Applies to`",
+                "No",
+                "Table. The seats the rule binds and the processes and phases it applies in; its columns are declared below. A rule with no rows applies everywhere."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The law, standard or document it complies with, or where it came from; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A rule is a statement under the company's own authority that obliges, forbids or permits something (SBVR; BMM's directive). It answers \"what must, must not or may happen here, and why?\" for a person or an agent about to act. It is for what reaches across: a refusal only one seat, one process or one phase makes stays in that page's `## What it never does`. Whether a machine or a person holds a change to the rule is read from the controls that enforce it, which name the rule; the rule names none of them.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The statement says one thing, as the people it binds would say it, and could be kept or broken. A statement nobody could tell was kept or broken is advice and is not written (SBVR: no business rule is an advice).\n- A rule that no control enforces is still a rule, and one a person or a reviewer holds a change against.\n- A refusal only one seat, one process or one phase makes stays in that page's `## What it never does`. A rule is for what binds more than one of them, or what a control checks, and where a rule replaces a refusal restated on several pages, those restatements are removed.\n- A value's \"We never …\" is the value's own boundary and stays; a rule may protect it.\n- `motivated-by` names a risk only where the rule exists because of it.\n- An `## Applies to` row names a role, a process or a phase; the grammar reads any type in the Type column, so this is the agent pass's to hold.\n- Names and prose are American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/rules/*.md`\n\nNothing owns a rule and a rule owns nothing: a rule reaches across the seats, processes and phases it binds and belongs to none of them.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/rule-schema.md"
+    },
+    {
       "id": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "address": "core/skill",
-      "type": "schema",
+      "type": "core",
       "name": "Skill Schema",
       "tagline": "Required structure for skill files.",
       "fields": {},
@@ -5394,7 +6138,7 @@
     {
       "id": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "address": "core/source",
-      "type": "schema",
+      "type": "core",
       "name": "Source Schema",
       "tagline": "Required structure for source files.",
       "fields": {},
@@ -5552,7 +6296,7 @@
     {
       "id": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "address": "core/strategic-objective",
-      "type": "schema",
+      "type": "core",
       "name": "Strategic Objective Schema",
       "tagline": "Required structure for strategic objective files.",
       "fields": {},
@@ -5756,7 +6500,7 @@
     {
       "id": "01a0a48b-9818-7d5d-a7eb-46aee2dfe2a7",
       "address": "core/strategy",
-      "type": "schema",
+      "type": "core",
       "name": "Strategy Schema",
       "tagline": "Required structure for strategy files.",
       "fields": {},
@@ -5992,7 +6736,7 @@
     {
       "id": "01a08666-4360-7bac-8ac9-4b7c234e01fc",
       "address": "core/surface",
-      "type": "schema",
+      "type": "core",
       "name": "Surface Schema",
       "tagline": "Required structure for surface files.",
       "fields": {},
@@ -6228,7 +6972,7 @@
     {
       "id": "01a0bfb0-acf0-79e1-bc25-474cf0bd7ac0",
       "address": "core/track",
-      "type": "schema",
+      "type": "core",
       "name": "Track Schema",
       "tagline": "Required structure for track files.",
       "fields": {
@@ -6400,7 +7144,7 @@
     {
       "id": "01a02f39-6248-779b-b3d9-aed29f14e367",
       "address": "core/value",
-      "type": "schema",
+      "type": "core",
       "name": "Value Schema",
       "tagline": "Required structure for value files.",
       "fields": {},
@@ -6580,7 +7324,7 @@
     {
       "id": "01a04c7b-6b80-711e-bc03-252a77c875ab",
       "address": "core/vision",
-      "type": "schema",
+      "type": "core",
       "name": "Vision Schema",
       "tagline": "Required structure for the vision file — the future the company is working toward.",
       "fields": {},
@@ -6756,6 +7500,1346 @@
       ],
       "owner": null,
       "path": "core/vision-schema.md"
+    },
+    {
+      "id": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "address": "software/aggregate",
+      "type": "software",
+      "name": "Aggregate Schema",
+      "tagline": "Required structure for aggregate files.",
+      "fields": {
+        "owner": "bounded-context"
+      },
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`root`",
+                  "Yes",
+                  "ref → concept-design",
+                  "The entity through which the aggregate is reached, a concept design of kind `entity` in the same context (Evans)"
+                ],
+                [
+                  "`members`",
+                  "No",
+                  "array of ref → concept-design",
+                  "The other concept designs the aggregate holds, beside its root"
+                ],
+                [
+                  "`decisions`",
+                  "No",
+                  "array of ref → decision",
+                  "The decisions that shaped this aggregate, the H1s of files in `decisions/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`root`",
+                "Yes",
+                "ref → concept-design",
+                "The entity through which the aggregate is reached, a concept design of kind `entity` in the same context (Evans)"
+              ],
+              [
+                "`members`",
+                "No",
+                "array of ref → concept-design",
+                "The other concept designs the aggregate holds, beside its root"
+              ],
+              [
+                "`decisions`",
+                "No",
+                "array of ref → decision",
+                "The decisions that shaped this aggregate, the H1s of files in `decisions/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Aggregate]`",
+                  "Yes",
+                  "The aggregate's name, usually its root's"
+                ],
+                [
+                  "`> [Consistency]`",
+                  "Yes",
+                  "What the aggregate keeps consistent, in one sentence"
+                ],
+                [
+                  "`## Invariants`",
+                  "Yes",
+                  "Table. One rule per row that holds after every change, under a label a test or a code comment cites it by (DDD Crew, Aggregate Design Canvas); its columns are declared below."
+                ],
+                [
+                  "`## Handled commands`",
+                  "No",
+                  "Table. What the aggregate is asked to do; its columns are declared below."
+                ],
+                [
+                  "`## State transitions`",
+                  "No",
+                  "The states the aggregate moves through and what moves it (DDD Crew, Aggregate Design Canvas)"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the aggregate; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Invariants` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Label`",
+                  "Yes",
+                  "string",
+                  "What the invariant is cited by: letters, digits and hyphens, unique within the aggregate, such as `INV-T1`"
+                ],
+                [
+                  "`Invariant`",
+                  "Yes",
+                  "string",
+                  "The rule, stated so a test could check it"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Handled commands` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Command`",
+                  "Yes",
+                  "string",
+                  "The command, in the imperative: \"Issue invoice\""
+                ],
+                [
+                  "`Description`",
+                  "No",
+                  "string",
+                  "What it asks for, and what it refuses"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — an aggregate canvas, a design note"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Aggregate]`",
+                "Yes",
+                "The aggregate's name, usually its root's"
+              ],
+              [
+                "`> [Consistency]`",
+                "Yes",
+                "What the aggregate keeps consistent, in one sentence"
+              ],
+              [
+                "`## Invariants`",
+                "Yes",
+                "Table. One rule per row that holds after every change, under a label a test or a code comment cites it by (DDD Crew, Aggregate Design Canvas); its columns are declared below."
+              ],
+              [
+                "`## Handled commands`",
+                "No",
+                "Table. What the aggregate is asked to do; its columns are declared below."
+              ],
+              [
+                "`## State transitions`",
+                "No",
+                "The states the aggregate moves through and what moves it (DDD Crew, Aggregate Design Canvas)"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the aggregate; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "An aggregate answers \"what has to stay consistent together, and through what is it changed?\" It is Evans's aggregate: a cluster of concept designs changed only through its root. The invariants are a table and not a numbered list, because they are a set and not a sequence, and a position is no key anything outside can cite. A command is a row here and not a type, because nothing outside the aggregate names it. The events it emits are not written here: each event names its aggregate as `emitted-by`, and the edge is read from that end.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The root is an entity. A value object cannot be a root, since it has no identity to reach the rest through.\n- An invariant is a rule that holds after every command, stated so a test could check it.\n- A command is named in the imperative and an event in the past tense, so the two are never confused.\n- A label stays when its invariant is reworded. A new rule takes a new label, and a removed rule's label is not used again.\n- A page drawn from code names that code as its `source`, the repository a sync reads, and the module or package as its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/bounded-contexts/<bounded-context>/aggregates/*.md`",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/software/aggregate-schema.md"
+    },
+    {
+      "id": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "address": "software/bounded-context",
+      "type": "software",
+      "name": "Bounded Context Schema",
+      "tagline": "Required structure for bounded context files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`classification`",
+                  "Yes",
+                  "enum",
+                  "`core`, `supporting` or `generic`. How much it matters to build this well: where the company competes, what it needs and builds for itself, or what it could buy (DDD Crew, Bounded Context Canvas)."
+                ],
+                [
+                  "`realizes`",
+                  "No",
+                  "array of ref → domain",
+                  "The domains this context serves, the H1s of files in `domains/`; a context may serve several and a domain be served by several (Vernon)"
+                ],
+                [
+                  "`decisions`",
+                  "No",
+                  "array of ref → decision",
+                  "The decisions that shaped this context, the H1s of files in `decisions/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`classification`",
+                "Yes",
+                "enum",
+                "`core`, `supporting` or `generic`. How much it matters to build this well: where the company competes, what it needs and builds for itself, or what it could buy (DDD Crew, Bounded Context Canvas)."
+              ],
+              [
+                "`realizes`",
+                "No",
+                "array of ref → domain",
+                "The domains this context serves, the H1s of files in `domains/`; a context may serve several and a domain be served by several (Vernon)"
+              ],
+              [
+                "`decisions`",
+                "No",
+                "array of ref → decision",
+                "The decisions that shaped this context, the H1s of files in `decisions/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Bounded Context]`",
+                  "Yes",
+                  "The canonical name of the context"
+                ],
+                [
+                  "`> [Purpose]`",
+                  "Yes",
+                  "What the context is responsible for, and one thing it leaves to another context"
+                ],
+                [
+                  "`## Responsibilities`",
+                  "Yes",
+                  "Bulleted. One responsibility each, in business words"
+                ],
+                [
+                  "`## Relationships`",
+                  "No",
+                  "Table. One row per context this one depends on, written on the downstream side; its columns are declared below."
+                ],
+                [
+                  "`## Consumes`",
+                  "No",
+                  "Table. One row per domain event this context takes from another; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the context; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Relationships` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Context`",
+                  "Yes",
+                  "ref → bounded-context",
+                  "The upstream context this one depends on, by its canonical name"
+                ],
+                [
+                  "`Pattern`",
+                  "Yes",
+                  "enum",
+                  "`partnership`, `shared kernel`, `customer/supplier`, `conformist`, `anticorruption layer`, `open host service`, `published language`, `separate ways` or `big ball of mud`. How the two contexts relate (DDD Crew, Context Mapping)."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Consumes` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "The type of what is consumed, as its schema is named: `domain-event`"
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type in Context",
+                  "What is consumed, by its canonical name"
+                ],
+                [
+                  "`Context`",
+                  "Yes",
+                  "string",
+                  "The context that owns it, by its canonical name"
+                ],
+                [
+                  "`Reaction`",
+                  "No",
+                  "string",
+                  "What this context does in response, naming the handled command in words; a command is a row on its aggregate, and nothing can reference it (Event Modeling, policy)"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a context canvas, a service's documentation"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Bounded Context]`",
+                "Yes",
+                "The canonical name of the context"
+              ],
+              [
+                "`> [Purpose]`",
+                "Yes",
+                "What the context is responsible for, and one thing it leaves to another context"
+              ],
+              [
+                "`## Responsibilities`",
+                "Yes",
+                "Bulleted. One responsibility each, in business words"
+              ],
+              [
+                "`## Relationships`",
+                "No",
+                "Table. One row per context this one depends on, written on the downstream side; its columns are declared below."
+              ],
+              [
+                "`## Consumes`",
+                "No",
+                "Table. One row per domain event this context takes from another; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the context; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A bounded context answers \"within which boundary does one model, and one meaning of each word, hold?\" It is Evans's bounded context and the solution side of core's domain: a domain says what area of the company something belongs to, and a context says where one model of it is built. It owns the terms of its language, so two contexts may mean different things by one word, which is the problem domain-driven design exists to solve. Its strategic classification departs from Evans, who puts it on the subdomain; it sits here, as the DDD Crew's canvas puts it, so that core's domain stays untouched.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The name is the business's, not a service's or a team's: \"Billing\", not \"billing-service\".\n- The purpose names one thing the context leaves to another, so its boundary can be read from its first line.\n- A relationship is written on the downstream context, the side that knows it depends. A symmetric pattern, a partnership or a shared kernel, is written once, on either side.\n- The context map is drawn from the Relationships rows and never written as a page.\n- An event is consumed where the Consumes table names it, and the Relationships table names the context it comes from.\n- A reaction says what happens here, not in the context that emitted the event.\n- A page drawn from code names that code as its `source`, the repository a sync reads, and the module or package as its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/bounded-contexts/<bounded-context>/<bounded-context>.md`\n\nA bounded context owns the terms of its language, its aggregates and its events, so it is a folder and they nest inside it (R5, R6).",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/software/bounded-context-schema.md"
+    },
+    {
+      "id": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "address": "software/concept-design",
+      "type": "software",
+      "name": "Concept Design Schema",
+      "tagline": "Required structure for concept design files.",
+      "fields": {
+        "owner": "bounded-context"
+      },
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "enum",
+                  "`entity` or `value object`. An entity is defined by an identity that persists through changes to its attributes; a value object is defined only by its attributes and is replaced rather than changed (Evans)."
+                ],
+                [
+                  "`refines`",
+                  "No",
+                  "ref → concept",
+                  "The enterprise concept this term narrows, the H1 of a file in `concepts/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "enum",
+                "`entity` or `value object`. An entity is defined by an identity that persists through changes to its attributes; a value object is defined only by its attributes and is replaced rather than changed (Evans)."
+              ],
+              [
+                "`refines`",
+                "No",
+                "ref → concept",
+                "The enterprise concept this term narrows, the H1 of a file in `concepts/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Concept Design]`",
+                  "Yes",
+                  "The term, as the context's people say it"
+                ],
+                [
+                  "`> [Meaning]`",
+                  "Yes",
+                  "What the word means in this context, and nowhere else"
+                ],
+                [
+                  "`## Attributes`",
+                  "No",
+                  "Table. What the term carries; its columns are declared below."
+                ],
+                [
+                  "`## Relations`",
+                  "No",
+                  "Table. Other terms of the same context this one is related to; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the term; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Attributes` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Attribute`",
+                  "Yes",
+                  "string",
+                  "The attribute's name, as the context's people say it"
+                ],
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "A plain type such as `Money` or `date`, or the name of a value-object concept design in the same context"
+                ],
+                [
+                  "`Description`",
+                  "No",
+                  "string",
+                  "What the attribute says"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Relations` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Concept`",
+                  "Yes",
+                  "ref → concept-design",
+                  "The related term in the same context, by its canonical name"
+                ],
+                [
+                  "`Cardinality`",
+                  "Yes",
+                  "enum",
+                  "`one`, `maybe one`, `many` or `one to many`. How many of the target one of these has: exactly one, none or one, none or more, or one or more."
+                ],
+                [
+                  "`As`",
+                  "No",
+                  "string",
+                  "The role the target plays, required where two rows name the same concept"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a model diagram, a glossary"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Concept Design]`",
+                "Yes",
+                "The term, as the context's people say it"
+              ],
+              [
+                "`> [Meaning]`",
+                "Yes",
+                "What the word means in this context, and nowhere else"
+              ],
+              [
+                "`## Attributes`",
+                "No",
+                "Table. What the term carries; its columns are declared below."
+              ],
+              [
+                "`## Relations`",
+                "No",
+                "Table. Other terms of the same context this one is related to; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the term; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A concept design answers \"what does this word mean here?\" It is one term of a bounded context's ubiquitous language (Evans), and an entity or a value object by its kind. It may refine an enterprise concept of core, which says what the thing is for the whole company; the concept design says what it is inside one context, which is narrower and may differ from another context's term of the same name.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The meaning says what the thing is in this context, not what a system does with it.\n- The kind follows Evans's test: if every attribute changed, would it still be the same one? Then it is an entity.\n- A relation is written on one side only, as core's concept relations are.\n- An attribute whose type is a value object names that value object's concept design exactly.\n- A page drawn from code names that code as its `source`, the repository a sync reads, and the module or package as its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/bounded-contexts/<bounded-context>/concept-designs/*.md`\n\nA concept design is a term of one context's language and means nothing outside it, so it nests inside its context (R5, R10), and its name is unique within that context (R2).",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/software/concept-design-schema.md"
+    },
+    {
+      "id": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
+      "address": "software/domain-event",
+      "type": "software",
+      "name": "Domain Event Schema",
+      "tagline": "Required structure for domain event files.",
+      "fields": {
+        "owner": "bounded-context"
+      },
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`emitted-by`",
+                  "Yes",
+                  "ref → aggregate",
+                  "The aggregate whose change the event records, in the same context"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`emitted-by`",
+                "Yes",
+                "ref → aggregate",
+                "The aggregate whose change the event records, in the same context"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Domain Event]`",
+                  "Yes",
+                  "What happened, in the past tense: \"Invoice issued\""
+                ],
+                [
+                  "`> [What happened]`",
+                  "Yes",
+                  "The event in business words, in one sentence"
+                ],
+                [
+                  "`## Payload`",
+                  "No",
+                  "Table. What the event carries; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the event; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Payload` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Attribute`",
+                  "Yes",
+                  "string",
+                  "The value's name, as the context's people say it"
+                ],
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "A plain type such as `duration` or `timestamp`, or the name of a concept design in the same context"
+                ],
+                [
+                  "`Description`",
+                  "No",
+                  "string",
+                  "What the value says"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a message schema, an event catalog"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Domain Event]`",
+                "Yes",
+                "What happened, in the past tense: \"Invoice issued\""
+              ],
+              [
+                "`> [What happened]`",
+                "Yes",
+                "The event in business words, in one sentence"
+              ],
+              [
+                "`## Payload`",
+                "No",
+                "Table. What the event carries; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the event; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A domain event answers \"what happened that other parts of the domain care about?\" It is Evans's and Vernon's domain event, named in the past tense. It is a type and not a row of its aggregate because other contexts consume it and feature designs name it, and a row cannot be named from outside its page.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The name is in the past tense and says what happened, not what should happen next.\n- A payload type that names a term names one of the event's own context; a consumer translates it into its own language.\n- A page drawn from code names that code as its `source`, the repository a sync reads, and the module or package as its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/bounded-contexts/<bounded-context>/domain-events/*.md`",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/software/domain-event-schema.md"
+    },
+    {
+      "id": "01a0f94d-fada-7269-85c8-f21efe8fb99f",
+      "address": "software/feature-design",
+      "type": "software",
+      "name": "Feature Design Schema",
+      "tagline": "Required structure for feature design files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`refines`",
+                  "No",
+                  "ref → feature",
+                  "The feature this design builds, the H1 of a file in `features/`; more than one design may refine one feature"
+                ],
+                [
+                  "`contexts`",
+                  "Yes",
+                  "array of ref → bounded-context",
+                  "The contexts the design takes part in, at least one"
+                ],
+                [
+                  "`decisions`",
+                  "No",
+                  "array of ref → decision",
+                  "The decisions that shaped this design, the H1s of files in `decisions/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`refines`",
+                "No",
+                "ref → feature",
+                "The feature this design builds, the H1 of a file in `features/`; more than one design may refine one feature"
+              ],
+              [
+                "`contexts`",
+                "Yes",
+                "array of ref → bounded-context",
+                "The contexts the design takes part in, at least one"
+              ],
+              [
+                "`decisions`",
+                "No",
+                "array of ref → decision",
+                "The decisions that shaped this design, the H1s of files in `decisions/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Feature Design]`",
+                  "Yes",
+                  "The design's name"
+                ],
+                [
+                  "`> [What it delivers]`",
+                  "Yes",
+                  "What the design delivers, in one sentence"
+                ],
+                [
+                  "`## Operational principle`",
+                  "Yes",
+                  "The one scenario that shows why the design exists (Jackson, The Essence of Software)"
+                ],
+                [
+                  "`## Scenarios`",
+                  "No",
+                  "One `###` per scenario, headed `<Label>: <title>` with the label unique within the design, each written Given, When, Then (Gherkin)"
+                ],
+                [
+                  "`## Uses`",
+                  "No",
+                  "Table. The terms and events of its contexts the design works with; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the design; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Uses` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "string",
+                  "`concept-design` or `domain-event`, as the schema is named"
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type in Context",
+                  "The term or event, by its canonical name"
+                ],
+                [
+                  "`Context`",
+                  "Yes",
+                  "string",
+                  "The context that owns it, by its canonical name"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a specification, a prototype"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Feature Design]`",
+                "Yes",
+                "The design's name"
+              ],
+              [
+                "`> [What it delivers]`",
+                "Yes",
+                "What the design delivers, in one sentence"
+              ],
+              [
+                "`## Operational principle`",
+                "Yes",
+                "The one scenario that shows why the design exists (Jackson, The Essence of Software)"
+              ],
+              [
+                "`## Scenarios`",
+                "No",
+                "One `###` per scenario, headed `<Label>: <title>` with the label unique within the design, each written Given, When, Then (Gherkin)"
+              ],
+              [
+                "`## Uses`",
+                "No",
+                "Table. The terms and events of its contexts the design works with; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the design; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A feature design answers \"how is this feature built, and across which contexts?\" It is the solution side of what core's feature says it gives, and it refines that feature. Its operational principle is Jackson's: the one scenario that shows why the design exists. Its scenarios are written as Gherkin writes them.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The operational principle is one scenario, told as what happens, not a list of capabilities.\n- A scenario says Given, When and Then, and each step is something a person or the system does or sees.\n- Every term and event the scenarios mention has a row in `## Uses`, and no row names one they do not.\n- A scenario's label is what the test that proves it cites. It stays when the title is reworded.\n- A page drawn from code names that code as its `source`, the repository a sync reads, and the module or package as its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/feature-designs/*.md`\n\nA feature design uses the contexts it touches and owns none, because a context outlives any one feature and serves many.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/software/feature-design-schema.md"
     }
   ],
   "edges": [
@@ -6797,6 +8881,42 @@
     },
     {
       "from": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
+      "to": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "via": "enforces",
+      "attrs": {
+        "type": "array of ref → rule"
+      },
+      "label": "enforces"
+    },
+    {
+      "from": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
+      "to": "01a0fb19-9552-78c5-9105-3fa9c4659b23",
+      "via": "mitigates",
+      "attrs": {
+        "type": "array of ref → risk"
+      },
+      "label": "mitigates"
+    },
+    {
+      "from": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "performed-by",
+      "attrs": {
+        "type": "ref → role"
+      },
+      "label": "performed-by"
+    },
+    {
+      "from": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
@@ -7305,6 +9425,33 @@
       "label": "source"
     },
     {
+      "from": "01a0fb19-9552-78c5-9105-3fa9c4659b23",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "owner",
+      "attrs": {
+        "type": "ref → role"
+      },
+      "label": "owner"
+    },
+    {
+      "from": "01a0fb19-9552-78c5-9105-3fa9c4659b23",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0fb19-9552-78c5-9105-3fa9c4659b23",
+      "to": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
+      "via": "threatens",
+      "attrs": {
+        "type": "array of ref → strategic-objective"
+      },
+      "label": "threatens"
+    },
+    {
       "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
       "via": "requires",
@@ -7315,6 +9462,42 @@
     },
     {
       "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "to": "01a0fb19-9552-78c5-9105-3fa9c4659b23",
+      "via": "motivated-by",
+      "attrs": {
+        "type": "array of ref → risk"
+      },
+      "label": "motivated-by"
+    },
+    {
+      "from": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "to": "01a02f39-6248-779b-b3d9-aed29f14e367",
+      "via": "protects",
+      "attrs": {
+        "type": "array of ref → value"
+      },
+      "label": "protects"
+    },
+    {
+      "from": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "to": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
+      "via": "serves",
+      "attrs": {
+        "type": "array of ref → strategic-objective"
+      },
+      "label": "serves"
+    },
+    {
+      "from": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
@@ -7403,6 +9586,180 @@
     },
     {
       "from": "01a04c7b-6b80-711e-bc03-252a77c875ab",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "to": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "via": "decisions",
+      "attrs": {
+        "type": "array of ref → decision"
+      },
+      "label": "decisions"
+    },
+    {
+      "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "to": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "via": "members",
+      "attrs": {
+        "type": "array of ref → concept-design"
+      },
+      "label": "members"
+    },
+    {
+      "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "to": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "via": "owner",
+      "attrs": {},
+      "label": "owner"
+    },
+    {
+      "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "to": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "via": "root",
+      "attrs": {
+        "type": "ref → concept-design"
+      },
+      "label": "root"
+    },
+    {
+      "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "to": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "via": "Relationships.Context",
+      "attrs": {
+        "type": "ref → bounded-context"
+      },
+      "label": "Relationships.Context"
+    },
+    {
+      "from": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "to": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "via": "decisions",
+      "attrs": {
+        "type": "array of ref → decision"
+      },
+      "label": "decisions"
+    },
+    {
+      "from": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "to": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
+      "via": "realizes",
+      "attrs": {
+        "type": "array of ref → domain"
+      },
+      "label": "realizes"
+    },
+    {
+      "from": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "to": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "via": "Relations.Concept",
+      "attrs": {
+        "type": "ref → concept-design"
+      },
+      "label": "Relations.Concept"
+    },
+    {
+      "from": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "to": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "via": "owner",
+      "attrs": {},
+      "label": "owner"
+    },
+    {
+      "from": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "to": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "via": "refines",
+      "attrs": {
+        "type": "ref → concept"
+      },
+      "label": "refines"
+    },
+    {
+      "from": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
+      "to": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "via": "emitted-by",
+      "attrs": {
+        "type": "ref → aggregate"
+      },
+      "label": "emitted-by"
+    },
+    {
+      "from": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
+      "to": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "via": "owner",
+      "attrs": {},
+      "label": "owner"
+    },
+    {
+      "from": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0f94d-fada-7269-85c8-f21efe8fb99f",
+      "to": "01a0f94d-f9e9-70c4-a498-9e19505fd58d",
+      "via": "contexts",
+      "attrs": {
+        "type": "array of ref → bounded-context"
+      },
+      "label": "contexts"
+    },
+    {
+      "from": "01a0f94d-fada-7269-85c8-f21efe8fb99f",
+      "to": "01a0dd34-8da0-7631-83df-1cf924855e48",
+      "via": "decisions",
+      "attrs": {
+        "type": "array of ref → decision"
+      },
+      "label": "decisions"
+    },
+    {
+      "from": "01a0f94d-fada-7269-85c8-f21efe8fb99f",
+      "to": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "via": "refines",
+      "attrs": {
+        "type": "ref → feature"
+      },
+      "label": "refines"
+    },
+    {
+      "from": "01a0f94d-fada-7269-85c8-f21efe8fb99f",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
