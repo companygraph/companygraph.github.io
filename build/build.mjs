@@ -65,10 +65,10 @@ const TARGETS = [
   // its pages, as blust.ch reads the reference instance. It also carries the packs its
   // `.companygraph/manifest.json` lists, vendored beside core, so `instance: true` reads
   // schemas through the manifest (`build/schemas.mjs`) rather than from `meta/core/` alone: a
-  // pack's types reach company.json and so the landing stage, and /model/ stays core's. It is the one artifact from another
-  // repository, so it names that repository: `card.js` and `stage.js` link a card to its file
-  // through `repo` and fall back to the meta-model without it. The other two need no `repo`,
-  // because that fallback is already theirs.
+  // pack's types reach company.json and so the landing stage, and /model/ stays core's. It is
+  // the one artifact from another repository, so it names that repository: `card.js` and
+  // `stage.js` link a card to its file through `repo` and fall back to the meta-model without
+  // it. The other two need no `repo`, because that fallback is already theirs.
   { dir: "company", pin: "mental-model", parse: parseInstance, sub: "model/", instance: true, repo: true },
 ];
 
@@ -78,6 +78,7 @@ async function readLocal({ commit, env }, sub) {
   if (head !== commit) throw new Error(`${env} is at ${head.slice(0, 7)}, source.json pins ${commit.slice(0, 7)}`);
   const root = path.join(dir, sub);
   const files = new Map();
+  if (!fs.existsSync(root)) return files;
   const walk = (d) => {
     for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, ent.name);

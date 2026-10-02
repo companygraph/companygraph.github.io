@@ -314,3 +314,25 @@ test("readSchemas on an instance without packs is core alone, as before", async 
     assert.deepEqual([...(await readSchemas(read)).keys()], ["a-schema.md"]);
   }
 });
+
+test("readSchemas names the manifest and the folder when a listed pack has no files", async () => {
+  const manifest = JSON.stringify({ units: "meta", packs: ["software"] });
+  const tree = { ".companygraph/manifest.json": manifest, "meta/core/a-schema.md": "a" };
+  // Remote: the tree has nothing under the prefix, so the read is an empty map.
+  await assert.rejects(readSchemas(repoReader(tree)), /manifest\.json lists the pack "software", but meta\/software\/ has no files/);
+  // Local: the folder is absent, and a read that throws ENOENT is the same refusal.
+  const local = async (sub, o) => {
+    if (sub.startsWith("meta/software/")) throw Object.assign(new Error("ENOENT"), { code: "ENOENT" });
+    return repoReader(tree)(sub, o);
+  };
+  await assert.rejects(readSchemas(local), /lists the pack "software"/);
+});
+
+test("readSchemas names the manifest when it is not JSON or its packs are not names", async () => {
+  await assert.rejects(readSchemas(repoReader({ ".companygraph/manifest.json": "{ nope" })),
+    /\.companygraph\/manifest\.json is not valid JSON/);
+  for (const packs of ["software", [1], { software: true }]) {
+    await assert.rejects(readSchemas(repoReader({ ".companygraph/manifest.json": JSON.stringify({ packs }) })),
+      /manifest\.json: "packs" must be an array of pack names/);
+  }
+});
