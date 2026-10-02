@@ -43,6 +43,15 @@ jobs:
             echo "::error::narration is stale — run talks/obsidian-plugin/tts/generate.py and commit the clips"
             exit 1
           fi
+      - name: Clips still say what the notes say (the levels)
+        working-directory: talks/levels/tts
+        run: |
+          out=$(./generate.py --dry-run)
+          printf '%s\n' "$out"
+          if printf '%s\n' "$out" | grep -q 'would write'; then
+            echo "::error::narration is stale — run talks/levels/tts/generate.py and commit the clips"
+            exit 1
+          fi
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
