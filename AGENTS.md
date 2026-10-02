@@ -51,7 +51,7 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
 - **The stage pages are the one mechanical exception:** `/example/`, `/model/` and the landing
   page each draw a committed artifact, `example.json`, `model.json` and `company.json` —
   `npm run build` writes the first two from `meta-model` at the `meta-model` pin in
-  `source.json`, the example from `example/` and the model from `core/`, and the third from
+  `source.json`, the example from `example/` and the model from `core/` and `packs/`, and the third from
   `companygraph/mental-model` at the `mental-model` pin. A page names its artifact rather than
   carrying it: one `<link rel="preload" as="fetch" href="../example.json" data-stage
   crossorigin>` in the head, which

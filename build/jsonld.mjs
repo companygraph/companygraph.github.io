@@ -127,8 +127,8 @@ function nodeFor(dir, data, repo) {
   return {
     "@type": "DefinedTermSet",
     "@id": `${SITE}/model/#vocabulary`,
-    name: "CompanyGraph core vocabulary",
-    description: "The schemas a company is described in: one per type, each stating the structure its files must carry and how they refer to one another.",
+    name: "CompanyGraph vocabulary",
+    description: "The schemas a company is described in, core and every pack: one per type, each stating the structure its files must carry and how they refer to one another.",
     url: `${SITE}/model/`,
     license: LICENSE,
     creator: CREATOR,
