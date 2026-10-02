@@ -56,7 +56,7 @@ const RENDERERS = [
   // Each board shows its process as the chat draws it, from the same drawer, over the artifact
   // at the commit source.json pins, so the picture moves only when the pin does.
   // Its nodes link to the home page, which draws the company.
-  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
+  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Deciding", "Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
   (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
   // One redirect page per entity of the company with a stable id, sending the reader on to its
