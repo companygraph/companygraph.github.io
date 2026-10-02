@@ -7,6 +7,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { writeJsonLd, terms, PAGES } from "./jsonld.mjs";
+import { readSchemas } from "./schemas.mjs";
 
 const FIXTURE = {
   example: { commit: "0".repeat(40), root: "Someone", rootId: "identity", types: [], entities: [], edges: [] },
@@ -270,5 +271,68 @@ test("company.json is the instance at the pin, with a root and edges", () => {
   for (const edge of data.edges) {
     assert.ok(ids.has(edge.from), `edge from ${edge.from}`);
     assert.ok(ids.has(edge.to), `edge to ${edge.to}`);
+  }
+});
+
+// An instance repository as `read(sub, { file })` sees it: a folder read returns the files
+// under the prefix with it stripped, a file read returns the text or undefined.
+function repoReader(tree) {
+  return async (sub, { file } = {}) => {
+    if (file) return tree[sub];
+    return new Map(Object.entries(tree).filter(([k]) => k.startsWith(sub)).map(([k, v]) => [k.slice(sub.length), v]));
+  };
+}
+
+test("readSchemas carries each pack the manifest lists beside core, under <pack>/<file>", async () => {
+  const read = repoReader({
+    ".companygraph/manifest.json": JSON.stringify({ units: "meta", packs: ["software"] }),
+    "meta/core/skill-schema.md": "core skill",
+    "meta/software/aggregate-schema.md": "pack aggregate",
+    "meta/other/stray-schema.md": "not listed",
+    "model/skill/x.md": "a page",
+  });
+  const schemas = await readSchemas(read);
+  assert.deepEqual([...schemas.keys()].sort(), ["skill-schema.md", "software/aggregate-schema.md"]);
+});
+
+test("readSchemas reads the units the manifest names", async () => {
+  const read = repoReader({
+    ".companygraph/manifest.json": JSON.stringify({ units: "vendor", packs: ["software"] }),
+    "vendor/core/a-schema.md": "a",
+    "vendor/software/b-schema.md": "b",
+  });
+  assert.deepEqual([...(await readSchemas(read)).keys()].sort(), ["a-schema.md", "software/b-schema.md"]);
+});
+
+test("readSchemas on an instance without packs is core alone, as before", async () => {
+  for (const manifest of [JSON.stringify({ units: "meta" }), JSON.stringify({ units: "meta", packs: [] }), undefined]) {
+    const read = repoReader({
+      ...(manifest ? { ".companygraph/manifest.json": manifest } : {}),
+      "meta/core/a-schema.md": "a",
+      "meta/software/b-schema.md": "left on disk, not taken",
+    });
+    assert.deepEqual([...(await readSchemas(read)).keys()], ["a-schema.md"]);
+  }
+});
+
+test("readSchemas names the manifest and the folder when a listed pack has no files", async () => {
+  const manifest = JSON.stringify({ units: "meta", packs: ["software"] });
+  const tree = { ".companygraph/manifest.json": manifest, "meta/core/a-schema.md": "a" };
+  // Remote: the tree has nothing under the prefix, so the read is an empty map.
+  await assert.rejects(readSchemas(repoReader(tree)), /manifest\.json lists the pack "software", but meta\/software\/ has no files/);
+  // Local: the folder is absent, and a read that throws ENOENT is the same refusal.
+  const local = async (sub, o) => {
+    if (sub.startsWith("meta/software/")) throw Object.assign(new Error("ENOENT"), { code: "ENOENT" });
+    return repoReader(tree)(sub, o);
+  };
+  await assert.rejects(readSchemas(local), /lists the pack "software"/);
+});
+
+test("readSchemas names the manifest when it is not JSON or its packs are not names", async () => {
+  await assert.rejects(readSchemas(repoReader({ ".companygraph/manifest.json": "{ nope" })),
+    /\.companygraph\/manifest\.json is not valid JSON/);
+  for (const packs of ["software", [1], { software: true }]) {
+    await assert.rejects(readSchemas(repoReader({ ".companygraph/manifest.json": JSON.stringify({ packs }) })),
+      /manifest\.json: "packs" must be an array of pack names/);
   }
 });

@@ -1,9 +1,21 @@
 {
-  "commit": "bd529f5bf281380dfe5843cd7f1eea650fd514dc",
-  "core": "0.50.0",
+  "commit": "aad33b559522f7e603873466f8f81471c439f123",
+  "core": "0.51.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
+    {
+      "type": "aggregate",
+      "folder": "aggregates",
+      "owner": "bounded-context",
+      "singular": false
+    },
+    {
+      "type": "bounded-context",
+      "folder": "bounded-contexts",
+      "owner": null,
+      "singular": false
+    },
     {
       "type": "brand",
       "folder": null,
@@ -14,6 +26,12 @@
       "type": "concept",
       "folder": "concepts",
       "owner": null,
+      "singular": false
+    },
+    {
+      "type": "concept-design",
+      "folder": "concept-designs",
+      "owner": "bounded-context",
       "singular": false
     },
     {
@@ -38,6 +56,12 @@
       "type": "domain",
       "folder": "domains",
       "owner": null,
+      "singular": false
+    },
+    {
+      "type": "domain-event",
+      "folder": "domain-events",
+      "owner": "bounded-context",
       "singular": false
     },
     {
@@ -156,6 +180,766 @@
     }
   ],
   "entities": [
+    {
+      "id": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "address": "bounded-contexts/resolution",
+      "type": "bounded-context",
+      "name": "Resolution",
+      "tagline": "Turns the names a page writes into the edges of the graph, by the type each schema declares and the owner a row names. Whether a page has the shape its schema asks for is left to the checks.",
+      "fields": {
+        "id": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+        "source": "Local",
+        "classification": "core",
+        "realizes": [
+          "Core"
+        ],
+        "decisions": [
+          "A reference resolves by its declared type, never by name alone"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Find the entity a written name means, looking only among the type the schema declares for that field or column\n- Look for an owned entity only inside the owner its row names, so two owners can each have a page of the same name\n- Report a name that exists only under another type as unresolvable, and say which type was searched\n- Tell the fields and columns that draw an edge from the ones that only qualify a row\n- Record on every edge the field or column that drew it, so a reader can see why two entities are joined",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Implementation",
+                  "https://github.com/companygraph/meta-model/blob/main/lib/instance.mjs"
+                ],
+                [
+                  "The specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-15-typed-resolution-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Implementation",
+                "https://github.com/companygraph/meta-model/blob/main/lib/instance.mjs"
+              ],
+              [
+                "The specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-15-typed-resolution-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/bounded-contexts/resolution/resolution.md"
+    },
+    {
+      "id": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "address": "bounded-contexts/resolution/aggregates/graph",
+      "type": "aggregate",
+      "name": "Graph",
+      "tagline": "Every edge of an instance's graph joins two entities that exist in it, each found by the type and owner its declaration names.",
+      "fields": {
+        "id": "01a0faae-d24f-7363-b997-383d2b553a2e",
+        "source": "Local",
+        "root": "Graph",
+        "members": [
+          "Edge",
+          "Scope"
+        ],
+        "decisions": [
+          "A reference resolves by its declared type, never by name alone",
+          "Every entity carries an id that outlives its name"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Invariants",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Label",
+                "Invariant"
+              ],
+              "rows": [
+                [
+                  "INV-R1",
+                  "Every edge runs between two entities of the graph; a name that resolves to nothing stops the read, and no edge points nowhere."
+                ],
+                [
+                  "INV-R2",
+                  "A written name is looked for only among the type its declaration names, so a name that exists only under another type is unresolvable, never ambiguous."
+                ],
+                [
+                  "INV-R3",
+                  "A name of an owned type is looked for only within its owner, so two owners may each hold a page of that name."
+                ],
+                [
+                  "INV-R4",
+                  "Within one scope no two entities share a canonical name."
+                ],
+                [
+                  "INV-R5",
+                  "A qualifier must resolve but draws no edge; its value describes the edge its row draws."
+                ],
+                [
+                  "INV-R6",
+                  "A `ref?` that names nothing stays a fact and draws no edge."
+                ],
+                [
+                  "INV-R7",
+                  "An edge joins entities by id, so renaming a page keeps every edge to it."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Label",
+              "Invariant"
+            ],
+            "rows": [
+              [
+                "INV-R1",
+                "Every edge runs between two entities of the graph; a name that resolves to nothing stops the read, and no edge points nowhere."
+              ],
+              [
+                "INV-R2",
+                "A written name is looked for only among the type its declaration names, so a name that exists only under another type is unresolvable, never ambiguous."
+              ],
+              [
+                "INV-R3",
+                "A name of an owned type is looked for only within its owner, so two owners may each hold a page of that name."
+              ],
+              [
+                "INV-R4",
+                "Within one scope no two entities share a canonical name."
+              ],
+              [
+                "INV-R5",
+                "A qualifier must resolve but draws no edge; its value describes the edge its row draws."
+              ],
+              [
+                "INV-R6",
+                "A `ref?` that names nothing stays a fact and draws no edge."
+              ],
+              [
+                "INV-R7",
+                "An edge joins entities by id, so renaming a page keeps every edge to it."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Handled commands",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Command",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Read an instance",
+                  "Reads every page against the schemas the instance vendors and draws the graph, or refuses at the first name that resolves to nothing"
+                ],
+                [
+                  "Resolve a row",
+                  "Finds what one table row's Type, Entity and Owner cells name, for an editor completing a cell as it is written"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Command",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Read an instance",
+                "Reads every page against the schemas the instance vendors and draws the graph, or refuses at the first name that resolves to nothing"
+              ],
+              [
+                "Resolve a row",
+                "Finds what one table row's Type, Entity and Owner cells name, for an editor completing a cell as it is written"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Implementation",
+                  "https://github.com/companygraph/meta-model/blob/main/lib/instance.mjs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Implementation",
+                "https://github.com/companygraph/meta-model/blob/main/lib/instance.mjs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/aggregates/graph.md"
+    },
+    {
+      "id": "01a0faae-d24f-746e-9e5a-feb86a53dde1",
+      "address": "bounded-contexts/resolution/concept-designs/declaration",
+      "type": "concept-design",
+      "name": "Declaration",
+      "tagline": "What a schema says one field, column or heading is: a reference that must resolve, a reference that may name nothing, or a qualifier, each pointing at one type. Anything a schema does not declare this way is a fact and is never resolved.",
+      "fields": {
+        "id": "01a0faae-d24f-746e-9e5a-feb86a53dde1",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Schema"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Form",
+                  "string",
+                  "`ref`, `ref?` or `qualifier`"
+                ],
+                [
+                  "Target",
+                  "string",
+                  "The type a written name is looked for in"
+                ],
+                [
+                  "By",
+                  "string",
+                  "For `ref → by <Column>`, the column of the same row that names the type"
+                ],
+                [
+                  "In",
+                  "string",
+                  "For `… in <Owner>`, the column of the same row that names the owner"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Form",
+                "string",
+                "`ref`, `ref?` or `qualifier`"
+              ],
+              [
+                "Target",
+                "string",
+                "The type a written name is looked for in"
+              ],
+              [
+                "By",
+                "string",
+                "For `ref → by <Column>`, the column of the same row that names the type"
+              ],
+              [
+                "In",
+                "string",
+                "For `… in <Owner>`, the column of the same row that names the owner"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/concept-designs/declaration.md"
+    },
+    {
+      "id": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+      "address": "bounded-contexts/resolution/concept-designs/edge",
+      "type": "concept-design",
+      "name": "Edge",
+      "tagline": "One entity joined to another because a field, a table column or a grouped heading its schema declares as a reference names it. Two edges with the same ends and the same origin are the same edge.",
+      "fields": {
+        "id": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Reference"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "From",
+                  "id",
+                  "The entity whose page writes the name"
+                ],
+                [
+                  "To",
+                  "id",
+                  "The entity the name resolves to"
+                ],
+                [
+                  "Via",
+                  "string",
+                  "The field, `<Section>.<Column>` or `<Section>.<Heading>` that drew it"
+                ],
+                [
+                  "Qualifiers",
+                  "map of string",
+                  "The row's other cells, which describe the edge and draw none of their own"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "From",
+                "id",
+                "The entity whose page writes the name"
+              ],
+              [
+                "To",
+                "id",
+                "The entity the name resolves to"
+              ],
+              [
+                "Via",
+                "string",
+                "The field, `<Section>.<Column>` or `<Section>.<Heading>` that drew it"
+              ],
+              [
+                "Qualifiers",
+                "map of string",
+                "The row's other cells, which describe the edge and draw none of their own"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Declaration",
+                  "one",
+                  "drawn by"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Declaration",
+                "one",
+                "drawn by"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/concept-designs/edge.md"
+    },
+    {
+      "id": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "address": "bounded-contexts/resolution/concept-designs/graph",
+      "type": "concept-design",
+      "name": "Graph",
+      "tagline": "An instance read at one commit: every entity its pages describe and every edge their references draw, and nothing a page only mentions.",
+      "fields": {
+        "id": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+        "source": "Local",
+        "kind": "entity",
+        "refines": "Instance"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Commit",
+                  "commit hash",
+                  "The commit the graph was read at, which names it"
+                ],
+                [
+                  "Core version",
+                  "version",
+                  "The core release the instance vendors"
+                ],
+                [
+                  "Entities",
+                  "list of entities",
+                  "Every page that describes an entity, each with its id, type and canonical name"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Commit",
+                "commit hash",
+                "The commit the graph was read at, which names it"
+              ],
+              [
+                "Core version",
+                "version",
+                "The core release the instance vendors"
+              ],
+              [
+                "Entities",
+                "list of entities",
+                "Every page that describes an entity, each with its id, type and canonical name"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Edge",
+                  "many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Edge",
+                "many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/concept-designs/graph.md"
+    },
+    {
+      "id": "01a0faae-d24f-7b8c-9d2a-23c38b301344",
+      "address": "bounded-contexts/resolution/concept-designs/scope",
+      "type": "concept-design",
+      "name": "Scope",
+      "tagline": "Where a written name is looked for: one type and, when that type is owned, one owner. A name is unique within its scope and nowhere else.",
+      "fields": {
+        "id": "01a0faae-d24f-7b8c-9d2a-23c38b301344",
+        "source": "Local",
+        "kind": "value object"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Type",
+                  "string",
+                  "The type the declaration names, or the row's Type cell for `ref → by`"
+                ],
+                [
+                  "Owner",
+                  "string",
+                  "The owner the referring page sits in, or the row's Owner cell; empty for a type nothing owns"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Type",
+                "string",
+                "The type the declaration names, or the row's Type cell for `ref → by`"
+              ],
+              [
+                "Owner",
+                "string",
+                "The owner the referring page sits in, or the row's Owner cell; empty for a type nothing owns"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/concept-designs/scope.md"
+    },
+    {
+      "id": "01a0faae-d24f-7780-86fa-24838d48e3e6",
+      "address": "bounded-contexts/resolution/domain-events/graph-drawn",
+      "type": "domain-event",
+      "name": "Graph drawn",
+      "tagline": "An instance was read at a commit and every reference in it resolved, so the graph can be served, exported or published.",
+      "fields": {
+        "id": "01a0faae-d24f-7780-86fa-24838d48e3e6",
+        "source": "Local",
+        "emitted-by": "Graph"
+      },
+      "sections": [
+        {
+          "heading": "Payload",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Graph",
+                  "Graph",
+                  "The graph as drawn"
+                ],
+                [
+                  "Commit",
+                  "commit hash",
+                  "The commit it was read at"
+                ],
+                [
+                  "Core version",
+                  "version",
+                  "The core release it was read against"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Graph",
+                "Graph",
+                "The graph as drawn"
+              ],
+              [
+                "Commit",
+                "commit hash",
+                "The commit it was read at"
+              ],
+              [
+                "Core version",
+                "version",
+                "The core release it was read against"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/domain-events/graph-drawn.md"
+    },
+    {
+      "id": "01a0faae-d24f-72bf-ab89-23fa90ef75c1",
+      "address": "bounded-contexts/resolution/domain-events/name-found-unresolvable",
+      "type": "domain-event",
+      "name": "Name found unresolvable",
+      "tagline": "A name written where a schema declares a reference named nothing in its scope, so the read stopped and said where and what it had searched.",
+      "fields": {
+        "id": "01a0faae-d24f-72bf-ab89-23fa90ef75c1",
+        "source": "Local",
+        "emitted-by": "Graph"
+      },
+      "sections": [
+        {
+          "heading": "Payload",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Name",
+                  "string",
+                  "The name as written"
+                ],
+                [
+                  "Where",
+                  "string",
+                  "The page and the field, column or heading it was written in"
+                ],
+                [
+                  "Scope",
+                  "Scope",
+                  "The type, and the owner where the type is owned, that was searched"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Name",
+                "string",
+                "The name as written"
+              ],
+              [
+                "Where",
+                "string",
+                "The page and the field, column or heading it was written in"
+              ],
+              [
+                "Scope",
+                "Scope",
+                "The type, and the owner where the type is owned, that was searched"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/domain-events/name-found-unresolvable.md"
+    },
     {
       "id": "01a0dcd1-8de0-79be-8e65-ed4f3f5667fa",
       "address": "brand",
@@ -14636,6 +15420,144 @@
       "from": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
       "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
       "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "to": "01a0dd52-bc30-75db-ae2a-efe33658a439",
+      "via": "decisions",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "to": "01a0c29a-9610-7d3a-a3de-244a58f09307",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "to": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
+      }
+    },
+    {
+      "from": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-72bf-ab89-23fa90ef75c1",
+      "to": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "via": "emitted-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-72bf-ab89-23fa90ef75c1",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "to": "01a0dd52-bc30-75db-ae2a-efe33658a439",
+      "via": "decisions",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "to": "01a0f0ed-5db8-7589-9ab1-df069dbad08c",
+      "via": "decisions",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "to": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+      "via": "members",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "to": "01a0faae-d24f-7b8c-9d2a-23c38b301344",
+      "via": "members",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "to": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "via": "root",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-746e-9e5a-feb86a53dde1",
+      "to": "01a0c2a7-ffa8-7321-8656-ce1a28092a97",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-746e-9e5a-feb86a53dde1",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7780-86fa-24838d48e3e6",
+      "to": "01a0faae-d24f-7363-b997-383d2b553a2e",
+      "via": "emitted-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7780-86fa-24838d48e3e6",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+      "to": "01a0faae-d24f-746e-9e5a-feb86a53dde1",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "drawn by"
+      }
+    },
+    {
+      "from": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+      "to": "01a0c2a7-ffa8-7030-9fbb-2baaa6c3715f",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7b8c-9d2a-23c38b301344",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
       "attrs": {}
     }
   ],

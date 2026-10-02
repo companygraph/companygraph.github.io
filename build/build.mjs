@@ -28,6 +28,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { parseInstance, parseSchemas } from "companygraph-meta-model/instance";
+import { readSchemas } from "./schemas.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const PINS = JSON.parse(fs.readFileSync(path.join(here, "..", "source.json"), "utf8"));
@@ -61,11 +62,14 @@ const TARGETS = [
   },
   // CompanyGraph's own instance, drawn on the landing page. An instance carries the core it is
   // written against, vendored at `meta/core/`, so its schemas are read from the same commit as
-  // its pages, as blust.ch reads the reference instance. It is the one artifact from another
-  // repository, so it names that repository: `card.js` and `stage.js` link a card to its file
-  // through `repo` and fall back to the meta-model without it. The other two need no `repo`,
-  // because that fallback is already theirs.
-  { dir: "company", pin: "mental-model", parse: parseInstance, sub: "model/", schemas: "meta/core/", repo: true },
+  // its pages, as blust.ch reads the reference instance. It also carries the packs its
+  // `.companygraph/manifest.json` lists, vendored beside core, so `instance: true` reads
+  // schemas through the manifest (`build/schemas.mjs`) rather than from `meta/core/` alone: a
+  // pack's types reach company.json and so the landing stage, and /model/ stays core's. It is
+  // the one artifact from another repository, so it names that repository: `card.js` and
+  // `stage.js` link a card to its file through `repo` and fall back to the meta-model without
+  // it. The other two need no `repo`, because that fallback is already theirs.
+  { dir: "company", pin: "mental-model", parse: parseInstance, sub: "model/", instance: true, repo: true },
 ];
 
 async function readLocal({ commit, env }, sub) {
@@ -74,6 +78,7 @@ async function readLocal({ commit, env }, sub) {
   if (head !== commit) throw new Error(`${env} is at ${head.slice(0, 7)}, source.json pins ${commit.slice(0, 7)}`);
   const root = path.join(dir, sub);
   const files = new Map();
+  if (!fs.existsSync(root)) return files;
   const walk = (d) => {
     for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, ent.name);
@@ -123,11 +128,22 @@ for (const target of TARGETS) {
   const pin = { ...PINS[target.pin], env: LOCAL_ENV[target.pin] };
   const { repo, commit } = pin;
   const read = (sub) => (process.env[pin.env] ? readLocal : readRemote)(pin, sub);
+  // One file at an exact path, or undefined: the instance's manifest. Local and remote differ
+  // only in where the text comes from.
+  const readFile = async (rel) => {
+    if (process.env[pin.env]) {
+      const f = path.join(process.env[pin.env], rel);
+      return fs.existsSync(f) ? fs.readFileSync(f, "utf8") : undefined;
+    }
+    return (await readRemote(pin, rel)).get("");
+  };
   const files = await read(target.sub);
   // The example is read beside the core it is written against: at 0.22.0 the parser resolves
   // a reference by the type its schema declares, so the schemas travel with the pages. The
   // model target parses the schemas themselves and names none.
-  const schemas = target.schemas ? await read(target.schemas) : undefined;
+  const schemas = target.instance
+    ? await readSchemas((sub, o) => (o?.file ? readFile(sub) : read(sub)))
+    : target.schemas ? await read(target.schemas) : undefined;
   // `sub` goes to the parser too: an entity's `path` is what the page turns into a link to
   // the file on GitHub, and it has to be the path in the repository the files came from. The
   // parser used to hardcode `example/model/`, which happened to be right here and was a 404 on
