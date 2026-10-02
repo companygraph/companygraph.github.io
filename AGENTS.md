@@ -32,9 +32,9 @@ The page opens on a headline and tagline saying what CompanyGraph is, then the v
   this repository has no way to know when that commit lands.
 - **No status and no roadmap.** "The first release describes one person completely" is
   honest, but it is `meta-model`'s sentence, not this page's.
-- **No claim about packs.** The model's own spec admits the pack mechanism ships as prose
-  with nothing yet demonstrating it — so this page must not advertise a mechanism the model
-  has not earned by shipping one.
+- **A pack is named only once it has shipped.** The first, `software`, shipped with
+  meta-model v0.68.0, and a page may name it as what exists; no page advertises a pack the
+  model has not shipped, because a mechanism is earned by shipping one.
 - **Nothing identifying the source companies** the model was extracted from.
 - **No hosted service, no rate, and no offer.** `/billing/` describes a model that *would*
   be billed — consulting, time and material — and says plainly that nothing is sold today
