@@ -12,7 +12,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/talks/` | The talks index. |
 | `/talks/intro/` | The introduction — English and German, narrated, with a PDF in each language. |
 | `/talks/obsidian-plugin/` | CompanyGraph explains its own Obsidian plugin, pane by pane, with an animated window beside each feature — English and German, narrated, with a PDF in each language. |
-| `/talks/levels/` | From one command to fully integrated: the five levels a company's model can reach, from one command to a model the site, the server and the editor all read — English and German, narrated, with a PDF in each language. |
+| `/talks/levels/` | CompanyGraph — From one command to fully integrated: the five levels a company's model can reach, from one command to a model the site, the server and the editor all read — English and German, narrated, with a PDF in each language. |
 | `/cli/` | The command line: one command opens a menu that makes a model, checks it, moves it to a newer release and installs the Obsidian plugin, and each entry is also a subcommand. First in the nav, by the owner's decision. |
 | `/team/` | Who does CompanyGraph's work: one board per process, generated from `company.json` by the design package's `render/team`, each opening on the process's owner. |
 | `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
