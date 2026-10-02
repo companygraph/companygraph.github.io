@@ -76,7 +76,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `example/` and `model/` — `index.html` each, the stage pages beside the landing page: their
   own prose and inline `<style>`, the stage above linked in, and a preload link naming the
   artifact the stage draws. Two steps build what the stage pages draw — `build/build.mjs`
-  writes `example.json` and `model.json` by reading `meta-model/example` and `meta-model/core`
+  writes `example.json` and `model.json` by reading `meta-model/example`, and `meta-model/core` with every pack under `meta-model/packs`,
   at the `meta-model` pin, and `company.json`, drawn on the landing page, by reading
   `companygraph/mental-model`'s `model/` against its vendored `meta/core/` at the
   `mental-model` pin (or checks each still matches, `--check`); `build/pages.mjs` renders each

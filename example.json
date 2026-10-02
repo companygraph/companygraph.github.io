@@ -1,6 +1,6 @@
 {
-  "commit": "1be6f71ceaccee4f3887fb54e5185ffe81433151",
-  "core": "0.50.0",
+  "commit": "4f606c7c760ee5904818daba0ab4eea64a676517",
+  "core": "0.53.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -19,6 +19,12 @@
     {
       "type": "concept",
       "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "control",
+      "folder": "controls",
       "owner": null,
       "singular": false
     },
@@ -131,8 +137,20 @@
       "singular": false
     },
     {
+      "type": "risk",
+      "folder": "risks",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "role",
       "folder": "roles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "rule",
+      "folder": "rules",
       "owner": null,
       "singular": false
     },
@@ -1037,6 +1055,70 @@
       "path": "example/model/concepts/usage-record.md"
     },
     {
+      "id": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "address": "controls/main-requires-a-review",
+      "type": "control",
+      "name": "Main requires a review",
+      "tagline": "The default branch refuses a merge that carries no approving review from someone other than its author.",
+      "fields": {
+        "id": "01a0fb1b-b534-79e9-a261-eda408034315",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "mitigates": [
+          "An unreviewed change reaches customers"
+        ],
+        "enforces": [
+          "A change is reviewed before it ships"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "A branch protection rule on the default branch requires one approving review before any pull request merges, and dismisses an approval when new commits are pushed after it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "process",
+                  "Delivery",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "process",
+                "Delivery",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/controls/main-requires-a-review.md"
+    },
+    {
       "id": "01a0dd35-9358-72cf-a4bd-360593010506",
       "address": "decision-kinds/architecture",
       "type": "decision-kind",
@@ -1748,46 +1830,14 @@
       "id": "01a0f254-3527-78bd-9d78-ee022ef66188",
       "address": "localization",
       "type": "localization",
-      "name": "Languages",
+      "name": "Language",
       "tagline": "Beacon Systems writes its model in American English for everyone who reads it, people and agents alike.",
       "fields": {
         "id": "01a0f254-3527-78bd-9d78-ee022ef66188",
-        "source": "Local"
+        "source": "Local",
+        "locale": "en-US"
       },
-      "sections": [
-        {
-          "heading": "Locales",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Locale",
-                "Role"
-              ],
-              "rows": [
-                [
-                  "en-US",
-                  "primary"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Locale",
-              "Role"
-            ],
-            "rows": [
-              [
-                "en-US",
-                "primary"
-              ]
-            ]
-          }
-        }
-      ],
+      "sections": [],
       "owner": null,
       "path": "example/model/localization.md"
     },
@@ -3307,6 +3357,35 @@
       "path": "example/model/questions/who-split-billing-out-of-the-monolith.md"
     },
     {
+      "id": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "address": "risks/an-unreviewed-change-reaches-customers",
+      "type": "risk",
+      "name": "An unreviewed change reaches customers",
+      "tagline": "A change that nobody but its author read goes out and alters what customers are billed.",
+      "fields": {
+        "id": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+        "source": "Local",
+        "owner": "Reviewer",
+        "threatens": [
+          "Support stops explaining invoices"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Cause",
+          "text": "A merge to the default branch that no second person approved, under time pressure or because the change looked small.",
+          "tables": []
+        },
+        {
+          "heading": "Consequence",
+          "text": "Invoices go out wrong, and support explains them again, which is the opposite of what the objective asks for.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/risks/an-unreviewed-change-reaches-customers.md"
+    },
+    {
       "id": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
       "address": "roles/backend-engineer",
       "type": "role",
@@ -3403,6 +3482,82 @@
       ],
       "owner": null,
       "path": "example/model/roles/reviewer.md"
+    },
+    {
+      "id": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "address": "rules/a-change-is-reviewed-before-it-ships",
+      "type": "rule",
+      "name": "A change is reviewed before it ships",
+      "tagline": "A change reaches the default branch only after a second person has read it and approved it.",
+      "fields": {
+        "id": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Craftsmanship"
+        ],
+        "serves": [
+          "Support stops explaining invoices"
+        ],
+        "motivated-by": [
+          "An unreviewed change reaches customers"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A billing change is cheap to read and expensive to get wrong, and the author is the person least able to see what they missed.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Reviewer",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Release",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "role",
+                "Reviewer",
+                ""
+              ],
+              [
+                "phase",
+                "Release",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/rules/a-change-is-reviewed-before-it-ships.md"
     },
     {
       "id": "01a02f53-2408-7255-a610-b931d033c1d4",
@@ -5013,6 +5168,93 @@
     },
     {
       "from": "01a0f254-3527-78bd-9d78-ee022ef66188",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "to": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
+      "via": "threatens",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "to": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "to": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "via": "motivated-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "to": "01a02f53-2408-79ce-829d-b6012ab3c389",
+      "via": "protects",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "to": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "to": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "to": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "to": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "via": "mitigates",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b534-79e9-a261-eda408034315",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
