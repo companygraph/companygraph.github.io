@@ -16,5 +16,5 @@ await exportDecks({
   chromium,
   PDFDocument,
   root: path.dirname(fileURLToPath(import.meta.url)),
-  decks: [{ dir: "talks/intro", slug: "companygraph" }, { dir: "talks/obsidian-plugin", slug: "obsidian-plugin" }],
+  decks: [{ dir: "talks/intro", slug: "companygraph" }, { dir: "talks/obsidian-plugin", slug: "obsidian-plugin" }, { dir: "talks/levels", slug: "levels" }],
 });

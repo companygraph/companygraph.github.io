@@ -272,6 +272,22 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["gelesen aus dem Modell"], hides: ["read from the model it edits"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  // The third deck, the levels, built as the other two and checked the same way. Its one
+  // outbound link is the chrome's blust.ch; its rests-on chips are links into the graph on
+  // this site, which internalLinks covers.
+  { path: "/talks/levels/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /From one command to fully integrated/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/"],
+    slides: 11,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["Stufe für Stufe"], hides: ["level by level"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {
