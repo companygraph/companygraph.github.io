@@ -1,6 +1,6 @@
 {
-  "commit": "11b73b10aaf6ae907dcbd18d896d1531a9060206",
-  "core": "0.53.0",
+  "commit": "6f6ada30fde2b35a33d63040502016df27380f2a",
+  "core": "0.54.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -1825,6 +1825,37 @@
       ],
       "owner": null,
       "path": "example/model/kpis/change-lead-time.md"
+    },
+    {
+      "id": "01a10040-3005-7db7-a01b-d031d4bebf58",
+      "address": "kpis/review-escapes",
+      "type": "kpi",
+      "name": "Review Escapes",
+      "tagline": "The changes that reached the default branch without the review its protection asks for.",
+      "fields": {
+        "id": "01a10040-3005-7db7-a01b-d031d4bebf58",
+        "source": "Local",
+        "owner": "Backend Engineer",
+        "assesses": [
+          "Main requires a review"
+        ],
+        "unit": "changes per month",
+        "direction": "lower"
+      },
+      "sections": [
+        {
+          "heading": "How it is measured",
+          "text": "The pull requests merged to the default branch in a calendar month without an approving review from someone other than their author, read from the repository host's pull request reviews.",
+          "tables": []
+        },
+        {
+          "heading": "What it can hide",
+          "text": "A change pushed to the default branch without a pull request carries no reviews to read, so it escapes without being counted; and an override made for a good reason counts the same as one made in a hurry.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/kpis/review-escapes.md"
     },
     {
       "id": "01a0f254-3527-78bd-9d78-ee022ef66188",
@@ -5255,6 +5286,24 @@
     },
     {
       "from": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10040-3005-7db7-a01b-d031d4bebf58",
+      "to": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "via": "assesses",
+      "attrs": {}
+    },
+    {
+      "from": "01a10040-3005-7db7-a01b-d031d4bebf58",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a10040-3005-7db7-a01b-d031d4bebf58",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
