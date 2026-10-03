@@ -1,6 +1,6 @@
 {
-  "commit": "24e1efcf07bc2ef288d1993c663c02afabbee36e",
-  "core": "0.54.0",
+  "commit": "c10dfc8a0d8234aefbbb15a1ed724c3623f61e2f",
+  "core": "0.56.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
