@@ -249,11 +249,11 @@
     function s(c, n) { c.q(".wst .dot").className = "dot" + (n ? " bad" : ""); c.q(".git").textContent = n ? "git: " + n + " lines changed" : "git: no change"; }
     return {
       reset: function (c) { draw(c, A); s(c, 0); c.q(".tab").textContent = "2026-vendored-core.md"; },
-      rest: function (c) { draw(c, A); s(c, 0); c.note("Written back in the family's form when the note was left"); },
+      rest: function (c) { draw(c, A); s(c, 0); c.note("Written back in the form when the note was left"); },
       run: async function (c) {
         await c.sl(1800); draw(c, B, true); s(c, 5); c.note("The table editor padded every column"); await c.sl(3000);
         c.q(".tab").textContent = "identity.md"; await c.sl(900); draw(c, A); s(c, 0); c.q(".tab").textContent = "2026-vendored-core.md";
-        c.note("Written back in the family's form when the note was left", 2600); await c.sl(2600);
+        c.note("Written back in the form when the note was left", 2600); await c.sl(2600);
       }
     };
   })();
