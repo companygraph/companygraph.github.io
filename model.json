@@ -1,5 +1,5 @@
 {
-  "commit": "11b73b10aaf6ae907dcbd18d896d1531a9060206",
+  "commit": "6f6ada30fde2b35a33d63040502016df27380f2a",
   "root": "Meta-model",
   "rootId": null,
   "types": [
@@ -1014,7 +1014,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A control is what the company does, or has a machine do, so that a risk is less likely or less harmful, or a rule is kept (ISO 31000: a measure that maintains or modifies risk; COSO's control activities). It answers \"what actually stops this, finds it, or repairs it, and is it a machine or a person?\" The control is the entity: a gate's criteria and a check's code stay where they are, and the control says in prose how it is carried out and points at the file that does it. How well it works is measured, where the company measures it, by a KPI, never by a number on this page.",
+          "text": "A control is what the company does, or has a machine do, so that a risk is less likely or less harmful, or a rule is kept (ISO 31000: a measure that maintains or modifies risk; COSO's control activities). It answers \"what actually stops this, finds it, or repairs it, and is it a machine or a person?\" The control is the entity: a gate's criteria and a check's code stay where they are, and the control says in prose how it is carried out and points at the file that does it. How well it works is measured, where the company measures it, by a KPI that names it in `assesses`, never by a number on this page.",
           "tables": []
         },
         {
@@ -3083,6 +3083,12 @@
                   "The process whose performance it measures, the H1 of a process file. Absent where it measures none."
                 ],
                 [
+                  "`assesses`",
+                  "No",
+                  "array of ref → control",
+                  "The controls whose effectiveness this KPI's number tells, each the H1 of a file in `controls/`. Absent where it assesses none."
+                ],
+                [
                   "`serves`",
                   "No",
                   "array of ref → strategic-objective",
@@ -3153,6 +3159,12 @@
                 "No",
                 "ref → process",
                 "The process whose performance it measures, the H1 of a process file. Absent where it measures none."
+              ],
+              [
+                "`assesses`",
+                "No",
+                "array of ref → control",
+                "The controls whose effectiveness this KPI's number tells, each the H1 of a file in `controls/`. Absent where it assesses none."
               ],
               [
                 "`serves`",
@@ -3293,7 +3305,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- No target, threshold, baseline or measured value, ever. Each moves, and a number that moves\n  goes stale in the model without a sound; a References row says where they are kept.\n- Named for the quantity, not for the dashboard or tool that shows it: `Change Lead Time`, not\n  `the lead-time chart`.\n- Person-neutral, as a role is: the definition names seats and never who holds them.\n- `## How it is measured` says what counts as the event in this company's terms — what a\n  deployment is here, what a failure is — concretely enough that two people counting would get\n  the same number. A definition that leaves the event open lets every reader count a different\n  thing under one name.\n- `## What it can hide` names a specific way the number improves while the work does not. \"It\n  can be misread\" hides nothing a reader can check.\n- `read-with` names a KPI that moves against this one when this one is gamed, never the KPI\n  itself and not every KPI of the same process.\n- `can-cost` names a value only where `## What it can hide` says how pushing the number wears\n  it down. The field is the edge; the section is the reason, and a name with no reason under it\n  is a claim nothing backs.\n- A value any KPI could cost tells a reader nothing, and is not named.\n- `direction: target` is written only where both too high and too low are worse; an indicator\n  that is better lower down to some floor is `lower`.\n- `unit` names the period wherever the value is a rate: `deployments per week`, not `count`.\n- `serves` names an objective only where the KPI moving would actually tell whether that\n  objective holds. A KPI that indicates no objective has none, and is still a KPI the company\n  watches.\n- A KPI that nothing measures yet is a valid definition. It carries no References row for\n  values until one exists, and it gains no invented one.\n- Names and prose are American English (R14).",
+          "text": "- No target, threshold, baseline or measured value, ever. Each moves, and a number that moves\n  goes stale in the model without a sound; a References row says where they are kept.\n- Named for the quantity, not for the dashboard or tool that shows it: `Change Lead Time`, not\n  `the lead-time chart`.\n- Person-neutral, as a role is: the definition names seats and never who holds them.\n- `## How it is measured` says what counts as the event in this company's terms — what a\n  deployment is here, what a failure is — concretely enough that two people counting would get\n  the same number. A definition that leaves the event open lets every reader count a different\n  thing under one name.\n- `## What it can hide` names a specific way the number improves while the work does not. \"It\n  can be misread\" hides nothing a reader can check.\n- `read-with` names a KPI that moves against this one when this one is gamed, never the KPI\n  itself and not every KPI of the same process.\n- `can-cost` names a value only where `## What it can hide` says how pushing the number wears\n  it down. The field is the edge; the section is the reason, and a name with no reason under it\n  is a claim nothing backs.\n- A value any KPI could cost tells a reader nothing, and is not named.\n- `direction: target` is written only where both too high and too low are worse; an indicator\n  that is better lower down to some floor is `lower`.\n- `unit` names the period wherever the value is a rate: `deployments per week`, not `count`.\n- `serves` names an objective only where the KPI moving would actually tell whether that\n  objective holds. A KPI that indicates no objective has none, and is still a KPI the company\n  watches.\n- `assesses` names a control only where the number moving would tell how well that control works; a KPI that merely shares a subject with a control names none.\n- A KPI that assesses a control says in `## What it can hide` what the control lets through that the number does not count.\n- A KPI that nothing measures yet is a valid definition. It carries no References row for\n  values until one exists, and it gains no invented one.\n- Names and prose are American English (R14).",
           "tables": []
         },
         {
@@ -9119,6 +9131,15 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "01a0d896-7c40-707d-92ca-c0568838830a",
+      "to": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
+      "via": "assesses",
+      "attrs": {
+        "type": "array of ref → control"
+      },
+      "label": "assesses"
     },
     {
       "from": "01a0d896-7c40-707d-92ca-c0568838830a",

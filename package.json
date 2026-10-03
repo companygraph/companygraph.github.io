@@ -25,12 +25,12 @@
     "pin:check": "node pin-check.mjs"
   },
   "dependencies": {
-    "companygraph-meta-model": "github:companygraph/meta-model#v0.71.1",
+    "companygraph-meta-model": "github:companygraph/meta-model#v0.74.0",
     "d3": "7.9.0"
   },
   "devDependencies": {
     "@robertblust/design": "github:robertblust/design#v0.132.0",
-    "companygraph-mcp-server": "github:companygraph/mcp-server#v0.51.0",
+    "companygraph-mcp-server": "github:companygraph/mcp-server#v0.53.1",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.63.0"
   }
