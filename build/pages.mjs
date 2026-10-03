@@ -18,6 +18,7 @@ import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeHome } from "@robertblust/design/render/home";
 import { loadGerman } from "@robertblust/design/render/german";
+import { writeQuestionsDe } from "@robertblust/design/render/questions";
 import { writeIdPages } from "@robertblust/design/render/ids";
 import { writeJsonLd } from "./jsonld.mjs";
 
@@ -48,9 +49,14 @@ for (const [name, pinName] of Object.entries(ARTIFACTS)) {
 
 const check = process.argv.includes("--check");
 const german = loadGerman(path.join(ROOT, "build", "principles.de.json"));
+// The model's question titles in German, which the chat offers on a German page: made by the
+// German pipeline in build/questions.de.json, held to the exact English as the principles are,
+// and written to the questions.de.json the chat's tag names.
+const questionsGerman = loadGerman(path.join(ROOT, "build", "questions.de.json"));
 const RENDERERS = [
   (d, o) => writeJsonLd(d, { ...o, repo }),
   (d, o) => writePrinciples(d.company, { ...o, root: ROOT, de: german.de }),
+  (d, o) => writeQuestionsDe(d.company, { ...o, root: ROOT, de: questionsGerman.de }),
   // The order the boards argue in: the work first, then how an outsider joins it. Core gives a
   // process no rank, so the page names it.
   // Each board shows its process as the chat draws it, from the same drawer, over the artifact
@@ -70,6 +76,11 @@ const stale = RENDERERS.flatMap((write) => write(data, { check }));
 const unused = german.unused();
 if (unused.length) {
   console.error(`  ✗ build/principles.de.json holds German for English the model no longer says:\n${unused.map((en) => `    "${en}"`).join("\n")}`);
+  process.exit(1);
+}
+const unusedQuestions = questionsGerman.unused();
+if (unusedQuestions.length) {
+  console.error(`  ✗ build/questions.de.json holds German for a question the model no longer asks:\n${unusedQuestions.map((en) => `    "${en}"`).join("\n")}`);
   process.exit(1);
 }
 

@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Can a system outside our model keep a link to an entity after it is renamed?",
+    "text": "Bleibt ein Link von aussen auf eine Entität gültig, wenn sie umbenannt wird?"
+  },
+  {
+    "title": "Can I trust what this chat says?",
+    "text": "Kann ich mich auf das verlassen, was dieser Chat sagt?"
+  },
+  {
+    "title": "Can I use CompanyGraph's colors and fonts for my own site?",
+    "text": "Darf ich die Farben und Schriften von CompanyGraph für meine eigene Website verwenden?"
+  },
+  {
+    "title": "Can our AI agents use it?",
+    "text": "Können unsere KI-Agenten CompanyGraph nutzen?"
+  },
+  {
+    "title": "Can we load our model into a graph database like Neo4j?",
+    "text": "Können wir unser Modell in eine Graphdatenbank wie Neo4j laden?"
+  },
+  {
+    "title": "Do I need your service to run CompanyGraph, and what does it cost?",
+    "text": "Brauche ich Ihren Dienst, um CompanyGraph zu betreiben, und was kostet das?"
+  },
+  {
+    "title": "Do our people have to write these files by hand?",
+    "text": "Müssen unsere Leute die Dateien des Modells von Hand schreiben?"
+  },
+  {
+    "title": "Does it only work with Claude, or can we use ChatGPT or Gemini?",
+    "text": "Funktioniert CompanyGraph nur mit Claude, oder können wir auch ChatGPT oder Gemini verwenden?"
+  },
+  {
+    "title": "Does our data leave our hands?",
+    "text": "Geben wir unsere Daten aus der Hand?"
+  },
+  {
+    "title": "How do I contribute to CompanyGraph?",
+    "text": "Wie kann ich zu CompanyGraph beitragen?"
+  },
+  {
+    "title": "How do I create my own profile?",
+    "text": "Wie erstelle ich mein eigenes Profil?"
+  },
+  {
+    "title": "How do I start?",
+    "text": "Wie fange ich an?"
+  },
+  {
+    "title": "How do you know CompanyGraph is working?",
+    "text": "Woran erkennen Sie, dass CompanyGraph funktioniert?"
+  },
+  {
+    "title": "How does content stay current when it comes from a wiki or another system?",
+    "text": "Wie bleiben Inhalte aktuell, wenn sie aus einem Wiki oder einem anderen System stammen?"
+  },
+  {
+    "title": "Is anyone besides you using CompanyGraph?",
+    "text": "Nutzt ausser Ihnen noch jemand CompanyGraph?"
+  },
+  {
+    "title": "Is CompanyGraph a business, or a side project?",
+    "text": "Steckt hinter CompanyGraph ein Geschäft, oder ist es ein Nebenprojekt?"
+  },
+  {
+    "title": "Isn't this just a wiki, or Notion with rules?",
+    "text": "Ist das nicht einfach ein Wiki oder Notion mit Regeln?"
+  },
+  {
+    "title": "What can an agent do with our model besides answering questions?",
+    "text": "Was kann ein KI-Agent mit unserem Modell tun, ausser Fragen zu beantworten?"
+  },
+  {
+    "title": "What do the colors on companygraph.io mean?",
+    "text": "Was bedeuten die Farben auf companygraph.io?"
+  },
+  {
+    "title": "What does a company's model actually look like?",
+    "text": "Wie sieht das Modell einer Firma konkret aus?"
+  },
+  {
+    "title": "What if the vocabulary doesn't fit our company?",
+    "text": "Was, wenn das Vokabular nicht zu unserer Firma passt?"
+  },
+  {
+    "title": "What problem does CompanyGraph solve?",
+    "text": "Welches Problem löst CompanyGraph?"
+  },
+  {
+    "title": "Where do our targets and actual numbers go?",
+    "text": "Wohin gehören unsere Soll- und Istwerte?"
+  },
+  {
+    "title": "Who answers this chat?",
+    "text": "Wer antwortet in diesem Chat?"
+  },
+  {
+    "title": "Who keeps the model true when the company changes?",
+    "text": "Wer sorgt dafür, dass das Modell stimmt, wenn sich die Firma verändert?"
+  },
+  {
+    "title": "Why is the schema written in Markdown instead of JSON Schema?",
+    "text": "Warum ist das Schema in Markdown geschrieben statt in JSON Schema?"
+  },
+  {
+    "title": "Will a new CompanyGraph release break our model?",
+    "text": "Funktioniert unser Modell nach einem neuen CompanyGraph-Release noch?"
+  }
+]
