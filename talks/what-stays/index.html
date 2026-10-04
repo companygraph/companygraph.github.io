@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/talks/what-stays/">
+
+<title>CompanyGraph — What stays when the model changes</title>
+<meta id="metadesc" name="description" content="Code, System One, System Two and a person: which model you keep, and which you can replace.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/talks/what-stays/">
+<meta property="og:title" content="CompanyGraph — What stays when the model changes">
+<meta property="og:description" content="Code, System One, System Two and a person: which model you keep, and which you can replace.">
+<meta property="og:image" content="https://companygraph.io/talks/what-stays/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CompanyGraph — What stays when the model changes.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+<!-- The publisher, the site and this page — nothing about what the software does or when
+     it does it, which is the same rule the prose follows. Each page carries the whole graph
+     it references: Google resolves @graph within one document, so a bare { "@id": ... }
+     naming a node defined on another page resolves to nothing. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": [
+        "https://github.com/companygraph",
+        "https://www.linkedin.com/company/companygraph"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://companygraph.io/#website",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/talks/what-stays/#webpage",
+      "name": "CompanyGraph — What stays when the model changes",
+      "url": "https://companygraph.io/talks/what-stays/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://companygraph.io/#website"
+      },
+      "publisher": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      },
+      "breadcrumb": {
+        "@id": "https://companygraph.io/talks/what-stays/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://companygraph.io/talks/what-stays/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://companygraph.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Talks",
+          "item": "https://companygraph.io/talks/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CompanyGraph — What stays when the model changes",
+          "item": "https://companygraph.io/talks/what-stays/"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://companygraph.io/#dataset",
+      "name": "CompanyGraph — the company described in CompanyGraph",
+      "description": "CompanyGraph described in the vocabulary it publishes: its direction, the roles and processes it works by, and what it builds.",
+      "url": "https://companygraph.io/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      },
+      "isBasedOn": "https://github.com/companygraph/mental-model",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://companygraph.io/company.json",
+        "encodingFormat": "application/json"
+      }
+    }
+  ]
+}
+</script>
+<meta name="author" content="Robert Blust">
+<script>
+  /* ─── theme boot · v5 · deck ────────────────────────────────────
+     Set the theme before anything paints. Generated from @robertblust/design —
+     editing it here does nothing, because the next `npm run design` overwrites it.
+
+     This is the one script this package puts in <head>, and it has to be there: the package's
+     other scripts sit at the end of the body, and a page may paint before they have run.
+     Language arriving late costs a flash of English; a palette arriving late repaints the
+     whole page in the wrong one, on every navigation. A site may put a script of its own in
+     <head> as well, as each site does to start its fonts loading right after its @font-face
+     rules.
+
+     It duplicates the storage key and the URL pattern that `theme` also carries. That is
+     deliberate — nothing is in scope up here, and the block must stand alone. Both blocks are
+     generated from the same package, so the duplicate cannot drift.
+
+     It also sets `data-embed` on a framed page whose address asks for it, for the same reason
+     it sets the theme here: the chat embeds a model page in its dialog, and that page must never
+     paint its header and footer before the stage's rules hide them.
+
+     And it marks a page arriving with the chat open, for the reason it sets the theme here too:
+     the panel is built by chat.js, which runs after the page's other scripts, and a page may
+     paint before it has. `data-chat-waiting` holds the host the panel's title bar names, and
+     chat.css paints the panel's empty frame and title bar at its size from it, so the frame
+     and the bar are there on the first paint and only the conversation arrives after.
+     chat.js takes the mark off once the panel stands, or once it has found nothing to show.
+
+     Dark is the default and `prefers-color-scheme` is never read: dark is the design, and
+     light is something a visitor asks for. A visitor whose system is set to light still
+     arrives on dark until they say otherwise.
+  */
+  (function(){
+    try {
+      var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+      var t = m ? m[1] : localStorage.getItem("theme");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+    // A page asked for `embed`, inside a frame, draws its stage alone, in the chat's dialog on
+    // another page; the flag is set here so the page never paints its own header first. Its own
+    // try, because the theme's storage read throws where site data is blocked and the flag must
+    // not go with it; and only in a frame, because a page opened on its own is an ordinary page.
+    try {
+      if (window.top !== window && /[?&]embed(&|$)/.test(location.search)) document.documentElement.setAttribute("data-embed", "");
+    } catch (e) {}
+    // A conversation the tab keeps open: the keys are chat.js's, `chat` and `chat-size`, read
+    // the way it reads them. Never in a frame, which takes no chat of its own.
+    try {
+      var r = document.documentElement, c = JSON.parse(sessionStorage.getItem("chat") || "null");
+      if (c && c.open && window.top === window) {
+        r.setAttribute("data-chat-waiting", location.host);
+        var z = JSON.parse(sessionStorage.getItem("chat-size") || "null");
+        if (z && z.w && z.h) { r.style.setProperty("--rbchat-kept-w", z.w + "px"); r.style.setProperty("--rbchat-kept-h", z.h + "px"); }
+      }
+    } catch (e) {}
+  })();
+  /* ─── end theme boot ─────────────────────────────────────────────────── */
+</script>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../deck.css">
+<link rel="stylesheet" href="../../chat.css">
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/Bricolage-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/InstrumentSans-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/PlexMono-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/PlexMono-600.woff2" crossorigin>
+<style>
+/* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
+   unit that has to survive being copied to someone else's machine is the folder,
+   not the file. */
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:fallback}
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:fallback}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:fallback}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:fallback}
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
+    background-image:var(--sky); background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at 1600×900 and the whole plane is scaled to whatever the
+     screen gives it, as the other decks on this site do. */
+  .deck{
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    background:transparent;
+  }
+  .slide svg, .slide img{max-height:60cqmin}
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
+  }
+  h1 em{font-style:normal; color:var(--c-mid)}
+  .sub{
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
+  }
+  /* A command or a file named inside a sentence is data, so it is set in mono. */
+  .sub code{font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--c-firm)}
+
+  /* title slide */
+  .titlelock{display:flex; align-items:center; gap:.32em}
+  .titlemark{color:var(--c-mid); display:flex; flex:0 0 auto}
+  .titlemark svg{width:clamp(2.6rem,9cqmin,6.6rem); height:clamp(2.6rem,9cqmin,6.6rem); display:block}
+  .titlelock h1{margin:0}
+
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:18ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
+
+  /* ---------- transport ---------- */
+  .chrome{
+    position:fixed; left:0; right:0; bottom:0; z-index:21;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto}
+
+  /* page-owned: groups the language and theme controls in the transport, exactly as
+     the prose header's #langind wrapper groups the same pair. */
+  .switchers{display:flex; align-items:center; gap:.45rem}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:var(--deck-well); color:var(--deck-paper); border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:var(--deck-accent); margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
+  /* Two roles, kept apart: a stage direction is not spoken, an emphasis is. */
+  .notes em.cue{font-style:italic; color:var(--deck-quiet)}
+  .notes em{font-style:normal; font-weight:600; color:var(--deck-paper)}
+  .notes .time{float:right; color:var(--deck-accent); font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
+                border:1px solid var(--deck-edge); border-radius:8px; padding:.5em .9em;
+                color:var(--deck-warm); font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
+  .notes .close:hover{color:var(--deck-paper); border-color:var(--deck-accent)}
+  .notes .close:focus-visible{outline:2px solid var(--deck-accent); outline-offset:2px}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .chrome{
+      grid-template-columns:1fr; padding:0;
+      background:var(--slab); border-top:1px solid var(--rule);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
+           transform:translateY(calc(101% + var(--chromeH,0px)))}
+    .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
+    .slide{justify-content:flex-start; overflow-y:auto;
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .titlelock{flex-wrap:wrap}
+    .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
+    .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
+    .kicker{margin-bottom:5vw}
+  }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
+
+  /* ─── this talk ───────────────────────────────────────────────────────
+     A slide is a lead on the left and a picture on the right, as in the other two talks: the
+     four layers, a window, the flow from check to person, or the split of what is fixed and
+     what is replaceable. A layer slide also carries the layers small, at its left edge, with
+     its own layer lit. The layers are drawn once, in the template under the deck, and copied
+     into every slot that names them. scenes.js animates a window or the flow while its slide
+     is shown and paints one still frame for a PDF, a crawler and anyone who asked for reduced
+     motion. */
+  .feat{display:grid; grid-template-columns:.82fr 1.18fr; gap:5cqmin; align-items:center}
+  .feat.lvl{grid-template-columns:auto .9fr 1.1fr; gap:4.4cqmin}
+  .feat .lead h1{font-size:clamp(1.9rem,5.4cqmin,3.8rem); max-width:none}
+  .feat .lead .sub{font-size:clamp(1.02rem,2.25cqmin,1.65rem); margin-top:2.4cqmin; max-width:none}
+  .rests{display:flex; flex-wrap:wrap; align-items:center; gap:1cqmin; margin-top:3.4cqmin}
+  .rests b{font-weight:400; font-size:clamp(.78rem,1.45cqmin,1.05rem); letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-right:.6cqmin}
+  /* Each chip opens its entity in the graph: a link, so --c-mid, the brand's color for anything
+     one can press. */
+  .rests a{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.78rem,1.45cqmin,1.05rem);
+           border:1px solid var(--rule); background:var(--raise); border-radius:6px; padding:.3em .65em;
+           color:var(--c-mid); text-decoration:none; transition:border-color .15s ease}
+  .rests a:hover{border-color:var(--c-mid)}
+  .rests a:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+  .rests a i{font-style:normal; color:var(--dim)}
+
+  /* the layers: a person on top, code at the foot, each with what sits there */
+  .layers{display:flex; flex-direction:column; gap:1.4cqmin; width:100%; max-width:62cqmin; justify-self:center}
+  .layer{display:grid; grid-template-columns:auto 1fr; align-items:baseline; gap:.4cqmin 2cqmin; padding:1.6cqmin 2.4cqmin;
+         background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin; transition:border-color .4s ease, background .4s ease}
+  .layer .ln{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.85rem,1.7cqmin,1.2rem); color:var(--dim)}
+  .layer .ll{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:600; font-size:clamp(1.1rem,2.7cqmin,1.9rem); color:var(--dim); transition:color .4s ease}
+  .layer .lx{grid-column:2; font-size:clamp(.8rem,1.6cqmin,1.15rem); color:var(--dim)}
+  .layer.on{border-color:var(--c-mid); background:var(--press)}
+  .layer.on .ln, .layer.on .ll{color:var(--c-mid)}
+  .layer.on .lx{color:var(--ink)}
+  /* small, at a layer slide's left edge */
+  .layers.mini{gap:.8cqmin; width:auto; max-width:none; align-self:center}
+  .layers.mini .layer{padding:.75cqmin 1.3cqmin; gap:0 1cqmin; border-radius:.7cqmin}
+  .layers.mini .ln{font-size:clamp(.7rem,1.3cqmin,.95rem)}
+  .layers.mini .ll{font-size:clamp(.82rem,1.75cqmin,1.25rem)}
+  .layers.mini .lx{display:none}
+
+  /* five things the word names */
+  .five{display:flex; flex-direction:column; gap:1.2cqmin; width:100%}
+  .five > div{display:grid; grid-template-columns:15ch 1fr; align-items:baseline; gap:2cqmin; padding:1.3cqmin 2.2cqmin;
+              background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin}
+  .five .fk{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.75rem,1.45cqmin,1.05rem); letter-spacing:.08em; color:var(--c-mid)}
+  .five .fn{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:600; font-size:clamp(1rem,2.4cqmin,1.7rem)}
+  .five .fn span{font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-weight:400; font-size:.7em; color:var(--dim); margin-left:.5em}
+
+  /* the flow: four steps in a row, and what each hands the next */
+  .flow{display:grid; grid-template-columns:repeat(4, 1fr); gap:0; width:100%; align-items:stretch; margin-top:4.4cqmin}
+  .step{position:relative; display:flex; flex-direction:column; gap:1cqmin; padding:2cqmin 2cqmin 2.2cqmin; margin-right:4cqmin;
+        background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin; transition:border-color .4s ease, background .4s ease}
+  .step:last-child{margin-right:0}
+  .step::after{content:""; position:absolute; left:100%; top:50%; width:4cqmin; height:3px; background:var(--rule); transition:background .4s ease}
+  .step:last-child::after{display:none}
+  .step .sl{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.72rem,1.35cqmin,1rem); letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .step .sn{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:600; font-size:clamp(1.05rem,2.5cqmin,1.8rem); color:var(--dim); transition:color .4s ease}
+  .step .sh{margin-top:auto; font-size:clamp(.78rem,1.55cqmin,1.12rem); color:var(--dim); line-height:1.35}
+  .step.on{border-color:var(--c-mid); background:var(--press)}
+  .step.on::after{background:var(--c-mid)}
+  .step.on .sl, .step.on .sn{color:var(--c-mid)}
+  .step.on .sh{color:var(--ink)}
+
+  /* what is fixed and what is replaceable */
+  .split{display:grid; grid-template-columns:1fr 1.25fr; gap:2.4cqmin; width:100%}
+  .split > div{background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin; padding:2cqmin 2.4cqmin}
+  .split h2{font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-weight:600; font-size:clamp(.75rem,1.45cqmin,1.05rem); letter-spacing:.16em; text-transform:uppercase; color:var(--c-mid); margin-bottom:1.4cqmin}
+  .split ul{list-style:none; display:flex; flex-direction:column; gap:1.1cqmin}
+  .split li{display:flex; justify-content:space-between; align-items:baseline; gap:1.6cqmin; font-size:clamp(.88rem,1.85cqmin,1.32rem); line-height:1.3}
+  .split li b{font-family:"Plex Mono", ui-monospace, monospace; font-weight:400; font-size:.72em; white-space:nowrap; border:1px solid var(--rule); border-radius:5px; padding:.15em .5em; color:var(--dim)}
+  .split li b.now{color:var(--c-sum); border-color:var(--c-sum)}
+
+  /* six practices */
+  .six{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:repeat(3, auto); grid-auto-flow:column; gap:1.6cqmin 4cqmin; margin-top:3.4cqmin; counter-reset:p; list-style:none; max-width:150cqmin}
+  .six li{counter-increment:p; display:grid; grid-template-columns:auto 1fr; gap:1.6cqmin; align-items:baseline; font-size:clamp(1rem,2.4cqmin,1.75rem); line-height:1.3}
+  .six li::before{content:counter(p, decimal-leading-zero); font-family:"Plex Mono", ui-monospace, monospace; font-size:.7em; color:var(--c-mid)}
+
+  /* the credits: what the talk borrows, and where to read it */
+  .credits{list-style:none; display:flex; flex-direction:column; gap:2.2cqmin; margin-top:4cqmin; max-width:150cqmin}
+  .credits li{display:grid; grid-template-columns:30ch 1fr; gap:3cqmin; align-items:baseline; font-size:clamp(1rem,2.3cqmin,1.7rem); line-height:1.35}
+  .credits .ck{font-family:"Plex Mono", ui-monospace, monospace; font-size:.62em; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .credits a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--rule)}
+  .credits a:hover{border-bottom-color:var(--c-mid)}
+  .credits a:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+  .credits cite{font-style:italic}
+
+  /* ─── the window ──────────────────────────────────────────────────────
+     The levels talk's window: a terminal, a pull request, a page. Sized in cqmin like the
+     rest of the canvas, and in em inside, so the whole window scales as one picture. */
+  .win{position:relative; width:100%; font-size:clamp(.62rem,1.55cqmin,1.1rem); line-height:1.45;
+       background:var(--raise); border:1px solid var(--rule); border-radius:1.4cqmin; overflow:hidden;
+       display:flex; flex-direction:column; color:var(--ink); box-shadow:0 2cqmin 5cqmin var(--deck-drop)}
+  .wbar{flex:none; height:2.9em; display:flex; align-items:center; gap:.5em; padding:0 1em; background:var(--ground); border-bottom:1px solid var(--rule)}
+  .wbar i{width:.75em; height:.75em; border-radius:50%; background:var(--rule)}
+  .wbar span{margin-left:.6em; color:var(--dim); font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em}
+  .ed{flex:1; min-width:0; padding:1em 1.5em 1.4em; position:relative; overflow:hidden}
+  .src{font-family:"Plex Mono", ui-monospace, monospace}
+  .l{min-height:1.75em; line-height:1.75em; white-space:pre-wrap; padding-left:2ch; text-indent:-2ch; position:relative}
+  .k{color:var(--c-mid)} .d{color:var(--dim)} .h{font-weight:600} .dim{color:var(--dim)} .ok{color:var(--c-sum)} .fl{color:var(--c-flag)}
+  .cur{display:inline-block; width:.6em; height:1.15em; background:var(--ink); vertical-align:-.2em; margin-left:.1em; animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-reduced-motion: reduce){ .cur{animation:none} }
+  .hid{visibility:hidden}
+
+  /* a pull request's checks */
+  .chk{display:flex; align-items:center; gap:.6em; padding:.8em .4em; border-bottom:1px solid var(--rule)}
+  .chk:last-child{border-bottom:none}
+  .chk .cr{color:var(--c-sum); font-weight:600}
+  .chk.gate{justify-content:space-between}
+  .chk.gate .who{color:var(--c-mid); font-weight:600}
+
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .feat, .feat.lvl{grid-template-columns:1fr; gap:5vw}
+    .layers{max-width:100%}
+    .layers.mini{flex-direction:row; flex-wrap:wrap; gap:1.5vw}
+    .five > div{grid-template-columns:1fr; gap:.5vw}
+    .flow{grid-template-columns:1fr 1fr; gap:3vw}
+    .step{margin-right:0}
+    .step::after{display:none}
+    .split, .six{grid-template-columns:1fr}
+    .credits li{grid-template-columns:1fr; gap:1vw}
+    .six{grid-template-rows:none; grid-auto-flow:row}
+    .win{font-size:2.4vw}
+    /* The chat's button sits bottom right on every page; here the transport spans the whole
+       bottom edge, so the button stands on top of it, at the height deck.js measures. */
+    .rbchat-open{bottom:calc(var(--chromeH,0px) + .8rem)}
+  }
+
+</style>
+<script>/* Start the fonts before the first layout needs them, so the first frame has them. */try{document.fonts.forEach(function(f){f.load()})}catch(e){}</script>
+<script type="module" blocking="render">/* Hold the first paint until the fonts have loaded, for at most 300ms: a page painted before them shows its text in another face and then moves it. */try{await Promise.race([Promise.all([...document.fonts].map(function(f){return f.load()})),new Promise(function(r){setTimeout(r,300)})])}catch(e){}</script>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <section class="slide title-slide" id="s-cover" data-say-title="no"
+    data-time="0:00"
+    data-notes="<em class='cue'>The title stays up while I open.</em> Around CompanyGraph, the word model names five different things, and two of them are models in the sense everyone means today. Some of the five are yours and stay. Others you should be able to swap for an equivalent next quarter without rewriting anything. This talk sorts them, says why each one is there, and ends with the practices that follow. As in our other talks, each slide names the pages of our own model it rests on."
+    data-notes-de="<em class='cue'>Der Titel bleibt stehen, während ich eröffne.</em> Rund um CompanyGraph steht das Wort «Modell» für fünf verschiedene Dinge, und zwei davon sind Modelle in dem Sinn, den heute alle meinen. Einige der fünf gehören Ihnen und bleiben. Andere sollten Sie im nächsten Quartal gegen etwas Gleichwertiges austauschen können, ohne etwas neu zu schreiben. Dieser Vortrag ordnet sie, sagt, warum jedes davon da ist, und endet mit den Praktiken, die daraus folgen. Wie in unseren anderen Vorträgen nennt jede Folie die Seiten unseres eigenen Modells, auf denen sie beruht.">
+    <div class="kicker mono" data-n="00"></div>
+    <div class="titlelock"><span class="titlemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><h1 data-de="Company<em>Graph</em> – Was bleibt, wenn das Modell wechselt">Company<em>Graph</em> — What stays when the model changes</h1></div>
+    <p class="sub" data-de="Code, System One, System Two und ein Mensch: welches Modell Sie behalten und welches Sie ersetzen können.">Code, System One, System Two and a person: which model you keep, and which you can replace.</p>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7986-8fbe-c785f2c74afe"><i>concept</i> Instance</a></div>
+    <p class="byline" data-de="Robert Blust · <span>Software Engineer &amp; Architect</span>">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
+  </section>
+
+  <section class="slide" id="s-five"
+    data-time="0:50"
+    data-notes="First, the five. A System Two model is what most people mean by an LLM: Opus, Fable, Gemini Flash. It writes and it reasons. A System One model is newer: TypeSafe's Jev answers a typed question about a piece of text with one of the answers you allowed, and says how likely it is. Then there are the two models this project is named for. The meta-model is the vocabulary: the types, their schemas and the rules for writing each page. The mental model is one company written in that vocabulary. And the graph is what a site, a server or a chat draws from it. Only the first two are machine learning. The other three are files."
+    data-notes-de="Zuerst die fünf. Ein System-Two-Modell ist das, was die meisten unter einem LLM verstehen: Opus, Fable, Gemini Flash. Es schreibt, und es zieht Schlüsse. Ein System-One-Modell ist neuer: Jev von TypeSafe beantwortet eine typisierte Frage zu einem Text mit einer der Antworten, die Sie zugelassen haben, und sagt, wie wahrscheinlich sie ist. Dann gibt es die zwei Modelle, nach denen dieses Projekt benannt ist. Das Meta-Modell ist das Vokabular: die Typen, ihre Schemas und die Regeln, nach denen jede Seite geschrieben wird. Das Mental Model ist eine Firma, beschrieben in diesem Vokabular. Und der Graph ist das, was eine Website, ein Server oder ein Chat daraus ableitet. Nur die ersten beiden stammen aus maschinellem Lernen. Die anderen drei sind Dateien.">
+    <div class="kicker mono" data-n="01"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Fünf Dinge heissen «Modell»">“Model” names five things</h1><p class="sub" data-de="Zwei davon sind trainierte Modelle. Drei sind Dateien, die Sie behalten.">Two of them are models that learned. Three of them are files you keep.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-77ad-8f21-67c035e80d13"><i>concept</i> Core</a><a href="../../?stage=expanded#01a0c2a7-ffa8-7986-8fbe-c785f2c74afe"><i>concept</i> Instance</a><a href="../../?stage=expanded#01a0c2a7-ffa8-7ea2-852f-524856809933"><i>concept</i> Type</a></div></div><div class="five" role="img" aria-label="Five things called model: a System Two model, a System One model, the meta-model, the mental model, and the graph."><div><span class="fk" data-de="SYSTEM TWO">SYSTEM TWO</span><span class="fn" data-de="Opus, Fable, Gemini Flash<span>schreibt und zieht Schlüsse</span>">Opus, Fable, Gemini Flash<span>writes and reasons</span></span></div><div><span class="fk" data-de="SYSTEM ONE">SYSTEM ONE</span><span class="fn" data-de="Jev von TypeSafe<span>beantwortet typisierte Fragen</span>">TypeSafe’s Jev<span>answers typed questions</span></span></div><div><span class="fk" data-de="META-MODELL">META-MODEL</span><span class="fn" data-de="CompanyGraph core<span>das Vokabular und seine Regeln</span>">CompanyGraph core<span>the vocabulary and its rules</span></span></div><div><span class="fk" data-de="MENTAL MODEL">MENTAL MODEL</span><span class="fn" data-de="die Instanz einer Firma<span>ihre Fakten, in diesem Vokabular</span>">one company’s instance<span>its facts, in that vocabulary</span></span></div><div><span class="fk" data-de="GRAPH">GRAPH</span><span class="fn" data-de="was daraus abgeleitet wird<span>eine Website, ein Server, ein Chat</span>">what is drawn from it<span>a site, a server, a chat</span></span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-layers"
+    data-time="0:55"
+    data-notes="Here is the frame. TypeSafe calls Jev a System One model, after Kahneman: fast, typed judgments, beside the System Two models that generate text. We put one layer under them and one above. Under them is code, which needs no model at all. Above them is a person. And one rule sorts the work: each decision goes to the lowest layer that can make it. If code can decide it, code decides it. If it is a choice among answers you can name, a System One model takes it. Only what needs writing or open reading goes to System Two. And what changes the company is approved by a person."
+    data-notes-de="Zuerst der Rahmen. TypeSafe nennt Jev ein System-One-Modell, nach Kahneman: schnelle, typisierte Urteile, neben den System-Two-Modellen, die Text erzeugen. Wir setzen eine Ebene darunter und eine darüber. Darunter liegt Code, der gar kein Modell braucht. Darüber steht ein Mensch. Und eine einzige Regel teilt die Arbeit auf: Jeder Entscheid geht an die tiefste Ebene, die ihn treffen kann. Kann Code darüber entscheiden, entscheidet der Code. Ist es eine Wahl zwischen Antworten, die Sie benennen können, übernimmt sie ein System-One-Modell. Nur was Schreiben oder freies Deuten eines Textes verlangt, geht an System Two. Und was die Firma verändert, gibt ein Mensch frei.">
+    <div class="kicker mono" data-n="02"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Vier Ebenen, eine Regel">Four layers, one rule</h1><p class="sub" data-de="Jeder Entscheid geht an die tiefste Ebene, die ihn treffen kann.">Each decision goes to the lowest layer that can make it.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0eb67-0768-773d-a9d9-c00b0c7530c9"><i>decision</i> Agents write the model, and a person approves every change to it</a></div></div><div class="layslot" data-on="all"></div></div>
+  </section>
+
+  <section class="slide" id="s-meta"
+    data-time="0:45"
+    data-notes="The first thing that stays is the meta-model. It is Markdown: every type has a schema, and every schema ends in writing rules, plain sentences that say what a good page of that type does. They are written to be judged, by an agent reading a page or by a decision model answering a question. This one, from the feature schema, is why the page we added for this talk names no vendor. An instance takes the meta-model at a tagged release and keeps it until someone moves the pin."
+    data-notes-de="Das Erste, was bleibt, ist das Meta-Modell. Es ist Markdown: Jeder Typ hat ein Schema, und jedes Schema endet mit Schreibregeln, einfachen Sätzen, die sagen, was eine gute Seite dieses Typs leistet. Sie sind so geschrieben, dass sich eine Seite daran messen lässt – von einem Agenten, der sie liest, oder von einem Entscheidungsmodell, das eine Frage beantwortet. Wegen dieser Regel aus dem Schema für Features nennt die Seite, die wir für diesen Vortrag angelegt haben, keinen Anbieter. Eine Instanz übernimmt das Meta-Modell aus einem getaggten Release und behält es, bis jemand den Pin verschiebt.">
+    <div class="kicker mono" data-n="03"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Fest: das Meta-Modell">Fixed: the meta-model</h1><p class="sub" data-de="Das Vokabular und die Regeln, nach denen jede Seite geschrieben wird – in Markdown und in einem Release, das eine Instanz pinnt.">The vocabulary, and the rules for writing each page, in Markdown, at a release an instance pins.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7321-8656-ce1a28092a97"><i>concept</i> Schema</a><a href="../../?stage=expanded#01a0dd52-bc30-7fd3-80a1-85ce038a92bb"><i>decision</i> The schema written as prose is the only schema</a><a href="../../?stage=expanded#01a0f0b5-1390-73e6-94f7-d3b510a3dff4"><i>decision</i> A release is its tag, and nothing we make is published to a registry</a></div></div><div class="win " role="img" aria-label="The writing rules of the feature schema."><div class="wbar"><i></i><i></i><i></i><span>meta/core/feature-schema.md</span></div><div class="ed"><div class="src"><div class="l"><span class="h">## Writing rules</span></div><div class="l">- The tagline says what someone can now do, in their words, and never names a screen, a service or a vendor.</div><div class="l">- The H1 names the capability, not the vendor that supplies it.</div><div class="l">- The page says nothing about a release, a ticket or a delivery date: those move, and a feature outlives all three.</div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-mental"
+    data-time="0:45"
+    data-notes="The second thing that stays is the mental model: one company, written in that vocabulary. Ours is a folder of Markdown in git. Every page sits in the folder of its type, carries an id that outlives its name, and points at other pages by name. No tool owns it, and no model does either: an editor opens it, a graph database could load it, and the next language model will read the same files the last one did. This is the page we wrote for the judge, which the next slides are about."
+    data-notes-de="Das Zweite, was bleibt, ist das Mental Model: eine Firma, beschrieben in diesem Vokabular. Unseres ist ein Ordner mit Markdown in git. Jede Seite liegt im Ordner ihres Typs, hat eine ID, die auch bei einer Umbenennung gleich bleibt, und verweist mit Namen auf andere Seiten. Es gehört keinem Werkzeug und auch keinem Modell: Ein Editor öffnet es, eine Graphdatenbank könnte es laden, und das nächste Sprachmodell wird dieselben Dateien lesen wie das letzte. Das hier ist die Seite, die wir für den Judge geschrieben haben, um den es auf den nächsten Folien geht.">
+    <div class="kicker mono" data-n="04"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Fest: das Mental Model">Fixed: the mental model</h1><p class="sub" data-de="Die Fakten einer Firma als Markdown in git, geprüft an dem Release, das die Instanz übernommen hat. Das Mental Model gehört keinem Werkzeug und keinem Modell.">A company’s facts as Markdown in git, checked against the release it adopted. No tool and no model owns it.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7986-8fbe-c785f2c74afe"><i>concept</i> Instance</a><a href="../../?stage=expanded#01a0ee26-c790-7cd2-9d34-008324cbeb63"><i>strategic-objective</i> A company&#x27;s model belongs to no tool, and any graph database can hold it</a><a href="../../?stage=expanded#01a0f0ed-5db8-7589-9ab1-df069dbad08c"><i>decision</i> Every entity carries an id that outlives its name</a></div></div><div class="win " role="img" aria-label="The head of a feature page in CompanyGraph's own model."><div class="wbar"><i></i><i></i><i></i><span>model/features/…writing-rules.md</span></div><div class="ed"><div class="src"><div class="l"><span class="d">---</span></div><div class="l"><span class="k">id:</span> 01a10770-fd86-7891-a8a0-5ea8e270b7f2</div><div class="l"><span class="k">products:</span> CompanyGraph Core</div><div class="l"><span class="k">concepts:</span> Agent pass, Schema, Rule, Instance</div><div class="l"><span class="d">---</span></div><div class="l"><span class="h"># A decision model asks each page its schema’s writing rules</span></div><div class="l"><span class="dim">&gt; A company learns which of its pages most likely break a writing rule before anyone reads them…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-code" data-scene="check"
+    data-time="0:45"
+    data-notes="The lowest layer is code. The check reads every page against the schemas the instance adopted: the frontmatter, the tables, the ids, and every reference, resolved by the type it declares and never by a name alone. It gives the same answer every time and asks no model anything. It runs on every commit and on every pull request. And it says, every run, what it did not check: the writing rules. That is the honest boundary of code, and it is where the next layer starts."
+    data-notes-de="Die unterste Ebene ist Code. Die Prüfung misst jede Seite an den Schemas, die die Instanz übernommen hat: das Frontmatter, die Tabellen, die IDs und jeden Verweis, aufgelöst über den deklarierten Typ und nie über einen Namen allein. Sie gibt jedes Mal dieselbe Antwort und fragt kein Modell. Sie läuft bei jedem Commit und bei jedem Pull-Request. Und sie sagt bei jedem Lauf, was sie nicht geprüft hat: die Schreibregeln. Hier stösst Code an seine Grenze und sagt es offen. Dort beginnt die nächste Ebene.">
+    <div class="kicker mono" data-n="05"></div>
+    <div class="feat lvl"><div class="layslot" data-on="1" data-size="mini"></div><div class="lead"><h1 data-de="Code: die Prüfung">Code: the check</h1><p class="sub" data-de="Verweise, Schemas, IDs. Bei jedem Lauf dieselbe Antwort, ohne dass ein Modell gefragt wird.">References, schemas, ids. The same answer every run, and no model asked.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-70b3-a43c-a1b44e906b46"><i>concept</i> Check</a><a href="../../?stage=expanded#01a0c29a-9610-7863-a9a5-c9d2ef01c3ff"><i>feature</i> Checks an instance runs</a><a href="../../?stage=expanded#01a0dd52-bc30-75db-ae2a-efe33658a439"><i>decision</i> A reference resolves by its declared type, never by name alone</a></div></div><div class="win term" role="img" aria-label="A terminal: companygraph check passes and says what it did not check."><div class="wbar"><i></i><i></i><i></i></div><div class="ed"><div class="src"><div class="l"><span class="d">$ </span><span class="cmd">companygraph check</span><span class="cur"></span></div><div class="l o"><span class="ok">✓</span> model/ against meta/core at core &lt;release&gt;: the mechanical checks pass</div><div class="l o">  not checked: every `## Writing rules` in every schema — that is the agent pass, R0</div><div class="l o"><span class="ok">✓</span> Markdown files in the one form</div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-judge" data-scene="judge"
+    data-time="1:00"
+    data-notes="The next layer is System One, and in CompanyGraph it is the judge. Every writing rule becomes a typed question, asked of every page of that type, and Jev answers each with a choice and a probability. Before anything leaves the machine, the owner is shown the pages, the questions, the service and the cost, and only a yes to exactly that sends it. The report flags the pages whose answers fall below a measured band. And it says of itself that it gates nothing and is no pass. It is a guard that points, not one that decides. The chat on this site checks its own answers the same way, against the pages its tools returned."
+    data-notes-de="Die nächste Ebene ist System One, und in CompanyGraph ist das der Judge. Jede Schreibregel wird zu einer typisierten Frage, die jeder Seite dieses Typs gestellt wird, und Jev beantwortet jede mit einer Wahl und einer Wahrscheinlichkeit. Bevor irgendetwas den Rechner verlässt, sieht der Owner die Seiten, die Fragen, den Dienst und die Kosten, und erst wenn er genau diesem Umfang zustimmt, geht etwas hinaus. Der Bericht markiert die Seiten, deren Antworten unter eine gemessene Schwelle fallen. Und er sagt von sich selbst, dass er nichts aufhält und kein Durchgang ist. Der Judge ist also ein Wächter, der hinweist, nicht einer, der entscheidet. Der Chat auf dieser Website prüft seine eigenen Antworten auf dieselbe Weise, an den Seiten, die seine Werkzeuge zurückgegeben haben.">
+    <div class="kicker mono" data-n="06"></div>
+    <div class="feat lvl"><div class="layslot" data-on="2" data-size="mini"></div><div class="lead"><h1 data-de="System One: der Judge">System One: the judge</h1><p class="sub" data-de="Jede Schreibregel wird zu einer typisierten Frage. Jev antwortet mit einer Wahl und einer Wahrscheinlichkeit. Der Owner sagt Ja zu genau dem, was den Rechner verlässt.">Each writing rule becomes a typed question. Jev answers with a choice and a probability. The owner says yes to exactly what leaves the machine.</p><p class="sub" data-de="Der Judge berät und ändert nichts.">It advises, and changes nothing.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a10770-fd86-7891-a8a0-5ea8e270b7f2"><i>feature</i> A decision model asks each page its schema&#x27;s writing rules</a><a href="../../?stage=expanded#01a0d4e3-e038-76c7-8592-925fb9c3c519"><i>question</i> Does our data leave our hands?</a></div></div><div class="win term" role="img" aria-label="A terminal: companygraph judge reports one flagged page of the example acme."><div class="wbar"><i></i><i></i><i></i></div><div class="ed"><div class="src"><div class="l"><span class="d">$ </span><span class="cmd">companygraph judge --consent &lt;digest&gt;</span><span class="cur"></span></div><div class="l o">judge: advisory — it gates nothing and is no pass</div><div class="l o"></div><div class="l o">model/features/checkout.md</div><div class="l o">  <span class="fl">!</span> 0.31  r1  The tagline says what someone can now do, in their words, and never names a screen, a service or a vendor.</div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-two"
+    data-time="0:55"
+    data-notes="Then System Two: the language model that writes and reads. Its skills draft an instance from a company's documents or its web address. Its validate skill reads the judge's flags first, then every page against every writing rule, and ends with what it did not check, so a clean report is never read as more than it is. On the other side, the server and the chat answer questions from the model at one named commit, and name the pages each answer rests on. The server only reads. Nothing System Two writes reaches the model on its own."
+    data-notes-de="Dann System Two: das Sprachmodell, das schreibt und liest. Seine Skills entwerfen eine Instanz aus den Dokumenten einer Firma oder aus ihrer Webadresse. Sein Skill validate liest zuerst die Markierungen des Judges, misst dann jede Seite an jeder Schreibregel und endet mit dem, was er nicht geprüft hat. So wird ein sauberer Bericht nie für mehr gehalten, als er ist. Auf der anderen Seite beantworten der Server und der Chat Fragen aus dem Modell auf dem Stand eines benannten Commits und nennen die Seiten, auf denen jede Antwort beruht. Der Server liest nur. Nichts, was System Two schreibt, gelangt von sich aus ins Modell.">
+    <div class="kicker mono" data-n="07"></div>
+    <div class="feat lvl"><div class="layslot" data-on="3" data-size="mini"></div><div class="lead"><h1 data-de="System Two: schreibt und liest">System Two: writes and reads</h1><p class="sub" data-de="Skills liefern Entwürfe. Der Skill validate liest zuerst die Markierungen des Judges, dann jede Seite. Der Server und der Chat antworten und nennen, worauf jede Antwort beruht.">Skills draft. Validate reads the judge’s flags first, then every page. The server and the chat answer, and name what each answer rests on.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7f39-8a45-52e006a9d079"><i>concept</i> Agent pass</a><a href="../../?stage=expanded#01a0ee28-9868-7bf5-9995-08d074d598cf"><i>feature</i> An agent does the work no script can, by the skills an instance ships</a><a href="../../?stage=expanded#01a0dd52-bc30-78cc-9401-25383aa1d354"><i>decision</i> The server only reads, and answers at one named commit</a></div></div><div class="win " role="img" aria-label="The end of a validate report: the mechanical checks, one finding, and what was not checked."><div class="wbar"><i></i><i></i><i></i><span>companygraph-validate</span></div><div class="ed"><div class="src"><div class="l"><span class="h">Mechanical checks</span>  <span class="ok">passed</span></div><div class="l"><span class="h">Writing rules</span></div><div class="l">  model/features/checkout.md breaks feature r1: <span class="dim">“The tagline says what someone can now do …”</span></div><div class="l"><span class="h">Not checked:</span> nothing</div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-person"
+    data-time="0:45"
+    data-notes="At the top is a person. Our conventions say it plainly: a pass that finds nothing approves nothing. It says a change has the right shape; the change enters the model when a person approves it. Agents write our model, every word of this talk included, and the owner's word merges. A reviewer reads the output, not a report about it. That is not a lack of trust in the models below. It is where the accountability sits, and no model can hold it for you."
+    data-notes-de="Ganz oben steht ein Mensch. Unsere Konventionen sagen es deutlich: Ein Durchgang, der nichts findet, gibt nichts frei. Er sagt, dass eine Änderung die richtige Form hat. Ins Modell kommt die Änderung, wenn ein Mensch sie freigibt. Agenten schreiben unser Modell, jedes Wort dieses Vortrags eingeschlossen, und gemergt wird erst, wenn der Owner es sagt. Wer gegenliest, liest das Ergebnis, nicht einen Bericht darüber. Das ist kein Misstrauen gegenüber den Modellen darunter. Hier oben liegt die Verantwortung, und kein Modell kann sie Ihnen abnehmen.">
+    <div class="kicker mono" data-n="08"></div>
+    <div class="feat lvl"><div class="layslot" data-on="4" data-size="mini"></div><div class="lead"><h1 data-de="Ein Mensch gibt frei">A person approves</h1><p class="sub" data-de="Ein Durchgang, der nichts findet, gibt nichts frei. Gemergt wird erst, wenn der Owner es sagt.">A pass that finds nothing approves nothing. The Owner’s word merges.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0fd97-30fd-785b-a1f9-18021203cd55"><i>rule</i> The Owner&#x27;s word merges</a><a href="../../?stage=expanded#01a0eb72-3a98-704b-b3be-d391303d97c6"><i>strategic-objective</i> Every gate an agent&#x27;s work passes is held by a person</a><a href="../../?stage=expanded#01a0ffcb-6b74-753b-a68b-d08e35f7ae7a"><i>control</i> A reviewer reads the output, not the report</a></div></div><div class="win" role="img" aria-label="A pull request: both checks passed, merged on the Owner's word."><div class="wbar"><i></i><i></i><i></i><span>pull request</span></div><div class="ed src"><div class="chk"><span class="cn">companygraph / companygraph</span> <span class="cr">✓</span></div><div class="chk"><span class="cn">conventions / conventions</span> <span class="cr">✓</span></div><div class="chk gate"><span class="cn">merge</span> <span class="who">on the Owner’s word</span></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-flow" data-scene="flow"
+    data-time="0:50"
+    data-notes="Put together, a change walks this line. The check refuses what code can prove wrong, and hands on a model that holds together. The judge flags what most likely breaks a writing rule, and hands on a short list with probabilities. Validate reads that list first and then everything else, and hands on findings and what it did not check. And a person decides. Each step does only what it is good at, and each one says what it leaves to the next."
+    data-notes-de="Im Zusammenspiel durchläuft eine Änderung diese Strecke. Die Prüfung lehnt ab, was Code als falsch nachweisen kann, und gibt ein Modell weiter, das in sich stimmig ist. Der Judge markiert, was am ehesten eine Schreibregel verletzt, und gibt eine kurze Liste mit Wahrscheinlichkeiten weiter. Der Skill validate liest zuerst diese Liste, dann alles andere, und gibt seine Befunde weiter, zusammen mit dem, was er nicht geprüft hat. Und ein Mensch entscheidet. Jeder Schritt tut nur, was er gut kann, und jeder sagt, was er dem nächsten überlässt.">
+    <div class="kicker mono" data-n="09"></div>
+    <h1 data-de="Der Ablauf">The flow</h1>
+    <p class="sub" data-de="Jeder Schritt tut, was er gut kann, und sagt, was er dem nächsten überlässt.">Each step does what it is good at, and says what it leaves to the next.</p>
+    <div class="flow" role="img" aria-label="Four steps: check, judge, validate, a person."><div class="step" data-s="1"><span class="sl" data-de="Code">code</span><span class="sn" data-de="Prüfung">check</span><span class="sh" data-de="lehnt ab, was Code als falsch nachweisen kann">refuses what code can prove wrong</span></div><div class="step" data-s="2"><span class="sl" data-de="System One">System One</span><span class="sn" data-de="Judge">judge</span><span class="sh" data-de="markiert, was am ehesten eine Regel verletzt">flags what most likely breaks a rule</span></div><div class="step" data-s="3"><span class="sl" data-de="System Two">System Two</span><span class="sn" data-de="validate">validate</span><span class="sh" data-de="liest die Markierungen, dann jede Seite">reads the flags, then every page</span></div><div class="step" data-s="4"><span class="sl" data-de="Mensch">person</span><span class="sn" data-de="Freigabe">approve</span><span class="sh" data-de="entscheidet und mergt">decides, and merges</span></div></div>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-70b3-a43c-a1b44e906b46"><i>concept</i> Check</a><a href="../../?stage=expanded#01a10770-fd86-7891-a8a0-5ea8e270b7f2"><i>feature</i> A decision model asks each page its schema&#x27;s writing rules</a><a href="../../?stage=expanded#01a0c2a7-ffa8-7f39-8a45-52e006a9d079"><i>concept</i> Agent pass</a></div>
+  </section>
+
+  <section class="slide" id="s-split"
+    data-time="1:00"
+    data-notes="So what is fixed, and what is replaceable? Fixed: the meta-model, your mental model, the check, your rules and decisions, and a person's approval. Replaceable, and here we are careful to say which is true today and which is true by design. Any agent that speaks MCP can read the model today. Any editor can open it today, because it is Markdown. The judge is one file in the tooling, so a second decision model is a second file, by design. The language model that writes is Claude today, and the others follow; that is a stage, not the design. A graph database can hold the model, by design."
+    data-notes-de="Was ist also fest, und was ist austauschbar? Fest sind das Meta-Modell, Ihr Mental Model, die Prüfung, Ihre Regeln und Entscheide und die Freigabe durch einen Menschen. Dann das Austauschbare, und hier achten wir darauf, zu sagen, was heute gilt und was dem Design nach gilt. Jeder Agent, der MCP spricht, kann das Modell heute lesen. Jeder Editor kann es heute öffnen, weil es Markdown ist. Der Judge ist eine einzige Datei in den Werkzeugen, ein zweites Entscheidungsmodell ist also dem Design nach eine zweite Datei. Das Sprachmodell, das schreibt, ist heute Claude, und die anderen folgen; das ist eine Etappe, nicht das Design. Eine Graphdatenbank kann das Modell aufnehmen, dem Design nach.">
+    <div class="kicker mono" data-n="10"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Fest und austauschbar">Fixed and replaceable</h1><p class="sub" data-de="Was bleibt, ist, was Sie geschrieben haben. Was wechselt, ist, was es liest – und bei jedem Teil steht, ob es heute schon austauschbar ist oder dem Design nach.">What stays is what you wrote. What changes is what reads it, and each says whether it is replaceable today or by design.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0ee24-9510-733f-b879-db9ec9ac8d25"><i>decision</i> Claude is the first agent an instance supports, and not the only one</a><a href="../../?stage=expanded#01a0ee24-9510-7378-a992-573206d9ba28"><i>strategic-objective</i> A company keeps its model with whichever agent it chooses</a><a href="../../?stage=expanded#01a0ee2a-de70-7b8b-9c6d-4579507061cd"><i>question</i> Does it only work with Claude, or can we use ChatGPT or Gemini?</a></div></div><div class="split" role="img" aria-label="Two lists: what is fixed, and what is replaceable, each replaceable part marked today or by design."><div><h2 data-de="Fest">Fixed</h2><ul><li data-de="das Meta-Modell">the meta-model</li><li data-de="Ihr Mental Model">your mental model</li><li data-de="die Prüfung">the check</li><li data-de="Ihre Regeln und Entscheide">your rules and decisions</li><li data-de="die Freigabe durch einen Menschen">a person’s approval</li></ul></div><div><h2 data-de="Austauschbar">Replaceable</h2><ul><li><span data-de="der Agent, der über MCP liest">the agent that reads, over MCP</span> <b class="now" data-de="heute">today</b></li><li><span data-de="der Editor">the editor</span> <b class="now" data-de="heute">today</b></li><li><span data-de="das System-One-Modell">the System One model</span> <b data-de="dem Design nach">by design</b></li><li><span data-de="das System-Two-Modell, das schreibt">the System Two model that writes</span> <b data-de="dem Design nach">by design</b></li><li><span data-de="die Graphdatenbank">the graph database</span> <b data-de="dem Design nach">by design</b></li></ul></div></div></div>
+  </section>
+
+  <section class="slide" id="s-measure"
+    data-time="0:50"
+    data-notes="Replaceable does not mean free to swap. The judge's model is pinned to one version, not to latest, because the band it flags by was measured against that one model; a newer one is measured again before it is named. The chat's answers are measured by one number, the Grounded Answer Rate: the share of a week's questions whose answer rested on what the model's tools returned. Swap the model behind either, and you measure first. A check counts only when its output was seen."
+    data-notes-de="Austauschbar heisst nicht, dass man ohne Weiteres wechseln kann. Das Modell des Judges ist auf eine Version gepinnt, nicht auf latest, denn die Schwelle, nach der er markiert, wurde an genau diesem einen Modell gemessen; ein neueres wird zuerst gemessen, bevor es an seine Stelle tritt. Die Antworten des Chats werden mit einer einzigen Zahl gemessen, der Grounded Answer Rate: dem Anteil der Fragen einer Woche, deren Antwort auf dem beruhte, was die Werkzeuge des Modells zurückgegeben haben. Bevor Sie das Modell hinter einem der beiden wechseln, messen Sie. Eine Prüfung zählt erst, wenn jemand ihre Ausgabe gesehen hat.">
+    <div class="kicker mono" data-n="11"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Messen, bevor Sie wechseln">Measure before you swap</h1><p class="sub" data-de="Jedes Modell ist gepinnt. Ein neues wird an derselben Firma gemessen, bevor es an seine Stelle tritt.">Every model is pinned. A new one is measured against the same company before it is named.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0d90e-7ee8-7194-84e3-e8932ab09b5a"><i>kpi</i> Grounded Answer Rate</a><a href="../../?stage=expanded#01a0d451-1230-7157-b7cd-18d2c475b767"><i>question</i> Can I trust what this chat says?</a><a href="../../?stage=expanded#01a0fd96-7fa8-7fa9-ae24-15a7f5d08ca2"><i>rule</i> A check counts only when its output was seen</a></div></div><div class="win " role="img" aria-label="The comment at the head of the judge's one model file."><div class="wbar"><i></i><i></i><i></i><span>bin/judges/typesafe.mjs</span></div><div class="ed"><div class="src"><div class="l"><span class="d">// The one place the tooling names a judge … so a second judge is a second</span></div><div class="l"><span class="d">// file beside this one and the questions do not change. The model is pinned</span></div><div class="l"><span class="d">// rather than `jev-latest`, because the band the report flags by is measured</span></div><div class="l"><span class="d">// against one model, and a newer one is measured again before it is named here.</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-six"
+    data-time="0:55"
+    data-notes="Six practices follow. Keep knowledge where no model owns it: plain files, in your repository. Let code decide what code can decide, because it is the only layer that is never wrong in a new way. Ask typed questions before free text: a choice with a probability can be measured, a paragraph cannot. Let a model propose and a person decide. Pin every model, and measure before you move it. And ask before data leaves the machine, every time, for exactly what leaves."
+    data-notes-de="Daraus folgen sechs Praktiken. Legen Sie Wissen dort ab, wo es keinem Modell gehört: in einfachen Dateien, in Ihrem Repository. Lassen Sie Code entscheiden, was Code entscheiden kann, denn er ist die einzige Ebene, die sich nie auf neue Art irrt. Stellen Sie typisierte Fragen, bevor Sie freien Text verlangen: Eine Wahl mit einer Wahrscheinlichkeit lässt sich messen, ein Absatz nicht. Lassen Sie ein Modell vorschlagen und einen Menschen entscheiden. Pinnen Sie jedes Modell, und messen Sie, bevor Sie den Pin verschieben. Und fragen Sie jedes Mal, bevor Daten den Rechner verlassen, und zwar nach genau dem, was ihn verlässt.">
+    <div class="kicker mono" data-n="12"></div>
+    <h1 data-de="Sechs Praktiken">Six practices</h1>
+    <ol class="six"><li data-de="Legen Sie Wissen dort ab, wo es keinem Modell gehört.">Keep knowledge where no model owns it.</li><li data-de="Lassen Sie Code entscheiden, was Code entscheiden kann.">Let code decide what code can decide.</li><li data-de="Stellen Sie typisierte Fragen, bevor Sie freien Text verlangen.">Ask typed questions before free text.</li><li data-de="Ein Modell schlägt vor, ein Mensch entscheidet.">A model proposes, a person decides.</li><li data-de="Pinnen Sie jedes Modell, und messen Sie, bevor Sie den Pin verschieben.">Pin every model, and measure before you move it.</li><li data-de="Fragen Sie, bevor Daten den Rechner verlassen.">Ask before data leaves the machine.</li></ol>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c1d6-f408-750f-a4c2-51a5ffe23686"><i>value</i> Run on what we publish</a></div>
+  </section>
+
+  <section class="slide" id="s-close"
+    data-time="0:35"
+    data-notes="The model you will change most often is the one you should depend on least. Write your company down where every model can read it, let code and typed questions do what they can, and keep the decision with a person. Then the next model is a pin you move, not a project you start."
+    data-notes-de="Von dem Modell, das Sie am häufigsten wechseln werden, sollten Sie am wenigsten abhängen. Schreiben Sie Ihre Firma dort auf, wo jedes Modell sie lesen kann, lassen Sie Code und typisierte Fragen tun, was sie können, und lassen Sie den Entscheid bei einem Menschen. Dann ist das nächste Modell ein Pin, den Sie verschieben, und kein Projekt, das Sie beginnen.">
+    <div class="kicker mono" data-n="13"></div>
+    <div class="feat"><div class="lead"><h1 data-de="Was bleibt">What stays</h1><p class="sub" data-de="Von dem Modell, das Sie am häufigsten wechseln werden, sollten Sie am wenigsten abhängen.">The model you will change most often is the one you should depend on least.</p><p class="sub" data-de="Dann ist das nächste Modell ein Pin, den Sie verschieben, und kein Projekt, das Sie beginnen.">Then the next model is a pin you move, not a project you start.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0eb67-0768-773d-a9d9-c00b0c7530c9"><i>decision</i> Agents write the model, and a person approves every change to it</a></div></div><div class="layslot" data-on="all"></div></div>
+  </section>
+  <section class="slide" id="s-credits"
+    data-time="0:30"
+    data-notes="The frame is borrowed. TypeSafe calls its decision model Jev a System One model, and that name gave this talk its shape. The terms System One and System Two were named by the psychologists Keith Stanovich and Richard West, and Daniel Kahneman made them widely known in his book Thinking, Fast and Slow. Jev and the API our judge calls are documented on TypeSafe's site, and the two models this talk rests on, the meta-model and the mental model, are open on GitHub, where you can read every page I showed."
+    data-notes-de="Den Rahmen haben wir übernommen. TypeSafe bezeichnet Jev, sein Entscheidungsmodell, als System-One-Modell, und diese Bezeichnung hat dem Vortrag seine Form gegeben. Die Begriffe System One und System Two gehen auf die Psychologen Keith Stanovich und Richard West zurück, bekannt gemacht hat sie Daniel Kahneman mit seinem Buch «Schnelles Denken, langsames Denken». Jev und die API, die unser Judge aufruft, sind auf der Website von TypeSafe dokumentiert. Und die beiden Modelle, auf denen dieser Vortrag beruht, das Meta-Modell und das Mental Model, sind öffentlich auf GitHub. Dort können Sie jede Seite lesen, die ich gezeigt habe.">
+    <div class="kicker mono" data-n="14"></div>
+    <h1 data-de="Quellen und Dank">Credits</h1>
+    <ul class="credits">
+      <li><span class="ck" data-de="Angeregt durch">Inspired by</span><span class="cv" data-de="TypeSafe, das Jev, sein Entscheidungsmodell, als System-One-Modell bezeichnet – als Gegenstück zu den System-Two-Modellen, die Text erzeugen.">TypeSafe, who call their decision model Jev a System One model, beside the System Two models that generate text.</span></li>
+      <li><span class="ck" data-de="System One und System Two">System One and System Two</span><span class="cv" data-de="Daniel Kahneman, <a href='https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow'><cite>Thinking, Fast and Slow</cite></a>, 2011; zuerst benannt von Keith Stanovich und Richard West, 2000">Daniel Kahneman, <a href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow"><cite>Thinking, Fast and Slow</cite></a>, 2011; first named by Keith Stanovich and Richard West, 2000</span></li>
+      <li><span class="ck" data-de="Jev und die API, die der Judge aufruft">Jev and the API the judge calls</span><span class="cv" data-de="<a href='https://typesafe.ai/'>typesafe.ai</a> · <a href='https://docs.typesafe.ai/'>docs.typesafe.ai</a>"><a href="https://typesafe.ai/">typesafe.ai</a> · <a href="https://docs.typesafe.ai/">docs.typesafe.ai</a></span></li>
+      <li><span class="ck" data-de="Die Modelle dieses Vortrags">The models in this talk</span><span class="cv" data-de="<a href='https://github.com/companygraph/meta-model'>companygraph/meta-model</a> · <a href='https://github.com/companygraph/mental-model'>companygraph/mental-model</a>"><a href="https://github.com/companygraph/meta-model">companygraph/meta-model</a> · <a href="https://github.com/companygraph/mental-model">companygraph/mental-model</a></span></li>
+    </ul>
+  </section>
+</div>
+<template id="layers"><div class="layers" role="img" aria-label="Four layers, top to bottom: a person, System Two, System One, code."><div class="layer" data-l="4"><span class="ln">4</span><span class="ll" data-de="Mensch">Person</span><span class="lx" data-de="gibt frei">approves</span></div><div class="layer" data-l="3"><span class="ln">3</span><span class="ll" data-de="System Two">System Two</span><span class="lx" data-de="schreibt und liest · Opus, Fable, Gemini Flash">writes and reads · Opus, Fable, Gemini Flash</span></div><div class="layer" data-l="2"><span class="ln">2</span><span class="ll" data-de="System One">System One</span><span class="lx" data-de="beantwortet typisierte Fragen · Jev">answers typed questions · Jev</span></div><div class="layer" data-l="1"><span class="ln">1</span><span class="ll" data-de="Code">Code</span><span class="lx" data-de="entscheidet, was Code entscheiden kann · die Prüfung">decides what code can decide · the check</span></div></div></template>
+<script>
+  /* The layers are drawn once, in the template above, and copied into every slot that names them,
+     here and not in scenes.js: deck.js collects every [data-de] when it runs, and the copies have
+     to be in the page by then for the language switch to reach their labels. A slot's data-on
+     names the layer to light, or "all"; data-size="mini" draws it small. */
+  (function () {
+    var t = document.getElementById("layers");
+    Array.prototype.forEach.call(document.querySelectorAll(".layslot"), function (s) {
+      var l = t.content.firstElementChild.cloneNode(true), on = s.getAttribute("data-on");
+      if (s.getAttribute("data-size")) l.classList.add(s.getAttribute("data-size"));
+      Array.prototype.forEach.call(l.querySelectorAll(".layer"), function (r) { if (on === "all" || r.getAttribute("data-l") === on) r.classList.add("on"); });
+      s.parentNode.replaceChild(l, s);
+    });
+  })();
+</script>
+<div class="chrome" id="chrome">
+
+  <div class="name">
+    <a class="lockup" href="../../"><span class="namemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><b>Company<em>Graph</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nperson" href="https://blust.ch/"><span class="rbmark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nlink" href="../" data-de="Vorträge">Talks</a>
+  </div>
+
+  <div class="transport" id="transport" role="group" aria-label="Deck controls">
+
+    <div class="lcd" aria-hidden="true">
+      <div class="n"><b id="cur">00</b><span class="sep">/</span><span id="tot">14</span></div>
+      <div class="clip"><i id="cliplen"></i></div>
+    </div>
+
+    <div class="tmain">
+
+    <button class="tbtn" id="tFirst" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="5" width="2.3" height="14" rx="1"/><path d="M13.2 5.4v13.2L7.6 12z"/><path d="M21 5.4v13.2L13.6 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tPrev" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.6v14.8L6 12z"/></svg>
+    </button>
+
+    <button class="tbtn play" id="tPlay" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="iplay"><path d="M7 4.4L19.2 12 7 19.6z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ipause"><rect x="6.4" y="4.8" width="3.7" height="14.4" rx="1.1"/><rect x="13.9" y="4.8" width="3.7" height="14.4" rx="1.1"/></svg>
+    </button>
+
+    <button class="tbtn" id="tNext" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 4.6v14.8L18 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tFull" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked iexpand"><path d="M9.5 4.5H4.5V9.5M14.5 4.5H19.5V9.5M14.5 19.5H19.5V14.5M9.5 19.5H4.5V14.5"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked icontract"><path d="M4.5 9.5H9.5V4.5M19.5 9.5H14.5V4.5M19.5 14.5H14.5V19.5M4.5 14.5H9.5V19.5"/></svg>
+    </button>
+
+    </div>
+
+    <div class="tside">
+    <div class="tdiv"></div>
+
+    <div class="switchers" id="langind">
+    <div class="seg" id="lang" role="group" aria-label="switch language" data-de-aria="Sprache wechseln">
+      <button type="button" id="langDe" aria-pressed="false">DE</button>
+      <button type="button" id="langEn" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="seg theme" id="thmind" role="group" aria-label="switch appearance" data-de-aria="Erscheinungsbild wechseln">
+      <button type="button" id="thLight" aria-pressed="false" aria-label="Light" data-de-aria="Hell"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" id="thDark" aria-pressed="true" aria-label="Dark" data-de-aria="Dunkel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    </div>
+
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
+    <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
+    </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <button class="close" type="button" id="notesclose">Notizen schliessen</button>
+</div>
+<script>
+  /* This talk's own strings. Everything else about the deck's chrome comes from
+     @robertblust/design — it is in deck.js now. The German title and description are the
+     Translator's; the control labels below are the family's. */
+  var TALK = {
+    de:{ title:'CompanyGraph – Was bleibt, wenn das Modell wechselt', desc:'Code, System One, System Two und ein Mensch: welches Modell Sie behalten und welches Sie ersetzen können.' },
+    en:{ title:'CompanyGraph — What stays when the model changes', desc:'Code, System One, System Two and a person: which model you keep, and which you can replace.' }
+  };
+  var UI = {
+    de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
+         title:TALK.de.title, desc:TALK.de.desc,
+         play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
+         prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', up:'Zurück zu allen Vorträgen' },
+    en:{ label:'Speaker note', close:'Close notes',
+         title:TALK.en.title, desc:TALK.en.desc,
+         play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
+         prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
+         notes:'Speaker notes', de:'In German', en:'In English', up:'Back to all talks' }
+  };
+
+
+  var THEME_KEY = "theme";
+  function themeStored(){ try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } }
+  function themeRemember(v){ try { localStorage.setItem(THEME_KEY, v); } catch (e) {} }
+  function themeFromUrl(){
+    var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+    if (!m) return null;
+    try {
+      var q = location.search.replace(/([?&])theme=(light|dark)(&|$)/, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+    return m[1];
+  }
+  function applyTheme(){
+    if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+    else document.documentElement.removeAttribute("data-theme");
+    var l = document.getElementById("thLight"), d = document.getElementById("thDark");
+    if (l) l.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+    if (d) d.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  }
+  function setTheme(v){ theme = v; themeRemember(v); applyTheme(); }
+
+  var urlTheme = themeFromUrl();
+  if (urlTheme) themeRemember(urlTheme);
+  var theme = urlTheme || (themeStored() === 'light' ? 'light' : 'dark');
+
+  document.getElementById('thLight').addEventListener('click', function(){ setTheme('light'); });
+  document.getElementById('thDark').addEventListener('click', function(){ setTheme('dark'); });
+  applyTheme();
+
+  // deck.js reads TALK and UI off this object, and calls applyLang() itself; nothing here
+  // calls it. This script is not wrapped in an IIFE — TALK, UI and theme are plain top-level
+  // declarations, exactly as "deck runtime" and "theme" left them — so this hook is a bare
+  // statement too, not a return from a closure.
+  window.rbDeck = { talk: TALK, ui: UI };
+</script>
+<script src="../../deck.js" defer></script>
+<script src="scenes.js" defer></script>
+<script src="../../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/" data-questions="/company.json" data-questions-de="/questions.de.json"></script>
+</body>
+</html>

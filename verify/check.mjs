@@ -288,6 +288,21 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["Stufe für Stufe"], hides: ["level by level"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  // The fourth deck, what stays when the model changes, built as the levels talk and checked the
+  // same way. Its outbound links are the chrome's blust.ch and the credits slide's five.
+  { path: "/talks/what-stays/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /What stays when the model changes/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/", "https://typesafe.ai/", "https://docs.typesafe.ai/", "https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow", "https://github.com/companygraph/meta-model", "https://github.com/companygraph/mental-model"],
+    slides: 15,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["welches Modell Sie behalten"], hides: ["which model you keep"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {

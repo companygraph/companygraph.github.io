@@ -1,5 +1,5 @@
 {
-  "commit": "67a20a47f2dd34bfb962dc143d03e1bb231a2ca4",
+  "commit": "71a096a1c113ebfab283439879bcb161b12b1655",
   "core": "0.59.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -16679,6 +16679,67 @@
       "path": "model/feature-designs/one-menu-makes-an-instance-and-moves-it-to-a-release.md"
     },
     {
+      "id": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+      "address": "features/a-decision-model-asks-each-page-its-schema-s-writing-rules",
+      "type": "feature",
+      "name": "A decision model asks each page its schema's writing rules",
+      "tagline": "A company learns which of its pages most likely break a writing rule before anyone reads them, and decides first exactly what leaves its hands to find out.",
+      "fields": {
+        "id": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Agent pass",
+          "Schema",
+          "Rule",
+          "Instance"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Each bullet of a schema's writing rules becomes a typed question, asked of every page of that type, and a decision model outside the machine answers each with a choice and how likely it is. Before anything is sent, the owner is shown the pages, the questions, the service, what the run will cost and a digest of it all, and only a yes to that digest sends exactly those files; a no sends nothing. The report flags the pages whose answers fall below a band measured against the one model it names, and the agent pass reads those first. It stops at advice: it changes no page, a flag counts only once it has been read against its page, and the agent pass still reads every page the report does not flag. Which model answers is the tooling's pinned choice, and another is measured before it is named.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The procedure that asks the owner, sends the pages and reads the flags",
+                  "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-judge/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The procedure that asks the owner, sends the pages and reads the flags",
+                "https://github.com/companygraph/mental-model/blob/main/.claude/skills/companygraph-judge/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-decision-model-asks-each-page-its-schema-s-writing-rules.md"
+    },
+    {
       "id": "01a0d808-0398-7732-a330-3fe0540cc328",
       "address": "features/a-profile-is-written-from-a-person-s-documents",
       "type": "feature",
@@ -32748,6 +32809,42 @@
     },
     {
       "from": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+      "to": "01a0c2a7-ffa8-7321-8656-ce1a28092a97",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+      "to": "01a0c2a7-ffa8-7f39-8a45-52e006a9d079",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+      "to": "01a0c2a7-ffa8-7fe4-a8af-2a5a36777f4f",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}

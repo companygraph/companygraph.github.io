@@ -1,5 +1,5 @@
 {
-  "commit": "75aba7670d775fab702d2c43b91f252fbb6b833c",
+  "commit": "47865832066cbb1a7aebb8323f6ff4724fb92a26",
   "root": "Meta-model",
   "rootId": null,
   "types": [
@@ -1030,6 +1030,267 @@
       ],
       "owner": null,
       "path": "core/control-schema.md"
+    },
+    {
+      "id": "01a10522-0ea5-7706-b34d-71f2af083427",
+      "address": "core/data-processor",
+      "type": "core",
+      "name": "Data Processor Schema",
+      "tagline": "Required structure for data processor files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`legal-name`",
+                  "Yes",
+                  "string",
+                  "The legal entity the company's contract is with, which may differ from the H1 and from one region to another"
+                ],
+                [
+                  "`countries`",
+                  "Yes",
+                  "array",
+                  "Where the processor processes and stores the data, each an ISO 3166-1 alpha-2 code"
+                ],
+                [
+                  "`retention`",
+                  "No",
+                  "string",
+                  "How long the processor keeps what it receives, under its own terms"
+                ],
+                [
+                  "`sub-processor-authorization`",
+                  "No",
+                  "enum",
+                  "`general` or `specific`. Whether the contract lets the processor add sub-processors after notice, or only with the company's approval of each (GDPR Art. 28(2); DSG Art. 9(3))."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`legal-name`",
+                "Yes",
+                "string",
+                "The legal entity the company's contract is with, which may differ from the H1 and from one region to another"
+              ],
+              [
+                "`countries`",
+                "Yes",
+                "array",
+                "Where the processor processes and stores the data, each an ISO 3166-1 alpha-2 code"
+              ],
+              [
+                "`retention`",
+                "No",
+                "string",
+                "How long the processor keeps what it receives, under its own terms"
+              ],
+              [
+                "`sub-processor-authorization`",
+                "No",
+                "enum",
+                "`general` or `specific`. Whether the contract lets the processor add sub-processors after notice, or only with the company's approval of each (GDPR Art. 28(2); DSG Art. 9(3))."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Data processor]`",
+                  "Yes",
+                  "The name the company calls the processor by. Everything references the processor by this exact string."
+                ],
+                [
+                  "`> [What it does for the company]`",
+                  "Yes",
+                  "What the processor does for the company, in one sentence"
+                ],
+                [
+                  "`## Own purposes`",
+                  "No",
+                  "Bulleted. What the vendor does with the data for purposes it decides itself, where for that processing it is a controller and not the company's processor (GDPR Art. 28(10))"
+                ],
+                [
+                  "`## Transfers`",
+                  "No",
+                  "Table. What makes the disclosure abroad lawful, for each jurisdiction whose law asks; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "Yes",
+                  "Table. The data processing agreement, the vendor's sub-processor list, its privacy policy and its retention terms; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Transfers` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Jurisdiction`",
+                  "Yes",
+                  "enum",
+                  "`eu`, `ch` or `uk`. The law that asks for a safeguard: the GDPR, the Swiss DSG or the UK GDPR."
+                ],
+                [
+                  "`Safeguard`",
+                  "Yes",
+                  "string",
+                  "The instrument as that law names it, an adequacy decision, standard contractual clauses and their module, binding corporate rules"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document, a data processing agreement, a sub-processor list, a privacy policy"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Data processor]`",
+                "Yes",
+                "The name the company calls the processor by. Everything references the processor by this exact string."
+              ],
+              [
+                "`> [What it does for the company]`",
+                "Yes",
+                "What the processor does for the company, in one sentence"
+              ],
+              [
+                "`## Own purposes`",
+                "No",
+                "Bulleted. What the vendor does with the data for purposes it decides itself, where for that processing it is a controller and not the company's processor (GDPR Art. 28(10))"
+              ],
+              [
+                "`## Transfers`",
+                "No",
+                "Table. What makes the disclosure abroad lawful, for each jurisdiction whose law asks; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "Yes",
+                "Table. The data processing agreement, the vendor's sub-processor list, its privacy policy and its retention terms; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A data processor is a party that processes personal data on the company's behalf (GDPR Art. 4(8); DSG Art. 5 lit. k, «Auftragsbearbeiter»). It answers \"who outside the company handles this data, where, under which contract, and how does it reach them lawfully?\" for whoever writes the privacy page, answers a data subject or reviews a vendor. What the company does with the data, and why, is the processing activity's, which names the processor; the processor names no activity.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline says what the processor does for the company, not what the vendor sells.\n- `legal-name` is the entity the company's contract is with, as the contract writes it.\n- `countries` lists where the data is processed and stored, not where the vendor is incorporated.\n- `retention` is the vendor's period in the vendor's words; the company's own retention is the processing activity's.\n- `## Own purposes` names each purpose the vendor decides for itself, in the words of its terms.\n- Each row of `## Transfers` names the instrument as its jurisdiction's law names it.\n- `## References` carries the vendor's sub-processor list as a row, because the list is the vendor's to keep and to announce changes to (GDPR Art. 28(2)).\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/data-processors/*.md`\n\nNothing owns a data processor and a data processor owns nothing: one vendor serves several of the company's processing activities, and each activity names the processors it uses.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/data-processor-schema.md"
     },
     {
       "id": "01a0dd34-8da0-7631-83df-1cf924855e48",
@@ -2204,7 +2465,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 names the part the subject played, or `role` carries it: the field is filled where the\n  H1 does not already name the part, and left absent where it does. An entry named for what it\n  delivered, or for the event it happened at, does not say who the subject was on it. An entry\n  named for a position does, and repeating it in the field would be the same fact twice. Which\n  of those an instance writes is the instance's own convention and no rule here fixes it; the\n  field is what carries the part when the H1 does not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- `## Achievements`, where an instance defines achievement kinds, groups them: each bullet sits\n  under the heading of the one kind it is chiefly evidence of, headings follow the kinds'\n  `rank`, and a kind with nothing in the entry has no heading. An instance that defines none\n  writes a flat list.\n- `## Achievements` puts the broadest claim first within a kind; peers follow the order they\n  happened in, and a bullet that points back comes directly after what it points to — or names\n  it, where the grouping would part them.\n- `## Achievements` holds no list of tools or stack, since that is not an achievement: what was\n  built with a tool says so in the bullet that built it.\n- The tagline of a period still running says so, and the period has no `end` — a reader sees a\n  tagline and does not see an absent field.\n- The H1 of a one-off — a talk, a certification, an award or a publication — comes with `end`\n  set equal to `start`, since a one-off is not a period. Left absent it would read as still\n  running, and no other field says otherwise. The two being equal is what makes it a one-off,\n  and the interval that shared value denotes is how precisely it is placed: `2012-05-04 ..\n  2012-05-04` is a day, `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its\n  year. A period that genuinely ran a whole year is not written `2002 .. 2002` — it takes the\n  months it ran, `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- The H1 of a one-off comes with `organization` naming whoever hosted, awarded or published it.\n  The field is a stretch there and the alternative — leaving it empty — says less.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
+          "text": "- The H1 names the part the subject played, or `role` carries it: the field is filled where the\n  H1 does not already name the part, and left absent where it does. An entry named for what it\n  delivered, or for the event it happened at, does not say who the subject was on it. An entry\n  named for a position does, and repeating it in the field would be the same fact twice. Which\n  of those an instance writes is the instance's own convention and no rule here fixes it; the\n  field is what carries the part when the H1 does not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- `## Achievements`, where an instance defines achievement kinds, groups them: each bullet sits\n  under the heading of the one kind it is chiefly evidence of, headings follow the kinds'\n  `rank`, and a kind with nothing in the entry has no heading. An instance that defines none\n  writes a flat list.\n- `## Achievements` puts the broadest claim first within a kind; peers follow the order they\n  happened in, and a bullet that points back comes directly after what it points to — or names\n  it, where the grouping would part them.\n- `## Achievements` holds no list of tools or stack, since that is not an achievement: what was\n  built with a tool says so in the bullet that built it.\n- The tagline of a period still running says so, and the period has no `end` — a reader sees a\n  tagline and does not see an absent field.\n- The H1 of a one-off — a talk, a certification, an award or a publication — comes with `end`\n  set equal to `start`, since a one-off is not a period. Left absent it would read as still\n  running, and no other field says otherwise. The two being equal is what makes it a one-off,\n  and the interval that shared value denotes is how precisely it is placed: `2012-05-04 ..\n  2012-05-04` is a day, `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its\n  year. A period that genuinely ran a whole year is not written `2002 .. 2002` — it takes the\n  months it ran, `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- The H1 of a one-off comes with `organization` naming whoever hosted, awarded or published it,\n  where that is someone other than the person; a one-off the person put out themselves, on\n  their own site or channel, has none.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
           "tables": []
         },
         {
@@ -4111,6 +4372,265 @@
       ],
       "owner": null,
       "path": "core/process-schema.md"
+    },
+    {
+      "id": "01a10522-0ee2-785a-915f-8e9b1cd7f5c8",
+      "address": "core/processing-activity",
+      "type": "core",
+      "name": "Processing Activity Schema",
+      "tagline": "Required structure for processing activity files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`legal-basis`",
+                  "Yes",
+                  "enum",
+                  "`consent`, `contract`, `legal-obligation`, `vital-interests`, `public-task` or `legitimate-interests`. The ground the processing rests on (GDPR Art. 6(1))."
+                ],
+                [
+                  "`retention`",
+                  "No",
+                  "string",
+                  "How long the company keeps the data, or the criterion that decides it"
+                ],
+                [
+                  "`surfaces`",
+                  "No",
+                  "array of ref → surface",
+                  "Where a person whose data it is meets the activity, each the H1 of a file in `surfaces/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`legal-basis`",
+                "Yes",
+                "enum",
+                "`consent`, `contract`, `legal-obligation`, `vital-interests`, `public-task` or `legitimate-interests`. The ground the processing rests on (GDPR Art. 6(1))."
+              ],
+              [
+                "`retention`",
+                "No",
+                "string",
+                "How long the company keeps the data, or the criterion that decides it"
+              ],
+              [
+                "`surfaces`",
+                "No",
+                "array of ref → surface",
+                "Where a person whose data it is meets the activity, each the H1 of a file in `surfaces/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Processing activity]`",
+                  "Yes",
+                  "The activity's name. Everything references the activity by this exact string."
+                ],
+                [
+                  "`> [Purpose]`",
+                  "Yes",
+                  "The purpose of the processing, in one sentence"
+                ],
+                [
+                  "`## Data subjects`",
+                  "Yes",
+                  "Bulleted. Whose personal data it is, one category of people per item"
+                ],
+                [
+                  "`## Personal data`",
+                  "Yes",
+                  "Bulleted. Which personal data it processes, one category per item"
+                ],
+                [
+                  "`## Processors`",
+                  "No",
+                  "Table. The processors the data goes to and what each receives; its columns are declared below. An activity the company does in-house has no rows."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The record of processing it belongs to, an impact assessment, the privacy page that discloses it; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Processors` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Processor`",
+                  "Yes",
+                  "ref → data-processor",
+                  "The processor the data goes to, the H1 of a file in `data-processors/`"
+                ],
+                [
+                  "`Receives`",
+                  "Yes",
+                  "string",
+                  "What that processor gets, which may be less than the activity holds"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document, a record of processing, an impact assessment, a privacy notice"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Processing activity]`",
+                "Yes",
+                "The activity's name. Everything references the activity by this exact string."
+              ],
+              [
+                "`> [Purpose]`",
+                "Yes",
+                "The purpose of the processing, in one sentence"
+              ],
+              [
+                "`## Data subjects`",
+                "Yes",
+                "Bulleted. Whose personal data it is, one category of people per item"
+              ],
+              [
+                "`## Personal data`",
+                "Yes",
+                "Bulleted. Which personal data it processes, one category per item"
+              ],
+              [
+                "`## Processors`",
+                "No",
+                "Table. The processors the data goes to and what each receives; its columns are declared below. An activity the company does in-house has no rows."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The record of processing it belongs to, an impact assessment, the privacy page that discloses it; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A processing activity is one thing the company does with personal data, for one purpose (GDPR Art. 30(1); DSG Art. 12, «Bearbeitungstätigkeit»). It answers \"what do we do with whose data, on what ground, for how long, and who else gets it?\", which is what a record of processing keeps and what a privacy page discloses. The processors it names keep their own facts on their own pages: where they process, under which contract, for how long.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline states one purpose, as the person whose data it is would understand it.\n- The page is one activity for one ground: processing that rests on two grounds in `legal-basis` is written as two activities.\n- Each item of `## Data subjects` names a category of people, never a person.\n- Each item of `## Personal data` names a category of data, not a field of a database, and says so where it is a special category (GDPR Art. 9; DSG Art. 5 lit. c).\n- Each row of `## Processors` says in `Receives` what reaches that processor and nothing more, so a processor that sees part of the data is never listed as seeing all of it.\n- `retention` states the company's own period or the criterion that decides it; a processor's own period is on the processor's page.\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/processing-activities/*.md`\n\nNothing owns a processing activity and a processing activity owns nothing: it names the processors it uses and the surfaces where a person meets it, and belongs to none of them.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/processing-activity-schema.md"
     },
     {
       "id": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
@@ -6306,6 +6826,248 @@
       "path": "core/source-schema.md"
     },
     {
+      "id": "01a10522-0f1d-7d35-be0a-34aacbf7ad04",
+      "address": "core/stored-item",
+      "type": "core",
+      "name": "Stored Item Schema",
+      "tagline": "Required structure for stored item files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`mechanism`",
+                  "Yes",
+                  "enum",
+                  "`local-storage`, `session-storage`, `cookie`, `indexeddb` or `cache`. How the browser keeps it: the two Web Storage areas, an HTTP cookie, an IndexedDB database or the Cache API (WHATWG HTML, Storage Standard)."
+                ],
+                [
+                  "`necessity`",
+                  "Yes",
+                  "enum",
+                  "`strictly-necessary` or `optional`. Whether the service the visitor asked for needs it (ePrivacy Directive Art. 5(3)). What follows from it differs by jurisdiction and is the law's, which the instance's rules cite."
+                ],
+                [
+                  "`duration`",
+                  "No",
+                  "string",
+                  "How long it stays, where the mechanism does not decide it"
+                ],
+                [
+                  "`surfaces`",
+                  "Yes",
+                  "array of ref → surface",
+                  "The surfaces that set it, each the H1 of a file in `surfaces/`"
+                ],
+                [
+                  "`set-by`",
+                  "No",
+                  "ref? → data-processor",
+                  "The party that sets or reads it, where that is not the company. A name that resolves is a processor; one that does not stays a name."
+                ],
+                [
+                  "`activity`",
+                  "No",
+                  "ref → processing-activity",
+                  "The activity it serves, where what it holds is personal data, the H1 of a file in `processing-activities/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`mechanism`",
+                "Yes",
+                "enum",
+                "`local-storage`, `session-storage`, `cookie`, `indexeddb` or `cache`. How the browser keeps it: the two Web Storage areas, an HTTP cookie, an IndexedDB database or the Cache API (WHATWG HTML, Storage Standard)."
+              ],
+              [
+                "`necessity`",
+                "Yes",
+                "enum",
+                "`strictly-necessary` or `optional`. Whether the service the visitor asked for needs it (ePrivacy Directive Art. 5(3)). What follows from it differs by jurisdiction and is the law's, which the instance's rules cite."
+              ],
+              [
+                "`duration`",
+                "No",
+                "string",
+                "How long it stays, where the mechanism does not decide it"
+              ],
+              [
+                "`surfaces`",
+                "Yes",
+                "array of ref → surface",
+                "The surfaces that set it, each the H1 of a file in `surfaces/`"
+              ],
+              [
+                "`set-by`",
+                "No",
+                "ref? → data-processor",
+                "The party that sets or reads it, where that is not the company. A name that resolves is a processor; one that does not stays a name."
+              ],
+              [
+                "`activity`",
+                "No",
+                "ref → processing-activity",
+                "The activity it serves, where what it holds is personal data, the H1 of a file in `processing-activities/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Key]`",
+                  "Yes",
+                  "The key or cookie name exactly as the code writes it. Everything references the item by this exact string."
+                ],
+                [
+                  "`> [What it holds]`",
+                  "Yes",
+                  "What the item holds and why, in one sentence"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The code that sets it, the provider's documentation; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document, a source file, a provider's documentation"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Key]`",
+                "Yes",
+                "The key or cookie name exactly as the code writes it. Everything references the item by this exact string."
+              ],
+              [
+                "`> [What it holds]`",
+                "Yes",
+                "What the item holds and why, in one sentence"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The code that sets it, the provider's documentation; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A stored item is one thing a surface keeps on a visitor's device under one name: a Web Storage key, a cookie, an IndexedDB database or a cache (ePrivacy Directive Art. 5(3); FMG Art. 45c). It answers \"what does this page leave in the browser, for how long, and who reads it?\", which is what a privacy page or a cookie policy discloses. Its H1 is the key, so what the code writes and what the model holds can be compared by name.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 is the key as the code writes it, character for character.\n- The tagline says what the item holds and why, in the words a privacy page would use.\n- The page leaves `duration` out for `session-storage`, which ends with the tab, and states it for any other mechanism, as the code sets it or as \"until the visitor clears it\".\n- `necessity` is `strictly-necessary` only where the service the visitor asked for fails without the item.\n- The page leaves `set-by` out for an item the company's own code sets.\n- The page sets `activity` only where what the item holds is personal data.\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/stored-items/*.md`\n\nNothing owns a stored item and a stored item owns nothing: one key is set by several surfaces of an instance, and it names each of them.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/stored-item-schema.md"
+    },
+    {
       "id": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "address": "core/strategic-objective",
       "type": "core",
@@ -7658,7 +8420,7 @@
                 [
                   "`## State transitions`",
                   "No",
-                  "The states the aggregate moves through and what moves it (DDD Crew, Aggregate Design Canvas)"
+                  "Table. The states the aggregate moves through and what moves it, one transition per row (DDD Crew, Aggregate Design Canvas); its columns are declared below."
                 ],
                 [
                   "`## References`",
@@ -7706,10 +8468,51 @@
                   "The command, in the imperative: \"Issue invoice\""
                 ],
                 [
+                  "`Emits`",
+                  "No",
+                  "ref → domain-event",
+                  "An event the command emits, by its canonical name, an event of this context; a command that emits two is two rows"
+                ],
+                [
+                  "`When`",
+                  "No",
+                  "string",
+                  "When the command emits this event rather than another, in words; it may cite the invariants it rests on by their labels"
+                ],
+                [
                   "`Description`",
                   "No",
                   "string",
                   "What it asks for, and what it refuses"
+                ]
+              ]
+            },
+            {
+              "caption": "`## State transitions` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`From`",
+                  "No",
+                  "string",
+                  "The state the aggregate leaves, blank for the transition that starts it"
+                ],
+                [
+                  "`Command`",
+                  "No",
+                  "string",
+                  "The handled command that moves it, as `## Handled commands` writes it, blank for a step the aggregate takes on its own"
+                ],
+                [
+                  "`To`",
+                  "Yes",
+                  "string",
+                  "The state it reaches; a state that is never a `From` ends the lifecycle"
                 ]
               ]
             },
@@ -7768,7 +8571,7 @@
               [
                 "`## State transitions`",
                 "No",
-                "The states the aggregate moves through and what moves it (DDD Crew, Aggregate Design Canvas)"
+                "Table. The states the aggregate moves through and what moves it, one transition per row (DDD Crew, Aggregate Design Canvas); its columns are declared below."
               ],
               [
                 "`## References`",
@@ -7780,12 +8583,12 @@
         },
         {
           "heading": "Purpose",
-          "text": "An aggregate answers \"what has to stay consistent together, and through what is it changed?\" It is Evans's aggregate: a cluster of concept designs changed only through its root. The invariants are a table and not a numbered list, because they are a set and not a sequence, and a position is no key anything outside can cite. A command is a row here and not a type, because nothing outside the aggregate names it. The events it emits are not written here: each event names its aggregate as `emitted-by`, and the edge is read from that end. The root is a concept design of kind entity, since a value object has no identity to reach the rest through. A label stays when its invariant is reworded, a new rule takes a new label, and a removed rule's label is not used again.",
+          "text": "An aggregate answers \"what has to stay consistent together, and through what is it changed?\" It is Evans's aggregate: a cluster of concept designs changed only through its root. The invariants are a table and not a numbered list, because they are a set and not a sequence, and a position is no key anything outside can cite. A command is a row here and not a type, because nothing outside the aggregate names it. Each event names its aggregate as `emitted-by`, and a handled command may name the events it emits, one row per command and event, which is where a flow is read from; when it emits one rather than another is said in words, and may cite the invariants it rests on. The root is a concept design of kind entity, since a value object has no identity to reach the rest through. A label stays when its invariant is reworded, a new rule takes a new label, and a removed rule's label is not used again.",
           "tables": []
         },
         {
           "heading": "Writing rules",
-          "text": "- `Invariant` is a rule that holds after every command, stated so a test could check it.\n- `Command` is named in the imperative, and an event in the past tense, so the two are never confused.\n- `source`, on a page drawn from code, names that code, the repository a sync reads, and the module or package is its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.",
+          "text": "- `Invariant` is a rule that holds after every command, stated so a test could check it.\n- `Command` is named in the imperative, and an event in the past tense, so the two are never confused.\n- `source`, on a page drawn from code, names that code, the repository a sync reads, and the module or package is its `source-id`; a page written here that code then follows names the code in `## References` as `Implementation`.\n- An event `Emits` names is one whose `emitted-by` is this aggregate.\n- A `Command` in `## State transitions` is written as `## Handled commands` writes it.",
           "tables": []
         },
         {
@@ -8244,10 +9047,22 @@
                   "The attribute's name, as the context's people say it"
                 ],
                 [
+                  "`Term`",
+                  "No",
+                  "ref → concept-design",
+                  "A value object of the same context, by its canonical name, where the attribute is one; an entity is a relation"
+                ],
+                [
                   "`Type`",
-                  "Yes",
-                  "string",
-                  "A plain type such as `Money` or `date`, or the name of a value-object concept design in the same context"
+                  "No",
+                  "enum",
+                  "`string`, `number`, `boolean`, `date`, `timestamp`, `duration`, `version`, `hash`, `path`, `id`, `URL`, `file`, `language` or `map`. A plain type, where the attribute is no term; its unit, or what it is of, goes in the Description."
+                ],
+                [
+                  "`Many`",
+                  "No",
+                  "enum",
+                  "`yes`. The attribute is a list of what `Term` or `Type` names; blank for one."
                 ],
                 [
                   "`Description`",
@@ -8348,7 +9163,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A concept design answers \"what does this word mean here?\" It is one term of a bounded context's ubiquitous language (Evans), and an entity or a value object by its kind. It may refine an enterprise concept of core, which says what the thing is for the whole company; the concept design says what it is inside one context, which is narrower and may differ from another context's term of the same name. A relation is written on one side only, as core's concept relations are, so no two concept designs each name the other in `## Relations`. An attribute whose type is a value object names that value object's concept design exactly.",
+          "text": "A concept design answers \"what does this word mean here?\" It is one term of a bounded context's ubiquitous language (Evans), and an entity or a value object by its kind. It may refine an enterprise concept of core, which says what the thing is for the whole company; the concept design says what it is inside one context, which is narrower and may differ from another context's term of the same name. A relation is written on one side only, as core's concept relations are, so no two concept designs each name the other in `## Relations`. An attribute names a value object of its own context in `Term` or a plain type in `Type`, exactly one of the two, and an entity it would name is a relation.",
           "tables": []
         },
         {
@@ -8501,10 +9316,22 @@
                   "The value's name, as the context's people say it"
                 ],
                 [
+                  "`Term`",
+                  "No",
+                  "ref → concept-design",
+                  "A concept design of the same context, of either kind, by its canonical name, where the value is one"
+                ],
+                [
                   "`Type`",
-                  "Yes",
-                  "string",
-                  "A plain type such as `duration` or `timestamp`, or the name of a concept design in the same context"
+                  "No",
+                  "enum",
+                  "`string`, `number`, `boolean`, `date`, `timestamp`, `duration`, `version`, `hash`, `path`, `id`, `URL`, `file`, `language` or `map`. A plain type, where the value is no term; its unit, or what it is of, goes in the Description."
+                ],
+                [
+                  "`Many`",
+                  "No",
+                  "enum",
+                  "`yes`. The value is a list of what `Term` or `Type` names; blank for one."
                 ],
                 [
                   "`Description`",
@@ -8571,7 +9398,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A domain event answers \"what happened that other parts of the domain care about?\" It is Evans's and Vernon's domain event, named in the past tense. It is a type and not a row of its aggregate because other contexts consume it and feature designs name it, and a row cannot be named from outside its page. A payload type that names a term names one of the event's own context, and a consumer translates it into its own language.",
+          "text": "A domain event answers \"what happened that other parts of the domain care about?\" It is Evans's and Vernon's domain event, named in the past tense. It is a type and not a row of its aggregate because other contexts consume it and feature designs name it, and a row cannot be named from outside its page. A payload value names a term of the event's own context in `Term`, of either kind, or a plain type in `Type`, exactly one of the two, and a consumer translates a term into its own language.",
           "tables": []
         },
         {
@@ -8929,6 +9756,15 @@
     },
     {
       "from": "01a0fb19-9589-70e2-aa4e-923ff81c01a8",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a10522-0ea5-7706-b34d-71f2af083427",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
@@ -9311,6 +10147,33 @@
       "label": "Tracks.Track"
     },
     {
+      "from": "01a10522-0ee2-785a-915f-8e9b1cd7f5c8",
+      "to": "01a10522-0ea5-7706-b34d-71f2af083427",
+      "via": "Processors.Processor",
+      "attrs": {
+        "type": "ref → data-processor"
+      },
+      "label": "Processors.Processor"
+    },
+    {
+      "from": "01a10522-0ee2-785a-915f-8e9b1cd7f5c8",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a10522-0ee2-785a-915f-8e9b1cd7f5c8",
+      "to": "01a08666-4360-7bac-8ac9-4b7c234e01fc",
+      "via": "surfaces",
+      "attrs": {
+        "type": "array of ref → surface"
+      },
+      "label": "surfaces"
+    },
+    {
       "from": "01a0a8b4-7978-7026-a388-b10e041b45b5",
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
@@ -9536,6 +10399,42 @@
       "label": "source"
     },
     {
+      "from": "01a10522-0f1d-7d35-be0a-34aacbf7ad04",
+      "to": "01a10522-0ee2-785a-915f-8e9b1cd7f5c8",
+      "via": "activity",
+      "attrs": {
+        "type": "ref → processing-activity"
+      },
+      "label": "activity"
+    },
+    {
+      "from": "01a10522-0f1d-7d35-be0a-34aacbf7ad04",
+      "to": "01a10522-0ea5-7706-b34d-71f2af083427",
+      "via": "set-by",
+      "attrs": {
+        "type": "ref? → data-processor"
+      },
+      "label": "set-by"
+    },
+    {
+      "from": "01a10522-0f1d-7d35-be0a-34aacbf7ad04",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a10522-0f1d-7d35-be0a-34aacbf7ad04",
+      "to": "01a08666-4360-7bac-8ac9-4b7c234e01fc",
+      "via": "surfaces",
+      "attrs": {
+        "type": "array of ref → surface"
+      },
+      "label": "surfaces"
+    },
+    {
       "from": "01a0a48a-b970-7f8e-b95f-0769904c5a94",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
@@ -9613,6 +10512,15 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
+      "to": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
+      "via": "Handled commands.Emits",
+      "attrs": {
+        "type": "ref → domain-event"
+      },
+      "label": "Handled commands.Emits"
     },
     {
       "from": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
@@ -9696,6 +10604,15 @@
     {
       "from": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
       "to": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "via": "Attributes.Term",
+      "attrs": {
+        "type": "ref → concept-design"
+      },
+      "label": "Attributes.Term"
+    },
+    {
+      "from": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "to": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
       "via": "Relations.Concept",
       "attrs": {
         "type": "ref → concept-design"
@@ -9726,6 +10643,15 @@
         "type": "ref → source"
       },
       "label": "source"
+    },
+    {
+      "from": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
+      "to": "01a0f94d-fa2a-7d34-ad48-bda5aa4a62c1",
+      "via": "Payload.Term",
+      "attrs": {
+        "type": "ref → concept-design"
+      },
+      "label": "Payload.Term"
     },
     {
       "from": "01a0f94d-fa9a-7907-ae3d-621f34d6e909",
