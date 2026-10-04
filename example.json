@@ -1,6 +1,6 @@
 {
-  "commit": "29ad11b54413636f69081d7ee54bacd1700a4fce",
-  "core": "0.59.0",
+  "commit": "47865832066cbb1a7aebb8323f6ff4724fb92a26",
+  "core": "0.60.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -25,6 +25,12 @@
     {
       "type": "control",
       "folder": "controls",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "data-processor",
+      "folder": "data-processors",
       "owner": null,
       "singular": false
     },
@@ -107,6 +113,12 @@
       "singular": false
     },
     {
+      "type": "processing-activity",
+      "folder": "processing-activities",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "product",
       "folder": "products",
       "owner": null,
@@ -163,6 +175,12 @@
     {
       "type": "source",
       "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "stored-item",
+      "folder": "stored-items",
       "owner": null,
       "singular": false
     },
@@ -1117,6 +1135,99 @@
       ],
       "owner": null,
       "path": "example/model/controls/main-requires-a-review.md"
+    },
+    {
+      "id": "01a10523-72fd-716a-adde-7b185258fad6",
+      "address": "data-processors/lantern-mail",
+      "type": "data-processor",
+      "name": "Lantern Mail",
+      "tagline": "Sends each customer's invoice to its billing contact by email.",
+      "fields": {
+        "id": "01a10523-72fd-716a-adde-7b185258fad6",
+        "source": "Local",
+        "legal-name": "Lantern Mail AG",
+        "countries": [
+          "CH"
+        ],
+        "retention": "Thirty days after delivery, then deleted",
+        "sub-processor-authorization": "specific"
+      },
+      "sections": [
+        {
+          "heading": "Transfers",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Jurisdiction",
+                "Safeguard"
+              ],
+              "rows": [
+                [
+                  "eu",
+                  "Adequacy decision for Switzerland"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Jurisdiction",
+              "Safeguard"
+            ],
+            "rows": [
+              [
+                "eu",
+                "Adequacy decision for Switzerland"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Data processing agreement",
+                  "https://lantern.example/legal/dpa"
+                ],
+                [
+                  "Sub-processor list",
+                  "https://lantern.example/legal/subprocessors"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Data processing agreement",
+                "https://lantern.example/legal/dpa"
+              ],
+              [
+                "Sub-processor list",
+                "https://lantern.example/legal/subprocessors"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/data-processors/lantern-mail.md"
     },
     {
       "id": "01a0dd35-9358-72cf-a4bd-360593010506",
@@ -2392,6 +2503,68 @@
       "sections": [],
       "owner": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
       "path": "example/model/processes/delivery/tracks/docs.md"
+    },
+    {
+      "id": "01a10523-733e-7f2e-beab-5a53c9c792b7",
+      "address": "processing-activities/invoice-delivery",
+      "type": "processing-activity",
+      "name": "Invoice delivery",
+      "tagline": "Sending each customer the invoice its contract asks for, to the person who pays it.",
+      "fields": {
+        "id": "01a10523-733e-7f2e-beab-5a53c9c792b7",
+        "source": "Local",
+        "legal-basis": "contract",
+        "retention": "Ten years after the invoice date, as business records",
+        "surfaces": [
+          "Beacon Systems website"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Data subjects",
+          "text": "- Billing contacts at customers",
+          "tables": []
+        },
+        {
+          "heading": "Personal data",
+          "text": "- Name and email address of the billing contact\n- The invoice: its lines, its amounts and the customer's address",
+          "tables": []
+        },
+        {
+          "heading": "Processors",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Processor",
+                "Receives"
+              ],
+              "rows": [
+                [
+                  "Lantern Mail",
+                  "The billing contact's email address and the invoice as a PDF"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Processor",
+              "Receives"
+            ],
+            "rows": [
+              [
+                "Lantern Mail",
+                "The billing contact's email address and the invoice as a PDF"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/processing-activities/invoice-delivery.md"
     },
     {
       "id": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
@@ -3679,6 +3852,26 @@
       "sections": [],
       "owner": null,
       "path": "example/model/sources/local.md"
+    },
+    {
+      "id": "01a10523-7383-700a-9eec-4c21a13dfcb4",
+      "address": "stored-items/theme",
+      "type": "stored-item",
+      "name": "theme",
+      "tagline": "Whether the visitor chose the light or the dark look, so the next page opens in it.",
+      "fields": {
+        "id": "01a10523-7383-700a-9eec-4c21a13dfcb4",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "optional",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "Beacon Systems website"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/stored-items/theme.md"
     },
     {
       "id": "01a0a48f-60d8-7d32-a8cd-12ec4281c038",
@@ -5306,6 +5499,44 @@
       "from": "01a10040-3005-7db7-a01b-d031d4bebf58",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10523-72fd-716a-adde-7b185258fad6",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10523-733e-7f2e-beab-5a53c9c792b7",
+      "to": "01a10523-72fd-716a-adde-7b185258fad6",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The billing contact's email address and the invoice as a PDF"
+      }
+    },
+    {
+      "from": "01a10523-733e-7f2e-beab-5a53c9c792b7",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10523-733e-7f2e-beab-5a53c9c792b7",
+      "to": "01a0ae17-9058-7ce4-a36c-49a68628ca76",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a10523-7383-700a-9eec-4c21a13dfcb4",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10523-7383-700a-9eec-4c21a13dfcb4",
+      "to": "01a0ae17-9058-7ce4-a36c-49a68628ca76",
+      "via": "surfaces",
       "attrs": {}
     }
   ]
