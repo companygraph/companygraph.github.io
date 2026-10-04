@@ -1,6 +1,6 @@
 {
-  "commit": "c10dfc8a0d8234aefbbb15a1ed724c3623f61e2f",
-  "core": "0.56.0",
+  "commit": "67a20a47f2dd34bfb962dc143d03e1bb231a2ca4",
+  "core": "0.59.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -446,19 +446,27 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Answer a message",
+                  "",
+                  "",
                   "Puts the conversation to the model with the host's tools and streams the answer, citing and naming as it goes; refuses before the first request what the fence or the meter refuses"
                 ],
                 [
                   "Stop answering",
+                  "",
+                  "",
                   "The visitor closed the page: asks no further round, settles the meter, and sends nothing more"
                 ],
                 [
                   "Keep the question",
+                  "",
+                  "",
                   "Writes the one line kept of the message once it has its answer or its refusal"
                 ]
               ]
@@ -468,19 +476,27 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Answer a message",
+                "",
+                "",
                 "Puts the conversation to the model with the host's tools and streams the answer, citing and naming as it goes; refuses before the first request what the fence or the meter refuses"
               ],
               [
                 "Stop answering",
+                "",
+                "",
                 "The visitor closed the page: asks no further round, settles the meter, and sends nothing more"
               ],
               [
                 "Keep the question",
+                "",
+                "",
                 "Writes the one line kept of the message once it has its answer or its refusal"
               ]
             ]
@@ -614,19 +630,27 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Reserve for a request",
+                  "",
+                  "",
                   "Adds the estimate to the day and the month, or refuses where the chat is closed or a line would be crossed"
                 ],
                 [
                   "Settle a request",
+                  "",
+                  "",
                   "Replaces the estimate with what the request cost"
                 ],
                 [
                   "Read the standing",
+                  "",
+                  "",
                   "Gives the ceiling, the share, what the day and the month have spent and whether the chat is closed, without spending anything"
                 ]
               ]
@@ -636,19 +660,27 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Reserve for a request",
+                "",
+                "",
                 "Adds the estimate to the day and the month, or refuses where the chat is closed or a line would be crossed"
               ],
               [
                 "Settle a request",
+                "",
+                "",
                 "Replaces the estimate with what the request cost"
               ],
               [
                 "Read the standing",
+                "",
+                "",
                 "Gives the ceiling, the share, what the day and the month have spent and whether the chat is closed, without spending anything"
               ]
             ]
@@ -718,28 +750,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Id",
+                  "",
                   "id",
+                  "",
                   "The entity's id, as the host gave it"
                 ],
                 [
                   "Title",
+                  "",
                   "string",
+                  "",
                   "Its title"
                 ],
                 [
                   "Type",
+                  "",
                   "string",
+                  "",
                   "Its type"
                 ],
                 [
                   "URL",
+                  "",
                   "string",
+                  "",
                   "The address of its page, empty where the host names no file"
                 ]
               ]
@@ -749,28 +791,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Id",
+                "",
                 "id",
+                "",
                 "The entity's id, as the host gave it"
               ],
               [
                 "Title",
+                "",
                 "string",
+                "",
                 "Its title"
               ],
               [
                 "Type",
+                "",
                 "string",
+                "",
                 "Its type"
               ],
               [
                 "URL",
+                "",
                 "string",
+                "",
                 "The address of its page, empty where the host names no file"
               ]
             ]
@@ -832,43 +884,59 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Message length",
-                  "characters",
-                  "The longest a visitor's turn may be, after trimming"
+                  "",
+                  "number",
+                  "",
+                  "The longest a visitor's turn may be, after trimming, in characters"
                 ],
                 [
                   "Turns",
+                  "",
                   "number",
+                  "",
                   "How many of the last turns reach the model"
                 ],
                 [
                   "Rounds",
+                  "",
                   "number",
+                  "",
                   "How many tool rounds a message may take before its last request"
                 ],
                 [
                   "Tool answer length",
-                  "characters",
-                  "How much of one tool's answer the model reads"
+                  "",
+                  "number",
+                  "",
+                  "How much of one tool's answer the model reads, in characters"
                 ],
                 [
                   "Output",
-                  "tokens",
-                  "How much the model may write in one request"
+                  "",
+                  "number",
+                  "",
+                  "How much the model may write in one request, in tokens"
                 ],
                 [
                   "Names",
+                  "",
                   "number",
+                  "",
                   "How many names one message may give the page"
                 ],
                 [
                   "Messages an hour",
+                  "",
                   "number",
+                  "",
                   "How many messages one address may send in an hour"
                 ]
               ]
@@ -878,43 +946,59 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Message length",
-                "characters",
-                "The longest a visitor's turn may be, after trimming"
+                "",
+                "number",
+                "",
+                "The longest a visitor's turn may be, after trimming, in characters"
               ],
               [
                 "Turns",
+                "",
                 "number",
+                "",
                 "How many of the last turns reach the model"
               ],
               [
                 "Rounds",
+                "",
                 "number",
+                "",
                 "How many tool rounds a message may take before its last request"
               ],
               [
                 "Tool answer length",
-                "characters",
-                "How much of one tool's answer the model reads"
+                "",
+                "number",
+                "",
+                "How much of one tool's answer the model reads, in characters"
               ],
               [
                 "Output",
-                "tokens",
-                "How much the model may write in one request"
+                "",
+                "number",
+                "",
+                "How much the model may write in one request, in tokens"
               ],
               [
                 "Names",
+                "",
                 "number",
+                "",
                 "How many names one message may give the page"
               ],
               [
                 "Messages an hour",
+                "",
                 "number",
+                "",
                 "How many messages one address may send in an hour"
               ]
             ]
@@ -984,43 +1068,59 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Question",
+                  "",
                   "string",
+                  "",
                   "The visitor's last turn as it was sent, trimmed"
                 ],
                 [
                   "Page language",
-                  "`en` or `de`",
-                  "The page's language where it is one the interface names, else empty"
+                  "",
+                  "language",
+                  "",
+                  "The page's language, `en` or `de`, where it is one the interface names, else empty"
                 ],
                 [
                   "Cited",
-                  "list of ids",
+                  "",
+                  "id",
+                  "yes",
                   "The entities the answer cited, in order"
                 ],
                 [
                   "Calls",
+                  "",
                   "number",
+                  "",
                   "How many tool calls the answer made"
                 ],
                 [
                   "Empty",
+                  "",
                   "number",
+                  "",
                   "How many of those found nothing: refused, an error, or a list with no rows"
                 ],
                 [
                   "Rounds",
+                  "",
                   "number",
+                  "",
                   "How many requests the model answered"
                 ],
                 [
                   "Refused",
+                  "",
                   "string",
+                  "",
                   "The refusal's code, empty where the model answered"
                 ]
               ]
@@ -1030,43 +1130,59 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Question",
+                "",
                 "string",
+                "",
                 "The visitor's last turn as it was sent, trimmed"
               ],
               [
                 "Page language",
-                "`en` or `de`",
-                "The page's language where it is one the interface names, else empty"
+                "",
+                "language",
+                "",
+                "The page's language, `en` or `de`, where it is one the interface names, else empty"
               ],
               [
                 "Cited",
-                "list of ids",
+                "",
+                "id",
+                "yes",
                 "The entities the answer cited, in order"
               ],
               [
                 "Calls",
+                "",
                 "number",
+                "",
                 "How many tool calls the answer made"
               ],
               [
                 "Empty",
+                "",
                 "number",
+                "",
                 "How many of those found nothing: refused, an error, or a list with no rows"
               ],
               [
                 "Rounds",
+                "",
                 "number",
+                "",
                 "How many requests the model answered"
               ],
               [
                 "Refused",
+                "",
                 "string",
+                "",
                 "The refusal's code, empty where the model answered"
               ]
             ]
@@ -1136,33 +1252,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Conversation",
-                  "list of turns",
+                  "Turn",
+                  "",
+                  "yes",
                   "The visitor's and the chat's turns that reach the model, the visitor's last"
                 ],
                 [
                   "Page language",
-                  "`en` or `de`",
-                  "The language of the page it was sent from, which the answer takes only where the message's own words do not tell"
+                  "",
+                  "language",
+                  "",
+                  "The language of the page it was sent from, `en` or `de`, which the answer takes only where the message's own words do not tell"
                 ],
                 [
                   "Rounds",
+                  "",
                   "number",
+                  "",
                   "The requests the model answered"
                 ],
                 [
                   "Spent",
-                  "input-equivalent tokens",
-                  "What its requests cost, as the meter counts it"
+                  "",
+                  "number",
+                  "",
+                  "What its requests cost, as the meter counts it, in input-equivalent tokens"
                 ],
                 [
                   "Cut",
+                  "",
                   "boolean",
+                  "",
                   "Whether the output limit stopped the answer mid-sentence"
                 ]
               ]
@@ -1172,33 +1300,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Conversation",
-                "list of turns",
+                "Turn",
+                "",
+                "yes",
                 "The visitor's and the chat's turns that reach the model, the visitor's last"
               ],
               [
                 "Page language",
-                "`en` or `de`",
-                "The language of the page it was sent from, which the answer takes only where the message's own words do not tell"
+                "",
+                "language",
+                "",
+                "The language of the page it was sent from, `en` or `de`, which the answer takes only where the message's own words do not tell"
               ],
               [
                 "Rounds",
+                "",
                 "number",
+                "",
                 "The requests the model answered"
               ],
               [
                 "Spent",
-                "input-equivalent tokens",
-                "What its requests cost, as the meter counts it"
+                "",
+                "number",
+                "",
+                "What its requests cost, as the meter counts it, in input-equivalent tokens"
               ],
               [
                 "Cut",
+                "",
                 "boolean",
+                "",
                 "Whether the output limit stopped the answer mid-sentence"
               ]
             ]
@@ -1326,33 +1466,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Month ceiling",
-                  "input-equivalent tokens",
-                  "What the month may spend, as the deployment states it"
+                  "",
+                  "number",
+                  "",
+                  "What the month may spend, as the deployment states it, in input-equivalent tokens"
                 ],
                 [
                   "Day share",
-                  "input-equivalent tokens",
-                  "What one day may spend, a tenth of the month's ceiling"
+                  "",
+                  "number",
+                  "",
+                  "What one day may spend, a tenth of the month's ceiling, in input-equivalent tokens"
                 ],
                 [
                   "Day spent",
-                  "input-equivalent tokens",
-                  "What today has spent, counted from midnight UTC"
+                  "",
+                  "number",
+                  "",
+                  "What today has spent, counted from midnight UTC, in input-equivalent tokens"
                 ],
                 [
                   "Month spent",
-                  "input-equivalent tokens",
-                  "What this month has spent, counted from the first at midnight UTC"
+                  "",
+                  "number",
+                  "",
+                  "What this month has spent, counted from the first at midnight UTC, in input-equivalent tokens"
                 ],
                 [
                   "Closed",
+                  "",
                   "boolean",
+                  "",
                   "Whether the owner switched the chat off"
                 ]
               ]
@@ -1362,33 +1514,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Month ceiling",
-                "input-equivalent tokens",
-                "What the month may spend, as the deployment states it"
+                "",
+                "number",
+                "",
+                "What the month may spend, as the deployment states it, in input-equivalent tokens"
               ],
               [
                 "Day share",
-                "input-equivalent tokens",
-                "What one day may spend, a tenth of the month's ceiling"
+                "",
+                "number",
+                "",
+                "What one day may spend, a tenth of the month's ceiling, in input-equivalent tokens"
               ],
               [
                 "Day spent",
-                "input-equivalent tokens",
-                "What today has spent, counted from midnight UTC"
+                "",
+                "number",
+                "",
+                "What today has spent, counted from midnight UTC, in input-equivalent tokens"
               ],
               [
                 "Month spent",
-                "input-equivalent tokens",
-                "What this month has spent, counted from the first at midnight UTC"
+                "",
+                "number",
+                "",
+                "What this month has spent, counted from the first at midnight UTC, in input-equivalent tokens"
               ],
               [
                 "Closed",
+                "",
                 "boolean",
+                "",
                 "Whether the owner switched the chat off"
               ]
             ]
@@ -1450,18 +1614,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Id",
+                  "",
                   "id",
+                  "",
                   "The entity's id, as the host gave it"
                 ],
                 [
                   "Title",
+                  "",
                   "string",
+                  "",
                   "The title the page looks for in the answer's text"
                 ]
               ]
@@ -1471,18 +1641,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Id",
+                "",
                 "id",
+                "",
                 "The entity's id, as the host gave it"
               ],
               [
                 "Title",
+                "",
                 "string",
+                "",
                 "The title the page looks for in the answer's text"
               ]
             ]
@@ -1525,6 +1701,80 @@
       "path": "model/bounded-contexts/answering/concept-designs/name.md"
     },
     {
+      "id": "01a105f9-65d5-7ee6-9ee5-34be85ab9cec",
+      "address": "bounded-contexts/answering/concept-designs/turn",
+      "type": "concept-design",
+      "name": "Turn",
+      "tagline": "One message of a conversation, the visitor's or the chat's, as it reaches the model.",
+      "fields": {
+        "id": "01a105f9-65d5-7ee6-9ee5-34be85ab9cec",
+        "source": "Local",
+        "kind": "value object"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Who",
+                  "",
+                  "string",
+                  "",
+                  "The visitor or the chat"
+                ],
+                [
+                  "Text",
+                  "",
+                  "string",
+                  "",
+                  "What was said, as it reaches the model"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Who",
+                "",
+                "string",
+                "",
+                "The visitor or the chat"
+              ],
+              [
+                "Text",
+                "",
+                "string",
+                "",
+                "What was said, as it reaches the model"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
+      "path": "model/bounded-contexts/answering/concept-designs/turn.md"
+    },
+    {
       "id": "01a10042-6098-79a7-9dbe-3a86a80ae299",
       "address": "bounded-contexts/answering/domain-events/entity-cited",
       "type": "domain-event",
@@ -1544,13 +1794,17 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Cite",
                   "Cite",
+                  "",
+                  "",
                   "The entity's id, title, type and the address of its page"
                 ]
               ]
@@ -1560,13 +1814,17 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Cite",
                 "Cite",
+                "",
+                "",
                 "The entity's id, title, type and the address of its page"
               ]
             ]
@@ -1628,28 +1886,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Model",
+                  "",
                   "string",
+                  "",
                   "The host's provenance, the commit the answer was read at"
                 ],
                 [
                   "Spent",
-                  "input-equivalent tokens",
-                  "What the message cost"
+                  "",
+                  "number",
+                  "",
+                  "What the message cost, in input-equivalent tokens"
                 ],
                 [
                   "Day left",
-                  "input-equivalent tokens",
-                  "What is left of today's share"
+                  "",
+                  "number",
+                  "",
+                  "What is left of today's share, in input-equivalent tokens"
                 ],
                 [
                   "Cut",
+                  "",
                   "boolean",
+                  "",
                   "Present where the output limit stopped the answer mid-sentence"
                 ]
               ]
@@ -1659,28 +1927,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Model",
+                "",
                 "string",
+                "",
                 "The host's provenance, the commit the answer was read at"
               ],
               [
                 "Spent",
-                "input-equivalent tokens",
-                "What the message cost"
+                "",
+                "number",
+                "",
+                "What the message cost, in input-equivalent tokens"
               ],
               [
                 "Day left",
-                "input-equivalent tokens",
-                "What is left of today's share"
+                "",
+                "number",
+                "",
+                "What is left of today's share, in input-equivalent tokens"
               ],
               [
                 "Cut",
+                "",
                 "boolean",
+                "",
                 "Present where the output limit stopped the answer mid-sentence"
               ]
             ]
@@ -1742,13 +2020,17 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Kept question",
                   "Kept question",
+                  "",
+                  "",
                   "The question, its page's language, what was cited, the calls and rounds, and the refusal's code"
                 ]
               ]
@@ -1758,13 +2040,17 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Kept question",
                 "Kept question",
+                "",
+                "",
                 "The question, its page's language, what was cited, the calls and rounds, and the refusal's code"
               ]
             ]
@@ -2075,23 +2361,39 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Check an instance",
+                  "Run refused",
+                  "a pin disagrees (INV-K2, INV-K3, INV-K4)",
                   "Holds every page to the vendored schemas and every recorded file to its hash; refuses when the pins disagree, the core is newer or a pack is unknown"
                 ],
                 [
+                  "Check an instance",
+                  "Instance checked",
+                  "the pins agree",
+                  ""
+                ],
+                [
                   "Check the form",
+                  "",
+                  "",
                   "Holds every Markdown file to the one form at the pinned tool version; refuses when the tooling pin names another release, unless asked to fix"
                 ],
                 [
                   "Check a range of ids",
+                  "",
+                  "",
                   "Fails every page a range of commits modified or renamed whose id differs from the one it carried at the base"
                 ],
                 [
                   "Check a range of commits",
+                  "",
+                  "",
                   "Judges every commit of a range, or one message before it is committed, against the seats, processes, phases and tracks the governing instance declares, and refuses one whose seat the named phase does not list"
                 ]
               ]
@@ -2101,24 +2403,96 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Check an instance",
+                "Run refused",
+                "a pin disagrees (INV-K2, INV-K3, INV-K4)",
                 "Holds every page to the vendored schemas and every recorded file to its hash; refuses when the pins disagree, the core is newer or a pack is unknown"
               ],
               [
+                "Check an instance",
+                "Instance checked",
+                "the pins agree",
+                ""
+              ],
+              [
                 "Check the form",
+                "",
+                "",
                 "Holds every Markdown file to the one form at the pinned tool version; refuses when the tooling pin names another release, unless asked to fix"
               ],
               [
                 "Check a range of ids",
+                "",
+                "",
                 "Fails every page a range of commits modified or renamed whose id differs from the one it carried at the base"
               ],
               [
                 "Check a range of commits",
+                "",
+                "",
                 "Judges every commit of a range, or one message before it is committed, against the seats, processes, phases and tracks the governing instance declares, and refuses one whose seat the named phase does not list"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "State transitions",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "From",
+                "Command",
+                "To"
+              ],
+              "rows": [
+                [
+                  "",
+                  "Check an instance",
+                  "Refused"
+                ],
+                [
+                  "",
+                  "Check an instance",
+                  "Passed"
+                ],
+                [
+                  "",
+                  "Check an instance",
+                  "Failed"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "From",
+              "Command",
+              "To"
+            ],
+            "rows": [
+              [
+                "",
+                "Check an instance",
+                "Refused"
+              ],
+              [
+                "",
+                "Check an instance",
+                "Passed"
+              ],
+              [
+                "",
+                "Check an instance",
+                "Failed"
               ]
             ]
           }
@@ -2196,18 +2570,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Name",
+                  "",
                   "string",
+                  "",
                   "What the check asserts, in a sentence: \"required sections are present\""
                 ],
                 [
                   "Rule",
+                  "",
                   "string",
+                  "",
                   "The rule in the conventions it holds part of, such as `R16`"
                 ]
               ]
@@ -2217,18 +2597,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Name",
+                "",
                 "string",
+                "",
                 "What the check asserts, in a sentence: \"required sections are present\""
               ],
               [
                 "Rule",
+                "",
                 "string",
+                "",
                 "The rule in the conventions it holds part of, such as `R16`"
               ]
             ]
@@ -2290,28 +2676,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Checker release",
+                  "",
                   "version",
+                  "",
                   "The release doing the checking, which must be the one the tooling pin names"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release the manifest says the instance vendored"
                 ],
                 [
                   "Not checked",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The types the vendored units carry no schema for"
                 ],
                 [
                   "Outcome",
+                  "",
                   "string",
+                  "",
                   "Refused, passed or failed"
                 ]
               ]
@@ -2321,28 +2717,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Checker release",
+                "",
                 "version",
+                "",
                 "The release doing the checking, which must be the one the tooling pin names"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release the manifest says the instance vendored"
               ],
               [
                 "Not checked",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The types the vendored units carry no schema for"
               ],
               [
                 "Outcome",
+                "",
                 "string",
+                "",
                 "Refused, passed or failed"
               ]
             ]
@@ -2470,18 +2876,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Where",
+                  "",
                   "string",
+                  "",
                   "The path of the page, schema or vendored file the finding is about"
                 ],
                 [
                   "What",
+                  "",
                   "string",
+                  "",
                   "What is wrong there, and what the schema permits or requires"
                 ]
               ]
@@ -2491,18 +2903,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Where",
+                "",
                 "string",
+                "",
                 "The path of the page, schema or vendored file the finding is about"
               ],
               [
                 "What",
+                "",
                 "string",
+                "",
                 "What is wrong there, and what the schema permits or requires"
               ]
             ]
@@ -2565,23 +2983,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Tooling",
+                  "",
                   "version",
+                  "",
                   "The release the manifest's `tooling` names"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release the manifest says was vendored, which may be older than the tooling and never newer"
                 ],
                 [
                   "Packs",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The packs the manifest names"
                 ]
               ]
@@ -2591,23 +3017,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Tooling",
+                "",
                 "version",
+                "",
                 "The release the manifest's `tooling` names"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release the manifest says was vendored, which may be older than the tooling and never newer"
               ],
               [
                 "Packs",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The packs the manifest names"
               ]
             ]
@@ -2669,18 +3103,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Types",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Each type with its folder, its owner where it is owned, and where it carries labels"
                 ],
                 [
                   "Units",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Core and each pack the manifest names, each with the folder it is vendored in"
                 ]
               ]
@@ -2690,18 +3130,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Types",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Each type with its folder, its owner where it is owned, and where it carries labels"
               ],
               [
                 "Units",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Core and each pack the manifest names, each with the folder it is vendored in"
               ]
             ]
@@ -2763,23 +3209,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Findings",
                   "Finding",
+                  "",
+                  "yes",
                   "Every finding of the run, none when it passed"
                 ],
                 [
                   "Not checked",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The types the vendored units carry no schema for"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release the instance was held to"
                 ]
               ]
@@ -2789,23 +3243,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Findings",
                 "Finding",
+                "",
+                "yes",
                 "Every finding of the run, none when it passed"
               ],
               [
                 "Not checked",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The types the vendored units carry no schema for"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release the instance was held to"
               ]
             ]
@@ -2867,23 +3329,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Tooling pin",
                   "Tooling pin",
+                  "",
+                  "",
                   "What the manifest names"
                 ],
                 [
                   "Checker release",
+                  "",
                   "version",
+                  "",
                   "The release that refused"
                 ],
                 [
                   "Reason",
+                  "",
                   "string",
+                  "",
                   "The pin or pack that disagreed, and what to move"
                 ]
               ]
@@ -2893,23 +3363,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Tooling pin",
                 "Tooling pin",
+                "",
+                "",
                 "What the manifest names"
               ],
               [
                 "Checker release",
+                "",
                 "version",
+                "",
                 "The release that refused"
               ],
               [
                 "Reason",
+                "",
                 "string",
+                "",
                 "The pin or pack that disagreed, and what to move"
               ]
             ]
@@ -3185,31 +3663,45 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Build an instance from a web address",
+                  "",
+                  "",
                   "Reads what the company publishes, puts the ledger to the operator and writes what was kept; on an Update it stops when the address is a different company"
                 ],
                 [
                   "Write a profile from documents",
+                  "",
+                  "",
                   "Reads a folder of a person's documents and writes or extends their profile; on an Update it stops when the documents describe a different person"
                 ],
                 [
                   "Record a source's terms and consent",
+                  "",
+                  "",
                   "Writes the terms found and each consent the operator states onto one source; it infers no consent the operator cannot state"
                 ],
                 [
                   "Validate an instance",
+                  "",
+                  "",
                   "Runs the mechanical checks at the release the manifest names, then judges every writing rule; where the checks cannot run it says so rather than walking them by hand"
                 ],
                 [
                   "Produce a surface",
+                  "",
+                  "",
                   "Writes one surface's content by the rules its page records; a request naming no surface against a model holding several is asked, not chosen"
                 ],
                 [
                   "Export the instance",
+                  "",
+                  "",
                   "Builds the agent's skill archive and the notebook bundle from one walk and verifies both against the model"
                 ]
               ]
@@ -3219,31 +3711,45 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Build an instance from a web address",
+                "",
+                "",
                 "Reads what the company publishes, puts the ledger to the operator and writes what was kept; on an Update it stops when the address is a different company"
               ],
               [
                 "Write a profile from documents",
+                "",
+                "",
                 "Reads a folder of a person's documents and writes or extends their profile; on an Update it stops when the documents describe a different person"
               ],
               [
                 "Record a source's terms and consent",
+                "",
+                "",
                 "Writes the terms found and each consent the operator states onto one source; it infers no consent the operator cannot state"
               ],
               [
                 "Validate an instance",
+                "",
+                "",
                 "Runs the mechanical checks at the release the manifest names, then judges every writing rule; where the checks cannot run it says so rather than walking them by hand"
               ],
               [
                 "Produce a surface",
+                "",
+                "",
                 "Writes one surface's content by the rules its page records; a request naming no surface against a model holding several is asked, not chosen"
               ],
               [
                 "Export the instance",
+                "",
+                "",
                 "Builds the agent's skill archive and the notebook bundle from one walk and verifies both against the model"
               ]
             ]
@@ -3306,33 +3812,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The release of the rules the pass held the instance to"
                 ],
                 [
                   "Mechanical failures",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "What the check printed, copied as it is"
                 ],
                 [
                   "Findings",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Each writing rule broken, in the rule's own words, with the file that breaks it"
                 ],
                 [
                   "Gaps",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Each skill a held role requires and a human profile does not claim, outside the count of failures"
                 ],
                 [
                   "Not checked",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Everything the pass skipped, such as the mechanical checks where they could not run"
                 ]
               ]
@@ -3342,33 +3860,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The release of the rules the pass held the instance to"
               ],
               [
                 "Mechanical failures",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "What the check printed, copied as it is"
               ],
               [
                 "Findings",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Each writing rule broken, in the rule's own words, with the file that breaks it"
               ],
               [
                 "Gaps",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Each skill a held role requires and a human profile does not claim, outside the count of failures"
               ],
               [
                 "Not checked",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Everything the pass skipped, such as the mechanical checks where they could not run"
               ]
             ]
@@ -3430,43 +3960,59 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Terms",
+                  "",
                   "string",
+                  "",
                   "What the content is published under, or \"no stated terms\""
                 ],
                 [
                   "Read on",
+                  "",
                   "date",
+                  "",
                   "When the terms were read"
                 ],
                 [
                   "Who",
+                  "",
                   "string",
+                  "",
                   "The person who consented, for a consent given"
                 ],
                 [
                   "Capacity",
+                  "",
                   "string",
+                  "",
                   "In what capacity they consented"
                 ],
                 [
                   "Consented on",
+                  "",
                   "date",
+                  "",
                   "When"
                 ],
                 [
                   "How",
+                  "",
                   "string",
+                  "",
                   "By mail, by a signed letter, in person, or an assumption the operator made for a test run"
                 ],
                 [
                   "To what",
+                  "",
                   "string",
+                  "",
                   "The use consented to"
                 ]
               ]
@@ -3476,43 +4022,59 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Terms",
+                "",
                 "string",
+                "",
                 "What the content is published under, or \"no stated terms\""
               ],
               [
                 "Read on",
+                "",
                 "date",
+                "",
                 "When the terms were read"
               ],
               [
                 "Who",
+                "",
                 "string",
+                "",
                 "The person who consented, for a consent given"
               ],
               [
                 "Capacity",
+                "",
                 "string",
+                "",
                 "In what capacity they consented"
               ],
               [
                 "Consented on",
+                "",
                 "date",
+                "",
                 "When"
               ],
               [
                 "How",
+                "",
                 "string",
+                "",
                 "By mail, by a signed letter, in person, or an assumption the operator made for a test run"
               ],
               [
                 "To what",
+                "",
                 "string",
+                "",
                 "The use consented to"
               ]
             ]
@@ -3574,33 +4136,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Date",
+                  "",
                   "date",
+                  "",
                   "The day of the run, in its file name"
                 ],
                 [
                   "Rows",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "One table per type, one row per proposed entity or fact, with its address and the words the source uses"
                 ],
                 [
                   "Further sources",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "What a search surfaced and the run did not read"
                 ],
                 [
                   "Read for nothing",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Pages read that yielded nothing"
                 ],
                 [
                   "Not read",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Pages not read, and why: a robots rule, a login, a paywall"
                 ]
               ]
@@ -3610,33 +4184,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Date",
+                "",
                 "date",
+                "",
                 "The day of the run, in its file name"
               ],
               [
                 "Rows",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "One table per type, one row per proposed entity or fact, with its address and the words the source uses"
               ],
               [
                 "Further sources",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "What a search surfaced and the run did not read"
               ],
               [
                 "Read for nothing",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Pages read that yielded nothing"
               ],
               [
                 "Not read",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Pages not read, and why: a robots rule, a login, a paywall"
               ]
             ]
@@ -3698,28 +4284,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Name",
+                  "",
                   "string",
+                  "",
                   "The name the agent calls it by, `companygraph-profile` and its siblings"
                 ],
                 [
                   "Agent",
+                  "",
                   "string",
+                  "",
                   "The agent it is written for"
                 ],
                 [
                   "Work",
+                  "",
                   "string",
+                  "",
                   "What it does and why no script does it, in one paragraph"
                 ],
                 [
                   "Allowed tools",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "What the agent may use while following it"
                 ]
               ]
@@ -3729,28 +4325,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Name",
+                "",
                 "string",
+                "",
                 "The name the agent calls it by, `companygraph-profile` and its siblings"
               ],
               [
                 "Agent",
+                "",
                 "string",
+                "",
                 "The agent it is written for"
               ],
               [
                 "Work",
+                "",
                 "string",
+                "",
                 "What it does and why no script does it, in one paragraph"
               ],
               [
                 "Allowed tools",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "What the agent may use while following it"
               ]
             ]
@@ -3848,38 +4454,52 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Mode",
+                  "",
                   "string",
+                  "",
                   "`Create` or `Update`, for a run that writes a profile or builds an instance"
                 ],
                 [
                   "Operator",
+                  "",
                   "string",
+                  "",
                   "The person who asked for the run and decides what is theirs"
                 ],
                 [
                   "Answers",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Every question the operator answered, and the answer"
                 ],
                 [
                   "Created",
-                  "list of path",
+                  "",
+                  "path",
+                  "yes",
                   "Every file the run wrote"
                 ],
                 [
                   "Reused",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The H1s of entities the run wrote against rather than created"
                 ],
                 [
                   "Left out",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Each fact no schema holds, named by its kind and never by its value"
                 ]
               ]
@@ -3889,38 +4509,52 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Mode",
+                "",
                 "string",
+                "",
                 "`Create` or `Update`, for a run that writes a profile or builds an instance"
               ],
               [
                 "Operator",
+                "",
                 "string",
+                "",
                 "The person who asked for the run and decides what is theirs"
               ],
               [
                 "Answers",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Every question the operator answered, and the answer"
               ],
               [
                 "Created",
-                "list of path",
+                "",
+                "path",
+                "yes",
                 "Every file the run wrote"
               ],
               [
                 "Reused",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The H1s of entities the run wrote against rather than created"
               ],
               [
                 "Left out",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Each fact no schema holds, named by its kind and never by its value"
               ]
             ]
@@ -4066,28 +4700,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Fact",
+                  "",
                   "string",
+                  "",
                   "The fact as read, with the document or address it came from"
                 ],
                 [
                   "Standing",
+                  "",
                   "string",
+                  "",
                   "`already held`, `new`, `held differently` or `left out by decision`"
                 ],
                 [
                   "Where held",
+                  "",
                   "string",
+                  "",
                   "The entity that holds it, for a fact already held or held differently"
                 ],
                 [
                   "Versions",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Both versions quoted, for a fact held differently"
                 ]
               ]
@@ -4097,28 +4741,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Fact",
+                "",
                 "string",
+                "",
                 "The fact as read, with the document or address it came from"
               ],
               [
                 "Standing",
+                "",
                 "string",
+                "",
                 "`already held`, `new`, `held differently` or `left out by decision`"
               ],
               [
                 "Where held",
+                "",
                 "string",
+                "",
                 "The entity that holds it, for a fact already held or held differently"
               ],
               [
                 "Versions",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Both versions quoted, for a fact held differently"
               ]
             ]
@@ -4180,33 +4834,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Created",
-                  "list of path",
+                  "",
+                  "path",
+                  "yes",
                   "Each file written"
                 ],
                 [
                   "Reused",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The H1s written against rather than created"
                 ],
                 [
                   "Answers",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Every question the operator answered, and the answer"
                 ],
                 [
                   "Left out",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "Each fact no schema holds, by kind"
                 ],
                 [
                   "Validation",
                   "Agent pass",
+                  "",
+                  "",
                   "The checks and the writing rules, with the gaps and what was not checked"
                 ]
               ]
@@ -4216,33 +4882,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Created",
-                "list of path",
+                "",
+                "path",
+                "yes",
                 "Each file written"
               ],
               [
                 "Reused",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The H1s written against rather than created"
               ],
               [
                 "Answers",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Every question the operator answered, and the answer"
               ],
               [
                 "Left out",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "Each fact no schema holds, by kind"
               ],
               [
                 "Validation",
                 "Agent pass",
+                "",
+                "",
                 "The checks and the writing rules, with the gaps and what was not checked"
               ]
             ]
@@ -4312,23 +4990,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Source",
+                  "",
                   "string",
+                  "",
                   "The source, by its H1"
                 ],
                 [
                   "Subject",
+                  "",
                   "string",
+                  "",
                   "The company, person or document whose consent was not given"
                 ],
                 [
                   "Agent-file line",
+                  "",
                   "string",
+                  "",
                   "The line proposed for the instance's agent file, so the question is not asked again"
                 ]
               ]
@@ -4338,23 +5024,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Source",
+                "",
                 "string",
+                "",
                 "The source, by its H1"
               ],
               [
                 "Subject",
+                "",
                 "string",
+                "",
                 "The company, person or document whose consent was not given"
               ],
               [
                 "Agent-file line",
+                "",
                 "string",
+                "",
                 "The line proposed for the instance's agent file, so the question is not asked again"
               ]
             ]
@@ -4416,28 +5110,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Skill archive",
+                  "",
                   "path",
+                  "",
                   "`dist/<skill>-skill.zip`, byte-identical across runs over an unchanged model"
                 ],
                 [
                   "Notebook bundle",
+                  "",
                   "path",
+                  "",
                   "`dist/<instance>-gemini-notebook/`"
                 ],
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit the build read, marked when what it read was not yet committed"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release the instance vendors"
                 ]
               ]
@@ -4447,28 +5151,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Skill archive",
+                "",
                 "path",
+                "",
                 "`dist/<skill>-skill.zip`, byte-identical across runs over an unchanged model"
               ],
               [
                 "Notebook bundle",
+                "",
                 "path",
+                "",
                 "`dist/<instance>-gemini-notebook/`"
               ],
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit the build read, marked when what it read was not yet committed"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release the instance vendors"
               ]
             ]
@@ -4804,31 +5518,45 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Move a pin",
+                  "",
+                  "",
                   "A person commits a new commit for a pin; then the artifacts, the derived regions, the pictures, the cards and the sitemap are rebuilt in that order"
                 ],
                 [
                   "Build the artifacts",
+                  "",
+                  "",
                   "Reads each target at its pin through the parser and writes its artifact; refuses a checkout at another commit and stops at the first read that fails"
                 ],
                 [
                   "Check the artifacts",
+                  "",
+                  "",
                   "Compares each committed artifact with what its pin parses to, and names the command to run where one differs"
                 ],
                 [
                   "Render the derived regions",
+                  "",
+                  "",
                   "Writes every derived region from the artifacts; refuses an artifact that is missing or at another commit, and a JSON-LD graph it does not recognize"
                 ],
                 [
                   "Render the share cards",
+                  "",
+                  "",
                   "Renders each card from its page in a browser and writes its stamp beside it"
                 ],
                 [
                   "Date the sitemap",
+                  "",
+                  "",
                   "Dates each sitemap entry from its page's last commit"
                 ]
               ]
@@ -4838,31 +5566,45 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Move a pin",
+                "",
+                "",
                 "A person commits a new commit for a pin; then the artifacts, the derived regions, the pictures, the cards and the sitemap are rebuilt in that order"
               ],
               [
                 "Build the artifacts",
+                "",
+                "",
                 "Reads each target at its pin through the parser and writes its artifact; refuses a checkout at another commit and stops at the first read that fails"
               ],
               [
                 "Check the artifacts",
+                "",
+                "",
                 "Compares each committed artifact with what its pin parses to, and names the command to run where one differs"
               ],
               [
                 "Render the derived regions",
+                "",
+                "",
                 "Writes every derived region from the artifacts; refuses an artifact that is missing or at another commit, and a JSON-LD graph it does not recognize"
               ],
               [
                 "Render the share cards",
+                "",
+                "",
                 "Renders each card from its page in a browser and writes its stamp beside it"
               ],
               [
                 "Date the sitemap",
+                "",
+                "",
                 "Dates each sitemap entry from its page's last commit"
               ]
             ]
@@ -4964,33 +5706,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Name",
+                  "",
                   "string",
+                  "",
                   "`model`, `example` or `company`, which names the file and the page that draws it"
                 ],
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit it was built from, carried in the file"
                 ],
                 [
                   "Repository",
+                  "",
                   "string",
+                  "",
                   "Where it came from, carried only by the one not drawn from the meta-model"
                 ],
                 [
                   "Entities",
-                  "list",
+                  "Entity",
+                  "",
+                  "yes",
                   "Every entity read, each with its id, type, name and path"
                 ],
                 [
                   "Edges",
-                  "list",
+                  "Edge",
+                  "",
+                  "yes",
                   "Every reference drawn, each with the field or column that drew it"
                 ]
               ]
@@ -5000,33 +5754,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Name",
+                "",
                 "string",
+                "",
                 "`model`, `example` or `company`, which names the file and the page that draws it"
               ],
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit it was built from, carried in the file"
               ],
               [
                 "Repository",
+                "",
                 "string",
+                "",
                 "Where it came from, carried only by the one not drawn from the meta-model"
               ],
               [
                 "Entities",
-                "list",
+                "Entity",
+                "",
+                "yes",
                 "Every entity read, each with its id, type, name and path"
               ],
               [
                 "Edges",
-                "list",
+                "Edge",
+                "",
+                "yes",
                 "Every reference drawn, each with the field or column that drew it"
               ]
             ]
@@ -5124,18 +5890,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Page",
+                  "",
                   "string",
+                  "",
                   "The page it sits in, or is"
                 ],
                 [
                   "Kind",
+                  "",
                   "string",
+                  "",
                   "What it is: a JSON-LD graph, the vision and values, a team board, the surfaces, the principles, an id page"
                 ]
               ]
@@ -5145,18 +5917,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Page",
+                "",
                 "string",
+                "",
                 "The page it sits in, or is"
               ],
               [
                 "Kind",
+                "",
                 "string",
+                "",
                 "What it is: a JSON-LD graph, the vision and values, a team board, the surfaces, the principles, an id page"
               ]
             ]
@@ -5243,6 +6021,198 @@
       "path": "model/bounded-contexts/publishing/concept-designs/derived-region.md"
     },
     {
+      "id": "01a105f9-65d8-76a8-863e-af4ca604f895",
+      "address": "bounded-contexts/publishing/concept-designs/edge",
+      "type": "concept-design",
+      "name": "Edge",
+      "tagline": "One reference as the artifact writes it, from the entity whose page names another to the one it names.",
+      "fields": {
+        "id": "01a105f9-65d8-76a8-863e-af4ca604f895",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Reference"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "From",
+                  "",
+                  "id",
+                  "",
+                  "The entity whose page writes the name"
+                ],
+                [
+                  "To",
+                  "",
+                  "id",
+                  "",
+                  "The entity the name resolves to"
+                ],
+                [
+                  "Via",
+                  "",
+                  "string",
+                  "",
+                  "The field or column that drew it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "From",
+                "",
+                "id",
+                "",
+                "The entity whose page writes the name"
+              ],
+              [
+                "To",
+                "",
+                "id",
+                "",
+                "The entity the name resolves to"
+              ],
+              [
+                "Via",
+                "",
+                "string",
+                "",
+                "The field or column that drew it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-593c-7fc9-b96e-fd14be5decb8",
+      "path": "model/bounded-contexts/publishing/concept-designs/edge.md"
+    },
+    {
+      "id": "01a105f9-65d8-7256-8032-219d45760551",
+      "address": "bounded-contexts/publishing/concept-designs/entity",
+      "type": "concept-design",
+      "name": "Entity",
+      "tagline": "One entity as the artifact writes it, read from a page of the model at the pinned commit.",
+      "fields": {
+        "id": "01a105f9-65d8-7256-8032-219d45760551",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Entity"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Id",
+                  "",
+                  "id",
+                  "",
+                  "The entity's id"
+                ],
+                [
+                  "Type",
+                  "",
+                  "string",
+                  "",
+                  "Its type"
+                ],
+                [
+                  "Name",
+                  "",
+                  "string",
+                  "",
+                  "Its canonical name"
+                ],
+                [
+                  "Path",
+                  "",
+                  "path",
+                  "",
+                  "Where its page is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Id",
+                "",
+                "id",
+                "",
+                "The entity's id"
+              ],
+              [
+                "Type",
+                "",
+                "string",
+                "",
+                "Its type"
+              ],
+              [
+                "Name",
+                "",
+                "string",
+                "",
+                "Its canonical name"
+              ],
+              [
+                "Path",
+                "",
+                "path",
+                "",
+                "Where its page is"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-593c-7fc9-b96e-fd14be5decb8",
+      "path": "model/bounded-contexts/publishing/concept-designs/entity.md"
+    },
+    {
       "id": "01a10042-5a60-7787-8968-300bd59baafb",
       "address": "bounded-contexts/publishing/concept-designs/pin",
       "type": "concept-design",
@@ -5263,23 +6233,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Name",
+                  "",
                   "string",
+                  "",
                   "What the site calls it, `meta-model` or `mental-model`"
                 ],
                 [
                   "Repository",
+                  "",
                   "string",
+                  "",
                   "The repository it points into"
                 ],
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit drawn"
                 ]
               ]
@@ -5289,23 +6267,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Name",
+                "",
                 "string",
+                "",
                 "What the site calls it, `meta-model` or `mental-model`"
               ],
               [
                 "Repository",
+                "",
                 "string",
+                "",
                 "The repository it points into"
               ],
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit drawn"
               ]
             ]
@@ -5375,23 +6361,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Page",
+                  "",
                   "string",
+                  "",
                   "The page it is rendered from"
                 ],
                 [
                   "Image",
+                  "",
                   "file",
+                  "",
                   "`og.png` beside the page"
                 ],
                 [
                   "Stamp",
+                  "",
                   "hash",
+                  "",
                   "`og.sha` beside it: a hash of the page, every local file it draws, the artifact it names included, and the frame it is rendered in"
                 ]
               ]
@@ -5401,23 +6395,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Page",
+                "",
                 "string",
+                "",
                 "The page it is rendered from"
               ],
               [
                 "Image",
+                "",
                 "file",
+                "",
                 "`og.png` beside the page"
               ],
               [
                 "Stamp",
+                "",
                 "hash",
+                "",
                 "`og.sha` beside it: a hash of the page, every local file it draws, the artifact it names included, and the frame it is rendered in"
               ]
             ]
@@ -5495,13 +6497,17 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Origin",
+                  "",
                   "URL",
+                  "",
                   "The scheme and host every address it publishes starts with"
                 ]
               ]
@@ -5511,13 +6517,17 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Origin",
+                "",
                 "URL",
+                "",
                 "The scheme and host every address it publishes starts with"
               ]
             ]
@@ -5655,18 +6665,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Address",
+                  "",
                   "string",
+                  "",
                   "Where the page is: `/model/`, `/example/` or the landing page"
                 ],
                 [
                   "Source folder",
+                  "",
                   "string",
+                  "",
                   "The folder of the repository the artifact was read from, which the source link names"
                 ]
               ]
@@ -5676,18 +6692,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Address",
+                "",
                 "string",
+                "",
                 "Where the page is: `/model/`, `/example/` or the landing page"
               ],
               [
                 "Source folder",
+                "",
                 "string",
+                "",
                 "The folder of the repository the artifact was read from, which the source link names"
               ]
             ]
@@ -5793,18 +6815,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Artifact",
                   "Artifact",
+                  "",
+                  "",
                   "The file as written"
                 ],
                 [
                   "Pin",
                   "Pin",
+                  "",
+                  "",
                   "The pin it was drawn from"
                 ]
               ]
@@ -5814,18 +6842,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Artifact",
                 "Artifact",
+                "",
+                "",
                 "The file as written"
               ],
               [
                 "Pin",
                 "Pin",
+                "",
+                "",
                 "The pin it was drawn from"
               ]
             ]
@@ -5887,18 +6921,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit that went live"
                 ],
                 [
                   "Before",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit live before it, its first parent"
                 ]
               ]
@@ -5908,18 +6948,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit that went live"
               ],
               [
                 "Before",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit live before it, its first parent"
               ]
             ]
@@ -6136,15 +7182,21 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Read an instance",
+                  "",
+                  "",
                   "Reads every page against the schemas the instance vendors and draws the graph, or refuses at the first name that resolves to nothing"
                 ],
                 [
                   "Resolve a row",
+                  "",
+                  "",
                   "Finds what one table row's Type, Entity and Owner cells name, for an editor completing a cell as it is written"
                 ]
               ]
@@ -6154,15 +7206,21 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Read an instance",
+                "",
+                "",
                 "Reads every page against the schemas the instance vendors and draws the graph, or refuses at the first name that resolves to nothing"
               ],
               [
                 "Resolve a row",
+                "",
+                "",
                 "Finds what one table row's Type, Entity and Owner cells name, for an editor completing a cell as it is written"
               ]
             ]
@@ -6225,28 +7283,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Form",
+                  "",
                   "string",
+                  "",
                   "`ref`, `ref?` or `qualifier`"
                 ],
                 [
                   "Target",
+                  "",
                   "string",
+                  "",
                   "The type a written name is looked for in"
                 ],
                 [
                   "By",
+                  "",
                   "string",
+                  "",
                   "For `ref → by <Column>`, the column of the same row that names the type"
                 ],
                 [
                   "In",
+                  "",
                   "string",
+                  "",
                   "For `… in <Owner>`, the column of the same row that names the owner"
                 ]
               ]
@@ -6256,28 +7324,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Form",
+                "",
                 "string",
+                "",
                 "`ref`, `ref?` or `qualifier`"
               ],
               [
                 "Target",
+                "",
                 "string",
+                "",
                 "The type a written name is looked for in"
               ],
               [
                 "By",
+                "",
                 "string",
+                "",
                 "For `ref → by <Column>`, the column of the same row that names the type"
               ],
               [
                 "In",
+                "",
                 "string",
+                "",
                 "For `… in <Owner>`, the column of the same row that names the owner"
               ]
             ]
@@ -6308,29 +7386,39 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "From",
+                  "",
                   "id",
+                  "",
                   "The entity whose page writes the name"
                 ],
                 [
                   "To",
+                  "",
                   "id",
+                  "",
                   "The entity the name resolves to"
                 ],
                 [
                   "Via",
+                  "",
                   "string",
+                  "",
                   "The field, `<Section>.<Column>` or `<Section>.<Heading>` that drew it"
                 ],
                 [
                   "Qualifiers",
-                  "map of string",
-                  "The row's other cells, which describe the edge and draw none of their own"
+                  "",
+                  "map",
+                  "",
+                  "The row's other cells, which describe the edge and draw none of their own, each a string"
                 ]
               ]
             }
@@ -6339,29 +7427,39 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "From",
+                "",
                 "id",
+                "",
                 "The entity whose page writes the name"
               ],
               [
                 "To",
+                "",
                 "id",
+                "",
                 "The entity the name resolves to"
               ],
               [
                 "Via",
+                "",
                 "string",
+                "",
                 "The field, `<Section>.<Column>` or `<Section>.<Heading>` that drew it"
               ],
               [
                 "Qualifiers",
-                "map of string",
-                "The row's other cells, which describe the edge and draw none of their own"
+                "",
+                "map",
+                "",
+                "The row's other cells, which describe the edge and draw none of their own, each a string"
               ]
             ]
           }
@@ -6407,6 +7505,95 @@
       "path": "model/bounded-contexts/resolution/concept-designs/edge.md"
     },
     {
+      "id": "01a105f9-65d8-71c9-9c2d-8749093e59a3",
+      "address": "bounded-contexts/resolution/concept-designs/entity",
+      "type": "concept-design",
+      "name": "Entity",
+      "tagline": "One page read as an entity of the graph, known by its id, its type and its canonical name.",
+      "fields": {
+        "id": "01a105f9-65d8-71c9-9c2d-8749093e59a3",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Entity"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Id",
+                  "",
+                  "id",
+                  "",
+                  "The entity's id"
+                ],
+                [
+                  "Type",
+                  "",
+                  "string",
+                  "",
+                  "Its type, read from the folder its page sits in"
+                ],
+                [
+                  "Name",
+                  "",
+                  "string",
+                  "",
+                  "Its canonical name, the page's H1"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Id",
+                "",
+                "id",
+                "",
+                "The entity's id"
+              ],
+              [
+                "Type",
+                "",
+                "string",
+                "",
+                "Its type, read from the folder its page sits in"
+              ],
+              [
+                "Name",
+                "",
+                "string",
+                "",
+                "Its canonical name, the page's H1"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "path": "model/bounded-contexts/resolution/concept-designs/entity.md"
+    },
+    {
       "id": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
       "address": "bounded-contexts/resolution/concept-designs/graph",
       "type": "concept-design",
@@ -6427,23 +7614,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit the graph was read at, which names it"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release the instance vendors"
                 ],
                 [
                   "Entities",
-                  "list of entities",
+                  "Entity",
+                  "",
+                  "yes",
                   "Every page that describes an entity, each with its id, type and canonical name"
                 ]
               ]
@@ -6453,23 +7648,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit the graph was read at, which names it"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release the instance vendors"
               ],
               [
                 "Entities",
-                "list of entities",
+                "Entity",
+                "",
+                "yes",
                 "Every page that describes an entity, each with its id, type and canonical name"
               ]
             ]
@@ -6535,18 +7738,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Type",
+                  "",
                   "string",
+                  "",
                   "The type the declaration names, or the row's Type cell for `ref → by`"
                 ],
                 [
                   "Owner",
+                  "",
                   "string",
+                  "",
                   "The owner the referring page sits in, or the row's Owner cell; empty for a type nothing owns"
                 ]
               ]
@@ -6556,18 +7765,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Type",
+                "",
                 "string",
+                "",
                 "The type the declaration names, or the row's Type cell for `ref → by`"
               ],
               [
                 "Owner",
+                "",
                 "string",
+                "",
                 "The owner the referring page sits in, or the row's Owner cell; empty for a type nothing owns"
               ]
             ]
@@ -6597,23 +7812,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Graph",
                   "Graph",
+                  "",
+                  "",
                   "The graph as drawn"
                 ],
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit it was read at"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release it was read against"
                 ]
               ]
@@ -6623,23 +7846,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Graph",
                 "Graph",
+                "",
+                "",
                 "The graph as drawn"
               ],
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit it was read at"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release it was read against"
               ]
             ]
@@ -6669,23 +7900,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Name",
+                  "",
                   "string",
+                  "",
                   "The name as written"
                 ],
                 [
                   "Where",
+                  "",
                   "string",
+                  "",
                   "The page and the field, column or heading it was written in"
                 ],
                 [
                   "Scope",
                   "Scope",
+                  "",
+                  "",
                   "The type, and the owner where the type is owned, that was searched"
                 ]
               ]
@@ -6695,23 +7934,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Name",
+                "",
                 "string",
+                "",
                 "The name as written"
               ],
               [
                 "Where",
+                "",
                 "string",
+                "",
                 "The page and the field, column or heading it was written in"
               ],
               [
                 "Scope",
                 "Scope",
+                "",
+                "",
                 "The type, and the owner where the type is owned, that was searched"
               ]
             ]
@@ -6974,19 +8221,27 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Take a snapshot",
+                  "",
+                  "",
                   "Reads an instance at a commit, from a repository or a working tree, against the core and packs it vendors; refuses with one line when the instance cannot be read"
                 ],
                 [
                   "Answer a tool call",
+                  "",
+                  "",
                   "Holds the arguments to the tool's input schema and answers from the snapshot, or refuses with a code"
                 ],
                 [
                   "Hand out the next page",
+                  "",
+                  "",
                   "Answers the page a cursor points at, or refuses a cursor this server did not write or wrote for another commit"
                 ]
               ]
@@ -6996,19 +8251,27 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Take a snapshot",
+                "",
+                "",
                 "Reads an instance at a commit, from a repository or a working tree, against the core and packs it vendors; refuses with one line when the instance cannot be read"
               ],
               [
                 "Answer a tool call",
+                "",
+                "",
                 "Holds the arguments to the tool's input schema and answers from the snapshot, or refuses with a code"
               ],
               [
                 "Hand out the next page",
+                "",
+                "",
                 "Answers the page a cursor points at, or refuses a cursor this server did not write or wrote for another commit"
               ]
             ]
@@ -7059,6 +8322,81 @@
       "path": "model/bounded-contexts/serving/aggregates/snapshot.md"
     },
     {
+      "id": "01a105f9-65d9-7e7e-b86f-53c7adfeac0b",
+      "address": "bounded-contexts/serving/concept-designs/check",
+      "type": "concept-design",
+      "name": "Check",
+      "tagline": "One check the instance's own gate runs, listed so an agent can name it and never run here.",
+      "fields": {
+        "id": "01a105f9-65d9-7e7e-b86f-53c7adfeac0b",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Check"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Name",
+                  "",
+                  "string",
+                  "",
+                  "What the check asserts, in a sentence"
+                ],
+                [
+                  "Rule",
+                  "",
+                  "string",
+                  "",
+                  "The rule it holds part of, such as `R16`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Name",
+                "",
+                "string",
+                "",
+                "What the check asserts, in a sentence"
+              ],
+              [
+                "Rule",
+                "",
+                "string",
+                "",
+                "The rule it holds part of, such as `R16`"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5b26-7cfd-b2c8-f1c072acfe16",
+      "path": "model/bounded-contexts/serving/concept-designs/check.md"
+    },
+    {
       "id": "01a10042-5c20-7bc7-bfd7-dcd3fa3db96f",
       "address": "bounded-contexts/serving/concept-designs/cursor",
       "type": "concept-design",
@@ -7078,18 +8416,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Offset",
+                  "",
                   "number",
+                  "",
                   "Where the next page starts in the list's fixed order"
                 ],
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit of the snapshot that wrote it"
                 ]
               ]
@@ -7099,18 +8443,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Offset",
+                "",
                 "number",
+                "",
                 "Where the next page starts in the list's fixed order"
               ],
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit of the snapshot that wrote it"
               ]
             ]
@@ -7153,6 +8503,212 @@
       "path": "model/bounded-contexts/serving/concept-designs/cursor.md"
     },
     {
+      "id": "01a105f9-65d8-7839-9f6e-77f53f1c68ab",
+      "address": "bounded-contexts/serving/concept-designs/edge",
+      "type": "concept-design",
+      "name": "Edge",
+      "tagline": "One edge of the snapshot, kept as the graph drew it.",
+      "fields": {
+        "id": "01a105f9-65d8-7839-9f6e-77f53f1c68ab",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Reference"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "From",
+                  "",
+                  "id",
+                  "",
+                  "The entity whose page writes the name"
+                ],
+                [
+                  "To",
+                  "",
+                  "id",
+                  "",
+                  "The entity the name resolves to"
+                ],
+                [
+                  "Via",
+                  "",
+                  "string",
+                  "",
+                  "The field, column or heading that drew it"
+                ],
+                [
+                  "Qualifiers",
+                  "",
+                  "map",
+                  "",
+                  "The row's other cells, each a string"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "From",
+                "",
+                "id",
+                "",
+                "The entity whose page writes the name"
+              ],
+              [
+                "To",
+                "",
+                "id",
+                "",
+                "The entity the name resolves to"
+              ],
+              [
+                "Via",
+                "",
+                "string",
+                "",
+                "The field, column or heading that drew it"
+              ],
+              [
+                "Qualifiers",
+                "",
+                "map",
+                "",
+                "The row's other cells, each a string"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5b26-7cfd-b2c8-f1c072acfe16",
+      "path": "model/bounded-contexts/serving/concept-designs/edge.md"
+    },
+    {
+      "id": "01a105f9-65d8-74af-9303-19ac4f66ad04",
+      "address": "bounded-contexts/serving/concept-designs/entity",
+      "type": "concept-design",
+      "name": "Entity",
+      "tagline": "One entity of the snapshot, carried with its page as written so an answer can quote it.",
+      "fields": {
+        "id": "01a105f9-65d8-74af-9303-19ac4f66ad04",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Entity"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Id",
+                  "",
+                  "id",
+                  "",
+                  "The entity's id"
+                ],
+                [
+                  "Type",
+                  "",
+                  "string",
+                  "",
+                  "Its type"
+                ],
+                [
+                  "Name",
+                  "",
+                  "string",
+                  "",
+                  "Its canonical name"
+                ],
+                [
+                  "Page",
+                  "",
+                  "string",
+                  "",
+                  "Its page as written"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Id",
+                "",
+                "id",
+                "",
+                "The entity's id"
+              ],
+              [
+                "Type",
+                "",
+                "string",
+                "",
+                "Its type"
+              ],
+              [
+                "Name",
+                "",
+                "string",
+                "",
+                "Its canonical name"
+              ],
+              [
+                "Page",
+                "",
+                "string",
+                "",
+                "Its page as written"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5b26-7cfd-b2c8-f1c072acfe16",
+      "path": "model/bounded-contexts/serving/concept-designs/entity.md"
+    },
+    {
       "id": "01a10042-5cb5-7e3d-8873-9fe1e820d36e",
       "address": "bounded-contexts/serving/concept-designs/list-page",
       "type": "concept-design",
@@ -7172,28 +8728,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Total",
+                  "",
                   "number",
+                  "",
                   "The entries the list holds after its filters"
                 ],
                 [
                   "Returned",
+                  "",
                   "number",
+                  "",
                   "The entries this page holds"
                 ],
                 [
                   "Has more",
+                  "",
                   "boolean",
+                  "",
                   "Whether entries follow this page"
                 ],
                 [
                   "Next cursor",
                   "Cursor",
+                  "",
+                  "",
                   "Where the next page starts; empty when none follows"
                 ]
               ]
@@ -7203,28 +8769,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Total",
+                "",
                 "number",
+                "",
                 "The entries the list holds after its filters"
               ],
               [
                 "Returned",
+                "",
                 "number",
+                "",
                 "The entries this page holds"
               ],
               [
                 "Has more",
+                "",
                 "boolean",
+                "",
                 "Whether entries follow this page"
               ],
               [
                 "Next cursor",
                 "Cursor",
+                "",
+                "",
                 "Where the next page starts; empty when none follows"
               ]
             ]
@@ -7286,28 +8862,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Commit",
-                  "commit hash",
+                  "",
+                  "hash",
+                  "",
                   "The commit the snapshot was taken at; empty for a working tree"
                 ],
                 [
                   "Repository",
+                  "",
                   "string",
+                  "",
                   "The repository it was read from; empty for a working tree"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The core release the instance vendors"
                 ],
                 [
                   "Parser",
+                  "",
                   "version",
+                  "",
                   "The release of the parser that drew the graph"
                 ]
               ]
@@ -7317,28 +8903,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Commit",
-                "commit hash",
+                "",
+                "hash",
+                "",
                 "The commit the snapshot was taken at; empty for a working tree"
               ],
               [
                 "Repository",
+                "",
                 "string",
+                "",
                 "The repository it was read from; empty for a working tree"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The core release the instance vendors"
               ],
               [
                 "Parser",
+                "",
                 "version",
+                "",
                 "The release of the parser that drew the graph"
               ]
             ]
@@ -7400,33 +8996,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Code",
+                  "",
                   "string",
+                  "",
                   "One of the closed list a client may branch on, such as `ambiguous_name` or `invalid_cursor`"
                 ],
                 [
                   "Message",
+                  "",
                   "string",
+                  "",
                   "The sentence for a reader"
                 ],
                 [
                   "Rule",
+                  "",
                   "string",
+                  "",
                   "The convention the refusal rests on, where one does"
                 ],
                 [
                   "Details",
-                  "map of string",
-                  "The facts the sentence names, such as the candidates an ambiguous name holds"
+                  "",
+                  "map",
+                  "",
+                  "The facts the sentence names, such as the candidates an ambiguous name holds, each a string"
                 ],
                 [
                   "Provenance",
                   "Provenance",
+                  "",
+                  "",
                   "The snapshot that refused"
                 ]
               ]
@@ -7436,33 +9044,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Code",
+                "",
                 "string",
+                "",
                 "One of the closed list a client may branch on, such as `ambiguous_name` or `invalid_cursor`"
               ],
               [
                 "Message",
+                "",
                 "string",
+                "",
                 "The sentence for a reader"
               ],
               [
                 "Rule",
+                "",
                 "string",
+                "",
                 "The convention the refusal rests on, where one does"
               ],
               [
                 "Details",
-                "map of string",
-                "The facts the sentence names, such as the candidates an ambiguous name holds"
+                "",
+                "map",
+                "",
+                "The facts the sentence names, such as the candidates an ambiguous name holds, each a string"
               ],
               [
                 "Provenance",
                 "Provenance",
+                "",
+                "",
                 "The snapshot that refused"
               ]
             ]
@@ -7505,6 +9125,170 @@
       "path": "model/bounded-contexts/serving/concept-designs/refusal.md"
     },
     {
+      "id": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
+      "address": "bounded-contexts/serving/concept-designs/rule",
+      "type": "concept-design",
+      "name": "Rule",
+      "tagline": "One convention of the core the instance vendors, as its conventions file states it.",
+      "fields": {
+        "id": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Rule"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Rule",
+                  "",
+                  "string",
+                  "",
+                  "Its label, such as `R4`"
+                ],
+                [
+                  "Title",
+                  "",
+                  "string",
+                  "",
+                  "Its heading"
+                ],
+                [
+                  "Text",
+                  "",
+                  "string",
+                  "",
+                  "What it says"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Rule",
+                "",
+                "string",
+                "",
+                "Its label, such as `R4`"
+              ],
+              [
+                "Title",
+                "",
+                "string",
+                "",
+                "Its heading"
+              ],
+              [
+                "Text",
+                "",
+                "string",
+                "",
+                "What it says"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5b26-7cfd-b2c8-f1c072acfe16",
+      "path": "model/bounded-contexts/serving/concept-designs/rule.md"
+    },
+    {
+      "id": "01a105f9-65d9-7231-b442-e14364d7b897",
+      "address": "bounded-contexts/serving/concept-designs/schema",
+      "type": "concept-design",
+      "name": "Schema",
+      "tagline": "One type the instance declares, as its schema reads, so an agent can ask what a type allows.",
+      "fields": {
+        "id": "01a105f9-65d9-7231-b442-e14364d7b897",
+        "source": "Local",
+        "kind": "value object",
+        "refines": "Schema"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Type",
+                  "",
+                  "string",
+                  "",
+                  "The type by its unit and name, such as `core/role`"
+                ],
+                [
+                  "Sections",
+                  "",
+                  "map",
+                  "",
+                  "What the schema declares, section by section"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Type",
+                "",
+                "string",
+                "",
+                "The type by its unit and name, such as `core/role`"
+              ],
+              [
+                "Sections",
+                "",
+                "map",
+                "",
+                "What the schema declares, section by section"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5b26-7cfd-b2c8-f1c072acfe16",
+      "path": "model/bounded-contexts/serving/concept-designs/schema.md"
+    },
+    {
       "id": "01a10042-5b8a-71bb-bed7-368901f26aea",
       "address": "bounded-contexts/serving/concept-designs/snapshot",
       "type": "concept-design",
@@ -7524,38 +9308,52 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Provenance",
                   "Provenance",
+                  "",
+                  "",
                   "Where every answer from it came from"
                 ],
                 [
                   "Entities",
-                  "list of entities",
+                  "Entity",
+                  "",
+                  "yes",
                   "Every entity of the graph, each with its page as written"
                 ],
                 [
                   "Edges",
-                  "list of edges",
+                  "Edge",
+                  "",
+                  "yes",
                   "The graph's edges, untouched"
                 ],
                 [
                   "Schemas",
-                  "list of schemas",
+                  "Schema",
+                  "",
+                  "yes",
                   "The types the instance declares and what each declares about the others"
                 ],
                 [
                   "Rules",
-                  "list of rules",
+                  "Rule",
+                  "",
+                  "yes",
                   "The conventions of the core the instance vendors, where it ships them"
                 ],
                 [
                   "Checks",
-                  "list of checks",
+                  "Check",
+                  "",
+                  "yes",
                   "The checks the instance's own gate runs, listed and never run here"
                 ]
               ]
@@ -7565,38 +9363,52 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Provenance",
                 "Provenance",
+                "",
+                "",
                 "Where every answer from it came from"
               ],
               [
                 "Entities",
-                "list of entities",
+                "Entity",
+                "",
+                "yes",
                 "Every entity of the graph, each with its page as written"
               ],
               [
                 "Edges",
-                "list of edges",
+                "Edge",
+                "",
+                "yes",
                 "The graph's edges, untouched"
               ],
               [
                 "Schemas",
-                "list of schemas",
+                "Schema",
+                "",
+                "yes",
                 "The types the instance declares and what each declares about the others"
               ],
               [
                 "Rules",
-                "list of rules",
+                "Rule",
+                "",
+                "yes",
                 "The conventions of the core the instance vendors, where it ships them"
               ],
               [
                 "Checks",
-                "list of checks",
+                "Check",
+                "",
+                "yes",
                 "The checks the instance's own gate runs, listed and never run here"
               ]
             ]
@@ -7658,23 +9470,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Provenance",
                   "Provenance",
+                  "",
+                  "",
                   "The commit, repository, core and parser it was taken with"
                 ],
                 [
                   "Entities",
+                  "",
                   "number",
+                  "",
                   "How many entities it holds"
                 ],
                 [
                   "Edges",
+                  "",
                   "number",
+                  "",
                   "How many edges it holds"
                 ]
               ]
@@ -7684,23 +9504,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Provenance",
                 "Provenance",
+                "",
+                "",
                 "The commit, repository, core and parser it was taken with"
               ],
               [
                 "Entities",
+                "",
                 "number",
+                "",
                 "How many entities it holds"
               ],
               [
                 "Edges",
+                "",
                 "number",
+                "",
                 "How many edges it holds"
               ]
             ]
@@ -7949,19 +9777,27 @@
               "caption": null,
               "columns": [
                 "Command",
+                "Emits",
+                "When",
                 "Description"
               ],
               "rows": [
                 [
                   "Make an instance",
+                  "",
+                  "",
                   "Writes core, the packs asked for, the skills, the manifest, a README per root folder, the starting entities, the workflow and the agent's files into an empty folder, or beside a repository's files with `--here`; refuses a units folder or `.companygraph/` already there"
                 ],
                 [
                   "Move an instance to a release",
+                  "",
+                  "",
                   "Writes what the release changed and removes what it dropped, takes a pack not taken before, then runs the check and says what the model owes; with `--dry-run` it lists what it would write and remove, and it refuses while the Markdown is out of the form unless forced"
                 ],
                 [
                   "Adopt a repository",
+                  "",
+                  "",
                   "Writes a manifest with no core, the workflow that runs the form, the seat hook and a `pins.json` into a repository with no manifest; refuses one that has a manifest and points at the move"
                 ]
               ]
@@ -7971,19 +9807,27 @@
             "caption": null,
             "columns": [
               "Command",
+              "Emits",
+              "When",
               "Description"
             ],
             "rows": [
               [
                 "Make an instance",
+                "",
+                "",
                 "Writes core, the packs asked for, the skills, the manifest, a README per root folder, the starting entities, the workflow and the agent's files into an empty folder, or beside a repository's files with `--here`; refuses a units folder or `.companygraph/` already there"
               ],
               [
                 "Move an instance to a release",
+                "",
+                "",
                 "Writes what the release changed and removes what it dropped, takes a pack not taken before, then runs the check and says what the model owes; with `--dry-run` it lists what it would write and remove, and it refuses while the Markdown is out of the form unless forced"
               ],
               [
                 "Adopt a repository",
+                "",
+                "",
                 "Writes a manifest with no core, the workflow that runs the form, the seat hook and a `pins.json` into a repository with no manifest; refuses one that has a manifest and points at the move"
               ]
             ]
@@ -8053,38 +9897,52 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Tooling",
+                  "",
                   "version",
+                  "",
                   "The release whose checker the repository's workflow runs, and the one every command compares itself against"
                 ],
                 [
                   "Core version",
+                  "",
                   "version",
+                  "",
                   "The version of the core vendored; it may lag the tooling and never lead it"
                 ],
                 [
                   "Core shape",
+                  "",
                   "number",
+                  "",
                   "The shape of that core, as its own manifest gives it"
                 ],
                 [
                   "Core source",
+                  "",
                   "string",
+                  "",
                   "`bundled` for the core inside the release that ran, or `fetched:<tag>` for one fetched by tag"
                 ],
                 [
                   "Units",
+                  "",
                   "string",
+                  "",
                   "The folder core and the packs are vendored under, `meta` unless named"
                 ],
                 [
                   "Exclude",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The paths the form leaves out"
                 ]
               ]
@@ -8094,38 +9952,52 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Tooling",
+                "",
                 "version",
+                "",
                 "The release whose checker the repository's workflow runs, and the one every command compares itself against"
               ],
               [
                 "Core version",
+                "",
                 "version",
+                "",
                 "The version of the core vendored; it may lag the tooling and never lead it"
               ],
               [
                 "Core shape",
+                "",
                 "number",
+                "",
                 "The shape of that core, as its own manifest gives it"
               ],
               [
                 "Core source",
+                "",
                 "string",
+                "",
                 "`bundled` for the core inside the release that ran, or `fetched:<tag>` for one fetched by tag"
               ],
               [
                 "Units",
+                "",
                 "string",
+                "",
                 "The folder core and the packs are vendored under, `meta` unless named"
               ],
               [
                 "Exclude",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The paths the form leaves out"
               ]
             ]
@@ -8234,28 +10106,38 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Kind",
+                  "",
                   "string",
+                  "",
                   "How the line is read and whether it names a tag or a commit: `core-release`, `npm-tag`, `source-commit`, `contract-commit` or one of the family's own"
                 ],
                 [
                   "File",
+                  "",
                   "string",
+                  "",
                   "The file the line is in"
                 ],
                 [
                   "Repository",
+                  "",
                   "string",
+                  "",
                   "The upstream, as `owner/repository`"
                 ],
                 [
                   "Declared",
+                  "",
                   "boolean",
+                  "",
                   "Whether `pins.json` names it, or it was only found"
                 ]
               ]
@@ -8265,28 +10147,38 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Kind",
+                "",
                 "string",
+                "",
                 "How the line is read and whether it names a tag or a commit: `core-release`, `npm-tag`, `source-commit`, `contract-commit` or one of the family's own"
               ],
               [
                 "File",
+                "",
                 "string",
+                "",
                 "The file the line is in"
               ],
               [
                 "Repository",
+                "",
                 "string",
+                "",
                 "The upstream, as `owner/repository`"
               ],
               [
                 "Declared",
+                "",
                 "boolean",
+                "",
                 "Whether `pins.json` names it, or it was only found"
               ]
             ]
@@ -8348,23 +10240,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Status",
+                  "",
                   "string",
+                  "",
                   "`current`, `behind`, `unknown` where the upstream cannot be reached, `unmanaged` for a line no declaration names, `missing` for a declaration that names no line or `family` for a kind the family's own resync reads"
                 ],
                 [
                   "Pinned",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The tags or commits the line names"
                 ],
                 [
                   "Newest",
+                  "",
                   "string",
+                  "",
                   "The highest version tag, or the upstream's head commit, as the upstream offers it now; said only when the pin is behind"
                 ]
               ]
@@ -8374,23 +10274,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Status",
+                "",
                 "string",
+                "",
                 "`current`, `behind`, `unknown` where the upstream cannot be reached, `unmanaged` for a line no declaration names, `missing` for a declaration that names no line or `family` for a kind the family's own resync reads"
               ],
               [
                 "Pinned",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The tags or commits the line names"
               ],
               [
                 "Newest",
+                "",
                 "string",
+                "",
                 "The highest version tag, or the upstream's head commit, as the upstream offers it now; said only when the pin is behind"
               ]
             ]
@@ -8488,18 +10396,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Name",
+                  "",
                   "string",
+                  "",
                   "`core`, or the name of the pack"
                 ],
                 [
                   "Folder",
+                  "",
                   "string",
+                  "",
                   "`<units>/<name>/`, where its files sit"
                 ]
               ]
@@ -8509,18 +10423,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Name",
+                "",
                 "string",
+                "",
                 "`core`, or the name of the pack"
               ],
               [
                 "Folder",
+                "",
                 "string",
+                "",
                 "`<units>/<name>/`, where its files sit"
               ]
             ]
@@ -8582,18 +10502,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Path",
+                  "",
                   "string",
+                  "",
                   "Where it sits, plain and relative, under the units folder or the skills folder"
                 ],
                 [
                   "Hash",
+                  "",
                   "string",
+                  "",
                   "`sha256:` and the digest of its text, line ends read as `\\n`"
                 ]
               ]
@@ -8603,18 +10529,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Path",
+                "",
                 "string",
+                "",
                 "Where it sits, plain and relative, under the units folder or the skills folder"
               ],
               [
                 "Hash",
+                "",
                 "string",
+                "",
                 "`sha256:` and the digest of its text, line ends read as `\\n`"
               ]
             ]
@@ -8676,23 +10608,31 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Manifest",
                   "Manifest",
+                  "",
+                  "",
                   "The manifest as written"
                 ],
                 [
                   "Units",
-                  "list of Unit",
+                  "Unit",
+                  "",
+                  "yes",
                   "Core and the packs vendored"
                 ],
                 [
                   "Folders",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The root folders given a README"
                 ]
               ]
@@ -8702,23 +10642,31 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Manifest",
                 "Manifest",
+                "",
+                "",
                 "The manifest as written"
               ],
               [
                 "Units",
-                "list of Unit",
+                "Unit",
+                "",
+                "yes",
                 "Core and the packs vendored"
               ],
               [
                 "Folders",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The root folders given a README"
               ]
             ]
@@ -8780,33 +10728,45 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "From",
+                  "",
                   "version",
+                  "",
                   "The core version the manifest named before"
                 ],
                 [
                   "To",
+                  "",
                   "version",
+                  "",
                   "The core version it names now"
                 ],
                 [
                   "Written",
-                  "list of Vendored file",
+                  "Vendored file",
+                  "",
+                  "yes",
                   "The files the release changed or added"
                 ],
                 [
                   "Removed",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The paths the release no longer ships"
                 ],
                 [
                   "Given",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The repository's own files written because it had none"
                 ]
               ]
@@ -8816,33 +10776,45 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "From",
+                "",
                 "version",
+                "",
                 "The core version the manifest named before"
               ],
               [
                 "To",
+                "",
                 "version",
+                "",
                 "The core version it names now"
               ],
               [
                 "Written",
-                "list of Vendored file",
+                "Vendored file",
+                "",
+                "yes",
                 "The files the release changed or added"
               ],
               [
                 "Removed",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The paths the release no longer ships"
               ],
               [
                 "Given",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The repository's own files written because it had none"
               ]
             ]
@@ -8904,18 +10876,24 @@
               "caption": null,
               "columns": [
                 "Attribute",
+                "Term",
                 "Type",
+                "Many",
                 "Description"
               ],
               "rows": [
                 [
                   "Manifest",
                   "Manifest",
+                  "",
+                  "",
                   "The manifest as written, with its tooling and what the form leaves out"
                 ],
                 [
                   "Written",
-                  "list of string",
+                  "",
+                  "string",
+                  "yes",
                   "The paths written"
                 ]
               ]
@@ -8925,18 +10903,24 @@
             "caption": null,
             "columns": [
               "Attribute",
+              "Term",
               "Type",
+              "Many",
               "Description"
             ],
             "rows": [
               [
                 "Manifest",
                 "Manifest",
+                "",
+                "",
                 "The manifest as written, with its tooling and what the form leaves out"
               ],
               [
                 "Written",
-                "list of string",
+                "",
+                "string",
+                "yes",
                 "The paths written"
               ]
             ]
@@ -27368,6 +29352,17 @@
     },
     {
       "from": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "to": "01a105f9-65d8-71c9-9c2d-8749093e59a3",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Entities",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Every page that describes an entity, each with its id, type and canonical name"
+      }
+    },
+    {
+      "from": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
       "to": "01a0faae-d24f-77ec-b7ad-bc05c556c781",
       "via": "Relations.Concept",
       "attrs": {
@@ -27386,6 +29381,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-72bf-ab89-23fa90ef75c1",
+      "to": "01a0faae-d24f-7b8c-9d2a-23c38b301344",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Scope",
+        "Type": "",
+        "Many": "",
+        "Description": "The type, and the owner where the type is owned, that was searched"
+      }
     },
     {
       "from": "01a0faae-d24f-72bf-ab89-23fa90ef75c1",
@@ -27446,6 +29452,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a0faae-d24f-7780-86fa-24838d48e3e6",
+      "to": "01a0faae-d24d-74b8-ac6d-73dc448cbe5d",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Graph",
+        "Type": "",
+        "Many": "",
+        "Description": "The graph as drawn"
+      }
     },
     {
       "from": "01a0faae-d24f-7780-86fa-24838d48e3e6",
@@ -28812,6 +30829,17 @@
     },
     {
       "from": "01a10042-58d8-7ffb-819a-310722a178d8",
+      "to": "01a10042-577c-7e30-ae5b-e3dcd324bd8b",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Validation",
+        "Type": "",
+        "Many": "",
+        "Description": "The checks and the writing rules, with the gaps and what was not checked"
+      }
+    },
+    {
+      "from": "01a10042-58d8-7ffb-819a-310722a178d8",
       "to": "01a10042-574b-7664-bb48-61c561e4b429",
       "via": "emitted-by",
       "attrs": {}
@@ -29033,6 +31061,28 @@
     },
     {
       "from": "01a10042-5ac3-7831-b4d1-38cacb0d30d2",
+      "to": "01a105f9-65d8-7256-8032-219d45760551",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Entities",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Every entity read, each with its id, type, name and path"
+      }
+    },
+    {
+      "from": "01a10042-5ac3-7831-b4d1-38cacb0d30d2",
+      "to": "01a105f9-65d8-76a8-863e-af4ca604f895",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Edges",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Every reference drawn, each with the field or column that drew it"
+      }
+    },
+    {
+      "from": "01a10042-5ac3-7831-b4d1-38cacb0d30d2",
       "to": "01a10042-5a60-7787-8968-300bd59baafb",
       "via": "Relations.Concept",
       "attrs": {
@@ -29045,6 +31095,28 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-5af5-7975-b68a-f07b368d64d7",
+      "to": "01a10042-5a60-7787-8968-300bd59baafb",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Pin",
+        "Type": "",
+        "Many": "",
+        "Description": "The pin it was drawn from"
+      }
+    },
+    {
+      "from": "01a10042-5af5-7975-b68a-f07b368d64d7",
+      "to": "01a10042-5ac3-7831-b4d1-38cacb0d30d2",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Artifact",
+        "Type": "",
+        "Many": "",
+        "Description": "The file as written"
+      }
     },
     {
       "from": "01a10042-5af5-7975-b68a-f07b368d64d7",
@@ -29120,6 +31192,72 @@
     },
     {
       "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
+      "to": "01a10042-5bbc-7adf-b3a9-9ce371c484b5",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Provenance",
+        "Type": "",
+        "Many": "",
+        "Description": "Where every answer from it came from"
+      }
+    },
+    {
+      "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
+      "to": "01a105f9-65d8-74af-9303-19ac4f66ad04",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Entities",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Every entity of the graph, each with its page as written"
+      }
+    },
+    {
+      "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
+      "to": "01a105f9-65d8-7839-9f6e-77f53f1c68ab",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Edges",
+        "Type": "",
+        "Many": "yes",
+        "Description": "The graph's edges, untouched"
+      }
+    },
+    {
+      "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
+      "to": "01a105f9-65d9-7231-b442-e14364d7b897",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Schemas",
+        "Type": "",
+        "Many": "yes",
+        "Description": "The types the instance declares and what each declares about the others"
+      }
+    },
+    {
+      "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
+      "to": "01a105f9-65d9-7e7e-b86f-53c7adfeac0b",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Checks",
+        "Type": "",
+        "Many": "yes",
+        "Description": "The checks the instance's own gate runs, listed and never run here"
+      }
+    },
+    {
+      "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
+      "to": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Rules",
+        "Type": "",
+        "Many": "yes",
+        "Description": "The conventions of the core the instance vendors, where it ships them"
+      }
+    },
+    {
+      "from": "01a10042-5b8a-71bb-bed7-368901f26aea",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -29129,6 +31267,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-5bf0-71af-a0f1-3f35a8ae8355",
+      "to": "01a10042-5bbc-7adf-b3a9-9ce371c484b5",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Provenance",
+        "Type": "",
+        "Many": "",
+        "Description": "The snapshot that refused"
+      }
     },
     {
       "from": "01a10042-5bf0-71af-a0f1-3f35a8ae8355",
@@ -29144,6 +31293,17 @@
     },
     {
       "from": "01a10042-5c84-7812-b049-8e153dc80fef",
+      "to": "01a10042-5bbc-7adf-b3a9-9ce371c484b5",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Provenance",
+        "Type": "",
+        "Many": "",
+        "Description": "The commit, repository, core and parser it was taken with"
+      }
+    },
+    {
+      "from": "01a10042-5c84-7812-b049-8e153dc80fef",
       "to": "01a10042-5b58-7499-b4a6-d415f9bf7484",
       "via": "emitted-by",
       "attrs": {}
@@ -29153,6 +31313,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-5cb5-7e3d-8873-9fe1e820d36e",
+      "to": "01a10042-5c20-7bc7-bfd7-dcd3fa3db96f",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Next cursor",
+        "Type": "",
+        "Many": "",
+        "Description": "Where the next page starts; empty when none follows"
+      }
     },
     {
       "from": "01a10042-5cb5-7e3d-8873-9fe1e820d36e",
@@ -29217,6 +31388,26 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-5d16-7600-aa84-b9739571a03f",
+      "to": "01a10042-5e42-7015-910a-80f55a8fce71",
+      "via": "Handled commands.Emits",
+      "attrs": {
+        "Command": "Check an instance",
+        "When": "a pin disagrees (INV-K2, INV-K3, INV-K4)",
+        "Description": "Holds every page to the vendored schemas and every recorded file to its hash; refuses when the pins disagree, the core is newer or a pack is unknown"
+      }
+    },
+    {
+      "from": "01a10042-5d16-7600-aa84-b9739571a03f",
+      "to": "01a10042-5e73-7117-9b8c-8bf69d19fe2a",
+      "via": "Handled commands.Emits",
+      "attrs": {
+        "Command": "Check an instance",
+        "When": "the pins agree",
+        "Description": ""
+      }
     },
     {
       "from": "01a10042-5d16-7600-aa84-b9739571a03f",
@@ -29346,6 +31537,17 @@
     },
     {
       "from": "01a10042-5e42-7015-910a-80f55a8fce71",
+      "to": "01a10042-5d7b-7cad-9ed5-b55e738c8785",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Tooling pin",
+        "Type": "",
+        "Many": "",
+        "Description": "What the manifest names"
+      }
+    },
+    {
+      "from": "01a10042-5e42-7015-910a-80f55a8fce71",
       "to": "01a10042-5d16-7600-aa84-b9739571a03f",
       "via": "emitted-by",
       "attrs": {}
@@ -29355,6 +31557,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-5e73-7117-9b8c-8bf69d19fe2a",
+      "to": "01a10042-5de0-7bb8-883f-df40c304648e",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Findings",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Every finding of the run, none when it passed"
+      }
     },
     {
       "from": "01a10042-5e73-7117-9b8c-8bf69d19fe2a",
@@ -29474,6 +31687,17 @@
     },
     {
       "from": "01a10042-6002-735b-aa63-ad043979bbef",
+      "to": "01a105f9-65d5-7ee6-9ee5-34be85ab9cec",
+      "via": "Attributes.Term",
+      "attrs": {
+        "Attribute": "Conversation",
+        "Type": "",
+        "Many": "yes",
+        "Description": "The visitor's and the chat's turns that reach the model, the visitor's last"
+      }
+    },
+    {
+      "from": "01a10042-6002-735b-aa63-ad043979bbef",
       "to": "01a10042-5f3a-71bc-af0e-2f644bc7246a",
       "via": "Relations.Concept",
       "attrs": {
@@ -29522,6 +31746,17 @@
     },
     {
       "from": "01a10042-6068-70bc-97d6-8e5fa3e936bd",
+      "to": "01a10042-5f3a-71bc-af0e-2f644bc7246a",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Kept question",
+        "Type": "",
+        "Many": "",
+        "Description": "The question, its page's language, what was cited, the calls and rounds, and the refusal's code"
+      }
+    },
+    {
+      "from": "01a10042-6068-70bc-97d6-8e5fa3e936bd",
       "to": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
       "via": "emitted-by",
       "attrs": {}
@@ -29531,6 +31766,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-6098-79a7-9dbe-3a86a80ae299",
+      "to": "01a10042-5fcf-719a-9cd2-403def262f7b",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Cite",
+        "Type": "",
+        "Many": "",
+        "Description": "The entity's id, title, type and the address of its page"
+      }
     },
     {
       "from": "01a10042-6098-79a7-9dbe-3a86a80ae299",
@@ -29675,6 +31921,28 @@
     },
     {
       "from": "01a10042-6253-7c2b-9b6a-f7cac3fc5cb7",
+      "to": "01a10042-615c-72b0-92e3-e9dada0e46a3",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Units",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Core and the packs vendored"
+      }
+    },
+    {
+      "from": "01a10042-6253-7c2b-9b6a-f7cac3fc5cb7",
+      "to": "01a10042-61bc-7bdb-b955-d6d0874c67ac",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Manifest",
+        "Type": "",
+        "Many": "",
+        "Description": "The manifest as written"
+      }
+    },
+    {
+      "from": "01a10042-6253-7c2b-9b6a-f7cac3fc5cb7",
       "to": "01a10042-612a-730a-ad10-1e5233131958",
       "via": "emitted-by",
       "attrs": {}
@@ -29687,6 +31955,17 @@
     },
     {
       "from": "01a10042-6283-7797-9680-ea2fbc247024",
+      "to": "01a10042-618d-798e-bbd9-e00c70bd0dad",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Written",
+        "Type": "",
+        "Many": "yes",
+        "Description": "The files the release changed or added"
+      }
+    },
+    {
+      "from": "01a10042-6283-7797-9680-ea2fbc247024",
       "to": "01a10042-612a-730a-ad10-1e5233131958",
       "via": "emitted-by",
       "attrs": {}
@@ -29696,6 +31975,17 @@
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a10042-62b5-724c-8ff6-645a8f7acc34",
+      "to": "01a10042-61bc-7bdb-b955-d6d0874c67ac",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Manifest",
+        "Type": "",
+        "Many": "",
+        "Description": "The manifest as written, with its tooling and what the form leaves out"
+      }
     },
     {
       "from": "01a10042-62b5-724c-8ff6-645a8f7acc34",
@@ -30356,6 +32646,108 @@
     },
     {
       "from": "01a1008f-79fe-7b6e-a781-fe4de5024498",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d5-7ee6-9ee5-34be85ab9cec",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-71c9-9c2d-8749093e59a3",
+      "to": "01a0c2a7-ffa8-7a7a-a98a-0c5aed378ea7",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-71c9-9c2d-8749093e59a3",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-7256-8032-219d45760551",
+      "to": "01a0c2a7-ffa8-7a7a-a98a-0c5aed378ea7",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-7256-8032-219d45760551",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-74af-9303-19ac4f66ad04",
+      "to": "01a0c2a7-ffa8-7a7a-a98a-0c5aed378ea7",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-74af-9303-19ac4f66ad04",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-76a8-863e-af4ca604f895",
+      "to": "01a0c2a7-ffa8-7030-9fbb-2baaa6c3715f",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-76a8-863e-af4ca604f895",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-7839-9f6e-77f53f1c68ab",
+      "to": "01a0c2a7-ffa8-7030-9fbb-2baaa6c3715f",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d8-7839-9f6e-77f53f1c68ab",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d9-7231-b442-e14364d7b897",
+      "to": "01a0c2a7-ffa8-7321-8656-ce1a28092a97",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d9-7231-b442-e14364d7b897",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d9-7e7e-b86f-53c7adfeac0b",
+      "to": "01a0c2a7-ffa8-70b3-a43c-a1b44e906b46",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d9-7e7e-b86f-53c7adfeac0b",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
+      "to": "01a0c2a7-ffa8-7fe4-a8af-2a5a36777f4f",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
