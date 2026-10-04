@@ -14,13 +14,13 @@ The company's model has no page for the judge. A slide about it would rest on no
 
 ## 2. What was decided
 
-**The frame is System One and System Two, with code below and a person above.** The owner saw the levels idea in TypeSafe's naming of Jev as a System One model beside System Two models that generate text. The talk names four layers and one sorting rule: each decision goes to the lowest layer that can make it. Code decides what code can decide; a System One model answers typed questions; a System Two model writes and reads; a person approves. TypeSafe and Kahneman are credited on the slide that introduces the frame and under References. Nicolas Figay's three maturity levels were considered and left out, so the talk carries one picture rather than two.
+**The frame is System One and System Two, with code below and a person above.** The owner saw the levels idea in TypeSafe's naming of Jev as a System One model beside System Two models that generate text. The talk names four layers and one sorting rule: each decision goes to the lowest layer that can make it. Code decides what code can decide; a System One model answers typed questions; a System Two model writes and reads; a person approves. TypeSafe, Kahneman, and Stanovich and West who first named the two systems, are credited in the frame slide's note and on a closing credits slide. Nicolas Figay's three maturity levels were considered and left out, so the talk carries one picture rather than two.
 
 **The judge keeps its name.** The talk calls `companygraph-judge` by its name and describes its role as a guard; nothing is renamed.
 
 **Each replaceable part says whether it is replaceable today or by design.** Jev is replaceable by design, a second file; the System Two model is replaceable by design while the skills are Claude's first; the editor and the graph database are replaceable today. "Nothing claims what the model does not hold" governs every such line, and no slide writes a model version, a probability band or a count that moves.
 
-**Thirteen slides after the title**, each naming the pages of the model it rests on:
+**Fourteen slides after the title**, each naming the pages of the model it rests on:
 
 | # | Slide | What it says | Rests on |
 | --- | --- | --- | --- |
@@ -38,12 +38,13 @@ The company's model has no page for the judge. A slide about it would rest on no
 | 11 | Measure before you swap | The System One model is pinned and its flags are read by a band measured against that one model; the Grounded Answer Rate measures the System Two answers; a new model is measured before it is named. | KPI Grounded Answer Rate, question "Can I trust what this chat says?", rule "A check counts only when its output was seen" |
 | 12 | Six practices | Keep knowledge where no model owns it. Let code decide what code can decide. Ask typed questions before free text. A model proposes, a person decides. Pin every model and measure before moving it. Ask before data leaves the machine. | value "Run on what we publish" |
 | 13 | Close | The model you will change most often is the one you should depend on least. | |
+| 14 | Credits | Inspired by TypeSafe naming Jev a System One model; System One and System Two first named by Keith Stanovich and Richard West and made widely known by Daniel Kahneman; links to TypeSafe, its documentation and the two repositories. Added at the owner's ask after the English was reviewed. | |
 
 The talk lives at `/talks/what-stays/` and is listed on `/talks/` after the levels talk.
 
 ## 3. Step 0: the judge in the company's model
 
-One pull request in companygraph/mental-model before anything here: a feature page whose name says what the judge does, drafted as "A decision model asks each page its schema's writing rules", with its Evidence and the relations to concept Agent pass, concept Check and the question "Does our data leave our hands?". It goes to the owner in chat on its own, the text, the case against it and a proposal, and is committed (Writer, Delivery, Implement, Prose) only on the owner's word.
+One pull request in companygraph/mental-model before anything here: a feature page whose name says what the judge does, "A decision model asks each page its schema's writing rules", naming the concepts Agent pass, Schema, Rule and Instance, which are the only relations the feature schema gives a feature. It names no vendor or model, as that schema's writing rules ask; the talk names them. It went to the owner in chat on its own and was committed (Writer, Delivery, Implement, Prose) on the owner's word: companygraph/mental-model #104, merged as 71a096a.
 
 ## 4. Step 1 and step 2: the talk
 
