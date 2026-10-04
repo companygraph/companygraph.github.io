@@ -149,7 +149,7 @@ It was written by breaking the page three ways and watching it catch each: the t
 
 ## What this site deliberately does not say
 
-No type count, no type list, no status and no roadmap — those live in [`companygraph/meta-model`](https://github.com/companygraph/meta-model), which ships them in the same commit as the thing they describe. No claim that a pack exists. Nothing identifying the companies the model was extracted from.
+No type count and no type list — those live in [`companygraph/meta-model`](https://github.com/companygraph/meta-model), which ships them in the same commit as the thing they describe. No status and no roadmap — those are on the [organization profile](https://github.com/companygraph/.github/blob/main/profile/README.md), where meta-model itself points for them. A pack is named only once it has shipped, and then only as what exists; `software` has. Nothing identifying the companies the model was extracted from.
 
 `/billing/` is the one place a commercial model is stated, and it states one that is not running: consulting, time and material, no rate, nobody to ask, and it may never happen at all. **The absent contact is deliberate** — adding one turns a described model into an offer. Nothing anywhere may imply a hosted product, a license fee, a seat count or a paid edition of the model; those are the four things the billing page rejects by name.
 

@@ -26,10 +26,10 @@ No build. `npm run serve` (`python3 -m http.server 8000`), then `npm run verify`
 
 The page opens on a headline and tagline saying what CompanyGraph is, then the vision — three tiles: Ask, which opens the chat; See the vocabulary, to `/model/`; and Try the CLI, to `/cli/` — then the values, then CompanyGraph's own model drawn as the graph under "CompanyGraph, described as CompanyGraph." That is the whole scope of `index.html`, and the list of what it must never say is longer than what it does say:
 
-- **No type count and no type list.** The model ships five types today and a planned
-  eighteen; it moves fast, so any number here is wrong within a release. That sentence
-  belongs in the model's own `README`, which ships in the same commit as the type it counts —
-  this repository has no way to know when that commit lands.
+- **No type count and no type list.** The model's type list moves with every release, so
+  any number here is soon wrong. That sentence belongs in the model's own `README`, which
+  ships in the same commit as the type it counts — this repository has no way to know when
+  that commit lands.
 - **No status and no roadmap.** "The first release describes one person completely" is
   honest, but it is `meta-model`'s sentence, not this page's.
 - **A pack is named only once it has shipped.** The first, `software`, shipped with
