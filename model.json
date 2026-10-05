@@ -1,5 +1,5 @@
 {
-  "commit": "47865832066cbb1a7aebb8323f6ff4724fb92a26",
+  "commit": "bc4b00f41a1444700614e280c8ecb847a068c314",
   "root": "Meta-model",
   "rootId": null,
   "types": [
@@ -1080,7 +1080,13 @@
                   "`countries`",
                   "Yes",
                   "array",
-                  "Where the processor processes and stores the data, each an ISO 3166-1 alpha-2 code"
+                  "Where the processor processes and stores the data, each an ISO 3166-1 alpha-2 code; where `processing` is `any`, where it stores what it keeps"
+                ],
+                [
+                  "`processing`",
+                  "No",
+                  "enum",
+                  "`fixed` or `any`. `fixed`, which an absent field means, says the processor processes the data where `countries` says; `any` says it may process a request in any country it chooses, and `countries` names where it stores what it keeps."
                 ],
                 [
                   "`retention`",
@@ -1134,7 +1140,13 @@
                 "`countries`",
                 "Yes",
                 "array",
-                "Where the processor processes and stores the data, each an ISO 3166-1 alpha-2 code"
+                "Where the processor processes and stores the data, each an ISO 3166-1 alpha-2 code; where `processing` is `any`, where it stores what it keeps"
+              ],
+              [
+                "`processing`",
+                "No",
+                "enum",
+                "`fixed` or `any`. `fixed`, which an absent field means, says the processor processes the data where `countries` says; `any` says it may process a request in any country it chooses, and `countries` names where it stores what it keeps."
               ],
               [
                 "`retention`",
@@ -1280,7 +1292,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline says what the processor does for the company, not what the vendor sells.\n- `legal-name` is the entity the company's contract is with, as the contract writes it.\n- `countries` lists where the data is processed and stored, not where the vendor is incorporated.\n- `retention` is the vendor's period in the vendor's words; the company's own retention is the processing activity's.\n- `## Own purposes` names each purpose the vendor decides for itself, in the words of its terms.\n- Each row of `## Transfers` names the instrument as its jurisdiction's law names it.\n- `## References` carries the vendor's sub-processor list as a row, because the list is the vendor's to keep and to announce changes to (GDPR Art. 28(2)).\n- The page writes names and prose in American English (R14).",
+          "text": "- The tagline says what the processor does for the company, not what the vendor sells.\n- `legal-name` is the entity the company's contract is with, as the contract writes it.\n- `countries` lists where the data is processed and stored, not where the vendor is incorporated.\n- `processing` is `any` only where the processor's own terms let it run a request in a country it chooses, and the tagline then says so in words.\n- `retention` is the vendor's period in the vendor's words; the company's own retention is the processing activity's.\n- `## Own purposes` names each purpose the vendor decides for itself, in the words of its terms.\n- Each row of `## Transfers` names the instrument as its jurisdiction's law names it.\n- `## References` carries the vendor's sub-processor list as a row, because the list is the vendor's to keep and to announce changes to (GDPR Art. 28(2)).\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {

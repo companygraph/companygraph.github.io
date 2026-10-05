@@ -1,6 +1,6 @@
 {
-  "commit": "b01dc66c1cff5ef8ffde5e9072ce0a86dd3d849a",
-  "core": "0.60.0",
+  "commit": "11ae05cda6e0f865fc4484730e2971cb6c8f98e3",
+  "core": "0.61.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -12837,6 +12837,7 @@
         "countries": [
           "US"
         ],
+        "processing": "any",
         "retention": "Within 30 days of receipt or generation, under its own terms",
         "sub-processor-authorization": "general"
       },
