@@ -1,5 +1,5 @@
 {
-  "commit": "8f7b2bbd026d6fac4b4a8cf1adc6d9731ae7ab0f",
+  "commit": "b01dc66c1cff5ef8ffde5e9072ce0a86dd3d849a",
   "core": "0.60.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -18872,13 +18872,15 @@
         "source": "Local",
         "owner": "Owner",
         "executed-by": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "supported-by": [
           "Contributor"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Review"
@@ -18933,7 +18935,7 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Consider, all of these hold:\n\n- The pull request says what is now true that was not before.\n- The Owner has said the change is wanted.\n- The status check has reported.",
+          "text": "To leave Consider, all of these hold:\n\n- The pull request says what is now true that was not before.\n- The Owner or the Partner has said the change is wanted.\n- The status check has reported.",
           "tables": []
         },
         {
@@ -19219,10 +19221,12 @@
         ],
         "supported-by": [
           "Contributor",
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Integrate"
@@ -19277,7 +19281,7 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Review, all of these hold:\n\n- Every finding carries a severity and the line it sits on.\n- The Owner has read the findings and said which are to be acted on.\n- What the review could not verify is written down.",
+          "text": "To leave Review, all of these hold:\n\n- Every finding carries a severity and the line it sits on.\n- The Owner or the Partner has read the findings and said which are to be acted on.\n- What the review could not verify is written down.",
           "tables": []
         },
         {
@@ -19918,7 +19922,7 @@
         },
         {
           "heading": "What it never does",
-          "text": "- Never begins a phase whose predecessor's gate the Owner has not approved.",
+          "text": "- Never begins a phase whose predecessor's gate neither the Owner nor the Partner has approved.",
           "tables": []
         },
         {
@@ -19989,13 +19993,15 @@
           "Reviewer",
           "Writer",
           "Translator",
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "supported-by": [
           "Planner"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Integrate"
@@ -20263,7 +20269,8 @@
           "Specifier"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Implement"
@@ -20318,7 +20325,7 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Plan, all of these hold:\n\n- The Owner has read the plan and approved it.\n- Every brief states how its holder can tell the task is done.\n- The order is one the briefs can actually be worked in.",
+          "text": "To leave Plan, all of these hold:\n\n- The Owner or the Partner has read the plan and approved it.\n- Every brief states how its holder can tell the task is done.\n- The order is one the briefs can actually be worked in.",
           "tables": []
         },
         {
@@ -20376,10 +20383,12 @@
         "source": "Local",
         "owner": "Owner",
         "executed-by": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Spec"
@@ -20522,7 +20531,8 @@
           "Writer"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Plan"
@@ -20585,7 +20595,7 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Spec, all of these hold:\n\n- The Owner has read the specification or the brief and approved it.\n- What is explicitly not being done is written down.\n- Where the change reaches another repository, what its release asks of a consumer is written down.\n- Every parked question has the Owner's word on it.",
+          "text": "To leave Spec, all of these hold:\n\n- The Owner or the Partner has read the specification or the brief and approved it.\n- What is explicitly not being done is written down.\n- Where the change reaches another repository, what its release asks of a consumer is written down.\n- Every parked question has the word of the Owner or the Partner on it.",
           "tables": []
         },
         {
@@ -20825,13 +20835,15 @@
         "source": "Local",
         "owner": "Owner",
         "executed-by": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "supported-by": [
           "Requestor"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner"
       },
@@ -21043,10 +21055,12 @@
         "source": "Local",
         "owner": "Owner",
         "executed-by": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Answer"
@@ -21151,13 +21165,15 @@
         "source": "Local",
         "owner": "Owner",
         "executed-by": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "supported-by": [
           "Requestor"
         ],
         "gate-approvers": [
-          "Owner"
+          "Owner",
+          "Partner"
         ],
         "escalation-authority": "Owner",
         "gate-to": "Triage"
@@ -21873,6 +21889,98 @@
       ],
       "owner": null,
       "path": "model/profiles/german-voice/german-voice.md"
+    },
+    {
+      "id": "01a1076d-db09-7ca5-b107-6571176ea946",
+      "address": "profiles/mischa-ramseyer",
+      "type": "profile",
+      "name": "Mischa Ramseyer",
+      "tagline": "Human in the loop at beacon.build.",
+      "fields": {
+        "id": "01a1076d-db09-7ca5-b107-6571176ea946",
+        "source": "Local",
+        "nature": "human",
+        "email": "mischa@beacon.build",
+        "roles": [
+          "Partner"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Also at",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Where",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub",
+                  "https://github.com/ramsyman"
+                ],
+                [
+                  "LinkedIn",
+                  "https://www.linkedin.com/in/mramseyer/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Where",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub",
+                "https://github.com/ramsyman"
+              ],
+              [
+                "LinkedIn",
+                "https://www.linkedin.com/in/mramseyer/"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Company",
+                  "https://beacon.build"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Company",
+                "https://beacon.build"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/profiles/mischa-ramseyer/mischa-ramseyer.md"
     },
     {
       "id": "01a0ea1b-f968-78eb-b38f-5f1290cc8e02",
@@ -24391,6 +24499,76 @@
       "path": "model/roles/owner.md"
     },
     {
+      "id": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "address": "roles/partner",
+      "type": "role",
+      "name": "Partner",
+      "tagline": "The seat that shares the Owner's say in what the project is for and in how its work is shaped, specified, planned and implemented, and leaves to the Owner the word every merge, tag and release waits on.",
+      "fields": {
+        "id": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The model, read before deciding: the vision, the objectives and the strategies under them, and the values a decision is weighed against. A draft or a pull request to review, on the branch and on the rendered page. The signals a strategy names as showing whether it is working.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "Wherever a phase of Delivery, Contribution or Feature Request before Integrate names the Owner, the Partner may act in the Owner's place, and a phase's gate is passed by either word. Decisions at every gate before Integrate: a shaped request, an approved specification, plan or implementation, and reviewed English on a branch. A pull request the Owner can integrate. The word that ends a question an agent has parked.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never merges into the default branch, pushes to it or creates a release tag.\n- Never approves a change a surface carries from the diff alone; the rendered page is read too.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/partner.md"
+    },
+    {
       "id": "01a0c202-d668-71dd-bef9-f72149f44b1e",
       "address": "roles/planner",
       "type": "role",
@@ -26881,7 +27059,19 @@
     },
     {
       "from": "01a0c202-d668-77f0-8e1f-222f104c28ed",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c202-d668-77f0-8e1f-222f104c28ed",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c202-d668-77f0-8e1f-222f104c28ed",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -26957,6 +27147,12 @@
     },
     {
       "from": "01a0c202-d668-7a73-9bd9-f58cbfc22abc",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c202-d668-7a73-9bd9-f58cbfc22abc",
       "to": "01a0c202-d668-7d80-ae12-05181a537989",
       "via": "gate-to",
       "attrs": {}
@@ -27022,6 +27218,12 @@
     {
       "from": "01a0c202-d668-7b80-b58a-02ac1f56beea",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c202-d668-7b80-b58a-02ac1f56beea",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -27113,7 +27315,19 @@
     },
     {
       "from": "01a0c202-d668-7d80-ae12-05181a537989",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c202-d668-7d80-ae12-05181a537989",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c202-d668-7d80-ae12-05181a537989",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -27213,7 +27427,19 @@
     },
     {
       "from": "01a0c220-5148-70ae-94fe-1c1e54320403",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-70ae-94fe-1c1e54320403",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-70ae-94fe-1c1e54320403",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -27451,7 +27677,19 @@
     },
     {
       "from": "01a0c220-5148-7563-b79e-338d0d73da14",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-7563-b79e-338d0d73da14",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-7563-b79e-338d0d73da14",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -27611,6 +27849,12 @@
     },
     {
       "from": "01a0c220-5148-79b2-a6d2-bffd0731cf96",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-79b2-a6d2-bffd0731cf96",
       "to": "01a0c220-5148-792f-9a49-fddd3af9ef72",
       "via": "gate-to",
       "attrs": {}
@@ -27640,6 +27884,12 @@
       "attrs": {}
     },
     {
+      "from": "01a0c220-5148-79b2-a6d2-bffd0731cf96",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
       "from": "01a0c220-5148-7b83-a720-42e45340d44b",
       "to": "01a0c220-5148-7b83-a720-42e45340d44b",
       "via": "If not met.Leads to",
@@ -27661,7 +27911,19 @@
     },
     {
       "from": "01a0c220-5148-7b83-a720-42e45340d44b",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-7b83-a720-42e45340d44b",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-7b83-a720-42e45340d44b",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -27703,7 +27965,19 @@
     },
     {
       "from": "01a0c220-5148-7ee7-8fca-e060f54fcf02",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-7ee7-8fca-e060f54fcf02",
       "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c220-5148-7ee7-8fca-e060f54fcf02",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
       "via": "gate-approvers",
       "attrs": {}
     },
@@ -33906,6 +34180,24 @@
     },
     {
       "from": "01a105f9-65d9-7fd9-86a4-581e1d4aef75",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1076d-db09-7ca5-b107-6571176ea946",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "01a1076d-db09-7ca5-b107-6571176ea946",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
