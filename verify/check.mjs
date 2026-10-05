@@ -81,7 +81,8 @@ const PAGES = [
     sameTab: ["../talks/", "../model/", "../cli/", "../billing/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    // fences reads the served HTML for named marker comments, and this page carries none:
+    // fences reads the served HTML for named marker comments, and this page carries none of the
+    // stylesheet fences (its surfaces lineage block is the script design:check holds byte for byte):
     // design tokens, header contract, title contract, prose reset and prose footer are
     // what tokens.css and page.css supply instead. An empty list satisfies the per-page
     // check (nothing named is missing) and runSuite's own gate, which only asks that every
@@ -93,7 +94,7 @@ const PAGES = [
     // style, which a linked stylesheet satisfies exactly as a fenced one did, and stay
     // declared.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
-    card: true, cardBase: SITE, internalLinks: true },
+    card: true, cardBase: SITE, internalLinks: true, privacyPath: true },
   // The command line's page. Its commands name GitHub releases, and the page itself still
   // fetches nothing from another origin, which `sameOrigin` holds it to as it holds Privacy.
   { path: "/cli/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /CLI/, lang: "en", sourceLang: "en",

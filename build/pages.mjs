@@ -16,6 +16,7 @@ import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeTeam } from "@robertblust/design/render/team";
 import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
+import { writePrivacy } from "@robertblust/design/render/privacy";
 import { writeHome } from "@robertblust/design/render/home";
 import { loadGerman } from "@robertblust/design/render/german";
 import { writeQuestionsDe } from "@robertblust/design/render/questions";
@@ -53,6 +54,10 @@ const german = loadGerman(path.join(ROOT, "build", "principles.de.json"));
 // German pipeline in build/questions.de.json, held to the exact English as the principles are,
 // and written to the questions.de.json the chat's tag names.
 const questionsGerman = loadGerman(path.join(ROOT, "build", "questions.de.json"));
+// The German of the privacy page's lineage, held to the model's exact English: the stored items'
+// taglines, the activities' names and what each processor receives. Made by the roles from
+// `npx design german privacy company.json`.
+const privacyGerman = loadGerman(path.join(ROOT, "build", "privacy.de.json"));
 const RENDERERS = [
   (d, o) => writeJsonLd(d, { ...o, repo }),
   (d, o) => writePrinciples(d.company, { ...o, root: ROOT, de: german.de }),
@@ -64,6 +69,7 @@ const RENDERERS = [
   // Its nodes link to the home page, which draws the company.
   (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Deciding", "Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
+  (d, o) => writePrivacy(d.company, { ...o, root: ROOT, site: "companygraph.io", de: privacyGerman.de }),
   (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
   // One redirect page per entity of the company with a stable id, sending the reader on to its
   // place on the home page's stage, which draws company.json. The example and the core
@@ -76,6 +82,11 @@ const stale = RENDERERS.flatMap((write) => write(data, { check }));
 const unused = german.unused();
 if (unused.length) {
   console.error(`  ✗ build/principles.de.json holds German for English the model no longer says:\n${unused.map((en) => `    "${en}"`).join("\n")}`);
+  process.exit(1);
+}
+const unusedPrivacy = privacyGerman.unused();
+if (unusedPrivacy.length) {
+  console.error(`  ✗ build/privacy.de.json holds German for English the model no longer says:\n${unusedPrivacy.map((en) => `    "${en}"`).join("\n")}`);
   process.exit(1);
 }
 const unusedQuestions = questionsGerman.unused();
