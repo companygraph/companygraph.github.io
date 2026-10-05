@@ -1,5 +1,5 @@
 {
-  "commit": "11ae05cda6e0f865fc4484730e2971cb6c8f98e3",
+  "commit": "92fec976c03efc4d936e046fdbaae472a2357d83",
   "core": "0.61.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -231,13 +231,14 @@
         ],
         "decisions": [
           "The server only reads, and answers at one named commit",
-          "A model is written in one language"
+          "A model is written in one language",
+          "A model that writes no text checks every claim of the chat's answers"
         ]
       },
       "sections": [
         {
           "heading": "Responsibilities",
-          "text": "- Refuse a message before the model is asked when it is not a conversation that ends with the visitor, when a turn is too long, when its page is not one the deployment named, or when its address has spent its hour\n- Give the model the host's instructions and tools as the host gave them, with the map of the model's types and the questions it answers, read again when the host names another commit\n- Let the model ask the tools for a bounded number of rounds, and make the last request one that can call nothing\n- Cite each entity a tool answered with whole, once a message, and name every entity a list answer held, so the page can link it where the answer writes it\n- Hand a diagram the host drew to the page to draw, and let the model read only what it shows\n- Tell the model to answer in the language the visitor's last message is written in, and in any other language than English to name each entity in that language before its exact title\n- Count what every request to the model costs against the day's share and the month's ceiling, before the request and after it\n- Keep one line of every question asked, with no address and no word of the answer\n- Stop where the visitor left, and spend nothing more",
+          "text": "- Refuse a message before the model is asked when it is not a conversation that ends with the visitor, when a turn is too long, when its page is not one the deployment named, or when its address has spent its hour\n- Give the model the host's instructions and tools as the host gave them, with the map of the model's types and the questions it answers, read again when the host names another commit\n- Let the model ask the tools for a bounded number of rounds, and make the last request one that can call nothing\n- Cite each entity a tool answered with whole, once a message, and name every entity a list answer held, so the page can link it where the answer writes it\n- Hand a diagram the host drew to the page to draw, and let the model read only what it shows\n- Tell the model to answer in the language the visitor's last message is written in, and in any other language than English to name each entity in that language before its exact title\n- Read each claim of an answer back against the tool answers that carried the entities it names, and send every claim's verdict before the answer ends, or nothing where the check cannot run\n- Count what every request to the model costs against the day's share and the month's ceiling, before the request and after it\n- Keep one line of every question asked, with no address and no word of the answer\n- Stop where the visitor left, and spend nothing more",
           "tables": []
         },
         {
@@ -337,10 +338,12 @@
         "members": [
           "Cite",
           "Name",
-          "Fence"
+          "Fence",
+          "Claim"
         ],
         "decisions": [
-          "A model is written in one language"
+          "A model is written in one language",
+          "A model that writes no text checks every claim of the chat's answers"
         ]
       },
       "sections": [
@@ -398,6 +401,22 @@
                 [
                   "INV-A11",
                   "A message keeps one line of itself, with its answer or its refusal, and a message refused as malformed, too long or foreign keeps none."
+                ],
+                [
+                  "INV-A18",
+                  "A message's claims are checked after its last text and before its done event, and a check that cannot run within its budget sends no verdict and changes neither the answer nor what follows it."
+                ],
+                [
+                  "INV-A19",
+                  "A claim's evidence is the text of the tool answers that carried the entities it names, cut where the model's own was cut, and nothing more."
+                ],
+                [
+                  "INV-A20",
+                  "A claim that writes the title of an entity no tool returned in the message is `unsourced` and carries no probability, and a claim that says the model holds nothing where a tool call found something is `withheld`."
+                ],
+                [
+                  "INV-A21",
+                  "A checked message's kept line counts its claims and those not carried, and a message whose check did not run carries neither count."
                 ]
               ]
             }
@@ -452,6 +471,22 @@
               [
                 "INV-A11",
                 "A message keeps one line of itself, with its answer or its refusal, and a message refused as malformed, too long or foreign keeps none."
+              ],
+              [
+                "INV-A18",
+                "A message's claims are checked after its last text and before its done event, and a check that cannot run within its budget sends no verdict and changes neither the answer nor what follows it."
+              ],
+              [
+                "INV-A19",
+                "A claim's evidence is the text of the tool answers that carried the entities it names, cut where the model's own was cut, and nothing more."
+              ],
+              [
+                "INV-A20",
+                "A claim that writes the title of an entity no tool returned in the message is `unsourced` and carries no probability, and a claim that says the model holds nothing where a tool call found something is `withheld`."
+              ],
+              [
+                "INV-A21",
+                "A checked message's kept line counts its claims and those not carried, and a message whose check did not run carries neither count."
               ]
             ]
           }
@@ -486,6 +521,12 @@
                   "",
                   "",
                   "Writes the one line kept of the message once it has its answer or its refusal"
+                ],
+                [
+                  "Check the answer",
+                  "Answer checked",
+                  "the deployment checks its answers and the check ran within its budget (INV-A18)",
+                  "Reads each claim back against its evidence after the last text, and sends nothing where the check cannot run"
                 ]
               ]
             }
@@ -516,6 +557,12 @@
                 "",
                 "",
                 "Writes the one line kept of the message once it has its answer or its refusal"
+              ],
+              [
+                "Check the answer",
+                "Answer checked",
+                "the deployment checks its answers and the check ran within its budget (INV-A18)",
+                "Reads each claim back against its evidence after the last text, and sends nothing where the check cannot run"
               ]
             ]
           }
@@ -883,6 +930,154 @@
       "path": "model/bounded-contexts/answering/concept-designs/cite.md"
     },
     {
+      "id": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
+      "address": "bounded-contexts/answering/concept-designs/claim",
+      "type": "concept-design",
+      "name": "Claim",
+      "tagline": "One sentence, list item or table row of an answer, with the entities it names and the verdict on whether the tool answers that carried them say what it says.",
+      "fields": {
+        "id": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
+        "source": "Local",
+        "kind": "value object"
+      },
+      "sections": [
+        {
+          "heading": "Attributes",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "From",
+                  "",
+                  "number",
+                  "",
+                  "Where it starts in the answer's text, counted over the answer as it streamed"
+                ],
+                [
+                  "To",
+                  "",
+                  "number",
+                  "",
+                  "Where it ends"
+                ],
+                [
+                  "Names",
+                  "",
+                  "id",
+                  "yes",
+                  "The entities whose titles it writes, by their ids"
+                ],
+                [
+                  "Verdict",
+                  "",
+                  "string",
+                  "",
+                  "`supported`, `partial`, `contradicted`, `absent`, `says-nothing`, `withheld`, `unnamed` or `unsourced`"
+                ],
+                [
+                  "Probability",
+                  "",
+                  "number",
+                  "",
+                  "The probability the judge gave the verdict, empty where no judge was asked"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "From",
+                "",
+                "number",
+                "",
+                "Where it starts in the answer's text, counted over the answer as it streamed"
+              ],
+              [
+                "To",
+                "",
+                "number",
+                "",
+                "Where it ends"
+              ],
+              [
+                "Names",
+                "",
+                "id",
+                "yes",
+                "The entities whose titles it writes, by their ids"
+              ],
+              [
+                "Verdict",
+                "",
+                "string",
+                "",
+                "`supported`, `partial`, `contradicted`, `absent`, `says-nothing`, `withheld`, `unnamed` or `unsourced`"
+              ],
+              [
+                "Probability",
+                "",
+                "number",
+                "",
+                "The probability the judge gave the verdict, empty where no judge was asked"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Implementation",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Implementation",
+                "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
+      "path": "model/bounded-contexts/answering/concept-designs/claim.md"
+    },
+    {
       "id": "01a10042-6035-7e65-bb4e-5cc2bb44b816",
       "address": "bounded-contexts/answering/concept-designs/fence",
       "type": "concept-design",
@@ -1140,6 +1335,20 @@
                   "string",
                   "",
                   "The refusal's code, empty where the model answered"
+                ],
+                [
+                  "Claims",
+                  "",
+                  "number",
+                  "",
+                  "How many claims the answer made, where it was checked; empty where it was not"
+                ],
+                [
+                  "Not carried",
+                  "",
+                  "number",
+                  "",
+                  "How many of those were judged anything but `supported` or `says-nothing`, where it was checked; empty where it was not"
                 ]
               ]
             }
@@ -1202,6 +1411,20 @@
                 "string",
                 "",
                 "The refusal's code, empty where the model answered"
+              ],
+              [
+                "Claims",
+                "",
+                "number",
+                "",
+                "How many claims the answer made, where it was checked; empty where it was not"
+              ],
+              [
+                "Not carried",
+                "",
+                "number",
+                "",
+                "How many of those were judged anything but `supported` or `says-nothing`, where it was checked; empty where it was not"
               ]
             ]
           }
@@ -1393,6 +1616,11 @@
                   "Kept question",
                   "maybe one",
                   "kept as"
+                ],
+                [
+                  "Claim",
+                  "many",
+                  ""
                 ]
               ]
             }
@@ -1424,6 +1652,11 @@
                 "Kept question",
                 "maybe one",
                 "kept as"
+              ],
+              [
+                "Claim",
+                "many",
+                ""
               ]
             ]
           }
@@ -1791,6 +2024,120 @@
       ],
       "owner": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
       "path": "model/bounded-contexts/answering/concept-designs/turn.md"
+    },
+    {
+      "id": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+      "address": "bounded-contexts/answering/domain-events/answer-checked",
+      "type": "domain-event",
+      "name": "Answer checked",
+      "tagline": "Every claim of an answer was read back against the tool answers that carried the entities it names, before the answer ended.",
+      "fields": {
+        "id": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+        "source": "Local",
+        "emitted-by": "Message"
+      },
+      "sections": [
+        {
+          "heading": "Payload",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Attribute",
+                "Term",
+                "Type",
+                "Many",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Claims",
+                  "Claim",
+                  "",
+                  "yes",
+                  "Each claim with its place, the entities it names, its verdict and its probability"
+                ],
+                [
+                  "Threshold",
+                  "",
+                  "number",
+                  "",
+                  "The probability above which the page marks a claim not carried, empty where none is measured, as for an answer written in German"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Attribute",
+              "Term",
+              "Type",
+              "Many",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Claims",
+                "Claim",
+                "",
+                "yes",
+                "Each claim with its place, the entities it names, its verdict and its probability"
+              ],
+              [
+                "Threshold",
+                "",
+                "number",
+                "",
+                "The probability above which the page marks a claim not carried, empty where none is measured, as for an answer written in German"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The event, `verdict`",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "Implementation",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The event, `verdict`",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "Implementation",
+                "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
+      "path": "model/bounded-contexts/answering/domain-events/answer-checked.md"
     },
     {
       "id": "01a10042-6098-79a7-9dbe-3a86a80ae299",
@@ -5260,6 +5607,9 @@
         "id": "01a10042-593c-7fc9-b96e-fd14be5decb8",
         "source": "Local",
         "classification": "supporting",
+        "realizes": [
+          "Core"
+        ],
         "decisions": [
           "A model is written in one language",
           "Every entity carries an id that outlives its name"
@@ -15472,6 +15822,223 @@
       "path": "model/decisions/2026-stable-entity-id.md"
     },
     {
+      "id": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "address": "decisions/2026-the-answer-is-checked",
+      "type": "decision",
+      "name": "A model that writes no text checks every claim of the chat's answers",
+      "tagline": "We check each claim of every answer the chat gives against the tool answers the chat's model was given, with TypeSafe's Jev, a model that picks one of a fixed set of verdicts with a probability and writes no text; the check changes no answer, and the chat marks a claim only above a threshold measured on real answers before it is set.",
+      "fields": {
+        "id": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+        "source": "Local",
+        "decided": "2026-10-03",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "An agent answers as well as the person who runs the company"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether anything checks that an answer says what the entities it names say. The chat named the entity each claim rests on, and nothing held the claim to it: a claim could name the right entity and state the wrong date, and neither the visitor nor the owner could tell. It had to be decided on October 3, 2026, when the design of the check had been measured against planted faults and left three choices open: whether the check runs at all, since it sends the answer to a party the privacy pages did not name; whether a German answer is checked before German is measured; and whether the chat marks a claim or only counts it.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Ask the chat's own model to judge its answer",
+                  "A text model grading its own kind of output, at the chat's price and latency, whose verdict is prose and can carry a claim of its own."
+                ],
+                [
+                  "No check, with Grounded Answer Rate alone",
+                  "The rate says whether an answer rested on the model and never whether it said what the model says, so a wrong date under a right link passes for the visitor and the owner alike."
+                ],
+                [
+                  "Mark every claim the judge does not carry, from the first answer",
+                  "Before a threshold is measured, a mark is a guess shown to a visitor as a finding."
+                ],
+                [
+                  "A switch with which the visitor turns the check on",
+                  "The kept counts would become a sample of the visitors who chose it."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Ask the chat's own model to judge its answer",
+                "A text model grading its own kind of output, at the chat's price and latency, whose verdict is prose and can carry a claim of its own."
+              ],
+              [
+                "No check, with Grounded Answer Rate alone",
+                "The rate says whether an answer rested on the model and never whether it said what the model says, so a wrong date under a right link passes for the visitor and the owner alike."
+              ],
+              [
+                "Mark every claim the judge does not carry, from the first answer",
+                "Before a threshold is measured, a mark is a guess shown to a visitor as a finding."
+              ],
+              [
+                "A switch with which the visitor turns the check on",
+                "The kept counts would become a sample of the visitors who chose it."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The check is a classification, whether the evidence carries the claim, and Jev answers one with a closed set of verdicts, each with a probability trained to be calibrated. A verdict can then be nothing but one the design names, a threshold can be read off a measured curve rather than chosen, and a judge that writes no prose cannot add a claim to the answer it judges. What reaches it is the chat's own sentences and the model's public text, never the visitor's question or address, which is what let the check run under a processor the privacy pages name.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "TypeSafe processes the chat's answers, under its own key and a spend limit set at TypeSafe, outside the meter, and the privacy pages name it before any deployment turns the check on. Each deployment turns it on in its own configuration. A check that cannot run sends nothing and takes nothing from the answer, which it delays by at most the check's budget. The chat marks a claim only where its verdict is not carried and its probability is above the threshold the measurement gave; a German answer is checked and its verdicts kept, and none is marked until German is measured on its own. The kept line counts each answer's claims and those not carried, and Carried Claim Rate reads them. What we gave up is an answer that reaches the visitor without a second company's model in its path. The call stays right for as long as the verdicts stay calibrated against what is measured, and the judge writes no text.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "data-processor",
+                  "TypeSafe",
+                  "",
+                  "made it one of ours"
+                ],
+                [
+                  "processing-activity",
+                  "Answering in the chat",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "kpi",
+                  "Carried Claim Rate",
+                  "",
+                  "made it measurable"
+                ],
+                [
+                  "surface",
+                  "chat.companygraph.io chat",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "data-processor",
+                "TypeSafe",
+                "",
+                "made it one of ours"
+              ],
+              [
+                "processing-activity",
+                "Answering in the chat",
+                "",
+                "changed it"
+              ],
+              [
+                "kpi",
+                "Carried Claim Rate",
+                "",
+                "made it measurable"
+              ],
+              [
+                "surface",
+                "chat.companygraph.io chat",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The design, the three choices and the measurement",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+                ],
+                [
+                  "The `verdict` event and the kept line",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "The deployment's switch and threshold",
+                  "https://github.com/companygraph/mcp-companygraph-io/blob/main/chat/chat.json"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The design, the three choices and the measurement",
+                "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+              ],
+              [
+                "The `verdict` event and the kept line",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "The deployment's switch and threshold",
+                "https://github.com/companygraph/mcp-companygraph-io/blob/main/chat/chat.json"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-the-answer-is-checked.md"
+    },
+    {
       "id": "01a10839-765a-714f-bd83-6d638e1e3006",
       "address": "decisions/2026-the-chat-runs-where-anthropic-chooses",
       "type": "decision",
@@ -16157,6 +16724,180 @@
       ],
       "owner": null,
       "path": "model/feature-designs/a-browser-draws-the-vocabulary-at-the-commit-a-pin-names.md"
+    },
+    {
+      "id": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "address": "feature-designs/a-claim-the-evidence-does-not-carry-is-marked-where-the-visitor-reads-it",
+      "type": "feature-design",
+      "name": "A claim the evidence does not carry is marked where the visitor reads it",
+      "tagline": "After the last sentence of an answer, the chat reads each claim back against the tool answers that carried the entities it names and sends every verdict before the answer ends, so the page marks what the evidence does not carry and the kept line counts it.",
+      "fields": {
+        "id": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+        "source": "Local",
+        "refines": "A chat answer marks the claims its evidence does not carry",
+        "contexts": [
+          "Answering"
+        ],
+        "decisions": [
+          "A model that writes no text checks every claim of the chat's answers"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Operational principle",
+          "text": "A visitor asks the chat in English what a skill rests on; the answer streams, and after its last sentence the chat reads each claim back against the tool answers that carried the entities it names and sends every claim's verdict and probability before the answer ends; the page underlines the one sentence the evidence carries only in part, a line under the answer says one claim was marked, and the kept line counts the answer's claims and the one not carried.",
+          "tables": []
+        },
+        {
+          "heading": "Scenarios",
+          "text": "### SC-V1: A carried claim is left as it is\n\nGiven an English answer whose sentence names a skill and says what the skill's tool answer says, when the answer is checked, then the claim's verdict is `supported` and nothing in it is marked.\n\n### SC-V2: A claim carried in part is marked\n\nGiven an English answer whose sentence says what its entity's tool answer says and one thing more, when its `partial` verdict comes with a probability above the deployment's threshold, then the page underlines the sentence as carried in part, a note on hover or focus says so, and a line under the answer says one claim was marked.\n\n### SC-V3: A title no tool returned\n\nGiven a sentence that writes the title of an entity of the model that no tool returned in this message, when the answer is checked, then the claim is `unsourced`, carries no probability and is not marked, and the kept line counts it as not carried.\n\n### SC-V4: A claim about the schema keeps its verdict\n\nGiven a sentence that names no entity and says what a tool's answer about a type says, when the answer is checked, then the claim keeps the judge's verdict rather than counting as `unnamed`.\n\n### SC-V5: Nothing is said where a tool answered\n\nGiven an answer that says the model holds nothing on the matter in a message where a tool call returned rows, when the answer is checked, then the claim is `withheld` and counts as not carried.\n\n### SC-V6: A German answer is checked and not marked\n\nGiven an answer written in German, on either language's page, when the answer is checked, then its verdicts are sent with no threshold, nothing in it is marked, and the kept line counts its claims.\n\n### SC-V7: The check cannot run\n\nGiven a judge that does not answer within the check's budget, when the answer ends, then no verdict is sent, the answer ends as it would have, and the kept line carries no count of claims.",
+          "tables": []
+        },
+        {
+          "heading": "Uses",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Context"
+              ],
+              "rows": [
+                [
+                  "concept-design",
+                  "Message",
+                  "Answering"
+                ],
+                [
+                  "concept-design",
+                  "Claim",
+                  "Answering"
+                ],
+                [
+                  "concept-design",
+                  "Kept question",
+                  "Answering"
+                ],
+                [
+                  "domain-event",
+                  "Answer checked",
+                  "Answering"
+                ],
+                [
+                  "domain-event",
+                  "Message answered",
+                  "Answering"
+                ],
+                [
+                  "domain-event",
+                  "Question kept",
+                  "Answering"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Context"
+            ],
+            "rows": [
+              [
+                "concept-design",
+                "Message",
+                "Answering"
+              ],
+              [
+                "concept-design",
+                "Claim",
+                "Answering"
+              ],
+              [
+                "concept-design",
+                "Kept question",
+                "Answering"
+              ],
+              [
+                "domain-event",
+                "Answer checked",
+                "Answering"
+              ],
+              [
+                "domain-event",
+                "Message answered",
+                "Answering"
+              ],
+              [
+                "domain-event",
+                "Question kept",
+                "Answering"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Implementation",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+                ],
+                [
+                  "Implementation",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/loop.mjs"
+                ],
+                [
+                  "Implementation",
+                  "https://github.com/robertblust/design/blob/main/assets/chat.js"
+                ],
+                [
+                  "The design, with what was measured",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Implementation",
+                "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+              ],
+              [
+                "Implementation",
+                "https://github.com/companygraph/chat-server/blob/main/lib/loop.mjs"
+              ],
+              [
+                "Implementation",
+                "https://github.com/robertblust/design/blob/main/assets/chat.js"
+              ],
+              [
+                "The design, with what was measured",
+                "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/feature-designs/a-claim-the-evidence-does-not-carry-is-marked-where-the-visitor-reads-it.md"
     },
     {
       "id": "01a10042-62e7-79af-ae15-8113836ac9b6",
@@ -17480,6 +18221,81 @@
       "path": "model/feature-designs/one-menu-makes-an-instance-and-moves-it-to-a-release.md"
     },
     {
+      "id": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "address": "features/a-chat-answer-marks-the-claims-its-evidence-does-not-carry",
+      "type": "feature",
+      "name": "A chat answer marks the claims its evidence does not carry",
+      "tagline": "Someone reading an answer from a company's model sees which of its sentences the entities it names do not bear out, before deciding which of them to trust.",
+      "fields": {
+        "id": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Entity",
+          "Reference"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Each claim of an answer, a sentence, a list item or a table row, is read back against the text of the tool answers that carried the entities it names, exactly as the model was given it, by a decision model outside the machine that picks a verdict with a probability and writes nothing. Where a deployment checks its answers, the chat marks a claim the evidence carries only in part, or not at all, once the answer is drawn, with a note saying which, and a line under the answer says how many it marked. It marks only above a probability measured on real answers, marks nothing in an answer written in German until German is measured on its own, and marks nothing where the check could not run. It stops at the mark: it changes no answer, it says whether a claim keeps to what the model says and never whether the model is right, and every checked answer is counted in the week's report whether it was marked or not.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The design of the check, and what was measured before it marked anything",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+                ],
+                [
+                  "The event the chat sends with each claim's verdict",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "The code that marks a claim where the visitor reads it",
+                  "https://github.com/robertblust/design/blob/main/assets/chat.js"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The design of the check, and what was measured before it marked anything",
+                "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+              ],
+              [
+                "The event the chat sends with each claim's verdict",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "The code that marks a claim where the visitor reads it",
+                "https://github.com/robertblust/design/blob/main/assets/chat.js"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-chat-answer-marks-the-claims-its-evidence-does-not-carry.md"
+    },
+    {
       "id": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
       "address": "features/a-decision-model-asks-each-page-its-schema-s-writing-rules",
       "type": "feature",
@@ -17975,6 +18791,89 @@
       "path": "model/identity.md"
     },
     {
+      "id": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "address": "kpis/carried-claim-rate",
+      "type": "kpi",
+      "name": "Carried Claim Rate",
+      "tagline": "The share of a week's claims, in the answers a chat checked, that the evidence the answer was written from carries.",
+      "fields": {
+        "id": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+        "source": "Local",
+        "owner": "Owner",
+        "measures": "Answering",
+        "serves": [
+          "An agent answers as well as the person who runs the company"
+        ],
+        "unit": "percent of checked claims per week",
+        "direction": "higher",
+        "read-with": [
+          "Grounded Answer Rate"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is measured",
+          "text": "The chats this KPI counts are the surfaces of this model that answer a visitor's question from it and check their answers. A claim is a sentence, a list item or a table row of an answer. Where a deployment checks, each claim is judged against the text of the tool answers that carried the entities it names, exactly as the model was given it, and the kept line of the message counts its `claims` and its `unsupported`: those judged `partial`, `contradicted`, `absent`, `withheld`, `unnamed` or `unsourced`. A message whose check could not run, or that was refused, carries neither count and is left out.\n\nEach chat's weekly report sums both counts over the answers it checked in the ISO week that ended, Monday midnight UTC to the next, under its Claims section; the value, read per chat, is the week's claims less those not carried, divided by its claims. Every verdict counts whatever its probability, so the value does not move with the threshold above which the chat marks a claim, and a German answer counts though the chat marks none.",
+          "tables": []
+        },
+        {
+          "heading": "What it can hide",
+          "text": "A claim is judged against what the tools returned, so a claim that repeats a page which is itself wrong counts as carried: the rate says the answers kept to the model, not that the model is true. It rises when answers say less, since an answer with fewer claims has fewer to miss, and a chat that stops using the tools makes no claims the check can count; Grounded Answer Rate, read beside it, shows answers that no longer rest on the model. A claim judged `partial` counts as not carried however much of it was. And the judge is another company's model at a release of its own, so a new release can move the rate with no answer changed; a week that moves without a change to the chat or the model is read against the judge's release first.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The kept line's `claims` and `unsupported`",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "The design of the check and what was measured before it was trusted",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+                ],
+                [
+                  "The chat.companygraph.io chat's weekly report, which sums the counts",
+                  "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/report.yml"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The kept line's `claims` and `unsupported`",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "The design of the check and what was measured before it was trusted",
+                "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+              ],
+              [
+                "The chat.companygraph.io chat's weekly report, which sums the counts",
+                "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/report.yml"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/kpis/carried-claim-rate.md"
+    },
+    {
       "id": "01a0d9f1-d620-7991-b31d-260a8ce1d057",
       "address": "kpis/change-fail-rate",
       "type": "kpi",
@@ -18309,7 +19208,10 @@
           "An agent answers as well as the person who runs the company"
         ],
         "unit": "percent of questions per week",
-        "direction": "higher"
+        "direction": "higher",
+        "read-with": [
+          "Carried Claim Rate"
+        ]
       },
       "sections": [
         {
@@ -18319,7 +19221,7 @@
         },
         {
           "heading": "What it can hide",
-          "text": "An answer that cites the right entity and says something wrong about it counts as answered: the rate measures whether the answer rested on the model, not whether it was true, and nothing kept can tell the two apart, because the answer is not kept. It rises when the model reads the identity entity for every question, since one cite is enough, so a week where every answer cites the same entity reads as well as one where each cites the entity the question was about; the report's table of most cited entities shows the difference. It falls when the fence refuses, for a spent share or a host that is down, which is the fence working and not the answer failing; the report's table of unanswered questions separates a refusal from an answer without material. A question that was not about the model, which the Answerer meets with one sentence and no tool, counts as not answered though it got the right reply.",
+          "text": "An answer that cites the right entity and says something wrong about it counts as answered: the rate measures whether the answer rested on the model, not whether what it said was carried by what it rested on. The answer is not kept, but where a chat checks its answers the kept line counts the claims each made and those their evidence does not carry, and Carried Claim Rate, read beside it, shows the difference. It rises when the model reads the identity entity for every question, since one cite is enough, so a week where every answer cites the same entity reads as well as one where each cites the entity the question was about; the report's table of most cited entities shows the difference. It falls when the fence refuses, for a spent share or a host that is down, which is the fence working and not the answer failing; the report's table of unanswered questions separates a refusal from an answer without material. A question that was not about the model, which the Answerer meets with one sentence and no tool, counts as not answered though it got the right reply.",
           "tables": []
         },
         {
@@ -18612,7 +19514,7 @@
         },
         {
           "heading": "Activities",
-          "text": "1. The Visitor asks, in their own words and language.\n2. The Answerer asks the host's tools, up to four rounds: a kind of thing by its type, a named thing by search and then the entity itself.\n3. The Answerer writes the answer from what the tools said, naming the entity each claim rests on, and where they said nothing, that the model does not say.\n4. The page links each entity the answer was read from, to the model page and to the file at the commit.\n5. Nobody reads the answer before the Visitor does. The Owner's gate was passed once, before any question: the rules the seat runs under, the commit the host pins, the fence, and the switch that stops the chat without a deploy.",
+          "text": "1. The Visitor asks, in their own words and language.\n2. The Answerer asks the host's tools, up to four rounds: a kind of thing by its type, a named thing by search and then the entity itself.\n3. The Answerer writes the answer from what the tools said, naming the entity each claim rests on, and where they said nothing, that the model does not say.\n4. The page links each entity the answer was read from, to the model page and to the file at the commit.\n5. Where the deployment checks its answers, each claim is read back against the tool answers that carried the entities it names, and the page marks one the evidence does not carry.\n6. Nobody reads the answer before the Visitor does. The Owner's gate was passed once, before any question: the rules the seat runs under, the commit the host pins, the fence, and the switch that stops the chat without a deploy.",
           "tables": []
         },
         {
@@ -22213,7 +23115,7 @@
       "address": "questions/can-i-trust-what-this-chat-says",
       "type": "question",
       "name": "Can I trust what this chat says?",
-      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it. Grounded Answer Rate says what is watched: whether an answer rested on the model, which shows grounding and not whether the answer was true.",
+      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it. Grounded Answer Rate says whether an answer rested on the model; where the chat checks its answers, the feature marks a claim the evidence does not carry and Carried Claim Rate counts how often, and both say whether an answer kept to the model, never whether the model is right.",
       "fields": {
         "id": "01a0d451-1230-7157-b7cd-18d2c475b767",
         "source": "Local",
@@ -22250,6 +23152,18 @@
                   "Grounded Answer Rate",
                   "",
                   "what is watched, grounding and not truth"
+                ],
+                [
+                  "feature",
+                  "A chat answer marks the claims its evidence does not carry",
+                  "",
+                  "what is marked in an answer, and where it stops"
+                ],
+                [
+                  "kpi",
+                  "Carried Claim Rate",
+                  "",
+                  "how often a claim is not carried"
                 ]
               ]
             }
@@ -22280,6 +23194,18 @@
                 "Grounded Answer Rate",
                 "",
                 "what is watched, grounding and not truth"
+              ],
+              [
+                "feature",
+                "A chat answer marks the claims its evidence does not carry",
+                "",
+                "what is marked in an answer, and where it stops"
+              ],
+              [
+                "kpi",
+                "Carried Claim Rate",
+                "",
+                "how often a claim is not carried"
               ]
             ]
           }
@@ -23009,7 +23935,7 @@
       "address": "questions/how-do-you-know-companygraph-is-working",
       "type": "question",
       "name": "How do you know CompanyGraph is working?",
-      "tagline": "Grounded Answer Rate watches whether the chat's answers rest on the model, as the objective of an agent answering as well as the person who runs the company asks, and the DORA KPIs define what is watched in how our changes reach production. The model holds their definitions and none of their values: the chat's report computes Grounded Answer Rate's, nothing measures the DORA KPIs yet, and our other objectives have no KPI yet.",
+      "tagline": "Grounded Answer Rate watches whether the chat's answers rest on the model and Carried Claim Rate whether they keep to it, as the objective of an agent answering as well as the person who runs the company asks; Merges Past Their Checks watches whether our merges keep to the gates a person holds; and the DORA KPIs define what is watched in how our changes reach production. The model holds their definitions and none of their values: the chat's report computes Grounded Answer Rate's and counts what Carried Claim Rate reads, the weekly kpi workflow counts Merges Past Their Checks, nothing measures the DORA KPIs yet, and our other objectives have no KPI yet.",
       "fields": {
         "id": "01a0dcc8-bc10-7a22-8d45-783ab8087d42",
         "source": "Local",
@@ -23040,6 +23966,24 @@
                   "Grounded Answer Rate",
                   "",
                   "whether answers rest on the model, and where its value is"
+                ],
+                [
+                  "kpi",
+                  "Carried Claim Rate",
+                  "",
+                  "whether answers keep to what they rest on, and where its counts are"
+                ],
+                [
+                  "strategic-objective",
+                  "Every gate an agent's work passes is held by a person",
+                  "",
+                  "the objective our merges are held to"
+                ],
+                [
+                  "kpi",
+                  "Merges Past Their Checks",
+                  "",
+                  "whether a merge passed its checks, and where its value is"
                 ],
                 [
                   "kpi",
@@ -23094,6 +24038,24 @@
                 "Grounded Answer Rate",
                 "",
                 "whether answers rest on the model, and where its value is"
+              ],
+              [
+                "kpi",
+                "Carried Claim Rate",
+                "",
+                "whether answers keep to what they rest on, and where its counts are"
+              ],
+              [
+                "strategic-objective",
+                "Every gate an agent's work passes is held by a person",
+                "",
+                "the objective our merges are held to"
+              ],
+              [
+                "kpi",
+                "Merges Past Their Checks",
+                "",
+                "whether a merge passed its checks, and where its value is"
               ],
               [
                 "kpi",
@@ -26615,7 +27577,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Endpoint** — `/chat` on this address, which a page of companygraph.io posts a visitor's conversation to and which answers it as a stream of events.\n- **Answer** — the text a language model writes from what the MCP server's tools returned for the visitor's question, in the language of the visitor's message, naming the entity each claim rests on.\n- **From the model** — a link to each entity a tool returned on its own, opening it on the model page of companygraph.io.\n- **Refusals** — the sentences a visitor reads instead of an answer when the day's or the month's share is spent, when one address has sent too many messages in an hour, when the host does not answer or when the chat is switched off.\n- **Page** — what a browser gets at the chat's own address: the host's name, the vision's and the identity's taglines, the paths and the events the endpoint answers, the fence that bounds what it spends, and the commit of the model it answers from.",
+          "text": "- **Endpoint** — `/chat` on this address, which a page of companygraph.io posts a visitor's conversation to and which answers it as a stream of events.\n- **Answer** — the text a language model writes from what the MCP server's tools returned for the visitor's question, in the language of the visitor's message, naming the entity each claim rests on.\n- **Not fully backed** — a dotted underline under each statement of an answer that the tool answers it rests on back only in part or not at all, where the probability of that verdict is above the deployment's threshold, with a note saying which, and a line under the answer counting the statements marked.\n- **From the model** — a link to each entity a tool returned on its own, opening it on the model page of companygraph.io.\n- **Refusals** — the sentences a visitor reads instead of an answer when the day's or the month's share is spent, when one address has sent too many messages in an hour, when the host does not answer or when the chat is switched off.\n- **Page** — what a browser gets at the chat's own address: the host's name, the vision's and the identity's taglines, the paths and the events the endpoint answers, the fence that bounds what it spends, and the commit of the model it answers from.",
           "tables": []
         }
       ],
@@ -28741,6 +29703,26 @@
     },
     {
       "from": "01a0d451-1230-7157-b7cd-18d2c475b767",
+      "to": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how often a claim is not carried"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7157-b7cd-18d2c475b767",
+      "to": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what is marked in an answer, and where it stops"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7157-b7cd-18d2c475b767",
       "to": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
       "via": "kind",
       "attrs": {}
@@ -29441,6 +30423,12 @@
     },
     {
       "from": "01a0d90e-7ee8-7194-84e3-e8932ab09b5a",
+      "to": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "01a0d90e-7ee8-7194-84e3-e8932ab09b5a",
       "to": "01a0c1e8-beb8-7071-ac19-e32ae7286ed6",
       "via": "serves",
       "attrs": {}
@@ -29651,6 +30639,36 @@
         "Type": "kpi",
         "Owner": "",
         "For": "how long a change takes to ship"
+      }
+    },
+    {
+      "from": "01a0dcc8-bc10-7a22-8d45-783ab8087d42",
+      "to": "01a0eb72-3a98-704b-b3be-d391303d97c6",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "the objective our merges are held to"
+      }
+    },
+    {
+      "from": "01a0dcc8-bc10-7a22-8d45-783ab8087d42",
+      "to": "01a1008f-79fe-7b6e-a781-fe4de5024498",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "whether a merge passed its checks, and where its value is"
+      }
+    },
+    {
+      "from": "01a0dcc8-bc10-7a22-8d45-783ab8087d42",
+      "to": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "whether answers keep to what they rest on, and where its counts are"
       }
     },
     {
@@ -32335,6 +33353,12 @@
     },
     {
       "from": "01a10042-593c-7fc9-b96e-fd14be5decb8",
+      "to": "01a0c29a-9610-7d3a-a3de-244a58f09307",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a10042-593c-7fc9-b96e-fd14be5decb8",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -33036,6 +34060,12 @@
     },
     {
       "from": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
+      "to": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "via": "decisions",
+      "attrs": {}
+    },
+    {
+      "from": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
       "to": "01a0c29a-9610-7d3a-a3de-244a58f09307",
       "via": "realizes",
       "attrs": {}
@@ -33060,7 +34090,23 @@
     },
     {
       "from": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
+      "to": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+      "via": "Handled commands.Emits",
+      "attrs": {
+        "Command": "Check the answer",
+        "When": "the deployment checks its answers and the check ran within its budget (INV-A18)",
+        "Description": "Reads each claim back against its evidence after the last text, and sends nothing where the check cannot run"
+      }
+    },
+    {
+      "from": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
       "to": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "via": "decisions",
+      "attrs": {}
+    },
+    {
+      "from": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
+      "to": "01a10a7e-285a-7b7c-8224-943f38e5655e",
       "via": "decisions",
       "attrs": {}
     },
@@ -33079,6 +34125,12 @@
     {
       "from": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
       "to": "01a10042-6035-7e65-bb4e-5cc2bb44b816",
+      "via": "members",
+      "attrs": {}
+    },
+    {
+      "from": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
+      "to": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
       "via": "members",
       "attrs": {}
     },
@@ -33163,6 +34215,15 @@
       "attrs": {
         "Cardinality": "one",
         "As": "bounded by"
+      }
+    },
+    {
+      "from": "01a10042-6002-735b-aa63-ad043979bbef",
+      "to": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
       }
     },
     {
@@ -34539,6 +35600,237 @@
       "from": "01a10839-765a-714f-bd83-6d638e1e3006",
       "to": "01a0c1d6-f408-750f-a4c2-51a5ffe23686",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "measures",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "to": "01a0d90e-7ee8-7194-84e3-e8932ab09b5a",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "to": "01a0c1e8-beb8-7071-ac19-e32ae7286ed6",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a107de-42df-7ec1-ab8f-49d478a1abc2",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "How": "made it one of ours"
+      }
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a107ec-5eb5-78b1-9fbf-4190fc846e44",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "processing-activity",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "How": "made it measurable"
+      }
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a0dd52-bc30-709c-9bbf-490d8a8458d6",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a0c1e8-beb8-7071-ac19-e32ae7286ed6",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "to": "01a0c2a7-ffa8-7030-9fbb-2baaa6c3715f",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "to": "01a0c2a7-ffa8-7a7a-a98a-0c5aed378ea7",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+      "to": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
+      "via": "Payload.Term",
+      "attrs": {
+        "Attribute": "Claims",
+        "Type": "",
+        "Many": "yes",
+        "Description": "Each claim with its place, the entities it names, its verdict and its probability"
+      }
+    },
+    {
+      "from": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+      "to": "01a10042-5f07-7abf-b76a-72c457dc2cfc",
+      "via": "emitted-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10042-5f3a-71bc-af0e-2f644bc7246a",
+      "via": "Uses.Entity",
+      "attrs": {
+        "Type": "concept-design",
+        "Context": "Answering"
+      }
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10042-6002-735b-aa63-ad043979bbef",
+      "via": "Uses.Entity",
+      "attrs": {
+        "Type": "concept-design",
+        "Context": "Answering"
+      }
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10042-6068-70bc-97d6-8e5fa3e936bd",
+      "via": "Uses.Entity",
+      "attrs": {
+        "Type": "domain-event",
+        "Context": "Answering"
+      }
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10042-60ca-7c2f-bef6-40b7c2de0380",
+      "via": "Uses.Entity",
+      "attrs": {
+        "Type": "domain-event",
+        "Context": "Answering"
+      }
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10a8f-21c3-7313-8edb-6518d09a0e5f",
+      "via": "Uses.Entity",
+      "attrs": {
+        "Type": "concept-design",
+        "Context": "Answering"
+      }
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10a8f-21f0-790c-abf7-f1eede82992a",
+      "via": "Uses.Entity",
+      "attrs": {
+        "Type": "domain-event",
+        "Context": "Answering"
+      }
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10042-5ea4-7ef8-af18-8e8675267d6e",
+      "via": "contexts",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10a7e-285a-7b7c-8224-943f38e5655e",
+      "via": "decisions",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "via": "refines",
+      "attrs": {}
+    },
+    {
+      "from": "01a10a8f-54f9-72ca-bd55-1774d0d676e9",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
       "attrs": {}
     }
   ],
