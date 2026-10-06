@@ -1,5 +1,5 @@
 {
-  "commit": "92fec976c03efc4d936e046fdbaae472a2357d83",
+  "commit": "67605e1a16f5e23631a24b0f284a7952f589b6d4",
   "core": "0.61.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -16865,6 +16865,10 @@
                 [
                   "The design, with what was measured",
                   "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+                ],
+                [
+                  "The design of one message answered, the check among its steps",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/design/answering.md"
                 ]
               ]
             }
@@ -16891,6 +16895,10 @@
               [
                 "The design, with what was measured",
                 "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-26-the-answer-is-checked-design.md"
+              ],
+              [
+                "The design of one message answered, the check among its steps",
+                "https://github.com/companygraph/chat-server/blob/main/docs/design/answering.md"
               ]
             ]
           }
@@ -17810,6 +17818,14 @@
                 [
                   "The interface",
                   "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "The design of one message answered",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/design/answering.md"
+                ],
+                [
+                  "The design of the prompt",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/design/prompt.md"
                 ]
               ]
             }
@@ -17828,6 +17844,14 @@
               [
                 "The interface",
                 "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "The design of one message answered",
+                "https://github.com/companygraph/chat-server/blob/main/docs/design/answering.md"
+              ],
+              [
+                "The design of the prompt",
+                "https://github.com/companygraph/chat-server/blob/main/docs/design/prompt.md"
               ]
             ]
           }
