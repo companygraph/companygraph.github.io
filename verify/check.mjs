@@ -128,7 +128,7 @@ const PAGES = [
   { path: "/processes/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Processes/, lang: "en", sourceLang: "en",
     contains: ["An agent does the work,", "every", "gate", "How to read it", "Generated from"],
     translates: { lang: "de",
-      shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE PROCESSES", "A seat is a place at the work"] },
+      shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE PROCESSES", "A seat is not a person"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
