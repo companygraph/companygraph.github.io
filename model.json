@@ -1,11 +1,16 @@
 {
-  "commit": "cb122d4d0351b362bacc206cb91ad8cd45a630ba",
+  "commit": "4a3ecfbb9552b18b5a0d858eded0a26dfb713b6d",
   "root": "Meta-model",
   "rootId": null,
   "types": [
     {
       "type": "core",
       "folder": "core",
+      "owner": null
+    },
+    {
+      "type": "organization",
+      "folder": "organization",
       "owner": null
     },
     {
@@ -735,7 +740,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A concept is one word the company means something exact by, and it answers \"what do we mean when we say this, and what does it hang off?\" for anyone reading a feature, a process or a role that names it. It is an entity rather than a heading in a glossary so that a file can cite it, a rename is caught everywhere at once, and the relations between the company's words are rows a check resolves instead of lines in a drawing. A relation is written on one side only, so no two concepts each name the other in `## Relations`.",
+          "text": "A concept is one word the company means something exact by, and it answers \"what do we mean when we say this, and what does it hang off?\" for anyone reading a feature, a process or a seat that names it. It is an entity rather than a heading in a glossary so that a file can cite it, a rename is caught everywhere at once, and the relations between the company's words are rows a check resolves instead of lines in a drawing. A relation is written on one side only, so no two concepts each name the other in `## Relations`.",
           "tables": []
         },
         {
@@ -818,8 +823,8 @@
                 [
                   "`performed-by`",
                   "No",
-                  "ref → role",
-                  "The seat that carries it out, for a manual control, the H1 of a file in `roles/`"
+                  "ref → seat",
+                  "The seat that carries it out, for a manual control, the H1 of a file in `seats/`"
                 ]
               ]
             }
@@ -878,8 +883,8 @@
               [
                 "`performed-by`",
                 "No",
-                "ref → role",
-                "The seat that carries it out, for a manual control, the H1 of a file in `roles/`"
+                "ref → seat",
+                "The seat that carries it out, for a manual control, the H1 of a file in `seats/`"
               ]
             ]
           }
@@ -936,7 +941,7 @@
                   "`Type`",
                   "Yes",
                   "string",
-                  "The type of the entity this row names, as its schema is named: `role`, `process` or `phase`"
+                  "The type of the entity this row names, as its schema is named: `seat`, `process` or `phase`"
                 ],
                 [
                   "`Entity`",
@@ -1019,7 +1024,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 names a control that mitigates at least one risk or enforces at least one rule, and `mitigates` or `enforces` names that risk or rule. The grammar declares each field on its own, so this rule is the agent pass's to hold.\n- `## How it is carried out` says what does the work and when, as a reader could check: \"the seat check, run by the commit hook and again by the instance check on every pull request, refuses a commit whose seat the named phase does not list\". The hook, the workflow or the command it names goes in `## References`.\n- `## Applies to`, on a control that is a phase's gate, names that phase, and the gate's criteria stay the phase's bullets.\n- `mode` decides `performed-by`: a manual control names a seat there, never a person, and an automated control names none.\n- An `## Applies to` row names a role, a process or a phase; the grammar reads any type in the Type column, so this is the agent pass's to hold.\n- The page writes names and prose in American English (R14).",
+          "text": "- The H1 names a control that mitigates at least one risk or enforces at least one rule, and `mitigates` or `enforces` names that risk or rule. The grammar declares each field on its own, so this rule is the agent pass's to hold.\n- `## How it is carried out` says what does the work and when, as a reader could check: \"the seat check, run by the commit hook and again by the instance check on every pull request, refuses a commit whose seat the named phase does not list\". The hook, the workflow or the command it names goes in `## References`.\n- `## Applies to`, on a control that is a phase's gate, names that phase, and the gate's criteria stay the phase's bullets.\n- `mode` decides `performed-by`: a manual control names a seat there, never a person, and an automated control names none.\n- An `## Applies to` row names a seat, a process or a phase; the grammar reads any type in the Type column, so this is the agent pass's to hold.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -1364,8 +1369,8 @@
                 [
                   "`by`",
                   "Yes",
-                  "ref → role",
-                  "The seat that made the call, the H1 of a file in `roles/`. Never the person: who held the seat on that date is the profile's."
+                  "ref → seat",
+                  "The seat that made the call, the H1 of a file in `seats/`. Never the person: who held the seat on that date is the profile's."
                 ],
                 [
                   "`serves`",
@@ -1436,8 +1441,8 @@
               [
                 "`by`",
                 "Yes",
-                "ref → role",
-                "The seat that made the call, the H1 of a file in `roles/`. Never the person: who held the seat on that date is the profile's."
+                "ref → seat",
+                "The seat that made the call, the H1 of a file in `seats/`. Never the person: who held the seat on that date is the profile's."
               ],
               [
                 "`serves`",
@@ -1654,7 +1659,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 states what was decided, never the topic: \"Core is vendored at a named release\", not\n  \"Core distribution\". A reader who sees only the name knows the call.\n- The statement is a call a reasonable company could have made differently. If no company\n  would have chosen otherwise, it describes the work rather than deciding anything.\n- `## The question` names what had to be decided and what made it have to be decided then, a\n  deadline, an offer, a finding, and states no reason for the answer; the reasons are `## Why`.\n- `## Alternatives` carries at least one row, and never the option taken. `Why not` names what\n  the option would have cost, in the terms the call turned on, not that it was worse.\n- `## Why` gives the reason the chosen option won, concretely enough that a reader could tell\n  whether it would still win today. A reason that would equally support any of the\n  alternatives supports none.\n- `## Consequences` names what the company is now committed to and what it gave up, and states\n  what has to stay true for the call to stay right, because that is what a reader watches for.\n- `decided` is the date the call was made, at the precision the source states, never the date\n  it was carried out. A call still proposed carries the date it was put forward, and takes the\n  date of the call when its status leaves the proposed state, the file renamed where the year\n  moved.\n- `by` names the seat, never the person, as a role is person-neutral. In a company of one that\n  is one seat; in a company of more it is the seat that answered for the call, and a call that\n  several seats made names the one that would have had the last word.\n- `upholds` names a value only where it actually turned the call. A value that would be cited\n  by any call the company makes tells a reader nothing.\n- `serves` names an objective only where the call was made for it; a call that serves no\n  written objective is still a decision, and gains no invented one.\n- `serves` names the objective the decision serves, never the strategy it follows: which route a\n  call sits on is read from the strategy that serves the same objective, and a strategy the call\n  produced or changed is a `## Bears on` row.\n- Every row of `## Bears on` names an entity the call made, changed or ended. An entity the\n  call merely mentions is not borne on.\n- `## Consequences` closes with one dated sentence saying so where a call is dropped and nothing\n  replaced it.\n- The page is written in the company's own first person, \"I\" for a company of one, \"we\"\n  otherwise, and the same one throughout the instance.\n- The page writes names and prose in American English (R14).",
+          "text": "- The H1 states what was decided, never the topic: \"Core is vendored at a named release\", not\n  \"Core distribution\". A reader who sees only the name knows the call.\n- The statement is a call a reasonable company could have made differently. If no company\n  would have chosen otherwise, it describes the work rather than deciding anything.\n- `## The question` names what had to be decided and what made it have to be decided then, a\n  deadline, an offer, a finding, and states no reason for the answer; the reasons are `## Why`.\n- `## Alternatives` carries at least one row, and never the option taken. `Why not` names what\n  the option would have cost, in the terms the call turned on, not that it was worse.\n- `## Why` gives the reason the chosen option won, concretely enough that a reader could tell\n  whether it would still win today. A reason that would equally support any of the\n  alternatives supports none.\n- `## Consequences` names what the company is now committed to and what it gave up, and states\n  what has to stay true for the call to stay right, because that is what a reader watches for.\n- `decided` is the date the call was made, at the precision the source states, never the date\n  it was carried out. A call still proposed carries the date it was put forward, and takes the\n  date of the call when its status leaves the proposed state, the file renamed where the year\n  moved.\n- `by` names the seat, never the person, as a seat is person-neutral. In a company of one that\n  is one seat; in a company of more it is the seat that answered for the call, and a call that\n  several seats made names the one that would have had the last word.\n- `upholds` names a value only where it actually turned the call. A value that would be cited\n  by any call the company makes tells a reader nothing.\n- `serves` names an objective only where the call was made for it; a call that serves no\n  written objective is still a decision, and gains no invented one.\n- `serves` names the objective the decision serves, never the strategy it follows: which route a\n  call sits on is read from the strategy that serves the same objective, and a strategy the call\n  produced or changed is a `## Bears on` row.\n- Every row of `## Bears on` names an entity the call made, changed or ended. An entity the\n  call merely mentions is not borne on.\n- `## Consequences` closes with one dated sentence saying so where a call is dropped and nothing\n  replaced it.\n- The page is written in the company's own first person, \"I\" for a company of one, \"we\"\n  otherwise, and the same one throughout the instance.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -2262,10 +2267,10 @@
                   "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
                 ],
                 [
-                  "`role`",
+                  "`capacity`",
                   "No",
                   "string",
-                  "The part the subject played, where the H1 does not already name it"
+                  "The capacity the subject served in, where the H1 does not already name it: a job title or a part such as speaker or author"
                 ],
                 [
                   "`url`",
@@ -2334,10 +2339,10 @@
                 "Where the period was spent. What it names depends on the `kind` — an employer, a client, a host, an awarding body — and each kind says which. It draws an edge when it names the company this instance describes, and stays a fact when it names anyone else."
               ],
               [
-                "`role`",
+                "`capacity`",
                 "No",
                 "string",
-                "The part the subject played, where the H1 does not already name it"
+                "The capacity the subject served in, where the H1 does not already name it: a job title or a part such as speaker or author"
               ],
               [
                 "`url`",
@@ -2477,7 +2482,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 names the part the subject played, or `role` carries it: the field is filled where the\n  H1 does not already name the part, and left absent where it does. An entry named for what it\n  delivered, or for the event it happened at, does not say who the subject was on it. An entry\n  named for a position does, and repeating it in the field would be the same fact twice. Which\n  of those an instance writes is the instance's own convention and no rule here fixes it; the\n  field is what carries the part when the H1 does not.\n- `role` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- `## Achievements`, where an instance defines achievement kinds, groups them: each bullet sits\n  under the heading of the one kind it is chiefly evidence of, headings follow the kinds'\n  `rank`, and a kind with nothing in the entry has no heading. An instance that defines none\n  writes a flat list.\n- `## Achievements` puts the broadest claim first within a kind; peers follow the order they\n  happened in, and a bullet that points back comes directly after what it points to — or names\n  it, where the grouping would part them.\n- `## Achievements` holds no list of tools or stack, since that is not an achievement: what was\n  built with a tool says so in the bullet that built it.\n- The tagline of a period still running says so, and the period has no `end` — a reader sees a\n  tagline and does not see an absent field.\n- The H1 of a one-off — a talk, a certification, an award or a publication — comes with `end`\n  set equal to `start`, since a one-off is not a period. Left absent it would read as still\n  running, and no other field says otherwise. The two being equal is what makes it a one-off,\n  and the interval that shared value denotes is how precisely it is placed: `2012-05-04 ..\n  2012-05-04` is a day, `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its\n  year. A period that genuinely ran a whole year is not written `2002 .. 2002` — it takes the\n  months it ran, `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- The H1 of a one-off comes with `organization` naming whoever hosted, awarded or published it,\n  where that is someone other than the person; a one-off the person put out themselves, on\n  their own site or channel, has none.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
+          "text": "- The H1 names the part the subject played, or `capacity` carries it: the field is filled where the\n  H1 does not already name the part, and left absent where it does. An entry named for what it\n  delivered, or for the event it happened at, does not say who the subject was on it. An entry\n  named for a position does, and repeating it in the field would be the same fact twice. Which\n  of those an instance writes is the instance's own convention and no rule here fixes it; the\n  field is what carries the part when the H1 does not.\n- `capacity` is the part, not the employer and not the client. Who the work was done for is\n  `organization`. Who it was done through is not a field at all: it is the period that contains\n  this one, and an instance that wants it stated reads it from there.\n- Every entry in `skills:` is one the body shows. A skill listed and not evidenced belongs in\n  the profile's table or nowhere; here it is a claim with nothing under it.\n- An `## Achievements` bullet states an outcome, one idea each. \"Responsible for the platform\"\n  is a job description; \"held platform cost flat as volume grew to 89M events a year\" is an\n  achievement. Where a number, a system or a named result exists, it goes in the bullet.\n- `## Achievements`, where an instance defines achievement kinds, groups them: each bullet sits\n  under the heading of the one kind it is chiefly evidence of, headings follow the kinds'\n  `rank`, and a kind with nothing in the entry has no heading. An instance that defines none\n  writes a flat list.\n- `## Achievements` puts the broadest claim first within a kind; peers follow the order they\n  happened in, and a bullet that points back comes directly after what it points to — or names\n  it, where the grouping would part them.\n- `## Achievements` holds no list of tools or stack, since that is not an achievement: what was\n  built with a tool says so in the bullet that built it.\n- The tagline of a period still running says so, and the period has no `end` — a reader sees a\n  tagline and does not see an absent field.\n- The H1 of a one-off — a talk, a certification, an award or a publication — comes with `end`\n  set equal to `start`, since a one-off is not a period. Left absent it would read as still\n  running, and no other field says otherwise. The two being equal is what makes it a one-off,\n  and the interval that shared value denotes is how precisely it is placed: `2012-05-04 ..\n  2012-05-04` is a day, `2016-10 .. 2016-10` a month, `2002 .. 2002` an event known only to its\n  year. A period that genuinely ran a whole year is not written `2002 .. 2002` — it takes the\n  months it ran, `2002-01 .. 2002-12`, which is also the only way to tell the two apart.\n- `url` is the entry's own address and nothing else — the conference's page, the recording,\n  the published case study. A link that lets a reader check a claim the entry makes is not the\n  entry's address; it is a reference, and it goes in the table.\n- `What` names the kind of document, not its significance. \"Commercial register entry\" is a\n  fact about the link; \"proof that the company existed\" is a reading of it.\n- The H1 of a one-off comes with `organization` naming whoever hosted, awarded or published it,\n  where that is someone other than the person; a one-off the person put out themselves, on\n  their own site or channel, has none.\n- `## Ending` is written in the person's own voice and looks forward: what the period had\n  settled, and what it made the next thing. It is neither an achievement nor a grievance.",
           "tables": []
         },
         {
@@ -3346,8 +3351,8 @@
                 [
                   "`owner`",
                   "Yes",
-                  "ref → role",
-                  "The seat accountable for improving it, the H1 of a file in `roles/`"
+                  "ref → seat",
+                  "The seat accountable for improving it, the H1 of a file in `seats/`"
                 ],
                 [
                   "`measures`",
@@ -3424,8 +3429,8 @@
               [
                 "`owner`",
                 "Yes",
-                "ref → role",
-                "The seat accountable for improving it, the H1 of a file in `roles/`"
+                "ref → seat",
+                "The seat accountable for improving it, the H1 of a file in `seats/`"
               ],
               [
                 "`measures`",
@@ -3578,7 +3583,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The page holds no target, threshold, baseline or measured value, ever. Each moves, and a\n  number that moves goes stale in the model without a sound; a References row says where they\n  are kept.\n- The H1 names the quantity, not the dashboard or tool that shows it: `Change Lead Time`, not\n  `the lead-time chart`.\n- The page is person-neutral, as a role is: the definition names seats and never who holds them.\n- `## How it is measured` says what counts as the event in this company's terms — what a\n  deployment is here, what a failure is — concretely enough that two people counting would get\n  the same number. A definition that leaves the event open lets every reader count a different\n  thing under one name.\n- `## What it can hide` names a specific way the number improves while the work does not. \"It\n  can be misread\" hides nothing a reader can check.\n- `read-with` names a KPI that moves against this one when this one is gamed, never the KPI\n  itself and not every KPI of the same process.\n- `can-cost` names a value only where `## What it can hide` says how pushing the number wears\n  it down. The field is the edge; the section is the reason, and a name with no reason under it\n  is a claim nothing backs.\n- `can-cost` names no value any KPI could cost, since such a value tells a reader nothing.\n- `direction: target` is written only where both too high and too low are worse; an indicator\n  that is better lower down to some floor is `lower`.\n- `unit` names the period wherever the value is a rate: `deployments per week`, not `count`.\n- `serves` names an objective only where the KPI moving would actually tell whether that\n  objective holds. A KPI that indicates no objective has none, and is still a KPI the company\n  watches.\n- `assesses` names a control only where the number moving would tell how well that control works; a KPI that merely shares a subject with a control names none.\n- `## What it can hide`, on a KPI that assesses a control, says what the control lets through\n  that the number does not count.\n- The page writes names and prose in American English (R14).",
+          "text": "- The page holds no target, threshold, baseline or measured value, ever. Each moves, and a\n  number that moves goes stale in the model without a sound; a References row says where they\n  are kept.\n- The H1 names the quantity, not the dashboard or tool that shows it: `Change Lead Time`, not\n  `the lead-time chart`.\n- The page is person-neutral, as a seat is: the definition names seats and never who holds them.\n- `## How it is measured` says what counts as the event in this company's terms — what a\n  deployment is here, what a failure is — concretely enough that two people counting would get\n  the same number. A definition that leaves the event open lets every reader count a different\n  thing under one name.\n- `## What it can hide` names a specific way the number improves while the work does not. \"It\n  can be misread\" hides nothing a reader can check.\n- `read-with` names a KPI that moves against this one when this one is gamed, never the KPI\n  itself and not every KPI of the same process.\n- `can-cost` names a value only where `## What it can hide` says how pushing the number wears\n  it down. The field is the edge; the section is the reason, and a name with no reason under it\n  is a claim nothing backs.\n- `can-cost` names no value any KPI could cost, since such a value tells a reader nothing.\n- `direction: target` is written only where both too high and too low are worse; an indicator\n  that is better lower down to some floor is `lower`.\n- `unit` names the period wherever the value is a rate: `deployments per week`, not `count`.\n- `serves` names an objective only where the KPI moving would actually tell whether that\n  objective holds. A KPI that indicates no objective has none, and is still a KPI the company\n  watches.\n- `assesses` names a control only where the number moving would tell how well that control works; a KPI that merely shares a subject with a control names none.\n- `## What it can hide`, on a KPI that assesses a control, says what the control lets through\n  that the number does not count.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -3804,31 +3809,31 @@
                 [
                   "`owner`",
                   "Yes",
-                  "ref → role",
-                  "The seat accountable for the phase's outcome, the H1 of a file in `roles/`. Distinct from the **Owner:** line above, which names the type that owns a phase; this field names the seat."
+                  "ref → seat",
+                  "The seat accountable for the phase's outcome, the H1 of a file in `seats/`. Distinct from the **Owner:** line above, which names the type that owns a phase; this field names the seat."
                 ],
                 [
                   "`executed-by`",
                   "Yes",
-                  "array of ref → role",
+                  "array of ref → seat",
                   "The seats that do the phase's work"
                 ],
                 [
                   "`supported-by`",
                   "No",
-                  "array of ref → role",
+                  "array of ref → seat",
                   "The seats consulted in the phase, producing nothing it is graded on"
                 ],
                 [
                   "`gate-approvers`",
                   "Yes",
-                  "array of ref → role",
+                  "array of ref → seat",
                   "The seats that approve passage out of the phase. At least one; a phase nobody approves is an activity inside another phase."
                 ],
                 [
                   "`escalation-authority`",
                   "Yes",
-                  "ref → role",
+                  "ref → seat",
                   "The seat that decides when the gate's criteria cannot be met"
                 ],
                 [
@@ -3870,31 +3875,31 @@
               [
                 "`owner`",
                 "Yes",
-                "ref → role",
-                "The seat accountable for the phase's outcome, the H1 of a file in `roles/`. Distinct from the **Owner:** line above, which names the type that owns a phase; this field names the seat."
+                "ref → seat",
+                "The seat accountable for the phase's outcome, the H1 of a file in `seats/`. Distinct from the **Owner:** line above, which names the type that owns a phase; this field names the seat."
               ],
               [
                 "`executed-by`",
                 "Yes",
-                "array of ref → role",
+                "array of ref → seat",
                 "The seats that do the phase's work"
               ],
               [
                 "`supported-by`",
                 "No",
-                "array of ref → role",
+                "array of ref → seat",
                 "The seats consulted in the phase, producing nothing it is graded on"
               ],
               [
                 "`gate-approvers`",
                 "Yes",
-                "array of ref → role",
+                "array of ref → seat",
                 "The seats that approve passage out of the phase. At least one; a phase nobody approves is an activity inside another phase."
               ],
               [
                 "`escalation-authority`",
                 "Yes",
-                "ref → role",
+                "ref → seat",
                 "The seat that decides when the gate's criteria cannot be met"
               ],
               [
@@ -4169,13 +4174,13 @@
                 [
                   "`owner`",
                   "Yes",
-                  "ref → role",
-                  "The seat accountable for the process as a whole, the H1 of a file in `roles/`"
+                  "ref → seat",
+                  "The seat accountable for the process as a whole, the H1 of a file in `seats/`"
                 ],
                 [
                   "`supported-by`",
                   "No",
-                  "array of ref → role",
+                  "array of ref → seat",
                   "The seats that keep the process working without being accountable for it"
                 ]
               ]
@@ -4211,13 +4216,13 @@
               [
                 "`owner`",
                 "Yes",
-                "ref → role",
-                "The seat accountable for the process as a whole, the H1 of a file in `roles/`"
+                "ref → seat",
+                "The seat accountable for the process as a whole, the H1 of a file in `seats/`"
               ],
               [
                 "`supported-by`",
                 "No",
-                "array of ref → role",
+                "array of ref → seat",
                 "The seats that keep the process working without being accountable for it"
               ]
             ]
@@ -4368,12 +4373,12 @@
         },
         {
           "heading": "Purpose",
-          "text": "A process is the path work takes through the company's seats — one folder, the phases in the order they are passed through, and the gate between each pair — and it answers \"what happens next, who does it, and what has to be true before it moves on?\" for someone doing the work or waiting on it. It is not a seat, which says what one role takes and produces whenever it acts, and it is not a record of work that happened, which is an experience.",
+          "text": "A process is the path work takes through the company's seats — one folder, the phases in the order they are passed through, and the gate between each pair — and it answers \"what happens next, who does it, and what has to be true before it moves on?\" for someone doing the work or waiting on it. It is not a seat, which says what one seat takes and produces whenever it acts, and it is not a record of work that happened, which is an experience.",
           "tables": []
         },
         {
           "heading": "Writing rules",
-          "text": "- The page is person-neutral, as a role is: a process names seats and never who holds them.\n- The H1 names the work rather than the tool that carries it: `Delivery`, not `The board`.\n- Each line under `## What it never does` is a sentence an agent can hold a change against.\n  \"Never merges without the Owner\" can fail; \"works carefully\" cannot.\n- `## Phases` names a phase by its canonical name and nothing beside it (R3). A path to the\n  phase's file is not written there: a path moves, nothing resolves one, and whatever shows the\n  model to a reader can make the name a link.\n- `## Tracks` names each track by its canonical name and nothing beside it (R3). What a track\n  produces is said once, in the track's own file, and is not repeated here. (The half \"lists\n  every track in the folder and nothing else\" is dropped: the instance check that an owner lists\n  every track it owns holds it, R5.)",
+          "text": "- The page is person-neutral, as a seat is: a process names seats and never who holds them.\n- The H1 names the work rather than the tool that carries it: `Delivery`, not `The board`.\n- Each line under `## What it never does` is a sentence an agent can hold a change against.\n  \"Never merges without the Owner\" can fail; \"works carefully\" cannot.\n- `## Phases` names a phase by its canonical name and nothing beside it (R3). A path to the\n  phase's file is not written there: a path moves, nothing resolves one, and whatever shows the\n  model to a reader can make the name a link.\n- `## Tracks` names each track by its canonical name and nothing beside it (R3). What a track\n  produces is said once, in the track's own file, and is not repeated here. (The half \"lists\n  every track in the folder and nothing else\" is dropped: the instance check that an owner lists\n  every track it owns holds it, R5.)",
           "tables": []
         },
         {
@@ -5076,10 +5081,10 @@
                   "`human` or `agent`. What holds this profile: a person, or an agent that runs under rulebooks and stands for whichever model runs it."
                 ],
                 [
-                  "`roles`",
+                  "`seats`",
                   "No",
-                  "array of ref → role",
-                  "The seats this profile holds, each the H1 of a file in `roles/`. Absent for a profile without a seat."
+                  "array of ref → seat",
+                  "The seats this profile holds, each the H1 of a file in `seats/`. Absent for a profile without a seat."
                 ],
                 [
                   "`email`",
@@ -5136,10 +5141,10 @@
                 "`human` or `agent`. What holds this profile: a person, or an agent that runs under rulebooks and stands for whichever model runs it."
               ],
               [
-                "`roles`",
+                "`seats`",
                 "No",
-                "array of ref → role",
-                "The seats this profile holds, each the H1 of a file in `roles/`. Absent for a profile without a seat."
+                "array of ref → seat",
+                "The seats this profile holds, each the H1 of a file in `seats/`. Absent for a profile without a seat."
               ],
               [
                 "`email`",
@@ -5358,7 +5363,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A profile is the one page that says who a person or an agent is and what they claim — the entity every experience is owned by, every skill claim is made from and every role is held by. It answers \"who is this, what can they do, and what is that judgment resting on?\" for someone deciding whether to work with them. It is not a curriculum vitae: what happened, when and where lives in the experiences the profile owns, and what a capability *is* lives in the skill. What only the profile can hold is the claim — this person, this skill, at this level, on this evidence. A person who holds a role claims the skills the role requires in their Skills table, with evidence, and where they cannot the gap stays visible as a finding the validation pass reports, never an error and never an invented row, while an agent claims nothing, so a seat it holds reports no gap.",
+          "text": "A profile is the one page that says who a person or an agent is and what they claim — the entity every experience is owned by, every skill claim is made from and every seat is held by. It answers \"who is this, what can they do, and what is that judgment resting on?\" for someone deciding whether to work with them. It is not a curriculum vitae: what happened, when and where lives in the experiences the profile owns, and what a capability *is* lives in the skill. What only the profile can hold is the claim — this person, this skill, at this level, on this evidence. A person who holds a seat claims the skills the seat requires in their Skills table, with evidence, and where they cannot the gap stays visible as a finding the validation pass reports, never an error and never an invented row, while an agent claims nothing, so a seat it holds reports no gap.",
           "tables": []
         },
         {
@@ -5836,8 +5841,8 @@
                 [
                   "`owner`",
                   "Yes",
-                  "ref → role",
-                  "The seat accountable for the risk, the H1 of a file in `roles/`"
+                  "ref → seat",
+                  "The seat accountable for the risk, the H1 of a file in `seats/`"
                 ],
                 [
                   "`threatens`",
@@ -5878,8 +5883,8 @@
               [
                 "`owner`",
                 "Yes",
-                "ref → role",
-                "The seat accountable for the risk, the H1 of a file in `roles/`"
+                "ref → seat",
+                "The seat accountable for the risk, the H1 of a file in `seats/`"
               ],
               [
                 "`threatens`",
@@ -5996,7 +6001,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 is written as an event, not as a feeling or a gap: \"a secret reaches a transcript\", not \"security\".\n- The page carries no likelihood, impact or score. Those are assessments that move, and the model holds how things are made and not their state (R17), as a KPI holds its definition and none of its values. Where the company rates its risks, `## References` points at where it does.\n- `owner` names the seat, never the person, as a role is person-neutral.\n- The page writes names and prose in American English (R14).",
+          "text": "- The H1 is written as an event, not as a feeling or a gap: \"a secret reaches a transcript\", not \"security\".\n- The page carries no likelihood, impact or score. Those are assessments that move, and the model holds how things are made and not their state (R17), as a KPI holds its definition and none of its values. Where the company rates its risks, `## References` points at where it does.\n- `owner` names the seat, never the person, as a seat is person-neutral.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -6007,218 +6012,6 @@
       ],
       "owner": null,
       "path": "core/risk-schema.md"
-    },
-    {
-      "id": "01a0a6a7-53f8-7824-b858-32860e752f35",
-      "address": "core/role",
-      "type": "core",
-      "name": "Role Schema",
-      "tagline": "Required structure for role files.",
-      "fields": {},
-      "sections": [
-        {
-          "heading": "Frontmatter",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Field",
-                "Required",
-                "Type",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "`id`",
-                  "Yes",
-                  "string",
-                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
-                ],
-                [
-                  "`source`",
-                  "Yes",
-                  "ref → source",
-                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
-                ],
-                [
-                  "`source-id`",
-                  "No",
-                  "string",
-                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
-                ],
-                [
-                  "`requires`",
-                  "No",
-                  "array of ref → skill",
-                  "The skills the seat needs, each the H1 of a file in `skills/`. Absent while nobody has said what the seat needs."
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Field",
-              "Required",
-              "Type",
-              "Description"
-            ],
-            "rows": [
-              [
-                "`id`",
-                "Yes",
-                "string",
-                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
-              ],
-              [
-                "`source`",
-                "Yes",
-                "ref → source",
-                "Where this page's facts are mastered — the H1 of a file in `sources/`"
-              ],
-              [
-                "`source-id`",
-                "No",
-                "string",
-                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
-              ],
-              [
-                "`requires`",
-                "No",
-                "array of ref → skill",
-                "The skills the seat needs, each the H1 of a file in `skills/`. Absent while nobody has said what the seat needs."
-              ]
-            ]
-          }
-        },
-        {
-          "heading": "Sections",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Section",
-                "Required",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "`# [Seat]`",
-                  "Yes",
-                  "The canonical name of the seat. Profiles reference the role by this exact string."
-                ],
-                [
-                  "`> [Purpose]`",
-                  "Yes",
-                  "One-paragraph statement of what the seat is for"
-                ],
-                [
-                  "`## What it takes`",
-                  "Yes",
-                  "What the holder is handed, and what the seat refuses to start without"
-                ],
-                [
-                  "`## What it produces`",
-                  "Yes",
-                  "What leaves the seat, and in what form"
-                ],
-                [
-                  "`## What it never does`",
-                  "Yes",
-                  "Bulleted. One sentence each, of what the seat refuses whoever holds it"
-                ],
-                [
-                  "`## References`",
-                  "No",
-                  "Table. The documents the seat works by — a rulebook, a mandate; its columns are declared below."
-                ]
-              ]
-            },
-            {
-              "caption": "`## References` is a table with these columns:",
-              "columns": [
-                "Column",
-                "Required",
-                "Type",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "`What`",
-                  "Yes",
-                  "string",
-                  "The kind of document — a rulebook, a glossary, a mandate"
-                ],
-                [
-                  "`URL`",
-                  "Yes",
-                  "string",
-                  "Where it is"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Section",
-              "Required",
-              "Description"
-            ],
-            "rows": [
-              [
-                "`# [Seat]`",
-                "Yes",
-                "The canonical name of the seat. Profiles reference the role by this exact string."
-              ],
-              [
-                "`> [Purpose]`",
-                "Yes",
-                "One-paragraph statement of what the seat is for"
-              ],
-              [
-                "`## What it takes`",
-                "Yes",
-                "What the holder is handed, and what the seat refuses to start without"
-              ],
-              [
-                "`## What it produces`",
-                "Yes",
-                "What leaves the seat, and in what form"
-              ],
-              [
-                "`## What it never does`",
-                "Yes",
-                "Bulleted. One sentence each, of what the seat refuses whoever holds it"
-              ],
-              [
-                "`## References`",
-                "No",
-                "Table. The documents the seat works by — a rulebook, a mandate; its columns are declared below."
-              ]
-            ]
-          }
-        },
-        {
-          "heading": "Purpose",
-          "text": "A role is a seat the company needs filled — one file, named once, held by whichever profile lists it. It answers \"what does this seat take, produce and refuse, and what must whoever holds it be able to do?\" for someone filling it, holding it or handing work to it. It is not a person's history in the seat, which lives on the profile and in its experiences, and it is not a process, which says when the seat acts.",
-          "tables": []
-        },
-        {
-          "heading": "Writing rules",
-          "text": "- The page is person-neutral: no name, employer, date or number from any profile, and never who\n  holds the seat. Who holds it is the profile's fact.\n- The H1 names the seat, so a second holder would still be called that: `Owner`, not\n  `Entrepreneur`; `Reviewer`, not the reviewer's name.\n- Each line under `## What it never does` is a sentence an agent can hold an output against.\n  \"Never merges\" can fail; \"acts responsibly\" cannot.\n- `requires` lists what the seat needs, not what its current holder happens to have.",
-          "tables": []
-        },
-        {
-          "heading": "File Location",
-          "text": "`model/roles/*.md`\n\nA role owns nothing and nothing owns it, so it is a file. A profile holds one by listing it, and the role never names its holder; what a role names is the skills the seat requires.",
-          "tables": []
-        }
-      ],
-      "owner": null,
-      "path": "core/role-schema.md"
     },
     {
       "id": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
@@ -6392,7 +6185,7 @@
                   "`Type`",
                   "Yes",
                   "string",
-                  "The type of the entity this row names, as its schema is named: `role`, `process` or `phase`"
+                  "The type of the entity this row names, as its schema is named: `seat`, `process` or `phase`"
                 ],
                 [
                   "`Entity`",
@@ -6475,7 +6268,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The statement says one thing, as the people it binds would say it, and could be kept or broken. A statement nobody could tell was kept or broken is advice and is not written (SBVR: no business rule is an advice).\n- `motivated-by` names a risk only where the rule exists because of it.\n- An `## Applies to` row names a role, a process or a phase; the grammar reads any type in the Type column, so this is the agent pass's to hold.\n- The page writes names and prose in American English (R14).",
+          "text": "- The statement says one thing, as the people it binds would say it, and could be kept or broken. A statement nobody could tell was kept or broken is advice and is not written (SBVR: no business rule is an advice).\n- `motivated-by` names a risk only where the rule exists because of it.\n- An `## Applies to` row names a seat, a process or a phase; the grammar reads any type in the Type column, so this is the agent pass's to hold.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -6486,6 +6279,218 @@
       ],
       "owner": null,
       "path": "core/rule-schema.md"
+    },
+    {
+      "id": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "address": "core/seat",
+      "type": "core",
+      "name": "Seat Schema",
+      "tagline": "Required structure for seat files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`requires`",
+                  "No",
+                  "array of ref → skill",
+                  "The skills the seat needs, each the H1 of a file in `skills/`. Absent while nobody has said what the seat needs."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`requires`",
+                "No",
+                "array of ref → skill",
+                "The skills the seat needs, each the H1 of a file in `skills/`. Absent while nobody has said what the seat needs."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Seat]`",
+                  "Yes",
+                  "The canonical name of the seat. Profiles reference the seat by this exact string."
+                ],
+                [
+                  "`> [Purpose]`",
+                  "Yes",
+                  "One-paragraph statement of what the seat is for"
+                ],
+                [
+                  "`## What it takes`",
+                  "Yes",
+                  "What the holder is handed, and what the seat refuses to start without"
+                ],
+                [
+                  "`## What it produces`",
+                  "Yes",
+                  "What leaves the seat, and in what form"
+                ],
+                [
+                  "`## What it never does`",
+                  "Yes",
+                  "Bulleted. One sentence each, of what the seat refuses whoever holds it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The documents the seat works by — a rulebook, a mandate; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a rulebook, a glossary, a mandate"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Seat]`",
+                "Yes",
+                "The canonical name of the seat. Profiles reference the seat by this exact string."
+              ],
+              [
+                "`> [Purpose]`",
+                "Yes",
+                "One-paragraph statement of what the seat is for"
+              ],
+              [
+                "`## What it takes`",
+                "Yes",
+                "What the holder is handed, and what the seat refuses to start without"
+              ],
+              [
+                "`## What it produces`",
+                "Yes",
+                "What leaves the seat, and in what form"
+              ],
+              [
+                "`## What it never does`",
+                "Yes",
+                "Bulleted. One sentence each, of what the seat refuses whoever holds it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The documents the seat works by — a rulebook, a mandate; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A seat is a responsibility the company needs filled — one file, named once, held by whichever profile lists it. It answers \"what does this seat take, produce and refuse, and what must whoever holds it be able to do?\" for someone filling it, holding it or handing work to it. It is not a person's history in the seat, which lives on the profile and in its experiences, and it is not a process, which says when the seat acts.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The page is person-neutral: no name, employer, date or number from any profile, and never who\n  holds the seat. Who holds it is the profile's fact.\n- The H1 names the seat, so a second holder would still be called that: `Owner`, not\n  `Entrepreneur`; `Reviewer`, not the reviewer's name.\n- Each line under `## What it never does` is a sentence an agent can hold an output against.\n  \"Never merges\" can fail; \"acts responsibly\" cannot.\n- `requires` lists what the seat needs, not what its current holder happens to have.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/seats/*.md`\n\nA seat owns nothing and nothing owns it, so it is a file. A profile holds one by listing it, and the seat never names its holder; what a seat names is the skills it requires.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/seat-schema.md"
     },
     {
       "id": "01a02f31-3488-773e-a919-f51e729f2ba4",
@@ -6586,7 +6591,7 @@
                 [
                   "`# [Skill]`",
                   "Yes",
-                  "The canonical name. Profiles, experiences and roles reference this exact string."
+                  "The canonical name. Profiles, experiences and seats reference this exact string."
                 ],
                 [
                   "`> [Definition]`",
@@ -6640,7 +6645,7 @@
               [
                 "`# [Skill]`",
                 "Yes",
-                "The canonical name. Profiles, experiences and roles reference this exact string."
+                "The canonical name. Profiles, experiences and seats reference this exact string."
               ],
               [
                 "`> [Definition]`",
@@ -6662,7 +6667,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A skill is a capability a person can claim, an experience can evidence and a role can require — one file, named once, referenced by every profile that claims it. It answers \"what is this, and what does doing it look like?\" for a reader who may claim it, assess it or hire for it. It is not any one person's history with the capability: that lives in the profile's Skills table as a level, in the Evidence table under it and in the experiences that list the skill.",
+          "text": "A skill is a capability a person can claim, an experience can evidence and a seat can require — one file, named once, referenced by every profile that claims it. It answers \"what is this, and what does doing it look like?\" for a reader who may claim it, assess it or hire for it. It is not any one person's history with the capability: that lives in the profile's Skills table as a level, in the Evidence table under it and in the experiences that list the skill.",
           "tables": []
         },
         {
@@ -6672,7 +6677,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/skills/*.md`\n\nA skill owns nothing, so it is a file. Nothing owns a skill either: a profile claims one and a role requires one, and it outlives both.",
+          "text": "`model/skills/*.md`\n\nA skill owns nothing, so it is a file. Nothing owns a skill either: a profile claims one and a seat requires one, and it outlives both.",
           "tables": []
         }
       ],
@@ -8090,7 +8095,7 @@
         },
         {
           "heading": "Purpose",
-          "text": "A value is something the company holds itself to, written so that a strategy, a role or a process can cite it — which is why it is one file rather than a heading in a list. It answers \"what does this company refuse to trade away, and how would anyone know?\" for someone deciding whether to work here, or deciding a hard case where two good options disagree. It is not an aspiration and not a slogan: a value nobody could act against is decoration.",
+          "text": "A value is something the company holds itself to, written so that a strategy, a seat or a process can cite it — which is why it is one file rather than a heading in a list. It answers \"what does this company refuse to trade away, and how would anyone know?\" for someone deciding whether to work here, or deciding a hard case where two good options disagree. It is not an aspiration and not a slogan: a value nobody could act against is decoration.",
           "tables": []
         },
         {
@@ -8100,7 +8105,7 @@
         },
         {
           "heading": "File Location",
-          "text": "`model/values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a heading per value, and a heading has no canonical name — so no strategy, role or process could cite the value it upholds, which is the one thing a company's values are for.",
+          "text": "`model/values/*.md`\n\nOne file per value. Both source instances kept their values in a single document with a heading per value, and a heading has no canonical name — so no strategy, seat or process could cite the value it upholds, which is the one thing a company's values are for.",
           "tables": []
         }
       ],
@@ -8286,6 +8291,669 @@
       ],
       "owner": null,
       "path": "core/vision-schema.md"
+    },
+    {
+      "id": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "address": "organization/group",
+      "type": "organization",
+      "name": "Group Schema",
+      "tagline": "Required structure for group files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "ref → group-kind",
+                  "What kind of group this is, the H1 of a file in `group-kinds/`; its `in-line` says whether the group stands in the disciplinary line"
+                ],
+                [
+                  "`part-of`",
+                  "No",
+                  "ref → group",
+                  "The unit this one sits in, one step up the disciplinary line. Absent at the top and for a group outside the line."
+                ],
+                [
+                  "`guides`",
+                  "No",
+                  "array of ref → job",
+                  "The jobs whose discipline this group sets, wherever the people who do them sit, each the H1 of a file in `jobs/`: the professional line"
+                ],
+                [
+                  "`start`",
+                  "No",
+                  "date",
+                  "When the group was formed, for a group that is not standing"
+                ],
+                [
+                  "`end`",
+                  "No",
+                  "date",
+                  "When the group was disbanded: the last day it existed, as R9 reads an `end`. A person who moves to another unit is in the new one from the next day, so the old unit's `end` is the day before the move. Absent while it exists. A disbanded group keeps its page."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "ref → group-kind",
+                "What kind of group this is, the H1 of a file in `group-kinds/`; its `in-line` says whether the group stands in the disciplinary line"
+              ],
+              [
+                "`part-of`",
+                "No",
+                "ref → group",
+                "The unit this one sits in, one step up the disciplinary line. Absent at the top and for a group outside the line."
+              ],
+              [
+                "`guides`",
+                "No",
+                "array of ref → job",
+                "The jobs whose discipline this group sets, wherever the people who do them sit, each the H1 of a file in `jobs/`: the professional line"
+              ],
+              [
+                "`start`",
+                "No",
+                "date",
+                "When the group was formed, for a group that is not standing"
+              ],
+              [
+                "`end`",
+                "No",
+                "date",
+                "When the group was disbanded: the last day it existed, as R9 reads an `end`. A person who moves to another unit is in the new one from the next day, so the old unit's `end` is the day before the move. Absent while it exists. A disbanded group keeps its page."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Name]`",
+                  "Yes",
+                  "The group's name. Every reference uses this exact string."
+                ],
+                [
+                  "`> [Purpose]`",
+                  "Yes",
+                  "What the group is for, in one paragraph"
+                ],
+                [
+                  "`## Responsibilities`",
+                  "No",
+                  "Bulleted. What the group answers for, one item each"
+                ],
+                [
+                  "`## People`",
+                  "No",
+                  "Table. The people who sit in the group, each with the job they do there and their place in it; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the group — a charter, a mandate; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## People` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Profile`",
+                  "Yes",
+                  "ref → profile",
+                  "The person, the H1 of a profile"
+                ],
+                [
+                  "`Job`",
+                  "No",
+                  "qualifier → job",
+                  "What the person does in the group, the H1 of a file in `jobs/`. In the person's unit in the line it is the job they are employed as; in a group outside the line, the job they do there. A person who does two jobs in a group has a row for each. Blank where the person is not employed in a job here, as an agent is not."
+                ],
+                [
+                  "`Place`",
+                  "Yes",
+                  "enum",
+                  "`Lead`, `Deputy` or `Member`. The person's place in the group: the one who leads it, one who stands in for the lead, or one who sits in it."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a charter, a mandate"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Name]`",
+                "Yes",
+                "The group's name. Every reference uses this exact string."
+              ],
+              [
+                "`> [Purpose]`",
+                "Yes",
+                "What the group is for, in one paragraph"
+              ],
+              [
+                "`## Responsibilities`",
+                "No",
+                "Bulleted. What the group answers for, one item each"
+              ],
+              [
+                "`## People`",
+                "No",
+                "Table. The people who sit in the group, each with the job they do there and their place in it; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the group — a charter, a mandate; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A group is a unit of the company, or a team drawn from its units, and answers \"who sits together, under whom, and whose standard do they work to?\" Its `## People` rows are its positions, each one person in one job in one place; a position is a job in a group, and a row, not a page. In a group whose kind is in the line, a person answers to the person whose `Place` is `Lead`, and that lead to the lead of the unit its `part-of` names, as Gabler's Einliniensystem has it. Its `guides` is the professional line, the professional right to direct of a matrix, the fachliches Weisungsrecht: the unit that sets a discipline's standard lists that discipline's jobs, and the standard holds wherever the people who do them sit. The checks hold the norms that follow from this: a person sits in at most one unit in the line, only a human sits in one, only a human leads or deputizes, a group has one lead, and a person has one place in a group.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 names the group as the company calls it, without its kind: `Engineering`, not `Engineering department`.\n- The tagline says what the group is for, not who sits in it.\n- `guides` names only jobs whose discipline the group sets, not jobs that merely work with it.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/groups/*.md`\n\nA group owns nothing and nothing owns it, so it is a file. Its place in the tree is its `part-of`, so a reorganization edits one field and moves no file, and a team drawn across units stands beside them.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/organization/group-schema.md"
+    },
+    {
+      "id": "01a114eb-b0e2-7773-b742-d5556cadc57b",
+      "address": "organization/group-kind",
+      "type": "organization",
+      "name": "Group Kind Schema",
+      "tagline": "Required structure for group kind files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`in-line`",
+                  "Yes",
+                  "enum",
+                  "`yes` or `no`. Whether a group of this kind stands in the disciplinary line, and so whether a person named in its `## People` has it as their unit."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`in-line`",
+                "Yes",
+                "enum",
+                "`yes` or `no`. Whether a group of this kind stands in the disciplinary line, and so whether a person named in its `## People` has it as their unit."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every group references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the kind covers"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "Which groups belong to this kind, and which do not"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — an organization handbook, a framework"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every group references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the kind covers"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "Which groups belong to this kind, and which do not"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A group kind says what kind of group a company has, and whether groups of it stand in the disciplinary line. A standing unit does; a board, a cross-functional team or an initiative team does not, and the people it gathers keep the unit they already sit in. That one fact is what lets a board and a team list people who are already in a unit without giving any person a second disciplinary line. It also decides where a group stands in the tree: only a group of a kind in the line has a `part-of`, and only such a group is named in one.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 is the kind's name, singular: `Department`, not `Departments`.\n- `## What it means` names what a group of the kind is for and one kind of group it is not.\n- `in-line` is `yes` only for a kind whose groups hire, appraise and set objectives for the people in them.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/group-kinds/*.md`\n\nA group kind owns nothing and nothing owns it, so it is a file. A company names its own kinds; the pack ships none.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/organization/group-kind-schema.md"
+    },
+    {
+      "id": "01a1199f-28ad-7f8d-93b9-c9b71903339d",
+      "address": "organization/job",
+      "type": "organization",
+      "name": "Job Schema",
+      "tagline": "Required structure for job files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered — the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`seats`",
+                  "No",
+                  "array of ref → seat",
+                  "The seats in the company's processes that a person in this job usually holds, each the H1 of a file in `seats/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered — the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source — a directory id, a record key. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`seats`",
+                "No",
+                "array of ref → seat",
+                "The seats in the company's processes that a person in this job usually holds, each the H1 of a file in `seats/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Job]`",
+                  "Yes",
+                  "The canonical name of the job. A group's `guides` and `## People` reference it by this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph statement of what the job is for"
+                ],
+                [
+                  "`## Responsibilities`",
+                  "No",
+                  "Bulleted. What the job answers for, one item each"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the job — a job description, a career framework; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a job description, a career framework"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Job]`",
+                "Yes",
+                "The canonical name of the job. A group's `guides` and `## People` reference it by this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph statement of what the job is for"
+              ],
+              [
+                "`## Responsibilities`",
+                "No",
+                "Bulleted. What the job answers for, one item each"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the job — a job description, a career framework; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A job is what a person is employed as and, in a group outside the line, the job someone does there, the same wherever they sit: one file, named once, done in as many groups as the company has. It answers \"what does this job answer for, and which seats in the company's processes does a person in it usually take?\" It is not a seat, core's own type: a responsibility in a process, taken by whoever the process hands it to whatever job they are employed in. It is not a position either, which is a job in a group, one person's row in the group's `## People`, and which no page holds.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 names the job as the company titles it, singular and person-neutral: `Backend Engineer`, not `Backend Engineers` and not the name of anyone who does it.\n- The tagline says what the job is for, not who holds it.\n- `seats` names only seats a holder of the job takes in the company's processes, not seats that a person happens to hold beside the job.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/jobs/*.md`\n\nA job owns nothing and nothing owns it, so it is a file. A group names it in its `guides` and in its `## People` rows, and the job never names a group or a person.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/organization/job-schema.md"
     },
     {
       "id": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
@@ -9762,7 +10430,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "performed-by",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "performed-by"
     },
@@ -9807,7 +10475,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "by",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "by"
     },
@@ -10012,7 +10680,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "owner"
     },
@@ -10075,7 +10743,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "escalation-authority",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "escalation-authority"
     },
@@ -10084,7 +10752,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "executed-by",
       "attrs": {
-        "type": "array of ref → role"
+        "type": "array of ref → seat"
       },
       "label": "executed-by"
     },
@@ -10093,7 +10761,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "gate-approvers",
       "attrs": {
-        "type": "array of ref → role"
+        "type": "array of ref → seat"
       },
       "label": "gate-approvers"
     },
@@ -10118,7 +10786,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "owner"
     },
@@ -10136,7 +10804,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "supported-by",
       "attrs": {
-        "type": "array of ref → role"
+        "type": "array of ref → seat"
       },
       "label": "supported-by"
     },
@@ -10190,7 +10858,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "owner"
     },
@@ -10208,7 +10876,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "supported-by",
       "attrs": {
-        "type": "array of ref → role"
+        "type": "array of ref → seat"
       },
       "label": "supported-by"
     },
@@ -10278,11 +10946,11 @@
     {
       "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
-      "via": "roles",
+      "via": "seats",
       "attrs": {
-        "type": "array of ref → role"
+        "type": "array of ref → seat"
       },
-      "label": "roles"
+      "label": "seats"
     },
     {
       "from": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
@@ -10325,7 +10993,7 @@
       "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "via": "owner",
       "attrs": {
-        "type": "ref → role"
+        "type": "ref → seat"
       },
       "label": "owner"
     },
@@ -10346,24 +11014,6 @@
         "type": "array of ref → strategic-objective"
       },
       "label": "threatens"
-    },
-    {
-      "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
-      "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
-      "via": "requires",
-      "attrs": {
-        "type": "array of ref → skill"
-      },
-      "label": "requires"
-    },
-    {
-      "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
-      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
-      "via": "source",
-      "attrs": {
-        "type": "ref → source"
-      },
-      "label": "source"
     },
     {
       "from": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
@@ -10394,6 +11044,24 @@
     },
     {
       "from": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "to": "01a02f31-3488-773e-a919-f51e729f2ba4",
+      "via": "requires",
+      "attrs": {
+        "type": "array of ref → skill"
+      },
+      "label": "requires"
+    },
+    {
+      "from": "01a0a6a7-53f8-7824-b858-32860e752f35",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
@@ -10518,6 +11186,87 @@
     },
     {
       "from": "01a04c7b-6b80-711e-bc03-252a77c875ab",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a114eb-b0e2-7773-b742-d5556cadc57b",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "to": "01a1199f-28ad-7f8d-93b9-c9b71903339d",
+      "via": "People.Job",
+      "attrs": {
+        "type": "qualifier → job"
+      },
+      "label": "People.Job"
+    },
+    {
+      "from": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "to": "01a02f3d-4e30-7b02-9ed7-cc37d8a2aa93",
+      "via": "People.Profile",
+      "attrs": {
+        "type": "ref → profile"
+      },
+      "label": "People.Profile"
+    },
+    {
+      "from": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "to": "01a1199f-28ad-7f8d-93b9-c9b71903339d",
+      "via": "guides",
+      "attrs": {
+        "type": "array of ref → job"
+      },
+      "label": "guides"
+    },
+    {
+      "from": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "to": "01a114eb-b0e2-7773-b742-d5556cadc57b",
+      "via": "kind",
+      "attrs": {
+        "type": "ref → group-kind"
+      },
+      "label": "kind"
+    },
+    {
+      "from": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "to": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "via": "part-of",
+      "attrs": {
+        "type": "ref → group"
+      },
+      "label": "part-of"
+    },
+    {
+      "from": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a1199f-28ad-7f8d-93b9-c9b71903339d",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "seats",
+      "attrs": {
+        "type": "array of ref → seat"
+      },
+      "label": "seats"
+    },
+    {
+      "from": "01a1199f-28ad-7f8d-93b9-c9b71903339d",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {

@@ -65,7 +65,7 @@ export const PAGES = [
   { file: "privacy/index.html", head: PAGE_HEAD },
   { file: "cli/index.html", head: PAGE_HEAD },
   { file: "principles/index.html", head: PAGE_HEAD },
-  { file: "team/index.html", head: PAGE_HEAD },
+  { file: "processes/index.html", head: PAGE_HEAD },
   { file: "surfaces/index.html", head: PAGE_HEAD },
   { file: "talks/index.html", head: PAGE_HEAD },
   { file: "talks/intro/index.html", head: PAGE_HEAD },
@@ -95,7 +95,7 @@ function nodeFor(dir, data, repo) {
       // As the example's: the name comes from the instance, and so does the repository, which
       // the artifact names because it is not the meta-model.
       name: `${data.company.root} — the company described in CompanyGraph`,
-      description: "CompanyGraph described in the vocabulary it publishes: its direction, the roles and processes it works by, and what it builds.",
+      description: "CompanyGraph described in the vocabulary it publishes: its direction, the seats and processes it works by, and what it builds.",
       url: `${SITE}/`,
       license: INSTANCE_LICENSE,
       creator: CREATOR,

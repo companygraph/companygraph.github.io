@@ -13,7 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
-import { writeTeam } from "@robertblust/design/render/team";
+import { writeProcesses } from "@robertblust/design/render/processes";
 import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writePrivacy } from "@robertblust/design/render/privacy";
@@ -67,7 +67,7 @@ const RENDERERS = [
   // Each board shows its process as the chat draws it, from the same drawer, over the artifact
   // at the commit source.json pins, so the picture moves only when the pin does.
   // Its nodes link to the home page, which draws the company.
-  (d, o) => writeTeam(d.company, { ...o, root: ROOT, order: ["Deciding", "Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
+  (d, o) => writeProcesses(d.company, { ...o, root: ROOT, order: ["Deciding", "Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
   (d, o) => writePrivacy(d.company, { ...o, root: ROOT, site: "companygraph.io", de: privacyGerman.de }),
   (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
