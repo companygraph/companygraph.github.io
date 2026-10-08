@@ -1,6 +1,6 @@
 {
-  "commit": "cb122d4d0351b362bacc206cb91ad8cd45a630ba",
-  "core": "0.61.0",
+  "commit": "4a3ecfbb9552b18b5a0d858eded0a26dfb713b6d",
+  "core": "0.63.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -77,6 +77,18 @@
       "singular": false
     },
     {
+      "type": "group",
+      "folder": "groups",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "group-kind",
+      "folder": "group-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "identifier",
       "folder": null,
       "owner": null,
@@ -87,6 +99,12 @@
       "folder": null,
       "owner": null,
       "singular": true
+    },
+    {
+      "type": "job",
+      "folder": "jobs",
+      "owner": null,
+      "singular": false
     },
     {
       "type": "kpi",
@@ -155,14 +173,14 @@
       "singular": false
     },
     {
-      "type": "role",
-      "folder": "roles",
+      "type": "rule",
+      "folder": "rules",
       "owner": null,
       "singular": false
     },
     {
-      "type": "rule",
-      "folder": "rules",
+      "type": "seat",
+      "folder": "seats",
       "owner": null,
       "singular": false
     },
@@ -1737,6 +1755,251 @@
       "path": "example/model/features/usage-reporting.md"
     },
     {
+      "id": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
+      "address": "group-kinds/department",
+      "type": "group-kind",
+      "name": "Department",
+      "tagline": "A standing unit of the company that hires, appraises and sets objectives for the people in it.",
+      "fields": {
+        "id": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
+        "source": "Local",
+        "in-line": "yes"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A department is a standing unit that people belong to, and it lasts as long as the company has the work. A team gathered for a piece of work is not one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/group-kinds/department.md"
+    },
+    {
+      "id": "01a1152c-37cd-72c7-9330-b457a52f24ab",
+      "address": "group-kinds/team",
+      "type": "group-kind",
+      "name": "Team",
+      "tagline": "A group gathered for a piece of work from people who already sit in a department.",
+      "fields": {
+        "id": "01a1152c-37cd-72c7-9330-b457a52f24ab",
+        "source": "Local",
+        "in-line": "no"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A team is formed for work and disbanded after it, and the people in it keep the department they already sit in. A standing unit is not one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/group-kinds/team.md"
+    },
+    {
+      "id": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "address": "groups/billing-run-team",
+      "type": "group",
+      "name": "Billing Run Team",
+      "tagline": "Ships the billing run, the feature that closes a period and issues every invoice for it.",
+      "fields": {
+        "id": "01a1152c-3863-79ba-8430-755ed2dec49c",
+        "source": "Local",
+        "kind": "Team",
+        "start": "2026-09"
+      },
+      "sections": [
+        {
+          "heading": "People",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Profile",
+                "Job",
+                "Place"
+              ],
+              "rows": [
+                [
+                  "Mira Halvorsen",
+                  "Backend Engineer",
+                  "Lead"
+                ],
+                [
+                  "AI Agent",
+                  "",
+                  "Member"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Profile",
+              "Job",
+              "Place"
+            ],
+            "rows": [
+              [
+                "Mira Halvorsen",
+                "Backend Engineer",
+                "Lead"
+              ],
+              [
+                "AI Agent",
+                "",
+                "Member"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/groups/billing-run-team.md",
+      "stamp": {
+        "kind": null,
+        "start": "2026-09",
+        "end": null
+      }
+    },
+    {
+      "id": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "address": "groups/engineering",
+      "type": "group",
+      "name": "Engineering",
+      "tagline": "Builds and runs the billing platform.",
+      "fields": {
+        "id": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+        "source": "Local",
+        "kind": "Department",
+        "part-of": "Management",
+        "guides": [
+          "Backend Engineer",
+          "Product Engineer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Keeps the billing run reproducible: the same inputs issue the same invoices.\n- Keeps every charge on an invoice traceable to what the customer agreed to.\n- Reviews every change before it ships.",
+          "tables": []
+        },
+        {
+          "heading": "People",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Profile",
+                "Job",
+                "Place"
+              ],
+              "rows": [
+                [
+                  "Mira Halvorsen",
+                  "Engineering Lead",
+                  "Lead"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Profile",
+              "Job",
+              "Place"
+            ],
+            "rows": [
+              [
+                "Mira Halvorsen",
+                "Engineering Lead",
+                "Lead"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/groups/engineering.md"
+    },
+    {
+      "id": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "address": "groups/management",
+      "type": "group",
+      "name": "Management",
+      "tagline": "The top of Beacon Systems' line, where the company's direction is set and the departments answer.",
+      "fields": {
+        "id": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+        "source": "Local",
+        "kind": "Department"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/groups/management.md"
+    },
+    {
+      "id": "01a11732-685a-77fa-b329-a53090054f37",
+      "address": "groups/product",
+      "type": "group",
+      "name": "Product",
+      "tagline": "Decides what Beacon's products and features do for the people who use them, and builds the features it decides on.",
+      "fields": {
+        "id": "01a11732-685a-77fa-b329-a53090054f37",
+        "source": "Local",
+        "kind": "Department",
+        "part-of": "Management"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Keeps every feature tied to a customer need: the billing run for the finance team that closes a period, the charge explanation for the customer who asks why a line is on an invoice.\n- Keeps the Billing Console, the Invoice Page and the Usage API each answering to one audience.\n- Builds product features to the standard Engineering sets.",
+          "tables": []
+        },
+        {
+          "heading": "People",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Profile",
+                "Job",
+                "Place"
+              ],
+              "rows": [
+                [
+                  "Tomas Reyes",
+                  "Head of Product",
+                  "Lead"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Profile",
+              "Job",
+              "Place"
+            ],
+            "rows": [
+              [
+                "Tomas Reyes",
+                "Head of Product",
+                "Lead"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/groups/product.md"
+    },
+    {
       "id": "01a0f10b-91d2-7004-96e6-daffc70ee0c1",
       "address": "identifier",
       "type": "identifier",
@@ -1805,6 +2068,89 @@
       ],
       "owner": null,
       "path": "example/model/identity.md"
+    },
+    {
+      "id": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+      "address": "jobs/backend-engineer",
+      "type": "job",
+      "name": "Backend Engineer",
+      "tagline": "Builds and runs the services the billing platform stands on, and answers for them when they are not right.",
+      "fields": {
+        "id": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+        "source": "Local",
+        "seats": [
+          "Backend Engineer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Keeps the services the product runs on correct, and takes a turn on the pager for what ships.\n- Keeps each change small enough that a reviewer reads it in one sitting.\n- Covers each change with the tests that show the invoice is still right.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/backend-engineer.md"
+    },
+    {
+      "id": "01a1199f-dfc5-7f98-9cf4-f46d07e4ac11",
+      "address": "jobs/engineering-lead",
+      "type": "job",
+      "name": "Engineering Lead",
+      "tagline": "Leads Engineering and sets the standard every engineer works to, wherever they sit.",
+      "fields": {
+        "id": "01a1199f-dfc5-7f98-9cf4-f46d07e4ac11",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Sets the standard for how engineering work is done and reviewed.\n- Keeps Engineering meeting it: the billing run reproducible, every charge traceable.\n- Keeps the standard for a change whatever the date, and gives it to every engineer in another department.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/engineering-lead.md"
+    },
+    {
+      "id": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
+      "address": "jobs/head-of-product",
+      "type": "job",
+      "name": "Head of Product",
+      "tagline": "Leads Product and answers for what is built and why.",
+      "fields": {
+        "id": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Decides what is built next and what is not, each with the customer need it answers.\n- Takes what engineering says a feature costs before committing it to a date.\n- Leaves how a feature is built to the engineering standard.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/head-of-product.md"
+    },
+    {
+      "id": "01a1199f-e096-78eb-b8c2-76e01a6bf381",
+      "address": "jobs/product-engineer",
+      "type": "job",
+      "name": "Product Engineer",
+      "tagline": "Builds product features from inside Product, to engineering's standard.",
+      "fields": {
+        "id": "01a1199f-e096-78eb-b8c2-76e01a6bf381",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Builds each feature to the customer need it answers.\n- Keeps each change small enough to be reviewed in one sitting, with the tests that show it.\n- Holds each change to the engineering standard, whatever Product asks.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/product-engineer.md"
     },
     {
       "id": "01a0d888-d040-7226-b4e2-24993ad80baf",
@@ -2741,7 +3087,7 @@
         "id": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
         "source": "Local",
         "nature": "agent",
-        "roles": [
+        "seats": [
           "Reviewer"
         ],
         "image": "ai-agent.png"
@@ -2767,7 +3113,7 @@
         "source": "Google Workspace",
         "source-id": "104857613902",
         "nature": "human",
-        "roles": [
+        "seats": [
           "Backend Engineer"
         ],
         "email": "mira@example.invalid",
@@ -2923,7 +3269,7 @@
         "kind": "Role",
         "start": "2018-03",
         "end": "2022-01",
-        "role": "Backend engineer",
+        "capacity": "Backend engineer",
         "organization": "Northwind Atelier",
         "skills": [
           "Java Programming"
@@ -3214,7 +3560,7 @@
         "start": "2021-09",
         "end": "2021-09",
         "url": "https://orbit.example/2021/talks/the-speed-up",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "organization": "Orbit Conference",
         "skills": [
           "Product Discovery"
@@ -3590,9 +3936,85 @@
       "path": "example/model/risks/an-unreviewed-change-reaches-customers.md"
     },
     {
+      "id": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "address": "rules/a-change-is-reviewed-before-it-ships",
+      "type": "rule",
+      "name": "A change is reviewed before it ships",
+      "tagline": "A change reaches the default branch only after a second person has read it and approved it.",
+      "fields": {
+        "id": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Craftsmanship"
+        ],
+        "serves": [
+          "Support stops explaining invoices"
+        ],
+        "motivated-by": [
+          "An unreviewed change reaches customers"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A billing change is cheap to read and expensive to get wrong, and the author is the person least able to see what they missed.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Reviewer",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Release",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Reviewer",
+                ""
+              ],
+              [
+                "phase",
+                "Release",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/rules/a-change-is-reviewed-before-it-ships.md"
+    },
+    {
       "id": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
-      "address": "roles/backend-engineer",
-      "type": "role",
+      "address": "seats/backend-engineer",
+      "type": "seat",
       "name": "Backend Engineer",
       "tagline": "The seat that keeps the services the product runs on correct, and answers for them when they are not.",
       "fields": {
@@ -3620,12 +4042,12 @@
         }
       ],
       "owner": null,
-      "path": "example/model/roles/backend-engineer.md"
+      "path": "example/model/seats/backend-engineer.md"
     },
     {
       "id": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
-      "address": "roles/reviewer",
-      "type": "role",
+      "address": "seats/reviewer",
+      "type": "seat",
       "name": "Reviewer",
       "tagline": "The seat that reads one change against what was asked, returns findings with a severity and changes nothing.",
       "fields": {
@@ -3685,83 +4107,7 @@
         }
       ],
       "owner": null,
-      "path": "example/model/roles/reviewer.md"
-    },
-    {
-      "id": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
-      "address": "rules/a-change-is-reviewed-before-it-ships",
-      "type": "rule",
-      "name": "A change is reviewed before it ships",
-      "tagline": "A change reaches the default branch only after a second person has read it and approved it.",
-      "fields": {
-        "id": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Craftsmanship"
-        ],
-        "serves": [
-          "Support stops explaining invoices"
-        ],
-        "motivated-by": [
-          "An unreviewed change reaches customers"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "A billing change is cheap to read and expensive to get wrong, and the author is the person least able to see what they missed.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Reviewer",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Release",
-                  "Delivery"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Reviewer",
-                ""
-              ],
-              [
-                "phase",
-                "Release",
-                "Delivery"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "example/model/rules/a-change-is-reviewed-before-it-ships.md"
+      "path": "example/model/seats/reviewer.md"
     },
     {
       "id": "01a02f53-2408-7255-a610-b931d033c1d4",
@@ -3948,7 +4294,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Home** — the identity's tagline and `## What it is`.\n- **Principles** — the vision and the values.\n- **Team** — the profiles, each with the roles it holds.\n- **How we deliver** — the process and its phases, in order.",
+          "text": "- **Home** — the identity's tagline and `## What it is`.\n- **Principles** — the vision and the values.\n- **Team** — the profiles, each with the seats it holds.\n- **How we deliver** — the process and its phases, in order.",
           "tables": []
         }
       ],
@@ -4101,7 +4447,7 @@
     {
       "from": "01a02f53-2408-7291-ac16-087fcdee4d71",
       "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
@@ -4476,7 +4822,7 @@
     {
       "from": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
       "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
@@ -5419,7 +5765,7 @@
       "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -5537,6 +5883,156 @@
       "from": "01a10523-7383-700a-9eec-4c21a13dfcb4",
       "to": "01a0ae17-9058-7ce4-a36c-49a68628ca76",
       "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-37cd-72c7-9330-b457a52f24ab",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "to": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a1199f-dfc5-7f98-9cf4-f46d07e4ac11",
+        "Place": "Lead"
+      }
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+      "via": "guides",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a1199f-e096-78eb-b8c2-76e01a6bf381",
+      "via": "guides",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+        "Place": "Lead"
+      }
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a1152c-37cd-72c7-9330-b457a52f24ab",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11732-685a-77fa-b329-a53090054f37",
+      "to": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
+        "Place": "Lead"
+      }
+    },
+    {
+      "from": "01a11732-685a-77fa-b329-a53090054f37",
+      "to": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a11732-685a-77fa-b329-a53090054f37",
+      "to": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a11732-685a-77fa-b329-a53090054f37",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "seats",
+      "attrs": {}
+    },
+    {
+      "from": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1199f-dfc5-7f98-9cf4-f46d07e4ac11",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1199f-e096-78eb-b8c2-76e01a6bf381",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
       "attrs": {}
     }
   ]

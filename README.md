@@ -15,7 +15,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/talks/levels/` | CompanyGraph — From one command to fully integrated: the five levels a company's model can reach, from one command to a model the site, the server and the editor all read — English and German, narrated, with a PDF in each language. |
 | `/talks/what-stays/` | CompanyGraph — What stays when the model changes: code, a System One model, a System Two model and a person, which of the five things called a model are fixed and which are replaceable, six practices and the credits — English and German, narrated, with a PDF in each language. |
 | `/cli/` | The command line: one command opens a menu that makes a model, checks it, moves it to a newer release and installs the Obsidian plugin, and each entry is also a subcommand. First in the nav, by the owner's decision. |
-| `/team/` | Who does CompanyGraph's work: one board per process, generated from `company.json` by the design package's `render/team`, each opening on the process's owner. |
+| `/processes/` | CompanyGraph's processes and the seats they name: one board per process, generated from `company.json` by the design package's `render/processes`, each opening on the process's owner. |
 | `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
 | `/surfaces/` | Where CompanyGraph's model is published and what makes each place, generated from `company.json` by the design package's `render/surfaces`. |
 | `/model/` | The model's own vocabulary, drawn as the graph of what references what — one schema per type. |
@@ -67,8 +67,8 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   stage page gets it. The vendored d3 is at the root for the same reason `fonts/` is — self-hosted,
   one copy, reached relatively — and `npm run test:d3` asserts it is still the pinned
   package's build, byte for byte.
-- `team/` — `index.html`, the page shell around the boards `build/pages.mjs` writes from
-  `company.json` with `@robertblust/design/render/team`, in the order it names. Its CSS is
+- `processes/` — `index.html`, the page shell around the boards `build/pages.mjs` writes from
+  `company.json` with `@robertblust/design/render/processes`, in the order it names. Its CSS is
   `page.css`'s now; `stage contract` and `model card` are the fences it still carries.
 - `principles/` — `index.html`, the page shell around a region `build/pages.mjs` writes from
   `company.json` with `@robertblust/design/render/principles`. Its CSS is `page.css`'s now, and
@@ -93,7 +93,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
 - `og.png`, `talks/og.png`, `talks/intro/og.png`, `talks/obsidian-plugin/og.png`, `talks/levels/og.png`, `talks/what-stays/og.png`, `model/og.png`, `example/og.png`,
-  `billing/og.png`, `privacy/og.png`, `cli/og.png`, `principles/og.png`, `team/og.png`, `surfaces/og.png` — 1200×630 share cards, each
+  `billing/og.png`, `privacy/og.png`, `cli/og.png`, `principles/og.png`, `processes/og.png`, `surfaces/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
   `og-recipe.mjs` defines what goes into a card, `export-og.mjs` renders every one and writes

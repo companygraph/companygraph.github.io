@@ -103,7 +103,7 @@ const PAGES = [
       shows: ["Ein Befehl", "Starten", "Was das Menü tut", "Ein Modell anlegen", "Was Obsidian noch fragt", "Ohne Menü"],
       hides: ["One command", "Run it", "What the menu does", "What Obsidian still asks", "Without the menu"] },
     links: ["https://github.com/companygraph/meta-model#readme", "https://nodejs.org/en/download"],
-    sameTab: ["../team/", "../principles/", "../privacy/", "../", "./"],
+    sameTab: ["../processes/", "../principles/", "../privacy/", "../", "./"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [], fits: true,
@@ -123,16 +123,16 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, lineage: true },
   // Who does CompanyGraph's work: one board per process, drawn from company.json by
-  // @robertblust/design's writeTeam, held by the shared board check to the artifact and to where
+  // @robertblust/design's writeProcesses, held by the shared board check to the artifact and to where
   // STAGE_PAGE sends a card, which here is the landing page.
-  { path: "/team/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
+  { path: "/processes/", citeOpens: true, typography: true, footer: FOOTER, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, seo: true, noNewTab: true, title: /Processes/, lang: "en", sourceLang: "en",
     contains: ["An agent does the work,", "every", "gate", "How to read it", "Generated from"],
     translates: { lang: "de",
-      shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"] },
+      shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE PROCESSES", "A seat is a place at the work"] },
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    // fences keeps stage contract and drops team: the team CSS is page.css's now, reaching
+    // fences keeps stage contract and drops processes: the processes CSS is page.css's now, reaching
     // every prose page rather than only this one, per the package README's warning.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, board: true },
@@ -309,7 +309,7 @@ const PAGES = [
 const CHECKS = {
   ...DESIGN_CHECKS,
   ...STAGE_CHECKS,
-  // The Team board, held to the artifact the page names and to where STAGE_PAGE sends a card.
+  // The Processes board, held to the artifact the page names and to where STAGE_PAGE sends a card.
   ...MODEL_PAGE_CHECKS,
   ...pageChecks({ SITE, BASE }),
   // The deck's length in slides. The arc is twelve slides and the numbering is zero-based

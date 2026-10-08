@@ -1,4 +1,4 @@
-<!-- conventions · v1.44.0 -->
+<!-- conventions · v1.45.0 -->
 Shared conventions of the robertblust, guestgraph and companygraph organizations live in `conventions/`, vendored from robertblust/conventions at the release `conventions.json` names. Read them before writing or committing anything here.
 
 - `conventions/WRITING.md` — how we write: one voice, three registers, English and German.
@@ -70,15 +70,15 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   pin `/principles/` draws from — nothing on the landing page names anything from CompanyGraph's
   own model beyond those two regions.
 - **`/cli/` restates meta-model's command line, and is the one page allowed to.** A page about the command line that only linked to the README would not be one, so it shows the command, the menu it opens, what each entry does, what Obsidian still asks after the plugin is installed, and the subcommands with their flags. What keeps it true is what the page leaves out and one habit. It names no release: every command reads `#semver:*`, which npm resolves to the highest release tag when the command runs, and the drawn menu writes `<release>` where the tooling prints one, because a version written here is wrong at the next release. The drawing plays the menu's default flow, Make a model with the plugin and back to the menu, and every line it plays is one the tooling prints, with a placeholder such as `<n>`, `<core>` or `<plugin release>` wherever that line carries a count, a version or a list that moves. And every command on it was run from a release before it was written: when meta-model changes the menu, a command or a flag the page names, this page changes in the same wave, since nothing in this repository can see the change happen. Its prose is hand-written, so it is not a unit of the website surface in `companygraph/mental-model`.
-- **Team, Principles and Surfaces are generated regions around a hand-written shell.** Each is
+- **Processes, Principles and Surfaces are generated regions around a hand-written shell.** Each is
   a page built from `/privacy/`'s shell whose model-derived region `npm run pages` writes from
-  `company.json` with the design package's `render/team`, `render/principles` and
+  `company.json` with the design package's `render/processes`, `render/principles` and
   `render/surfaces`; its CSS is `page.css`'s now, and its `model card` or `surfaces lineage`
-  fence still comes from `npm run design`. Team's and Surfaces' words are the model's own and
+  fence still comes from `npm run design`. Processes' and Surfaces' words are the model's own and
   are not translated, which those pages' generated note says; Principles' words are the model's
   own too, but do carry a translation, as the German section below says. Everything around all
-  three is the page's, reviewed English with German made from it. Team's board order is the list
-  `build/pages.mjs` passes as `order`, because core gives a process no rank. Team and Surfaces
+  three is the page's, reviewed English with German made from it. Processes' board order is the list
+  `build/pages.mjs` passes as `order`, because core gives a process no rank. Processes and Surfaces
   declare `STAGE_PAGE = "../"`, the landing page, which draws the instance, and the suite's
   `board` and `lineage` checks fail if that page stops drawing `company.json`.
 
@@ -173,7 +173,7 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   && npm run og` here. `npm run design:check` runs in CI before the browser suite, so a page
   that drifts from the pinned release goes red without anyone going looking.
   When the release moves `chat.js` or Mermaid, run `npm run pages && npm run pictures &&
-  npm run pages` too and commit `team/pictures/`: the team page's process pictures are drawn
+  npm run pages` too and commit `processes/pictures/`: the Processes page's process pictures are drawn
   when the site builds, by `build/pictures.mjs`, and `npm run pages:check` fails until they
   are drawn from what the page shows now.
 
@@ -181,7 +181,7 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   is the one script that has to run inline in `<head>`, before the first paint, so every
   `<link>` and `<script src>` this repository adds comes after it; and, on the pages that
   draw the model, `stage contract`, `model card` and `surfaces lineage`, which are this
-  site's own glue to what each page draws rather than shared boilerplate. `team`, `surfaces`
+  site's own glue to what each page draws rather than shared boilerplate. `processes`, `surfaces`
   and `principles` are gone as fences — their CSS is `page.css`'s now, reaching every prose
   page rather than only the page that used to carry each, which is why a class name this
   site already uses for something else, `.legend`, `.card`, `.row` or `.board` among them,
