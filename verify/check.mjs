@@ -132,7 +132,7 @@ const PAGES = [
     links: ["https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    // fences keeps stage contract and drops processes: the processes CSS is page.css's now, reaching
+    // fences keeps stage contract and drops team: the team CSS is page.css's now, reaching
     // every prose page rather than only this one, per the package README's warning.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], fits: true,
     card: true, cardBase: SITE, internalLinks: true, board: true },

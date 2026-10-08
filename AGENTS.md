@@ -181,7 +181,7 @@ This is not hypothetical caution: the sibling org's profile at `guestgraph/.gith
   is the one script that has to run inline in `<head>`, before the first paint, so every
   `<link>` and `<script src>` this repository adds comes after it; and, on the pages that
   draw the model, `stage contract`, `model card` and `surfaces lineage`, which are this
-  site's own glue to what each page draws rather than shared boilerplate. `processes`, `surfaces`
+  site's own glue to what each page draws rather than shared boilerplate. `team`, `surfaces`
   and `principles` are gone as fences — their CSS is `page.css`'s now, reaching every prose
   page rather than only the page that used to carry each, which is why a class name this
   site already uses for something else, `.legend`, `.card`, `.row` or `.board` among them,
@@ -285,7 +285,7 @@ The row across the top — wordmark, links, language control — is one design o
 
 What the contract says:
 
-- **Order.** Ideas, Principles, Model, Example, Talks, Billing, Privacy, then the language
+- **Order.** CLI, Principles, Processes, Surfaces, Model, Talks, Billing, then the language
   control. A site skips what it does not have and reorders nothing. Read right to left, the
   switcher is at the edge and each step left is more the site's own subject.
 - **One baseline.** A single line runs through the middle of every text in the row. The
