@@ -47,9 +47,13 @@ const LOCAL_ENV = { "meta-model": "META_MODEL", "mental-model": "MENTAL_MODEL" }
 // plural — a contract for the agent that checks the file. On the card it is the technical
 // footnote, so it goes last. The content is untouched; only the order the card reads it in
 // changes, and the schema files keep the shape the conventions require. The example target
-// needs no such step, so it carries none.
+// needs no such step, so it carries none. The example is read against core and every pack's
+// schemas, each keyed `<pack>/<file>` as the parser reads a pack's (R20): an example that takes
+// a pack holds folders only that pack's schemas declare, and the parser refuses such a folder
+// (R13) when it is handed core alone. A pack the example does not take adds types nothing in
+// it uses, which changes nothing the parser returns for it.
 const TARGETS = [
-  { dir: "example", pin: "meta-model", parse: parseInstance, sub: "example/model/", schemas: "core/" },
+  { dir: "example", pin: "meta-model", parse: parseInstance, sub: "example/model/", schemas: "core/", schemaPacks: "packs/" },
   // The vocabulary is core and every pack beside it: `packs` is read too, and each pack's
   // files reach the parser under `<pack>/`, the key it reads a pack's schema by (R20), so a
   // pack released upstream is drawn at the next re-pin without a line changing here. The stage
@@ -161,6 +165,8 @@ for (const target of TARGETS) {
   const schemas = target.instance
     ? await readSchemas((sub, o) => (o?.file ? readFile(sub) : read(sub)))
     : target.schemas ? await read(target.schemas) : undefined;
+  if (target.schemaPacks)
+    for (const [file, text] of await read(target.schemaPacks)) if (file.endsWith("-schema.md")) schemas.set(file, text);
   // `sub` goes to the parser too: an entity's `path` is what the page turns into a link to
   // the file on GitHub, and it has to be the path in the repository the files came from. The
   // parser used to hardcode `example/model/`, which happened to be right here and was a 404 on
