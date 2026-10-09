@@ -1,6 +1,6 @@
 {
-  "commit": "b2095924f121a16770813fda0460e5c5e77f90fe",
-  "core": "0.63.0",
+  "commit": "93e13f7288312730e7a053d2718b8ec5b4335ef1",
+  "core": "0.64.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -1776,6 +1776,28 @@
       "path": "example/model/group-kinds/department.md"
     },
     {
+      "id": "01a11fcc-a433-7d5d-8f95-954125a2abe8",
+      "address": "group-kinds/staff-unit",
+      "type": "group-kind",
+      "name": "Staff Unit",
+      "tagline": "A unit that serves a head from beside it, preparing and checking what the head decides, and commands nothing outside itself.",
+      "fields": {
+        "id": "01a11fcc-a433-7d5d-8f95-954125a2abe8",
+        "source": "Local",
+        "in-line": "yes",
+        "staff": "yes"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A staff unit advises the head of the unit it is attached to, as Legal advises Beacon's managing director, and its people have it as their unit. A department that runs a part of the business is not one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/group-kinds/staff-unit.md"
+    },
+    {
       "id": "01a1152c-37cd-72c7-9330-b457a52f24ab",
       "address": "group-kinds/team",
       "type": "group-kind",
@@ -1806,6 +1828,7 @@
         "id": "01a1152c-3863-79ba-8430-755ed2dec49c",
         "source": "Local",
         "kind": "Team",
+        "rank": "90",
         "start": "2026-09"
       },
       "sections": [
@@ -1874,6 +1897,7 @@
         "id": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
         "source": "Local",
         "kind": "Department",
+        "rank": "20",
         "part-of": "Management",
         "guides": [
           "Backend Engineer",
@@ -1921,10 +1945,113 @@
               ]
             ]
           }
+        },
+        {
+          "heading": "Openings",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Job",
+                "Place",
+                "Count",
+                "Since"
+              ],
+              "rows": [
+                [
+                  "Backend Engineer",
+                  "Member",
+                  "2",
+                  "2026-11-01"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Job",
+              "Place",
+              "Count",
+              "Since"
+            ],
+            "rows": [
+              [
+                "Backend Engineer",
+                "Member",
+                "2",
+                "2026-11-01"
+              ]
+            ]
+          }
         }
       ],
       "owner": null,
       "path": "example/model/groups/engineering.md"
+    },
+    {
+      "id": "01a11fcc-a579-7c38-88e9-0784850f3e77",
+      "address": "groups/legal",
+      "type": "group",
+      "name": "Legal",
+      "tagline": "Advises Beacon's managing director on the law the billing platform is held to, from contracts to invoicing rules.",
+      "fields": {
+        "id": "01a11fcc-a579-7c38-88e9-0784850f3e77",
+        "source": "Local",
+        "kind": "Staff Unit",
+        "rank": "15",
+        "part-of": "Management"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Reviews every customer contract before it is signed.\n- Keeps the invoice format within the invoicing rules of each country Beacon bills in.",
+          "tables": []
+        },
+        {
+          "heading": "Openings",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Job",
+                "Place",
+                "Count",
+                "Since"
+              ],
+              "rows": [
+                [
+                  "Legal Counsel",
+                  "Lead",
+                  "",
+                  "2026-12-01"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Job",
+              "Place",
+              "Count",
+              "Since"
+            ],
+            "rows": [
+              [
+                "Legal Counsel",
+                "Lead",
+                "",
+                "2026-12-01"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/groups/legal.md"
     },
     {
       "id": "01a1152c-3800-7600-a961-2992dc0f3e2d",
@@ -1935,9 +2062,57 @@
       "fields": {
         "id": "01a1152c-3800-7600-a961-2992dc0f3e2d",
         "source": "Local",
-        "kind": "Department"
+        "kind": "Department",
+        "rank": "10"
       },
-      "sections": [],
+      "sections": [
+        {
+          "heading": "People",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Profile",
+                "Job",
+                "Place"
+              ],
+              "rows": [
+                [
+                  "Ines Marchetti",
+                  "Managing Director",
+                  "Lead"
+                ],
+                [
+                  "Jonas Whitcombe",
+                  "Executive Assistant",
+                  "Staff"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Profile",
+              "Job",
+              "Place"
+            ],
+            "rows": [
+              [
+                "Ines Marchetti",
+                "Managing Director",
+                "Lead"
+              ],
+              [
+                "Jonas Whitcombe",
+                "Executive Assistant",
+                "Staff"
+              ]
+            ]
+          }
+        }
+      ],
       "owner": null,
       "path": "example/model/groups/management.md"
     },
@@ -1951,6 +2126,7 @@
         "id": "01a11732-685a-77fa-b329-a53090054f37",
         "source": "Local",
         "kind": "Department",
+        "rank": "30",
         "part-of": "Management"
       },
       "sections": [
@@ -1991,6 +2167,46 @@
                 "Tomas Reyes",
                 "Head of Product",
                 "Lead"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Openings",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Job",
+                "Place",
+                "Count",
+                "Since"
+              ],
+              "rows": [
+                [
+                  "Head of Product",
+                  "Lead",
+                  "",
+                  "2027-01-01"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Job",
+              "Place",
+              "Count",
+              "Since"
+            ],
+            "rows": [
+              [
+                "Head of Product",
+                "Lead",
+                "",
+                "2027-01-01"
               ]
             ]
           }
@@ -2113,6 +2329,26 @@
       "path": "example/model/jobs/engineering-lead.md"
     },
     {
+      "id": "01a11fcc-a50a-7011-b85b-e24a6436103d",
+      "address": "jobs/executive-assistant",
+      "type": "job",
+      "name": "Executive Assistant",
+      "tagline": "Keeps the managing director's calendar, papers and decisions in order, so that what is decided is also prepared and followed up.",
+      "fields": {
+        "id": "01a11fcc-a50a-7011-b85b-e24a6436103d",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Prepares the papers for each leadership meeting and sends them before it.\n- Records what the meeting decided and follows each decision up with the person it names.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/executive-assistant.md"
+    },
+    {
       "id": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
       "address": "jobs/head-of-product",
       "type": "job",
@@ -2131,6 +2367,46 @@
       ],
       "owner": null,
       "path": "example/model/jobs/head-of-product.md"
+    },
+    {
+      "id": "01a11fcc-a49f-7fff-ba50-805be7c54c60",
+      "address": "jobs/legal-counsel",
+      "type": "job",
+      "name": "Legal Counsel",
+      "tagline": "Advises Beacon on the law its billing platform is held to, and answers for what the company signs.",
+      "fields": {
+        "id": "01a11fcc-a49f-7fff-ba50-805be7c54c60",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Reads every customer contract before it is signed and says what it commits Beacon to.\n- Checks each new invoice format against the invoicing rules of the country it is for before it ships.\n- Answers a customer's legal question about an invoice in writing.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/legal-counsel.md"
+    },
+    {
+      "id": "01a11fec-8800-7f1d-aefb-030f2f1a31f8",
+      "address": "jobs/managing-director",
+      "type": "job",
+      "name": "Managing Director",
+      "tagline": "Leads Beacon Systems and answers for its direction, its results and the departments that carry them out.",
+      "fields": {
+        "id": "01a11fec-8800-7f1d-aefb-030f2f1a31f8",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Responsibilities",
+          "text": "- Sets the company's direction and says what it will not do, so the departments choose against something.\n- Holds each department to the outcomes it answers for, and settles what two of them cannot.\n- Signs what commits Beacon, after Legal has said what it commits the company to.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/jobs/managing-director.md"
     },
     {
       "id": "01a1199f-e096-78eb-b8c2-76e01a6bf381",
@@ -3101,6 +3377,54 @@
       ],
       "owner": null,
       "path": "example/model/profiles/ai-agent/ai-agent.md"
+    },
+    {
+      "id": "01a11fec-8792-73f8-b030-92147dae4f65",
+      "address": "profiles/ines-marchetti",
+      "type": "profile",
+      "name": "Ines Marchetti",
+      "tagline": "Managing director who sets Beacon Systems' direction and answers for it to the departments and to customers.",
+      "fields": {
+        "id": "01a11fec-8792-73f8-b030-92147dae4f65",
+        "source": "Google Workspace",
+        "source-id": "104857613958",
+        "nature": "human",
+        "email": "ines@example.invalid",
+        "location": "Zurich"
+      },
+      "sections": [
+        {
+          "heading": "Summary",
+          "text": "Beacon's managing director, kept to a thin file: the model records the lead at the top of the company's line and leaves the career to the places that publish it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/profiles/ines-marchetti/ines-marchetti.md"
+    },
+    {
+      "id": "01a11fec-87c0-7d80-8aa2-fa64547264dc",
+      "address": "profiles/jonas-whitcombe",
+      "type": "profile",
+      "name": "Jonas Whitcombe",
+      "tagline": "Executive assistant who keeps the managing director's calendar and papers, so that what is decided is also prepared and followed up.",
+      "fields": {
+        "id": "01a11fec-87c0-7d80-8aa2-fa64547264dc",
+        "source": "Google Workspace",
+        "source-id": "104857613971",
+        "nature": "human",
+        "email": "jonas@example.invalid",
+        "location": "Zurich"
+      },
+      "sections": [
+        {
+          "heading": "Summary",
+          "text": "Beacon's executive assistant, kept to a thin file for the same reason as the managing director's: the model needs the person and the place they hold, not a history of how they came to it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/profiles/jonas-whitcombe/jonas-whitcombe.md"
     },
     {
       "id": "01a02f53-2408-7291-ac16-087fcdee4d71",
@@ -5899,6 +6223,24 @@
     },
     {
       "from": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "to": "01a11fec-8792-73f8-b030-92147dae4f65",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a11fec-8800-7f1d-aefb-030f2f1a31f8",
+        "Place": "Lead"
+      }
+    },
+    {
+      "from": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "to": "01a11fec-87c0-7d80-8aa2-fa64547264dc",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a11fcc-a50a-7011-b85b-e24a6436103d",
+        "Place": "Staff"
+      }
+    },
+    {
+      "from": "01a1152c-3800-7600-a961-2992dc0f3e2d",
       "to": "01a1152c-379b-73e1-b7e3-e6cc8ff183be",
       "via": "kind",
       "attrs": {}
@@ -5908,6 +6250,16 @@
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
+    },
+    {
+      "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
+      "to": "01a1199f-df7d-7d7d-90ae-03cd52174cbf",
+      "via": "Openings.Job",
+      "attrs": {
+        "Place": "Member",
+        "Count": "2",
+        "Since": "2026-11-01"
+      }
     },
     {
       "from": "01a1152c-3830-7c3f-b3ad-3761dc40528c",
@@ -5980,6 +6332,16 @@
     },
     {
       "from": "01a11732-685a-77fa-b329-a53090054f37",
+      "to": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
+      "via": "Openings.Job",
+      "attrs": {
+        "Place": "Lead",
+        "Count": "",
+        "Since": "2027-01-01"
+      }
+    },
+    {
+      "from": "01a11732-685a-77fa-b329-a53090054f37",
       "to": "01a03a2c-2de8-73b4-9058-8664caea919a",
       "via": "People.Profile",
       "attrs": {
@@ -6031,6 +6393,70 @@
     },
     {
       "from": "01a1199f-e096-78eb-b8c2-76e01a6bf381",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fcc-a433-7d5d-8f95-954125a2abe8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fcc-a49f-7fff-ba50-805be7c54c60",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fcc-a50a-7011-b85b-e24a6436103d",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fcc-a579-7c38-88e9-0784850f3e77",
+      "to": "01a11fcc-a49f-7fff-ba50-805be7c54c60",
+      "via": "Openings.Job",
+      "attrs": {
+        "Place": "Lead",
+        "Count": "",
+        "Since": "2026-12-01"
+      }
+    },
+    {
+      "from": "01a11fcc-a579-7c38-88e9-0784850f3e77",
+      "to": "01a11fcc-a433-7d5d-8f95-954125a2abe8",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fcc-a579-7c38-88e9-0784850f3e77",
+      "to": "01a1152c-3800-7600-a961-2992dc0f3e2d",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fcc-a579-7c38-88e9-0784850f3e77",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fec-8792-73f8-b030-92147dae4f65",
+      "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fec-87c0-7d80-8aa2-fa64547264dc",
+      "to": "01a03a36-9dc8-7e9b-9500-583546f2a37c",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a11fec-8800-7f1d-aefb-030f2f1a31f8",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
