@@ -1,5 +1,5 @@
 {
-  "commit": "d94b438d4d64dae63122afd42cc9bd50bd02fcfe",
+  "commit": "e480d4ca3d120460d389dc0fb4d409081d992295",
   "core": "0.63.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -3816,7 +3816,7 @@
       "sections": [
         {
           "heading": "Responsibilities",
-          "text": "- Build an instance from what a company publishes, keeping only what a schema has a place for and what the operator keeps\n- Write a profile, or extend one, from a folder of a person's documents, reusing the skills, levels, kinds and roles the model already holds\n- Record on a source the terms its content is published under and each consent its use needs, as the operator states them\n- Judge every page against its schema's writing rules after the mechanical checks, and say what was not checked\n- Produce a surface's content from the model by the rules its page records, and stop where a rule needs what the model does not hold\n- Package the model for an agent and for a notebook from one walk, so that both carry the same entities\n- Propose every level, seat and sentence in someone's own voice, leave each decision to the operator, and leave the commit to them",
+          "text": "- Build an instance from what a company publishes, keeping only what a schema has a place for and what the operator keeps\n- Write a profile, or extend one, from a folder of a person's documents, reusing the skills, levels, kinds and seats the model already holds\n- Record on a source the terms its content is published under and each consent its use needs, as the operator states them\n- Judge every page against its schema's writing rules after the mechanical checks, and say what was not checked\n- Produce a surface's content from the model by the rules its page records, and stop where a rule needs what the model does not hold\n- Package the model for an agent and for a notebook from one walk, so that both carry the same entities\n- Propose every level, seat and sentence in someone's own voice, leave each decision to the operator, and leave the commit to them",
           "tables": []
         },
         {
@@ -4209,7 +4209,7 @@
                   "",
                   "string",
                   "yes",
-                  "Each skill a held role requires and a human profile does not claim, outside the count of failures"
+                  "Each skill a held seat requires and a human profile does not claim, outside the count of failures"
                 ],
                 [
                   "Not checked",
@@ -4257,7 +4257,7 @@
                 "",
                 "string",
                 "yes",
-                "Each skill a held role requires and a human profile does not claim, outside the count of failures"
+                "Each skill a held seat requires and a human profile does not claim, outside the count of failures"
               ],
               [
                 "Not checked",
@@ -9613,7 +9613,7 @@
                   "",
                   "string",
                   "",
-                  "The type by its unit and name, such as `core/role`"
+                  "The type by its unit and name, such as `core/seat`"
                 ],
                 [
                   "Sections",
@@ -9640,7 +9640,7 @@
                 "",
                 "string",
                 "",
-                "The type by its unit and name, such as `core/role`"
+                "The type by its unit and name, such as `core/seat`"
               ],
               [
                 "Sections",
@@ -12416,7 +12416,7 @@
       "address": "concepts/type",
       "type": "concept",
       "name": "Type",
-      "tagline": "A kind of thing a company knows about — a value, a role, a process — named in the singular, whose entities are kept together in a folder named in the plural.",
+      "tagline": "A kind of thing a company knows about — a value, a seat, a process — named in the singular, whose entities are kept together in a folder named in the plural.",
       "fields": {
         "id": "01a0c2a7-ffa8-7ea2-852f-524856809933",
         "source": "Local",
@@ -17041,7 +17041,7 @@
       "sections": [
         {
           "heading": "Operational principle",
-          "text": "Handed a folder of a person's CVs and certificates, the agent lists every file before reading any, reads each, proposes only the skills, levels, kinds and roles the model lacks, writes the experiences and then the profile, runs the checks and the agent pass, and leaves the change for the operator to approve and commit.",
+          "text": "Handed a folder of a person's CVs and certificates, the agent lists every file before reading any, reads each, proposes only the skills, levels, kinds and seats the model lacks, writes the experiences and then the profile, runs the checks and the agent pass, and leaves the change for the operator to approve and commit.",
           "tables": []
         },
         {
@@ -17332,7 +17332,7 @@
         },
         {
           "heading": "Scenarios",
-          "text": "### SC-C1: A name that exists nowhere\n\nGiven a concept design whose Relations row names «Declarations», when the instance is checked, then the check fails on that page, saying the column is declared `ref → concept-design` and names no entity.\n\n### SC-C2: A name under another type\n\nGiven a decision whose `by` names a person's profile rather than a role, when the instance is checked, then it fails, saying the name is an entity of type profile, not role, and never resolves it to the profile.\n\n### SC-C3: A name inside its owner\n\nGiven two bounded contexts that each own a concept design called Graph, when a row names Graph in one context, then it resolves inside that context, and the other Graph is not considered.",
+          "text": "### SC-C1: A name that exists nowhere\n\nGiven a concept design whose Relations row names «Declarations», when the instance is checked, then the check fails on that page, saying the column is declared `ref → concept-design` and names no entity.\n\n### SC-C2: A name under another type\n\nGiven a decision whose `by` names a person's profile rather than a seat, when the instance is checked, then it fails, saying the name is an entity of type profile, not seat, and never resolves it to the profile.\n\n### SC-C3: A name inside its owner\n\nGiven two bounded contexts that each own a concept design called Graph, when a row names Graph in one context, then it resolves inside that context, and the other Graph is not considered.",
           "tables": []
         },
         {
@@ -18147,7 +18147,7 @@
         },
         {
           "heading": "Scenarios",
-          "text": "### SC-E1: A field offers its type\n\nGiven a field declared `ref → role`, when its value is typed, then the editor offers the roles' names and no other type's.\n\n### SC-E2: A row offers its owner's names\n\nGiven a Uses row whose Type is concept-design and whose Context is Resolution, when its Entity cell is typed, then the editor offers only Resolution's concept designs.\n\n### SC-E3: A name that names nothing is marked\n\nGiven a name typed that holds nothing in its scope, when the line is left, then it is marked as an unresolved link before any check runs.",
+          "text": "### SC-E1: A field offers its type\n\nGiven a field declared `ref → seat`, when its value is typed, then the editor offers the seats' names and no other type's.\n\n### SC-E2: A row offers its owner's names\n\nGiven a Uses row whose Type is concept-design and whose Context is Resolution, when its Entity cell is typed, then the editor offers only Resolution's concept designs.\n\n### SC-E3: A name that names nothing is marked\n\nGiven a name typed that holds nothing in its scope, when the line is left, then it is marked as an unresolved link before any check runs.",
           "tables": []
         },
         {
@@ -18515,7 +18515,7 @@
       "sections": [
         {
           "heading": "Description",
-          "text": "A procedure an agent follows, shipped as a skill with every instance and moved with it on every upgrade, because what a period shows and what level a claim has earned are judgments no script makes. It asks whether to create a profile or extend one, reads every document in the folder, reuses the skills, levels, kinds and roles the model already holds and proposes only what is missing, writes the experiences and the profile against their schemas, and runs the checks and the agent pass. The operator decides every level, every seat and every sentence said in the person's own voice, and the commit is theirs. A CV is derived from what it writes: the profile says what the person claims and the experiences it owns say what happened, when and where, each claim resting on its evidence, so the CV is drawn from them and never kept beside them. Deriving one is not part of this feature. It stops at the documents: a fact no schema has a place for is left out and written down nowhere, and publishing the profile is a separate step.",
+          "text": "A procedure an agent follows, shipped as a skill with every instance and moved with it on every upgrade, because what a period shows and what level a claim has earned are judgments no script makes. It asks whether to create a profile or extend one, reads every document in the folder, reuses the skills, levels, kinds and seats the model already holds and proposes only what is missing, writes the experiences and the profile against their schemas, and runs the checks and the agent pass. The operator decides every level, every seat and every sentence said in the person's own voice, and the commit is theirs. A CV is derived from what it writes: the profile says what the person claims and the experiences it owns say what happened, when and where, each claim resting on its evidence, so the CV is drawn from them and never kept beside them. Deriving one is not part of this feature. It stops at the documents: a fact no schema has a place for is left out and written down nowhere, and publishing the profile is a separate step.",
           "tables": []
         }
       ],
@@ -27738,7 +27738,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **CLI** — the one command an instance is made and kept from: what each pick of its menu does, and how the command is run from a release.\n- **Team** — each process's phases as a board of the roles that own, execute, support and approve each, and the profiles that hold those roles, drawn from `company.json`.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, and nothing kept beside the model, drawn from `company.json`.\n- **Model** — the vocabulary, drawn: every core type with its schema, as a graph from a pinned commit of core.\n- **Example** — one company, drawn: the fictional company the vocabulary's example describes, as a graph from the same commit.\n- **Talks** — the introduction talk, narrated in both languages with a PDF, and the questions it ends on.\n- **Billing** — how consulting would be counted if it ever were, what is free and stays so, and the ways to charge that were refused and why.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full from the model's data processors, processing activities and stored items.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
+          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **CLI** — the one command an instance is made and kept from: what each pick of its menu does, and how the command is run from a release.\n- **Processes** — each process's phases as a board of the seats that own, execute, support and approve each, and the profiles that hold those seats, drawn from `company.json`.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, and nothing kept beside the model, drawn from `company.json`.\n- **Model** — the vocabulary, drawn: every core type with its schema, as a graph from a pinned commit of core.\n- **Example** — one company, drawn: the fictional company the vocabulary's example describes, as a graph from the same commit.\n- **Talks** — the introduction talk, narrated in both languages with a PDF, and the questions it ends on.\n- **Billing** — how consulting would be counted if it ever were, what is free and stays so, and the ways to charge that were refused and why.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full from the model's data processors, processing activities and stored items.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
           "tables": []
         },
         {
@@ -27770,7 +27770,7 @@
         },
         {
           "heading": "Projection rules",
-          "text": "- Everything written for this surface is in the prose register of `conventions/WRITING.md`,\n  aimed at a visitor who has not decided to stay.\n- The Tagline is the brand's promise and nothing beside it, so it carries no product, audience or\n  place. The Description is where a visitor learns what the name is, and a tagline that tried to\n  say it as well would say it twice in two lengths.\n- The Description is written rather than copied. The identity was written for a reader who came\n  to read, and this surface is read by one who has not decided to. Its first sentence says what\n  CompanyGraph is and nothing more, and the shape it gives a company follows in a sentence of its\n  own, because a first sentence carrying every term the model uses is skimmed past. It then says\n  who CompanyGraph is for and what describing a company this way leaves where it was.\n- The Description closes on the vision in one sentence, in its own words shortened, because a\n  visitor deciding whether to follow a page follows where it is going, and the vision is the one\n  entity that says so.\n- The page is in English and in no other language. English is the model's language, and the\n  network shows a member whose language the page does not carry the page's default, so one\n  language reaches every member. A second language would translate the Name, the Tagline and the\n  Description together, and the brand's promise has no form in another language for the Tagline\n  to take.\n- The Website is the identity's `url` and no other address. The places of `## Also at` are\n  reached from the network in their own ways, and a second link would compete with the first.\n- The Industry is IT Services and IT Consulting, the owner's choice from the network's closed\n  list. The list has no entry for a published vocabulary, and this one names the consulting the\n  billing page describes, which is the only thing CompanyGraph would ever charge for.\n- The Organization size is 0-1 employees, the network's smallest band. No CompanyGraph company\n  has been founded, so nobody is employed by it, and the model describes no person who could be\n  counted.\n- The Organization type is Nonprofit, as the decision The LinkedIn company page is typed\n  Nonprofit records with the types it passed over, and changes only when that decision does.\n- The Logo is the mark's tile, made from the mark's master as `## Mark` in the brand says, and the\n  Cover image sets the promise in the brand's faces and colors, with the mark and the name in the\n  top left corner, because the network lays the Logo over the lower left of the cover.\n- The values, the strategic objectives, the strategies, the processes, the roles and the products\n  reach no unit. A page on the network is followed for its posts, and a visitor who wants what\n  the company holds to is sent to the Website, where every one of them is drawn.\n- The optional units the network offers and this file does not name stay empty: Year founded,\n  Specialties, Locations and Phone. The model holds no founding date, no list of specialties, no\n  address and no number, and this surface invents none.\n- Commitments stays empty as well. The network files a commitment under one of its own categories,\n  each a promise an employer makes to the people who work for it, and CompanyGraph employs nobody\n  and the model describes no person. The decisions do not reach it either: each is a call about\n  the vocabulary or the tooling, not a promise to anyone who works here, and filed under a category\n  it would restate the mission or promote the product, the two uses the network rules out.\n- Nothing else the model holds reaches this surface: the identity's `## Also at`, the brand's\n  colors, faces and voice as text, the sources and this file's own type. Each is either how the\n  model is kept, or already carried by the Logo, the Cover image and the register.",
+          "text": "- Everything written for this surface is in the prose register of `conventions/WRITING.md`,\n  aimed at a visitor who has not decided to stay.\n- The Tagline is the brand's promise and nothing beside it, so it carries no product, audience or\n  place. The Description is where a visitor learns what the name is, and a tagline that tried to\n  say it as well would say it twice in two lengths.\n- The Description is written rather than copied. The identity was written for a reader who came\n  to read, and this surface is read by one who has not decided to. Its first sentence says what\n  CompanyGraph is and nothing more, and the shape it gives a company follows in a sentence of its\n  own, because a first sentence carrying every term the model uses is skimmed past. It then says\n  who CompanyGraph is for and what describing a company this way leaves where it was.\n- The Description closes on the vision in one sentence, in its own words shortened, because a\n  visitor deciding whether to follow a page follows where it is going, and the vision is the one\n  entity that says so.\n- The page is in English and in no other language. English is the model's language, and the\n  network shows a member whose language the page does not carry the page's default, so one\n  language reaches every member. A second language would translate the Name, the Tagline and the\n  Description together, and the brand's promise has no form in another language for the Tagline\n  to take.\n- The Website is the identity's `url` and no other address. The places of `## Also at` are\n  reached from the network in their own ways, and a second link would compete with the first.\n- The Industry is IT Services and IT Consulting, the owner's choice from the network's closed\n  list. The list has no entry for a published vocabulary, and this one names the consulting the\n  billing page describes, which is the only thing CompanyGraph would ever charge for.\n- The Organization size is 0-1 employees, the network's smallest band. No CompanyGraph company\n  has been founded, so nobody is employed by it, and the model describes no person who could be\n  counted.\n- The Organization type is Nonprofit, as the decision The LinkedIn company page is typed\n  Nonprofit records with the types it passed over, and changes only when that decision does.\n- The Logo is the mark's tile, made from the mark's master as `## Mark` in the brand says, and the\n  Cover image sets the promise in the brand's faces and colors, with the mark and the name in the\n  top left corner, because the network lays the Logo over the lower left of the cover.\n- The values, the strategic objectives, the strategies, the processes, the seats and the products\n  reach no unit. A page on the network is followed for its posts, and a visitor who wants what\n  the company holds to is sent to the Website, where every one of them is drawn.\n- The optional units the network offers and this file does not name stay empty: Year founded,\n  Specialties, Locations and Phone. The model holds no founding date, no list of specialties, no\n  address and no number, and this surface invents none.\n- Commitments stays empty as well. The network files a commitment under one of its own categories,\n  each a promise an employer makes to the people who work for it, and CompanyGraph employs nobody\n  and the model describes no person. The decisions do not reach it either: each is a call about\n  the vocabulary or the tooling, not a promise to anyone who works here, and filed under a category\n  it would restate the mission or promote the product, the two uses the network rules out.\n- Nothing else the model holds reaches this surface: the identity's `## Also at`, the brand's\n  colors, faces and voice as text, the sources and this file's own type. Each is either how the\n  model is kept, or already carried by the Logo, the Cover image and the register.",
           "tables": []
         },
         {
