@@ -1,6 +1,6 @@
 {
-  "commit": "d2e152e2920c1f664353ea408f6912c841f567b7",
-  "core": "0.64.0",
+  "commit": "b1ff6365e65c604e01b70496402e6b7d96fe422f",
+  "core": "0.65.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -151,6 +151,12 @@
     {
       "type": "product",
       "folder": "products",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "product-kind",
+      "folder": "product-kinds",
       "owner": null,
       "singular": false
     },
@@ -22874,6 +22880,27 @@
       "path": "model/processing-activities/keeping-the-chat-s-questions.md"
     },
     {
+      "id": "01a12458-0ac7-7d6f-a60a-ee7a5a1ba149",
+      "address": "product-kinds/software",
+      "type": "product-kind",
+      "name": "Software",
+      "tagline": "What CompanyGraph ships to be installed and run: the metamodel package with its checks, server, plugin and tooling.",
+      "fields": {
+        "id": "01a12458-0ac7-7d6f-a60a-ee7a5a1ba149",
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A product of this kind is opened by the people who run a company and the agents beside them, by vendoring it into their own repository and running what it ships. CompanyGraph Core is this kind. There is no other kind yet; consulting, were it ever a product, would be a second.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/product-kinds/software.md"
+    },
+    {
       "id": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
       "address": "products/companygraph-core",
       "type": "product",
@@ -22882,7 +22909,8 @@
       "fields": {
         "id": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
         "source": "Local",
-        "domain": "Core"
+        "domain": "Core",
+        "kind": "Software"
       },
       "sections": [],
       "owner": null,
@@ -29461,6 +29489,12 @@
       "from": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
       "to": "01a0c29a-9610-7d3a-a3de-244a58f09307",
       "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "to": "01a12458-0ac7-7d6f-a60a-ee7a5a1ba149",
+      "via": "kind",
       "attrs": {}
     },
     {
@@ -36243,6 +36277,12 @@
     },
     {
       "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12458-0ac7-7d6f-a60a-ee7a5a1ba149",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
