@@ -1,5 +1,5 @@
 {
-  "commit": "3748d9832a4f4b98889b567755e9887442d898b1",
+  "commit": "d2e152e2920c1f664353ea408f6912c841f567b7",
   "core": "0.64.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -89,6 +89,18 @@
       "singular": false
     },
     {
+      "type": "group",
+      "folder": "groups",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "group-kind",
+      "folder": "group-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "identifier",
       "folder": null,
       "owner": null,
@@ -99,6 +111,12 @@
       "folder": null,
       "owner": null,
       "singular": true
+    },
+    {
+      "type": "job",
+      "folder": "jobs",
+      "owner": null,
+      "singular": false
     },
     {
       "type": "kpi",
@@ -18852,6 +18870,119 @@
       "path": "model/features/the-vocabulary-on-the-web.md"
     },
     {
+      "id": "01a1223c-d318-78dd-9429-9563d8998d10",
+      "address": "group-kinds/team",
+      "type": "group-kind",
+      "name": "Team",
+      "tagline": "A group that gathers people and agents for the work on CompanyGraph, and stands outside the disciplinary line.",
+      "fields": {
+        "id": "01a1223c-d318-78dd-9429-9563d8998d10",
+        "source": "Local",
+        "in-line": "no"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A team is for the work on CompanyGraph. It stands outside the disciplinary line because nothing CompanyGraph publishes says it hires anyone, appraises anyone or sets anyone's objectives. A unit that did those things would stand in the line, and would not be a team.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/group-kinds/team.md"
+    },
+    {
+      "id": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "address": "groups/maintainers",
+      "type": "group",
+      "name": "Maintainers",
+      "tagline": "Keeps CompanyGraph, from deciding what it is for through every gate to the merge, the tag and the release.",
+      "fields": {
+        "id": "01a1223d-0d61-7504-8395-1e072b3ede83",
+        "source": "Local",
+        "kind": "Team"
+      },
+      "sections": [
+        {
+          "heading": "People",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Profile",
+                "Job",
+                "Place"
+              ],
+              "rows": [
+                [
+                  "Robert Blust",
+                  "Maintainer",
+                  "Lead"
+                ],
+                [
+                  "Mischa Ramseyer",
+                  "Co-Maintainer",
+                  "Member"
+                ],
+                [
+                  "AI Agent",
+                  "",
+                  "Member"
+                ],
+                [
+                  "English Voice",
+                  "",
+                  "Member"
+                ],
+                [
+                  "German Voice",
+                  "",
+                  "Member"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Profile",
+              "Job",
+              "Place"
+            ],
+            "rows": [
+              [
+                "Robert Blust",
+                "Maintainer",
+                "Lead"
+              ],
+              [
+                "Mischa Ramseyer",
+                "Co-Maintainer",
+                "Member"
+              ],
+              [
+                "AI Agent",
+                "",
+                "Member"
+              ],
+              [
+                "English Voice",
+                "",
+                "Member"
+              ],
+              [
+                "German Voice",
+                "",
+                "Member"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/groups/maintainers.md"
+    },
+    {
       "id": "01a0f1f8-d3b6-7c1d-ab67-b9bc3dcc128b",
       "address": "identifier",
       "type": "identifier",
@@ -18927,6 +19058,40 @@
       ],
       "owner": null,
       "path": "model/identity.md"
+    },
+    {
+      "id": "01a1223c-fe2e-748b-a231-dad2f078e375",
+      "address": "jobs/co-maintainer",
+      "type": "job",
+      "name": "Co-Maintainer",
+      "tagline": "Has a say in what CompanyGraph is for and at every gate before Integrate, and leaves the merge, the tag and the release to the Maintainer.",
+      "fields": {
+        "id": "01a1223c-fe2e-748b-a231-dad2f078e375",
+        "source": "Local",
+        "seats": [
+          "Partner"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/jobs/co-maintainer.md"
+    },
+    {
+      "id": "01a1223c-ee0a-78ff-b5bd-10651ec5b4df",
+      "address": "jobs/maintainer",
+      "type": "job",
+      "name": "Maintainer",
+      "tagline": "Decides what CompanyGraph is for, and gives the word every merge, tag and release waits on.",
+      "fields": {
+        "id": "01a1223c-ee0a-78ff-b5bd-10651ec5b4df",
+        "source": "Local",
+        "seats": [
+          "Owner"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/jobs/maintainer.md"
     },
     {
       "id": "01a10a7b-ba62-7bcf-9dce-4e1a261e27fa",
@@ -22936,7 +23101,7 @@
       "address": "profiles/mischa-ramseyer",
       "type": "profile",
       "name": "Mischa Ramseyer",
-      "tagline": "Human in the loop at beacon.build.",
+      "tagline": "Co-Maintainer of CompanyGraph, and the human in the loop at beacon.build.",
       "fields": {
         "id": "01a1076d-db09-7ca5-b107-6571176ea946",
         "source": "Local",
@@ -35993,6 +36158,93 @@
       "from": "01a1128e-a262-7d5b-bec5-d57aaf015a1d",
       "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
       "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223c-d318-78dd-9429-9563d8998d10",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223c-ee0a-78ff-b5bd-10651ec5b4df",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "seats",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223c-ee0a-78ff-b5bd-10651ec5b4df",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223c-fe2e-748b-a231-dad2f078e375",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "seats",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223c-fe2e-748b-a231-dad2f078e375",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a0c220-5148-7344-a15c-23fa8928033b",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a0d506-7b98-73a0-905a-d5c37dfae7d4",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a0d506-7b98-75b3-ac14-0df7c79b73c4",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a0ea1b-f968-78eb-b38f-5f1290cc8e02",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a1223c-ee0a-78ff-b5bd-10651ec5b4df",
+        "Place": "Lead"
+      }
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a1076d-db09-7ca5-b107-6571176ea946",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a1223c-fe2e-748b-a231-dad2f078e375",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a1223c-d318-78dd-9429-9563d8998d10",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
       "attrs": {}
     }
   ],
