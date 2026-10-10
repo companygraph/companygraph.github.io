@@ -95,9 +95,11 @@ At `/talks/landscape-pack/`, built last. It runs the same arc, credits the Archi
 
 Each talk is built from the what-stays talk's page as its shell, in its own pull request, in two steps. This spec is the first commit of the first talk's pull request, on the branch `talks-on-core-and-packs`.
 
+Before step 1, the content pin in `source.json` moves to the companygraph/mental-model commit the talk rests on, because a chip may name a page newer than the pin — the first talk's product-kind Software is one — and the graph a chip opens is drawn at the pin. As every content re-pin does, the meta-model and mcp-server pins move to their latest releases in the same commit.
+
 Step 1 is the English deck: every slide with its speaker notes, its rests-on chips opening the graph modal as on the other talks, and a `scenes.js` where a slide animates. The owner reads it served locally, at a desk's width and a phone's, in both themes, before anything else is built.
 
-Step 2, on the owner's word about the English: the German by the translator, the editor and the back-reader in turn; the narration clips in both languages; both PDFs, the og card, the listing on `/talks/`, the sitemap and the talk's row in the README. The content pin in `source.json` moves to the companygraph/mental-model commit the talk rests on and, as every content re-pin does, the meta-model and mcp-server pins move to their latest releases in the same pull request.
+Step 2, on the owner's word about the English: the German by the translator, the editor and the back-reader in turn; the narration clips in both languages; both PDFs, the og card, the listing on `/talks/`, the sitemap and the talk's row in the README.
 
 A pack talk's pull request also adds its link to slide 10 of the first talk. That slide's German was made already, so the translator, the editor and the back-reader run again on the values the link touched.
 
