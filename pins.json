@@ -12,6 +12,7 @@
     "(cd talks/obsidian-plugin/tts && ./generate.py --dry-run)",
     "(cd talks/levels/tts && ./generate.py --dry-run)",
     "(cd talks/what-stays/tts && ./generate.py --dry-run)",
+    "(cd talks/core-and-packs/tts && ./generate.py --dry-run)",
     "npm run pages:check",
     "npm run pin:check",
     "npm run build:check",

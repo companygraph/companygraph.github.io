@@ -304,6 +304,21 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["welches Modell Sie behalten"], hides: ["which model you keep"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  // The fifth deck, core and packs, built as the what-stays talk and checked the same way. Its
+  // outbound link is the chrome's blust.ch.
+  { path: "/talks/core-and-packs/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /One core, and the words your company adds/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/"],
+    slides: 12,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["was allen Firmen gemeinsam ist"], hides: ["what every company shares"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {
