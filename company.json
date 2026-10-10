@@ -1,5 +1,5 @@
 {
-  "commit": "b1ff6365e65c604e01b70496402e6b7d96fe422f",
+  "commit": "a34e03366991d99b74a12c2f2ffbbd5d5da93d9e",
   "core": "0.65.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -37,6 +37,12 @@
     {
       "type": "control",
       "folder": "controls",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "data-object",
+      "folder": "data-objects",
       "owner": null,
       "singular": false
     },
@@ -191,6 +197,12 @@
       "singular": false
     },
     {
+      "type": "service",
+      "folder": "services",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "source",
       "folder": "sources",
       "owner": null,
@@ -217,6 +229,18 @@
     {
       "type": "surface",
       "folder": "surfaces",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "system",
+      "folder": "systems",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "system-kind",
+      "folder": "system-kinds",
       "owner": null,
       "singular": false
     },
@@ -11811,6 +11835,21 @@
       "path": "model/concepts/check.md"
     },
     {
+      "id": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "address": "concepts/conversation",
+      "type": "concept",
+      "name": "Conversation",
+      "tagline": "One visitor's exchange with the chat: the messages they send from one browser tab, in order, and the answer written to each, which begins with their first message and ends when the tab closes.",
+      "fields": {
+        "id": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/concepts/conversation.md"
+    },
+    {
       "id": "01a0c2a7-ffa8-77ad-8f21-67c035e80d13",
       "address": "concepts/core",
       "type": "concept",
@@ -13197,6 +13236,84 @@
       ],
       "owner": null,
       "path": "model/controls/pages-drawn-from-the-model-are-held-to-it.md"
+    },
+    {
+      "id": "01a12590-2b1d-758d-a75f-605949596608",
+      "address": "data-objects/question-log",
+      "type": "data-object",
+      "name": "Question log",
+      "tagline": "One JSON line per message the chat answered or refused: the question as sent, trimmed, what the loop saw of it and whether the model could answer, with no address and no word of the answer, kept ninety days in a log bucket of the deployment's own project under the logger `chat.question`.",
+      "fields": {
+        "id": "01a12590-2b1d-758d-a75f-605949596608",
+        "source": "Local",
+        "realizes": "Conversation"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The line's fields",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The line's fields",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-objects/question-log.md"
+    },
+    {
+      "id": "01a12590-0c79-750e-820f-b0a8daa484f4",
+      "address": "data-objects/repository",
+      "type": "data-object",
+      "name": "Repository",
+      "tagline": "The git repository `companygraph/mental-model`: the instance's pages, the core and packs it vendored and its manifest, at every commit since it began, with the pull requests and checks that changed it.",
+      "fields": {
+        "id": "01a12590-0c79-750e-820f-b0a8daa484f4",
+        "source": "Local",
+        "realizes": "Instance"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/data-objects/repository.md"
+    },
+    {
+      "id": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+      "address": "data-objects/snapshot",
+      "type": "data-object",
+      "name": "Snapshot",
+      "tagline": "The instance parsed from its repository at the one commit the deployment pins, held in the server's memory from the moment its image is built until the next deploy replaces it.",
+      "fields": {
+        "id": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+        "source": "Local",
+        "realizes": "Instance"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/data-objects/snapshot.md"
     },
     {
       "id": "01a107db-5255-7b65-85f7-4e05bc9d2fed",
@@ -18456,6 +18573,375 @@
       ],
       "owner": null,
       "path": "model/features/a-chat-answer-marks-the-claims-its-evidence-does-not-carry.md"
+    },
+    {
+      "id": "01a1256e-3951-75ec-b608-05267af3ccf8",
+      "address": "features/a-company-of-more-than-one-person-describes-its-units-and-who-answers-to-whom",
+      "type": "feature",
+      "name": "A company of more than one person describes its units and who answers to whom",
+      "tagline": "A company of more than one person writes down its units and the teams drawn from them, the jobs its people are employed in, who answers to whom and who sets the discipline of whose work, and which positions it is looking to fill.",
+      "fields": {
+        "id": "01a1256e-3951-75ec-b608-05267af3ccf8",
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Pack",
+          "Type"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The organization pack, taken beside core: a group is a unit of the company or a team drawn from its units, of a kind the company names, and a job is what a person is employed as wherever they sit. A person sits in a unit in a job, and the disciplinary line runs from each person to their unit's lead and up through the units; the professional line runs from a group to the jobs it guides, wherever the people in them sit. A group names the positions it is looking to fill, a staff unit stands beside the head it serves, and a rank on each group is the company's own order.\n\nIt stops at the structure. It draws no org chart, which is a renderer's to draw from the pages, and holds no headcount and no cost.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The pack's documentation, with where it departs from its sources",
+                  "https://github.com/companygraph/meta-model/blob/main/packs/organization/README.md"
+                ],
+                [
+                  "The web standard's vocabulary for an organization's structure",
+                  "https://www.w3.org/TR/vocab-org/"
+                ],
+                [
+                  "A shared vocabulary's term for a department",
+                  "https://schema.org/department"
+                ],
+                [
+                  "A course on an HR system's organizational management",
+                  "https://learning.sap.com/courses/organizational-management-in-sap-hcm-for-s-4hana/finding-object-relationships"
+                ],
+                [
+                  "An HR system's record of a vacancy",
+                  "https://help.sap.com/saphelp_em92/helpdata/en/4e/ebee1a11324e70e10000000a42189d/content.htm"
+                ],
+                [
+                  "An HR system's flag for a staff unit",
+                  "https://help.sap.com/saphelp_em92/helpdata/en/4e/ebef1a11394e6fe10000000a42189d/content.htm"
+                ],
+                [
+                  "An HR system's order of the units in a structure",
+                  "https://help.sap.com/saphelp_470/helpdata/en/bb/bdba94575911d189240000e8323d3a/content.htm"
+                ],
+                [
+                  "An exchange standard's type for the position one reports to",
+                  "https://schemas.liquid-technologies.com/HR-XML/3.1/reportstopositiontype.html"
+                ],
+                [
+                  "A business dictionary's entry on the single-line organization",
+                  "https://wirtschaftslexikon.gabler.de/definition/einliniensystem-32337"
+                ],
+                [
+                  "A business dictionary's entry on the multiple-line organization",
+                  "https://wirtschaftslexikon.gabler.de/definition/mehrliniensystem-41223"
+                ],
+                [
+                  "A business dictionary's entry on the position",
+                  "https://wirtschaftslexikon.gabler.de/definition/stelle-42791"
+                ],
+                [
+                  "A business dictionary's entry on the staff unit",
+                  "https://wirtschaftslexikon.gabler.de/definition/stab-45274"
+                ],
+                [
+                  "A labor lawyer's article on the establishment in a matrix structure",
+                  "https://kliemt.blog/2016/07/06/der-betrieb-in-der-matrix-struktur/"
+                ],
+                [
+                  "An HR system's staffing models",
+                  "https://doc.workday.com/admin-guide/en-us/human-capital-management/staffing/staffing-models/ivu1483299086459.html"
+                ],
+                [
+                  "A data management system's custom order of the nodes in a hierarchy",
+                  "https://docs.oracle.com/cloud/latest/enterprise-data-management-cloud/DMCAA/reorder_node_100x1d7f4feb.htm"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The pack's documentation, with where it departs from its sources",
+                "https://github.com/companygraph/meta-model/blob/main/packs/organization/README.md"
+              ],
+              [
+                "The web standard's vocabulary for an organization's structure",
+                "https://www.w3.org/TR/vocab-org/"
+              ],
+              [
+                "A shared vocabulary's term for a department",
+                "https://schema.org/department"
+              ],
+              [
+                "A course on an HR system's organizational management",
+                "https://learning.sap.com/courses/organizational-management-in-sap-hcm-for-s-4hana/finding-object-relationships"
+              ],
+              [
+                "An HR system's record of a vacancy",
+                "https://help.sap.com/saphelp_em92/helpdata/en/4e/ebee1a11324e70e10000000a42189d/content.htm"
+              ],
+              [
+                "An HR system's flag for a staff unit",
+                "https://help.sap.com/saphelp_em92/helpdata/en/4e/ebef1a11394e6fe10000000a42189d/content.htm"
+              ],
+              [
+                "An HR system's order of the units in a structure",
+                "https://help.sap.com/saphelp_470/helpdata/en/bb/bdba94575911d189240000e8323d3a/content.htm"
+              ],
+              [
+                "An exchange standard's type for the position one reports to",
+                "https://schemas.liquid-technologies.com/HR-XML/3.1/reportstopositiontype.html"
+              ],
+              [
+                "A business dictionary's entry on the single-line organization",
+                "https://wirtschaftslexikon.gabler.de/definition/einliniensystem-32337"
+              ],
+              [
+                "A business dictionary's entry on the multiple-line organization",
+                "https://wirtschaftslexikon.gabler.de/definition/mehrliniensystem-41223"
+              ],
+              [
+                "A business dictionary's entry on the position",
+                "https://wirtschaftslexikon.gabler.de/definition/stelle-42791"
+              ],
+              [
+                "A business dictionary's entry on the staff unit",
+                "https://wirtschaftslexikon.gabler.de/definition/stab-45274"
+              ],
+              [
+                "A labor lawyer's article on the establishment in a matrix structure",
+                "https://kliemt.blog/2016/07/06/der-betrieb-in-der-matrix-struktur/"
+              ],
+              [
+                "An HR system's staffing models",
+                "https://doc.workday.com/admin-guide/en-us/human-capital-management/staffing/staffing-models/ivu1483299086459.html"
+              ],
+              [
+                "A data management system's custom order of the nodes in a hierarchy",
+                "https://docs.oracle.com/cloud/latest/enterprise-data-management-cloud/DMCAA/reorder_node_100x1d7f4feb.htm"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-company-of-more-than-one-person-describes-its-units-and-who-answers-to-whom.md"
+    },
+    {
+      "id": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+      "address": "features/a-company-that-builds-software-describes-how-it-designs-it",
+      "type": "feature",
+      "name": "A company that builds software describes how it designs it",
+      "tagline": "A company that builds software writes down its bounded contexts, the terms each one's language holds, the aggregates and events inside them and how a feature is built across them, in the words of domain-driven design, as a refinement of the concepts and features it already describes.",
+      "fields": {
+        "id": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Pack",
+          "Type"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The software pack, taken beside core: a bounded context with how much it matters to build well, the terms of its language as entities and value objects, the aggregates that keep them consistent with the commands they handle, the domain events other contexts consume, and a feature design saying how one feature is built across the contexts it touches. A term refines a core concept and a feature design a core feature, so a reader goes from what the company means by a word to how its software keeps it.\n\nIt stops at the design. It generates no code and reads none, so nothing holds the code to the pages. An architecture decision is a core decision the pack's pages name, not a type of its own.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The pack's documentation, with where it departs from its sources",
+                  "https://github.com/companygraph/meta-model/blob/main/packs/software/README.md"
+                ],
+                [
+                  "The reference of domain-driven design's patterns, by the author who named them",
+                  "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf"
+                ],
+                [
+                  "A short introduction to domain-driven design",
+                  "https://www.oreilly.com/library/view/domain-driven-design-distilled/9780134434964/"
+                ],
+                [
+                  "A canvas for describing one bounded context",
+                  "https://github.com/ddd-crew/bounded-context-canvas"
+                ],
+                [
+                  "A canvas for designing one aggregate",
+                  "https://github.com/ddd-crew/aggregate-design-canvas"
+                ],
+                [
+                  "The patterns two bounded contexts relate by",
+                  "https://github.com/ddd-crew/context-mapping"
+                ],
+                [
+                  "A book on concepts as the units of software design",
+                  "https://essenceofsoftware.com/"
+                ],
+                [
+                  "The reference of a language for writing behavior as examples",
+                  "https://cucumber.io/docs/gherkin/reference/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The pack's documentation, with where it departs from its sources",
+                "https://github.com/companygraph/meta-model/blob/main/packs/software/README.md"
+              ],
+              [
+                "The reference of domain-driven design's patterns, by the author who named them",
+                "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf"
+              ],
+              [
+                "A short introduction to domain-driven design",
+                "https://www.oreilly.com/library/view/domain-driven-design-distilled/9780134434964/"
+              ],
+              [
+                "A canvas for describing one bounded context",
+                "https://github.com/ddd-crew/bounded-context-canvas"
+              ],
+              [
+                "A canvas for designing one aggregate",
+                "https://github.com/ddd-crew/aggregate-design-canvas"
+              ],
+              [
+                "The patterns two bounded contexts relate by",
+                "https://github.com/ddd-crew/context-mapping"
+              ],
+              [
+                "A book on concepts as the units of software design",
+                "https://essenceofsoftware.com/"
+              ],
+              [
+                "The reference of a language for writing behavior as examples",
+                "https://cucumber.io/docs/gherkin/reference/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-company-that-builds-software-describes-how-it-designs-it.md"
+    },
+    {
+      "id": "01a1256e-487d-785c-bff3-01aed9c39917",
+      "address": "features/a-company-that-runs-systems-describes-its-landscape",
+      "type": "feature",
+      "name": "A company that runs systems describes its landscape",
+      "tagline": "A company that runs systems writes down which ones it has, what each runs on, what each offers the others, which one keeps the data of each thing it knows about and where each takes its data from, so whoever plans a replacement or answers for an outage reads it in one place.",
+      "fields": {
+        "id": "01a1256e-487d-785c-bff3-01aed9c39917",
+        "source": "Local",
+        "products": [
+          "CompanyGraph Core"
+        ],
+        "concepts": [
+          "Pack",
+          "Type"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The landscape pack, taken beside core: a system is of a kind the company names in its own words, and each kind is a specialization of one ArchiMate element, so a generator can take a system to an architecture tool and back as the element it is. A system says what it runs on, who owns it and who runs it, the features it realizes and the data processor behind it; a service is what a system exposes to others, with the systems that provide it. A system names the concepts it keeps data of, one of them the master of each, with the data object it keeps of a concept where one is modeled, and a connection is written on the system that takes the data, with the interface it goes through.\n\nIt stops at the inventory. It ships the mapping to the standard and no generator, draws no diagram, which a consumer draws from the pages, holds no cost and no license, and says nothing about where a system is.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The pack's documentation, with its mapping to the standard and where it departs from its sources",
+                  "https://github.com/companygraph/meta-model/blob/main/packs/landscape/README.md"
+                ],
+                [
+                  "The standard for modeling an enterprise's architecture",
+                  "https://pubs.opengroup.org/architecture/archimate4-doc/"
+                ],
+                [
+                  "The file format architecture tools exchange a model in",
+                  "https://www.opengroup.org/xsd/archimate/"
+                ],
+                [
+                  "An architecture management tool's stages of an application's lifecycle",
+                  "https://docs-eam.leanix.net/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The pack's documentation, with its mapping to the standard and where it departs from its sources",
+                "https://github.com/companygraph/meta-model/blob/main/packs/landscape/README.md"
+              ],
+              [
+                "The standard for modeling an enterprise's architecture",
+                "https://pubs.opengroup.org/architecture/archimate4-doc/"
+              ],
+              [
+                "The file format architecture tools exchange a model in",
+                "https://www.opengroup.org/xsd/archimate/"
+              ],
+              [
+                "An architecture management tool's stages of an application's lifecycle",
+                "https://docs-eam.leanix.net/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-company-that-runs-systems-describes-its-landscape.md"
     },
     {
       "id": "01a10770-fd86-7891-a8a0-5ea8e270b7f2",
@@ -27465,6 +27951,113 @@
       "path": "model/seats/writer.md"
     },
     {
+      "id": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+      "address": "services/chat-answer",
+      "type": "service",
+      "name": "Chat answer",
+      "tagline": "The answer to a visitor's question, streamed as events to the chat panel on companygraph.io's pages, with each claim naming the entity it rests on and marked where that evidence does not carry it.",
+      "fields": {
+        "id": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+        "source": "Local",
+        "provided-by": [
+          "Chat server"
+        ],
+        "realizes": [
+          "A visitor asks the model",
+          "A chat answer marks the claims its evidence does not carry"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "An interface description of the events an answer streams",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "An interface description of the events an answer streams",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/services/chat-answer.md"
+    },
+    {
+      "id": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+      "address": "services/mcp-endpoint",
+      "type": "service",
+      "name": "MCP endpoint",
+      "tagline": "The Model Context Protocol endpoint at mcp.companygraph.io/mcp, where any agent client, and the chat, lists the types CompanyGraph's model declares, reads its entities and searches it, without signing in.",
+      "fields": {
+        "id": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+        "source": "Local",
+        "provided-by": [
+          "MCP server"
+        ],
+        "realizes": [
+          "An agent reads the model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The server's documentation, with the tools it exposes",
+                  "https://github.com/companygraph/mcp-server"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The server's documentation, with the tools it exposes",
+                "https://github.com/companygraph/mcp-server"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/services/mcp-endpoint.md"
+    },
+    {
       "id": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "address": "sources/local",
       "type": "source",
@@ -28020,6 +28613,960 @@
       ],
       "owner": null,
       "path": "model/surfaces/mcp-registry-listing.md"
+    },
+    {
+      "id": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "address": "system-kinds/deployment",
+      "type": "system-kind",
+      "name": "Deployment",
+      "tagline": "Software CompanyGraph builds, releases and deploys to a platform it rents or takes free.",
+      "fields": {
+        "id": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+        "source": "Local",
+        "rank": "10",
+        "element": "application-component"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A deployment is made of code in CompanyGraph's own repositories, built and deployed by those repositories' workflows on a merge, and run on a platform. It is not SaaS, which a vendor builds and runs and CompanyGraph only connects to, and not a platform, which is what a deployment runs on. Nor is it the `service` type: a service is what a deployment exposes to others, with a page of its own.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/system-kinds/deployment.md"
+    },
+    {
+      "id": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "address": "system-kinds/platform",
+      "type": "system-kind",
+      "name": "Platform",
+      "tagline": "What CompanyGraph's deployments and pages run on, and where its checks run, taken from a provider and configured by CompanyGraph's own seats.",
+      "fields": {
+        "id": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+        "source": "Local",
+        "rank": "20",
+        "element": "node"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A platform is compute or hosting a provider builds and keeps, rented from it or taken free on its terms, which CompanyGraph's seats configure and deploy to: where a deployment runs, where a site is served from, where a check runs. It is not a deployment, which CompanyGraph builds itself and which runs on a platform, and not SaaS, which a vendor runs as software CompanyGraph uses and deploys nothing to.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/system-kinds/platform.md"
+    },
+    {
+      "id": "01a1256e-7726-7a24-8893-05b527b55325",
+      "address": "system-kinds/saas",
+      "type": "system-kind",
+      "name": "SaaS",
+      "tagline": "Software a vendor runs and CompanyGraph connects to, paid by use or taken free.",
+      "fields": {
+        "id": "01a1256e-7726-7a24-8893-05b527b55325",
+        "source": "Local",
+        "rank": "30",
+        "element": "application-component"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "SaaS is software a vendor builds, runs and keeps, which CompanyGraph reaches over the vendor's own interface. Where it handles personal data the vendor is a data processor, and the system's page names it. It is not a deployment, which CompanyGraph builds and runs itself, and not a platform, which CompanyGraph deploys its own software to.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/system-kinds/saas.md"
+    },
+    {
+      "id": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "address": "systems/chat-server",
+      "type": "system",
+      "name": "Chat server",
+      "tagline": "Answers the questions a visitor asks on companygraph.io from what the MCP server returns, has a language model write each answer and a judge check its claims, and logs each question it answers or refuses.",
+      "fields": {
+        "id": "01a1256e-95a8-7252-a79b-d83322045bb1",
+        "source": "Local",
+        "kind": "Deployment",
+        "owner": "Owner",
+        "processor": "Google Cloud",
+        "part-of": "Cloud Run"
+      },
+      "sections": [
+        {
+          "heading": "Connects to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "System",
+                "As",
+                "Service",
+                "Carries",
+                "Via"
+              ],
+              "rows": [
+                [
+                  "MCP server",
+                  "Streamable HTTP",
+                  "MCP endpoint",
+                  "Entity",
+                  "HTTPS"
+                ],
+                [
+                  "Claude API",
+                  "Messages API",
+                  "",
+                  "",
+                  "HTTPS"
+                ],
+                [
+                  "TypeSafe",
+                  "System One API",
+                  "",
+                  "",
+                  "HTTPS"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "System",
+              "As",
+              "Service",
+              "Carries",
+              "Via"
+            ],
+            "rows": [
+              [
+                "MCP server",
+                "Streamable HTTP",
+                "MCP endpoint",
+                "Entity",
+                "HTTPS"
+              ],
+              [
+                "Claude API",
+                "Messages API",
+                "",
+                "",
+                "HTTPS"
+              ],
+              [
+                "TypeSafe",
+                "System One API",
+                "",
+                "",
+                "HTTPS"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Conversation",
+                  "Question log",
+                  "writes"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Conversation",
+                "Question log",
+                "writes"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The server's source and documentation",
+                  "https://github.com/companygraph/chat-server"
+                ],
+                [
+                  "The interface the chat answers over",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "The deployment's pins, configuration and infrastructure",
+                  "https://github.com/companygraph/mcp-companygraph-io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The server's source and documentation",
+                "https://github.com/companygraph/chat-server"
+              ],
+              [
+                "The interface the chat answers over",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "The deployment's pins, configuration and infrastructure",
+                "https://github.com/companygraph/mcp-companygraph-io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/chat-server.md"
+    },
+    {
+      "id": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "address": "systems/claude-api",
+      "type": "system",
+      "name": "Claude API",
+      "tagline": "Writes the chat's answers with Claude, from the visitor's messages and what the MCP server's tools returned, for the chat server.",
+      "fields": {
+        "id": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+        "source": "Local",
+        "kind": "SaaS",
+        "vendor": "Anthropic",
+        "owner": "Owner",
+        "processor": "Anthropic",
+        "serves": [
+          "Answering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://docs.claude.com/en/api/messages"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://docs.claude.com/en/api/messages"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/claude-api.md"
+    },
+    {
+      "id": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "address": "systems/cloud-logging",
+      "type": "system",
+      "name": "Cloud Logging",
+      "tagline": "Keeps the lines the chat server writes in Google Cloud's Zürich region, the questions among them in a bucket of their own for ninety days, which the owner reads as an analyst account and nothing more.",
+      "fields": {
+        "id": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+        "source": "Local",
+        "kind": "Platform",
+        "vendor": "Google",
+        "owner": "Owner",
+        "processor": "Google Cloud",
+        "serves": [
+          "Answering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Conversation",
+                  "Question log",
+                  "master"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Conversation",
+                "Question log",
+                "master"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://cloud.google.com/logging/docs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://cloud.google.com/logging/docs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/cloud-logging.md"
+    },
+    {
+      "id": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "address": "systems/cloud-run",
+      "type": "system",
+      "name": "Cloud Run",
+      "tagline": "Runs the MCP server and the chat server as containers in Google Cloud's Zürich region, deployed to by CompanyGraph's own seats on every merge to the repository that pins them.",
+      "fields": {
+        "id": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+        "source": "Local",
+        "kind": "Platform",
+        "vendor": "Google",
+        "owner": "Owner",
+        "processor": "Google Cloud",
+        "serves": [
+          "Answering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://cloud.google.com/run/docs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://cloud.google.com/run/docs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/cloud-run.md"
+    },
+    {
+      "id": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "address": "systems/github",
+      "type": "system",
+      "name": "GitHub",
+      "tagline": "Holds CompanyGraph's repositories, among them the vocabulary, the tools and its own model, with their pull requests, issues and releases, for the seats that work on them.",
+      "fields": {
+        "id": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+        "source": "Local",
+        "kind": "SaaS",
+        "vendor": "GitHub",
+        "owner": "Owner",
+        "serves": [
+          "Delivery",
+          "Contribution",
+          "Feature request"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Instance",
+                  "Repository",
+                  "master"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Instance",
+                "Repository",
+                "master"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://docs.github.com/en"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://docs.github.com/en"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/github.md"
+    },
+    {
+      "id": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "address": "systems/github-actions",
+      "type": "system",
+      "name": "GitHub Actions",
+      "tagline": "Runs the checks and the deploys of CompanyGraph's repositories on each pull request, each merge and on a schedule, for the seats that open and merge them.",
+      "fields": {
+        "id": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+        "source": "Local",
+        "kind": "Platform",
+        "vendor": "GitHub",
+        "owner": "Owner",
+        "serves": [
+          "Delivery"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://docs.github.com/en/actions"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://docs.github.com/en/actions"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/github-actions.md"
+    },
+    {
+      "id": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+      "address": "systems/github-pages",
+      "type": "system",
+      "name": "GitHub Pages",
+      "tagline": "Serves companygraph.io to its visitors: the pages the Site build renders and checks, as merged into the companygraph/companygraph.github.io repository.",
+      "fields": {
+        "id": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+        "source": "Local",
+        "kind": "Platform",
+        "vendor": "GitHub",
+        "owner": "Owner",
+        "serves": [
+          "Delivery"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://docs.github.com/en/pages"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://docs.github.com/en/pages"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/github-pages.md"
+    },
+    {
+      "id": "01a1256e-8662-7925-9097-a884e87a2658",
+      "address": "systems/mcp-server",
+      "type": "system",
+      "name": "MCP server",
+      "tagline": "Answers questions about CompanyGraph's own model, read at one pinned commit when its image is built and not live, over the Model Context Protocol at mcp.companygraph.io, for any agent that connects and for the chat.",
+      "fields": {
+        "id": "01a1256e-8662-7925-9097-a884e87a2658",
+        "source": "Local",
+        "kind": "Deployment",
+        "owner": "Owner",
+        "processor": "Google Cloud",
+        "part-of": "Cloud Run"
+      },
+      "sections": [
+        {
+          "heading": "Connects to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "System",
+                "As",
+                "Service",
+                "Carries",
+                "Via"
+              ],
+              "rows": [
+                [
+                  "GitHub",
+                  "the instance's repository, at image build",
+                  "",
+                  "Instance",
+                  "HTTPS"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "System",
+              "As",
+              "Service",
+              "Carries",
+              "Via"
+            ],
+            "rows": [
+              [
+                "GitHub",
+                "the instance's repository, at image build",
+                "",
+                "Instance",
+                "HTTPS"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Instance",
+                  "Snapshot",
+                  "reads"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Instance",
+                "Snapshot",
+                "reads"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The server's source and documentation",
+                  "https://github.com/companygraph/mcp-server"
+                ],
+                [
+                  "The deployment's pins, configuration and infrastructure",
+                  "https://github.com/companygraph/mcp-companygraph-io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The server's source and documentation",
+                "https://github.com/companygraph/mcp-server"
+              ],
+              [
+                "The deployment's pins, configuration and infrastructure",
+                "https://github.com/companygraph/mcp-companygraph-io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/mcp-server.md"
+    },
+    {
+      "id": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "address": "systems/site-build",
+      "type": "system",
+      "name": "Site build",
+      "tagline": "Renders companygraph.io's pages from the vocabulary and the instance, each at a pinned commit, with the design package's renderer, for the seat that moves the pins, and checks on every pull request and every merge that the pages committed are the ones those commits render.",
+      "fields": {
+        "id": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+        "source": "Local",
+        "kind": "Deployment",
+        "owner": "Owner",
+        "part-of": "GitHub Actions",
+        "realizes": [
+          "The vocabulary on the web"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Connects to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "System",
+                "As",
+                "Service",
+                "Carries",
+                "Via"
+              ],
+              "rows": [
+                [
+                  "GitHub",
+                  "the vocabulary's repository",
+                  "",
+                  "Schema",
+                  "HTTPS"
+                ],
+                [
+                  "GitHub",
+                  "the instance's repository",
+                  "",
+                  "Instance",
+                  "HTTPS"
+                ],
+                [
+                  "GitHub",
+                  "the design package",
+                  "",
+                  "",
+                  "HTTPS"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "System",
+              "As",
+              "Service",
+              "Carries",
+              "Via"
+            ],
+            "rows": [
+              [
+                "GitHub",
+                "the vocabulary's repository",
+                "",
+                "Schema",
+                "HTTPS"
+              ],
+              [
+                "GitHub",
+                "the instance's repository",
+                "",
+                "Instance",
+                "HTTPS"
+              ],
+              [
+                "GitHub",
+                "the design package",
+                "",
+                "",
+                "HTTPS"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The site's source, with the build and its pins",
+                  "https://github.com/companygraph/companygraph.github.io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The site's source, with the build and its pins",
+                "https://github.com/companygraph/companygraph.github.io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/site-build.md"
+    },
+    {
+      "id": "01a1256e-f10e-71e1-be79-fad934671484",
+      "address": "systems/typesafe",
+      "type": "system",
+      "name": "TypeSafe",
+      "tagline": "Judges whether each claim of a chat answer is carried by the tool answers it rests on, and returns a verdict with its probability, for the chat server.",
+      "fields": {
+        "id": "01a1256e-f10e-71e1-be79-fad934671484",
+        "source": "Local",
+        "kind": "SaaS",
+        "vendor": "TypeSafe",
+        "owner": "Owner",
+        "processor": "TypeSafe",
+        "serves": [
+          "Answering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://docs.typesafe.ai/introduction"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://docs.typesafe.ai/introduction"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/typesafe.md"
     },
     {
       "id": "01a0c1d6-f408-7169-9c29-264eba3008b2",
@@ -36283,6 +37830,593 @@
     },
     {
       "from": "01a12458-0ac7-7d6f-a60a-ee7a5a1ba149",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+      "to": "01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+      "to": "01a0c2a7-ffa8-7ea2-852f-524856809933",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-3951-75ec-b608-05267af3ccf8",
+      "to": "01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-3951-75ec-b608-05267af3ccf8",
+      "to": "01a0c2a7-ffa8-7ea2-852f-524856809933",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-3951-75ec-b608-05267af3ccf8",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-3951-75ec-b608-05267af3ccf8",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-487d-785c-bff3-01aed9c39917",
+      "to": "01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-487d-785c-bff3-01aed9c39917",
+      "to": "01a0c2a7-ffa8-7ea2-852f-524856809933",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-487d-785c-bff3-01aed9c39917",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-487d-785c-bff3-01aed9c39917",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-7726-7a24-8893-05b527b55325",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "the instance's repository, at image build",
+        "Service": "",
+        "Carries": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+        "Access": "reads"
+      }
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a1256e-8662-7925-9097-a884e87a2658",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "Streamable HTTP",
+        "Service": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+        "Carries": "01a0c2a7-ffa8-7a7a-a98a-0c5aed378ea7",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "Messages API",
+        "Service": "",
+        "Carries": "",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a1256e-f10e-71e1-be79-fad934671484",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "System One API",
+        "Service": "",
+        "Carries": "",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-2b1d-758d-a75f-605949596608",
+        "Access": "writes"
+      }
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+      "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+      "to": "01a0c202-d668-701a-b86c-a9d622fccc98",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "to": "01a0c202-d668-701a-b86c-a9d622fccc98",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-0c79-750e-820f-b0a8daa484f4",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a1256e-7726-7a24-8893-05b527b55325",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a0c202-d668-701a-b86c-a9d622fccc98",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a0c220-5148-749e-a2c6-120ee4de50dd",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a0c220-5148-7958-80bb-92629861f970",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "to": "01a1256e-7726-7a24-8893-05b527b55325",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "to": "01a107db-5255-7b65-85f7-4e05bc9d2fed",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-f10e-71e1-be79-fad934671484",
+      "to": "01a1256e-7726-7a24-8893-05b527b55325",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-f10e-71e1-be79-fad934671484",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-f10e-71e1-be79-fad934671484",
+      "to": "01a107de-42df-7ec1-ab8f-49d478a1abc2",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-f10e-71e1-be79-fad934671484",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-f10e-71e1-be79-fad934671484",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+      "to": "01a1256e-8662-7925-9097-a884e87a2658",
+      "via": "provided-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+      "to": "01a0c29a-9610-7599-88be-da45e0941d77",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+      "to": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "via": "provided-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+      "to": "01a0d646-a0a0-74f1-95d4-cacbba20c3ab",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+      "to": "01a10a8a-fb15-798b-b3a3-6379060ee373",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "the vocabulary's repository",
+        "Service": "",
+        "Carries": "01a0c2a7-ffa8-7321-8656-ce1a28092a97",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "the instance's repository",
+        "Service": "",
+        "Carries": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "the design package",
+        "Service": "",
+        "Carries": "",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a0c29a-9610-7475-9d42-df639029335a",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "to": "01a0c29a-9610-7d3a-a3de-244a58f09307",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12590-0c79-750e-820f-b0a8daa484f4",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12590-0c79-750e-820f-b0a8daa484f4",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12590-2b1d-758d-a75f-605949596608",
+      "to": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12590-2b1d-758d-a75f-605949596608",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-2b1d-758d-a75f-605949596608",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
