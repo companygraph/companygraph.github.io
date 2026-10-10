@@ -1,6 +1,6 @@
 {
-  "commit": "a34e03366991d99b74a12c2f2ffbbd5d5da93d9e",
-  "core": "0.65.0",
+  "commit": "fc2e6ad7eddf1f806ab3ff9c7fb0b2f6b09da637",
+  "core": "0.66.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -28865,7 +28865,6 @@
         "id": "01a1256e-e202-757e-8a03-e1c9e58b174a",
         "source": "Local",
         "kind": "SaaS",
-        "vendor": "Anthropic",
         "owner": "Owner",
         "processor": "Anthropic",
         "serves": [
@@ -28919,7 +28918,6 @@
         "id": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
         "source": "Local",
         "kind": "Platform",
-        "vendor": "Google",
         "owner": "Owner",
         "processor": "Google Cloud",
         "serves": [
@@ -29009,7 +29007,6 @@
         "id": "01a1256e-a48a-7d64-ae90-32f51de52f77",
         "source": "Local",
         "kind": "Platform",
-        "vendor": "Google",
         "owner": "Owner",
         "processor": "Google Cloud",
         "serves": [
@@ -29524,7 +29521,6 @@
         "id": "01a1256e-f10e-71e1-be79-fad934671484",
         "source": "Local",
         "kind": "SaaS",
-        "vendor": "TypeSafe",
         "owner": "Owner",
         "processor": "TypeSafe",
         "serves": [
