@@ -40,7 +40,7 @@
   S.take = typed(60, 480);
 
   Array.prototype.forEach.call(document.querySelectorAll(".slide[data-scene]"), function (slide) {
-    var sc = S[slide.dataset.scene], el = slide.querySelector(".win") || slide.querySelector(".flow"), cur = null;
+    var sc = S[slide.dataset.scene], el = slide.querySelector(".win"), cur = null;
     if (!sc || !el) return;
     function start() {
       if (cur) return;
