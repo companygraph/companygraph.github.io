@@ -1,11 +1,16 @@
 {
-  "commit": "93e13f7288312730e7a053d2718b8ec5b4335ef1",
+  "commit": "79ef3ef55f003cba3e24f0ecec1218855adec81a",
   "root": "Meta-model",
   "rootId": null,
   "types": [
     {
       "type": "core",
       "folder": "core",
+      "owner": null
+    },
+    {
+      "type": "landscape",
+      "folder": "landscape",
       "owner": null
     },
     {
@@ -4695,10 +4700,10 @@
                   "The area of the company this product belongs to — the H1 of a file in `domains/`"
                 ],
                 [
-                  "`audience`",
-                  "No",
-                  "string",
-                  "Free-text grouping, e.g. `Staff`. Whether an audience becomes an entity of its own is deliberately open."
+                  "`kind`",
+                  "Yes",
+                  "ref → product-kind",
+                  "What sort of thing this product is, the H1 of a file in `product-kinds/`"
                 ]
               ]
             }
@@ -4737,10 +4742,10 @@
                 "The area of the company this product belongs to — the H1 of a file in `domains/`"
               ],
               [
-                "`audience`",
-                "No",
-                "string",
-                "Free-text grouping, e.g. `Staff`. Whether an audience becomes an entity of its own is deliberately open."
+                "`kind`",
+                "Yes",
+                "ref → product-kind",
+                "What sort of thing this product is, the H1 of a file in `product-kinds/`"
               ]
             ]
           }
@@ -4831,7 +4836,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline names what the product is and who opens it, in that order, and claims nothing about how well it does either.\n- The H1 names the product as the people who use it name it, not as its repository or its internal project is named.\n- `domain` names the one domain whose concepts the product's users came to it for. A product that works across two still names one, and the concepts its features name show the rest.\n- The page says nothing about a release, a version or a roadmap: a product outlives all three.",
+          "text": "- The tagline names what the product is and who opens it, in that order, and claims nothing about how well it does either.\n- The H1 names the product as the people who use it name it, not as its repository or its internal project is named.\n- `domain` names the one domain whose concepts the product's users came to it for. A product that works across two still names one, and the concepts its features name show the rest.\n- The page says nothing about a release, a version or a roadmap: a product outlives all three.\n- `kind` is the one a reader looking for this product would look under first; a product that\n  seems to need two is two products, or sits where most readers would look for it.",
           "tables": []
         },
         {
@@ -4842,6 +4847,198 @@
       ],
       "owner": null,
       "path": "core/product-schema.md"
+    },
+    {
+      "id": "01a12186-4ca9-72e8-9e81-17ee888e32f6",
+      "address": "core/product-kind",
+      "type": "core",
+      "name": "Product Kind Schema",
+      "tagline": "Required structure for product kind files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The kind's position wherever products are drawn grouped. Spaced in tens so a kind can be added without renumbering the others."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The kind's position wherever products are drawn grouped. Spaced in tens so a kind can be added without renumbering the others."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every product references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what sort of thing the products of this kind are"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "Who opens a product of this kind, which products belong to it, and which do not"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a classification, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every product references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what sort of thing the products of this kind are"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "Who opens a product of this kind, which products belong to it, and which do not"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A kind answers \"what sort of thing does this company ship?\", the question a reader cannot otherwise ask of a folder that holds a box of pralines, an online shop and the systems behind a store side by side. Its value is that the answer is a reference rather than a word: two products of one kind are the same sort of thing, a surface can draw the products of one kind together, and the chat can say what the company ships from the model rather than from its own reading. A kind holds at least one product; a kind no product names is vocabulary nobody uses, and leaves, once the instance holds a product.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` says who opens a product of this kind, a customer, a franchisee, the\n  company's own staff, since that is the one sentence that tells a channel from the systems\n  behind it, and it has nowhere else to live.\n- `## What it means` says what the kind excludes as well as what it covers. The boundary\n  between a channel and the thing sold through it, or between what IT provides and what the\n  business sells, is where every disagreement will be.\n- `## What it means` is about the sort of thing, never about how well a product of it does,\n  how many there are or what they earn. Those belong to the product, or to nothing in the\n  model.\n- The H1 names what a product of this kind is, `Channel`, `IT product`, and never the type,\n  `Product`, a market or a business unit.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/product-kinds/*.md`\n\nA kind owns nothing and nothing owns it: every product claims one of the same few, and what each kind covers lives here rather than being restated on every product. It sits at the container root beside `products/`, as `question-kinds/` sits beside `questions/`.\n\nThe set is the instance's own, as a question kind's is. What a company ships, chocolate, the channels it sells through, what its IT provides to its staff, is a fact about that company, and a kind arriving later is one file here, not a change to this metamodel and a release of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "core/product-kind-schema.md"
     },
     {
       "id": "01a02f8b-db90-7d28-8506-23282bf3a383",
@@ -8293,6 +8490,990 @@
       "path": "core/vision-schema.md"
     },
     {
+      "id": "01a1226b-c58f-7a35-85fb-6ccaa493cc9f",
+      "address": "landscape/data-object",
+      "type": "landscape",
+      "name": "Data Object Schema",
+      "tagline": "Required structure for data object files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source, an element's GUID in an architecture tool. Absent when the source has none."
+                ],
+                [
+                  "`realizes`",
+                  "Yes",
+                  "ref → concept",
+                  "The concept whose data this is, the H1 of a file in `concepts/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source, an element's GUID in an architecture tool. Absent when the source has none."
+              ],
+              [
+                "`realizes`",
+                "Yes",
+                "ref → concept",
+                "The concept whose data this is, the H1 of a file in `concepts/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Data object]`",
+                  "Yes",
+                  "The canonical name, as the people who keep it name it"
+                ],
+                [
+                  "`> [What it holds]`",
+                  "Yes",
+                  "One-paragraph statement of what it holds and in what form"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the data object; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a data dictionary, a schema, an architecture view"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Data object]`",
+                "Yes",
+                "The canonical name, as the people who keep it name it"
+              ],
+              [
+                "`> [What it holds]`",
+                "Yes",
+                "One-paragraph statement of what it holds and in what form"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the data object; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A data object answers \"in what form, and where, does the company keep this?\" for whoever maps a concept to the systems that hold it, migrates one of them or answers for a record. It is the layer below the concept: what a system stores, not what the business means by it. Data whose meaning nobody can name has no page here, as a function nobody uses has none. A field list is left for later.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 names the data as the people who keep it name it, `Invoice record`, `ARTICLE`, never as\n  the concept it realizes, which has its own page.\n- The tagline says what the data object holds and in what form, a table, a file, a message, and\n  claims nothing about its quality.\n- `realizes` names the one concept this is the data of; data that is the data of two concepts is two\n  data objects.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/data-objects/*.md`\n\nA data object is owned by nothing: several systems hold one, so it is a file, and each system's `## Holds` row names it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/landscape/data-object-schema.md"
+    },
+    {
+      "id": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "address": "landscape/service",
+      "type": "landscape",
+      "name": "Service Schema",
+      "tagline": "Required structure for service files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source, an element's GUID in an architecture tool. Absent when the source has none."
+                ],
+                [
+                  "`provided-by`",
+                  "Yes",
+                  "array of ref → system",
+                  "The systems that expose this service, each the H1 of a file in `systems/`; several where several realize one"
+                ],
+                [
+                  "`realizes`",
+                  "No",
+                  "array of ref → feature",
+                  "The features this service gives people, through the products that carry them, each the H1 of a file in `features/`"
+                ],
+                [
+                  "`serves`",
+                  "No",
+                  "array of ref → process",
+                  "The processes this service carries, each the H1 of a process's own file"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source, an element's GUID in an architecture tool. Absent when the source has none."
+              ],
+              [
+                "`provided-by`",
+                "Yes",
+                "array of ref → system",
+                "The systems that expose this service, each the H1 of a file in `systems/`; several where several realize one"
+              ],
+              [
+                "`realizes`",
+                "No",
+                "array of ref → feature",
+                "The features this service gives people, through the products that carry them, each the H1 of a file in `features/`"
+              ],
+              [
+                "`serves`",
+                "No",
+                "array of ref → process",
+                "The processes this service carries, each the H1 of a process's own file"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Service]`",
+                  "Yes",
+                  "The canonical name of the service, as its consumers call it"
+                ],
+                [
+                  "`> [What it exposes]`",
+                  "Yes",
+                  "One-paragraph statement of what the service exposes and to whom"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the service; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — an interface description, a vendor's documentation, an architecture view"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Service]`",
+                "Yes",
+                "The canonical name of the service, as its consumers call it"
+              ],
+              [
+                "`> [What it exposes]`",
+                "Yes",
+                "One-paragraph statement of what the service exposes and to whom"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the service; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A service answers \"what does this system offer the others, and who depends on it?\", the question an outage or a replacement asks first. ArchiMate 4's application and technology services are both specializations of the Common Domain's Service, so it is one type and has no kind. A system's own `realizes` and `serves` stay for an instance that models no services.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 names the service as its consumers call it, `Invoice feed`, `Price lookup`, never by the\n  system behind it.\n- The tagline says what is exposed and to whom, in the consumer's words.\n- `provided-by` names the systems that expose the service, never one that only calls it.\n- `realizes` names features in the words of those features; a service nobody outside its system\n  uses realizes nothing.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/services/*.md`\n\nA service is owned by nothing, and several systems may provide one, so the edge is written here: a connection row on a system can then be held to the services that system provides.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/landscape/service-schema.md"
+    },
+    {
+      "id": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "address": "landscape/system",
+      "type": "landscape",
+      "name": "System Schema",
+      "tagline": "Required structure for system files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source, an element's GUID in an architecture tool. Absent when the source has none."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "ref → system-kind",
+                  "What sort of system this is, the H1 of a file in `system-kinds/`; its `element` says which ArchiMate element a system of this kind is"
+                ],
+                [
+                  "`vendor`",
+                  "No",
+                  "string",
+                  "Who makes it. A name, not a reference: a vendor is an entity only when it processes personal data, which `processor` says."
+                ],
+                [
+                  "`lifecycle`",
+                  "No",
+                  "enum",
+                  "`planned`, `active`, `retiring` or `retired`. The stage the system is in, not a date (LeanIX, application lifecycle)."
+                ],
+                [
+                  "`criticality`",
+                  "No",
+                  "enum",
+                  "`high`, `medium` or `low`. What stops when it stops."
+                ],
+                [
+                  "`owner`",
+                  "No",
+                  "ref → seat",
+                  "The seat accountable for what the system does for the business, the H1 of a file in `seats/`"
+                ],
+                [
+                  "`operator`",
+                  "No",
+                  "ref → seat",
+                  "The seat that runs it, the H1 of a file in `seats/`"
+                ],
+                [
+                  "`processor`",
+                  "No",
+                  "ref → data-processor",
+                  "The party outside the company that runs it where it handles personal data, the H1 of a file in `data-processors/`; the contract sits on that page"
+                ],
+                [
+                  "`part-of`",
+                  "No",
+                  "ref → system",
+                  "The system this one runs on or in, the H1 of another file in `systems/`: the device a terminal is, the node an application runs on. Written on the part; the whole lists nothing."
+                ],
+                [
+                  "`domain`",
+                  "No",
+                  "ref → domain",
+                  "The area of the company the system belongs to where it realizes no feature, the H1 of a file in `domains/`"
+                ],
+                [
+                  "`realizes`",
+                  "No",
+                  "array of ref → feature",
+                  "The features this system gives, each the H1 of a file in `features/`"
+                ],
+                [
+                  "`serves`",
+                  "No",
+                  "array of ref → process",
+                  "The processes this system carries where no feature names it yet, each the H1 of a process's own file"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source, an element's GUID in an architecture tool. Absent when the source has none."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "ref → system-kind",
+                "What sort of system this is, the H1 of a file in `system-kinds/`; its `element` says which ArchiMate element a system of this kind is"
+              ],
+              [
+                "`vendor`",
+                "No",
+                "string",
+                "Who makes it. A name, not a reference: a vendor is an entity only when it processes personal data, which `processor` says."
+              ],
+              [
+                "`lifecycle`",
+                "No",
+                "enum",
+                "`planned`, `active`, `retiring` or `retired`. The stage the system is in, not a date (LeanIX, application lifecycle)."
+              ],
+              [
+                "`criticality`",
+                "No",
+                "enum",
+                "`high`, `medium` or `low`. What stops when it stops."
+              ],
+              [
+                "`owner`",
+                "No",
+                "ref → seat",
+                "The seat accountable for what the system does for the business, the H1 of a file in `seats/`"
+              ],
+              [
+                "`operator`",
+                "No",
+                "ref → seat",
+                "The seat that runs it, the H1 of a file in `seats/`"
+              ],
+              [
+                "`processor`",
+                "No",
+                "ref → data-processor",
+                "The party outside the company that runs it where it handles personal data, the H1 of a file in `data-processors/`; the contract sits on that page"
+              ],
+              [
+                "`part-of`",
+                "No",
+                "ref → system",
+                "The system this one runs on or in, the H1 of another file in `systems/`: the device a terminal is, the node an application runs on. Written on the part; the whole lists nothing."
+              ],
+              [
+                "`domain`",
+                "No",
+                "ref → domain",
+                "The area of the company the system belongs to where it realizes no feature, the H1 of a file in `domains/`"
+              ],
+              [
+                "`realizes`",
+                "No",
+                "array of ref → feature",
+                "The features this system gives, each the H1 of a file in `features/`"
+              ],
+              [
+                "`serves`",
+                "No",
+                "array of ref → process",
+                "The processes this system carries where no feature names it yet, each the H1 of a process's own file"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [System]`",
+                  "Yes",
+                  "The canonical name of the system, as the people who use or run it name it"
+                ],
+                [
+                  "`> [What it does]`",
+                  "Yes",
+                  "One-paragraph statement of what the system does and for whom"
+                ],
+                [
+                  "`## Connects to`",
+                  "No",
+                  "Table. One row per integration this system takes data over, written on the side that takes it; its columns are declared below."
+                ],
+                [
+                  "`## Holds`",
+                  "No",
+                  "Table. One row per concept this system keeps data of; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the system; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Connects to` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`System`",
+                  "Yes",
+                  "ref → system",
+                  "The system the data comes from, by its canonical name"
+                ],
+                [
+                  "`As`",
+                  "No",
+                  "string",
+                  "The interface the connection goes through, by its own name: `Payment network – Tillpay`. Required where two rows name the same system (R16)."
+                ],
+                [
+                  "`Service`",
+                  "No",
+                  "qualifier → service",
+                  "`provided-by` lists `System`. The service of that system the connection calls, by its canonical name"
+                ],
+                [
+                  "`Carries`",
+                  "No",
+                  "qualifier → concept",
+                  "What the connection carries, by the concept's canonical name"
+                ],
+                [
+                  "`Via`",
+                  "No",
+                  "string",
+                  "How it is carried: a protocol, a file, a message queue"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Holds` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Concept`",
+                  "Yes",
+                  "ref → concept",
+                  "What the system keeps data of, by its canonical name"
+                ],
+                [
+                  "`Data object`",
+                  "No",
+                  "qualifier → data-object",
+                  "`realizes` lists `Concept`. The representation this system keeps of the concept, by its canonical name"
+                ],
+                [
+                  "`Access`",
+                  "Yes",
+                  "enum",
+                  "`master`, `writes` or `reads`. The one system whose copy leads, a system that writes a copy, or one that only reads (ArchiMate 4, access relationship)."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — an operations manual, a vendor's documentation, an architecture view"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [System]`",
+                "Yes",
+                "The canonical name of the system, as the people who use or run it name it"
+              ],
+              [
+                "`> [What it does]`",
+                "Yes",
+                "One-paragraph statement of what the system does and for whom"
+              ],
+              [
+                "`## Connects to`",
+                "No",
+                "Table. One row per integration this system takes data over, written on the side that takes it; its columns are declared below."
+              ],
+              [
+                "`## Holds`",
+                "No",
+                "Table. One row per concept this system keeps data of; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the system; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A system answers \"what does this run on, what does it carry, who owns it and what breaks when it stops?\" for whoever plans a replacement, answers for an outage or asks which system masters a customer record. It is the layer below the feature: what IT buys, builds, runs and retires, whatever it is made of. It is not a product, which is what somebody uses on its own, and not a feature, which is what they do with it; a system that gives people something to do realizes a feature, and the feature says what.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 names the system as staff name it, `Kassensystem`, `Filialsystem`, and never by its\n  vendor or its product name alone; the vendor goes to `vendor`. An architecture tool's habit of\n  writing both into one name, `Kassensystem – Tillworks Retail`, splits into the H1 and the\n  field.\n- The tagline says what the system does and for whom, and claims nothing about how well.\n- `kind` names what sort of system it is, what it is made of and who runs it, not what it is for:\n  a payment terminal is of a kind whose `element` is `device` whatever it runs, and the software on\n  it, where that is a system of its own, is of an application kind and `part-of` the terminal.\n- `realizes` names features of the products staff and customers open, in the words of those\n  features; a system that gives nobody anything to do, a network, a camera, realizes nothing and\n  names its `domain`, or the processes it `serves`, instead.\n- `## Connects to` is written on the system that takes the data. An exchange both ways is two\n  rows, one on each page.\n- `## Holds` names concepts, not tables or files, and one system holds a concept as `master`:\n  the one whose copy the others are copies of.\n- `## Holds` names a concept once per data object the system keeps of it, and once where it keeps\n  none, each at its strongest access: a system that writes a concept reads it too, and a row for\n  each would draw one edge twice.\n- `## Holds` names the data object the system keeps of the concept where one is modeled, and leaves\n  the cell blank where it keeps the concept in no form the model names yet.\n- `## Connects to` names the service the connection calls where one is modeled, in the same row as\n  the interface it goes through.\n- The page states no cost, no license count and no version. Those move, and a contract register\n  or a configuration database holds them.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/systems/*.md`\n\nA system owns nothing and nothing owns it, so it is a file. What it runs on or in is its `part-of`, so a terminal moves from one node to another by editing a line and no file moves, and a device that holds no application is a page like any other.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/landscape/system-schema.md"
+    },
+    {
+      "id": "01a12230-c82d-71c9-9871-a01cbb55497e",
+      "address": "landscape/system-kind",
+      "type": "landscape",
+      "name": "System Kind Schema",
+      "tagline": "Required structure for system kind files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The kind's position wherever systems are drawn grouped. Spaced in tens so a kind can be added without renumbering the others."
+                ],
+                [
+                  "`element`",
+                  "Yes",
+                  "enum",
+                  "`application-component`, `node`, `system-software`, `device`, `equipment` or `communication-network`. The ArchiMate 4 element a system of this kind is, an internal active structure element of the Application or Technology Domain (chapters 9 and 10), read by a generator in either direction; the kind is that element's profile-based specialization (§14.2)."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The kind's position wherever systems are drawn grouped. Spaced in tens so a kind can be added without renumbering the others."
+              ],
+              [
+                "`element`",
+                "Yes",
+                "enum",
+                "`application-component`, `node`, `system-software`, `device`, `equipment` or `communication-network`. The ArchiMate 4 element a system of this kind is, an internal active structure element of the Application or Technology Domain (chapters 9 and 10), read by a generator in either direction; the kind is that element's profile-based specialization (§14.2)."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every system references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what sort of system this kind holds"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "What a system of this kind is made of, who runs or holds it, and which systems are not of it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the kind; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a classification, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every system references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what sort of system this kind holds"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "What a system of this kind is made of, who runs or holds it, and which systems are not of it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the kind; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A kind answers \"what sort of system is this?\" in the company's words, `SaaS`, `Store device`, `Cloud platform`, and carries once the one fact a tool needs, which element it is, so the system page says what staff say and the element comes back exact from an architecture tool, and the kind where the tool carries a specialization. A kind holds at least one system; a kind no system names is vocabulary nobody uses, and leaves, once the instance holds a system.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` says what a system of this kind is made of and who runs or holds it, since\n  that is what tells a device in a store from the software on it, and it has nowhere else to live.\n- `## What it means` says what the kind excludes as well as what it covers.\n- `element` is the ArchiMate element and nothing more: two kinds may share one, `SaaS` and\n  `Service` are both an application component, and the kind is what tells them apart.\n- The H1 names what the system is, `SaaS`, `Store device`, and never the element,\n  `Application component`, or the type, `System`.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/system-kinds/*.md`\n\nA kind owns nothing and nothing owns it: every system claims one of the same few, and what each kind covers lives here rather than being restated on every system. It sits beside `systems/` as `product-kinds/` sits beside `products/`.\n\nThe set is the instance's own. A kind arriving later is one file here, not a change to this metamodel and a release of it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/landscape/system-kind-schema.md"
+    },
+    {
       "id": "01a114eb-b0a9-7c5a-b639-9033f599f5f9",
       "address": "organization/group",
       "type": "organization",
@@ -10950,6 +12131,15 @@
       "label": "supported-by"
     },
     {
+      "from": "01a12186-4ca9-72e8-9e81-17ee888e32f6",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
       "from": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
       "to": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
       "via": "domain",
@@ -10957,6 +12147,15 @@
         "type": "ref → domain"
       },
       "label": "domain"
+    },
+    {
+      "from": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
+      "to": "01a12186-4ca9-72e8-9e81-17ee888e32f6",
+      "via": "kind",
+      "attrs": {
+        "type": "ref → product-kind"
+      },
+      "label": "kind"
     },
     {
       "from": "01a0c231-9ef8-7add-8875-3ed58850ec6e",
@@ -11255,6 +12454,195 @@
     },
     {
       "from": "01a04c7b-6b80-711e-bc03-252a77c875ab",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a1226b-c58f-7a35-85fb-6ccaa493cc9f",
+      "to": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "via": "realizes",
+      "attrs": {
+        "type": "ref → concept"
+      },
+      "label": "realizes"
+    },
+    {
+      "from": "01a1226b-c58f-7a35-85fb-6ccaa493cc9f",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "to": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "via": "provided-by",
+      "attrs": {
+        "type": "array of ref → system"
+      },
+      "label": "provided-by"
+    },
+    {
+      "from": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "to": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "via": "realizes",
+      "attrs": {
+        "type": "array of ref → feature"
+      },
+      "label": "realizes"
+    },
+    {
+      "from": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "to": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "via": "serves",
+      "attrs": {
+        "type": "array of ref → process"
+      },
+      "label": "serves"
+    },
+    {
+      "from": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a12230-c82d-71c9-9871-a01cbb55497e",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "via": "Connects to.Carries",
+      "attrs": {
+        "type": "qualifier → concept"
+      },
+      "label": "Connects to.Carries"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "via": "Connects to.Service",
+      "attrs": {
+        "type": "qualifier → service"
+      },
+      "label": "Connects to.Service"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "via": "Connects to.System",
+      "attrs": {
+        "type": "ref → system"
+      },
+      "label": "Connects to.System"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0c233-ae50-7e67-96c8-bb9a8d116ca7",
+      "via": "Holds.Concept",
+      "attrs": {
+        "type": "ref → concept"
+      },
+      "label": "Holds.Concept"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a1226b-c58f-7a35-85fb-6ccaa493cc9f",
+      "via": "Holds.Data object",
+      "attrs": {
+        "type": "qualifier → data-object"
+      },
+      "label": "Holds.Data object"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
+      "via": "domain",
+      "attrs": {
+        "type": "ref → domain"
+      },
+      "label": "domain"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a12230-c82d-71c9-9871-a01cbb55497e",
+      "via": "kind",
+      "attrs": {
+        "type": "ref → system-kind"
+      },
+      "label": "kind"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "operator",
+      "attrs": {
+        "type": "ref → seat"
+      },
+      "label": "operator"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "owner",
+      "attrs": {
+        "type": "ref → seat"
+      },
+      "label": "owner"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "via": "part-of",
+      "attrs": {
+        "type": "ref → system"
+      },
+      "label": "part-of"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a10522-0ea5-7706-b34d-71f2af083427",
+      "via": "processor",
+      "attrs": {
+        "type": "ref → data-processor"
+      },
+      "label": "processor"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "via": "realizes",
+      "attrs": {
+        "type": "array of ref → feature"
+      },
+      "label": "realizes"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a0a8b4-7978-7026-a388-b10e041b45b5",
+      "via": "serves",
+      "attrs": {
+        "type": "array of ref → process"
+      },
+      "label": "serves"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
