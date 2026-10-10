@@ -17,5 +17,5 @@ await exportDecks({
   PDFDocument,
   PDFString,
   root: path.dirname(fileURLToPath(import.meta.url)),
-  decks: [{ dir: "talks/intro", slug: "companygraph" }, { dir: "talks/obsidian-plugin", slug: "obsidian-plugin" }, { dir: "talks/levels", slug: "levels" }, { dir: "talks/what-stays", slug: "what-stays" }],
+  decks: [{ dir: "talks/intro", slug: "companygraph" }, { dir: "talks/obsidian-plugin", slug: "obsidian-plugin" }, { dir: "talks/levels", slug: "levels" }, { dir: "talks/what-stays", slug: "what-stays" }, { dir: "talks/core-and-packs", slug: "core-and-packs" }],
 });
