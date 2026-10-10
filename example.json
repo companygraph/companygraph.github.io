@@ -1,6 +1,6 @@
 {
-  "commit": "93e13f7288312730e7a053d2718b8ec5b4335ef1",
-  "core": "0.64.0",
+  "commit": "79ef3ef55f003cba3e24f0ecec1218855adec81a",
+  "core": "0.65.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -25,6 +25,12 @@
     {
       "type": "control",
       "folder": "controls",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "data-object",
+      "folder": "data-objects",
       "owner": null,
       "singular": false
     },
@@ -143,6 +149,12 @@
       "singular": false
     },
     {
+      "type": "product-kind",
+      "folder": "product-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "proficiency-level",
       "folder": "proficiency-levels",
       "owner": null,
@@ -185,6 +197,12 @@
       "singular": false
     },
     {
+      "type": "service",
+      "folder": "services",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "skill",
       "folder": "skills",
       "owner": null,
@@ -217,6 +235,18 @@
     {
       "type": "surface",
       "folder": "surfaces",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "system",
+      "folder": "systems",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "system-kind",
+      "folder": "system-kinds",
       "owner": null,
       "singular": false
     },
@@ -1153,6 +1183,21 @@
       ],
       "owner": null,
       "path": "example/model/controls/main-requires-a-review.md"
+    },
+    {
+      "id": "01a1226b-c617-7a13-9570-6f418579c6dc",
+      "address": "data-objects/invoice-record",
+      "type": "data-object",
+      "name": "Invoice record",
+      "tagline": "The row set the Billing service writes for each issued invoice, with its lines and totals, kept in the billing database.",
+      "fields": {
+        "id": "01a1226b-c617-7a13-9570-6f418579c6dc",
+        "source": "Local",
+        "realizes": "Invoice"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/data-objects/invoice-record.md"
     },
     {
       "id": "01a10523-72fd-716a-adde-7b185258fad6",
@@ -3189,6 +3234,69 @@
       "path": "example/model/processing-activities/invoice-delivery.md"
     },
     {
+      "id": "01a1218a-eab6-7a05-be07-a764f7c083db",
+      "address": "product-kinds/api",
+      "type": "product-kind",
+      "name": "API",
+      "tagline": "An interface the systems of a customer send to or read from, set up by a developer.",
+      "fields": {
+        "id": "01a1218a-eab6-7a05-be07-a764f7c083db",
+        "source": "Local",
+        "rank": "30"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A product of this kind is opened by a developer on the customer's side, once, to connect a system of theirs; after that the systems talk and no person looks at it. The Usage API is this kind.\n\nWhat a person works in is Application, and what a person reads from a link is Page.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/product-kinds/api.md"
+    },
+    {
+      "id": "01a1218a-ea4b-719a-8ff6-c652c9eea5ee",
+      "address": "product-kinds/application",
+      "type": "product-kind",
+      "name": "Application",
+      "tagline": "Software a customer's own people sign in to and work in.",
+      "fields": {
+        "id": "01a1218a-ea4b-719a-8ff6-c652c9eea5ee",
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A product of this kind is opened by the staff of a company billing through Beacon, signed in, as part of their work: the finance team in the Billing Console. It is this kind when the person opening it is on the customer's side and comes back to it.\n\nA page somebody reaches once from a link, to read or pay, is Page. An interface another system calls is API.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/product-kinds/application.md"
+    },
+    {
+      "id": "01a1218a-ea82-78fc-ae73-ccb3b2d20727",
+      "address": "product-kinds/page",
+      "type": "product-kind",
+      "name": "Page",
+      "tagline": "A page somebody reaches from a link, to read something or pay it, without an account.",
+      "fields": {
+        "id": "01a1218a-ea82-78fc-ae73-ccb3b2d20727",
+        "source": "Local",
+        "rank": "20"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A product of this kind is opened by whoever an invoice or a notice is addressed to, following a link, with nothing to sign in to: the payer on the Invoice Page. It is this kind when the person opening it may never come back and needs no account.\n\nSoftware a customer's own staff sign in to is Application. An interface a developer connects is API.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/product-kinds/page.md"
+    },
+    {
       "id": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
       "address": "products/billing-console",
       "type": "product",
@@ -3198,7 +3306,7 @@
         "id": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
         "source": "Local",
         "domain": "Pricing",
-        "audience": "Finance"
+        "kind": "Application"
       },
       "sections": [],
       "owner": null,
@@ -3214,7 +3322,7 @@
         "id": "01a0c25c-19f8-764b-a67b-1073041d82ed",
         "source": "Local",
         "domain": "Invoicing",
-        "audience": "Payer"
+        "kind": "Page"
       },
       "sections": [
         {
@@ -3263,7 +3371,7 @@
         "id": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
         "source": "Local",
         "domain": "Pricing",
-        "audience": "Developer"
+        "kind": "API"
       },
       "sections": [],
       "owner": null,
@@ -4434,6 +4542,26 @@
       "path": "example/model/seats/reviewer.md"
     },
     {
+      "id": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
+      "address": "services/invoice-feed",
+      "type": "service",
+      "name": "Invoice feed",
+      "tagline": "The feed of finished invoices the Billing service exposes to whoever delivers or shows one.",
+      "fields": {
+        "id": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
+        "source": "Local",
+        "provided-by": [
+          "Billing service"
+        ],
+        "realizes": [
+          "Invoice download"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/services/invoice-feed.md"
+    },
+    {
       "id": "01a02f53-2408-7255-a610-b931d033c1d4",
       "address": "skills/domain-driven-design",
       "type": "skill",
@@ -4656,6 +4784,317 @@
       ],
       "owner": null,
       "path": "example/model/surfaces/partner-directory.md"
+    },
+    {
+      "id": "01a12230-f6e1-7682-a291-7ed1910422a6",
+      "address": "system-kinds/platform",
+      "type": "system-kind",
+      "name": "Platform",
+      "tagline": "What Beacon's services run on, rented from a provider and run by Beacon.",
+      "fields": {
+        "id": "01a12230-f6e1-7682-a291-7ed1910422a6",
+        "source": "Local",
+        "rank": "20",
+        "element": "node"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A cluster, a database host, run by Beacon's engineers on a provider's machines; it does nothing a customer sees.\n\nSoftware with a job of its own is Service or SaaS.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/system-kinds/platform.md"
+    },
+    {
+      "id": "01a12230-f717-739f-9051-f62c78c974a0",
+      "address": "system-kinds/saas",
+      "type": "system-kind",
+      "name": "SaaS",
+      "tagline": "Software a vendor runs for Beacon, reached over the internet and paid for by use.",
+      "fields": {
+        "id": "01a12230-f717-739f-9051-f62c78c974a0",
+        "source": "Local",
+        "rank": "30",
+        "element": "application-component"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "The vendor runs it, Beacon connects to it, and where it handles personal data the vendor is a data processor named on the page.\n\nSoftware Beacon runs itself is Service, whatever it does.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/system-kinds/saas.md"
+    },
+    {
+      "id": "01a12230-f6a8-78e3-8025-fb23ef13317d",
+      "address": "system-kinds/service",
+      "type": "system-kind",
+      "name": "Service",
+      "tagline": "Software Beacon builds and runs itself, deployed to its own cluster.",
+      "fields": {
+        "id": "01a12230-f6a8-78e3-8025-fb23ef13317d",
+        "source": "Local",
+        "rank": "10",
+        "element": "application-component"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "Opened by nobody directly: the products are the faces people see, and a service stands behind them, built by Beacon's engineers and run on the Beacon cluster.\n\nSoftware a vendor runs for Beacon is SaaS; what services run on is Platform.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/system-kinds/service.md"
+    },
+    {
+      "id": "01a12190-1c52-75a6-acde-c992a62c115a",
+      "address": "systems/beacon-cluster",
+      "type": "system",
+      "name": "Beacon cluster",
+      "tagline": "The managed Kubernetes cluster every Beacon service is deployed to, where a release lands at the end of the delivery process.",
+      "fields": {
+        "id": "01a12190-1c52-75a6-acde-c992a62c115a",
+        "source": "Local",
+        "kind": "Platform",
+        "vendor": "Harbor Cloud",
+        "lifecycle": "active",
+        "criticality": "high",
+        "operator": "Backend Engineer",
+        "serves": [
+          "Delivery"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "example/model/systems/beacon-cluster.md"
+    },
+    {
+      "id": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "address": "systems/billing-service",
+      "type": "system",
+      "name": "Billing service",
+      "tagline": "The service that runs every billing run, prices each customer's usage against its contract, and writes the invoices and credit notes the Billing Console and the Invoice Page show.",
+      "fields": {
+        "id": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+        "source": "Local",
+        "kind": "Service",
+        "lifecycle": "active",
+        "criticality": "high",
+        "owner": "Backend Engineer",
+        "part-of": "Beacon cluster",
+        "realizes": [
+          "Billing run",
+          "Pricing rules",
+          "Credit notes",
+          "Charge explanation"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Invoice",
+                  "Invoice record",
+                  "master"
+                ],
+                [
+                  "Invoice line",
+                  "",
+                  "master"
+                ],
+                [
+                  "Credit note",
+                  "",
+                  "master"
+                ],
+                [
+                  "Pricing rule",
+                  "",
+                  "master"
+                ],
+                [
+                  "Customer",
+                  "",
+                  "reads"
+                ],
+                [
+                  "Usage record",
+                  "",
+                  "reads"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Invoice",
+                "Invoice record",
+                "master"
+              ],
+              [
+                "Invoice line",
+                "",
+                "master"
+              ],
+              [
+                "Credit note",
+                "",
+                "master"
+              ],
+              [
+                "Pricing rule",
+                "",
+                "master"
+              ],
+              [
+                "Customer",
+                "",
+                "reads"
+              ],
+              [
+                "Usage record",
+                "",
+                "reads"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/systems/billing-service.md"
+    },
+    {
+      "id": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "address": "systems/invoice-mailer",
+      "type": "system",
+      "name": "Invoice mailer",
+      "tagline": "The hosted mailer that takes each finished invoice from the Billing service and delivers it to the customer's address.",
+      "fields": {
+        "id": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+        "source": "Local",
+        "kind": "SaaS",
+        "vendor": "Lantern Mail",
+        "lifecycle": "active",
+        "criticality": "medium",
+        "processor": "Lantern Mail",
+        "domain": "Invoicing"
+      },
+      "sections": [
+        {
+          "heading": "Connects to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "System",
+                "As",
+                "Service",
+                "Carries",
+                "Via"
+              ],
+              "rows": [
+                [
+                  "Billing service",
+                  "Feed endpoint",
+                  "Invoice feed",
+                  "Invoice",
+                  "REST"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "System",
+              "As",
+              "Service",
+              "Carries",
+              "Via"
+            ],
+            "rows": [
+              [
+                "Billing service",
+                "Feed endpoint",
+                "Invoice feed",
+                "Invoice",
+                "REST"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Invoice",
+                  "Invoice record",
+                  "reads"
+                ],
+                [
+                  "Customer",
+                  "",
+                  "reads"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Invoice",
+                "Invoice record",
+                "reads"
+              ],
+              [
+                "Customer",
+                "",
+                "reads"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/systems/invoice-mailer.md"
     },
     {
       "id": "01a02f53-2408-79ce-829d-b6012ab3c389",
@@ -5488,6 +5927,12 @@
     },
     {
       "from": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
+      "to": "01a1218a-ea4b-719a-8ff6-c652c9eea5ee",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-73d1-90f2-6b99d03be0a7",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
@@ -5496,6 +5941,12 @@
       "from": "01a0c25c-19f8-764b-a67b-1073041d82ed",
       "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
       "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-764b-a67b-1073041d82ed",
+      "to": "01a1218a-ea82-78fc-ae73-ccb3b2d20727",
+      "via": "kind",
       "attrs": {}
     },
     {
@@ -5778,6 +6229,12 @@
       "from": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
       "to": "01a0c25c-19f8-70f4-803c-9899401b89dd",
       "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c25c-19f8-7f6a-aa9d-2d7a3a1eb26a",
+      "to": "01a1218a-eab6-7a05-be07-a764f7c083db",
+      "via": "kind",
       "attrs": {}
     },
     {
@@ -6457,6 +6914,251 @@
     },
     {
       "from": "01a11fec-8800-7f1d-aefb-030f2f1a31f8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1218a-ea4b-719a-8ff6-c652c9eea5ee",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1218a-ea82-78fc-ae73-ccb3b2d20727",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1218a-eab6-7a05-be07-a764f7c083db",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a1226b-c617-7a13-9570-6f418579c6dc",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "",
+        "Access": "reads"
+      }
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-76b2-92d0-ed85a91331b4",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-788e-8b44-ada689a92da4",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-7980-a019-46b608819370",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-7aa8-92f8-8cb84ce85714",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "",
+        "Access": "reads"
+      }
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a12230-f6a8-78e3-8025-fb23ef13317d",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a12190-1c52-75a6-acde-c992a62c115a",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-775c-bdc0-cbdf0b182b2d",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-776c-ba20-82b391bc6e7a",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-7b11-9b56-2c95a9f92677",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a0c25c-19f8-7b2b-81c4-d2dd9f850e9c",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c52-75a6-acde-c992a62c115a",
+      "to": "01a12230-f6e1-7682-a291-7ed1910422a6",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c52-75a6-acde-c992a62c115a",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "operator",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c52-75a6-acde-c992a62c115a",
+      "to": "01a0a8c7-74d8-7c00-b7dd-6a8118ddc0d3",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c52-75a6-acde-c992a62c115a",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "Feed endpoint",
+        "Service": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
+        "Carries": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+        "Via": "REST"
+      }
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a1226b-c617-7a13-9570-6f418579c6dc",
+        "Access": "reads"
+      }
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a0c25c-19f8-716b-846a-8c5f00818198",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "",
+        "Access": "reads"
+      }
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a0c25c-19f8-79d2-898e-01b6da02bb29",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a12230-f717-739f-9051-f62c78c974a0",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a10523-72fd-716a-adde-7b185258fad6",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a12190-1c8c-7467-b70b-0c658281c7b8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12230-f6a8-78e3-8025-fb23ef13317d",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12230-f6e1-7682-a291-7ed1910422a6",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12230-f717-739f-9051-f62c78c974a0",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1226b-c617-7a13-9570-6f418579c6dc",
+      "to": "01a0c233-ae50-79f4-bba5-989d5353e0e6",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a1226b-c617-7a13-9570-6f418579c6dc",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
+      "to": "01a12190-1c1b-7fa5-a0ec-c93888e10d73",
+      "via": "provided-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
+      "to": "01a0c25c-19f8-77ee-8656-f16c523bdc15",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
