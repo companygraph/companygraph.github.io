@@ -331,6 +331,8 @@ const PAGES = [
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
     fences: [],
     lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["über die innerhalb seiner Grenze eine Prüfung wacht"], hides: ["as pages a check holds to their boundary"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
 ];
 
