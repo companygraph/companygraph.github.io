@@ -1,5 +1,5 @@
 {
-  "commit": "79ef3ef55f003cba3e24f0ecec1218855adec81a",
+  "commit": "e208de4d66e094e1af18b7f0912260df8129433c",
   "root": "Meta-model",
   "rootId": null,
   "types": [
@@ -8926,7 +8926,7 @@
                   "`vendor`",
                   "No",
                   "string",
-                  "Who makes it. A name, not a reference: a vendor is an entity only when it processes personal data, which `processor` says."
+                  "Who makes it, where the model has no page for the party: a name, not a reference. Written only on a system naming no `processor`; where one is named, that page says which party the company's contract is with, and a maker who is another party is named in the tagline."
                 ],
                 [
                   "`lifecycle`",
@@ -9022,7 +9022,7 @@
                 "`vendor`",
                 "No",
                 "string",
-                "Who makes it. A name, not a reference: a vendor is an entity only when it processes personal data, which `processor` says."
+                "Who makes it, where the model has no page for the party: a name, not a reference. Written only on a system naming no `processor`; where one is named, that page says which party the company's contract is with, and a maker who is another party is named in the tagline."
               ],
               [
                 "`lifecycle`",
@@ -9257,7 +9257,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 names the system as staff name it, `Kassensystem`, `Filialsystem`, and never by its\n  vendor or its product name alone; the vendor goes to `vendor`. An architecture tool's habit of\n  writing both into one name, `Kassensystem – Tillworks Retail`, splits into the H1 and the\n  field.\n- The tagline says what the system does and for whom, and claims nothing about how well.\n- `kind` names what sort of system it is, what it is made of and who runs it, not what it is for:\n  a payment terminal is of a kind whose `element` is `device` whatever it runs, and the software on\n  it, where that is a system of its own, is of an application kind and `part-of` the terminal.\n- `realizes` names features of the products staff and customers open, in the words of those\n  features; a system that gives nobody anything to do, a network, a camera, realizes nothing and\n  names its `domain`, or the processes it `serves`, instead.\n- `## Connects to` is written on the system that takes the data. An exchange both ways is two\n  rows, one on each page.\n- `## Holds` names concepts, not tables or files, and one system holds a concept as `master`:\n  the one whose copy the others are copies of.\n- `## Holds` names a concept once per data object the system keeps of it, and once where it keeps\n  none, each at its strongest access: a system that writes a concept reads it too, and a row for\n  each would draw one edge twice.\n- `## Holds` names the data object the system keeps of the concept where one is modeled, and leaves\n  the cell blank where it keeps the concept in no form the model names yet.\n- `## Connects to` names the service the connection calls where one is modeled, in the same row as\n  the interface it goes through.\n- The page states no cost, no license count and no version. Those move, and a contract register\n  or a configuration database holds them.",
+          "text": "- The H1 names the system as the people who run it name it, `Kassensystem`, `Filialsystem`, and\n  never by its vendor alone where a word of their own exists; the vendor goes to `vendor`. An\n  architecture tool's habit of writing both into one name, `Kassensystem – Tillworks Retail`,\n  splits into the H1 and the field. Software a vendor runs and the company only connects to is\n  named as its runners name it, which is the vendor's own name for it, `GitHub`, `Cloud Run`,\n  and `vendor`, or the `processor` where one is named, still says who stands behind it.\n- `vendor` is written only where no `processor` is: a processor is a page with a legal name and a\n  contract on it, and a vendor named beside it is, nearly always, the same party written twice,\n  once in a form nothing resolves. Where the maker is another party than the one the contract is\n  with, a terminal one company makes and an acquirer runs, the tagline names the maker, as a\n  word, not a field. A system naming no processor keeps its vendor as a name.\n- The tagline says what the system does and for whom, and claims nothing about how well.\n- `kind` names what sort of system it is, what it is made of and who runs it, not what it is for:\n  a payment terminal is of a kind whose `element` is `device` whatever it runs, and the software on\n  it, where that is a system of its own, is of an application kind and `part-of` the terminal.\n- `realizes` names features of the products staff and customers open, in the words of those\n  features; a system that gives nobody anything to do, a network, a camera, realizes nothing and\n  names its `domain`, or the processes it `serves`, instead.\n- `## Connects to` is written on the system that takes the data. An exchange both ways is two\n  rows, one on each page.\n- `## Holds` names concepts, not tables or files, and one system holds a concept as `master`:\n  the one whose copy the others are copies of.\n- `## Holds` names a concept once per data object the system keeps of it, and once where it keeps\n  none, each at its strongest access: a system that writes a concept reads it too, and a row for\n  each would draw one edge twice.\n- `## Holds` names the data object the system keeps of the concept where one is modeled, and leaves\n  the cell blank where it keeps the concept in no form the model names yet.\n- `## Connects to` names the service the connection calls where one is modeled, in the same row as\n  the interface it goes through.\n- The page states no cost, no license count and no version. Those move, and a contract register\n  or a configuration database holds them.",
           "tables": []
         },
         {
@@ -9461,7 +9461,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- `## What it means` says what a system of this kind is made of and who runs or holds it, since\n  that is what tells a device in a store from the software on it, and it has nowhere else to live.\n- `## What it means` says what the kind excludes as well as what it covers.\n- `element` is the ArchiMate element and nothing more: two kinds may share one, `SaaS` and\n  `Service` are both an application component, and the kind is what tells them apart.\n- The H1 names what the system is, `SaaS`, `Store device`, and never the element,\n  `Application component`, or the type, `System`.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "text": "- `## What it means` says what a system of this kind is made of and who runs or holds it, since\n  that is what tells a device in a store from the software on it, and it has nowhere else to live.\n- `## What it means` says what the kind excludes as well as what it covers.\n- `element` is the ArchiMate element and nothing more: two kinds may share one, `SaaS` and\n  `Deployment` are both an application component, and the kind is what tells them apart.\n- The H1 names what the system is, `SaaS`, `Store device`, and never the element,\n  `Application component`, or the type, `System`.\n- The page writes names and prose in the model's language (R14), as every page does.",
           "tables": []
         },
         {

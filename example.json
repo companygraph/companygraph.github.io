@@ -1,6 +1,6 @@
 {
-  "commit": "79ef3ef55f003cba3e24f0ecec1218855adec81a",
-  "core": "0.65.0",
+  "commit": "e208de4d66e094e1af18b7f0912260df8129433c",
+  "core": "0.66.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -4995,7 +4995,6 @@
         "id": "01a12190-1c8c-7467-b70b-0c658281c7b8",
         "source": "Local",
         "kind": "SaaS",
-        "vendor": "Lantern Mail",
         "lifecycle": "active",
         "criticality": "medium",
         "processor": "Lantern Mail",
