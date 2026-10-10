@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/talks/core-and-packs/">
+
+<title>CompanyGraph — One core, and the words your company adds</title>
+<meta id="metadesc" name="description" content="Core holds what every company shares, and a pack what only some kinds of company need. Your own words go into kinds and sections.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/talks/core-and-packs/">
+<meta property="og:title" content="CompanyGraph — One core, and the words your company adds">
+<meta property="og:description" content="Core holds what every company shares, and a pack what only some kinds of company need. Your own words go into kinds and sections.">
+<meta property="og:image" content="https://companygraph.io/talks/core-and-packs/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CompanyGraph — One core, and the words your company adds.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+<!-- The publisher, the site and this page — nothing about what the software does or when
+     it does it, which is the same rule the prose follows. Each page carries the whole graph
+     it references: Google resolves @graph within one document, so a bare { "@id": ... }
+     naming a node defined on another page resolves to nothing. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": [
+        "https://github.com/companygraph",
+        "https://www.linkedin.com/company/companygraph"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://companygraph.io/#website",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/talks/core-and-packs/#webpage",
+      "name": "CompanyGraph — One core, and the words your company adds",
+      "url": "https://companygraph.io/talks/core-and-packs/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://companygraph.io/#website"
+      },
+      "publisher": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      },
+      "breadcrumb": {
+        "@id": "https://companygraph.io/talks/core-and-packs/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://companygraph.io/talks/core-and-packs/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://companygraph.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Talks",
+          "item": "https://companygraph.io/talks/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CompanyGraph — One core, and the words your company adds",
+          "item": "https://companygraph.io/talks/core-and-packs/"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://companygraph.io/#dataset",
+      "name": "CompanyGraph — the company described in CompanyGraph",
+      "description": "CompanyGraph described in the vocabulary it publishes: its direction, the seats and processes it works by, and what it builds.",
+      "url": "https://companygraph.io/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      },
+      "isBasedOn": "https://github.com/companygraph/mental-model",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://companygraph.io/company.json",
+        "encodingFormat": "application/json"
+      }
+    }
+  ]
+}
+</script>
+<meta name="author" content="Robert Blust">
+<script>
+  /* ─── theme boot · v5 · deck ────────────────────────────────────
+     Set the theme before anything paints. Generated from @robertblust/design —
+     editing it here does nothing, because the next `npm run design` overwrites it.
+
+     This is the one script this package puts in <head>, and it has to be there: the package's
+     other scripts sit at the end of the body, and a page may paint before they have run.
+     Language arriving late costs a flash of English; a palette arriving late repaints the
+     whole page in the wrong one, on every navigation. A site may put a script of its own in
+     <head> as well, as each site does to start its fonts loading right after its @font-face
+     rules.
+
+     It duplicates the storage key and the URL pattern that `theme` also carries. That is
+     deliberate — nothing is in scope up here, and the block must stand alone. Both blocks are
+     generated from the same package, so the duplicate cannot drift.
+
+     It also sets `data-embed` on a framed page whose address asks for it, for the same reason
+     it sets the theme here: the chat embeds a model page in its dialog, and that page must never
+     paint its header and footer before the stage's rules hide them.
+
+     And it marks a page arriving with the chat open, for the reason it sets the theme here too:
+     the panel is built by chat.js, which runs after the page's other scripts, and a page may
+     paint before it has. `data-chat-waiting` holds the host the panel's title bar names, and
+     chat.css paints the panel's empty frame and title bar at its size from it, so the frame
+     and the bar are there on the first paint and only the conversation arrives after.
+     chat.js takes the mark off once the panel stands, or once it has found nothing to show.
+
+     Dark is the default and `prefers-color-scheme` is never read: dark is the design, and
+     light is something a visitor asks for. A visitor whose system is set to light still
+     arrives on dark until they say otherwise.
+  */
+  (function(){
+    try {
+      var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+      var t = m ? m[1] : localStorage.getItem("theme");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+    // A page asked for `embed`, inside a frame, draws its stage alone, in the chat's dialog on
+    // another page; the flag is set here so the page never paints its own header first. Its own
+    // try, because the theme's storage read throws where site data is blocked and the flag must
+    // not go with it; and only in a frame, because a page opened on its own is an ordinary page.
+    try {
+      if (window.top !== window && /[?&]embed(&|$)/.test(location.search)) document.documentElement.setAttribute("data-embed", "");
+    } catch (e) {}
+    // A conversation the tab keeps open: the keys are chat.js's, `chat` and `chat-size`, read
+    // the way it reads them. Never in a frame, which takes no chat of its own.
+    try {
+      var r = document.documentElement, c = JSON.parse(sessionStorage.getItem("chat") || "null");
+      if (c && c.open && window.top === window) {
+        r.setAttribute("data-chat-waiting", location.host);
+        var z = JSON.parse(sessionStorage.getItem("chat-size") || "null");
+        if (z && z.w && z.h) { r.style.setProperty("--rbchat-kept-w", z.w + "px"); r.style.setProperty("--rbchat-kept-h", z.h + "px"); }
+      }
+    } catch (e) {}
+  })();
+  /* ─── end theme boot ─────────────────────────────────────────────────── */
+</script>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../deck.css">
+<link rel="stylesheet" href="../../chat.css">
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/Bricolage-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/InstrumentSans-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/PlexMono-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/PlexMono-600.woff2" crossorigin>
+<style>
+/* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
+   unit that has to survive being copied to someone else's machine is the folder,
+   not the file. */
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:fallback}
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:fallback}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:fallback}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:fallback}
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
+    background-image:var(--sky); background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at 1600×900 and the whole plane is scaled to whatever the
+     screen gives it, as the other decks on this site do. */
+  .deck{
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    background:transparent;
+  }
+  .slide svg, .slide img{max-height:60cqmin}
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
+  }
+  h1 em{font-style:normal; color:var(--c-mid)}
+  .sub{
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
+  }
+  /* A command or a file named inside a sentence is data, so it is set in mono. */
+  .sub code{font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--c-firm)}
+
+  /* title slide */
+  .titlelock{display:flex; align-items:center; gap:.32em}
+  .titlemark{color:var(--c-mid); display:flex; flex:0 0 auto}
+  .titlemark svg{width:clamp(2.6rem,9cqmin,6.6rem); height:clamp(2.6rem,9cqmin,6.6rem); display:block}
+  .titlelock h1{margin:0}
+
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:18ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
+
+  /* ---------- transport ---------- */
+  .chrome{
+    position:fixed; left:0; right:0; bottom:0; z-index:21;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto}
+
+  /* page-owned: groups the language and theme controls in the transport, exactly as
+     the prose header's #langind wrapper groups the same pair. */
+  .switchers{display:flex; align-items:center; gap:.45rem}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:var(--deck-well); color:var(--deck-paper); border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:var(--deck-accent); margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
+  /* Two roles, kept apart: a stage direction is not spoken, an emphasis is. */
+  .notes em.cue{font-style:italic; color:var(--deck-quiet)}
+  .notes em{font-style:normal; font-weight:600; color:var(--deck-paper)}
+  .notes .time{float:right; color:var(--deck-accent); font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
+                border:1px solid var(--deck-edge); border-radius:8px; padding:.5em .9em;
+                color:var(--deck-warm); font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
+  .notes .close:hover{color:var(--deck-paper); border-color:var(--deck-accent)}
+  .notes .close:focus-visible{outline:2px solid var(--deck-accent); outline-offset:2px}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .chrome{
+      grid-template-columns:1fr; padding:0;
+      background:var(--slab); border-top:1px solid var(--rule);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
+           transform:translateY(calc(101% + var(--chromeH,0px)))}
+    .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
+    .slide{justify-content:flex-start; overflow-y:auto;
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .titlelock{flex-wrap:wrap}
+    .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
+    .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
+    .kicker{margin-bottom:5vw}
+  }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
+
+  /* ─── this talk ───────────────────────────────────────────────────────
+     A slide is a lead on the left and a picture on the right, as in the other talks: the two
+     levels, core under every company and the packs above it, a window, or the choice of a
+     pack. scenes.js types slide 07's terminal while its slide is shown and paints one still
+     frame for a PDF, a crawler and anyone who asked for reduced motion. */
+  .feat{display:grid; grid-template-columns:.82fr 1.18fr; gap:5cqmin; align-items:center}
+  .feat .lead h1{font-size:clamp(1.9rem,5.4cqmin,3.8rem); max-width:none}
+  .feat .lead .sub{font-size:clamp(1.02rem,2.25cqmin,1.65rem); margin-top:2.4cqmin; max-width:none}
+
+  /* a command in a subtitle stays on one line, so a phone never breaks it at its dashes */
+  .sub code{white-space:nowrap}
+
+  /* the two levels: core under every company, the packs above it, and the one-way arrow */
+  .lv{display:flex; flex-direction:column; gap:1.4cqmin; width:100%}
+  .lv .band{display:grid; grid-template-columns:auto 1fr; align-items:baseline; gap:.4cqmin 2cqmin; padding:1.8cqmin 2.4cqmin;
+            background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin}
+  .lv .bn{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.75rem,1.45cqmin,1.05rem); letter-spacing:.12em; color:var(--dim)}
+  .lv .bl{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:600; font-size:clamp(1.1rem,2.7cqmin,1.9rem); color:var(--dim)}
+  .lv .bx{grid-column:2; font-size:clamp(.8rem,1.6cqmin,1.15rem); color:var(--dim)}
+  .lv .packs{display:grid; grid-template-columns:repeat(3, 1fr); gap:1.4cqmin}
+  .lv .packs .band{grid-template-columns:1fr; align-content:start}
+  .lv .packs .bx{grid-column:1}
+  .lv .band.on{border-color:var(--c-mid); background:var(--press)}
+  .lv .band.on .bn, .lv .band.on .bl{color:var(--c-mid)}
+  .lv .band.on .bx{color:var(--ink)}
+  .lv .arrow{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.75rem,1.45cqmin,1.05rem); color:var(--c-mid); text-align:center}
+
+  /* which pack: a kind of company, the pack it takes, and what the pack adds */
+  .choose{display:flex; flex-direction:column; gap:1.4cqmin; width:100%}
+  .choose > div{display:grid; grid-template-columns:1fr auto; gap:.4cqmin 2cqmin; align-items:baseline; padding:1.6cqmin 2.4cqmin;
+                background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin}
+  .choose .if{font-size:clamp(1rem,2.4cqmin,1.7rem)}
+  .choose .pk{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.8rem,1.6cqmin,1.15rem); color:var(--c-mid)}
+  .choose .ad{grid-column:1 / -1; font-size:clamp(.8rem,1.6cqmin,1.15rem); color:var(--dim)}
+
+  /* the pack talks */
+  .talks{list-style:none; display:flex; flex-direction:column; gap:1.6cqmin; margin-top:3.4cqmin; max-width:150cqmin}
+  .talks li{display:grid; grid-template-columns:20ch 1fr; gap:3cqmin; align-items:baseline; font-size:clamp(1rem,2.4cqmin,1.75rem)}
+  .talks .tk{font-family:"Plex Mono", ui-monospace, monospace; font-size:.62em; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .talks a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--rule)}
+  .talks a:hover{border-bottom-color:var(--c-mid)}
+  .talks a:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+
+  /* ─── the window ──────────────────────────────────────────────────────
+     The levels talk's window: a terminal, a pull request, a page. Sized in cqmin like the
+     rest of the canvas, and in em inside, so the whole window scales as one picture. */
+  .win{position:relative; width:100%; font-size:clamp(.62rem,1.55cqmin,1.1rem); line-height:1.45;
+       background:var(--raise); border:1px solid var(--rule); border-radius:1.4cqmin; overflow:hidden;
+       display:flex; flex-direction:column; color:var(--ink); box-shadow:0 2cqmin 5cqmin var(--deck-drop)}
+  .wbar{flex:none; height:2.9em; display:flex; align-items:center; gap:.5em; padding:0 1em; background:var(--ground); border-bottom:1px solid var(--rule)}
+  .wbar i{width:.75em; height:.75em; border-radius:50%; background:var(--rule)}
+  .wbar span{margin-left:.6em; color:var(--dim); font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em}
+  .ed{flex:1; min-width:0; padding:1em 1.5em 1.4em; position:relative; overflow:hidden}
+  .src{font-family:"Plex Mono", ui-monospace, monospace}
+  .l{min-height:1.75em; line-height:1.75em; white-space:pre-wrap; padding-left:2ch; text-indent:-2ch; position:relative}
+  .k{color:var(--c-mid)} .d{color:var(--dim)} .h{font-weight:600} .dim{color:var(--dim)} .ok{color:var(--c-sum)} .fl{color:var(--c-flag)}
+  .cur{display:inline-block; width:.6em; height:1.15em; background:var(--ink); vertical-align:-.2em; margin-left:.1em; animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-reduced-motion: reduce){ .cur{animation:none} }
+  .hid{visibility:hidden}
+
+  /* a pull request's checks */
+  .chk{display:flex; align-items:center; gap:.6em; padding:.8em .4em; border-bottom:1px solid var(--rule)}
+  .chk:last-child{border-bottom:none}
+  .chk .cr{color:var(--c-sum); font-weight:600}
+  .chk.gate{justify-content:space-between}
+  .chk.gate .who{color:var(--c-mid); font-weight:600}
+
+
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .feat{grid-template-columns:1fr; gap:5vw}
+    .lv .packs{grid-template-columns:1fr}
+    .talks li{grid-template-columns:1fr; gap:1vw}
+    .win{font-size:2.4vw}
+  }
+</style>
+<script>/* Start the fonts before the first layout needs them, so the first frame has them. */try{document.fonts.forEach(function(f){f.load()})}catch(e){}</script>
+<script type="module" blocking="render">/* Hold the first paint until the fonts have loaded, for at most 300ms: a page painted before them shows its text in another face and then moves it. */try{await Promise.race([Promise.all([...document.fonts].map(function(f){return f.load()})),new Promise(function(r){setTimeout(r,300)})])}catch(e){}</script>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+
+  <section class="slide title-slide" id="s-cover" data-say-title="no"
+    data-time="0:00"
+    data-notes="<em class='cue'>The title stays up while I open.</em> Setting up a company's model in CompanyGraph starts with a choice: which words to take. This talk is for that choice. It says what core gives every company, what a pack adds for only some kinds of company and where your own words go without a new type. As in our other talks, each slide names the pages of our own model it rests on.">
+    <div class="kicker mono" data-n="00"></div>
+    <div class="titlelock"><span class="titlemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><h1>Company<em>Graph</em> — One core, and the words your company adds</h1></div>
+    <p class="sub">Core holds what every company shares, and a pack what only some kinds of company need. Your own words go into kinds and sections.</p>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div>
+    <p class="byline">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
+  </section>
+
+  <section class="slide" id="s-size"
+    data-time="0:42"
+    data-notes="Every vocabulary has a size, and both ways of getting it wrong cost something. Too small, and a fact you need has no type to carry it, so it is left out. Too large, and every company carries types it leaves empty. Our objective for core names the first: someone describing their company reaches the end of it without meeting a fact no type can carry. It also says what falls outside. Vocabulary that only one kind of company needs is deliberately not in core. A company reaching for it has not found a gap in core. It has found the case that justifies a pack.">
+    <div class="kicker mono" data-n="01"></div>
+    <div class="feat"><div class="lead"><h1>Too small, too large</h1><p class="sub">A vocabulary too small leaves facts out. One too large makes every company carry types it leaves empty.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c1e8-beb8-76d6-af73-ac7c992318ba"><i>strategic-objective</i> Core holds a company without running out of vocabulary</a></div></div><div class="lv" role="img" aria-label="Core at the foot and the three packs above it, none lit."><div class="packs"><div class="band"><span class="bn">LEVEL 1 · PACK</span><span class="bl">software</span><span class="bx">a company that builds software</span></div><div class="band"><span class="bn">LEVEL 1 · PACK</span><span class="bl">organization</span><span class="bx">a company of more than one person</span></div><div class="band"><span class="bn">LEVEL 1 · PACK</span><span class="bl">landscape</span><span class="bx">a company that runs systems</span></div></div><div class="band"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">what fits every business</span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-core"
+    data-time="0:41"
+    data-notes="Core sits at the foot, under every company. It is level 0, the vocabulary any company can be described in. It ships as one unit, its types with a schema for each and the conventions, and an instance copies it whole and never edits it there. Our domain Core says what it leaves out: what only some kinds of company need goes to packs. And core defines a type without obliging you to populate it. A company that writes no page of a type has not found a gap. It has made a choice, and the type stays in core either way.">
+    <div class="kicker mono" data-n="02"></div>
+    <div class="feat"><div class="lead"><h1>Level 0: core</h1><p class="sub">What fits every business. Core defines a type; it does not oblige you to fill it.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c29a-9610-7d3a-a3de-244a58f09307"><i>domain</i> Core</a><a href="../../?stage=expanded#01a0c2a7-ffa8-77ad-8f21-67c035e80d13"><i>concept</i> Core</a></div></div><div class="lv" role="img" aria-label="Core lit, at the foot; the packs above it not lit."><div class="packs"><div class="band"><span class="bn">LEVEL 1 · PACK</span><span class="bl">software</span><span class="bx">a company that builds software</span></div><div class="band"><span class="bn">LEVEL 1 · PACK</span><span class="bl">organization</span><span class="bx">a company of more than one person</span></div><div class="band"><span class="bn">LEVEL 1 · PACK</span><span class="bl">landscape</span><span class="bx">a company that runs systems</span></div></div><div class="band on"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">what fits every business</span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-pack"
+    data-time="0:42"
+    data-notes="Above core is level 1, a pack. A pack is vocabulary only some kinds of company need at all, shipped beside core as a unit of its own. The difference from core is the difference between optional and absent. A core type may stay empty. A pack's types are ones a company without that need should not carry at all. Software is for a company that builds software, in the words of domain-driven design. Organization is for a company of more than one person. Landscape is for a company that runs systems, in ArchiMate's terms. Each one refines core for that kind of company.">
+    <div class="kicker mono" data-n="03"></div>
+    <div class="feat"><div class="lead"><h1>Level 1: a pack</h1><p class="sub">Vocabulary only some kinds of company need at all. For any other company its types are absent, not optional.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div></div><div class="lv" role="img" aria-label="The three packs lit: software, organization and landscape, above core."><div class="packs"><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">software</span><span class="bx">a company that builds software</span></div><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">organization</span><span class="bx">a company of more than one person</span></div><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">landscape</span><span class="bx">a company that runs systems</span></div></div><div class="band"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">what fits every business</span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-oneway"
+    data-time="0:41"
+    data-notes="The arrow runs one way, and our conventions hold it as a rule, R20. Core names only its own types. A pack names core's types and its own, and no other pack's. Every edge from a pack to core is optional. So core never has to know a pack exists, and taking a pack asks nothing new of a page you already have. We tried it. On a copy of a full instance that took no pack, taking the organization pack changed two files, its manifest and its workflow, and added the pack's empty folders. No page changed, and the check passed.">
+    <div class="kicker mono" data-n="04"></div>
+    <div class="feat"><div class="lead"><h1>The one-way rule</h1><p class="sub">A pack names core; core never names a pack. Taking one asks nothing new of a page you already have.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a><a href="../../?stage=expanded#01a0c2a7-ffa8-7030-9fbb-2baaa6c3715f"><i>concept</i> Reference</a></div></div><div class="lv" role="img" aria-label="The packs above core, with an arrow from the packs to core: a pack names core, core never names a pack."><div class="packs"><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">software</span><span class="bx">a company that builds software</span></div><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">organization</span><span class="bx">a company of more than one person</span></div><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">landscape</span><span class="bx">a company that runs systems</span></div></div><div class="arrow">↓ a pack names core · core never names a pack ↓</div><div class="band on"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">what fits every business</span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-kinds"
+    data-time="0:40"
+    data-notes="Now your own words, cheapest first. Before you look for a new type, look at the kinds. A kind is a page in your company's own words that sorts the entities of a type. Core has product kinds and decision kinds, among others; the organization pack has group kinds, the landscape pack system kinds. This one is ours: the product kind Software, what CompanyGraph ships to be installed and run. The set is yours. A kind you add later is one file in your model, not a change to the meta-model and not a release of it. No type is added.">
+    <div class="kicker mono" data-n="05"></div>
+    <div class="feat"><div class="lead"><h1>Your own sorts</h1><p class="sub">A kind is a page in your own words that sorts the pages of a type: product kind, decision kind, group kind, system kind. It adds no type.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a12458-0ac7-7d6f-a60a-ee7a5a1ba149"><i>product-kind</i> Software</a></div></div><div class="win" role="img" aria-label="The head of CompanyGraph's own product kind Software."><div class="wbar"><i></i><i></i><i></i><span>model/product-kinds/software.md</span></div><div class="ed"><div class="src"><div class="l"><span class="d">---</span></div><div class="l"><span class="k">id:</span> 01a12458-0ac7-7d6f-a60a-ee7a5a1ba149</div><div class="l"><span class="k">rank:</span> 10</div><div class="l"><span class="d">---</span></div><div class="l"><span class="h"># Software</span></div><div class="l"><span class="dim">&gt; What CompanyGraph ships to be installed and run: the metamodel package with its checks, server, plugin and tooling.</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-sections"
+    data-time="0:58"
+    data-notes="The second place your words go is a section. The rule for it comes from how each part of a page can fail. A field left over from a rename still renders as though it were the field, while a heading of your own claims to be nothing the schema knows. So a section is open and a field is closed. A page may carry a section its schema does not declare, read as prose; a frontmatter field its schema does not declare is an error. This is our page for Pack. Relations is declared. The section under it is not on our page; it is one we could add, and it would be read as prose. An agent asking over MCP gets that section like any other, but it draws no edge: only a field or a column the schema declares joins two pages.">
+    <div class="kicker mono" data-n="06"></div>
+    <div class="feat"><div class="lead"><h1>Your own sections</h1><p class="sub">A section is open and a field is closed: a page may carry prose its schema does not declare.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0dd52-bc30-71d8-972a-15358951f921"><i>decision</i> A section is open and a field is closed</a></div></div><div class="win" role="img" aria-label="A concept page with the section its schema declares and one it does not."><div class="wbar"><i></i><i></i><i></i><span>model/concepts/pack.md</span></div><div class="ed"><div class="src"><div class="l"><span class="h"># Pack</span></div><div class="l"><span class="dim">&gt; Vocabulary only some kinds of company need at all …</span></div><div class="l"></div><div class="l"><span class="h">## Relations</span>  <span class="ok">declared</span></div><div class="l">| Type | one to many | |</div><div class="l"></div><div class="l"><span class="h">## When we reach for one</span>  <span class="k">not declared: read as prose</span></div><div class="l">When a company needs a type at all, not when it might.</div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-take" data-scene="take"
+    data-time="0:44"
+    data-notes="Taking a pack is one command. When an instance starts, companygraph init takes its packs with the pack flag. Later, companygraph upgrade takes one with the same flag, so a company that started without a pack takes it without a second init. Either way the pack is vendored beside core and listed in the manifest, and from then on check holds it and upgrade moves it, with core. A pack is released with its core under one tag, so the tooling will not pair a pack with another release's core. On the right is that run: the organization pack is vendored beside core, its folders are written and the check passes.">
+    <div class="kicker mono" data-n="07"></div>
+    <div class="feat"><div class="lead"><h1>Taking a pack</h1><p class="sub"><code>init --pack</code> when you start, <code>upgrade --pack</code> later: vendored beside core, listed in the manifest, checked and moved with it.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7986-8fbe-c785f2c74afe"><i>concept</i> Instance</a><a href="../../?stage=expanded#01a0c2a7-ffa8-7577-a994-0e0200c78552"><i>concept</i> Release</a><a href="../../?stage=expanded#01a0c2a7-ffa8-70b2-9a29-88380c14208b"><i>concept</i> Pin</a></div></div><div class="win term" role="img" aria-label="A terminal: companygraph upgrade takes the organization pack and the check passes."><div class="wbar"><i></i><i></i><i></i></div><div class="ed"><div class="src"><div class="l"><span class="d">$ </span><span class="cmd">companygraph upgrade --pack organization</span><span class="cur"></span></div><div class="l o">core 0.65.0 → 0.65.0: 10 written, 0 removed</div><div class="l o">  packs: organization, vendored beside core</div><div class="l o">  written, since the instance had none, and its own from now on: model/group-kinds/README.md, model/groups/README.md, model/jobs/README.md</div><div class="l o"><span class="ok">✓</span> model/ against meta/core, meta/organization/ at core 0.65.0: the mechanical checks pass</div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-choose"
+    data-time="0:37"
+    data-notes="So, do you need one? Each pack answers one question about your company. Do you build software? The software pack adds bounded contexts, concept designs, aggregates, domain events and feature designs. Does more than one person work here? The organization pack adds groups, group kinds, jobs and the two lines that run through them, the disciplinary and the professional. Do you run systems? The landscape pack adds systems, system kinds, data objects and services. A yes takes the pack. A no leaves it out, and your model is missing nothing for it.">
+    <div class="kicker mono" data-n="08"></div>
+    <div class="feat"><div class="lead"><h1>Do you need one?</h1><p class="sub">Take a pack when your company is that kind of company, and only then.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div></div><div class="choose" role="img" aria-label="Three kinds of company and the pack each takes."><div><span class="if">You build software</span><span class="pk">software</span><span class="ad">bounded contexts, concept designs, aggregates, domain events and feature designs</span></div><div><span class="if">More than one person works here</span><span class="pk">organization</span><span class="ad">groups, group kinds, jobs and the two lines that run through them</span></div><div><span class="if">You run systems</span><span class="pk">landscape</span><span class="ad">systems, system kinds, data objects and services</span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-ask"
+    data-time="0:44"
+    data-notes="Sometimes neither a kind nor a section carries what you need, and no pack does either. Then you ask, with a feature request: a GitHub issue that says what is missing. Our model holds the question in your words, “What if the vocabulary doesn't fit our company?”, and its answer points to the pages this talk has walked through: the objective, the pack, the open sections and the feature request. New vocabulary starts from a pattern a real company shows. Core itself is two working models of companies, generalized into one. So a request is evidence of a gap, and never on its own the decision to fill it.">
+    <div class="kicker mono" data-n="09"></div>
+    <h1>When nothing fits</h1>
+    <p class="sub">Ask with a feature request. New vocabulary starts from a pattern a real company shows, not from a wish list.</p>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c220-5148-749e-a2c6-120ee4de50dd"><i>process</i> Feature request</a><a href="../../?stage=expanded#01a0d451-1230-7233-b043-9f0676fad581"><i>question</i> What if the vocabulary doesn&#x27;t fit our company?</a></div>
+  </section>
+
+  <section class="slide" id="s-talks"
+    data-time="0:27"
+    data-notes="One talk follows for each pack. None is out yet, so this slide names them and links none. Each is for someone who already works in the method its pack draws from: domain-driven design for software and ArchiMate for landscape. The organization talk is for anyone who already draws a company's units and the two lines through them. Each one shows that method as pages a check can hold.">
+    <div class="kicker mono" data-n="10"></div>
+    <h1>The pack talks</h1>
+    <p class="sub">One talk follows for each pack, for people who already work in the method it draws from.</p>
+    <ul class="talks">
+      <li><span class="tk">software</span><span>Domain-driven design, as pages you can check</span></li>
+      <li><span class="tk">organization</span><span>Two lines through one company</span></li>
+      <li><span class="tk">landscape</span><span>Your landscape, in ArchiMate’s words</span></li>
+    </ul>
+  </section>
+
+  <section class="slide" id="s-close"
+    data-time="0:30"
+    data-notes="Cheapest first, then. Core is there for every company, and a type you leave empty is a choice, not a gap. Your own words go into kinds and sections, which need no new type and no release. A pack is there when your company is that kind of company, and only then. And when none of it carries what you have, a feature request is how you ask. Take only the words your company needs.">
+    <div class="kicker mono" data-n="11"></div>
+    <div class="feat"><div class="lead"><h1>Take only the words your company needs</h1><p class="sub">Core for every company and a pack for your kind. Your own words go into kinds and sections before any new type.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div></div><div class="lv" role="img" aria-label="Two levels: core at the foot, three packs above it, software, organization and landscape."><div class="packs"><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">software</span><span class="bx">a company that builds software</span></div><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">organization</span><span class="bx">a company of more than one person</span></div><div class="band on"><span class="bn">LEVEL 1 · PACK</span><span class="bl">landscape</span><span class="bx">a company that runs systems</span></div></div><div class="band on"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">what fits every business</span></div></div></div>
+  </section>
+</div>
+<div class="chrome" id="chrome">
+
+  <div class="name">
+    <a class="lockup" href="../../"><span class="namemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><b>Company<em>Graph</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nperson" href="https://blust.ch/"><span class="rbmark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nlink" href="../" data-de="Vorträge">Talks</a>
+  </div>
+
+  <div class="transport" id="transport" role="group" aria-label="Deck controls">
+
+    <div class="lcd" aria-hidden="true">
+      <div class="n"><b id="cur">00</b><span class="sep">/</span><span id="tot">14</span></div>
+      <div class="clip"><i id="cliplen"></i></div>
+    </div>
+
+    <div class="tmain">
+
+    <button class="tbtn" id="tFirst" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="5" width="2.3" height="14" rx="1"/><path d="M13.2 5.4v13.2L7.6 12z"/><path d="M21 5.4v13.2L13.6 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tPrev" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.6v14.8L6 12z"/></svg>
+    </button>
+
+    <button class="tbtn play" id="tPlay" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="iplay"><path d="M7 4.4L19.2 12 7 19.6z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ipause"><rect x="6.4" y="4.8" width="3.7" height="14.4" rx="1.1"/><rect x="13.9" y="4.8" width="3.7" height="14.4" rx="1.1"/></svg>
+    </button>
+
+    <button class="tbtn" id="tNext" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 4.6v14.8L18 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tFull" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked iexpand"><path d="M9.5 4.5H4.5V9.5M14.5 4.5H19.5V9.5M14.5 19.5H19.5V14.5M9.5 19.5H4.5V14.5"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked icontract"><path d="M4.5 9.5H9.5V4.5M19.5 9.5H14.5V4.5M19.5 14.5H14.5V19.5M4.5 14.5H9.5V19.5"/></svg>
+    </button>
+
+    </div>
+
+    <div class="tside">
+    <div class="tdiv"></div>
+
+    <div class="switchers" id="langind">
+    <div class="seg" id="lang" role="group" aria-label="switch language" data-de-aria="Sprache wechseln">
+      <button type="button" id="langDe" aria-pressed="false">DE</button>
+      <button type="button" id="langEn" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="seg theme" id="thmind" role="group" aria-label="switch appearance" data-de-aria="Erscheinungsbild wechseln">
+      <button type="button" id="thLight" aria-pressed="false" aria-label="Light" data-de-aria="Hell"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" id="thDark" aria-pressed="true" aria-label="Dark" data-de-aria="Dunkel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    </div>
+
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
+    <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
+    </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <button class="close" type="button" id="notesclose">Notizen schliessen</button>
+</div>
+<script>
+  /* This talk's own strings. Everything else about the deck's chrome comes from
+     @robertblust/design — it is in deck.js now. The German title and description are the
+     Translator's; the control labels below are the family's. */
+  var TALK = {
+    de:{ title:'CompanyGraph — One core, and the words your company adds', desc:'Core holds what every company shares, and a pack what only some kinds of company need. Your own words go into kinds and sections.' },
+    en:{ title:'CompanyGraph — One core, and the words your company adds', desc:'Core holds what every company shares, and a pack what only some kinds of company need. Your own words go into kinds and sections.' }
+  };
+  var UI = {
+    de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
+         title:TALK.de.title, desc:TALK.de.desc,
+         play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
+         prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', up:'Zurück zu allen Vorträgen' },
+    en:{ label:'Speaker note', close:'Close notes',
+         title:TALK.en.title, desc:TALK.en.desc,
+         play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
+         prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
+         notes:'Speaker notes', de:'In German', en:'In English', up:'Back to all talks' }
+  };
+
+
+  var THEME_KEY = "theme";
+  function themeStored(){ try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } }
+  function themeRemember(v){ try { localStorage.setItem(THEME_KEY, v); } catch (e) {} }
+  function themeFromUrl(){
+    var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+    if (!m) return null;
+    try {
+      var q = location.search.replace(/([?&])theme=(light|dark)(&|$)/, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+    return m[1];
+  }
+  function applyTheme(){
+    if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+    else document.documentElement.removeAttribute("data-theme");
+    var l = document.getElementById("thLight"), d = document.getElementById("thDark");
+    if (l) l.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+    if (d) d.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  }
+  function setTheme(v){ theme = v; themeRemember(v); applyTheme(); }
+
+  var urlTheme = themeFromUrl();
+  if (urlTheme) themeRemember(urlTheme);
+  var theme = urlTheme || (themeStored() === 'light' ? 'light' : 'dark');
+
+  document.getElementById('thLight').addEventListener('click', function(){ setTheme('light'); });
+  document.getElementById('thDark').addEventListener('click', function(){ setTheme('dark'); });
+  applyTheme();
+
+  // deck.js reads TALK and UI off this object, and calls applyLang() itself; nothing here
+  // calls it. This script is not wrapped in an IIFE — TALK, UI and theme are plain top-level
+  // declarations, exactly as "deck runtime" and "theme" left them — so this hook is a bare
+  // statement too, not a return from a closure.
+  window.rbDeck = { talk: TALK, ui: UI };
+</script>
+<script src="../../deck.js" defer></script>
+<script src="scenes.js" defer></script>
+<script src="../../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/" data-questions="/company.json" data-questions-de="/questions.de.json"></script>
+</body>
+</html>
