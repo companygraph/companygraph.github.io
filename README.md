@@ -15,6 +15,7 @@ One repository serves the whole domain. It was two — the talks had their own �
 | `/talks/levels/` | CompanyGraph — From one command to fully integrated: the five levels a company's model can reach, from one command to a model the site, the server and the editor all read — English and German, narrated, with a PDF in each language. |
 | `/talks/what-stays/` | CompanyGraph — What stays when the model changes: code, a System One model, a System Two model and a person, which of the five things called a model are fixed and which are replaceable, six practices and the credits — English and German, narrated, with a PDF in each language. |
 | `/talks/core-and-packs/` | CompanyGraph — One core, and the words your company adds: what core gives every company, what a pack adds and which to take, and where a company's own words go — English and German, narrated, with a PDF in each language. |
+| `/talks/software-pack/` | CompanyGraph — Domain-driven design, as pages you can check: a bounded context, its language, an aggregate, an event, the context map and a feature design as pages, where the pack departs from its sources and how it joins core — English and German, narrated, with a PDF in each language. |
 | `/cli/` | The command line: one command opens a menu that makes a model, checks it, moves it to a newer release and installs the Obsidian plugin, and each entry is also a subcommand. First in the nav, by the owner's decision. |
 | `/processes/` | CompanyGraph's processes and the seats they name: one board per process, generated from `company.json` by the design package's `render/processes`, each opening on the process's owner. |
 | `/principles/` | CompanyGraph's vision and values, generated from its own model, `company.json`, by the design package's `render/principles`. |
@@ -53,6 +54,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
 - `talks/what-stays/` — the fourth deck, built from the third, with a `scenes.js` that types its
   two terminals and lights the flow on slide 09, under the same still-frame rule.
 - `talks/core-and-packs/` — the fifth deck, built from the fourth, with a `scenes.js` that types slide 07's terminal, under the same still-frame rule.
+- `talks/software-pack/` — the sixth deck, built from the fifth, with a `scenes.js` that types slide 09's terminal, under the same still-frame rule.
 - `tokens.css`, `page.css`, `page.js`, `deck.css`, `deck.js` — five whole files `npm run design`
   writes from `@robertblust/design` at the pinned tag: the tokens, the chrome and the runtime
   every prose page or the deck links and loads instead of carrying a fenced copy. Editing one
@@ -94,7 +96,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   each is behind.
 - `logo.svg` — the mark, described below. `favicon.svg` is the same mark at a size that has to
   survive 16px. `avatar.svg` / `avatar.png` are the org avatar, 1024×1024, full-bleed square.
-- `og.png`, `talks/og.png`, `talks/intro/og.png`, `talks/obsidian-plugin/og.png`, `talks/levels/og.png`, `talks/what-stays/og.png`, `talks/core-and-packs/og.png`, `model/og.png`, `example/og.png`,
+- `og.png`, `talks/og.png`, `talks/intro/og.png`, `talks/obsidian-plugin/og.png`, `talks/levels/og.png`, `talks/what-stays/og.png`, `talks/core-and-packs/og.png`, `talks/software-pack/og.png`, `model/og.png`, `example/og.png`,
   `billing/og.png`, `privacy/og.png`, `cli/og.png`, `principles/og.png`, `processes/og.png`, `surfaces/og.png` — 1200×630 share cards, each
   rendered from the page it belongs to, and an `og.sha` beside each one: a hash of everything
   that went into the card, so `npm run og:check` can say whether it still shows its page.
