@@ -24,7 +24,7 @@ The example company under meta-model's `example/model` takes all three packs, an
 
 **Every chip rests on our own model, with one exception.** As in the other talks, each slide names the pages it rests on and each chip opens one. The organization talk also opens the example company where our model has nothing to show — the two lines, the staff unit, the team across units, the openings — and each such chip says which instance it opens.
 
-**The landscape talk comes last and waits for the session working on landscape to say it is ready.** It starts only once that session reports two things merged: meta-model's README describing the landscape pack as the pack's own README does, and the landscape pages in companygraph/mental-model. Its slides are written then, against those pages, so the spec fixes only its arc and sources.
+**The landscape talk comes last and waits for the session working on landscape to say it is ready.** It starts only once that session reports two things merged: meta-model's README describing the landscape pack as the pack's own README does, and the landscape pages in companygraph/mental-model. Its slides are written then, against those pages, so the spec fixes only its arc and sources. Both were in on 2026-10-10 — meta-model #338 fixed the README and the pages are in companygraph/mental-model — and the owner moved the talk ahead of the organization talk; its slide table is in section 6.
 
 **One spec, one pull request per talk, in order:** core and packs, software, organization, landscape. The first talk is the one the others link back to, so it ships first, and each later pull request adds its own link to the first talk's list of pack talks.
 
@@ -89,7 +89,22 @@ At `/talks/organization-pack/`. A chip marked (example) opens the example compan
 
 ## 6. Your landscape, in ArchiMate's words
 
-At `/talks/landscape-pack/`, built last. It runs the same arc, credits the ArchiMate 4 specification, the ArchiMate model exchange file format and LeanIX's application lifecycle, and shows the mapping the pack's README gives in both directions. Its slide table is written into this spec in its own pull request, once the landscape pages in companygraph/mental-model are merged, so no slide describes a page that does not exist.
+At `/talks/landscape-pack/`, built after the software talk; the owner moved it ahead of the organization talk on 2026-10-10. It is for an enterprise architect who already models a landscape in ArchiMate. It runs the same arc, credits the ArchiMate 4 specification, the ArchiMate model exchange file format and LeanIX's application lifecycle, and shows the mapping the pack's README gives in both directions. The landscape pages it rests on are companygraph/mental-model's at fc2e6ad, the site's pin when the table was written, read against the pack's README at meta-model e208de4.
+
+| # | Slide | What it says | Rests on |
+| --- | --- | --- | --- |
+| 0 | Title | Your landscape, in ArchiMate's words. | concept Pack |
+| 1 | The method you know | The ArchiMate 4 specification, its model exchange file format and LeanIX's application lifecycle, each linked: the pack writes the architect's elements down as pages. | concept Pack |
+| 2 | A system and its kind | One type where ArchiMate has six elements; the kind is a page in the company's own words that carries the ArchiMate element once. A window on the kind Deployment, with `element: application-component`. | system-kinds Deployment, Platform and SaaS |
+| 3 | A system | A window on the MCP server: its kind, the seat that owns it, the data processor behind it and the platform it is `part-of`. | systems MCP server and Cloud Run |
+| 4 | What it connects to | A row of `## Connects to` is written on the side that takes the data, with the interface's name in `As` and the service it calls in `Service`. A window on the chat server's rows. | system Chat server, service MCP endpoint, system Claude API |
+| 5 | What it holds | A row of `## Holds` names a concept, the data object that keeps it and the access, one system holding each concept as `master`. A window on GitHub holding the Instance as master through the Repository; the MCP server reads it as a Snapshot. | system GitHub, data-objects Repository and Snapshot, concept Instance |
+| 6 | Service | What a system exposes to others, provided by the systems that expose it, realizing the feature the business sees. A window on the MCP endpoint. | service MCP endpoint, feature “An agent reads the model” |
+| 7 | The mapping | A generator reads the mapping in either direction, from an architecture tool's export into pages and back into the exchange format; what never comes back is what the table says is dropped. A two-column list of rows from the README. | concept Pack |
+| 8 | Where it departs | The README's departures: one type for six elements, an interface as a row, triggering read back as flow, behavior nobody uses dropped, access in three tokens, lifecycle in four stages, a kind with no notation of its own. | concept Pack |
+| 9 | How it joins core | A system serves a process and realizes a feature, a service realizes a feature, a data object realizes a concept, a seat owns a system and a data processor stands behind it; every edge runs one way and is optional. | process Answering, feature “An agent reads the model”, concept Instance, seat Owner, data-processor Google Cloud |
+| 10 | Left for later | The README's list: Location, an integration type, functions, license and cost, a collaboration, a notation on the kind, an artifact realizing a data object, a field list on a data object, a generator from an architecture tool's export. | concept Pack |
+| 11 | Close | Your landscape as pages a check holds, in the words the architect already uses; the first talk in the series says how a company chooses its packs. | concept Pack |
 
 ## 7. Each talk in two steps
 
