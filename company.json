@@ -1,6 +1,6 @@
 {
-  "commit": "fc2e6ad7eddf1f806ab3ff9c7fb0b2f6b09da637",
-  "core": "0.66.0",
+  "commit": "4faa54f45c30f0bdfa61ed0d70228bf140b0a91f",
+  "core": "0.67.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -181,6 +181,12 @@
     {
       "type": "question-kind",
       "folder": "question-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "risk",
+      "folder": "risks",
       "owner": null,
       "singular": false
     },
@@ -13238,6 +13244,110 @@
       "path": "model/controls/pages-drawn-from-the-model-are-held-to-it.md"
     },
     {
+      "id": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+      "address": "controls/the-chat-says-who-answers-before-the-first-message",
+      "type": "control",
+      "name": "The chat says who answers before the first message",
+      "tagline": "The chat widget opens on a notice that says, first and in its own words, that an AI answers and not a person, then where the message goes and that it goes to the model and to Claude through Anthropic's API, before anything is sent.",
+      "fields": {
+        "id": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "mitigates": [
+          "A visitor takes an answer for a person's"
+        ],
+        "enforces": [
+          "A visitor is told an agent answers"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The widget our sites embed, on every page it is deployed on and in the page's language: when the chat opens, it shows the notice at the top of its log, under a rail in the terminal's amber, opening with the sentence that an AI answers here and not a person, in the panel's ink, then naming the host the message goes to, that the host asks the model and Claude through Anthropic's API, and that nothing is sent until the visitor presses send. A question handed to the chat by a page, from a chip or a link, is not sent on arrival either; it waits under the notice until the visitor sends it. The words are the widget's own and change only with a release of the design that every site then takes.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "process",
+                  "Answering",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "process",
+                "Answering",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The widget, with the notice in English and German",
+                  "https://github.com/robertblust/design/blob/main/assets/chat.js"
+                ],
+                [
+                  "The surface the notice appears on",
+                  "https://companygraph.io/model/#01a0c9f6-5458-7276-aae9-86088e4eb1e0"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The widget, with the notice in English and German",
+                "https://github.com/robertblust/design/blob/main/assets/chat.js"
+              ],
+              [
+                "The surface the notice appears on",
+                "https://companygraph.io/model/#01a0c9f6-5458-7276-aae9-86088e4eb1e0"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/the-chat-says-who-answers-before-the-first-message.md"
+    },
+    {
       "id": "01a12590-2b1d-758d-a75f-605949596608",
       "address": "data-objects/question-log",
       "type": "data-object",
@@ -15828,7 +15938,7 @@
               "rows": [
                 [
                   "The rule in the shared conventions",
-                  "https://github.com/robertblust/conventions/blob/main/WORKING.md"
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
                 ],
                 [
                   "The command-line specification",
@@ -15850,7 +15960,7 @@
             "rows": [
               [
                 "The rule in the shared conventions",
-                "https://github.com/robertblust/conventions/blob/main/WORKING.md"
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
               ],
               [
                 "The command-line specification",
@@ -25883,6 +25993,35 @@
       "path": "model/questions/will-a-new-companygraph-release-break-our-model.md"
     },
     {
+      "id": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "address": "risks/a-visitor-takes-an-answer-for-a-person-s",
+      "type": "risk",
+      "name": "A visitor takes an answer for a person's",
+      "tagline": "A visitor who asks the chat on one of our pages reads the answer as something a person at the company wrote to them.",
+      "fields": {
+        "id": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+        "source": "Local",
+        "owner": "Owner",
+        "threatens": [
+          "The questions the AI Act asks a company are answered from its model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Cause",
+          "text": "The chat answers on the company's own page, in the company's own first person, fluently and in the language the visitor wrote in, and nothing in the answer itself says that an agent wrote it. What says so is a notice under the input, which a visitor may not read, or may read without learning from it that an AI is answering, because it names a product rather than saying the word.",
+          "tables": []
+        },
+        {
+          "heading": "Consequence",
+          "text": "The visitor holds the company to a sentence no person said, and the company has not told a person it meets that they were talking to an AI, which is the first thing the AI Act asks of a provider of such a system. The test the vision rests on, the same question put to a person and to an agent and the two answers compared, loses its meaning for a visitor who cannot tell which of the two they got.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/risks/a-visitor-takes-an-answer-for-a-person-s.md"
+    },
+    {
       "id": "01a0fd97-0436-744d-bcc5-ada708012187",
       "address": "rules/a-branch-is-deleted-only-after-its-merge-is-confirmed",
       "type": "rule",
@@ -26332,6 +26471,109 @@
       ],
       "owner": null,
       "path": "model/rules/a-state-is-read-again-before-it-is-relied-on.md"
+    },
+    {
+      "id": "01a129b3-7831-7f71-8148-4391f6612657",
+      "address": "rules/a-visitor-is-told-an-agent-answers",
+      "type": "rule",
+      "name": "A visitor is told an agent answers",
+      "tagline": "A visitor who asks a chat of ours is told, before the first message is sent and in the language of the page, that an agent writes the answer from the model and which company's language model it goes through.",
+      "fields": {
+        "id": "01a129b3-7831-7f71-8148-4391f6612657",
+        "source": "Local",
+        "modality": "must",
+        "serves": [
+          "The questions the AI Act asks a company are answered from its model"
+        ],
+        "motivated-by": [
+          "A visitor takes an answer for a person's"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Article 50 of the European Union's AI Act obliges whoever provides an AI system that interacts with people to inform them that it does, no later than the first interaction, unless that is obvious from the circumstances; it applies since August 2, 2026, and reaches a company outside the Union whose system's output is used in it. Our chat is placed on our own pages under our own name on top of Anthropic's Claude, which makes us the provider of that system, and a fluent answer in the company's own voice is not obviously an AI's. The Act also asks that the text such a system generates be marked as generated in a form a machine can read; whether an answer streamed to a page and kept nowhere is such text is not settled, and this rule does not reach it until it is.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "process",
+                  "Answering",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "process",
+                "Answering",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Article 50 of the Regulation, the transparency obligations",
+                  "https://artificialintelligenceact.eu/article/50/"
+                ],
+                [
+                  "The Regulation, Regulation (EU) 2024/1689",
+                  "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Article 50 of the Regulation, the transparency obligations",
+                "https://artificialintelligenceact.eu/article/50/"
+              ],
+              [
+                "The Regulation, Regulation (EU) 2024/1689",
+                "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/a-visitor-is-told-an-agent-answers.md"
     },
     {
       "id": "01a0fd96-abab-74bc-a803-f6ddc5037b3e",
@@ -28385,6 +28627,75 @@
       ],
       "owner": null,
       "path": "model/strategic-objectives/every-gate-an-agent-s-work-passes-is-held-by-a-person.md"
+    },
+    {
+      "id": "01a129ae-4c21-7cc9-8d78-58d38283d08c",
+      "address": "strategic-objectives/the-questions-the-ai-act-asks-a-company-are-answered-from-its-model",
+      "type": "strategic-objective",
+      "name": "The questions the AI Act asks a company are answered from its model",
+      "tagline": "What the European Union's AI Act asks of a company that provides or deploys an AI system — what the system rests on, who oversees it, what it tells the people it meets, what it keeps and who else sees what passes through it — is answered from the company's model, by a person or an agent, with the page each answer rests on, rather than from a file assembled for the occasion.",
+      "fields": {
+        "id": "01a129ae-4c21-7cc9-8d78-58d38283d08c",
+        "source": "Local",
+        "adopted": "2026-10-11"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "Each obligation the Act puts to a provider or a deployer of an AI system has a type to carry the company's answer, and the answer can be followed to a page: the rule the obligation became in the company's own words, the control that keeps it and whether a machine or a person carries it out, the risk it guards against and the seat that answers for it, the processor each piece of data reaches, the KPI that assesses the control, and the person at every gate an agent's work passes. We are the first instance of it. The chat on our own site is an AI system a visitor meets, so the Act's questions are put to this model first, and a question we cannot answer from it is a finding about the vocabulary before it is anything else.\n\nIt holds when a company that keeps its model answers a regulator, a customer or its own board under the Act by pointing at pages, and when an obligation that newly applies to it enters the model as a rule with nothing else built to hold it. It fails the day a question the Act asks has no type to carry the answer, or the day the answer lives in a document beside the model that the model does not name.\n\nWhat falls outside: whether any company, this one included, complies. The model holds what a company does and how it is kept, and whether that satisfies the Act is a judgment a lawyer or an authority makes, which the model is opened for and never replaces. Also outside: the uses the Act treats as high-risk and the systems it regulates as products, until a company that runs one keeps a model, because a type enters the vocabulary when an instance had to be written with it and none of ours runs one. Other laws fall outside as well. The model answers data-protection law where its processing activities and processors reach, and the Act is named here because it is the law that asks about an AI system as such.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The Regulation, Regulation (EU) 2024/1689",
+                  "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+                ],
+                [
+                  "The amending Regulation (EU) 2026/1744, which moved the high-risk dates",
+                  "https://eur-lex.europa.eu/eli/reg/2026/1744/oj"
+                ],
+                [
+                  "Article 50, the transparency obligations the chat falls under, read article by article",
+                  "https://artificialintelligenceact.eu/article/50/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The Regulation, Regulation (EU) 2024/1689",
+                "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+              ],
+              [
+                "The amending Regulation (EU) 2026/1744, which moved the high-risk dates",
+                "https://eur-lex.europa.eu/eli/reg/2026/1744/oj"
+              ],
+              [
+                "Article 50, the transparency obligations the chat falls under, read article by article",
+                "https://artificialintelligenceact.eu/article/50/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/the-questions-the-ai-act-asks-a-company-are-answered-from-its-model.md"
     },
     {
       "id": "01a0c1e8-beb8-762d-9442-8bbda19975e9",
@@ -38413,6 +38724,84 @@
     },
     {
       "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a129ae-4c21-7cc9-8d78-58d38283d08c",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "to": "01a129ae-4c21-7cc9-8d78-58d38283d08c",
+      "via": "threatens",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-7831-7f71-8148-4391f6612657",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a129b3-7831-7f71-8148-4391f6612657",
+      "to": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "via": "motivated-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-7831-7f71-8148-4391f6612657",
+      "to": "01a129ae-4c21-7cc9-8d78-58d38283d08c",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-7831-7f71-8148-4391f6612657",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+      "to": "01a129b3-7831-7f71-8148-4391f6612657",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+      "to": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "via": "mitigates",
+      "attrs": {}
+    },
+    {
+      "from": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
