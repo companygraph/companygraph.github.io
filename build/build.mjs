@@ -29,6 +29,9 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { parseInstance, parseSchemas } from "companygraph-meta-model/instance";
 import { readSchemas } from "./schemas.mjs";
+import { buildSnapshot } from "companygraph-mcp-server/snapshot";
+import { diagram } from "companygraph-mcp-server/diagram";
+import { TALK_PICTURES, pictureOf, pictureJson } from "./talk-pictures.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const PINS = JSON.parse(fs.readFileSync(path.join(here, "..", "source.json"), "utf8"));
@@ -173,6 +176,25 @@ for (const target of TARGETS) {
   // every sibling site.
   const data = { ...target.parse(files, { sub: target.sub, schemas }), commit, ...(target.repo ? { repo } : {}) };
   if (target.finish) target.finish(data);
+
+  // The talks' pictures of this instance, drawn by the MCP server's own code from a snapshot of
+  // the same files and schemas, so a slide shows what the server would answer at this pin.
+  const wanted = TALK_PICTURES.filter((p) => p.from === target.dir);
+  if (wanted.length) {
+    const snapshot = buildSnapshot({ files, schemas, sub: target.sub, commit, repo });
+    for (const p of wanted) {
+      const out = path.join(here, "..", pictureJson(p.page, p.name));
+      const json = JSON.stringify(pictureOf(p.request, diagram(snapshot, p.request)), null, 2) + "\n";
+      if (check) {
+        if ((fs.existsSync(out) ? fs.readFileSync(out, "utf8") : "") === json) console.log(`  ✓ ${pictureJson(p.page, p.name)} is what the server draws at ${commit.slice(0, 7)}`);
+        else { console.log(`  ✗ ${pictureJson(p.page, p.name)} is not what the server draws at ${commit.slice(0, 7)} — run: npm run build`); allMatch = false; }
+        continue;
+      }
+      fs.mkdirSync(path.dirname(out), { recursive: true });
+      fs.writeFileSync(out, json);
+      console.log(`  wrote ${pictureJson(p.page, p.name)}`);
+    }
+  }
 
   const OUT = path.join(here, "..", `${target.dir}.json`);
   const text = JSON.stringify(data, null, 2) + "\n";

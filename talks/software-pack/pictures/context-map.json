@@ -1,0 +1,27 @@
+{
+  "shape": "context",
+  "title": "Checking",
+  "mermaid": "flowchart TB\n  n0[\"<small>«bounded-context» · core</small><br/><b>Checking</b>\"]\n  n1[\"<small>«bounded-context» · core</small><br/>Procedures\"]\n  n2[\"<small>«bounded-context» · core</small><br/>Resolution\"]\n  n3[\"<small>«bounded-context» · supporting</small><br/>Vendoring\"]\n  n0 -->|\"U → D · conformist\"| n1\n  n0 <-->|\"shared kernel\"| n3\n  n2 -->|\"U → D · conformist\"| n0",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a10042-5ce7-7756-9ce4-1cf2a4435aa2",
+      "title": "Checking"
+    },
+    {
+      "node": "n1",
+      "id": "01a10042-5719-7ad4-b25d-d53630b4884b",
+      "title": "Procedures"
+    },
+    {
+      "node": "n2",
+      "id": "01a0faaa-5d02-71db-bcdb-f672c4324bee",
+      "title": "Resolution"
+    },
+    {
+      "node": "n3",
+      "id": "01a10042-60fa-7013-bc65-786c99bebd24",
+      "title": "Vendoring"
+    }
+  ]
+}
