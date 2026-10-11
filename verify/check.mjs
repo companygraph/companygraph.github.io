@@ -334,6 +334,21 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["über die innerhalb seiner Grenze eine Prüfung wacht"], hides: ["as pages a check holds to their boundary"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  // The talk on the organization pack, built as the software pack's talk and checked the same
+  // way. Its outbound links are the chrome's blust.ch and slide 01's sources.
+  { path: "/talks/organization-pack/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /Two lines through one company/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/", "https://www.w3.org/TR/vocab-org/", "https://schema.org/department", "https://learning.sap.com/courses/organizational-management-in-sap-hcm-for-s-4hana/finding-object-relationships", "https://schemas.liquid-technologies.com/HR-XML/3.1/reportstopositiontype.html", "https://wirtschaftslexikon.gabler.de/definition/einliniensystem-32337", "https://wirtschaftslexikon.gabler.de/definition/mehrliniensystem-41223", "https://wirtschaftslexikon.gabler.de/definition/stelle-42791"],
+    slides: 14,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["die zwei Linien, die durch die Firma verlaufen"], hides: ["the two lines that run through them"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {
