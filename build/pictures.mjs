@@ -5,7 +5,7 @@
 //
 // A talk is a deck that shows one slide at a time, and the package's drawing waits for a figure to
 // be on screen, so a talk's pictures are drawn here with the package's own helpers, each after the
-// slide that holds it is made the one shown. What is written is the same: the same placeholder
+// slide that holds it is made the one shown, and its tab's panel, where it sits in one. What is written is the same: the same placeholder
 // colors read back as tokens, the same refusal of a color that is none, the same stamp.
 //
 // Usage: npm run pages && npm run pictures && npm run pages
@@ -19,6 +19,7 @@ import { chromium } from "playwright";
 import { drawPictures, PLACEHOLDERS, picturePath, pictureStamp, tokenized } from "@robertblust/design/pictures";
 import { serve } from "@robertblust/design/cards/export";
 import { TALK_PAGES } from "./talk-figures.mjs";
+import { TALK_PICTURES } from "./talk-pictures.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -63,24 +64,27 @@ try {
         });
       }, Object.entries(PLACEHOLDERS));
       await tab.goto(base + "/" + page.replace(/index\.html$/, ""));
-      const names = await tab.$$eval("figure[data-diagram][data-picture]", (fs) => fs.map((f) => f.getAttribute("data-picture")));
+      const atBuild = new Set(TALK_PICTURES.filter((p) => p.page === page && !p.browser).map((p) => p.name));
+      const names = (await tab.$$eval("figure[data-diagram][data-picture]", (fs) => fs.map((f) => f.getAttribute("data-picture")))).filter((n) => atBuild.has(n));
       for (const name of names) {
         const sel = `figure[data-diagram][data-picture="${name}"]`;
         await tab.evaluate((sel) => {
           const fig = document.querySelector(sel);
           document.querySelectorAll(".slide").forEach((s) => s.classList.toggle("active", s.contains(fig)));
+          // A picture in a tab is drawn with its own panel shown, since a hidden one never nears the screen.
+          document.querySelectorAll('[role="tabpanel"]').forEach((p) => { if (p.closest(".slide")?.contains(fig)) p.hidden = !p.contains(fig); });
         }, sel);
         await tab.locator(sel).scrollIntoViewIfNeeded();
         await tab.waitForFunction((sel) => !!document.querySelector(sel + " .rbchat-diagram-box svg"), sel, { timeout: 30000 });
       }
       const bad = await tab.evaluate(unnamedPaint, Object.values(PLACEHOLDERS));
       if (bad.length) throw new Error(`${page}: a picture paints a color that is no token, so it would be wrong in one theme:\n  ${bad.join("\n  ")}`);
-      const drawn = await tab.$$eval("figure[data-diagram][data-picture]", (fs) => fs.map((f) => ({
+      const drawn = (await tab.$$eval("figure[data-diagram][data-picture]", (fs) => fs.filter((f) => f.querySelector(".rbchat-diagram-box svg")).map((f) => ({
         name: f.getAttribute("data-picture"),
         picture: JSON.parse(f.querySelector('script[type="application/json"]').textContent),
         id: f.querySelector(".rbchat-diagram-box svg").id,
         html: f.querySelector(".rbchat-diagram-box").innerHTML,
-      })));
+      })))).filter((d) => atBuild.has(d.name));
       for (const d of drawn) {
         const file = path.join(ROOT, picturePath(page, d.name));
         fs.mkdirSync(path.dirname(file), { recursive: true });

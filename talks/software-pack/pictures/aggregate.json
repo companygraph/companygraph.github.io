@@ -1,0 +1,42 @@
+{
+  "shape": "aggregate",
+  "title": "Check run",
+  "mermaid": "classDiagram\n  class n0[\"Check run\"] {\n    <<aggregate root>>\n    Checker release : version\n    Core version : version\n    Not checked : string\n    Outcome : string\n  }\n  class n1[\"Check\"] {\n    <<entity>>\n    Name : string\n    Rule : string\n  }\n  class n2[\"Finding\"] {\n    <<value object>>\n    Where : string\n    What : string\n  }\n  class n3[\"Vocabulary\"] {\n    <<value object>>\n    Types : string\n    Units : string\n  }\n  class n4[\"Tooling pin\"] {\n    <<value object>>\n    Tooling : version\n    Core version : version\n    Packs : string\n  }\n  class n5[\"Instance checked\"] {\n    <<domain event>>\n  }\n  class n6[\"Run refused\"] {\n    <<domain event>>\n  }\n  n0 *-- \"1..*\" n1\n  n0 *-- \"*\" n2\n  n0 *-- \"1\" n3\n  n0 *-- \"1\" n4\n  n0 ..> n5 : emits\n  n0 ..> n6 : emits",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a10042-5e10-7ae1-a2a7-a6b0497dddd0",
+      "title": "Check run"
+    },
+    {
+      "node": "n1",
+      "id": "01a10042-5dac-7cf8-b522-0814f72afc33",
+      "title": "Check"
+    },
+    {
+      "node": "n2",
+      "id": "01a10042-5de0-7bb8-883f-df40c304648e",
+      "title": "Finding"
+    },
+    {
+      "node": "n3",
+      "id": "01a10042-5d47-70e6-a2e7-84b1a2ea8d2f",
+      "title": "Vocabulary"
+    },
+    {
+      "node": "n4",
+      "id": "01a10042-5d7b-7cad-9ed5-b55e738c8785",
+      "title": "Tooling pin"
+    },
+    {
+      "node": "n5",
+      "id": "01a10042-5e73-7117-9b8c-8bf69d19fe2a",
+      "title": "Instance checked"
+    },
+    {
+      "node": "n6",
+      "id": "01a10042-5e42-7015-910a-80f55a8fce71",
+      "title": "Run refused"
+    }
+  ]
+}

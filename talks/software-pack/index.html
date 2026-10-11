@@ -354,6 +354,15 @@
   .departs .is{color:var(--ink)}
   /* the server's own drawing: the figure chat.js draws, in a window like the pages', with its caption and its Expand inside */
   .drawn .ed{padding:.6em 1.2em 1em}
+  .drawn .wbar{gap:.4em}
+  .drawn .tabs{display:flex; gap:.2em; margin-left:.6em; min-width:0; overflow-x:auto; scrollbar-width:none}
+  .drawn .tabs button{font:inherit; font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--dim); background:none;
+                      border:1px solid transparent; border-radius:.5em; padding:.25em .7em; cursor:pointer; white-space:nowrap}
+  .drawn .tabs button[aria-selected="true"]{color:var(--c-mid); border-color:var(--rule); background:var(--raise)}
+  .drawn .tabs button:hover{color:var(--ink)}
+  .drawn .tabs button:focus-visible{outline:2px solid var(--c-mid); outline-offset:1px}
+  .drawn .wbar .host{margin-left:auto; color:var(--dim); font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; white-space:nowrap}
+  .drawn .pane[hidden]{display:none}
   .drawn .rbchat-diagram{margin:0; padding:0; border-top:0}
   .drawn .rbchat-diagram-box svg{width:100%; height:auto; max-height:50cqmin}
   .departs code{font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--c-firm)}
@@ -513,11 +522,12 @@
     <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div>
   </section>
 
-  <section class="slide" id="s-drawn"
-    data-time="0:56"
-    data-notes="The rows you saw on Checking's page are the context map; this is that map, drawn. Nobody drew it by hand. When the site builds, it asks the MCP server's own code for the context around Checking, from our model at the commit it pins: the code that answers an agent asking mcp.companygraph.io for a diagram. So the picture changes when the rows do, once the pin moves. Each box names a bounded context and its classification, core or supporting. Resolution is upstream, and Checking is a conformist to it. Procedures is downstream, a conformist to Checking, and writes that row itself, on the side that depends. Checking and Vendoring share a kernel, written once, on Checking's page. An agent can ask the server for the same picture, and the chat on this site draws it that way too.">
+  <section class="slide" id="s-drawn" data-scene="tabs"
+    data-time="1:00"
+    data-notes="Nobody drew these pictures. When the site builds, it asks the MCP server's own code for them, from our model at the commit it pins: the code that answers an agent asking mcp.companygraph.io for a diagram. So they change when the pages do, once the pin moves. First, the context map around Checking, from the rows you saw: Resolution upstream, with Checking a conformist to it; Procedures downstream, a conformist to Checking; and a kernel shared with Vendoring. Next, Check run, the aggregate Checking holds: the entity Check, the value objects Finding, Vocabulary and Tooling pin, and the events it emits, Instance checked and Run refused. Then its flow: a caller sends the command Check an instance, and the answer is Run refused if a pin disagrees, Instance checked if not. Last, its lifecycle: a run ends Refused, Passed or Failed. An agent can ask the server for any of these.">
     <div class="kicker mono" data-n="11"></div>
-    <div class="feat"><div class="lead"><h1>The map, as the server draws it</h1><p class="sub">Nobody drew this map. The MCP server's own code draws it from the rows the pages write, at the commit the site pins.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a10042-5ce7-7756-9ce4-1cf2a4435aa2"><i>bounded-context</i> Checking</a><a href="../../?stage=expanded#01a0faaa-5d02-71db-bcdb-f672c4324bee"><i>bounded-context</i> Resolution</a><a href="../../?stage=expanded#01a10042-5719-7ad4-b25d-d53630b4884b"><i>bounded-context</i> Procedures</a><a href="../../?stage=expanded#01a10042-60fa-7013-bc65-786c99bebd24"><i>bounded-context</i> Vendoring</a></div></div><div class="win drawn"><div class="wbar"><i></i><i></i><i></i><span>mcp.companygraph.io · diagram</span></div><div class="ed">
+    <div class="feat"><div class="lead"><h1>Drawn by the server</h1><p class="sub">Nobody drew these. The MCP server's own code draws them from the pages, at the commit the site pins.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a10042-5ce7-7756-9ce4-1cf2a4435aa2"><i>bounded-context</i> Checking</a><a href="../../?stage=expanded#01a0faaa-5d02-71db-bcdb-f672c4324bee"><i>bounded-context</i> Resolution</a><a href="../../?stage=expanded#01a10042-5719-7ad4-b25d-d53630b4884b"><i>bounded-context</i> Procedures</a><a href="../../?stage=expanded#01a10042-60fa-7013-bc65-786c99bebd24"><i>bounded-context</i> Vendoring</a><a href="../../?stage=expanded#01a10042-5d16-7600-aa84-b9739571a03f"><i>aggregate</i> Check run</a></div></div><div class="win drawn" data-tabs><div class="wbar"><i></i><i></i><i></i><span class="tabs" role="tablist" aria-label="Four pictures the server draws"><button type="button" role="tab" id="tab-context-map" aria-controls="panel-context-map" aria-selected="true" tabindex="0">Context map</button><button type="button" role="tab" id="tab-aggregate" aria-controls="panel-aggregate" aria-selected="false" tabindex="-1">Aggregate</button><button type="button" role="tab" id="tab-flow" aria-controls="panel-flow" aria-selected="false" tabindex="-1">Flow</button><button type="button" role="tab" id="tab-lifecycle" aria-controls="panel-lifecycle" aria-selected="false" tabindex="-1">Lifecycle</button></span><span class="host">mcp.companygraph.io</span></div><div class="ed">
+      <div class="pane" role="tabpanel" id="panel-context-map" aria-labelledby="tab-context-map">
       <!-- picture: context-map -->
       <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="context-map">
         <figcaption><span>Checking</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
@@ -525,7 +535,35 @@
         <script type="application/json">{"shape":"context","title":"Checking","mermaid":"flowchart TB\n  n0[\"\u003csmall>«bounded-context» · core\u003c/small>\u003cbr/>\u003cb>Checking\u003c/b>\"]\n  n1[\"\u003csmall>«bounded-context» · core\u003c/small>\u003cbr/>Procedures\"]\n  n2[\"\u003csmall>«bounded-context» · core\u003c/small>\u003cbr/>Resolution\"]\n  n3[\"\u003csmall>«bounded-context» · supporting\u003c/small>\u003cbr/>Vendoring\"]\n  n0 -->|\"U → D · conformist\"| n1\n  n0 \u003c-->|\"shared kernel\"| n3\n  n2 -->|\"U → D · conformist\"| n0","nodes":[{"node":"n0","id":"01a10042-5ce7-7756-9ce4-1cf2a4435aa2","title":"Checking"},{"node":"n1","id":"01a10042-5719-7ad4-b25d-d53630b4884b","title":"Procedures"},{"node":"n2","id":"01a0faaa-5d02-71db-bcdb-f672c4324bee","title":"Resolution"},{"node":"n3","id":"01a10042-60fa-7013-bc65-786c99bebd24","title":"Vendoring"}]}</script>
       </figure>
       <!-- /picture: context-map -->
-    </div></div></div>
+      </div>
+      <div class="pane" role="tabpanel" id="panel-aggregate" aria-labelledby="tab-aggregate" hidden>
+      <!-- picture: aggregate -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="aggregate">
+        <figcaption><span>Check run</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"aggregate","title":"Check run","mermaid":"classDiagram\n  class n0[\"Check run\"] {\n    \u003c\u003caggregate root>>\n    Checker release : version\n    Core version : version\n    Not checked : string\n    Outcome : string\n  }\n  class n1[\"Check\"] {\n    \u003c\u003centity>>\n    Name : string\n    Rule : string\n  }\n  class n2[\"Finding\"] {\n    \u003c\u003cvalue object>>\n    Where : string\n    What : string\n  }\n  class n3[\"Vocabulary\"] {\n    \u003c\u003cvalue object>>\n    Types : string\n    Units : string\n  }\n  class n4[\"Tooling pin\"] {\n    \u003c\u003cvalue object>>\n    Tooling : version\n    Core version : version\n    Packs : string\n  }\n  class n5[\"Instance checked\"] {\n    \u003c\u003cdomain event>>\n  }\n  class n6[\"Run refused\"] {\n    \u003c\u003cdomain event>>\n  }\n  n0 *-- \"1..*\" n1\n  n0 *-- \"*\" n2\n  n0 *-- \"1\" n3\n  n0 *-- \"1\" n4\n  n0 ..> n5 : emits\n  n0 ..> n6 : emits","nodes":[{"node":"n0","id":"01a10042-5e10-7ae1-a2a7-a6b0497dddd0","title":"Check run"},{"node":"n1","id":"01a10042-5dac-7cf8-b522-0814f72afc33","title":"Check"},{"node":"n2","id":"01a10042-5de0-7bb8-883f-df40c304648e","title":"Finding"},{"node":"n3","id":"01a10042-5d47-70e6-a2e7-84b1a2ea8d2f","title":"Vocabulary"},{"node":"n4","id":"01a10042-5d7b-7cad-9ed5-b55e738c8785","title":"Tooling pin"},{"node":"n5","id":"01a10042-5e73-7117-9b8c-8bf69d19fe2a","title":"Instance checked"},{"node":"n6","id":"01a10042-5e42-7015-910a-80f55a8fce71","title":"Run refused"}]}</script>
+      </figure>
+      <!-- /picture: aggregate -->
+      </div>
+      <div class="pane" role="tabpanel" id="panel-flow" aria-labelledby="tab-flow" hidden>
+      <!-- picture: flow -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="flow">
+        <figcaption><span>Check run</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"flow","title":"Check run","mermaid":"sequenceDiagram\n  participant caller as Caller\n  participant n0 as Check run\n  caller->>n0: Check an instance\n  alt a pin disagrees (INV-K2, INV-K3, INV-K4)\n    n0--)caller: Run refused\n  else the pins agree\n    n0--)caller: Instance checked\n  end\n  caller->>n0: Check the form\n  caller->>n0: Check a range of ids\n  caller->>n0: Check a range of commits","nodes":[{"node":"n0","id":"01a10042-5d16-7600-aa84-b9739571a03f","title":"Check run"},{"node":"n1","id":"01a10042-5e42-7015-910a-80f55a8fce71","title":"Run refused"},{"node":"n2","id":"01a10042-5e73-7117-9b8c-8bf69d19fe2a","title":"Instance checked"}]}</script>
+      </figure>
+      <!-- /picture: flow -->
+      </div>
+      <div class="pane" role="tabpanel" id="panel-lifecycle" aria-labelledby="tab-lifecycle" hidden>
+      <!-- picture: lifecycle -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="lifecycle">
+        <figcaption><span>Check run</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"lifecycle","title":"Check run","mermaid":"stateDiagram-v2\n  state \"Refused\" as s0\n  state \"Passed\" as s1\n  state \"Failed\" as s2\n  [*] --> s0 : Check an instance\n  [*] --> s1 : Check an instance\n  [*] --> s2 : Check an instance\n  s0 --> [*]\n  s1 --> [*]\n  s2 --> [*]","nodes":[{"node":"n0","id":"01a10042-5d16-7600-aa84-b9739571a03f","title":"Check run"}]}</script>
+      </figure>
+      <!-- /picture: lifecycle -->
+      </div>
+    </div></div></div></div>
   </section>
 
   <section class="slide" id="s-close"

@@ -7,14 +7,23 @@
 //
 // `from` names the artifact whose instance is drawn, `company` for CompanyGraph's own model and
 // `example` for the example company, and `model` is where a node links, relative to the talk.
+// `browser: true` marks a picture chat.js draws in the visitor's browser instead, when its tab is
+// first shown: Mermaid paints a class, sequence or state diagram partly in colors that are no token,
+// so drawn once it would be right in one theme only, and the build refuses it. A flowchart paints
+// tokens alone and is drawn at build.
 
-/** @typedef {{ page: string; name: string; from: "company" | "example"; model: string; request: Record<string, string> }} TalkPicture */
+/** @typedef {{ page: string; name: string; from: "company" | "example"; model: string; request: Record<string, string>; browser?: boolean }} TalkPicture */
 
 /** @type {TalkPicture[]} */
 export const TALK_PICTURES = [
   // The context map around Checking: the contexts it depends on and how, as the rows of its
   // `## Relationships` and every other context's say.
   { page: "talks/software-pack/index.html", name: "context-map", from: "company", model: "../../", request: { shape: "context", id: "01a10042-5ce7-7756-9ce4-1cf2a4435aa2" } },
+  // The aggregate Checking holds, Check run, three ways: what it holds and emits, the flow of a
+  // command it handles to the events it answers with, and the states a run ends in.
+  { page: "talks/software-pack/index.html", name: "aggregate", from: "company", model: "../../", browser: true, request: { shape: "aggregate", id: "01a10042-5d16-7600-aa84-b9739571a03f" } },
+  { page: "talks/software-pack/index.html", name: "flow", from: "company", model: "../../", browser: true, request: { shape: "flow", id: "01a10042-5d16-7600-aa84-b9739571a03f" } },
+  { page: "talks/software-pack/index.html", name: "lifecycle", from: "company", model: "../../", browser: true, request: { shape: "lifecycle", id: "01a10042-5d16-7600-aa84-b9739571a03f" } },
 ];
 
 // What a picture is written as: the shape chat.js captions it by, and the server's answer

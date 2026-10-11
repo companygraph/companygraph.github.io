@@ -13,8 +13,9 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 /** @param {string} root @param {import("./talk-pictures.mjs").TalkPicture} p @param {string[]} stale */
 function figure(root, p, stale) {
   const picture = JSON.parse(fs.readFileSync(path.join(root, pictureJson(p.page, p.name)), "utf8"));
-  const svg = keptPicture(root, p.page, p.name, picture);
-  if (!svg) stale.push(picturePath(p.page, p.name));
+  // A picture the browser draws is written with an empty box, for chat.js to fill when its tab shows.
+  const svg = p.browser ? null : keptPicture(root, p.page, p.name, picture);
+  if (!svg && !p.browser) stale.push(picturePath(p.page, p.name));
   // A `<` is written as its escape, so no title can close the script it sits in.
   const json = JSON.stringify(picture).replace(/</g, "\\u003c");
   return [
