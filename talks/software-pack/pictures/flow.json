@@ -1,0 +1,22 @@
+{
+  "shape": "flow",
+  "title": "Check run",
+  "mermaid": "sequenceDiagram\n  participant caller as Caller\n  participant n0 as Check run\n  caller->>n0: Check an instance\n  alt a pin disagrees (INV-K2, INV-K3, INV-K4)\n    n0--)caller: Run refused\n  else the pins agree\n    n0--)caller: Instance checked\n  end\n  caller->>n0: Check the form\n  caller->>n0: Check a range of ids\n  caller->>n0: Check a range of commits",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a10042-5d16-7600-aa84-b9739571a03f",
+      "title": "Check run"
+    },
+    {
+      "node": "n1",
+      "id": "01a10042-5e42-7015-910a-80f55a8fce71",
+      "title": "Run refused"
+    },
+    {
+      "node": "n2",
+      "id": "01a10042-5e73-7117-9b8c-8bf69d19fe2a",
+      "title": "Instance checked"
+    }
+  ]
+}

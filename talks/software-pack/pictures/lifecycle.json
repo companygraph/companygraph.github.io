@@ -1,0 +1,12 @@
+{
+  "shape": "lifecycle",
+  "title": "Check run",
+  "mermaid": "stateDiagram-v2\n  state \"Refused\" as s0\n  state \"Passed\" as s1\n  state \"Failed\" as s2\n  [*] --> s0 : Check an instance\n  [*] --> s1 : Check an instance\n  [*] --> s2 : Check an instance\n  s0 --> [*]\n  s1 --> [*]\n  s2 --> [*]",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a10042-5d16-7600-aa84-b9739571a03f",
+      "title": "Check run"
+    }
+  ]
+}

@@ -1,8 +1,9 @@
-/* The one window of this talk that moves, slide 09's terminal, typed as the levels talk types its windows. A
-   slide names its scene in data-scene; a scene runs while its slide is on screen and stops when it
-   leaves. Under reduced motion, and in a browser driven by a script (the PDF and card export, the
-   verify suite), it paints one still frame instead, the finished terminal. The text it types is the
-   tooling's, which is English in both languages. */
+/* The windows of this talk that move: slide 09's terminal, typed as the levels talk types its
+   windows, and slide 11's tabs, which step through the server's pictures. A slide names its scene in
+   data-scene; a scene runs while its slide is on screen and stops when it leaves. Under reduced
+   motion, and in a browser driven by a script (the PDF and card export, the verify suite), it paints
+   one still frame instead: the finished terminal, and the first tab. The text the terminal types is
+   the tooling's, which is English in both languages. */
 (function () {
   var still = navigator.webdriver || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -38,6 +39,43 @@
 
   var S = {};
   S.check = typed(70, 520);
+
+  // The server's pictures on slide 11: tabs in the window's bar, each showing one picture. While
+  // the slide is shown they advance on their own, until a viewer picks one, by click or by the
+  // arrow keys, and then they stay where the viewer put them. The still frame is the first tab.
+  function selectTab(win, i) {
+    var tabs = Array.prototype.slice.call(win.querySelectorAll('[role="tab"]'));
+    tabs.forEach(function (t, k) {
+      var on = k === i, panel = document.getElementById(t.getAttribute("aria-controls"));
+      t.setAttribute("aria-selected", on ? "true" : "false"); t.tabIndex = on ? 0 : -1;
+      if (panel) panel.hidden = !on;
+    });
+    return tabs[i];
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".win[data-tabs]"), function (win) {
+    var tabs = Array.prototype.slice.call(win.querySelectorAll('[role="tab"]'));
+    function pick(i, focus) { win.dataset.held = "1"; var t = selectTab(win, (i + tabs.length) % tabs.length); if (focus) t.focus(); }
+    tabs.forEach(function (t, k) {
+      t.addEventListener("click", function () { pick(k, false); });
+      t.addEventListener("keydown", function (e) {
+        var to = e.key === "ArrowRight" ? k + 1 : e.key === "ArrowLeft" ? k - 1 : e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 : null;
+        if (to === null) return;
+        e.preventDefault(); e.stopPropagation(); pick(to, true);
+      });
+    });
+  });
+  S.tabs = {
+    reset: function (c) { if (!c.el.dataset.held) selectTab(c.el, 0); },
+    rest: function (c) { if (!c.el.dataset.held) selectTab(c.el, 0); },
+    run: async function (c) {
+      var n = c.qa('[role="tab"]').length;
+      for (var i = 1; i <= n; i++) {
+        await c.sl(6500);
+        if (c.el.dataset.held) throw "held";
+        selectTab(c.el, i % n);
+      }
+    }
+  };
 
   Array.prototype.forEach.call(document.querySelectorAll(".slide[data-scene]"), function (slide) {
     var sc = S[slide.dataset.scene], el = slide.querySelector(".win"), cur = null;
