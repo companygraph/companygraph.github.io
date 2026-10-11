@@ -355,7 +355,7 @@ const PAGES = [
     landing: "../../",
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     transportBaseline: [320, 360, 430, 500, 900, 1280],
-    links: ["https://blust.ch/", "https://pubs.opengroup.org/architecture/archimate4-doc/", "https://www.opengroup.org/xsd/archimate/"],
+    links: ["https://blust.ch/", "https://www.opengroup.org/xsd/archimate/"],
     slides: 13,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
