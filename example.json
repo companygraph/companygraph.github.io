@@ -1,6 +1,6 @@
 {
-  "commit": "e208de4d66e094e1af18b7f0912260df8129433c",
-  "core": "0.66.0",
+  "commit": "9482b4f1ead41b16281c79f83a2a1729873732c7",
+  "core": "0.67.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -1895,7 +1895,17 @@
                   "Lead"
                 ],
                 [
+                  "Tomas Reyes",
+                  "Head of Product",
+                  "Member"
+                ],
+                [
                   "AI Agent",
+                  "",
+                  "Member"
+                ],
+                [
+                  "Build Agent",
                   "",
                   "Member"
                 ]
@@ -1916,9 +1926,51 @@
                 "Lead"
               ],
               [
+                "Tomas Reyes",
+                "Head of Product",
+                "Member"
+              ],
+              [
                 "AI Agent",
                 "",
                 "Member"
+              ],
+              [
+                "Build Agent",
+                "",
+                "Member"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Direction",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Agent",
+                "Directed by"
+              ],
+              "rows": [
+                [
+                  "Build Agent",
+                  "Mira Halvorsen"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Agent",
+              "Directed by"
+            ],
+            "rows": [
+              [
+                "Build Agent",
+                "Mira Halvorsen"
               ]
             ]
           }
@@ -3479,12 +3531,36 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "One profile for every agent the company runs, so the seat has a holder. It claims no skill, and not because the first review is unread: a claim is a person's history with a capability, and an agent has none. What holds it to the seat is the rulebook, never a row.",
+          "text": "One profile for whichever agent reviews, so the seat has a holder. It claims no skill, and not because the first review is unread: a claim is a person's history with a capability, and an agent has none. What holds it to the seat is the rulebook, never a row.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "example/model/profiles/ai-agent/ai-agent.md"
+    },
+    {
+      "id": "01a12659-d295-7969-b17f-fbae284c2391",
+      "address": "profiles/build-agent",
+      "type": "profile",
+      "name": "Build Agent",
+      "tagline": "Whichever agent writes the change at Beacon Systems today, in the Backend Engineer seat, and hands it to the Reviewer.",
+      "fields": {
+        "id": "01a12659-d295-7969-b17f-fbae284c2391",
+        "source": "Local",
+        "nature": "agent",
+        "seats": [
+          "Backend Engineer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Summary",
+          "text": "The second profile an agent holds: where AI Agent reviews, this one builds, and the two never hold one seat, so a change is never approved by what wrote it. It claims no skill, as no agent does, and the seat's gap is reported for no one. What holds it to the seat is the rulebook, and who directs it is a row of the Billing Run Team's Direction: Mira Halvorsen alone, where AI Agent beside it, with no row there, is directed by every human in the team.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/profiles/build-agent/build-agent.md"
     },
     {
       "id": "01a11fec-8792-73f8-b030-92147dae4f65",
@@ -6758,6 +6834,14 @@
     },
     {
       "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a12659-d295-7969-b17f-fbae284c2391",
+      "via": "Direction.Agent",
+      "attrs": {
+        "Directed by": "01a02f53-2408-7291-ac16-087fcdee4d71"
+      }
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
       "to": "01a02f53-2408-7291-ac16-087fcdee4d71",
       "via": "People.Profile",
       "attrs": {
@@ -6767,7 +6851,25 @@
     },
     {
       "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "01a1199f-e00b-7a2a-9466-9f6a96ffe718",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
       "to": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
+      "via": "People.Profile",
+      "attrs": {
+        "Job": "",
+        "Place": "Member"
+      }
+    },
+    {
+      "from": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "to": "01a12659-d295-7969-b17f-fbae284c2391",
       "via": "People.Profile",
       "attrs": {
         "Job": "",
@@ -7158,6 +7260,18 @@
     },
     {
       "from": "01a1226b-c65b-7c27-a96f-dbfb10db9c15",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12659-d295-7969-b17f-fbae284c2391",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "seats",
+      "attrs": {}
+    },
+    {
+      "from": "01a12659-d295-7969-b17f-fbae284c2391",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
