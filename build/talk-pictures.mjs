@@ -9,8 +9,9 @@
 // `example` for the example company, and `model` is where a node links, relative to the talk.
 // `browser: true` marks a picture chat.js draws in the visitor's browser instead, when its tab is
 // first shown: Mermaid paints a class, sequence or state diagram partly in colors that are no token,
-// so drawn once it would be right in one theme only, and the build refuses it. A flowchart paints
-// tokens alone and is drawn at build.
+// and the marks before a person's or a system's name the same, so drawn once it would be right in one
+// theme only, and the build refuses it. A flowchart without marks paints tokens alone and is drawn
+// at build.
 
 /** @typedef {{ page: string; name: string; from: "company" | "example"; model: string; request: Record<string, string>; browser?: boolean }} TalkPicture */
 
@@ -24,6 +25,10 @@ export const TALK_PICTURES = [
   { page: "talks/software-pack/index.html", name: "aggregate", from: "company", model: "../../", browser: true, request: { shape: "aggregate", id: "01a10042-5d16-7600-aa84-b9739571a03f" } },
   { page: "talks/software-pack/index.html", name: "flow", from: "company", model: "../../", browser: true, request: { shape: "flow", id: "01a10042-5d16-7600-aa84-b9739571a03f" } },
   { page: "talks/software-pack/index.html", name: "lifecycle", from: "company", model: "../../", browser: true, request: { shape: "lifecycle", id: "01a10042-5d16-7600-aa84-b9739571a03f" } },
+  // The MCP server in its landscape: what it runs on, what it takes data from and gives it to, the
+  // service it provides and what it holds; and what it holds among every system that holds the same.
+  { page: "talks/landscape-pack/index.html", name: "system", from: "company", model: "../../", browser: true, request: { shape: "system", id: "01a1256e-8662-7925-9097-a884e87a2658" } },
+  { page: "talks/landscape-pack/index.html", name: "holds", from: "company", model: "../../", browser: true, request: { shape: "holds", id: "01a1256e-8662-7925-9097-a884e87a2658" } },
 ];
 
 // What a picture is written as: the shape chat.js captions it by, and the server's answer

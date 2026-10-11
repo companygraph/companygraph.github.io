@@ -355,6 +355,17 @@
   /* the departures run longest in German, so on that slide the rows sit closer */
   #s-departs .departs{gap:1cqmin}
   #s-departs .departs li{padding:1cqmin 2cqmin; font-size:clamp(.8rem,1.65cqmin,1.2rem); line-height:1.3}
+  /* the server's own drawing: the figure chat.js draws, in a window like the pages', with its caption and its Expand inside */
+  .drawn .ed{padding:.6em 1.2em 1em}
+  .drawn .wbar{gap:.4em}
+  .drawn .tabs{display:flex; gap:.2em; margin-left:.6em; min-width:0; overflow-x:auto; scrollbar-width:none}
+  .drawn .tabs button{font:inherit; font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--dim); background:none;
+                      border:1px solid transparent; border-radius:.5em; padding:.25em .7em; cursor:pointer; white-space:nowrap}
+  .drawn .tabs button[aria-selected="true"]{color:var(--c-mid); border-color:var(--rule); background:var(--raise)}
+  .drawn .tabs button:hover{color:var(--ink)}
+  .drawn .tabs button:focus-visible{outline:2px solid var(--c-mid); outline-offset:1px}
+  .drawn .wbar .host{margin-left:auto; color:var(--dim); font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; white-space:nowrap}
+  .drawn .pane[hidden]{display:none}
   .departs code{font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--c-firm)}
 
   /* the sources, and what is left for later */
@@ -512,11 +523,37 @@
     <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div>
   </section>
 
+  <section class="slide" id="s-drawn" data-scene="tabs"
+    data-time="0:56"
+    data-notes="The landscape the earlier slides wrote as rows is drawn here by no one’s hand. The MCP server’s own code drew it: its diagram tool, the one an agent calls on mcp.companygraph.io, run on our model at the commit this site pins. The first is the MCP server in its landscape. It runs on Cloud Run, the dotted line to a platform. It takes Instance from GitHub when its image is built, gives entities to the chat server over Streamable HTTP, provides the MCP endpoint and reads its Snapshot. Each box carries the ArchiMate mark of the element its kind names, with the kind as its stereotype. The second puts the server among the systems that hold Instance. GitHub masters it through Repository, the heavy arrow. The server only reads, the dotted arrow, so its copy is a copy of GitHub’s.">
+    <div class="kicker mono" data-n="11"></div>
+    <div class="feat"><div class="lead"><h1>The landscape, drawn</h1><p class="sub">Nobody drew these. The MCP server’s own code draws them from our pages at the commit this site pins — the same code that answers an agent at mcp.companygraph.io.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1256e-8662-7925-9097-a884e87a2658"><i>system</i> MCP server</a><a href="../../?stage=expanded#01a1256e-d242-7df9-8f04-c0aed47a1c12"><i>system</i> GitHub</a><a href="../../?stage=expanded#01a12590-1b8b-7246-9275-8a7b98436b7b"><i>data-object</i> Snapshot</a><a href="../../?stage=expanded#01a12590-0c79-750e-820f-b0a8daa484f4"><i>data-object</i> Repository</a></div></div><div class="win drawn" data-tabs><div class="wbar"><i></i><i></i><i></i><span class="tabs" role="tablist" aria-label="Two pictures the server draws"><button type="button" role="tab" id="tab-system" aria-controls="panel-system" aria-selected="true" tabindex="0">System</button><button type="button" role="tab" id="tab-holds" aria-controls="panel-holds" aria-selected="false" tabindex="-1">Holds</button></span><span class="host">mcp.companygraph.io</span></div><div class="ed">
+      <div class="pane" role="tabpanel" id="panel-system" aria-labelledby="tab-system">
+      <!-- picture: system -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="system">
+        <figcaption><span>MCP server</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"system","title":"MCP server","mermaid":"flowchart LR\n  n0[\"fak:fa-application-component \u003cb>MCP server\u003c/b>\u003cbr/>\u003csmall>«Deployment»\u003c/small>\"]:::middle\n  n1[\"fak:fa-node \u003cb>Cloud Run\u003c/b>\u003cbr/>\u003csmall>«Platform»\u003c/small>\"]\n  n0 -.- n1\n  n2[\"fak:fa-application-component \u003cb>GitHub\u003c/b>\u003cbr/>\u003csmall>«SaaS»\u003c/small>\"]\n  n2 -->|\"the instance's repository, at image build · Instance · HTTPS\"| n0\n  n3[\"fak:fa-application-component \u003cb>Chat server\u003c/b>\u003cbr/>\u003csmall>«Deployment»\u003c/small>\"]\n  n0 -->|\"Streamable HTTP · Entity · HTTPS\"| n3\n  n4([\"MCP endpoint\"])\n  n0 --o n4\n  n5[(\"Snapshot\u003cbr/>\u003csmall>Instance\u003c/small>\")]\n  n0 -.->|\"reads\"| n5\n  classDef middle stroke-width:2px","nodes":[{"node":"n0","id":"01a1256e-8662-7925-9097-a884e87a2658","title":"MCP server"},{"node":"n1","id":"01a1256e-a48a-7d64-ae90-32f51de52f77","title":"Cloud Run"},{"node":"n2","id":"01a1256e-d242-7df9-8f04-c0aed47a1c12","title":"GitHub"},{"node":"n3","id":"01a1256e-95a8-7252-a79b-d83322045bb1","title":"Chat server"},{"node":"n4","id":"01a1256f-009b-7dca-b327-76f8b78a27cf","title":"MCP endpoint"},{"node":"n5","id":"01a12590-1b8b-7246-9275-8a7b98436b7b","title":"Snapshot"}]}</script>
+      </figure>
+      <!-- /picture: system -->
+      </div>
+      <div class="pane" role="tabpanel" id="panel-holds" aria-labelledby="tab-holds" hidden>
+      <!-- picture: holds -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="holds">
+        <figcaption><span>MCP server</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"holds","title":"MCP server","mermaid":"flowchart LR\n  n0[\"fak:fa-application-component \u003cb>MCP server\u003c/b>\u003cbr/>\u003csmall>«Deployment»\u003c/small>\"]:::middle\n  n1[(\"Snapshot\u003cbr/>\u003csmall>Instance\u003c/small>\")]\n  n0 -.->|\"reads\"| n1\n  n2[\"fak:fa-application-component \u003cb>GitHub\u003c/b>\u003cbr/>\u003csmall>«SaaS»\u003c/small>\"]\n  n3[(\"Repository\u003cbr/>\u003csmall>Instance\u003c/small>\")]\n  n2 ==>|\"master\"| n3\n  classDef middle stroke-width:2px","nodes":[{"node":"n0","id":"01a1256e-8662-7925-9097-a884e87a2658","title":"MCP server"},{"node":"n1","id":"01a12590-1b8b-7246-9275-8a7b98436b7b","title":"Snapshot"},{"node":"n2","id":"01a1256e-d242-7df9-8f04-c0aed47a1c12","title":"GitHub"},{"node":"n3","id":"01a12590-0c79-750e-820f-b0a8daa484f4","title":"Repository"}]}</script>
+      </figure>
+      <!-- /picture: holds -->
+      </div>
+    </div></div></div>
+  </section>
+
   <section class="slide" id="s-close"
     data-time="0:48"
     data-notes="So the elements are the ones you already model: application components, nodes, devices and networks, their interfaces, data objects, services and access. The pack writes them down as pages and rows: a system and its kind, what it connects to, what it holds and the services it exposes. A check holds each name to its type and each row’s service and data object to its system and concept. The README maps them to ArchiMate 4 in both directions and says what never comes back. Where the pack departs from ArchiMate or LeanIX, it says so and says why. Your landscape, as pages a check holds. The first talk in this series says how a company chooses which packs to take."
     data-notes-de="Die Elemente sind also die, die Sie schon modellieren: Application Components, Nodes, Devices und Netzwerke, ihre Interfaces, Data Objects, Services und Access. Das Pack schreibt sie als Seiten und Zeilen auf: ein System und seine Art, womit es verbunden ist, welche Daten es führt und welche Services es anbietet. Eine Prüfung bindet jeden Namen an seinen Typ. Bei jeder Zeile bindet sie den Service an das System und das Datenobjekt an das Konzept. Das README bildet die Seiten in beide Richtungen auf ArchiMate 4 ab und sagt, was nie zurückkommt. Wo das Pack von ArchiMate oder LeanIX abweicht, sagt es das und sagt auch, warum. Ihre Systemlandschaft als Seiten, über die eine Prüfung wacht. Der erste Vortrag dieser Reihe sagt, wie eine Firma wählt, welche Packs sie übernimmt.">
-    <div class="kicker mono" data-n="11"></div>
+    <div class="kicker mono" data-n="12"></div>
     <div class="feat"><div class="lead"><h1 data-de="Ihre Systemlandschaft als Seiten">Your landscape, as pages</h1><p class="sub" data-de="Die Elemente von ArchiMate als Seiten, über die eine Prüfung wacht, in beide Richtungen abgebildet. Wo das Pack abweicht, sagt sein README, warum.">ArchiMate’s elements as pages a check holds, mapped in both directions. Where the pack departs, its README says why.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div></div><div class="lv" role="img" aria-label="Both levels lit: the landscape pack’s system, service and data object above core’s process, feature, concept, seat and data processor, joined by serves, realizes, owner and processor."><div class="band on"><span class="bn" data-de="EBENE 1 · LANDSCAPE">LEVEL 1 · LANDSCAPE</span><span class="bl" data-de="System · Service · Datenobjekt">system · service · data object</span></div><div class="arrow" data-de="↓ unterstützt · realisiert · Owner · Auftragsbearbeiter ↓">↓ serves · realizes · owner · processor ↓</div><div class="band on"><span class="bn" data-de="EBENE 0">LEVEL 0</span><span class="bl">Core</span><span class="bx" data-de="Prozess · Feature · Konzept · Sitz · Auftragsbearbeiter">process · feature · concept · seat · data processor</span></div></div></div>
   </section>
 </div>
@@ -657,6 +694,7 @@
   window.rbDeck = { talk: TALK, ui: UI };
 </script>
 <script src="../../deck.js" defer></script>
+<script src="scenes.js" defer></script>
 <script src="../../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/" data-questions="/company.json" data-questions-de="/questions.de.json"></script>
 </body>
 </html>
