@@ -346,6 +346,8 @@ const PAGES = [
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
     fences: [],
     lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["die zwei Linien, die durch die Firma verlaufen"], hides: ["the two lines that run through them"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
 ];
 
