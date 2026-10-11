@@ -29,6 +29,10 @@ export const TALK_PICTURES = [
   // own, where the server draws an arrow for each row of the team's `## Direction`.
   { page: "talks/organization-pack/index.html", name: "organization", from: "example", model: "../../example/", browser: true, request: { shape: "organization" } },
   { page: "talks/organization-pack/index.html", name: "team", from: "example", model: "../../example/", browser: true, request: { shape: "organization", id: "01a1152c-3863-79ba-8430-755ed2dec49c" } },
+  // The MCP server in its landscape: what it runs on, what it takes data from and gives it to, the
+  // service it provides and what it holds; and what it holds among every system that holds the same.
+  { page: "talks/landscape-pack/index.html", name: "system", from: "company", model: "../../", browser: true, request: { shape: "system", id: "01a1256e-8662-7925-9097-a884e87a2658" } },
+  { page: "talks/landscape-pack/index.html", name: "holds", from: "company", model: "../../", browser: true, request: { shape: "holds", id: "01a1256e-8662-7925-9097-a884e87a2658" } },
 ];
 
 // What a picture is written as: the shape chat.js captions it by, and the server's answer

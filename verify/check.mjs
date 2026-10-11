@@ -349,6 +349,21 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["die zwei Linien, die durch die Firma verlaufen"], hides: ["the two lines that run through them"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  // The talk on the landscape pack, built as the software pack's talk and checked the same
+  // way. Its outbound links are the chrome's blust.ch and slide 01's sources.
+  { path: "/talks/landscape-pack/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /Your landscape, in ArchiMate’s words/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/", "https://pubs.opengroup.org/architecture/archimate4-doc/", "https://www.opengroup.org/xsd/archimate/", "https://docs-eam.leanix.net/"],
+    slides: 13,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["in beide Richtungen auf ArchiMate abgebildet"], hides: ["mapped to ArchiMate in both directions"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {

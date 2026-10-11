@@ -1,0 +1,37 @@
+{
+  "shape": "system",
+  "title": "MCP server",
+  "mermaid": "flowchart LR\n  n0[\"fak:fa-application-component <b>MCP server</b><br/><small>«Deployment»</small>\"]:::middle\n  n1[\"fak:fa-node <b>Cloud Run</b><br/><small>«Platform»</small>\"]\n  n0 -.- n1\n  n2[\"fak:fa-application-component <b>GitHub</b><br/><small>«SaaS»</small>\"]\n  n2 -->|\"the instance's repository, at image build · Instance · HTTPS\"| n0\n  n3[\"fak:fa-application-component <b>Chat server</b><br/><small>«Deployment»</small>\"]\n  n0 -->|\"Streamable HTTP · Entity · HTTPS\"| n3\n  n4([\"MCP endpoint\"])\n  n0 --o n4\n  n5[(\"Snapshot<br/><small>Instance</small>\")]\n  n0 -.->|\"reads\"| n5\n  classDef middle stroke-width:2px",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a1256e-8662-7925-9097-a884e87a2658",
+      "title": "MCP server"
+    },
+    {
+      "node": "n1",
+      "id": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "title": "Cloud Run"
+    },
+    {
+      "node": "n2",
+      "id": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "title": "GitHub"
+    },
+    {
+      "node": "n3",
+      "id": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "title": "Chat server"
+    },
+    {
+      "node": "n4",
+      "id": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+      "title": "MCP endpoint"
+    },
+    {
+      "node": "n5",
+      "id": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+      "title": "Snapshot"
+    }
+  ]
+}
