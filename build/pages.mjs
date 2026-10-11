@@ -22,6 +22,7 @@ import { loadGerman } from "@robertblust/design/render/german";
 import { writeQuestionsDe } from "@robertblust/design/render/questions";
 import { writeIdPages } from "@robertblust/design/render/ids";
 import { writeJsonLd } from "./jsonld.mjs";
+import { writeTalkFigures } from "./talk-figures.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PINS = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
@@ -69,6 +70,8 @@ const RENDERERS = [
   // Its nodes link to the home page, which draws the company.
   (d, o) => writeProcesses(d.company, { ...o, root: ROOT, order: ["Deciding", "Delivery", "Contribution", "Feature request", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id), model: "../" }),
   (d, o) => writeSurfaces(d.company, { ...o, root: ROOT }),
+  // The talks' pictures, each the MCP server's own drawing of a pinned instance (talk-pictures.mjs).
+  (d, o) => writeTalkFigures({ ...o, root: ROOT }),
   (d, o) => writePrivacy(d.company, { ...o, root: ROOT, site: "companygraph.io", de: privacyGerman.de }),
   (d, o) => writeHome(d.company, { ...o, root: ROOT, de: german.de, heading: { en: "{n} values, each with the thing <em>we never do</em>.", de: "{n} Werte – jeder mit dem, <em>was wir nie tun</em>." } }),
   // One redirect page per entity of the company with a stable id, sending the reader on to its
