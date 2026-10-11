@@ -79,6 +79,15 @@ jobs:
             echo "::error::narration is stale — run talks/software-pack/tts/generate.py and commit the clips"
             exit 1
           fi
+      - name: Clips still say what the notes say (organization pack)
+        working-directory: talks/organization-pack/tts
+        run: |
+          out=$(./generate.py --dry-run)
+          printf '%s\n' "$out"
+          if printf '%s\n' "$out" | grep -q 'would write'; then
+            echo "::error::narration is stale — run talks/organization-pack/tts/generate.py and commit the clips"
+            exit 1
+          fi
       - name: Clips still say what the notes say (landscape pack)
         working-directory: talks/landscape-pack/tts
         run: |

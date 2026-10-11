@@ -1,0 +1,32 @@
+{
+  "shape": "organization",
+  "title": "Billing Run Team",
+  "mermaid": "flowchart TB\n  subgraph g0 [\"Billing Run Team\"]\n    n0[\"fak:fa-human <b>Mira Halvorsen</b><br/><small>Backend Engineer</small>\"]:::lead\n    n1[\"fak:fa-human <b>Tomas Reyes</b><br/><small>Head of Product</small>\"]\n    subgraph g0a [\" \"]\n      direction LR\n      n2[\"fak:fa-agent <b>AI Agent</b>\"]\n      n3[\"fak:fa-agent <b>Build Agent</b>\"]\n    end\n    n0 -.-> n3\n    n0 ~~~ n1\n    n1 ~~~ g0a\n  end\n  class g0a agents\n  classDef lead stroke-width:2px\n  classDef agents stroke-dasharray:2 3",
+  "nodes": [
+    {
+      "node": "g0",
+      "id": "01a1152c-3863-79ba-8430-755ed2dec49c",
+      "title": "Billing Run Team"
+    },
+    {
+      "node": "n0",
+      "id": "01a02f53-2408-7291-ac16-087fcdee4d71",
+      "title": "Mira Halvorsen"
+    },
+    {
+      "node": "n1",
+      "id": "01a03a2c-2de8-73b4-9058-8664caea919a",
+      "title": "Tomas Reyes"
+    },
+    {
+      "node": "n2",
+      "id": "01a0a6b8-7e80-78af-b202-d3733bdd650c",
+      "title": "AI Agent"
+    },
+    {
+      "node": "n3",
+      "id": "01a12659-d295-7969-b17f-fbae284c2391",
+      "title": "Build Agent"
+    }
+  ]
+}
