@@ -326,7 +326,7 @@ const PAGES = [
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     transportBaseline: [320, 360, 430, 500, 900, 1280],
     links: ["https://blust.ch/", "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf", "https://www.oreilly.com/library/view/domain-driven-design-distilled/9780134434964/", "https://github.com/ddd-crew/bounded-context-canvas", "https://github.com/ddd-crew/aggregate-design-canvas", "https://github.com/ddd-crew/context-mapping", "https://essenceofsoftware.com/", "https://cucumber.io/docs/gherkin/reference/"],
-    slides: 12,
+    slides: 13,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
     fences: [],
