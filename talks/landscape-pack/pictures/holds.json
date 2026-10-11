@@ -1,0 +1,27 @@
+{
+  "shape": "holds",
+  "title": "MCP server",
+  "mermaid": "flowchart LR\n  n0[\"fak:fa-application-component <b>MCP server</b><br/><small>«Deployment»</small>\"]:::middle\n  n1[(\"Snapshot<br/><small>Instance</small>\")]\n  n0 -.->|\"reads\"| n1\n  n2[\"fak:fa-application-component <b>GitHub</b><br/><small>«SaaS»</small>\"]\n  n3[(\"Repository<br/><small>Instance</small>\")]\n  n2 ==>|\"master\"| n3\n  classDef middle stroke-width:2px",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a1256e-8662-7925-9097-a884e87a2658",
+      "title": "MCP server"
+    },
+    {
+      "node": "n1",
+      "id": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+      "title": "Snapshot"
+    },
+    {
+      "node": "n2",
+      "id": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "title": "GitHub"
+    },
+    {
+      "node": "n3",
+      "id": "01a12590-0c79-750e-820f-b0a8daa484f4",
+      "title": "Repository"
+    }
+  ]
+}
