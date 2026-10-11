@@ -56,7 +56,7 @@ A repository named `talks` in this organization would claim `companygraph.io/tal
   two terminals and lights the flow on slide 09, under the same still-frame rule.
 - `talks/core-and-packs/` — the fifth deck, built from the fourth, with a `scenes.js` that types slide 07's terminal, under the same still-frame rule.
 - `talks/software-pack/` — the sixth deck, built from the fifth, with a `scenes.js` that types slide 09's terminal and steps slide 11's tabs through the pictures the MCP server draws, under the same still-frame rule.
-- `talks/landscape-pack/` — the seventh deck, built from the sixth, with no scene, since no slide shows a run.
+- `talks/landscape-pack/` — the seventh deck, built from the sixth, with a `scenes.js` that steps slide 11's tabs through the pictures the MCP server draws, under the same still-frame rule.
 - `build/talk-pictures.mjs` — the pictures the talks show, each the MCP server's own drawing of a pinned instance: `build/build.mjs` asks the server package's `diagram` for each, from a snapshot it builds with the package's `buildSnapshot`, and writes the answer to `<talk>/pictures/<name>.json`; `build/talk-figures.mjs`, run by `build/pages.mjs`, writes each into its slide as the figure `chat.js` draws, and `npm run pictures` draws a flowchart once into `<talk>/pictures/<name>.svg`. A class, sequence or state diagram is drawn in the visitor's browser when its tab first shows, since Mermaid paints it partly in colors that are no token. `build:check` holds each picture to its pin and `pages:check` each drawing to its picture.
 - `tokens.css`, `page.css`, `page.js`, `deck.css`, `deck.js` — five whole files `npm run design`
   writes from `@robertblust/design` at the pinned tag: the tokens, the chrome and the runtime
