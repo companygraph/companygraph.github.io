@@ -1,5 +1,5 @@
 {
-  "commit": "4faa54f45c30f0bdfa61ed0d70228bf140b0a91f",
+  "commit": "08eec835b29489232d976913d1c693dcdd0d1d30",
   "core": "0.67.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -13320,7 +13320,7 @@
                 ],
                 [
                   "The surface the notice appears on",
-                  "https://companygraph.io/model/#01a0c9f6-5458-7276-aae9-86088e4eb1e0"
+                  "https://companygraph.io/id/01a0c9f6-5458-7276-aae9-86088e4eb1e0/"
                 ]
               ]
             }
@@ -13338,7 +13338,7 @@
               ],
               [
                 "The surface the notice appears on",
-                "https://companygraph.io/model/#01a0c9f6-5458-7276-aae9-86088e4eb1e0"
+                "https://companygraph.io/id/01a0c9f6-5458-7276-aae9-86088e4eb1e0/"
               ]
             ]
           }
