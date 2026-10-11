@@ -346,6 +346,8 @@ const PAGES = [
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
     fences: [],
     lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["in beide Richtungen auf ArchiMate abgebildet"], hides: ["mapped to ArchiMate in both directions"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
 ];
 
