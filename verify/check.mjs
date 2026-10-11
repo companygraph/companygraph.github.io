@@ -341,7 +341,7 @@ const PAGES = [
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     transportBaseline: [320, 360, 430, 500, 900, 1280],
     links: ["https://blust.ch/", "https://www.w3.org/TR/vocab-org/", "https://schema.org/department", "https://learning.sap.com/courses/organizational-management-in-sap-hcm-for-s-4hana/finding-object-relationships", "https://schemas.liquid-technologies.com/HR-XML/3.1/reportstopositiontype.html", "https://wirtschaftslexikon.gabler.de/definition/einliniensystem-32337", "https://wirtschaftslexikon.gabler.de/definition/mehrliniensystem-41223", "https://wirtschaftslexikon.gabler.de/definition/stelle-42791"],
-    slides: 12,
+    slides: 14,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
     fences: [],
