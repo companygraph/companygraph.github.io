@@ -1,6 +1,6 @@
 {
-  "commit": "08eec835b29489232d976913d1c693dcdd0d1d30",
-  "core": "0.67.0",
+  "commit": "c917286b0afb3508b1e23028ec4a100a81f7dad3",
+  "core": "0.68.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -80,6 +80,12 @@
       "type": "domain-event",
       "folder": "domain-events",
       "owner": "bounded-context",
+      "singular": false
+    },
+    {
+      "type": "environment",
+      "folder": "environments",
+      "owner": null,
       "singular": false
     },
     {
@@ -16906,6 +16912,83 @@
       "path": "model/domains/core.md"
     },
     {
+      "id": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "address": "environments/production",
+      "type": "environment",
+      "name": "Production",
+      "tagline": "Where companygraph.io, the MCP server and the chat server serve their visitors, the one environment CompanyGraph runs, deployed to on every merge and never by hand.",
+      "fields": {
+        "id": "01a12eb2-fad9-752e-a440-0a85a6867456",
+        "source": "Local",
+        "rank": "30"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "The MCP server and the chat server run here as containers on Cloud Run, reached at mcp.companygraph.io and chat.companygraph.io, and the Site build's pages are served here by GitHub Pages at companygraph.io. CompanyGraph's own seats deploy to it by merging to the repository that pins what runs: a merge to mcp-companygraph-io builds and releases the servers, a merge to companygraph.github.io publishes the site. Nobody deploys to it by hand, and nothing runs here that a merge did not put there. It holds the public model at one pinned commit, and the Question log the chat writes, which is what real visitors asked and the only data here that is anyone's. A developer's machine, where a server runs against a checkout before a change ships, is not it, and no test stage stands between the two.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The pipeline that deploys the servers",
+                  "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/deploy.yml"
+                ],
+                [
+                  "The pipeline that publishes the site",
+                  "https://github.com/companygraph/companygraph.github.io/blob/main/.github/workflows/ci.yml"
+                ],
+                [
+                  "The site",
+                  "https://companygraph.io"
+                ],
+                [
+                  "The MCP server's page",
+                  "https://mcp.companygraph.io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The pipeline that deploys the servers",
+                "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/deploy.yml"
+              ],
+              [
+                "The pipeline that publishes the site",
+                "https://github.com/companygraph/companygraph.github.io/blob/main/.github/workflows/ci.yml"
+              ],
+              [
+                "The site",
+                "https://companygraph.io"
+              ],
+              [
+                "The MCP server's page",
+                "https://mcp.companygraph.io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/environments/production.md"
+    },
+    {
       "id": "01a10042-637e-7b18-8ccc-106a7ca249f4",
       "address": "feature-designs/a-browser-draws-the-vocabulary-at-the-commit-a-pin-names",
       "type": "feature-design",
@@ -19015,10 +19098,6 @@
                 [
                   "The file format architecture tools exchange a model in",
                   "https://www.opengroup.org/xsd/archimate/"
-                ],
-                [
-                  "An architecture management tool's stages of an application's lifecycle",
-                  "https://docs-eam.leanix.net/"
                 ]
               ]
             }
@@ -19041,10 +19120,6 @@
               [
                 "The file format architecture tools exchange a model in",
                 "https://www.opengroup.org/xsd/archimate/"
-              ],
-              [
-                "An architecture management tool's stages of an application's lifecycle",
-                "https://docs-eam.leanix.net/"
               ]
             ]
           }
@@ -29003,7 +29078,8 @@
         "kind": "Deployment",
         "owner": "Owner",
         "processor": "Google Cloud",
-        "part-of": "Cloud Run"
+        "part-of": "Cloud Run",
+        "environment": "Production"
       },
       "sections": [
         {
@@ -29233,7 +29309,8 @@
         "processor": "Google Cloud",
         "serves": [
           "Answering"
-        ]
+        ],
+        "environment": "Production"
       },
       "sections": [
         {
@@ -29322,7 +29399,8 @@
         "processor": "Google Cloud",
         "serves": [
           "Answering"
-        ]
+        ],
+        "environment": "Production"
       },
       "sections": [
         {
@@ -29466,7 +29544,8 @@
         "owner": "Owner",
         "serves": [
           "Delivery"
-        ]
+        ],
+        "environment": "Production"
       },
       "sections": [
         {
@@ -29519,7 +29598,8 @@
         "owner": "Owner",
         "serves": [
           "Delivery"
-        ]
+        ],
+        "environment": "Production"
       },
       "sections": [
         {
@@ -29570,7 +29650,8 @@
         "kind": "Deployment",
         "owner": "Owner",
         "processor": "Google Cloud",
-        "part-of": "Cloud Run"
+        "part-of": "Cloud Run",
+        "environment": "Production"
       },
       "sections": [
         {
@@ -29711,7 +29792,8 @@
         "part-of": "GitHub Actions",
         "realizes": [
           "The vocabulary on the web"
-        ]
+        ],
+        "environment": "Production"
       },
       "sections": [
         {
@@ -38253,6 +38335,12 @@
     },
     {
       "from": "01a1256e-8662-7925-9097-a884e87a2658",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-8662-7925-9097-a884e87a2658",
       "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
       "via": "kind",
       "attrs": {}
@@ -38325,6 +38413,12 @@
     },
     {
       "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
       "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
       "via": "kind",
       "attrs": {}
@@ -38351,6 +38445,12 @@
       "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-a48a-7d64-ae90-32f51de52f77",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
       "attrs": {}
     },
     {
@@ -38385,6 +38485,12 @@
     },
     {
       "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
       "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
       "via": "kind",
       "attrs": {}
@@ -38405,6 +38511,12 @@
       "from": "01a1256e-b39f-7e20-8e59-7907f3d03485",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256e-c2d9-7384-91d6-226d3be232bd",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
       "attrs": {}
     },
     {
@@ -38613,6 +38725,12 @@
     },
     {
       "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a12578-5da5-7cf7-acaf-ee2a84eb1308",
       "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
       "via": "kind",
       "attrs": {}
@@ -38697,6 +38815,12 @@
         "Data object": "01a12590-2b1d-758d-a75f-605949596608",
         "Access": "master"
       }
+    },
+    {
+      "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
     },
     {
       "from": "01a12591-6c04-7315-a0f3-b7e9aa9173c2",
@@ -38802,6 +38926,12 @@
     },
     {
       "from": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12eb2-fad9-752e-a440-0a85a6867456",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
