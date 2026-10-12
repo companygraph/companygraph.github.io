@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://companygraph.io/talks/requirements-pack/">
+
+<title>CompanyGraph — What someone wants, and what a product is held to</title>
+<meta id="metadesc" name="description" content="A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, written as pages a check holds and drawn by the MCP server.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CompanyGraph">
+<meta property="og:url" content="https://companygraph.io/talks/requirements-pack/">
+<meta property="og:title" content="CompanyGraph — What someone wants, and what a product is held to">
+<meta property="og:description" content="A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, written as pages a check holds and drawn by the MCP server.">
+<meta property="og:image" content="https://companygraph.io/talks/requirements-pack/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CompanyGraph — What someone wants, and what a product is held to.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+<!-- The publisher, the site and this page — nothing about what the software does or when
+     it does it, which is the same rule the prose follows. Each page carries the whole graph
+     it references: Google resolves @graph within one document, so a bare { "@id": ... }
+     naming a node defined on another page resolves to nothing. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "logo": "https://companygraph.io/logo.svg",
+      "sameAs": [
+        "https://github.com/companygraph",
+        "https://www.linkedin.com/company/companygraph"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://companygraph.io/#website",
+      "name": "CompanyGraph",
+      "url": "https://companygraph.io/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://companygraph.io/talks/requirements-pack/#webpage",
+      "name": "CompanyGraph — What someone wants, and what a product is held to",
+      "url": "https://companygraph.io/talks/requirements-pack/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://companygraph.io/#website"
+      },
+      "publisher": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      },
+      "breadcrumb": {
+        "@id": "https://companygraph.io/talks/requirements-pack/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://companygraph.io/talks/requirements-pack/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://companygraph.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Talks",
+          "item": "https://companygraph.io/talks/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CompanyGraph — What someone wants, and what a product is held to",
+          "item": "https://companygraph.io/talks/requirements-pack/"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://companygraph.io/#dataset",
+      "name": "CompanyGraph — the company described in CompanyGraph",
+      "description": "CompanyGraph described in the vocabulary it publishes: its direction, the seats and processes it works by, and what it builds.",
+      "url": "https://companygraph.io/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@id": "https://companygraph.io/id/01a0c152-e370-71a3-8bba-4bf6458989e1"
+      },
+      "isBasedOn": "https://github.com/companygraph/mental-model",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://companygraph.io/company.json",
+        "encodingFormat": "application/json"
+      }
+    }
+  ]
+}
+</script>
+<meta name="author" content="Robert Blust">
+<script>
+  /* ─── theme boot · v5 · deck ────────────────────────────────────
+     Set the theme before anything paints. Generated from @robertblust/design —
+     editing it here does nothing, because the next `npm run design` overwrites it.
+
+     This is the one script this package puts in <head>, and it has to be there: the package's
+     other scripts sit at the end of the body, and a page may paint before they have run.
+     Language arriving late costs a flash of English; a palette arriving late repaints the
+     whole page in the wrong one, on every navigation. A site may put a script of its own in
+     <head> as well, as each site does to start its fonts loading right after its @font-face
+     rules.
+
+     It duplicates the storage key and the URL pattern that `theme` also carries. That is
+     deliberate — nothing is in scope up here, and the block must stand alone. Both blocks are
+     generated from the same package, so the duplicate cannot drift.
+
+     It also sets `data-embed` on a framed page whose address asks for it, for the same reason
+     it sets the theme here: the chat embeds a model page in its dialog, and that page must never
+     paint its header and footer before the stage's rules hide them.
+
+     And it marks a page arriving with the chat open, for the reason it sets the theme here too:
+     the panel is built by chat.js, which runs after the page's other scripts, and a page may
+     paint before it has. `data-chat-waiting` holds the host the panel's title bar names, and
+     chat.css paints the panel's empty frame and title bar at its size from it, so the frame
+     and the bar are there on the first paint and only the conversation arrives after.
+     chat.js takes the mark off once the panel stands, or once it has found nothing to show.
+
+     Dark is the default and `prefers-color-scheme` is never read: dark is the design, and
+     light is something a visitor asks for. A visitor whose system is set to light still
+     arrives on dark until they say otherwise.
+  */
+  (function(){
+    try {
+      var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+      var t = m ? m[1] : localStorage.getItem("theme");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+    // A page asked for `embed`, inside a frame, draws its stage alone, in the chat's dialog on
+    // another page; the flag is set here so the page never paints its own header first. Its own
+    // try, because the theme's storage read throws where site data is blocked and the flag must
+    // not go with it; and only in a frame, because a page opened on its own is an ordinary page.
+    try {
+      if (window.top !== window && /[?&]embed(&|$)/.test(location.search)) document.documentElement.setAttribute("data-embed", "");
+    } catch (e) {}
+    // A conversation the tab keeps open: the keys are chat.js's, `chat` and `chat-size`, read
+    // the way it reads them. Never in a frame, which takes no chat of its own.
+    try {
+      var r = document.documentElement, c = JSON.parse(sessionStorage.getItem("chat") || "null");
+      if (c && c.open && window.top === window) {
+        r.setAttribute("data-chat-waiting", location.host);
+        var z = JSON.parse(sessionStorage.getItem("chat-size") || "null");
+        if (z && z.w && z.h) { r.style.setProperty("--rbchat-kept-w", z.w + "px"); r.style.setProperty("--rbchat-kept-h", z.h + "px"); }
+      }
+    } catch (e) {}
+  })();
+  /* ─── end theme boot ─────────────────────────────────────────────────── */
+</script>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../deck.css">
+<link rel="stylesheet" href="../../chat.css">
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/Bricolage-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/InstrumentSans-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/PlexMono-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../../fonts/PlexMono-600.woff2" crossorigin>
+<style>
+/* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
+   unit that has to survive being copied to someone else's machine is the folder,
+   not the file. */
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:fallback}
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:fallback}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:fallback}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:fallback}
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
+    background-image:var(--sky); background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at 1600×900 and the whole plane is scaled to whatever the
+     screen gives it, as the other decks on this site do. */
+  .deck{
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    background:transparent;
+  }
+  .slide svg, .slide img{max-height:60cqmin}
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
+  }
+  h1 em{font-style:normal; color:var(--c-mid)}
+  .sub{
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
+  }
+  /* A command or a file named inside a sentence is data, so it is set in mono. */
+  .sub code{font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--c-firm)}
+
+  /* title slide */
+  .titlelock{display:flex; align-items:center; gap:.32em}
+  .titlemark{color:var(--c-mid); display:flex; flex:0 0 auto}
+  .titlemark svg{width:clamp(2.6rem,9cqmin,6.6rem); height:clamp(2.6rem,9cqmin,6.6rem); display:block}
+  .titlelock h1{margin:0}
+
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:18ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
+
+  /* ---------- transport ---------- */
+  .chrome{
+    position:fixed; left:0; right:0; bottom:0; z-index:21;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto}
+
+  /* page-owned: groups the language and theme controls in the transport, exactly as
+     the prose header's #langind wrapper groups the same pair. */
+  .switchers{display:flex; align-items:center; gap:.45rem}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:var(--deck-well); color:var(--deck-paper); border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:var(--deck-accent); margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
+  /* Two roles, kept apart: a stage direction is not spoken, an emphasis is. */
+  .notes em.cue{font-style:italic; color:var(--deck-quiet)}
+  .notes em{font-style:normal; font-weight:600; color:var(--deck-paper)}
+  .notes .time{float:right; color:var(--deck-accent); font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
+                border:1px solid var(--deck-edge); border-radius:8px; padding:.5em .9em;
+                color:var(--deck-warm); font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
+  .notes .close:hover{color:var(--deck-paper); border-color:var(--deck-accent)}
+  .notes .close:focus-visible{outline:2px solid var(--deck-accent); outline-offset:2px}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .chrome{
+      grid-template-columns:1fr; padding:0;
+      background:var(--slab); border-top:1px solid var(--rule);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
+           transform:translateY(calc(101% + var(--chromeH,0px)))}
+    .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
+    .slide{justify-content:flex-start; overflow-y:auto;
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .titlelock{flex-wrap:wrap}
+    .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
+    .titlemark svg{width:clamp(1.55rem,7vw,2.45rem); height:clamp(1.55rem,7vw,2.45rem)}
+    .kicker{margin-bottom:5vw}
+  }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
+
+  /* ─── this talk ───────────────────────────────────────────────────────
+     A slide is a lead on the left and a picture on the right, as in the other talks: a window on a
+     page of our model, the two levels with the pack's edges into core, or a two-column list for the
+     kinds and modalities and for where the pack departs. Slide 12's window has tabs that step through
+     the three pictures the MCP server draws of one use case; scenes.js runs them. */
+  #s-method .talks{gap:1.1cqmin; margin-top:2.6cqmin}
+  #s-method .talks li{font-size:clamp(.95rem,2.15cqmin,1.6rem)}
+  .feat{display:grid; grid-template-columns:.82fr 1.18fr; gap:5cqmin; align-items:center}
+  .feat .lead h1{font-size:clamp(1.9rem,5.4cqmin,3.8rem); max-width:none}
+  .feat .lead .sub{font-size:clamp(1.02rem,2.25cqmin,1.65rem); margin-top:2.4cqmin; max-width:none}
+
+  /* the cover title is set smaller than the other decks', because this title is longer: at their
+     size its German takes four lines and runs under the transport on a 4:3 screen */
+  .title-slide h1{font-size:clamp(2.6rem,9cqmin,6rem); max-width:22ch}
+
+  /* a command in a subtitle stays on one line, so a phone never breaks it at its dashes */
+  .sub code{white-space:nowrap}
+
+  /* the two levels: core under every company, the packs above it, and the one-way arrow */
+  .lv{display:flex; flex-direction:column; gap:1.4cqmin; width:100%}
+  .lv .band{display:grid; grid-template-columns:auto 1fr; align-items:baseline; gap:.4cqmin 2cqmin; padding:1.8cqmin 2.4cqmin;
+            background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin}
+  .lv .bn{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.75rem,1.45cqmin,1.05rem); letter-spacing:.12em; color:var(--dim)}
+  .lv .bl{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:600; font-size:clamp(1.1rem,2.7cqmin,1.9rem); color:var(--dim)}
+  .lv .bx{grid-column:2; font-size:clamp(.8rem,1.6cqmin,1.15rem); color:var(--dim)}
+  .lv .packs{display:grid; grid-template-columns:repeat(3, 1fr); gap:1.4cqmin}
+  .lv .packs .band{grid-template-columns:1fr; align-content:start}
+  .lv .packs .bx{grid-column:1}
+  .lv .band.on{border-color:var(--c-mid); background:var(--press)}
+  .lv .band.on .bn, .lv .band.on .bl{color:var(--c-mid)}
+  .lv .band.on .bx{color:var(--ink)}
+  .lv .arrow{font-family:"Plex Mono", ui-monospace, monospace; font-size:clamp(.75rem,1.45cqmin,1.05rem); color:var(--c-mid); text-align:center}
+
+  /* two columns: an ArchiMate element and what it is here, or a departure and what the pack does */
+  .departs{list-style:none; display:flex; flex-direction:column; gap:1.4cqmin; width:100%}
+  .departs li{display:grid; grid-template-columns:1fr 1fr; gap:2.4cqmin; padding:1.4cqmin 2.2cqmin; align-items:baseline;
+              background:var(--raise); border:1px solid var(--rule); border-radius:1cqmin; font-size:clamp(.85rem,1.8cqmin,1.3rem); line-height:1.35}
+  .departs .was{color:var(--dim)}
+  .departs .is{color:var(--ink)}
+  /* the departures run longest in German, so on that slide the rows sit closer */
+  #s-departs .departs{gap:1cqmin}
+  #s-departs .departs li{padding:1cqmin 2cqmin; font-size:clamp(.8rem,1.65cqmin,1.2rem); line-height:1.3}
+  /* the server's own drawing: the figure chat.js draws, in a window like the pages', with its caption and its Expand inside */
+  .drawn .ed{padding:.6em 1.2em 1em}
+  .drawn .wbar{gap:.4em}
+  .drawn .tabs{display:flex; gap:.2em; margin-left:.6em; min-width:0; overflow-x:auto; scrollbar-width:none}
+  .drawn .tabs button{font:inherit; font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--dim); background:none;
+                      border:1px solid transparent; border-radius:.5em; padding:.25em .7em; cursor:pointer; white-space:nowrap}
+  .drawn .tabs button[aria-selected="true"]{color:var(--c-mid); border-color:var(--rule); background:var(--raise)}
+  .drawn .tabs button:hover{color:var(--ink)}
+  .drawn .tabs button:focus-visible{outline:2px solid var(--c-mid); outline-offset:1px}
+  .drawn .wbar .host{margin-left:auto; color:var(--dim); font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; white-space:nowrap}
+  .drawn .pane[hidden]{display:none}
+  .departs code{font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em; color:var(--c-firm)}
+
+  /* the sources, and what is left for later */
+  .talks{list-style:none; display:flex; flex-direction:column; gap:1.6cqmin; margin-top:3.4cqmin; max-width:150cqmin}
+  .talks li{display:grid; grid-template-columns:20ch 1fr; gap:3cqmin; align-items:baseline; font-size:clamp(1rem,2.4cqmin,1.75rem)}
+  .talks .tk{font-family:"Plex Mono", ui-monospace, monospace; font-size:.62em; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .talks a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--rule)}
+  .talks a:hover{border-bottom-color:var(--c-mid)}
+  .talks a:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+  /* the list of what is left for later is the longest on any slide here, so it sits closer */
+  #s-later .talks{gap:1.1cqmin; margin-top:2.6cqmin}
+
+  /* ─── the window ──────────────────────────────────────────────────────
+     This talk's window: a page or a terminal. Sized in cqmin like the rest of the canvas, and
+     in em inside, so the whole window scales as one picture. */
+  .win{position:relative; width:100%; font-size:clamp(.62rem,1.55cqmin,1.1rem); line-height:1.45;
+       background:var(--raise); border:1px solid var(--rule); border-radius:1.4cqmin; overflow:hidden;
+       display:flex; flex-direction:column; color:var(--ink); box-shadow:0 2cqmin 5cqmin var(--deck-drop)}
+  .wbar{flex:none; height:2.9em; display:flex; align-items:center; gap:.5em; padding:0 1em; background:var(--ground); border-bottom:1px solid var(--rule)}
+  .wbar i{width:.75em; height:.75em; border-radius:50%; background:var(--rule)}
+  .wbar span{margin-left:.6em; color:var(--dim); font-family:"Plex Mono", ui-monospace, monospace; font-size:.9em}
+  .ed{flex:1; min-width:0; padding:1em 1.5em 1.4em; position:relative; overflow:hidden}
+  .src{font-family:"Plex Mono", ui-monospace, monospace}
+  .l{min-height:1.75em; line-height:1.75em; white-space:pre-wrap; padding-left:2ch; text-indent:-2ch; position:relative}
+  .k{color:var(--c-mid)} .d{color:var(--dim)} .h{font-weight:600} .dim{color:var(--dim)} .ok{color:var(--c-sum)} .fl{color:var(--c-flag)}
+  .cur{display:inline-block; width:.6em; height:1.15em; background:var(--ink); vertical-align:-.2em; margin-left:.1em; animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-reduced-motion: reduce){ .cur{animation:none} }
+  .hid{visibility:hidden}
+
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .feat{grid-template-columns:1fr; gap:5vw}
+    .lv .packs{grid-template-columns:1fr}
+    .talks li{grid-template-columns:1fr; gap:1vw}
+    .departs li{grid-template-columns:1fr; gap:1vw}
+    .title-slide h1{font-size:clamp(1.9rem,8.6vw,3rem)}
+    .win{font-size:2.4vw}
+  }
+</style>
+<script>/* Start the fonts before the first layout needs them, so the first frame has them. */try{document.fonts.forEach(function(f){f.load()})}catch(e){}</script>
+<script type="module" blocking="render">/* Hold the first paint until the fonts have loaded, for at most 300ms: a page painted before them shows its text in another face and then moves it. */try{await Promise.race([Promise.all([...document.fonts].map(function(f){return f.load()})),new Promise(function(r){setTimeout(r,300)})])}catch(e){}</script>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <section class="slide title-slide" id="s-cover" data-say-title="no"
+    data-time="0:00"
+    data-notes="&lt;em class=&#x27;cue&#x27;&gt;The title stays up while I open.&lt;/em&gt; If you write use cases in Cockburn’s form and requirements the way a standard asks for them, you already have the words: actor, scope, level, scenario, extension, guarantee; kind, modality, fit criterion. This talk shows the requirements pack writing them down as pages a check holds, and the MCP server drawing a use case from those pages. It also shows where the pack departs from its sources and why, and how it joins core, the vocabulary every company shares. As in our other talks, each slide names the pages of our own model it rests on."
+    >
+    <div class="kicker mono" data-n="00"></div>
+    <div class="titlelock"><span class="titlemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><h1>What someone wants, and what a product is held to</h1></div>
+    <p class="sub">A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, written as pages a check holds and drawn by the MCP server.</p>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div>
+    <p class="byline">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
+  </section>
+
+  <section class="slide" id="s-method"
+    data-time="0:55"
+    data-notes="This talk is for you if you already write use cases and requirements. The requirements pack is vocabulary for a company that says what its products must do before it builds them: the goals people bring to a system, and the statements a product is held to. It writes the words of the method down as pages rather than inventing its own, and its README names its sources. For use cases, Cockburn’s fully dressed form: the Use-Case Foundation he wrote with Jacobson, his template, UML’s clause on use cases and Use-Case 2.0. For requirements, ISO 29148, IREB’s glossary, Volere’s snow card and the three words of RFC 2119. They are on the screen, each linked, so you can hold the pack to them. Where the pack does something else, it says so, and a later slide shows where.">
+    <div class="kicker mono" data-n="01"></div>
+    <h1>The method you know</h1>
+    <p class="sub">The pack writes the words of use cases and requirements down as pages, and its README names the sources they come from.</p>
+    <ul class="talks">
+      <li><span class="tk">Cockburn and Jacobson</span><a href="https://alistaircockburn.com/Use%20Case%20Foundation.pdf">Use-Case Foundation</a></li>
+      <li><span class="tk">Cockburn</span><a href="https://www.cs.otago.ac.nz/coursework/cosc461/uctempla.htm">Basic use case template</a></li>
+      <li><span class="tk">Cockburn</span><a href="https://cs.otago.ac.nz/coursework/cosc461/usecases.htm">Structuring use cases with goals</a></li>
+      <li><span class="tk">OMG</span><a href="https://www.omg.org/spec/UML/2.5.1/PDF">UML 2.5.1, clause 18</a></li>
+      <li><span class="tk">Jacobson, Spence and Bittner</span><a href="https://www.ivarjacobson.com/publications/white-papers/use-case-20-e-book">Use-Case 2.0</a></li>
+      <li><span class="tk">ISO/IEC/IEEE</span><a href="https://www.iso.org/standard/72089.html">29148:2018</a></li>
+      <li><span class="tk">IREB</span><a href="https://cockpit-v1.ireb.org/media/pages/downloads/cpre-glossary/510f672cfd-1760005471/ireb_cpre_glossary_en_2.2.pdf">CPRE glossary</a></li>
+      <li><span class="tk">Volere</span><a href="https://www.volere.org/wp-content/uploads/2018/12/snowcard.pdf">Requirement snow card</a></li>
+      <li><span class="tk">IETF</span><a href="https://www.rfc-editor.org/rfc/rfc2119">RFC 2119, key words for requirement levels</a></li>
+      <li><span class="tk">GitHub</span><a href="https://github.com/github/spec-kit/blob/main/templates/spec-template.md">spec-kit, specification template</a></li>
+    </ul>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div>
+  </section>
+
+  <section class="slide" id="s-usecase"
+    data-time="1:02"
+    data-notes="A use case is all the ways of using a system to achieve one goal for one actor, and the pack has one type for it, use-case. This is one from our own model: Ask the company a question. Its level is user goal, Cockburn’s word for a goal the actor gets done in one sitting; its scope is system, what the use case treats as the thing under design. Its primary actor is Visitor, which is a seat in our model, so the page resolves it. Where a company has no seat for an actor, the name stands as written. It names the features it asks something of: here A visitor asks the model, and the marks a chat answer puts on claims its evidence does not carry. The tagline says what the visitor wants and what they have when it is done. Everything else is on the page, in the sections Cockburn’s template has.">
+    <div class="kicker mono" data-n="02"></div>
+    <div class="feat"><div class="lead"><h1>A use case</h1><p class="sub">One goal for one actor, and every way of reaching it. Its level, its scope and its primary actor stand in the front matter, with the features it asks something of.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312c-4d5f-7923-b896-700a5ce8d15f"><i>use-case</i> Ask the company a question</a><a href="../../?stage=expanded#01a0d646-a0a0-74f1-95d4-cacbba20c3ab"><i>feature</i> A visitor asks the model</a><a href="../../?stage=expanded#01a0ccd4-cfb0-7641-9793-c30711c38403"><i>seat</i> Visitor</a></div></div><div class="win" role="img" aria-label="The head of the use case Ask the company a question: its level, scope, primary actor and features."><div class="wbar"><i></i><i></i><i></i><span>model/use-cases/ask-the-company-a-question.md</span></div><div class="ed"><div class="src"><div class="l"><span class="d">---</span></div><div class="l"><span class="k">id:</span> 01a1312c-4d5f-7923-b896-700a5ce8d15f</div><div class="l"><span class="k">source:</span> Local</div><div class="l"><span class="k">level:</span> user goal</div><div class="l"><span class="k">scope:</span> system</div><div class="l"><span class="k">primary-actor:</span> Visitor</div><div class="l"><span class="k">features:</span> </div><div class="l">  - A visitor asks the model</div><div class="l">  - A chat answer marks the claims its evidence does not carry</div><div class="l"><span class="d">---</span></div><div class="l"><span class="h"># Ask the company a question</span></div><div class="l"><span class="dim">&gt; A visitor asks about the company in their own words and language, and gets an answer that names the entity each claim rests on, says where the model does not say, and sends them to the page the claim came from at the commit it was read.</span></div><div class="l"><span class="dim">…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-stakeholders"
+    data-time="1:04"
+    data-notes="A use case names every party with an interest in how it goes, and what each needs from it. Here the Visitor needs what the model says and nothing else, in their language, with nothing left behind. The Answerer, the seat that writes the answer, needs a host that answers at one pinned commit and a fence it can write inside. The Owner needs no claim standing that no tool returned, and nothing spent past the ceiling. Then the two guarantees. The minimal guarantees hold however the use case ends, an extension that gives up included: no claim stands that no tool returned, and nobody reads the answer before the visitor does. The success guarantees hold only when the goal is reached: every claim names the entity a tool returned it from, and the visitor can open it at the commit the answer names. The pack keeps them under Cockburn’s own two headings, not in one table with a kind column.">
+    <div class="kicker mono" data-n="03"></div>
+    <div class="feat"><div class="lead"><h1>Stakeholders and guarantees</h1><p class="sub">Who has a stake in the goal and what each wants. What holds whatever happens, and what holds when the goal is reached.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312c-4d5f-7923-b896-700a5ce8d15f"><i>use-case</i> Ask the company a question</a></div></div><div class="win" role="img" aria-label="The stakeholders and interests of Ask the company a question, and its minimal and success guarantees."><div class="wbar"><i></i><i></i><i></i><span>model/use-cases/ask-the-company-a-question.md</span></div><div class="ed"><div class="src"><div class="l"><span class="dim">…</span></div><div class="l"><span class="h">## Stakeholders and interests</span></div><div class="l">| Stakeholder | Interest |</div><div class="l">| --- | --- |</div><div class="l">| Visitor | What the model says and nothing else, in their language, with no account and nothing left behind |</div><div class="l">| Answerer | A host whose tools answer at one pinned commit, and a fence it can write inside |</div><div class="l">| Owner | No claim standing that no tool returned, and nothing spent past the ceiling the deployment wrote down |</div><div class="l"><span class="dim">…</span></div><div class="l"><span class="h">## Minimal guarantees</span></div><div class="l">- No claim stands that no tool returned in that conversation.</div><div class="l"><span class="dim">…</span></div><div class="l">- Nobody reads the answer before the visitor does.</div><div class="l"><span class="h">## Success guarantees</span></div><div class="l">- Every claim names the entity a tool returned it from, and the visitor can open that entity at the commit the answer names.</div><div class="l"><span class="dim">…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-scenario"
+    data-time="1:03"
+    data-notes="The trigger is what starts the use case: the visitor opens the chat and presses send. Then the main success scenario, the steps from the trigger to the goal when nothing goes wrong, one row each, in order. Each row names who acts. Visitor and Answerer are seats of our model, so they resolve; System is not a seat, so it stands as a name. The actions are the ones you would write: the message passes the fence, the Answerer asks the host’s tools, the answer is written from what they said. Where a step calls another use case, the action names it and the page lists it under includes. In our model, Read the model from an agent includes Walk a long list a page at a time, a subfunction in the scope of one component. Cockburn underlines such a step; the pack writes the edge instead, so the check resolves it like any other reference.">
+    <div class="kicker mono" data-n="04"></div>
+    <div class="feat"><div class="lead"><h1>The scenario</h1><p class="sub">A trigger, then the steps on which everything goes right. A step names who acts, and a step that calls another use case names it in <code>includes</code>.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312c-4d5f-7923-b896-700a5ce8d15f"><i>use-case</i> Ask the company a question</a><a href="../../?stage=expanded#01a1312c-5cfc-7c71-bd35-b7da880c4254"><i>use-case</i> Read the model from an agent</a><a href="../../?stage=expanded#01a1312c-7bf1-7220-aac8-2909c906829e"><i>use-case</i> Walk a long list a page at a time</a></div></div><div class="win" role="img" aria-label="The trigger of Ask the company a question and the first four steps of its main success scenario."><div class="wbar"><i></i><i></i><i></i><span>model/use-cases/ask-the-company-a-question.md</span></div><div class="ed"><div class="src"><div class="l"><span class="dim">…</span></div><div class="l"><span class="h">## Trigger</span></div><div class="l">The visitor opens the chat and presses send.</div><div class="l"><span class="h">## Main success scenario</span></div><div class="l">| Step | Actor | Action |</div><div class="l">| --- | --- | --- |</div><div class="l">| 1 | Visitor | Asks, in their own words and language |</div><div class="l">| 2 | System | Lets the message through the fence: under the length it allows, from a page the deployment names, inside the hour's, the day's and the month's share |</div><div class="l">| 3 | Answerer | Asks the host's tools, up to four rounds: a kind of thing by its type, a named thing by search and then the entity itself |</div><div class="l">| 4 | Answerer | Writes the answer from what the tools said, in the language of the message's words, naming the entity each claim rests on, and where the tools said nothing, that the model does not say |</div><div class="l"><span class="dim">…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-extensions"
+    data-time="0:45"
+    data-notes="An extension is where a step goes another way: a condition the system can detect, and what happens then. The row’s label says which step it branches from, and a step may branch more than once, as step 3 does here, once when the rounds are spent and once when the host moved to a new commit under the running chat. The main scenario is the path when nothing goes wrong; the extensions are what the product does when something is. The page keeps them in one table, in the order of the steps, and the server draws each as a dashed box off its step, which you will see at the end.">
+    <div class="kicker mono" data-n="05"></div>
+    <div class="feat"><div class="lead"><h1>Extensions</h1><p class="sub">Where the scenario branches: a condition at a step, and what happens then. A step may branch more than once.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312c-4d5f-7923-b896-700a5ce8d15f"><i>use-case</i> Ask the company a question</a></div></div><div class="win" role="img" aria-label="Five of the extensions of Ask the company a question: a condition at a step, and what happens then."><div class="wbar"><i></i><i></i><i></i><span>model/use-cases/ask-the-company-a-question.md</span></div><div class="ed"><div class="src"><div class="l"><span class="dim">…</span></div><div class="l"><span class="h">## Extensions</span></div><div class="l">| Step | Condition | Handling |</div><div class="l">| --- | --- | --- |</div><div class="l">| 1a | The question is not about the model | It is answered with one sentence saying what the chat is for, and no tool is asked |</div><div class="l">| 2a | The day's share is spent | The message is refused before the model is asked, the refusal names the next midnight UTC as the moment it lifts, and the question is kept with the refusal's code |</div><div class="l">| 3a | The rounds the fence allows are spent while the model still asks for tools | The last request can call no tool, and the model writes the answer from what the tools returned |</div><div class="l">| 3b | The host moved to a new commit while the chat runs | The message reads the model's types and questions again, and the answer names the new commit |</div><div class="l">| 4a | The message is in English words with German word order, on the German page | It is answered in the language its words are in |</div><div class="l"><span class="dim">…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-requirement"
+    data-time="1:04"
+    data-notes="A requirement is one statement a product is held to, and the pack has one type for it, requirement. This one says a question is answered in the language of its words. Its kind is functional and its modality is must. The title is the statement’s short name, and the tagline is the statement itself, one thing a product could be shown to meet or to miss. Under Why, the page says the need behind it; the window leaves that out. The fit criterion is how anyone can tell the requirement is met, measured where it can be, Volere’s word: a message in English words with German word order, sent from the German page, is answered in English. And Applies to names what the requirement is about, here the use case you just saw. A requirement may apply to a feature, a product or a use case, and it is written once, on the narrowest subject that carries it.">
+    <div class="kicker mono" data-n="06"></div>
+    <div class="feat"><div class="lead"><h1>A requirement</h1><p class="sub">One statement a product is held to, with its kind, its modality, the fit criterion that shows it met, and what it applies to.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312d-4501-7e47-abc4-8b179c53d140"><i>requirement</i> A question is answered in the language of its words</a></div></div><div class="win" role="img" aria-label="The requirement A question is answered in the language of its words: its kind, modality, fit criterion and what it applies to."><div class="wbar"><i></i><i></i><i></i><span>model/requirements/a-question-is-answered-in-the-language-of-its-words.md</span></div><div class="ed"><div class="src"><div class="l"><span class="d">---</span></div><div class="l"><span class="k">id:</span> 01a1312d-4501-7e47-abc4-8b179c53d140</div><div class="l"><span class="k">source:</span> Local</div><div class="l"><span class="k">kind:</span> functional</div><div class="l"><span class="k">modality:</span> must</div><div class="l"><span class="d">---</span></div><div class="l"><span class="h"># A question is answered in the language of its words</span></div><div class="l"><span class="dim">&gt; An answer is written in the language the message's words are in, and in the page's language only where the words do not tell.</span></div><div class="l"><span class="dim">…</span></div><div class="l"><span class="h">## Fit criterion</span></div><div class="l">A message in English words with German word order, sent from the German page, is answered in English; and a German answer written after a tool round names each entity in Swiss Standard German first with its exact title in parentheses after.</div><div class="l"><span class="h">## Applies to</span></div><div class="l">| Type | Entity |</div><div class="l">| --- | --- |</div><div class="l">| use-case | Ask the company a question |</div><div class="l"><span class="dim">…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-kinds"
+    data-time="1:06"
+    data-notes="A requirement has one of three kinds, in IREB’s sense. Functional is a result or behavior a function of the product provides. Quality is a concern no functional requirement covers, how fast, how safe, how available: that a broken reference is marked when the writer leaves the line is a quality, since its fit criterion measures how well, not whether. Constraint is a limit on the solution beyond what the other two need: no call changes the model. And one of three modalities, the words of RFC 2119. Must is binding. Should is binding unless a reason to depart is understood and stated: a German reader reads the vocabulary pages in German, while the schemas stay in English, and the page says why. May is permitted: an instance may make its own ids under a pattern it declares. Core’s rule has must, must not and may; a requirement has a should instead, and a tagline that says must not carries must, as the last row shows.">
+    <div class="kicker mono" data-n="07"></div>
+    <div class="feat"><div class="lead"><h1>Three kinds, three words</h1><p class="sub">Functional, quality or constraint. Must, should or may, the words of RFC 2119. A row each from our model.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312e-1130-7910-857a-3e4af9bfce31"><i>requirement</i> A broken reference is marked when the line is left</a><a href="../../?stage=expanded#01a1312d-9384-77bc-a0e9-c22318bb2902"><i>requirement</i> A German reader reads the vocabulary pages in German</a><a href="../../?stage=expanded#01a1312c-ba31-768b-ab88-cf336c1c4884"><i>requirement</i> An instance may make its own ids under a declared pattern</a><a href="../../?stage=expanded#01a1312d-a32d-711b-bcd8-29582f3f4110"><i>requirement</i> No call changes the model</a></div></div><ul class="departs" role="img" aria-label="Four requirements of our model: on the left the kind and the modality of each, on the right its statement."><li><span class="was"><code>quality</code> · <code>must</code></span><span class="is">A broken reference is marked when the line is left</span></li><li><span class="was"><code>functional</code> · <code>should</code></span><span class="is">A German reader reads the vocabulary pages in German</span></li><li><span class="was"><code>functional</code> · <code>may</code></span><span class="is">An instance may make its own ids under a declared pattern</span></li><li><span class="was"><code>constraint</code> · <code>must</code></span><span class="is">No call changes the model</span></li></ul></div>
+  </section>
+
+  <section class="slide" id="s-rule"
+    data-time="1:05"
+    data-notes="Some requirements exist because of a rule of the company, and they say so. Our model holds a rule, A visitor is told an agent answers, written for Article 50 of the European Union’s AI Act, and it applies to the process Answering. This requirement carries it into the product: the chat tells the visitor, before the first message and in the language of the page, that an agent writes the answer and which company’s language model it goes through. Follows names the rule, and Applies to names the feature, A visitor asks the model. So the trace runs from the obligation, through the rule the company adopted, to the requirement the product is held to, and on to the fit criterion that shows it kept: on every page the chat is deployed for, the notice is shown before a message can be sent. A requirement is not a rule; a rule binds the company’s own conduct, and a requirement binds the product.">
+    <div class="kicker mono" data-n="08"></div>
+    <div class="feat"><div class="lead"><h1>A rule carried in</h1><p class="sub">A requirement names the company rule it carries into the product in <code>follows</code>. The trace runs from the obligation to the fit criterion.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312c-f784-7d5d-b36c-d380130e0b09"><i>requirement</i> A visitor is told before the first message that an agent answers</a><a href="../../?stage=expanded#01a129b3-7831-7f71-8148-4391f6612657"><i>rule</i> A visitor is told an agent answers</a><a href="../../?stage=expanded#01a0d646-a0a0-74f1-95d4-cacbba20c3ab"><i>feature</i> A visitor asks the model</a></div></div><div class="win" role="img" aria-label="The requirement A visitor is told before the first message that an agent answers, which follows a rule and applies to a feature."><div class="wbar"><i></i><i></i><i></i><span>model/requirements/a-visitor-is-told-before-the-first-message-that-an-agent-answers.md</span></div><div class="ed"><div class="src"><div class="l"><span class="d">---</span></div><div class="l"><span class="k">id:</span> 01a1312c-f784-7d5d-b36c-d380130e0b09</div><div class="l"><span class="k">source:</span> Local</div><div class="l"><span class="k">kind:</span> functional</div><div class="l"><span class="k">modality:</span> must</div><div class="l"><span class="k">follows:</span> </div><div class="l">  - A visitor is told an agent answers</div><div class="l"><span class="d">---</span></div><div class="l"><span class="h"># A visitor is told before the first message that an agent answers</span></div><div class="l"><span class="dim">&gt; The chat tells the visitor, before the first message is sent and in the language of the page, that an agent writes the answer from the model and which company's language model it goes through.</span></div><div class="l"><span class="dim">…</span></div><div class="l"><span class="h">## Applies to</span></div><div class="l">| Type | Entity |</div><div class="l">| --- | --- |</div><div class="l">| feature | A visitor asks the model |</div><div class="l"><span class="dim">…</span></div></div></div></div></div>
+  </section>
+
+  <section class="slide" id="s-departs"
+    data-time="1:09"
+    data-notes="The README’s own list, where the pack departs from its sources. A requirement’s modality is RFC 2119’s must, should and may, not core’s rule’s must, must not and may: a requirement has a should, and a must not is a negated must written in the statement. Cockburn’s two guarantees are two sections under his own headings, not one table with a kind column. His black-box and white-box split is dropped; the steps show how far inside a scenario reaches. Goal levels are his words, not his icons, and his fifth level, too low, is left out, since his advice for a goal that low is not to write it. A step’s actor resolves, and the use case a step calls is drawn from includes, where Cockburn underlines the step. A requirement carries no priority, customer satisfaction, conflicts or history, which Volere’s card does; each moves or judges one requirement against another. And a measurable success criterion, as GitHub’s spec-kit template asks for, is a requirement, of kind quality where it measures a quality.">
+    <div class="kicker mono" data-n="09"></div>
+    <div class="feat"><div class="lead"><h1>Where it departs</h1><p class="sub">Where the pack does not do what its sources do, its README says so and says why.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div></div><ul class="departs" role="img" aria-label="Where the pack departs from its sources: on the left what the source does, on the right what the pack does instead."><li><span class="was"><code>must</code>, <code>must not</code>, <code>may</code></span><span class="is">RFC 2119’s <code>must</code>, <code>should</code> and <code>may</code>: a requirement has a should, and a must not is a must written in the statement</span></li><li><span class="was">One table of guarantees with a kind column</span><span class="is">two sections under Cockburn’s own headings, minimal and success</span></li><li><span class="was">Black-box and white-box scope</span><span class="is">dropped: the steps show how much of the inside a scenario reaches</span></li><li><span class="was">Goal levels as icons, five of them</span><span class="is">Cockburn’s words, and the lowest left out, since his advice for a goal that low is not to write it</span></li><li><span class="was">An underlined step calls a use case</span><span class="is">the step’s actor resolves, and the use case it calls is drawn from <code>includes</code> and named in the action</span></li><li><span class="was">Priority, satisfaction, conflicts, history</span><span class="is">none: each moves or judges one requirement against another</span></li><li><span class="was">spec-kit’s measurable success criterion</span><span class="is">a requirement, of kind <code>quality</code> where it measures a quality, its measure the fit criterion</span></li></ul></div>
+  </section>
+
+  <section class="slide" id="s-joins"
+    data-time="1:05"
+    data-notes="The pack sits on core, the vocabulary every company shares, and its edges run into core’s types. A use case asks something of a feature, and its primary actor, its stakeholders and the actor of each step are seats where the company has them. A requirement applies to a feature, a product or a use case, and follows a rule. Feature, product, seat and rule are core’s types. Every edge from the pack to core is optional, and core names none of the pack’s types; our conventions hold that as a rule, R20, so core never has to know the pack exists. The software pack’s feature design refines the same feature a use case asks something of. A company taking both packs reads the trace from what is wanted, the use case and its requirements, through the feature, to the design that builds it, and neither pack names the other. The first two are written before the design, and the design after them.">
+    <div class="kicker mono" data-n="10"></div>
+    <div class="feat"><div class="lead"><h1>How the pack joins core</h1><p class="sub">A use case asks something of a feature and its actors are seats. A requirement applies to a feature, a product or a use case and follows a rule. Every edge runs one way and is optional.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0d646-a0a0-74f1-95d4-cacbba20c3ab"><i>feature</i> A visitor asks the model</a><a href="../../?stage=expanded#01a0c29a-9610-7a57-9c2f-0d41d78c5ae5"><i>product</i> CompanyGraph Core</a><a href="../../?stage=expanded#01a0ccd4-cfb0-7641-9793-c30711c38403"><i>seat</i> Visitor</a><a href="../../?stage=expanded#01a129b3-7831-7f71-8148-4391f6612657"><i>rule</i> A visitor is told an agent answers</a></div></div><div class="lv" role="img" aria-label="Two levels: the requirements pack’s use case and requirement above core’s feature, product, seat and rule, joined by features, applies to, actor and follows."><div class="band on"><span class="bn">LEVEL 1 · REQUIREMENTS</span><span class="bl">use case · requirement</span></div><div class="arrow">↓ features · applies to · actor · follows ↓</div><div class="band on"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">feature · product · seat · rule</span></div></div></div>
+  </section>
+
+  <section class="slide" id="s-later"
+    data-time="0:41"
+    data-notes="At this release, the pack’s README names what it does not have yet, under Left for later. Cockburn’s technology and data variations. Secondary actors as a field of their own. Extend as a relation between use cases, where includes is there today. User stories and use-case slices as types, which the README sets aside because they are backlog items and move. Goals in the sense of KAOS or iStar. A stakeholder type beyond the seat. SysML’s derive, satisfy and verify. And a requirement’s originator. Because it is written down, what the pack leaves out is something you read before you take it.">
+    <div class="kicker mono" data-n="11"></div>
+    <h1>Left for later</h1>
+    <p class="sub">What the pack does not have yet is named in its README, not hidden.</p>
+    <ul class="talks">
+      <li><span class="tk">later</span><span>Cockburn’s technology and data variations</span></li>
+      <li><span class="tk">later</span><span>secondary actors as a field</span></li>
+      <li><span class="tk">later</span><span>extend as a relation between use cases</span></li>
+      <li><span class="tk">later</span><span>user stories and use-case slices as types, which are backlog items and move</span></li>
+      <li><span class="tk">later</span><span>goals in KAOS’s or iStar’s sense</span></li>
+      <li><span class="tk">later</span><span>a stakeholder type beyond the seat</span></li>
+      <li><span class="tk">later</span><span>SysML’s derive, satisfy and verify</span></li>
+      <li><span class="tk">later</span><span>a requirement’s originator</span></li>
+    </ul>
+    <div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div>
+  </section>
+
+  <section class="slide" id="s-drawn" data-scene="tabs"
+    data-time="1:14"
+    data-notes="Nobody drew these. The MCP server’s own code drew them: its diagram tool, the one an agent calls on mcp.companygraph.io, run on our model at the commit this site pins. This is Read the model from an agent, a use case of ours whose scenario fits a slide. The first picture is the use case inside the frame of its scope, system. The actor stands outside as an outlined figure, because Visitor is a seat nobody holds: someone, not one of us. A dashed arrow inside the frame runs to the subfunction its steps include, a solid one out to the feature it asks something of. The second is the scenario: the trigger in a rounded box, the steps in order with who acts, and each extension as a dashed box off its step. The third is what that feature is held to: its requirements as hexagons, framed by kind, each with the heavy border of a must. The chat on companygraph.io draws the same pictures when you ask to see a use case, how it runs, or what a feature is held to.">
+    <div class="kicker mono" data-n="12"></div>
+    <div class="feat"><div class="lead"><h1>A use case, drawn</h1><p class="sub">Nobody drew these. The MCP server’s own code draws them from our pages at the commit this site pins — the same code that answers an agent at mcp.companygraph.io.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a1312c-5cfc-7c71-bd35-b7da880c4254"><i>use-case</i> Read the model from an agent</a><a href="../../?stage=expanded#01a1312c-7bf1-7220-aac8-2909c906829e"><i>use-case</i> Walk a long list a page at a time</a><a href="../../?stage=expanded#01a0c29a-9610-7599-88be-da45e0941d77"><i>feature</i> An agent reads the model</a></div></div><div class="win drawn" data-tabs><div class="wbar"><i></i><i></i><i></i><span class="tabs" role="tablist" aria-label="Three pictures the server draws"><button type="button" role="tab" id="tab-usecase" aria-controls="panel-usecase" aria-selected="true" tabindex="0">Use case</button><button type="button" role="tab" id="tab-scenario" aria-controls="panel-scenario" aria-selected="false" tabindex="-1">Scenario</button><button type="button" role="tab" id="tab-requirements" aria-controls="panel-requirements" aria-selected="false" tabindex="-1">Requirements</button></span><span class="host">mcp.companygraph.io</span></div><div class="ed">
+      <div class="pane" role="tabpanel" id="panel-usecase" aria-labelledby="tab-usecase">
+      <!-- picture: usecase -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="usecase">
+        <figcaption><span>Read the model from an agent</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"usecase","title":"Read the model from an agent","mermaid":"flowchart LR\n  n0[\"fak:fa-actor \u003cb>Visitor\u003c/b>\"]\n  subgraph scope [\"system\"]\n    n1([\"\u003cb>Read the model from an agent\u003c/b>\u003cbr/>\u003csmall>«user goal»\u003c/small>\"]):::middle\n    n2([\"Walk a long list a page at a time\u003cbr/>\u003csmall>«subfunction»\u003c/small>\"])\n    n1 -.->|\"includes\"| n2\n  end\n  n0 --> n1\n  n3[\"An agent reads the model\u003cbr/>\u003csmall>«feature»\u003c/small>\"]\n  n1 -->|\"features\"| n3\n  classDef middle stroke-width:2px","nodes":[{"node":"n0","id":"01a0ccd4-cfb0-7641-9793-c30711c38403","title":"Visitor"},{"node":"n1","id":"01a1312c-5cfc-7c71-bd35-b7da880c4254","title":"Read the model from an agent"},{"node":"n2","id":"01a1312c-7bf1-7220-aac8-2909c906829e","title":"Walk a long list a page at a time"},{"node":"n3","id":"01a0c29a-9610-7599-88be-da45e0941d77","title":"An agent reads the model"}]}</script>
+      </figure>
+      <!-- /picture: usecase -->
+      </div>
+      <div class="pane" role="tabpanel" id="panel-scenario" aria-labelledby="tab-scenario" hidden>
+      <!-- picture: scenario -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="scenario">
+        <figcaption><span>Read the model from an agent</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"scenario","title":"Read the model from an agent","mermaid":"flowchart TB\n  t0([\"The visitor asks their agent something about the company.\"])\n  s0[\"fak:fa-actor \u003cb>Agent\u003c/b>\u003cbr/>\u003csmall>1\u003c/small> Asks which types the model declares, and what one schema says\"]\n  t0 --> s0\n  s1[\"fak:fa-actor \u003cb>Agent\u003c/b>\u003cbr/>\u003csmall>2\u003c/small> Searches for a named thing, then asks for the entity itself by its id or its address\"]\n  s0 --> s1\n  s2[\"fak:fa-actor \u003cb>System\u003c/b>\u003cbr/>\u003csmall>3\u003c/small> Answers from the graph drawn once at the commit the deployment names: the entity's references resolved to ids, each with the field or column that drew it, and the commit\"]\n  s1 --> s2\n  s3[\"fak:fa-actor \u003cb>Agent\u003c/b>\u003cbr/>\u003csmall>4\u003c/small> Asks what evidence a claim rests on, and which rule governs a page\"]\n  s2 --> s3\n  s4[\"fak:fa-actor \u003cb>Agent\u003c/b>\u003cbr/>\u003csmall>5\u003c/small> Follows a list past its first page, as Walk a long list a page at a time says\"]\n  s3 --> s4\n  s5[\"fak:fa-actor \u003cb>Agent\u003c/b>\u003cbr/>\u003csmall>6\u003c/small> Gives the visitor the answer with the commit it was read at\"]\n  s4 --> s5\n  x0[\"\u003csmall>2a\u003c/small> The name alone is ambiguous, two entities of one type under different owners\u003cbr/>\u003ci>The agent asks by id, which no two entities share\u003c/i>\"]:::ext\n  s1 -.-> x0\n  x1[\"\u003csmall>2b\u003c/small> A call is refused\u003cbr/>\u003ci>The refusal carries a code for a program beside the sentence for a reader, and the agent asks for the codes and the schema of a refusal\u003c/i>\"]:::ext\n  s1 -.-> x1\n  x2[\"\u003csmall>3a\u003c/small> The entity's page was renamed since an earlier commit\u003cbr/>\u003ci>The edge still joins the same id\u003c/i>\"]:::ext\n  s2 -.-> x2\n  classDef ext stroke-dasharray:5 4","nodes":[]}</script>
+      </figure>
+      <!-- /picture: scenario -->
+      </div>
+      <div class="pane" role="tabpanel" id="panel-requirements" aria-labelledby="tab-requirements" hidden>
+      <!-- picture: requirements -->
+      <figure class="rbchat-diagram" data-diagram data-model="../../" data-picture="requirements">
+        <figcaption><span>An agent reads the model</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"requirements","title":"An agent reads the model","mermaid":"flowchart LR\n  n0[\"\u003cb>An agent reads the model\u003c/b>\u003cbr/>\u003csmall>«feature»\u003c/small>\"]:::middle\n  subgraph functional [\"functional\"]\n    n1{{\"\u003cb>A model that does not resolve is not served\u003c/b>\u003cbr/>\u003csmall>«must»\u003c/small>\"}}:::must\n    n2{{\"\u003cb>A refusal carries a code a program can read\u003c/b>\u003cbr/>\u003csmall>«must»\u003c/small>\"}}:::must\n    n3{{\"\u003cb>An answer names the commit it was read at\u003c/b>\u003cbr/>\u003csmall>«must»\u003c/small>\"}}:::must\n  end\n  n1 --> n0\n  n2 --> n0\n  n3 --> n0\n  subgraph constraint [\"constraint\"]\n    n4{{\"\u003cb>No call changes the model\u003c/b>\u003cbr/>\u003csmall>«must»\u003c/small>\"}}:::must\n  end\n  n4 --> n0\n  classDef middle stroke-width:2px\n  classDef must stroke-width:2px","nodes":[{"node":"n0","id":"01a0c29a-9610-7599-88be-da45e0941d77","title":"An agent reads the model"},{"node":"n1","id":"01a1312d-83b6-719e-bff9-46901f2c6476","title":"A model that does not resolve is not served"},{"node":"n2","id":"01a1312d-63fa-7a20-a5ca-a0b19b506c10","title":"A refusal carries a code a program can read"},{"node":"n3","id":"01a1312c-9a9a-739b-917c-93031643590f","title":"An answer names the commit it was read at"},{"node":"n4","id":"01a1312d-a32d-711b-bcd8-29582f3f4110","title":"No call changes the model"}]}</script>
+      </figure>
+      <!-- /picture: requirements -->
+      </div>
+    </div></div></div>
+  </section>
+
+  <section class="slide" id="s-close"
+    data-time="1:05"
+    data-notes="So the words are the ones you already use: actor, scope, level, scenario, extension and guarantee; kind, modality, fit criterion. The pack writes them down as pages and rows: a use case with its stakeholders, its steps and where they branch, and a requirement with the measure that shows it met and what it applies to. A check holds each name to its type: an actor to its seat where the company has one, an included use case to its page, a requirement to the feature, product or use case it applies to and to the rule it follows. The server draws a use case from those pages, and the chat shows the drawing to whoever asks. Where the pack departs from Cockburn, from Volere or from core’s own rule, its README says why, and what it has not got yet is named there too. The first talk in this series says how a company decides which packs to take. Thank you.">
+    <div class="kicker mono" data-n="13"></div>
+    <div class="feat"><div class="lead"><h1>What someone wants, as pages</h1><p class="sub">Use cases and requirements as pages a check holds and the server draws. Where the pack departs, its README says why.</p><div class="rests"><b class="mono" data-de="beruht auf">rests on</b><a href="../../?stage=expanded#01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37"><i>concept</i> Pack</a></div></div><div class="lv" role="img" aria-label="Both levels lit: the requirements pack’s use case and requirement above core’s feature, product, seat and rule, joined by features, applies to, actor and follows."><div class="band on"><span class="bn">LEVEL 1 · REQUIREMENTS</span><span class="bl">use case · requirement</span></div><div class="arrow">↓ features · applies to · actor · follows ↓</div><div class="band on"><span class="bn">LEVEL 0</span><span class="bl">Core</span><span class="bx">feature · product · seat · rule</span></div></div></div>
+  </section>
+</div>
+<div class="chrome" id="chrome">
+
+  <div class="name">
+    <a class="lockup" href="../../"><span class="namemark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/><rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/><path d="M12.5 12 h4.5"/><rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/></svg></span><b>Company<em>Graph</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nperson" href="https://blust.ch/"><span class="rbmark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nlink" href="../" data-de="Vorträge">Talks</a>
+  </div>
+
+  <div class="transport" id="transport" role="group" aria-label="Deck controls">
+
+    <div class="lcd" aria-hidden="true">
+      <div class="n"><b id="cur">00</b><span class="sep">/</span><span id="tot">14</span></div>
+      <div class="clip"><i id="cliplen"></i></div>
+    </div>
+
+    <div class="tmain">
+
+    <button class="tbtn" id="tFirst" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="5" width="2.3" height="14" rx="1"/><path d="M13.2 5.4v13.2L7.6 12z"/><path d="M21 5.4v13.2L13.6 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tPrev" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.6v14.8L6 12z"/></svg>
+    </button>
+
+    <button class="tbtn play" id="tPlay" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="iplay"><path d="M7 4.4L19.2 12 7 19.6z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ipause"><rect x="6.4" y="4.8" width="3.7" height="14.4" rx="1.1"/><rect x="13.9" y="4.8" width="3.7" height="14.4" rx="1.1"/></svg>
+    </button>
+
+    <button class="tbtn" id="tNext" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 4.6v14.8L18 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tFull" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked iexpand"><path d="M9.5 4.5H4.5V9.5M14.5 4.5H19.5V9.5M14.5 19.5H19.5V14.5M9.5 19.5H4.5V14.5"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked icontract"><path d="M4.5 9.5H9.5V4.5M19.5 9.5H14.5V4.5M19.5 14.5H14.5V19.5M4.5 14.5H9.5V19.5"/></svg>
+    </button>
+
+    </div>
+
+    <div class="tside">
+    <div class="tdiv"></div>
+
+    <div class="switchers" id="langind">
+    <div class="seg" id="lang" role="group" aria-label="switch language" data-de-aria="Sprache wechseln">
+      <button type="button" id="langDe" aria-pressed="false">DE</button>
+      <button type="button" id="langEn" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="seg theme" id="thmind" role="group" aria-label="switch appearance" data-de-aria="Erscheinungsbild wechseln">
+      <button type="button" id="thLight" aria-pressed="false" aria-label="Light" data-de-aria="Hell"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" id="thDark" aria-pressed="true" aria-label="Dark" data-de-aria="Dunkel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    </div>
+
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
+    <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
+    </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <button class="close" type="button" id="notesclose">Notizen schliessen</button>
+</div>
+<script>
+  /* This talk's own strings. Everything else about the deck's chrome comes from
+     @robertblust/design — it is in deck.js now. The German title and description are the
+     Translator's; the control labels below are the family's. */
+  var TALK = {
+    de:{ title:'CompanyGraph – What someone wants, and what a product is held to', desc:'A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, written as pages a check holds and drawn by the MCP server.' },
+    en:{ title:'CompanyGraph — What someone wants, and what a product is held to', desc:'A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, written as pages a check holds and drawn by the MCP server.' }
+  };
+  var UI = {
+    de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
+         title:TALK.de.title, desc:TALK.de.desc,
+         play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
+         prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', up:'Zurück zu allen Vorträgen' },
+    en:{ label:'Speaker note', close:'Close notes',
+         title:TALK.en.title, desc:TALK.en.desc,
+         play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
+         prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
+         notes:'Speaker notes', de:'In German', en:'In English', up:'Back to all talks' }
+  };
+
+
+  var THEME_KEY = "theme";
+  function themeStored(){ try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } }
+  function themeRemember(v){ try { localStorage.setItem(THEME_KEY, v); } catch (e) {} }
+  function themeFromUrl(){
+    var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+    if (!m) return null;
+    try {
+      var q = location.search.replace(/([?&])theme=(light|dark)(&|$)/, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+    return m[1];
+  }
+  function applyTheme(){
+    if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+    else document.documentElement.removeAttribute("data-theme");
+    var l = document.getElementById("thLight"), d = document.getElementById("thDark");
+    if (l) l.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+    if (d) d.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  }
+  function setTheme(v){ theme = v; themeRemember(v); applyTheme(); }
+
+  var urlTheme = themeFromUrl();
+  if (urlTheme) themeRemember(urlTheme);
+  var theme = urlTheme || (themeStored() === 'light' ? 'light' : 'dark');
+
+  document.getElementById('thLight').addEventListener('click', function(){ setTheme('light'); });
+  document.getElementById('thDark').addEventListener('click', function(){ setTheme('dark'); });
+  applyTheme();
+
+  // deck.js reads TALK and UI off this object, and calls applyLang() itself; nothing here
+  // calls it. This script is not wrapped in an IIFE — TALK, UI and theme are plain top-level
+  // declarations, exactly as "deck runtime" and "theme" left them — so this hook is a bare
+  // statement too, not a return from a closure.
+  window.rbDeck = { talk: TALK, ui: UI };
+</script>
+<script src="../../deck.js" defer></script>
+<script src="scenes.js" defer></script>
+<script src="../../chat.js" data-chat="https://chat.companygraph.io/chat" data-model="/" data-questions="/company.json" data-questions-de="/questions.de.json"></script>
+</body>
+</html>

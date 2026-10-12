@@ -1,0 +1,32 @@
+{
+  "shape": "requirements",
+  "title": "An agent reads the model",
+  "mermaid": "flowchart LR\n  n0[\"<b>An agent reads the model</b><br/><small>«feature»</small>\"]:::middle\n  subgraph functional [\"functional\"]\n    n1{{\"<b>A model that does not resolve is not served</b><br/><small>«must»</small>\"}}:::must\n    n2{{\"<b>A refusal carries a code a program can read</b><br/><small>«must»</small>\"}}:::must\n    n3{{\"<b>An answer names the commit it was read at</b><br/><small>«must»</small>\"}}:::must\n  end\n  n1 --> n0\n  n2 --> n0\n  n3 --> n0\n  subgraph constraint [\"constraint\"]\n    n4{{\"<b>No call changes the model</b><br/><small>«must»</small>\"}}:::must\n  end\n  n4 --> n0\n  classDef middle stroke-width:2px\n  classDef must stroke-width:2px",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a0c29a-9610-7599-88be-da45e0941d77",
+      "title": "An agent reads the model"
+    },
+    {
+      "node": "n1",
+      "id": "01a1312d-83b6-719e-bff9-46901f2c6476",
+      "title": "A model that does not resolve is not served"
+    },
+    {
+      "node": "n2",
+      "id": "01a1312d-63fa-7a20-a5ca-a0b19b506c10",
+      "title": "A refusal carries a code a program can read"
+    },
+    {
+      "node": "n3",
+      "id": "01a1312c-9a9a-739b-917c-93031643590f",
+      "title": "An answer names the commit it was read at"
+    },
+    {
+      "node": "n4",
+      "id": "01a1312d-a32d-711b-bcd8-29582f3f4110",
+      "title": "No call changes the model"
+    }
+  ]
+}

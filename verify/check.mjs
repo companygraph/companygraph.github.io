@@ -364,6 +364,17 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["in beide Richtungen auf ArchiMate abgebildet"], hides: ["mapped to ArchiMate in both directions"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  { path: "/talks/requirements-pack/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /What someone wants, and what a product is held to/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    links: ["https://blust.ch/", "https://www.rfc-editor.org/rfc/rfc2119"],
+    slides: 14,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {
