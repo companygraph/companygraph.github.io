@@ -1,6 +1,6 @@
 {
-  "commit": "9482b4f1ead41b16281c79f83a2a1729873732c7",
-  "core": "0.67.0",
+  "commit": "4088f5a1d23be63f43953ed1eae5eb1740f6eb8d",
+  "core": "0.69.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -179,6 +179,12 @@
       "singular": false
     },
     {
+      "type": "requirement",
+      "folder": "requirements",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "risk",
       "folder": "risks",
       "owner": null,
@@ -254,6 +260,12 @@
       "type": "track",
       "folder": "tracks",
       "owner": "process",
+      "singular": false
+    },
+    {
+      "type": "use-case",
+      "folder": "use-cases",
+      "owner": null,
       "singular": false
     },
     {
@@ -4415,6 +4427,65 @@
       "path": "example/model/questions/who-split-billing-out-of-the-monolith.md"
     },
     {
+      "id": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
+      "address": "requirements/a-copy-is-the-invoice-as-issued",
+      "type": "requirement",
+      "name": "A copy is the invoice as issued",
+      "tagline": "A downloaded invoice holds every line and its explanation exactly as they were on the day the invoice was issued.",
+      "fields": {
+        "id": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
+        "source": "Local",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A payer files the copy in their own books, and a copy that changes after the fact makes their books disagree with the company's without either side noticing.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "An invoice downloaded on the day it is issued, and again after a credit note against it is issued, gives two copies identical to each other and to the invoice as issued.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "use-case",
+                  "Download an invoice"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "use-case",
+                "Download an invoice"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/requirements/a-copy-is-the-invoice-as-issued.md"
+    },
+    {
       "id": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
       "address": "risks/an-unreviewed-change-reaches-customers",
       "type": "risk",
@@ -5170,6 +5241,292 @@
       ],
       "owner": null,
       "path": "example/model/systems/invoice-mailer.md"
+    },
+    {
+      "id": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "address": "use-cases/download-an-invoice",
+      "type": "use-case",
+      "name": "Download an invoice",
+      "tagline": "A payer keeps a copy of an invoice in their own books, exactly as it was issued.",
+      "fields": {
+        "id": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+        "source": "Local",
+        "level": "user goal",
+        "scope": "system",
+        "primary-actor": "Payer",
+        "features": [
+          "Invoice download"
+        ],
+        "includes": [
+          "Find an invoice"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Stakeholders and interests",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Stakeholder",
+                "Interest"
+              ],
+              "rows": [
+                [
+                  "Payer",
+                  "A copy that matches the invoice they were sent, line for line"
+                ],
+                [
+                  "Backend Engineer",
+                  "A copy made from the issued invoice and never computed again"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Stakeholder",
+              "Interest"
+            ],
+            "rows": [
+              [
+                "Payer",
+                "A copy that matches the invoice they were sent, line for line"
+              ],
+              [
+                "Backend Engineer",
+                "A copy made from the issued invoice and never computed again"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Trigger",
+          "text": "The payer's bookkeeping asks for the invoice of a closed billing period.",
+          "tables": []
+        },
+        {
+          "heading": "Main success scenario",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Step",
+                "Actor",
+                "Action"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "Payer",
+                  "Finds the invoice on the Invoice Page, as Find an invoice says"
+                ],
+                [
+                  "2",
+                  "Payer",
+                  "Asks for a copy"
+                ],
+                [
+                  "3",
+                  "System",
+                  "Hands over the invoice as it was issued, every line and its explanation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Step",
+              "Actor",
+              "Action"
+            ],
+            "rows": [
+              [
+                "1",
+                "Payer",
+                "Finds the invoice on the Invoice Page, as Find an invoice says"
+              ],
+              [
+                "2",
+                "Payer",
+                "Asks for a copy"
+              ],
+              [
+                "3",
+                "System",
+                "Hands over the invoice as it was issued, every line and its explanation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Extensions",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Step",
+                "Condition",
+                "Handling"
+              ],
+              "rows": [
+                [
+                  "1a",
+                  "The billing period is still open, so no invoice is issued yet",
+                  "The page says when the period closes, and the payer comes back then, so the use case ends without a copy"
+                ],
+                [
+                  "3a",
+                  "A credit note has been issued against the invoice since",
+                  "The copy is still the invoice as issued, and the page names the credit note beside it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Step",
+              "Condition",
+              "Handling"
+            ],
+            "rows": [
+              [
+                "1a",
+                "The billing period is still open, so no invoice is issued yet",
+                "The page says when the period closes, and the payer comes back then, so the use case ends without a copy"
+              ],
+              [
+                "3a",
+                "A credit note has been issued against the invoice since",
+                "The copy is still the invoice as issued, and the page names the credit note beside it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Minimal guarantees",
+          "text": "- No copy differs from the invoice as it was issued.",
+          "tables": []
+        },
+        {
+          "heading": "Success guarantees",
+          "text": "- The payer holds a copy that matches what the Invoice Page showed on the day the invoice was issued.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/use-cases/download-an-invoice.md"
+    },
+    {
+      "id": "01a12b01-39eb-7a27-a513-10b8e399cbc1",
+      "address": "use-cases/find-an-invoice",
+      "type": "use-case",
+      "name": "Find an invoice",
+      "tagline": "A payer has the invoice of the billing period they pick in front of them.",
+      "fields": {
+        "id": "01a12b01-39eb-7a27-a513-10b8e399cbc1",
+        "source": "Local",
+        "level": "subfunction",
+        "primary-actor": "Payer"
+      },
+      "sections": [
+        {
+          "heading": "Stakeholders and interests",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Stakeholder",
+                "Interest"
+              ],
+              "rows": [
+                [
+                  "Payer",
+                  "Only their own invoices, and the one for the period they picked"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Stakeholder",
+              "Interest"
+            ],
+            "rows": [
+              [
+                "Payer",
+                "Only their own invoices, and the one for the period they picked"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Main success scenario",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Step",
+                "Actor",
+                "Action"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "Payer",
+                  "Picks a billing period"
+                ],
+                [
+                  "2",
+                  "System",
+                  "Shows the invoice issued for that period"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Step",
+              "Actor",
+              "Action"
+            ],
+            "rows": [
+              [
+                "1",
+                "Payer",
+                "Picks a billing period"
+              ],
+              [
+                "2",
+                "System",
+                "Shows the invoice issued for that period"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Minimal guarantees",
+          "text": "- No payer sees another payer's invoice.",
+          "tables": []
+        },
+        {
+          "heading": "Success guarantees",
+          "text": "- The invoice of the period the payer picked is on the page.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/use-cases/find-an-invoice.md"
     },
     {
       "id": "01a02f53-2408-79ce-829d-b6012ab3c389",
@@ -7272,6 +7629,52 @@
     },
     {
       "from": "01a12659-d295-7969-b17f-fbae284c2391",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "to": "01a0a6b8-7e80-7c97-aab2-32e4469383db",
+      "via": "Stakeholders and interests.Stakeholder",
+      "attrs": {
+        "Interest": "A copy made from the issued invoice and never computed again"
+      }
+    },
+    {
+      "from": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "to": "01a0c25c-19f8-77ee-8656-f16c523bdc15",
+      "via": "features",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "to": "01a12b01-39eb-7a27-a513-10b8e399cbc1",
+      "via": "includes",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-39eb-7a27-a513-10b8e399cbc1",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
+      "to": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "use-case"
+      }
+    },
+    {
+      "from": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}

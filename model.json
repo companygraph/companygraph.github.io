@@ -1,5 +1,5 @@
 {
-  "commit": "9482b4f1ead41b16281c79f83a2a1729873732c7",
+  "commit": "4088f5a1d23be63f43953ed1eae5eb1740f6eb8d",
   "root": "Meta-model",
   "rootId": null,
   "types": [
@@ -16,6 +16,11 @@
     {
       "type": "organization",
       "folder": "organization",
+      "owner": null
+    },
+    {
+      "type": "requirements",
+      "folder": "requirements",
       "owner": null
     },
     {
@@ -8672,6 +8677,198 @@
       "path": "packs/landscape/data-object-schema.md"
     },
     {
+      "id": "01a12c14-d5fb-7268-ae0c-299f194e8ffb",
+      "address": "landscape/environment",
+      "type": "landscape",
+      "name": "Environment Schema",
+      "tagline": "Required structure for environment files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The environment's place on the path from a developer's machine to the customer, the order every list of copies sorts by. Spaced in tens so one can be added without renumbering the others."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The environment's place on the path from a developer's machine to the customer, the order every list of copies sorts by. Spaced in tens so one can be added without renumbering the others."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Environment]`",
+                  "Yes",
+                  "The canonical name, as the people who deploy to it say it. Every system that runs there references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what runs here and for whom"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "What is deployed here, who may deploy to it, what data it holds, real customers' or synthetic, and which environments are not it"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to reach the environment; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a console, a runbook, the pipeline that deploys here"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Environment]`",
+                "Yes",
+                "The canonical name, as the people who deploy to it say it. Every system that runs there references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what runs here and for whom"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "What is deployed here, who may deploy to it, what data it holds, real customers' or synthetic, and which environments are not it"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to reach the environment; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "An environment answers \"where does this copy stand, and what may it touch?\" in the company's words, and carries once the order every drawing and every list of copies sorts by. A copy of a software runs in exactly one environment, and a platform runs in one too, so an agent that reads a copy's page follows `environment` to what it may touch there. An environment no system names is vocabulary nobody uses, and leaves, once the instance holds a system.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` says what data the environment holds and who may deploy to it, since that is what an agent asks before it acts, and which environments are not it.\n- The H1 names the environment as its deployers say it, never its rank and never the platform under it.\n- `## What it means` is the one place that says what data the environment holds, real customers' or synthetic: no field says it, until an instance needs it as a fact with a check.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/environments/*.md`\n\nAn environment owns nothing and nothing owns it: every copy that runs there names it, and what the environment is for lives here rather than being restated on every copy. It sits beside `systems/` as `system-kinds/` does.\n\nThe set is the instance's own, in the company's words: `Production`, `UAT`, `Northflank Test`. An environment arriving later is one file here, not a change to this metamodel.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/landscape/environment-schema.md"
+    },
+    {
       "id": "01a1226b-c5d5-7dcd-8295-40de820876db",
       "address": "landscape/service",
       "type": "landscape",
@@ -8727,6 +8924,12 @@
                   "No",
                   "array of ref → process",
                   "The processes this service carries, each the H1 of a process's own file"
+                ],
+                [
+                  "`domain`",
+                  "No",
+                  "ref → domain",
+                  "The area of the company the service belongs to, the H1 of a file in `domains/`, written beside `realizes` where the features alone do not place it"
                 ]
               ]
             }
@@ -8775,6 +8978,12 @@
                 "No",
                 "array of ref → process",
                 "The processes this service carries, each the H1 of a process's own file"
+              ],
+              [
+                "`domain`",
+                "No",
+                "ref → domain",
+                "The area of the company the service belongs to, the H1 of a file in `domains/`, written beside `realizes` where the features alone do not place it"
               ]
             ]
           }
@@ -8865,7 +9074,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 names the service as its consumers call it, `Invoice feed`, `Price lookup`, never by the\n  system behind it.\n- The tagline says what is exposed and to whom, in the consumer's words.\n- `provided-by` names the systems that expose the service, never one that only calls it.\n- `realizes` names features in the words of those features; a service nobody outside its system\n  uses realizes nothing.\n- The page writes names and prose in the model's language (R14), as every page does.",
+          "text": "- The H1 names the service as its consumers call it, `Invoice feed`, `Price lookup`, never by the\n  system behind it.\n- The tagline says what is exposed and to whom, in the consumer's words.\n- `provided-by` names the systems that expose the service, never one that only calls it.\n- `realizes` names features in the words of those features; a service nobody outside its system\n  uses realizes nothing.\n- `domain` groups what a context offers outward: an API, an SDK client and a set of MCP tools\n  that consumers call apart are three services provided by the same system, each named as its\n  consumers call it, and the domain is what groups them, never one service that bundles them. A\n  service names no bounded context, since a pack names only core's types and its own (R20); a\n  context realizes domains, so a service in a domain stands beside the context of that domain.\n- The page writes names and prose in the model's language (R14), as every page does.",
           "tables": []
         },
         {
@@ -8932,7 +9141,7 @@
                   "`lifecycle`",
                   "No",
                   "enum",
-                  "`planned`, `active`, `retiring` or `retired`. The stage the system is in, not a date (LeanIX, application lifecycle)."
+                  "`planned`, `active`, `retiring` or `retired`. The stage the system is in, not a date: `planned` before it runs, `active` while it does, `retiring` while a successor takes over, `retired` once nothing runs on it."
                 ],
                 [
                   "`criticality`",
@@ -8963,6 +9172,18 @@
                   "No",
                   "ref → system",
                   "The system this one runs on or in, the H1 of another file in `systems/`: the device a terminal is, the node an application runs on. Written on the part; the whole lists nothing."
+                ],
+                [
+                  "`instance-of`",
+                  "No",
+                  "ref → system",
+                  "The system this one is a running copy of, the H1 of another file in `systems/`, written on the copy; the software page names nothing. One level deep: the page named leaves `instance-of` empty, so a copy is never a copy of a copy."
+                ],
+                [
+                  "`environment`",
+                  "No",
+                  "ref → environment",
+                  "Where this system runs, in the path from a developer's machine to the customer, the H1 of a file in `environments/`. Written on a copy, and on a platform, which runs somewhere too."
                 ],
                 [
                   "`domain`",
@@ -9028,7 +9249,7 @@
                 "`lifecycle`",
                 "No",
                 "enum",
-                "`planned`, `active`, `retiring` or `retired`. The stage the system is in, not a date (LeanIX, application lifecycle)."
+                "`planned`, `active`, `retiring` or `retired`. The stage the system is in, not a date: `planned` before it runs, `active` while it does, `retiring` while a successor takes over, `retired` once nothing runs on it."
               ],
               [
                 "`criticality`",
@@ -9059,6 +9280,18 @@
                 "No",
                 "ref → system",
                 "The system this one runs on or in, the H1 of another file in `systems/`: the device a terminal is, the node an application runs on. Written on the part; the whole lists nothing."
+              ],
+              [
+                "`instance-of`",
+                "No",
+                "ref → system",
+                "The system this one is a running copy of, the H1 of another file in `systems/`, written on the copy; the software page names nothing. One level deep: the page named leaves `instance-of` empty, so a copy is never a copy of a copy."
+              ],
+              [
+                "`environment`",
+                "No",
+                "ref → environment",
+                "Where this system runs, in the path from a developer's machine to the customer, the H1 of a file in `environments/`. Written on a copy, and on a platform, which runs somewhere too."
               ],
               [
                 "`domain`",
@@ -9257,7 +9490,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 names the system as the people who run it name it, `Kassensystem`, `Filialsystem`, and\n  never by its vendor alone where a word of their own exists; the vendor goes to `vendor`. An\n  architecture tool's habit of writing both into one name, `Kassensystem – Tillworks Retail`,\n  splits into the H1 and the field. Software a vendor runs and the company only connects to is\n  named as its runners name it, which is the vendor's own name for it, `GitHub`, `Cloud Run`,\n  and `vendor`, or the `processor` where one is named, still says who stands behind it.\n- `vendor` is written only where no `processor` is: a processor is a page with a legal name and a\n  contract on it, and a vendor named beside it is, nearly always, the same party written twice,\n  once in a form nothing resolves. Where the maker is another party than the one the contract is\n  with, a terminal one company makes and an acquirer runs, the tagline names the maker, as a\n  word, not a field. A system naming no processor keeps its vendor as a name.\n- The tagline says what the system does and for whom, and claims nothing about how well.\n- `kind` names what sort of system it is, what it is made of and who runs it, not what it is for:\n  a payment terminal is of a kind whose `element` is `device` whatever it runs, and the software on\n  it, where that is a system of its own, is of an application kind and `part-of` the terminal.\n- `realizes` names features of the products staff and customers open, in the words of those\n  features; a system that gives nobody anything to do, a network, a camera, realizes nothing and\n  names its `domain`, or the processes it `serves`, instead.\n- `## Connects to` is written on the system that takes the data. An exchange both ways is two\n  rows, one on each page.\n- `## Holds` names concepts, not tables or files, and one system holds a concept as `master`:\n  the one whose copy the others are copies of.\n- `## Holds` names a concept once per data object the system keeps of it, and once where it keeps\n  none, each at its strongest access: a system that writes a concept reads it too, and a row for\n  each would draw one edge twice.\n- `## Holds` names the data object the system keeps of the concept where one is modeled, and leaves\n  the cell blank where it keeps the concept in no form the model names yet.\n- `## Connects to` names the service the connection calls where one is modeled, in the same row as\n  the interface it goes through.\n- The page states no cost, no license count and no version. Those move, and a contract register\n  or a configuration database holds them.",
+          "text": "- The H1 names the system as the people who run it name it, `Kassensystem`, `Filialsystem`, and\n  never by its vendor alone where a word of their own exists; the vendor goes to `vendor`. An\n  architecture tool's habit of writing both into one name, `Kassensystem – Tillworks Retail`,\n  splits into the H1 and the field. Software a vendor runs and the company only connects to is\n  named as its runners name it, which is the vendor's own name for it, `GitHub`, `Cloud Run`,\n  and `vendor`, or the `processor` where one is named, still says who stands behind it.\n- `vendor` is written only where no `processor` is: a processor is a page with a legal name and a\n  contract on it, and a vendor named beside it is, nearly always, the same party written twice,\n  once in a form nothing resolves. Where the maker is another party than the one the contract is\n  with, a terminal one company makes and an acquirer runs, the tagline names the maker, as a\n  word, not a field. A system naming no processor keeps its vendor as a name.\n- The tagline says what the system does and for whom, and claims nothing about how well.\n- `kind` names what sort of system it is, what it is made of and who runs it, not what it is for:\n  a payment terminal is of a kind whose `element` is `device` whatever it runs, and the software on\n  it, where that is a system of its own, is of an application kind and `part-of` the terminal.\n- `realizes` names features of the products staff and customers open, in the words of those\n  features; a system that gives nobody anything to do, a network, a camera, realizes nothing and\n  names its `domain`, or the processes it `serves`, instead.\n- `## Connects to` is written on the system that takes the data. An exchange both ways is two\n  rows, one on each page.\n- `## Holds` names concepts, not tables or files, and one system holds a concept as `master`:\n  the one whose copy the others are copies of. A row with `writes` or `reads` alone is right where\n  the master stands on another system; a concept only one system keeps, as a cache keeps queue\n  jobs, is that system's as `master`.\n- `## Holds` names a concept once per data object the system keeps of it, and once where it keeps\n  none, each at its strongest access: a system that writes a concept reads it too, and a row for\n  each would draw one edge twice.\n- `## Holds` names the data object the system keeps of the concept where one is modeled, and leaves\n  the cell blank where it keeps the concept in no form the model names yet.\n- `## Connects to` names the service the connection calls where one is modeled, in the same row as\n  the interface it goes through.\n- `instance-of` makes a software that runs in several environments one page for the software and\n  one per running copy. The software page carries what is the same wherever it runs: its kind, its owner, what it\n  holds and the master's row among it, the services it provides and the features it realizes. A\n  copy carries what differs where it runs: its platform, its operator, its environment and the\n  connections it takes there, and repeats nothing the software page says.\n- A copy writes no `## Holds` row: the data it keeps is the software's, and a copy that claimed\n  `master` beside the software's row is refused by the one-master rule.\n- `## Connects to` on a copy names what that copy takes data from there: in production the\n  production database, locally the one on the laptop. A connection the software takes everywhere\n  is written on the software page once.\n- The H1 of a copy names the software and its environment as the people who run it say it,\n  `Billing service (production)`, so the two are told apart in every list. A database, a queue or a\n  cache is a system too, and its copies follow the same pattern.\n- `instance-of` names the same software running elsewhere. Another product in the same role, an\n  object store that is one product on a laptop and another in production, is a system of its own,\n  with its own kind, vendor or processor and lifecycle, and the service both provide, `provided-by`\n  both, is what joins them; a copy's `## Connects to` row names the system of its own environment\n  with that service in `Service`.\n- The page states no cost, no license count, no version, no port, no command and no log path.\n  Those move, and a contract register, a configuration database or a runbook holds them;\n  `## References` names the runbook, the log console and the repository whose README carries the\n  commands, one row each, so an agent reading the page finds where to look.",
           "tables": []
         },
         {
@@ -10237,6 +10470,646 @@
       ],
       "owner": null,
       "path": "packs/organization/job-schema.md"
+    },
+    {
+      "id": "01a12af5-ba03-7c84-98a2-79c3c0928b4c",
+      "address": "requirements/requirement",
+      "type": "requirements",
+      "name": "Requirement Schema",
+      "tagline": "Required structure for requirement files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source, the label a specification gives it: `FR-011`. Absent when the source has none."
+                ],
+                [
+                  "`kind`",
+                  "Yes",
+                  "enum",
+                  "`functional`, `quality` or `constraint`. A result or behavior a function of the product provides; a quality concern no functional requirement covers, how fast, how safe, how available; or a limit on the solution beyond what the other two need (IREB CPRE glossary)."
+                ],
+                [
+                  "`modality`",
+                  "Yes",
+                  "enum",
+                  "`must`, `should` or `may`. Binding; binding unless a reason to depart is understood and stated; or permitted (RFC 2119)."
+                ],
+                [
+                  "`follows`",
+                  "No",
+                  "array of ref → rule",
+                  "The company's rules this requirement carries into the product, each the H1 of a file in `rules/`"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source, the label a specification gives it: `FR-011`. Absent when the source has none."
+              ],
+              [
+                "`kind`",
+                "Yes",
+                "enum",
+                "`functional`, `quality` or `constraint`. A result or behavior a function of the product provides; a quality concern no functional requirement covers, how fast, how safe, how available; or a limit on the solution beyond what the other two need (IREB CPRE glossary)."
+              ],
+              [
+                "`modality`",
+                "Yes",
+                "enum",
+                "`must`, `should` or `may`. Binding; binding unless a reason to depart is understood and stated; or permitted (RFC 2119)."
+              ],
+              [
+                "`follows`",
+                "No",
+                "array of ref → rule",
+                "The company's rules this requirement carries into the product, each the H1 of a file in `rules/`"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Requirement]`",
+                  "Yes",
+                  "The requirement's short name. Everything references it, and a test or a code comment cites it, by this exact string."
+                ],
+                [
+                  "`> [Statement]`",
+                  "Yes",
+                  "The requirement itself: one thing a product could be shown to meet or to miss"
+                ],
+                [
+                  "`## Why`",
+                  "Yes",
+                  "The need behind the statement, in a paragraph"
+                ],
+                [
+                  "`## Fit criterion`",
+                  "Yes",
+                  "How anyone can tell the requirement is met, measured where it can be (Volere)"
+                ],
+                [
+                  "`## Applies to`",
+                  "Yes",
+                  "Table. The features, products and use cases the requirement is about, at least one; its columns are declared below."
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. The specification it was drawn from, the standard behind it, the test that proves it; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Applies to` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Type`",
+                  "Yes",
+                  "enum",
+                  "`feature`, `product` or `use-case`. The type of the entity this row names, as its schema is named."
+                ],
+                [
+                  "`Entity`",
+                  "Yes",
+                  "ref → by Type",
+                  "The feature, product or use case, by its canonical name"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a specification, a standard, a test"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Requirement]`",
+                "Yes",
+                "The requirement's short name. Everything references it, and a test or a code comment cites it, by this exact string."
+              ],
+              [
+                "`> [Statement]`",
+                "Yes",
+                "The requirement itself: one thing a product could be shown to meet or to miss"
+              ],
+              [
+                "`## Why`",
+                "Yes",
+                "The need behind the statement, in a paragraph"
+              ],
+              [
+                "`## Fit criterion`",
+                "Yes",
+                "How anyone can tell the requirement is met, measured where it can be (Volere)"
+              ],
+              [
+                "`## Applies to`",
+                "Yes",
+                "Table. The features, products and use cases the requirement is about, at least one; its columns are declared below."
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. The specification it was drawn from, the standard behind it, the test that proves it; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A requirement is one statement of what a product must do or be, written so that it can be shown met or missed (ISO/IEC/IEEE 29148), and it answers \"what exactly is this held to, why, and how would anyone tell?\" for whoever builds, tests or accepts it. It is a page so that a test, a code comment or a later specification can cite it by a name and an id no other requirement shares. It is not a rule, which binds the company's own conduct; a requirement that exists because of a rule names it in `follows`.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The tagline says one thing, so that a product could be shown to meet it or to miss it; a statement that joins two with \"and\" is two requirements.\n- The tagline says what, not how: it names no component, library or vendor unless `kind` is `constraint`.\n- `modality` is the strength the tagline states, and a tagline that says \"must not\" carries `must`.\n- `## Fit criterion` names what is observed and what counts as met, with the measure and the conditions it is taken under where it is a quantity; \"works well\" is no criterion.\n- `kind` is `quality` where `## Fit criterion` measures how well the product does something rather than whether it does it.\n- `## Applies to` names the narrowest subject that carries the requirement: a feature where one feature does, a product where every feature of it does.\n- `follows` names a rule only where the requirement exists because of it.\n- `## Why` says the need, not the solution.\n- `source-id`, on a page drawn from a specification, is the label the specification gives it, so a test that cites the label still finds the page.\n- The page holds no priority, status, release or date; each moves, and a References row says where they are kept.\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/requirements/*.md`\n\nA requirement owns nothing and nothing owns it, so it is a file. What it is about is its `## Applies to`, a feature, a product or a use case, so a requirement that holds for a whole product is written once and not on each feature.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/requirements/requirement-schema.md"
+    },
+    {
+      "id": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "address": "requirements/use-case",
+      "type": "requirements",
+      "name": "Use Case Schema",
+      "tagline": "Required structure for use case files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`level`",
+                  "Yes",
+                  "enum",
+                  "`very high summary`, `summary`, `user goal` or `subfunction`. How high the goal stands against what a primary actor gets done in one sitting: well above it, above it, at it, or below it (Cockburn's goal levels, drawn as cloud, kite, waves at sea and fish). The four are listed from the highest down, and the order is read: what a use case includes stands at its level or below."
+                ],
+                [
+                  "`scope`",
+                  "No",
+                  "enum",
+                  "`organization`, `system` or `component`. What the use case treats as the thing under design (Cockburn's design scope)."
+                ],
+                [
+                  "`primary-actor`",
+                  "Yes",
+                  "ref? → seat",
+                  "Whoever has the goal: the H1 of a file in `seats/` where the company has the seat, otherwise the actor's name, which stays a string"
+                ],
+                [
+                  "`features`",
+                  "No",
+                  "array of ref → feature",
+                  "The features the use case asks something of, each the H1 of a file in `features/`"
+                ],
+                [
+                  "`includes`",
+                  "No",
+                  "array of ref → use-case",
+                  "The subordinate use cases its steps call, each the H1 of another file in `use-cases/` (UML include)"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`level`",
+                "Yes",
+                "enum",
+                "`very high summary`, `summary`, `user goal` or `subfunction`. How high the goal stands against what a primary actor gets done in one sitting: well above it, above it, at it, or below it (Cockburn's goal levels, drawn as cloud, kite, waves at sea and fish). The four are listed from the highest down, and the order is read: what a use case includes stands at its level or below."
+              ],
+              [
+                "`scope`",
+                "No",
+                "enum",
+                "`organization`, `system` or `component`. What the use case treats as the thing under design (Cockburn's design scope)."
+              ],
+              [
+                "`primary-actor`",
+                "Yes",
+                "ref? → seat",
+                "Whoever has the goal: the H1 of a file in `seats/` where the company has the seat, otherwise the actor's name, which stays a string"
+              ],
+              [
+                "`features`",
+                "No",
+                "array of ref → feature",
+                "The features the use case asks something of, each the H1 of a file in `features/`"
+              ],
+              [
+                "`includes`",
+                "No",
+                "array of ref → use-case",
+                "The subordinate use cases its steps call, each the H1 of another file in `use-cases/` (UML include)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Use case]`",
+                  "Yes",
+                  "The goal as a short active verb phrase. Everything references the use case by this exact string."
+                ],
+                [
+                  "`> [Goal]`",
+                  "Yes",
+                  "One paragraph of what the primary actor wants and what they have when it is done"
+                ],
+                [
+                  "`## Stakeholders and interests`",
+                  "Yes",
+                  "Table. Every party with an interest in how the use case goes, and what each needs from it; its columns are declared below."
+                ],
+                [
+                  "`## Preconditions`",
+                  "No",
+                  "Bulleted. What the system makes sure of before the use case may start, one item each"
+                ],
+                [
+                  "`## Trigger`",
+                  "No",
+                  "What starts the use case, which may be a time"
+                ],
+                [
+                  "`## Main success scenario`",
+                  "Yes",
+                  "Table. The steps from the trigger to the goal when nothing goes wrong, one row each, in order; its columns are declared below."
+                ],
+                [
+                  "`## Extensions`",
+                  "No",
+                  "Table. Each condition under which a step goes another way, and what happens then; its columns are declared below."
+                ],
+                [
+                  "`## Minimal guarantees`",
+                  "Yes",
+                  "Bulleted. What holds for every stakeholder however the use case ends, one item each"
+                ],
+                [
+                  "`## Success guarantees`",
+                  "Yes",
+                  "Bulleted. What holds when the goal is reached, one item each"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the use case; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## Stakeholders and interests` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Stakeholder`",
+                  "Yes",
+                  "ref? → seat",
+                  "The party: the H1 of a file in `seats/` where it is a seat, otherwise its name, which stays a string"
+                ],
+                [
+                  "`Interest`",
+                  "Yes",
+                  "string",
+                  "What the party needs from the use case, or needs protected while it runs"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Main success scenario` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Step`",
+                  "Yes",
+                  "string",
+                  "The step's label, unique on the page, which an extension and a test cite: `1`, `2`"
+                ],
+                [
+                  "`Actor`",
+                  "Yes",
+                  "ref? → seat",
+                  "Who acts in the step: the H1 of a file in `seats/` where it is a seat, otherwise its name, which stays a string"
+                ],
+                [
+                  "`Action`",
+                  "Yes",
+                  "string",
+                  "What the actor does, in one sentence"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Extensions` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`Step`",
+                  "Yes",
+                  "string",
+                  "The label of the step it branches from and one lowercase letter: `2a`"
+                ],
+                [
+                  "`Condition`",
+                  "Yes",
+                  "string",
+                  "What the system can detect that sends the step another way"
+                ],
+                [
+                  "`Handling`",
+                  "Yes",
+                  "string",
+                  "What happens then, and where the scenario goes on"
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a specification, a recording of the flow"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Use case]`",
+                "Yes",
+                "The goal as a short active verb phrase. Everything references the use case by this exact string."
+              ],
+              [
+                "`> [Goal]`",
+                "Yes",
+                "One paragraph of what the primary actor wants and what they have when it is done"
+              ],
+              [
+                "`## Stakeholders and interests`",
+                "Yes",
+                "Table. Every party with an interest in how the use case goes, and what each needs from it; its columns are declared below."
+              ],
+              [
+                "`## Preconditions`",
+                "No",
+                "Bulleted. What the system makes sure of before the use case may start, one item each"
+              ],
+              [
+                "`## Trigger`",
+                "No",
+                "What starts the use case, which may be a time"
+              ],
+              [
+                "`## Main success scenario`",
+                "Yes",
+                "Table. The steps from the trigger to the goal when nothing goes wrong, one row each, in order; its columns are declared below."
+              ],
+              [
+                "`## Extensions`",
+                "No",
+                "Table. Each condition under which a step goes another way, and what happens then; its columns are declared below."
+              ],
+              [
+                "`## Minimal guarantees`",
+                "Yes",
+                "Bulleted. What holds for every stakeholder however the use case ends, one item each"
+              ],
+              [
+                "`## Success guarantees`",
+                "Yes",
+                "Bulleted. What holds when the goal is reached, one item each"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the use case; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A use case is all the ways of using a system to achieve one goal for one actor (Cockburn and Jacobson), and it answers \"who wants this, what do they get, who else has a stake, and what still holds when it goes wrong?\" for whoever decides what a feature must do before anyone designs it. It is the problem side of a feature: core's feature says what someone can do, and the use case says what they want and what is guaranteed, at the level it names. It is not a design, which the software pack's feature design is, and not a requirement, which states one thing a product is held to and may apply to a use case.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- The H1 is the primary actor's goal as a short active verb phrase, `Download an invoice`, and never a screen or a feature's name.\n- The tagline says what the primary actor wants and what they have when it is done, in their words.\n- `level` is `user goal` where the primary actor gets the goal done in one sitting and goes away content; a goal that gathers several of those is a summary, and one that no actor would stop after is a subfunction.\n- `primary-actor` names a seat where the company has one for whoever has the goal, and otherwise the actor as the company calls them: `Customer`, `Payment provider`.\n- `## Stakeholders and interests` names every party whose interest the use case must protect, the primary actor among them, and each Interest says what the party needs, not what it does.\n- Each row of `## Main success scenario` is one actor doing one thing that moves toward the goal; a condition is an extension, never a step.\n- `Action`, in a step that calls a subordinate use case, names that use case by its H1, and every use case in `includes` is named so in some step.\n- `includes` names use cases at the page's `level` or below, in the order `level` lists them: a summary may call a user goal, and a subfunction calls no summary.\n- `Condition`, in `## Extensions`, is something the system can detect, not something an actor feels.\n- `## Minimal guarantees` hold however the use case ends, an extension that gives up included, and `## Success guarantees` only when the goal is reached.\n- `Action` names an aggregate, an invariant or an event, where a step needs one, in words: they are another pack's types, and the page draws no edge to them.\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/use-cases/*.md`\n\nA use case owns nothing and nothing owns it, so it is a file. One use case may be called by several others, so the edge is written on the one that calls, in `includes`, and the called use case names none of its callers.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/requirements/use-case-schema.md"
     },
     {
       "id": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
@@ -12513,6 +13386,24 @@
       "label": "source"
     },
     {
+      "from": "01a12c14-d5fb-7268-ae0c-299f194e8ffb",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a1226b-c5d5-7dcd-8295-40de820876db",
+      "to": "01a0c233-ae50-7bfb-8010-1e997f829ce3",
+      "via": "domain",
+      "attrs": {
+        "type": "ref → domain"
+      },
+      "label": "domain"
+    },
+    {
       "from": "01a1226b-c5d5-7dcd-8295-40de820876db",
       "to": "01a12186-4d00-7c74-84cd-5cde349d9b40",
       "via": "provided-by",
@@ -12610,6 +13501,24 @@
         "type": "ref → domain"
       },
       "label": "domain"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a12c14-d5fb-7268-ae0c-299f194e8ffb",
+      "via": "environment",
+      "attrs": {
+        "type": "ref → environment"
+      },
+      "label": "environment"
+    },
+    {
+      "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "to": "01a12186-4d00-7c74-84cd-5cde349d9b40",
+      "via": "instance-of",
+      "attrs": {
+        "type": "ref → system"
+      },
+      "label": "instance-of"
     },
     {
       "from": "01a12186-4d00-7c74-84cd-5cde349d9b40",
@@ -12784,6 +13693,78 @@
     },
     {
       "from": "01a1199f-28ad-7f8d-93b9-c9b71903339d",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a12af5-ba03-7c84-98a2-79c3c0928b4c",
+      "to": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
+      "via": "follows",
+      "attrs": {
+        "type": "array of ref → rule"
+      },
+      "label": "follows"
+    },
+    {
+      "from": "01a12af5-ba03-7c84-98a2-79c3c0928b4c",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "Main success scenario.Actor",
+      "attrs": {
+        "type": "ref? → seat"
+      },
+      "label": "Main success scenario.Actor"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "Stakeholders and interests.Stakeholder",
+      "attrs": {
+        "type": "ref? → seat"
+      },
+      "label": "Stakeholders and interests.Stakeholder"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "to": "01a0c234-71a0-7313-94b7-15be3be5e2d3",
+      "via": "features",
+      "attrs": {
+        "type": "array of ref → feature"
+      },
+      "label": "features"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "to": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "via": "includes",
+      "attrs": {
+        "type": "array of ref → use-case"
+      },
+      "label": "includes"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "to": "01a0a6a7-53f8-7824-b858-32860e752f35",
+      "via": "primary-actor",
+      "attrs": {
+        "type": "ref? → seat"
+      },
+      "label": "primary-actor"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
