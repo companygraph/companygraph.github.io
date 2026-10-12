@@ -18,7 +18,7 @@ Four talks of the series are out: core and packs, software, organization and lan
 
 **Every chip rests on our own model.** Our model holds enough: a user-goal use case with stakeholders, eleven extensions and both guarantees, a subfunction another use case includes, and requirements of every kind and modality, two of them following a rule.
 
-**The drawn slide shows the three pictures of one use case.** `usecase`, `scenario` and `requirements` of Ask the company a question, as the MCP server answers them at the pinned commit, in the landscape talk's tabbed window.
+**The drawn slide shows three pictures around one use case.** `usecase` and `scenario` of Read the model from an agent, whose picture shows the subfunction it includes and whose scenario of six steps and three extensions reads on a slide, and `requirements` of the feature it asks something of, An agent reads the model, as the MCP server answers them at the pinned commit, in the landscape talk's tabbed window. Ask the company a question, the use case the windows show, has a scenario of eight steps and eleven extensions, which the server draws but a slide cannot show legibly.
 
 **The close links back to the first talk**, and the first talk's slide 10 gains the requirements row as a link, as every pack talk adds its own.
 
@@ -40,7 +40,7 @@ At `/talks/requirements-pack/`, listed on `/talks/` after the landscape talk.
 | 9 | Where it departs | The README's list: RFC 2119's three words rather than the rule's; two guarantee sections rather than one table; no black-box and white-box split; Cockburn's words for levels, his lowest left out; a step's actor resolves and includes is drawn; no priority, satisfaction, conflicts or history; a spec-kit success criterion is a quality requirement. | concept Pack |
 | 10 | How it joins core | A use case asks something of a feature, its actors are seats; a requirement applies to a feature, a product or a use case and follows a rule; the software pack's feature design refines the same feature, so the trace runs from what is wanted to how it is built, and neither pack names the other. Every edge runs one way and is optional. | feature A visitor asks the model, product CompanyGraph Core, seat Visitor, rule A visitor is told an agent answers |
 | 11 | Left for later | The README's list: technology and data variations, secondary actors, extend, user stories and slices, goals in KAOS's or iStar's sense, a stakeholder type, SysML's derive, satisfy and verify, an originator. | concept Pack |
-| 12 | A use case, drawn | Three tabs: the use case in its scope, its scenario, and what it is held to, drawn by the MCP server's own code at the pinned commit; the actor outlined, since Visitor is a seat nobody holds. | use-case Ask the company a question, requirements A question is answered in the language of its words and An answer says where the model does not say |
+| 12 | A use case, drawn | Three tabs: Read the model from an agent in its scope with the subfunction it includes, its scenario, and what the feature it asks something of is held to, drawn by the MCP server's own code at the pinned commit; the actor outlined, since Visitor is a seat nobody holds. | use-case Read the model from an agent, use-case Walk a long list a page at a time, feature An agent reads the model |
 | 13 | Close | What someone wants and what the product is held to, as pages a check holds; the first talk says how a company chooses its packs. | concept Pack |
 
 ## 4. The two steps
