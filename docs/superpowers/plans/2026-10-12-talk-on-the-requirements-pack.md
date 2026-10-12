@@ -65,14 +65,14 @@ Expected: Ask the company a question has `level: user goal`, `scope: system`, `p
 In `build/talk-pictures.mjs`, after the landscape entries:
 
 ```js
-  // One use case of our own model three ways: in its scope with its actor, features and requirements,
-  // as its scenario, and what it is held to.
-  { page: "talks/requirements-pack/index.html", name: "usecase", from: "company", model: "../../", browser: true, request: { shape: "usecase", id: "01a1312c-4d5f-7923-b896-700a5ce8d15f" } },
-  { page: "talks/requirements-pack/index.html", name: "scenario", from: "company", model: "../../", browser: true, request: { shape: "scenario", id: "01a1312c-4d5f-7923-b896-700a5ce8d15f" } },
-  { page: "talks/requirements-pack/index.html", name: "requirements", from: "company", model: "../../", browser: true, request: { shape: "requirements", id: "01a1312c-4d5f-7923-b896-700a5ce8d15f" } },
+  // One use case of our own model in its scope with its actor, the subfunction it includes and its
+  // feature, then as its scenario, and what that feature is held to.
+  { page: "talks/requirements-pack/index.html", name: "usecase", from: "company", model: "../../", browser: true, request: { shape: "usecase", id: "01a1312c-5cfc-7c71-bd35-b7da880c4254" } },
+  { page: "talks/requirements-pack/index.html", name: "scenario", from: "company", model: "../../", browser: true, request: { shape: "scenario", id: "01a1312c-5cfc-7c71-bd35-b7da880c4254" } },
+  { page: "talks/requirements-pack/index.html", name: "requirements", from: "company", model: "../../", browser: true, request: { shape: "requirements", id: "01a0c29a-9610-7599-88be-da45e0941d77" } },
 ```
 
-`GITHUB_TOKEN=$(gh auth token) npm run build` after Step 2 writes `talks/requirements-pack/pictures/{usecase,scenario,requirements}.json`; expected `usecase` with six nodes, `scenario` with four and `requirements` with three.
+`GITHUB_TOKEN=$(gh auth token) npm run build` after Step 2 writes `talks/requirements-pack/pictures/{usecase,scenario,requirements}.json`; expected `usecase` with four nodes, `scenario` with none, since its actors Visitor, Agent and System are no seat, and `requirements` with five.
 
 - [ ] **Step 2: Copy the shell and replace the slides**
 
@@ -98,7 +98,7 @@ Dispatch the `writer` subagent with the brief below and the file: it edits only 
 | 9 | `s-departs` | `.departs`: rows “the source does” · “the pack does” from the README's departures: must, must not, may · must, should, may, must not in the statement; one table of guarantees with a kind column · two sections; black-box and white-box · the steps show how far inside; icons and a fifth level · Cockburn's words, the lowest left out; an underlined step · a step whose actor resolves and includes drawn; priority, satisfaction, conflicts, history · none; a success criterion · a quality requirement | the README's departures, each with its reason | concept Pack |
 | 10 | `s-joins` | `.lv`: a level-1 band “use case · requirement” over a level-0 band “feature · product · seat · rule”, the `.arrow` “features · applies to · actor · follows” | a use case asks something of a feature and its actors are seats; a requirement applies to a feature, a product or a use case and follows a rule; the software pack's feature design refines the same features; neither pack names the other; every edge optional (README; R20) | feature A visitor asks the model, product CompanyGraph Core (its id from `company.json`), seat Visitor, rule A visitor is told an agent answers |
 | 11 | `s-later` | `.talks` list without links, `.tk` “later”: the README's “Left for later” | the README's list at v0.94.0 | concept Pack |
-| 12 | `s-drawn` | `.win.drawn` with three tabs, the panes holding the picture markers | the three pictures as the server answers them at the pin; Visitor is a seat nobody holds, so the actor is outlined; the actor's arrow, includes dashed, features solid, a hexagon per requirement; the scenario's boxes in order with their extensions dashed; the requirements framed by kind | use-case Ask the company a question, requirements `01a1312d-4501-7e47-abc4-8b179c53d140` and An answer says where the model does not say `01a1312d-0688-7aba-a96a-fcbd55585385` |
+| 12 | `s-drawn` | `.win.drawn` with three tabs, the panes holding the picture markers | the three pictures as the server answers them at the pin: Read the model from an agent in its scope, Visitor outlined since the seat is held by nobody, Walk a long list a page at a time dashed in the frame as included, the feature solid outside; its scenario, six steps and three extensions dashed off their steps; the requirements of An agent reads the model framed by kind | use-case Read the model from an agent `01a1312c-5cfc-7c71-bd35-b7da880c4254`, use-case Walk a long list a page at a time `01a1312c-7bf1-7220-aac8-2909c906829e`, feature An agent reads the model `01a0c29a-9610-7599-88be-da45e0941d77` |
 | 13 | `s-close` | `.lv`, both bands lit | spec §3 | concept Pack |
 
 - [ ] **Step 5: Hold every window to its page, and check the chips**
