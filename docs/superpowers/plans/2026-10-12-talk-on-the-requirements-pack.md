@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** The fifth talk of the series, “What someone wants, and what the product is held to”, at `/talks/requirements-pack/`, first in English with its narration for the owner's read, then in German, narrated, with both PDFs, its card, its place on `/talks/`, the README, the sitemap and its link from slide 10 of the talk on core and packs.
+**Goal:** The fifth talk of the series, “What someone wants, and what a product is held to”, at `/talks/requirements-pack/`, first in English with its narration for the owner's read, then in German, narrated, with both PDFs, its card, its place on `/talks/`, the README, the sitemap and its link from slide 10 of the talk on core and packs.
 
 **Architecture:** The deck is built from `talks/landscape-pack/index.html` as its shell, the latest deck of the series and the one with the tabbed window of drawn pictures and its `scenes.js`, which this talk keeps for three tabs. Its pictures are three entries in `build/talk-pictures.mjs`, drawn by the site's build with the server at the site's pin. It is registered where the other pack talks are and lands in the same commits under the same seats. The site's pins at f13d43a hold every page the slides rest on, so no re-pin comes first.
 
@@ -76,7 +76,7 @@ In `build/talk-pictures.mjs`, after the landscape entries:
 
 - [ ] **Step 2: Copy the shell and replace the slides**
 
-Copy `talks/landscape-pack/index.html` to `talks/requirements-pack/index.html` and `scenes.js` beside it. Replace `talks/landscape-pack/` with `talks/requirements-pack/`, the title in every place with `CompanyGraph — What someone wants, and what the product is held to`, the description in its five places with the cover's subtitle, and both `TALK` strings with the English. Delete every `data-de`, `data-de-href`, `data-de-aria` and `data-notes-de` except the chrome's and each chip label's `data-de="beruht auf"`. Rewrite the “this talk” comment. Replace the thirteen sections with this talk's fourteen, the table in Step 4; the drawn slide keeps the landscape talk's window with a third tab.
+Copy `talks/landscape-pack/index.html` to `talks/requirements-pack/index.html` and `scenes.js` beside it. Replace `talks/landscape-pack/` with `talks/requirements-pack/`, the title in every place with `CompanyGraph — What someone wants, and what a product is held to`, the description in its five places with the cover's subtitle, and both `TALK` strings with the English. Delete every `data-de`, `data-de-href`, `data-de-aria` and `data-notes-de` except the chrome's and each chip label's `data-de="beruht auf"`. Rewrite the “this talk” comment. Replace the thirteen sections with this talk's fourteen, the table in Step 4; the drawn slide keeps the landscape talk's window with a third tab.
 
 - [ ] **Step 3: Draft the English with the writer**
 
@@ -107,7 +107,7 @@ A script in the workspace reads each `.win` of the deck, strips the markup to li
 
 - [ ] **Step 6: Register the talk, and link it from the first talk**
 
-In `talks/index.html`, after the landscape-pack row, a row in the same form with the title, `N min` from the summed `data-time`, the description “A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, as pages a check holds and the server draws. Each slide names the pages of our own model it rests on.” and the PDF link `requirements-pack/requirements-pack-en.pdf`. In `verify/check.mjs`, after the landscape-pack entry, an entry copied from it with `path: "/talks/requirements-pack/"`, `title: /What someone wants, and what the product is held to/`, `slides: 14`, `links` the README's eight source URLs, no `translates` yet. In `talks/core-and-packs/index.html`, slide 10's list gains `<li><span class="tk">requirements</span><a href="../requirements-pack/">What someone wants, and what the product is held to</a></li>`, its German left to Task 4.
+In `talks/index.html`, after the landscape-pack row, a row in the same form with the title, `N min` from the summed `data-time`, the description “A use case with its stakeholders, scenario and extensions, and a requirement with its kind, modality and fit criterion, as pages a check holds and the server draws. Each slide names the pages of our own model it rests on.” and the PDF link `requirements-pack/requirements-pack-en.pdf`. In `verify/check.mjs`, after the landscape-pack entry, an entry copied from it with `path: "/talks/requirements-pack/"`, `title: /What someone wants, and what a product is held to/`, `slides: 14`, `links` the README's eight source URLs, no `translates` yet. In `talks/core-and-packs/index.html`, slide 10's list gains `<li><span class="tk">requirements</span><a href="../requirements-pack/">What someone wants, and what a product is held to</a></li>`, its German left to Task 4.
 
 - [ ] **Step 7: Run the build, the suite, the fit check and the screenshots**
 

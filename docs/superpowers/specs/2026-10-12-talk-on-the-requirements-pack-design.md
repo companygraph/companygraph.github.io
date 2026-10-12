@@ -22,13 +22,13 @@ Four talks of the series are out: core and packs, software, organization and lan
 
 **The close links back to the first talk**, and the first talk's slide 10 gains the requirements row as a link, as every pack talk adds its own.
 
-## 3. What someone wants, and what the product is held to
+## 3. What someone wants, and what a product is held to
 
 At `/talks/requirements-pack/`, listed on `/talks/` after the landscape talk.
 
 | # | Slide | What it says | Rests on |
 | --- | --- | --- | --- |
-| 0 | Title | What someone wants, and what the product is held to. | concept Pack |
+| 0 | Title | What someone wants, and what a product is held to. | concept Pack |
 | 1 | The method you know | Cockburn's use cases, UML 2.5.1's clause 18, Use-Case 2.0, ISO 29148, IREB's glossary, Volere's snow card, RFC 2119 and spec-kit's template, each linked from the README's Sources: the pack writes their words down. | concept Pack |
 | 2 | A use case | A window on Ask the company a question: its level, scope and primary actor, and the features it asks something of. One goal, one actor, all the ways of reaching it. | use-case Ask the company a question, feature A visitor asks the model, seat Visitor |
 | 3 | Stakeholders and guarantees | A window on its stakeholders and interests and its two guarantees: what holds whatever happens, and what holds when the goal is reached. Cockburn's two headings, not one table with a kind column. | use-case Ask the company a question |
