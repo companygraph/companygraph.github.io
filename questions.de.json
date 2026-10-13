@@ -4,16 +4,20 @@
     "text": "Bleibt ein Link von aussen auf eine Entität gültig, wenn sie umbenannt wird?"
   },
   {
+    "title": "Can an agent change our model through the MCP server?",
+    "text": "Kann ein KI-Agent unser Modell über den MCP-Server ändern?"
+  },
+  {
     "title": "Can I trust what this chat says?",
     "text": "Kann ich mich auf das verlassen, was dieser Chat sagt?"
   },
   {
-    "title": "Can I use CompanyGraph's colors and fonts for my own site?",
-    "text": "Darf ich die Farben und Schriften von CompanyGraph für meine eigene Website verwenden?"
-  },
-  {
     "title": "Can our AI agents use it?",
     "text": "Können unsere KI-Agenten CompanyGraph nutzen?"
+  },
+  {
+    "title": "Can we keep our model in several languages?",
+    "text": "Können wir unser Modell in mehreren Sprachen führen?"
   },
   {
     "title": "Can we load our model into a graph database like Neo4j?",
@@ -26,6 +30,10 @@
   {
     "title": "Do our people have to write these files by hand?",
     "text": "Müssen unsere Leute die Dateien des Modells von Hand schreiben?"
+  },
+  {
+    "title": "Does CompanyGraph help us with the EU AI Act?",
+    "text": "Hilft uns CompanyGraph beim EU AI Act?"
   },
   {
     "title": "Does it only work with Claude, or can we use ChatGPT or Gemini?",
@@ -64,16 +72,24 @@
     "text": "Steckt hinter CompanyGraph ein Geschäft, oder ist es ein Nebenprojekt?"
   },
   {
+    "title": "Is there a pack for software companies?",
+    "text": "Gibt es ein Pack für Softwarefirmen?"
+  },
+  {
+    "title": "Is there an editor, or do we work in plain files?",
+    "text": "Gibt es einen Editor, oder arbeiten wir direkt in den Dateien?"
+  },
+  {
+    "title": "Is what I type here stored?",
+    "text": "Wird gespeichert, was ich hier eingebe?"
+  },
+  {
     "title": "Isn't this just a wiki, or Notion with rules?",
     "text": "Ist das nicht einfach ein Wiki oder Notion mit Regeln?"
   },
   {
     "title": "What can an agent do with our model besides answering questions?",
     "text": "Was kann ein KI-Agent mit unserem Modell tun, ausser Fragen zu beantworten?"
-  },
-  {
-    "title": "What do the colors on companygraph.io mean?",
-    "text": "Was bedeuten die Farben auf companygraph.io?"
   },
   {
     "title": "What does a company's model actually look like?",
@@ -88,12 +104,20 @@
     "text": "Welches Problem löst CompanyGraph?"
   },
   {
+    "title": "What would we use CompanyGraph for?",
+    "text": "Wofür würden wir CompanyGraph einsetzen?"
+  },
+  {
     "title": "Where do our targets and actual numbers go?",
     "text": "Wohin gehören unsere Soll- und Istwerte?"
   },
   {
     "title": "Who answers this chat?",
     "text": "Wer antwortet in diesem Chat?"
+  },
+  {
+    "title": "Who is behind CompanyGraph?",
+    "text": "Wer steht hinter CompanyGraph?"
   },
   {
     "title": "Who keeps the model true when the company changes?",

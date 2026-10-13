@@ -1,5 +1,5 @@
 {
-  "commit": "26ad32b0026c4bb69d4d2075e5340ebeab62da45",
+  "commit": "8da4aac3a416b42aae49fdd5669d3628e4a35f81",
   "core": "0.69.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -23952,27 +23952,6 @@
       "path": "model/profiles/robert-blust/robert-blust.md"
     },
     {
-      "id": "01a0de43-dea8-73d6-ad5a-e1422b3c7bc6",
-      "address": "question-kinds/brand",
-      "type": "question-kind",
-      "name": "Brand",
-      "tagline": "Questions about how companygraph.io looks and what a visitor may reuse.",
-      "fields": {
-        "id": "01a0de43-dea8-73d6-ad5a-e1422b3c7bc6",
-        "source": "Local",
-        "rank": "40"
-      },
-      "sections": [
-        {
-          "heading": "What it means",
-          "text": "A question about the colors, the faces, the mark and the voice, and whether a visitor may use them. What a sentence on the site claims is the kind of the claim, not this one.",
-          "tables": []
-        }
-      ],
-      "owner": null,
-      "path": "model/question-kinds/brand.md"
-    },
-    {
       "id": "01a0de43-dea8-733f-9f08-4341ec2e8ae9",
       "address": "question-kinds/fit",
       "type": "question-kind",
@@ -23986,7 +23965,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A question about the problem and the match: why a model rather than a wiki, what a company's model looks like, whether the vocabulary fits, where targets and actual numbers go, how content stays current and who keeps it true, and whether it works with the agent and the graph database a company already runs.\n\nHow to begin is Getting started. What it costs, who is behind it and how it proves itself is Terms.",
+          "text": "A question about the problem and the match: why a model rather than a wiki, what a company would use it for, what a company's model looks like, whether the vocabulary fits and whether a pack holds what a company of its kind needs, whether a model can be kept in several languages, whether it helps with the EU AI Act, where targets and actual numbers go, how content stays current and who keeps it true, and whether it works with the agent and the graph database a company already runs.\n\nHow to begin is Getting started. What it costs, who is behind it and how it proves itself is Terms.",
           "tables": []
         }
       ],
@@ -24007,7 +23986,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A question about the first steps and what connects once the model exists: starting an instance, writing a profile, letting an agent read it, and whether the data leaves the company's hands when it runs.\n\nWhether it fits at all is Fit. Price, license and the people behind it are Terms.",
+          "text": "A question about the first steps and what connects once the model exists: starting an instance, what a page is written in, writing a profile, letting an agent read it and whether one may change it, and whether the data leaves the company's hands when it runs.\n\nWhether it fits at all is Fit. Price, license and the people behind it are Terms.",
           "tables": []
         }
       ],
@@ -24040,7 +24019,7 @@
       "address": "question-kinds/this-chat",
       "type": "question-kind",
       "name": "This chat",
-      "tagline": "Questions about the chat on companygraph.io: who answers, and how far to trust what it says.",
+      "tagline": "Questions about the chat on companygraph.io: who answers, how far to trust what it says, and what is kept of what a visitor types.",
       "fields": {
         "id": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
         "source": "Local",
@@ -24049,7 +24028,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A question about the chat itself, its seat and its measure. A question the chat is asked about CompanyGraph is the kind of what it asks about.",
+          "text": "A question about the chat itself, its seat, its measure and what it keeps of a message. A question the chat is asked about CompanyGraph is the kind of what it asks about.",
           "tables": []
         }
       ],
@@ -24125,11 +24104,91 @@
       "path": "model/questions/can-a-system-outside-our-model-keep-a-link-to-an-entity-after-it-is-renamed.md"
     },
     {
+      "id": "01a13351-995d-7cfd-9136-841e20364b17",
+      "address": "questions/can-an-agent-change-our-model-through-the-mcp-server",
+      "type": "question",
+      "name": "Can an agent change our model through the MCP server?",
+      "tagline": "The requirement says the server has no write path and how the model moves instead, the decision on the server says what was weighed against one, and the decision on who writes says how an agent's change still reaches the model, through the repository and a person's approval.",
+      "fields": {
+        "id": "01a13351-995d-7cfd-9136-841e20364b17",
+        "source": "Local",
+        "kind": "Getting started"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "requirement",
+                  "No call changes the model",
+                  "",
+                  "no write path, and how the model moves"
+                ],
+                [
+                  "decision",
+                  "The server only reads, and answers at one named commit",
+                  "",
+                  "what else was weighed"
+                ],
+                [
+                  "decision",
+                  "Agents write the model, and a person approves every change to it",
+                  "",
+                  "how an agent's change gets in"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "requirement",
+                "No call changes the model",
+                "",
+                "no write path, and how the model moves"
+              ],
+              [
+                "decision",
+                "The server only reads, and answers at one named commit",
+                "",
+                "what else was weighed"
+              ],
+              [
+                "decision",
+                "Agents write the model, and a person approves every change to it",
+                "",
+                "how an agent's change gets in"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-an-agent-change-our-model-through-the-mcp-server.md"
+    },
+    {
       "id": "01a0d451-1230-7157-b7cd-18d2c475b767",
       "address": "questions/can-i-trust-what-this-chat-says",
       "type": "question",
       "name": "Can I trust what this chat says?",
-      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, and the Answering process says how this chat is held to it. Grounded Answer Rate says whether an answer rested on the model; where the chat checks its answers, the feature marks a claim the evidence does not carry and Carried Claim Rate counts how often, and both say whether an answer kept to the model, never whether the model is right.",
+      "tagline": "The objective says what an agent answering as well as the person who runs the company would mean, the Answering process says how this chat is held to it, and the requirements say what an answer may rest on and what it says where the model does not say. Grounded Answer Rate says whether an answer rested on the model; where the chat checks its answers, the feature marks a claim the evidence does not carry and Carried Claim Rate counts how often, and both say whether an answer kept to the model, never whether the model is right.",
       "fields": {
         "id": "01a0d451-1230-7157-b7cd-18d2c475b767",
         "source": "Local",
@@ -24178,6 +24237,18 @@
                   "Carried Claim Rate",
                   "",
                   "how often a claim is not carried"
+                ],
+                [
+                  "requirement",
+                  "An answer rests only on what the host's tools returned",
+                  "",
+                  "what an answer may rest on"
+                ],
+                [
+                  "requirement",
+                  "An answer says where the model does not say",
+                  "",
+                  "what it says where the model is silent"
                 ]
               ]
             }
@@ -24220,6 +24291,18 @@
                 "Carried Claim Rate",
                 "",
                 "how often a claim is not carried"
+              ],
+              [
+                "requirement",
+                "An answer rests only on what the host's tools returned",
+                "",
+                "what an answer may rest on"
+              ],
+              [
+                "requirement",
+                "An answer says where the model does not say",
+                "",
+                "what it says where the model is silent"
               ]
             ]
           }
@@ -24227,74 +24310,6 @@
       ],
       "owner": null,
       "path": "model/questions/can-i-trust-what-this-chat-says.md"
-    },
-    {
-      "id": "01a0dcf9-5d48-7dbe-a710-522d6ffc2db6",
-      "address": "questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site",
-      "type": "question",
-      "name": "Can I use CompanyGraph's colors and fonts for my own site?",
-      "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
-      "fields": {
-        "id": "01a0dcf9-5d48-7dbe-a710-522d6ffc2db6",
-        "source": "Local",
-        "kind": "Brand"
-      },
-      "sections": [
-        {
-          "heading": "Rests on",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner",
-                "For"
-              ],
-              "rows": [
-                [
-                  "brand",
-                  "CompanyGraph",
-                  "",
-                  "the roles, the faces, and where the values are"
-                ],
-                [
-                  "surface",
-                  "companygraph.io website",
-                  "",
-                  "where the design is seen whole"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner",
-              "For"
-            ],
-            "rows": [
-              [
-                "brand",
-                "CompanyGraph",
-                "",
-                "the roles, the faces, and where the values are"
-              ],
-              [
-                "surface",
-                "companygraph.io website",
-                "",
-                "where the design is seen whole"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/questions/can-i-use-companygraph-s-colors-and-fonts-for-my-own-site.md"
     },
     {
       "id": "01a0d451-1230-7bd6-adc8-debd9665daec",
@@ -24387,6 +24402,74 @@
       ],
       "owner": null,
       "path": "model/questions/can-our-ai-agents-use-it.md"
+    },
+    {
+      "id": "01a13351-99a5-72db-945d-a094c38ece7f",
+      "address": "questions/can-we-keep-our-model-in-several-languages",
+      "type": "question",
+      "name": "Can we keep our model in several languages?",
+      "tagline": "The decision says why a model is written in one language and another language is a rendering of it, with what was weighed against translating inside the model, and the Languages page says which language this model is written in and where its German comes from.",
+      "fields": {
+        "id": "01a13351-99a5-72db-945d-a094c38ece7f",
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "A model is written in one language",
+                  "",
+                  "one language, and what else was weighed"
+                ],
+                [
+                  "localization",
+                  "Languages",
+                  "",
+                  "this model's language, and where its German comes from"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "decision",
+                "A model is written in one language",
+                "",
+                "one language, and what else was weighed"
+              ],
+              [
+                "localization",
+                "Languages",
+                "",
+                "this model's language, and where its German comes from"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-we-keep-our-model-in-several-languages.md"
     },
     {
       "id": "01a0ee2a-de70-7935-87d2-dc55ddd537e9",
@@ -24605,6 +24688,98 @@
       "path": "model/questions/do-our-people-have-to-write-these-files-by-hand.md"
     },
     {
+      "id": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "address": "questions/does-companygraph-help-us-with-the-eu-ai-act",
+      "type": "question",
+      "name": "Does CompanyGraph help us with the EU AI Act?",
+      "tagline": "The objective says which of the Act's questions a company answers from its model and what stays a lawyer's judgment, and our own chat is the first case of it: the rule says what the Act asks of the chat, the risk what that guards against, and the control how it is kept.",
+      "fields": {
+        "id": "01a13351-99eb-787b-8be1-c2091b2d2611",
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "The questions the AI Act asks a company are answered from its model",
+                  "",
+                  "what is answered from the model, and what is not"
+                ],
+                [
+                  "rule",
+                  "A visitor is told an agent answers",
+                  "",
+                  "what the Act asks of our chat"
+                ],
+                [
+                  "risk",
+                  "A visitor takes an answer for a person's",
+                  "",
+                  "what the rule guards against"
+                ],
+                [
+                  "control",
+                  "The chat says who answers before the first message",
+                  "",
+                  "how the rule is kept"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "The questions the AI Act asks a company are answered from its model",
+                "",
+                "what is answered from the model, and what is not"
+              ],
+              [
+                "rule",
+                "A visitor is told an agent answers",
+                "",
+                "what the Act asks of our chat"
+              ],
+              [
+                "risk",
+                "A visitor takes an answer for a person's",
+                "",
+                "what the rule guards against"
+              ],
+              [
+                "control",
+                "The chat says who answers before the first message",
+                "",
+                "how the rule is kept"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/does-companygraph-help-us-with-the-eu-ai-act.md"
+    },
+    {
       "id": "01a0ee2a-de70-7b8b-9c6d-4579507061cd",
       "address": "questions/does-it-only-work-with-claude-or-can-we-use-chatgpt-or-gemini",
       "type": "question",
@@ -24677,7 +24852,7 @@
       "address": "questions/does-our-data-leave-our-hands",
       "type": "question",
       "name": "Does our data leave our hands?",
-      "tagline": "The strategy says where a company's model, its server and its chat run, and what a chat visitor sends leaves them; the instance says the model is the company's own repository.",
+      "tagline": "The strategy says where a company's model, its server and its chat run, and what a chat visitor sends leaves them; the instance says the model is the company's own repository, and the requirement says what we are held to, that nothing a company writes passes through us.",
       "fields": {
         "id": "01a0d4e3-e038-76c7-8592-925fb9c3c519",
         "source": "Local",
@@ -24708,6 +24883,12 @@
                   "Instance",
                   "",
                   "the model is the company's own"
+                ],
+                [
+                  "requirement",
+                  "Nothing a company writes passes through us",
+                  "",
+                  "what we are held to"
                 ]
               ]
             }
@@ -24732,6 +24913,12 @@
                 "Instance",
                 "",
                 "the model is the company's own"
+              ],
+              [
+                "requirement",
+                "Nothing a company writes passes through us",
+                "",
+                "what we are held to"
               ]
             ]
           }
@@ -24813,7 +25000,7 @@
       "address": "questions/how-do-i-create-my-own-profile",
       "type": "question",
       "name": "How do I create my own profile?",
-      "tagline": "The feature says how an agent writes a profile from a person's own documents, the profile a CV is derived from, and the command that starts an instance says how to get the model it is written into.",
+      "tagline": "The feature says how an agent writes a profile from a person's own documents, the profile a CV is derived from, the requirement says the documents are used only under that person's consent, and the command that starts an instance says how to get the model it is written into.",
       "fields": {
         "id": "01a0d808-0398-762b-b45e-364d4b02042d",
         "source": "Local",
@@ -24844,6 +25031,12 @@
                   "An instance is made and kept from one command",
                   "",
                   "the model it is written into"
+                ],
+                [
+                  "requirement",
+                  "A person's documents are used only under that person's consent",
+                  "",
+                  "that the documents need the person's consent"
                 ]
               ]
             }
@@ -24868,6 +25061,12 @@
                 "An instance is made and kept from one command",
                 "",
                 "the model it is written into"
+              ],
+              [
+                "requirement",
+                "A person's documents are used only under that person's consent",
+                "",
+                "that the documents need the person's consent"
               ]
             ]
           }
@@ -25301,6 +25500,282 @@
       "path": "model/questions/is-companygraph-a-business-or-a-side-project.md"
     },
     {
+      "id": "01a13351-9b02-766b-80bf-556b38ac03df",
+      "address": "questions/is-there-a-pack-for-software-companies",
+      "type": "question",
+      "name": "Is there a pack for software companies?",
+      "tagline": "The pack says what vocabulary ships beside core and for which companies, the feature says what the software pack adds, in the words of domain-driven design, and the use case says how a company takes a pack it needs.",
+      "fields": {
+        "id": "01a13351-9b02-766b-80bf-556b38ac03df",
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Pack",
+                  "",
+                  "what a pack is"
+                ],
+                [
+                  "feature",
+                  "A company that builds software describes how it designs it",
+                  "",
+                  "what the software pack adds"
+                ],
+                [
+                  "use-case",
+                  "Take a pack the company needs",
+                  "",
+                  "how a company takes one"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Pack",
+                "",
+                "what a pack is"
+              ],
+              [
+                "feature",
+                "A company that builds software describes how it designs it",
+                "",
+                "what the software pack adds"
+              ],
+              [
+                "use-case",
+                "Take a pack the company needs",
+                "",
+                "how a company takes one"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-there-a-pack-for-software-companies.md"
+    },
+    {
+      "id": "01a13351-9a31-78e5-8b23-adc00d550a68",
+      "address": "questions/is-there-an-editor-or-do-we-work-in-plain-files",
+      "type": "question",
+      "name": "Is there an editor, or do we work in plain files?",
+      "tagline": "The product says a company's model is Markdown files, the feature says what a plugin for Obsidian adds while a page is written, and the use case says what a writer has before the change is pushed.",
+      "fields": {
+        "id": "01a13351-9a31-78e5-8b23-adc00d550a68",
+        "source": "Local",
+        "kind": "Getting started"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core",
+                  "",
+                  "a model is Markdown files"
+                ],
+                [
+                  "feature",
+                  "Checks while a file is edited",
+                  "",
+                  "what the plugin adds"
+                ],
+                [
+                  "use-case",
+                  "Write a page that holds",
+                  "",
+                  "what a writer has before the push"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core",
+                "",
+                "a model is Markdown files"
+              ],
+              [
+                "feature",
+                "Checks while a file is edited",
+                "",
+                "what the plugin adds"
+              ],
+              [
+                "use-case",
+                "Write a page that holds",
+                "",
+                "what a writer has before the push"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-there-an-editor-or-do-we-work-in-plain-files.md"
+    },
+    {
+      "id": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "address": "questions/is-what-i-type-here-stored",
+      "type": "question",
+      "name": "Is what I type here stored?",
+      "tagline": "The processing activities say what a message is used for and what is kept of it, the requirement says what is kept and what never is, and the data processors say which companies receive a message and where they process it.",
+      "fields": {
+        "id": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+        "source": "Local",
+        "kind": "This chat"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "processing-activity",
+                  "Answering in the chat",
+                  "",
+                  "what a message is used for"
+                ],
+                [
+                  "processing-activity",
+                  "Keeping the chat's questions",
+                  "",
+                  "what is kept, and for how long"
+                ],
+                [
+                  "requirement",
+                  "The question is kept and the answer is not",
+                  "",
+                  "what is kept and what never is"
+                ],
+                [
+                  "data-processor",
+                  "Anthropic",
+                  "",
+                  "who writes the answer"
+                ],
+                [
+                  "data-processor",
+                  "Google Cloud",
+                  "",
+                  "who runs the chat and keeps the questions"
+                ],
+                [
+                  "data-processor",
+                  "TypeSafe",
+                  "",
+                  "who checks the answer"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "processing-activity",
+                "Answering in the chat",
+                "",
+                "what a message is used for"
+              ],
+              [
+                "processing-activity",
+                "Keeping the chat's questions",
+                "",
+                "what is kept, and for how long"
+              ],
+              [
+                "requirement",
+                "The question is kept and the answer is not",
+                "",
+                "what is kept and what never is"
+              ],
+              [
+                "data-processor",
+                "Anthropic",
+                "",
+                "who writes the answer"
+              ],
+              [
+                "data-processor",
+                "Google Cloud",
+                "",
+                "who runs the chat and keeps the questions"
+              ],
+              [
+                "data-processor",
+                "TypeSafe",
+                "",
+                "who checks the answer"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-what-i-type-here-stored.md"
+    },
+    {
       "id": "01a0d451-1230-7f0c-83fb-24cc3038123f",
       "address": "questions/isn-t-this-just-a-wiki-or-notion-with-rules",
       "type": "question",
@@ -25459,62 +25934,6 @@
       ],
       "owner": null,
       "path": "model/questions/what-can-an-agent-do-with-our-model-besides-answering-questions.md"
-    },
-    {
-      "id": "01a0dcf9-5d48-7e9b-b971-9fcd7a36285f",
-      "address": "questions/what-do-the-colors-on-companygraph-io-mean",
-      "type": "question",
-      "name": "What do the colors on companygraph.io mean?",
-      "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
-      "fields": {
-        "id": "01a0dcf9-5d48-7e9b-b971-9fcd7a36285f",
-        "source": "Local",
-        "kind": "Brand"
-      },
-      "sections": [
-        {
-          "heading": "Rests on",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner",
-                "For"
-              ],
-              "rows": [
-                [
-                  "brand",
-                  "CompanyGraph",
-                  "",
-                  "what each color role means and never does"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner",
-              "For"
-            ],
-            "rows": [
-              [
-                "brand",
-                "CompanyGraph",
-                "",
-                "what each color role means and never does"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/questions/what-do-the-colors-on-companygraph-io-mean.md"
     },
     {
       "id": "01a0d451-1230-742e-b105-29b7e5afdb0f",
@@ -25757,6 +26176,110 @@
       "path": "model/questions/what-problem-does-companygraph-solve.md"
     },
     {
+      "id": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "address": "questions/what-would-we-use-companygraph-for",
+      "type": "question",
+      "name": "What would we use CompanyGraph for?",
+      "tagline": "The product says what CompanyGraph Core is and who uses it, and its use cases say what each of them gets done with it: an owner keeping the company's model, a writer writing a page that holds, and a visitor asking the company a question, in the chat or through an agent of their own.",
+      "fields": {
+        "id": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+        "source": "Local",
+        "kind": "Fit"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core",
+                  "",
+                  "what it is, and who uses it"
+                ],
+                [
+                  "use-case",
+                  "Keep the company's model",
+                  "",
+                  "what an owner gets done"
+                ],
+                [
+                  "use-case",
+                  "Write a page that holds",
+                  "",
+                  "what a writer gets done"
+                ],
+                [
+                  "use-case",
+                  "Ask the company a question",
+                  "",
+                  "what a visitor gets done in the chat"
+                ],
+                [
+                  "use-case",
+                  "Read the model from an agent",
+                  "",
+                  "what a visitor gets done through an agent"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core",
+                "",
+                "what it is, and who uses it"
+              ],
+              [
+                "use-case",
+                "Keep the company's model",
+                "",
+                "what an owner gets done"
+              ],
+              [
+                "use-case",
+                "Write a page that holds",
+                "",
+                "what a writer gets done"
+              ],
+              [
+                "use-case",
+                "Ask the company a question",
+                "",
+                "what a visitor gets done in the chat"
+              ],
+              [
+                "use-case",
+                "Read the model from an agent",
+                "",
+                "what a visitor gets done through an agent"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-would-we-use-companygraph-for.md"
+    },
+    {
       "id": "01a0dcc8-bc10-7730-8824-f91293c38b9a",
       "address": "questions/where-do-our-targets-and-actual-numbers-go",
       "type": "question",
@@ -25776,7 +26299,7 @@
       "address": "questions/who-answers-this-chat",
       "type": "question",
       "name": "Who answers this chat?",
-      "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says it reads this very model through its MCP server.",
+      "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; the chat says it reads this very model through its MCP server; and the requirement says a visitor is told before the first message that an agent answers.",
       "fields": {
         "id": "01a0d451-1230-7d66-a407-71d753da2755",
         "source": "Local",
@@ -25813,6 +26336,12 @@
                   "chat.companygraph.io chat",
                   "",
                   "that it reads this model"
+                ],
+                [
+                  "requirement",
+                  "A visitor is told before the first message that an agent answers",
+                  "",
+                  "that a visitor is told an agent answers"
                 ]
               ]
             }
@@ -25843,6 +26372,12 @@
                 "chat.companygraph.io chat",
                 "",
                 "that it reads this model"
+              ],
+              [
+                "requirement",
+                "A visitor is told before the first message that an agent answers",
+                "",
+                "that a visitor is told an agent answers"
               ]
             ]
           }
@@ -25850,6 +26385,110 @@
       ],
       "owner": null,
       "path": "model/questions/who-answers-this-chat.md"
+    },
+    {
+      "id": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "address": "questions/who-is-behind-companygraph",
+      "type": "question",
+      "name": "Who is behind CompanyGraph?",
+      "tagline": "The Maintainers group names the people and the agents that keep CompanyGraph and the job each person holds in it, the Owner and Partner seats say who decides what, and each person's profile says where they are found.",
+      "fields": {
+        "id": "01a13351-9b49-75ee-aa52-6603ff561f19",
+        "source": "Local",
+        "kind": "Terms"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "group",
+                  "Maintainers",
+                  "",
+                  "who keeps it, and in which job"
+                ],
+                [
+                  "seat",
+                  "Owner",
+                  "",
+                  "who has the last word"
+                ],
+                [
+                  "seat",
+                  "Partner",
+                  "",
+                  "who shares the say"
+                ],
+                [
+                  "profile",
+                  "Robert Blust",
+                  "",
+                  "where the maintainer is found"
+                ],
+                [
+                  "profile",
+                  "Mischa Ramseyer",
+                  "",
+                  "where the co-maintainer is found"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "group",
+                "Maintainers",
+                "",
+                "who keeps it, and in which job"
+              ],
+              [
+                "seat",
+                "Owner",
+                "",
+                "who has the last word"
+              ],
+              [
+                "seat",
+                "Partner",
+                "",
+                "who shares the say"
+              ],
+              [
+                "profile",
+                "Robert Blust",
+                "",
+                "where the maintainer is found"
+              ],
+              [
+                "profile",
+                "Mischa Ramseyer",
+                "",
+                "where the co-maintainer is found"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/who-is-behind-companygraph.md"
     },
     {
       "id": "01a0d451-1230-712b-8e06-2bbc1f6652d8",
@@ -26016,7 +26655,7 @@
       "address": "questions/will-a-new-companygraph-release-break-our-model",
       "type": "question",
       "name": "Will a new CompanyGraph release break our model?",
-      "tagline": "The decision says who decides when a new release of core reaches a company's model, and what was weighed against letting it arrive by itself, and the pin says how the model names the release it is written against.",
+      "tagline": "The decision says who decides when a new release of core reaches a company's model, and what was weighed against letting it arrive by itself, the pin says how the model names the release it is written against, and the requirements say that a model is checked only against the release it adopted and that a move is shown before it is written.",
       "fields": {
         "id": "01a0ded2-6308-79ce-b30c-0bc7c31722c7",
         "source": "Local",
@@ -26047,6 +26686,18 @@
                   "Pin",
                   "",
                   "how the release is named"
+                ],
+                [
+                  "requirement",
+                  "An instance is checked only against the release it adopted",
+                  "",
+                  "which rules a model is held to"
+                ],
+                [
+                  "requirement",
+                  "A move is shown before it is written",
+                  "",
+                  "what a move shows first"
                 ]
               ]
             }
@@ -26071,6 +26722,18 @@
                 "Pin",
                 "",
                 "how the release is named"
+              ],
+              [
+                "requirement",
+                "An instance is checked only against the release it adopted",
+                "",
+                "which rules a model is held to"
+              ],
+              [
+                "requirement",
+                "A move is shown before it is written",
+                "",
+                "what a move shows first"
               ]
             ]
           }
@@ -39217,6 +39880,26 @@
     },
     {
       "from": "01a0d451-1230-7157-b7cd-18d2c475b767",
+      "to": "01a1312d-0688-7aba-a96a-fcbd55585385",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "what it says where the model is silent"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7157-b7cd-18d2c475b767",
+      "to": "01a1312d-54ac-7c7c-b554-5cb0398ec71d",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "what an answer may rest on"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7157-b7cd-18d2c475b767",
       "to": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
       "via": "kind",
       "attrs": {}
@@ -39575,6 +40258,16 @@
     },
     {
       "from": "01a0d451-1230-7d66-a407-71d753da2755",
+      "to": "01a1312c-f784-7d5d-b36c-d380130e0b09",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "that a visitor is told an agent answers"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7d66-a407-71d753da2755",
       "to": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
       "via": "kind",
       "attrs": {}
@@ -39677,6 +40370,16 @@
         "Type": "concept",
         "Owner": "",
         "For": "the model is the company's own"
+      }
+    },
+    {
+      "from": "01a0d4e3-e038-76c7-8592-925fb9c3c519",
+      "to": "01a1312c-e88a-7575-8b3a-c7a7cc70c01f",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "what we are held to"
       }
     },
     {
@@ -39859,6 +40562,16 @@
         "Type": "feature",
         "Owner": "",
         "For": "how a profile is written"
+      }
+    },
+    {
+      "from": "01a0d808-0398-762b-b45e-364d4b02042d",
+      "to": "01a1312c-d8ca-7860-838e-396197f5aeba",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "that the documents need the person's consent"
       }
     },
     {
@@ -40179,60 +40892,6 @@
     },
     {
       "from": "01a0dcd1-8de0-79be-8e65-ed4f3f5667fa",
-      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "01a0dcf9-5d48-7dbe-a710-522d6ffc2db6",
-      "to": "01a0c1ee-21a0-70b0-aad5-76050b5c19cd",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "surface",
-        "Owner": "",
-        "For": "where the design is seen whole"
-      }
-    },
-    {
-      "from": "01a0dcf9-5d48-7dbe-a710-522d6ffc2db6",
-      "to": "01a0dcd1-8de0-79be-8e65-ed4f3f5667fa",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "brand",
-        "Owner": "",
-        "For": "the roles, the faces, and where the values are"
-      }
-    },
-    {
-      "from": "01a0dcf9-5d48-7dbe-a710-522d6ffc2db6",
-      "to": "01a0de43-dea8-73d6-ad5a-e1422b3c7bc6",
-      "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "01a0dcf9-5d48-7dbe-a710-522d6ffc2db6",
-      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
-      "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "01a0dcf9-5d48-7e9b-b971-9fcd7a36285f",
-      "to": "01a0dcd1-8de0-79be-8e65-ed4f3f5667fa",
-      "via": "Rests on.Entity",
-      "attrs": {
-        "Type": "brand",
-        "Owner": "",
-        "For": "what each color role means and never does"
-      }
-    },
-    {
-      "from": "01a0dcf9-5d48-7e9b-b971-9fcd7a36285f",
-      "to": "01a0de43-dea8-73d6-ad5a-e1422b3c7bc6",
-      "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "01a0dcf9-5d48-7e9b-b971-9fcd7a36285f",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -40566,12 +41225,6 @@
       "attrs": {}
     },
     {
-      "from": "01a0de43-dea8-73d6-ad5a-e1422b3c7bc6",
-      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
-      "via": "source",
-      "attrs": {}
-    },
-    {
       "from": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
@@ -40627,6 +41280,26 @@
         "Type": "decision",
         "Owner": "",
         "For": "who decides, and what else was weighed"
+      }
+    },
+    {
+      "from": "01a0ded2-6308-79ce-b30c-0bc7c31722c7",
+      "to": "01a1312d-c2e9-7cd0-bdee-3dc0e8b33b31",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "which rules a model is held to"
+      }
+    },
+    {
+      "from": "01a0ded2-6308-79ce-b30c-0bc7c31722c7",
+      "to": "01a1312d-d213-79b9-b25f-3ef12ecbec31",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "what a move shows first"
       }
     },
     {
@@ -47762,6 +48435,412 @@
     },
     {
       "from": "01a13135-072e-7d81-b46c-60b805711072",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-995d-7cfd-9136-841e20364b17",
+      "to": "01a0dd52-bc30-78cc-9401-25383aa1d354",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "what else was weighed"
+      }
+    },
+    {
+      "from": "01a13351-995d-7cfd-9136-841e20364b17",
+      "to": "01a0eb67-0768-773d-a9d9-c00b0c7530c9",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "how an agent's change gets in"
+      }
+    },
+    {
+      "from": "01a13351-995d-7cfd-9136-841e20364b17",
+      "to": "01a1312d-a32d-711b-bcd8-29582f3f4110",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "no write path, and how the model moves"
+      }
+    },
+    {
+      "from": "01a13351-995d-7cfd-9136-841e20364b17",
+      "to": "01a0de43-dea8-714f-9558-2ac442dd590c",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-995d-7cfd-9136-841e20364b17",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-99a5-72db-945d-a094c38ece7f",
+      "to": "01a0f340-455c-733e-9f3a-6c8070c48bb2",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "localization",
+        "Owner": "",
+        "For": "this model's language, and where its German comes from"
+      }
+    },
+    {
+      "from": "01a13351-99a5-72db-945d-a094c38ece7f",
+      "to": "01a0f588-3c5a-7cf9-a128-86d8a38d6e13",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "one language, and what else was weighed"
+      }
+    },
+    {
+      "from": "01a13351-99a5-72db-945d-a094c38ece7f",
+      "to": "01a0de43-dea8-733f-9f08-4341ec2e8ae9",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-99a5-72db-945d-a094c38ece7f",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "to": "01a129ae-4c21-7cc9-8d78-58d38283d08c",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what is answered from the model, and what is not"
+      }
+    },
+    {
+      "from": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "to": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "risk",
+        "Owner": "",
+        "For": "what the rule guards against"
+      }
+    },
+    {
+      "from": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "to": "01a129b3-7831-7f71-8148-4391f6612657",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "rule",
+        "Owner": "",
+        "For": "what the Act asks of our chat"
+      }
+    },
+    {
+      "from": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "to": "01a129b3-87e1-7cc9-8321-32b1ca586d28",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "control",
+        "Owner": "",
+        "For": "how the rule is kept"
+      }
+    },
+    {
+      "from": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "to": "01a0de43-dea8-733f-9f08-4341ec2e8ae9",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-99eb-787b-8be1-c2091b2d2611",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9a31-78e5-8b23-adc00d550a68",
+      "to": "01a0c29a-9610-7739-b7be-8876aaef6540",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what the plugin adds"
+      }
+    },
+    {
+      "from": "01a13351-9a31-78e5-8b23-adc00d550a68",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "product",
+        "Owner": "",
+        "For": "a model is Markdown files"
+      }
+    },
+    {
+      "from": "01a13351-9a31-78e5-8b23-adc00d550a68",
+      "to": "01a1312b-c453-7585-bcc7-1f4e34aa2446",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "use-case",
+        "Owner": "",
+        "For": "what a writer has before the push"
+      }
+    },
+    {
+      "from": "01a13351-9a31-78e5-8b23-adc00d550a68",
+      "to": "01a0de43-dea8-714f-9558-2ac442dd590c",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9a31-78e5-8b23-adc00d550a68",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a107db-5255-7b65-85f7-4e05bc9d2fed",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "For": "who writes the answer"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a107de-42df-7ec1-ab8f-49d478a1abc2",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "For": "who checks the answer"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "For": "who runs the chat and keeps the questions"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a107ec-5eb5-78b1-9fbf-4190fc846e44",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "processing-activity",
+        "Owner": "",
+        "For": "what a message is used for"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a107ed-732a-7be1-897e-430f5ba1db1c",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "processing-activity",
+        "Owner": "",
+        "For": "what is kept, and for how long"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a1312d-2629-72e5-9208-31b5c5db8047",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "requirement",
+        "Owner": "",
+        "For": "what is kept and what never is"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "product",
+        "Owner": "",
+        "For": "what it is, and who uses it"
+      }
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a1312b-a50c-7b0c-b291-c4d4056ddb87",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "use-case",
+        "Owner": "",
+        "For": "what an owner gets done"
+      }
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a1312b-c453-7585-bcc7-1f4e34aa2446",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "use-case",
+        "Owner": "",
+        "For": "what a writer gets done"
+      }
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a1312c-4d5f-7923-b896-700a5ce8d15f",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "use-case",
+        "Owner": "",
+        "For": "what a visitor gets done in the chat"
+      }
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a1312c-5cfc-7c71-bd35-b7da880c4254",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "use-case",
+        "Owner": "",
+        "For": "what a visitor gets done through an agent"
+      }
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a0de43-dea8-733f-9f08-4341ec2e8ae9",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9abf-7d8f-9f74-9825616d3c76",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9b02-766b-80bf-556b38ac03df",
+      "to": "01a0c2a7-ffa8-7e6f-a9a4-1e4a30240f37",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what a pack is"
+      }
+    },
+    {
+      "from": "01a13351-9b02-766b-80bf-556b38ac03df",
+      "to": "01a1256e-29ae-7c5e-8e99-e6f70d2beda3",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what the software pack adds"
+      }
+    },
+    {
+      "from": "01a13351-9b02-766b-80bf-556b38ac03df",
+      "to": "01a1312b-f25e-7c08-8a9b-e82807ad3ba8",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "use-case",
+        "Owner": "",
+        "For": "how a company takes one"
+      }
+    },
+    {
+      "from": "01a13351-9b02-766b-80bf-556b38ac03df",
+      "to": "01a0de43-dea8-733f-9f08-4341ec2e8ae9",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9b02-766b-80bf-556b38ac03df",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "seat",
+        "Owner": "",
+        "For": "who has the last word"
+      }
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "to": "01a0ea1b-f968-78eb-b38f-5f1290cc8e02",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "profile",
+        "Owner": "",
+        "For": "where the maintainer is found"
+      }
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "to": "01a1076a-7d4a-7ed2-a72a-e0e73ebdeda4",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "seat",
+        "Owner": "",
+        "For": "who shares the say"
+      }
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "to": "01a1076d-db09-7ca5-b107-6571176ea946",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "profile",
+        "Owner": "",
+        "For": "where the co-maintainer is found"
+      }
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "to": "01a1223d-0d61-7504-8395-1e072b3ede83",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "group",
+        "Owner": "",
+        "For": "who keeps it, and in which job"
+      }
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
+      "to": "01a0de43-dea8-72b8-8be4-da7cabf79fe4",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
