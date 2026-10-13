@@ -4,16 +4,20 @@
     "de": "Bleibt ein Link von aussen auf eine Entität gültig, wenn sie umbenannt wird?"
   },
   {
+    "en": "Can an agent change our model through the MCP server?",
+    "de": "Kann ein KI-Agent unser Modell über den MCP-Server ändern?"
+  },
+  {
     "en": "Can I trust what this chat says?",
     "de": "Kann ich mich auf das verlassen, was dieser Chat sagt?"
   },
   {
-    "en": "Can I use CompanyGraph's colors and fonts for my own site?",
-    "de": "Darf ich die Farben und Schriften von CompanyGraph für meine eigene Website verwenden?"
-  },
-  {
     "en": "Can our AI agents use it?",
     "de": "Können unsere KI-Agenten CompanyGraph nutzen?"
+  },
+  {
+    "en": "Can we keep our model in several languages?",
+    "de": "Können wir unser Modell in mehreren Sprachen führen?"
   },
   {
     "en": "Can we load our model into a graph database like Neo4j?",
@@ -26,6 +30,10 @@
   {
     "en": "Do our people have to write these files by hand?",
     "de": "Müssen unsere Leute die Dateien des Modells von Hand schreiben?"
+  },
+  {
+    "en": "Does CompanyGraph help us with the EU AI Act?",
+    "de": "Hilft uns CompanyGraph beim EU AI Act?"
   },
   {
     "en": "Does it only work with Claude, or can we use ChatGPT or Gemini?",
@@ -64,16 +72,24 @@
     "de": "Steckt hinter CompanyGraph ein Geschäft, oder ist es ein Nebenprojekt?"
   },
   {
+    "en": "Is there a pack for software companies?",
+    "de": "Gibt es ein Pack für Softwarefirmen?"
+  },
+  {
+    "en": "Is there an editor, or do we work in plain files?",
+    "de": "Gibt es einen Editor, oder arbeiten wir direkt in den Dateien?"
+  },
+  {
+    "en": "Is what I type here stored?",
+    "de": "Wird gespeichert, was ich hier eingebe?"
+  },
+  {
     "en": "Isn't this just a wiki, or Notion with rules?",
     "de": "Ist das nicht einfach ein Wiki oder Notion mit Regeln?"
   },
   {
     "en": "What can an agent do with our model besides answering questions?",
     "de": "Was kann ein KI-Agent mit unserem Modell tun, ausser Fragen zu beantworten?"
-  },
-  {
-    "en": "What do the colors on companygraph.io mean?",
-    "de": "Was bedeuten die Farben auf companygraph.io?"
   },
   {
     "en": "What does a company's model actually look like?",
@@ -88,12 +104,20 @@
     "de": "Welches Problem löst CompanyGraph?"
   },
   {
+    "en": "What would we use CompanyGraph for?",
+    "de": "Wofür würden wir CompanyGraph einsetzen?"
+  },
+  {
     "en": "Where do our targets and actual numbers go?",
     "de": "Wohin gehören unsere Soll- und Istwerte?"
   },
   {
     "en": "Who answers this chat?",
     "de": "Wer antwortet in diesem Chat?"
+  },
+  {
+    "en": "Who is behind CompanyGraph?",
+    "de": "Wer steht hinter CompanyGraph?"
   },
   {
     "en": "Who keeps the model true when the company changes?",
