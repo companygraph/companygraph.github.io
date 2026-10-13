@@ -364,6 +364,20 @@ const PAGES = [
     // The title slide's subtitle, present in exactly one language each.
     translates: { lang: "de", shows: ["in beide Richtungen auf ArchiMate abgebildet"], hides: ["mapped to ArchiMate in both directions"], id: "langDe", backId: "langEn" },
     card: true, cardBase: SITE, internalLinks: true },
+  { path: "/talks/requirements-pack/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, title: /What someone wants, and what a product is held to/, lang: "en", sourceLang: "en", wayOut: "../",
+    landing: "../../",
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    // The README's ten sources, each linked from slide 1, and the owner's site.
+    links: ["https://blust.ch/", "https://alistaircockburn.com/Use%20Case%20Foundation.pdf", "https://www.cs.otago.ac.nz/coursework/cosc461/uctempla.htm", "https://cs.otago.ac.nz/coursework/cosc461/usecases.htm", "https://www.omg.org/spec/UML/2.5.1/PDF", "https://www.ivarjacobson.com/publications/white-papers/use-case-20-e-book", "https://www.iso.org/standard/72089.html", "https://cockpit-v1.ireb.org/media/pages/downloads/cpre-glossary/510f672cfd-1760005471/ireb_cpre_glossary_en_2.2.pdf", "https://www.volere.org/wp-content/uploads/2018/12/snowcard.pdf", "https://www.rfc-editor.org/rfc/rfc2119", "https://github.com/github/spec-kit/blob/main/templates/spec-template.md"],
+    slides: 14,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
+    fences: [],
+    lockupCollapses: true,
+    // The title slide's subtitle, present in exactly one language each.
+    translates: { lang: "de", shows: ["gezeichnet vom MCP-Server"], hides: ["drawn by the MCP server"], id: "langDe", backId: "langEn" },
+    card: true, cardBase: SITE, internalLinks: true },
 ];
 
 const CHECKS = {

@@ -1,0 +1,27 @@
+{
+  "shape": "usecase",
+  "title": "Read the model from an agent",
+  "mermaid": "flowchart LR\n  n0[\"fak:fa-actor <b>Visitor</b>\"]\n  subgraph scope [\"system\"]\n    n1([\"<b>Read the model from an agent</b><br/><small>«user goal»</small>\"]):::middle\n    n2([\"Walk a long list a page at a time<br/><small>«subfunction»</small>\"])\n    n1 -.->|\"includes\"| n2\n  end\n  n0 --> n1\n  n3[\"An agent reads the model<br/><small>«feature»</small>\"]\n  n1 -->|\"features\"| n3\n  classDef middle stroke-width:2px",
+  "nodes": [
+    {
+      "node": "n0",
+      "id": "01a0ccd4-cfb0-7641-9793-c30711c38403",
+      "title": "Visitor"
+    },
+    {
+      "node": "n1",
+      "id": "01a1312c-5cfc-7c71-bd35-b7da880c4254",
+      "title": "Read the model from an agent"
+    },
+    {
+      "node": "n2",
+      "id": "01a1312c-7bf1-7220-aac8-2909c906829e",
+      "title": "Walk a long list a page at a time"
+    },
+    {
+      "node": "n3",
+      "id": "01a0c29a-9610-7599-88be-da45e0941d77",
+      "title": "An agent reads the model"
+    }
+  ]
+}

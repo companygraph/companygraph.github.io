@@ -33,6 +33,11 @@ export const TALK_PICTURES = [
   // service it provides and what it holds; and what it holds among every system that holds the same.
   { page: "talks/landscape-pack/index.html", name: "system", from: "company", model: "../../", browser: true, request: { shape: "system", id: "01a1256e-8662-7925-9097-a884e87a2658" } },
   { page: "talks/landscape-pack/index.html", name: "holds", from: "company", model: "../../", browser: true, request: { shape: "holds", id: "01a1256e-8662-7925-9097-a884e87a2658" } },
+  // One use case of our own model in its scope with its actor, the subfunction it includes and its
+  // feature, then as its scenario, and what that feature is held to.
+  { page: "talks/requirements-pack/index.html", name: "usecase", from: "company", model: "../../", browser: true, request: { shape: "usecase", id: "01a1312c-5cfc-7c71-bd35-b7da880c4254" } },
+  { page: "talks/requirements-pack/index.html", name: "scenario", from: "company", model: "../../", browser: true, request: { shape: "scenario", id: "01a1312c-5cfc-7c71-bd35-b7da880c4254" } },
+  { page: "talks/requirements-pack/index.html", name: "requirements", from: "company", model: "../../", browser: true, request: { shape: "requirements", id: "01a0c29a-9610-7599-88be-da45e0941d77" } },
 ];
 
 // What a picture is written as: the shape chat.js captions it by, and the server's answer

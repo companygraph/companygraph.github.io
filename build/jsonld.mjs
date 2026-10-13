@@ -76,6 +76,7 @@ export const PAGES = [
   { file: "talks/software-pack/index.html", head: PAGE_HEAD },
   { file: "talks/organization-pack/index.html", head: PAGE_HEAD },
   { file: "talks/landscape-pack/index.html", head: PAGE_HEAD },
+  { file: "talks/requirements-pack/index.html", head: PAGE_HEAD },
 ];
 
 export function terms(model, repo) {
