@@ -1,5 +1,5 @@
 {
-  "commit": "8da4aac3a416b42aae49fdd5669d3628e4a35f81",
+  "commit": "6085820b6824086f97010ee6f19a3e9763b1d430",
   "core": "0.69.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -32115,8 +32115,9 @@
       "fields": {
         "id": "01a107ef-d0af-7bfc-b402-b3bdf7d3af7e",
         "source": "Local",
-        "mechanism": "session-storage",
+        "mechanism": "local-storage",
         "necessity": "optional",
+        "duration": "Until the visitor clears it",
         "surfaces": [
           "chat.companygraph.io chat"
         ]
