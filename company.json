@@ -1,5 +1,5 @@
 {
-  "commit": "6085820b6824086f97010ee6f19a3e9763b1d430",
+  "commit": "2c4f7b0b1b19df27019e5055445f57d926ec553e",
   "core": "0.69.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -12583,6 +12583,872 @@
       "path": "model/concepts/type.md"
     },
     {
+      "id": "01a13c59-d659-7288-bfea-c0f3869a7db4",
+      "address": "controls/a-chat-answer-s-claims-are-read-back-against-the-model",
+      "type": "control",
+      "name": "A chat answer's claims are read back against the model",
+      "tagline": "Each claim of an answer the chat gives on companygraph.io is read back against the tool answers it rests on, and the chat marks one they do not carry before the visitor takes it for what the model says.",
+      "fields": {
+        "id": "01a13c59-d659-7288-bfea-c0f3869a7db4",
+        "source": "Local",
+        "kind": "detective",
+        "mode": "automated",
+        "enforces": [
+          "Nothing claims what the model does not hold"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The chat server behind companygraph.io, on every answer once it is written: it sends each claim, with the tool answers the chat's model was given, to TypeSafe's Jev, which returns a verdict and its probability and writes no text, and the widget marks a claim whose verdict is that the evidence does not carry it, above the threshold this deployment's configuration sets. Only an answer written in English is marked; a German one is checked and its verdicts kept until German has a threshold of its own. The check changes no word of the answer, and a check that cannot run, or does not finish within its budget, marks nothing. It holds the chat's answers and nothing else: a specification or a page someone writes is held to the rule by whoever writes it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Answer",
+                  "Answering"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Answer",
+                "Answering"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The claim check",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+                ],
+                [
+                  "This deployment's configuration",
+                  "https://github.com/companygraph/mcp-companygraph-io/blob/main/chat/chat.json"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The claim check",
+                "https://github.com/companygraph/chat-server/blob/main/lib/verdict.mjs"
+              ],
+              [
+                "This deployment's configuration",
+                "https://github.com/companygraph/mcp-companygraph-io/blob/main/chat/chat.json"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-chat-answer-s-claims-are-read-back-against-the-model.md"
+    },
+    {
+      "id": "01a13b64-5acc-7b29-a65e-6b7fa3148c60",
+      "address": "controls/a-deployed-server-is-asked-which-commit-it-serves",
+      "type": "control",
+      "name": "A deployed server is asked which commit it serves",
+      "tagline": "After every deploy of mcp.companygraph.io the run asks the live server which commit of the model it answers at, and fails unless it is the commit the repository pins.",
+      "fields": {
+        "id": "01a13b64-5acc-7b29-a65e-6b7fa3148c60",
+        "source": "Local",
+        "kind": "detective",
+        "mode": "automated",
+        "enforces": [
+          "A state is read again before it is relied on"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The deploy job that mcp.companygraph.io's workflow calls from the MCP server, on every push to main, once Terraform has applied: it calls the live server's own `list_types` tool, reads the commit every answer names under `model`, and fails unless it is the commit `source.json` pins. A deploy that applied cleanly but left an earlier revision serving, or one built from another commit, then turns the run red instead of reading as done.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The deploy job and its check",
+                  "https://github.com/companygraph/mcp-server/blob/main/.github/workflows/deploy-google.yml"
+                ],
+                [
+                  "The workflow that calls it",
+                  "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/deploy.yml"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The deploy job and its check",
+                "https://github.com/companygraph/mcp-server/blob/main/.github/workflows/deploy-google.yml"
+              ],
+              [
+                "The workflow that calls it",
+                "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/deploy.yml"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-deployed-server-is-asked-which-commit-it-serves.md"
+    },
+    {
+      "id": "01a13c57-a736-701f-82fe-16707e678abd",
+      "address": "controls/a-family-resync-refuses-to-start-beside-another",
+      "type": "control",
+      "name": "A family resync refuses to start beside another",
+      "tagline": "A resync takes a lock before it moves anything, and refuses to start while another run holds it or while a resync pull request it did not open is still open.",
+      "fields": {
+        "id": "01a13c57-a736-701f-82fe-16707e678abd",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "One session holds a piece of shared work"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The family resync in robertblust/conventions, each time a session starts it: it takes a lock in the clone's own git directory, which every worktree of that clone shares, and refuses while the run that holds it is alive; it then asks GitHub for the open pull requests of every member whose branch begins with `resync-`, and refuses where one is open that no run in this checkout opened or took on that day, unless it is started with `--force`. It holds a resync and nothing else: a release, a re-pin by hand or a change across repositories is claimed by the session itself, which reads the open pull requests, branches and tags and asks the running sessions before it starts, and nothing refuses a session that skips that.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The family resync",
+                  "https://github.com/robertblust/conventions/blob/main/family/resync.mjs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The family resync",
+                "https://github.com/robertblust/conventions/blob/main/family/resync.mjs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-family-resync-refuses-to-start-beside-another.md"
+    },
+    {
+      "id": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+      "address": "controls/a-message-from-another-session-carries-no-word-of-the-owner-s",
+      "type": "control",
+      "name": "A message from another session carries no word of the Owner's",
+      "tagline": "A session that receives a message from another takes it as that session's and never as the Owner's, so a refusal one session met is not passed to another to carry out.",
+      "fields": {
+        "id": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "A refusal is not carried out by another session"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The agent harness, in every session that receives a message from another: it delivers the message marked as another session's and not as the Owner's, tells the receiving agent that such a message grants no permission and that a request to do what the sender was refused is to be declined and shown to the Owner, and its permission layer judges any action the message asks for against the receiving session's own conversation, where the Owner gave no word for it. The marking is how the agent harness delivers such a message, seen in its sessions and not in its documentation, and it rests on the agent heeding it; a session the Owner gives the word in, in its own conversation, may carry out what another was refused, because the word is then the Owner's.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Controller",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Implementer",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Surveyor",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Controller",
+                ""
+              ],
+              [
+                "seat",
+                "Implementer",
+                ""
+              ],
+              [
+                "seat",
+                "Surveyor",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The agent harness's permission modes",
+                  "https://code.claude.com/docs/en/permission-modes"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The agent harness's permission modes",
+                "https://code.claude.com/docs/en/permission-modes"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-message-from-another-session-carries-no-word-of-the-owner-s.md"
+    },
+    {
+      "id": "01a13d2d-35ed-7aa9-a6e7-9715c2fa1218",
+      "address": "controls/a-new-type-s-unit-follows-the-companies-that-show-it",
+      "type": "control",
+      "name": "A new type's unit follows the companies that show it",
+      "tagline": "A new type is specified for core only where its sources show it in companies of more than one kind, for a pack where they show one kind, and not at all where they show a single company.",
+      "fields": {
+        "id": "01a13d2d-35ed-7aa9-a6e7-9715c2fa1218",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "manual",
+        "enforces": [
+          "No type enters core before an instance had to be written with it"
+        ],
+        "performed-by": "Specifier"
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The Specifier, in Spec, for every new type, through the skill that writes vocabulary specifications: the research behind the type counts the companies its sources show it in, and the unit is decided from that count, core only where companies of more than one kind have the type, a pack where one kind has it, and a wait for the second company where only one has it; the specification states the count and the sources it rests on, so the Owner reads the evidence before giving the word. Nothing refuses a specification without a count, so the control holds as long as a new type is specified through the skill.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Spec",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Spec",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The skill for new vocabulary",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-30-a-skill-for-new-vocabulary-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The skill for new vocabulary",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-30-a-skill-for-new-vocabulary-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-new-type-s-unit-follows-the-companies-that-show-it.md"
+    },
+    {
+      "id": "01a13dd1-b506-7f46-8068-743a54710f49",
+      "address": "controls/a-person-enters-a-model-only-through-their-consent-record",
+      "type": "control",
+      "name": "A person enters a model only through their consent record",
+      "tagline": "Nothing about a person is written into a model until the Owner has stated that person's consent, and the consent is recorded on the source every fact about them names.",
+      "fields": {
+        "id": "01a13dd1-b506-7f46-8068-743a54710f49",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "manual",
+        "enforces": [
+          "Personal data stays out of every model"
+        ],
+        "performed-by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The Owner, through the consent procedure that the profile and company procedures run as a step, before anything drawn from a source about a person is written: the procedure proposes that a person drawn from any source needs their own consent, takes only a consent the Owner states, who gave it, in what capacity, when and how, and writes it as one sentence on the source; a consent the Owner cannot state is not given, and nothing that rested on it is written. The Owner describing themselves needs none. It holds the procedures and nothing else: a page written by hand about a person passes through no consent step, and a consent withdrawn later takes the person out of the current state while every earlier state still holds them.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The consent procedure",
+                  "https://github.com/companygraph/meta-model/blob/main/agents/claude/skills/companygraph-consent/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The consent procedure",
+                "https://github.com/companygraph/meta-model/blob/main/agents/claude/skills/companygraph-consent/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-person-enters-a-model-only-through-their-consent-record.md"
+    },
+    {
+      "id": "01a13b60-837c-72ae-8285-e9410ccc7309",
+      "address": "controls/a-registry-entry-waits-for-a-release-tag-and-the-owner",
+      "type": "control",
+      "name": "A registry entry waits for a release tag and the Owner",
+      "tagline": "A server's entry in the MCP registry is published only from a release tag and only once the Owner has approved that run, because the key that signs it is held where no other run can reach it.",
+      "fields": {
+        "id": "01a13b60-837c-72ae-8285-e9410ccc7309",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "The Owner's word merges"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "GitHub's `registry` environment on mcp.companygraph.io's repository, on every run of the publish workflow: it lets a job in only from a tag matching `v*`, and holds that job until the Owner approves it. The key that signs the entry is a secret of the environment and of no other, so a run from a branch, or one nobody approved, never holds it and cannot publish. A repository admin may bypass the review, which is the Owner's account, so an agent working under it is held by An agent's permissions refuse a merge it was not given.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub's deployment environments",
+                  "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments"
+                ],
+                [
+                  "The publish workflow",
+                  "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/publish.yml"
+                ],
+                [
+                  "The registry job it calls",
+                  "https://github.com/companygraph/mcp-server/blob/main/.github/workflows/registry.yml"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub's deployment environments",
+                "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments"
+              ],
+              [
+                "The publish workflow",
+                "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/publish.yml"
+              ],
+              [
+                "The registry job it calls",
+                "https://github.com/companygraph/mcp-server/blob/main/.github/workflows/registry.yml"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-registry-entry-waits-for-a-release-tag-and-the-owner.md"
+    },
+    {
+      "id": "01a13b55-e0e9-728c-9668-c07ae3c505f4",
+      "address": "controls/a-release-tag-stays-where-the-owner-put-it",
+      "type": "control",
+      "name": "A release tag stays where the Owner put it",
+      "tagline": "Each of our repositories refuses a tag beginning with `v` that any account but the Owner's creates, moves or deletes, so a release exists only where the Owner tagged it and stays on the commit it was made on.",
+      "fields": {
+        "id": "01a13b55-e0e9-728c-9668-c07ae3c505f4",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "The Owner's word merges"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "GitHub's ruleset `protect-release-tags` on each repository, on every push of a tag matching `v*`: it refuses its creation, its update and its deletion, and lets only the repository's admin role past, which is the Owner's account. A release is its tag and a consumer takes it by naming the tag, so a tag moved after it was taken would change what every consumer already holds; a release tagged wrongly is followed by a patch release and never moved. An agent working under the Owner's account passes it, so what holds an agent's tag to the Owner's word is An agent's permissions refuse a merge it was not given.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Contribution"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Contribution"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub's rulesets for branches and tags",
+                  "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets#branch-and-tag-rulesets"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub's rulesets for branches and tags",
+                "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets#branch-and-tag-rulesets"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-release-tag-stays-where-the-owner-put-it.md"
+    },
+    {
+      "id": "01a13c5e-3775-7125-84d5-c4be1eedaf2c",
+      "address": "controls/a-request-is-asked-for-its-gap-and-never-its-company",
+      "type": "control",
+      "name": "A request is asked for its gap and never its company",
+      "tagline": "Whoever reads a request asks only for the entity, the field or the rule that was missing, never which company it comes from, and a name the asker offers stays out of everything made from it.",
+      "fields": {
+        "id": "01a13c5e-3775-7125-84d5-c4be1eedaf2c",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "manual",
+        "enforces": [
+          "Nobody is asked which company a request comes from"
+        ],
+        "performed-by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The Owner, in Understand, on every feature request: it reads the request as written, asks only for the gap where the request leaves it out, and restates it in the issue without the name of any company the asker offered. Where the request becomes vocabulary, the skill that writes the specification records the names the operator says to keep out, and before the specification is committed searches its diff and its commit message for each of them, after first showing that the same search finds the name in its own report, and refuses to commit until it finds none.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Understand",
+                  "Feature request"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Understand",
+                "Feature request"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The skill for new vocabulary",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-30-a-skill-for-new-vocabulary-design.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The skill for new vocabulary",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-30-a-skill-for-new-vocabulary-design.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-request-is-asked-for-its-gap-and-never-its-company.md"
+    },
+    {
       "id": "01a0ffcb-6b74-753b-a68b-d08e35f7ae7a",
       "address": "controls/a-reviewer-reads-the-output-not-the-report",
       "type": "control",
@@ -12695,6 +13561,119 @@
       ],
       "owner": null,
       "path": "model/controls/a-reviewer-reads-the-output-not-the-report.md"
+    },
+    {
+      "id": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+      "address": "controls/a-secret-is-refused-at-the-push",
+      "type": "control",
+      "name": "A secret is refused at the push",
+      "tagline": "GitHub refuses a push to any of our repositories that carries a secret it recognizes, before the secret is published, and scans what is already there for any that got in.",
+      "fields": {
+        "id": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "A secret is never written into a repository"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "GitHub's secret scanning with push protection, turned on in each of our repositories and for every repository the organization creates: on every push it looks for the shapes of keys and tokens its providers register, refuses the push that carries one and names the file and line, and it keeps scanning the history for any that reached a repository before. Whoever pushes may push past a refusal by giving a reason, that the secret is used in tests, is a false positive or will be fixed later, and GitHub then records an alert, writes the bypass to the audit log and emails the owners. It knows only those shapes, so a password someone made up, or a key in a form no provider registered, passes it; for those the rule rests on whoever writes the change.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Implement",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Contribution"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Implement",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Contribution"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub's push protection",
+                  "https://docs.github.com/en/code-security/concepts/secret-security/push-protection"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub's push protection",
+                "https://docs.github.com/en/code-security/concepts/secret-security/push-protection"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-secret-is-refused-at-the-push.md"
     },
     {
       "id": "01a0ffcb-7af4-7c2c-b9d1-fdec394fdca6",
@@ -12832,6 +13811,109 @@
       "path": "model/controls/a-vendored-copy-is-held-to-the-release-it-names.md"
     },
     {
+      "id": "01a13b7f-fa1b-74f3-8ee2-8a56f2fe59b7",
+      "address": "controls/an-agent-s-hook-refuses-removing-a-worktree-that-holds-a-plan",
+      "type": "control",
+      "name": "An agent's hook refuses removing a worktree that holds a plan",
+      "tagline": "Before an agent on the Owner's machine runs a shell command, a hook refuses it where it would remove a worktree that still holds a plan's ledger.",
+      "fields": {
+        "id": "01a13b7f-fa1b-74f3-8ee2-8a56f2fe59b7",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "A worktree is removed only once its plan is done"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "A hook the agent harness runs on the Owner's machine before every shell command an agent issues: it reads each `git worktree remove` in the command, resolves the worktree's path through any `cd` or `-C` before it, and refuses the command where that worktree holds a plan's ledger under `.superpowers/sdd/`, saying why, so the agent stops before anything is deleted. It holds an agent and not the Owner's own terminal, and a worktree deleted some other way, such as by `rm -rf`, passes it; the hook lives in the Owner's own settings and in no repository.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Implement",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Implement",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The agent harness's hooks",
+                  "https://code.claude.com/docs/en/hooks"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The agent harness's hooks",
+                "https://code.claude.com/docs/en/hooks"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/an-agent-s-hook-refuses-removing-a-worktree-that-holds-a-plan.md"
+    },
+    {
       "id": "01a0ffcb-8a4c-7a08-b84a-358d83c1e9a8",
       "address": "controls/an-agent-s-permissions-refuse-a-merge-it-was-not-given",
       "type": "control",
@@ -12849,7 +13931,7 @@
       "sections": [
         {
           "heading": "How it is carried out",
-          "text": "Claude Code's permission layer, before the agent's command runs: it judges the action against the conversation, and a merge without a review it can see is refused, so the agent stops and the merge waits for the Owner. On October 2, 2026 it refused the merge of meta-model #223, which the Owner then gave in another session.",
+          "text": "The agent harness's permission layer, before the agent's command runs: it judges the action against the conversation, and a merge without a review it can see is refused, so the agent stops and the merge waits for the Owner. On October 2, 2026 it refused the merge of meta-model #223, which the Owner then gave in another session.",
           "tables": []
         },
         {
@@ -12930,7 +14012,7 @@
               ],
               "rows": [
                 [
-                  "Claude Code permission modes",
+                  "The agent harness's permission modes",
                   "https://code.claude.com/docs/en/permission-modes"
                 ]
               ]
@@ -12944,7 +14026,7 @@
             ],
             "rows": [
               [
-                "Claude Code permission modes",
+                "The agent harness's permission modes",
                 "https://code.claude.com/docs/en/permission-modes"
               ]
             ]
@@ -12953,6 +14035,117 @@
       ],
       "owner": null,
       "path": "model/controls/an-agent-s-permissions-refuse-a-merge-it-was-not-given.md"
+    },
+    {
+      "id": "01a13b79-d51c-7efd-8b19-5597bc976422",
+      "address": "controls/an-id-a-decision-and-a-label-are-held-as-they-were",
+      "type": "control",
+      "name": "An id, a decision and a label are held as they were",
+      "tagline": "A pull request to the model fails where it changes an id already on the default branch, rewrites a decision beyond closing it, or moves, swaps or reuses a label.",
+      "fields": {
+        "id": "01a13b79-d51c-7efd-8b19-5597bc976422",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "What is cited from outside the model is not rewritten"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The instance check, required on the default branch, on every pull request: its step `companygraph ids --range` compares each page of the branch with its base after both are put in the one form, and refuses a changed id, a decision whose text changed beyond its status and one dated closing sentence, and a label of a scenario, a step or an invariant that moved to another item, swapped with one or came back after it was removed. A reference name may follow the rename of what it names, and a URL under `## References` may change on its own. Where a release of core changed the schema that governs a type, the decision and label checks stand aside for that type and say so in a note.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Contribution"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Contribution"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The instance check",
+                  "https://github.com/companygraph/meta-model/blob/main/.github/workflows/instance-check.yml"
+                ],
+                [
+                  "The change checks",
+                  "https://github.com/companygraph/meta-model/blob/main/lib/checks.mjs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The instance check",
+                "https://github.com/companygraph/meta-model/blob/main/.github/workflows/instance-check.yml"
+              ],
+              [
+                "The change checks",
+                "https://github.com/companygraph/meta-model/blob/main/lib/checks.mjs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/an-id-a-decision-and-a-label-are-held-as-they-were.md"
     },
     {
       "id": "01a0ffcb-9983-7c5d-811a-2e7f65a2a144",
@@ -13169,6 +14362,109 @@
       "path": "model/controls/main-takes-a-change-only-through-a-green-current-pull-request.md"
     },
     {
+      "id": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+      "address": "controls/only-the-owner-s-account-changes-main",
+      "type": "control",
+      "name": "Only the Owner's account changes main",
+      "tagline": "The default branch of each of our repositories takes a push or a merge from the Owner's account alone, so anyone else with write access can open a branch and a pull request but cannot merge it.",
+      "fields": {
+        "id": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "The Owner's word merges"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "GitHub's branch protection on each repository's default branch, on every push and every merge into it: it restricts who may push to the Owner's account, so a member of the organization, who holds write access through its base permission, can push a branch and open a pull request and is refused the merge. The protection holds nothing else; the pull request and the checks are what Main takes a change only through a green, current pull request holds. It is set as branch protection and not as a rule of the ruleset, because a ruleset lets only its bypass actors past such a rule, which would turn every merge the Owner makes into a bypass that Merges Past Their Checks counts. An agent working under the Owner's account passes it, so what holds an agent to the Owner's word is An agent's permissions refuse a merge it was not given.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Contribution"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Contribution"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub's restriction of who can push",
+                  "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#restrict-who-can-push-to-matching-branches"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub's restriction of who can push",
+                "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#restrict-who-can-push-to-matching-branches"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/only-the-owner-s-account-changes-main.md"
+    },
+    {
       "id": "01a0ffcb-b7cd-74a9-979b-fdc59b77c87c",
       "address": "controls/pages-drawn-from-the-model-are-held-to-it",
       "type": "control",
@@ -13364,6 +14660,110 @@
       ],
       "owner": null,
       "path": "model/controls/the-chat-says-who-answers-before-the-first-message.md"
+    },
+    {
+      "id": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+      "address": "controls/the-implementer-reads-the-merge-before-deleting-the-branch",
+      "type": "control",
+      "name": "The Implementer reads the merge before deleting the branch",
+      "tagline": "A branch is deleted only after the Implementer has read its pull request as merged, in a step of its own.",
+      "fields": {
+        "id": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "manual",
+        "enforces": [
+          "A branch is deleted only after its merge is confirmed"
+        ],
+        "performed-by": "Implementer"
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The Implementer, at the end of Integrate, once a pull request it carried has been merged: it reads the pull request's state and its merge commit from GitHub in a command of its own, and only when the state reads merged removes the worktree, the local branch and the remote branch, each by name and each as a step of its own, never chained after the merge. A branch whose merge it cannot read stays. GitHub's own deletion of a merged branch is turned off in each of our repositories, so a branch goes only when this step takes it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Contribution"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Contribution"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/the-implementer-reads-the-merge-before-deleting-the-branch.md"
     },
     {
       "id": "01a12590-2b1d-758d-a75f-605949596608",
@@ -14567,6 +15967,131 @@
       ],
       "owner": null,
       "path": "model/decisions/2026-commits-by-seat.md"
+    },
+    {
+      "id": "01a13dd7-fc77-7058-aa34-086986674292",
+      "address": "decisions/2026-git-holds-the-model",
+      "type": "decision",
+      "name": "A model is kept in git, and a store for reads stands in front of it",
+      "tagline": "We support one setup for keeping a company's model: its Markdown in git, on GitHub where the company keeps it there, as the record every check, pin and answer names, with a store for reads in front of it where a surface needs one, as the MCP server's snapshot is. Any other setup is supported once it shows it meets the requirements governance rests on.",
+      "fields": {
+        "id": "01a13dd7-fc77-7058-aa34-086986674292",
+        "source": "Local",
+        "decided": "2026-10-15",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Run on what we publish"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether CompanyGraph supports keeping a company's model in a database. It had to be decided on October 15, 2026, when the governance research found that the checker only reads files and that what makes its verdict binding, a state with a name, a change applied whole, an author kept, a gate and the accounts that may pass it, comes from git and GitHub, so a company asking to keep its model elsewhere would be asking for every one of those.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "A database as the model's record",
+                  "Every requirement git meets today, named states, change sets over a graph, differences entity by entity, would become the tooling's to build before the first check could govern anything."
+                ],
+                [
+                  "Any store, with no setup named",
+                  "A company could run the checks on a store that has no gate, and neither it nor we could tell whether its model is governed."
+                ],
+                [
+                  "Leave it unsaid",
+                  "The model would rest on git and GitHub without saying so, and a company asking would get no answer it can hold us to."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "A database as the model's record",
+                "Every requirement git meets today, named states, change sets over a graph, differences entity by entity, would become the tooling's to build before the first check could govern anything."
+              ],
+              [
+                "Any store, with no setup named",
+                "A company could run the checks on a store that has no gate, and neither it nor we could tell whether its model is governed."
+              ],
+              [
+                "Leave it unsaid",
+                "The model would rest on git and GitHub without saying so, and a company asking would get no answer it can hold us to."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "It is the setup we run: our three models are Markdown in git, every check of the family rests on it, and the MCP server already puts a store for reads in front of it in its snapshot, so naming it supported promises nothing we have not had to do. The requirements governance rests on are now pages of CompanyGraph Core, so the bar another setup has to clear is written down rather than implied.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "A company keeps its model in git and gets the governance the family has, and a surface that needs fast reads loads a state into a store of its own, which serves reads and is never written to. We give up a native database setup until one meets the requirements. A model kept in git on another host is supported once that host shows it meets the requirements on who may change a model and on counting every pass of the gate. Because git cannot take content out of its history, personal data stays out of every model by rule, and that rule has to hold for this call to stay right; so do the requirements, which have to keep naming what git and GitHub meet for us.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-git-holds-the-model.md"
     },
     {
       "id": "01a107e5-e4d1-7a82-95e4-97815a4bdc15",
@@ -26834,6 +28359,492 @@
       "path": "model/requirements/a-broken-reference-is-marked-when-the-line-is-left.md"
     },
     {
+      "id": "01a13dc2-94f1-7bd6-ab2d-41d4fb568509",
+      "address": "requirements/a-change-is-applied-only-once-its-checks-have-passed",
+      "type": "requirement",
+      "name": "A change is applied only once its checks have passed",
+      "tagline": "A change is applied to the model only once every check the model requires has passed on it.",
+      "fields": {
+        "id": "01a13dc2-94f1-7bd6-ab2d-41d4fb568509",
+        "source": "Governance research",
+        "source-id": "GD-12",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A check that can be skipped is advice; an instance's checks govern only where a change that fails them cannot land.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A change whose required check failed, or never ran, cannot be applied. Today the ruleset's required status checks meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-is-applied-only-once-its-checks-have-passed.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7e26-8f77-d0a1671dba58",
+      "address": "requirements/a-change-is-applied-only-to-the-state-it-was-checked-on",
+      "type": "requirement",
+      "name": "A change is applied only to the state it was checked on",
+      "tagline": "A change is applied only on top of the state its checks ran on, so a change whose base has moved is checked again on the current state first.",
+      "fields": {
+        "id": "01a13dc2-94f1-7e26-8f77-d0a1671dba58",
+        "source": "Governance research",
+        "source-id": "GD-08",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "A state is read again before it is relied on"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Two changes that each pass alone can break the model together, and checks run on an older state say nothing about the state a change lands on.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A change whose base has moved cannot be applied until its checks have passed on the current state. Today the required checks in strict mode, with main merged into the branch, meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-is-applied-only-to-the-state-it-was-checked-on.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7ef6-b0a1-702d8ac34b7e",
+      "address": "requirements/a-change-is-applied-whole-or-not-at-all",
+      "type": "requirement",
+      "name": "A change is applied whole or not at all",
+      "tagline": "A change is applied to the model whole, as one new state, or not at all.",
+      "fields": {
+        "id": "01a13dc2-94f1-7ef6-b0a1-702d8ac34b7e",
+        "source": "Governance research",
+        "source-id": "GD-07",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The checks hold the whole model, so a change applied in part leaves a state no check ever saw.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A change that fails while it is applied leaves the current state as it was. Today a merge commit meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-is-applied-whole-or-not-at-all.md"
+    },
+    {
+      "id": "01a13dc2-94f1-772c-95c9-1ed962c28c65",
+      "address": "requirements/a-change-is-prepared-apart-from-the-model",
+      "type": "requirement",
+      "name": "A change is prepared apart from the model",
+      "tagline": "A change to any number of entities is prepared apart from the model's current state, unseen by its readers until it is applied.",
+      "fields": {
+        "id": "01a13dc2-94f1-772c-95c9-1ed962c28c65",
+        "source": "Governance research",
+        "source-id": "GD-06",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "People and agents change the model at the same time, and a reader of the model, a server or a site must never see half a change.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "Two changes edit the same entity and neither sees the other's edit before it is applied, and a reader of the current state sees neither. Today a branch, checked out in a worktree beside the clone, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-is-prepared-apart-from-the-model.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7e08-830f-158210d64e95",
+      "address": "requirements/a-change-is-shown-entity-by-entity",
+      "type": "requirement",
+      "name": "A change is shown entity by entity",
+      "tagline": "The difference between two states of a model is given per entity, per field and per section, with an entity paired across a rename by its id.",
+      "fields": {
+        "id": "01a13dc2-94f1-7e08-830f-158210d64e95",
+        "source": "Governance research",
+        "source-id": "GD-03",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The checks on a change compare an id, a decision's text and a label on either side of it, and a reviewer reads what changed in each entity; a difference by lines or rows, or one that reads a rename as a deletion and an addition, shows neither.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "Renaming an entity shows as one entity whose name changed, and editing one field shows that field and nothing else. Today git's difference with rename detection, read after the checker puts both sides in one form, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-is-shown-entity-by-entity.md"
+    },
+    {
+      "id": "01a13dc2-94f1-721a-93d1-87cf36b7f413",
+      "address": "requirements/a-change-keeps-the-record-of-how-it-was-accepted",
+      "type": "requirement",
+      "name": "A change keeps the record of how it was accepted",
+      "tagline": "Every applied change keeps its difference, its discussion, each check's result and who applied it.",
+      "fields": {
+        "id": "01a13dc2-94f1-721a-93d1-87cf36b7f413",
+        "source": "Governance research",
+        "source-id": "GD-11",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Whoever asks later why a change is in the model, a reviewer, an auditor or the KPI that counts merges past their checks, reads that record and nothing else.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A year after it was applied, any change shows what changed, what was said about it, what was checked and who applied it when. Today a pull request meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-keeps-the-record-of-how-it-was-accepted.md"
+    },
+    {
+      "id": "01a13dc2-94f1-74d8-9f42-d037407ef6b1",
+      "address": "requirements/a-change-names-a-seat-its-phase-lists",
+      "type": "requirement",
+      "name": "A change names a seat its phase lists",
+      "tagline": "A change authored by a seat is refused unless the phase it names lists that seat.",
+      "fields": {
+        "id": "01a13dc2-94f1-74d8-9f42-d037407ef6b1",
+        "source": "Governance research",
+        "source-id": "GD-17",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The author of a change says which seat did the work, and that is true only where the seat is one the phase of the work lets do it.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A change by a seat the named phase does not list is refused when it is made and again before it is applied. Today the commit-msg hook and the seat check on each pull request meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-names-a-seat-its-phase-lists.md"
+    },
+    {
+      "id": "01a13dc2-94f1-75b7-9702-f61b6cf69db0",
+      "address": "requirements/a-change-that-carries-a-secret-is-refused",
+      "type": "requirement",
+      "name": "A change that carries a secret is refused",
+      "tagline": "A change that carries a secret is refused before it is stored.",
+      "fields": {
+        "id": "01a13dc2-94f1-75b7-9702-f61b6cf69db0",
+        "source": "Governance research",
+        "source-id": "GD-28",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "A secret is never written into a repository"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A stored secret is published to everyone who can read the model, and from then on it can only be rotated.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A change carrying a key in a known form is refused, and a push past the refusal shows who made it and why. Today push protection meets it for the forms GitHub recognizes.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-change-that-carries-a-secret-is-refused.md"
+    },
+    {
       "id": "01a1312d-f16d-75d5-8b22-03bed2242fd5",
       "address": "requirements/a-check-reads-nothing-but-the-instance",
       "type": "requirement",
@@ -26923,6 +28934,129 @@
       ],
       "owner": null,
       "path": "model/requirements/a-check-reads-nothing-but-the-instance.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7a46-a9b3-552f13563afe",
+      "address": "requirements/a-check-s-output-is-kept-with-the-change-it-checked",
+      "type": "requirement",
+      "name": "A check's output is kept with the change it checked",
+      "tagline": "The output of every check run on a change is kept and can be read from that change.",
+      "fields": {
+        "id": "01a13dc2-94f1-7a46-a9b3-552f13563afe",
+        "source": "Governance research",
+        "source-id": "GD-15",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "A check counts only when its output was seen"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A check counts as passed only when its output was seen, and the output is what a reviewer and every later reader hold a report against.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "The output of any check run on any applied change can be read from that change, its failures told apart from its notes. Today a check run's log, linked from its pull request, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-check-s-output-is-kept-with-the-change-it-checked.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7d37-a822-5fbf43cdab35",
+      "address": "requirements/a-check-sees-a-change-and-the-state-it-started-from",
+      "type": "requirement",
+      "name": "A check sees a change and the state it started from",
+      "tagline": "A check run on a change is given the whole proposed state and the state the change started from.",
+      "fields": {
+        "id": "01a13dc2-94f1-7d37-a822-5fbf43cdab35",
+        "source": "Governance research",
+        "source-id": "GD-14",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Some checks hold a change rather than its result, an id that changed, a decision rewritten, a label moved, a change's seat, and each of them needs both sides.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "The id check refuses a change that alters an id and passes one that does not, reading only what its run was given. Today `companygraph ids --range` over a pull request's base and head meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-check-sees-a-change-and-the-state-it-started-from.md"
     },
     {
       "id": "01a1312e-302d-7238-b694-50d430636faf",
@@ -27399,6 +29533,66 @@
       "path": "model/requirements/a-list-arrives-in-pages-that-neither-repeat-nor-skip.md"
     },
     {
+      "id": "01a13dc2-94f1-7e2e-882e-bdc4fb3881a9",
+      "address": "requirements/a-model-leaves-its-store-as-markdown",
+      "type": "requirement",
+      "name": "A model leaves its store as Markdown",
+      "tagline": "Any state of a model can be exported to the Markdown form with its ids, and imported back unchanged.",
+      "fields": {
+        "id": "01a13dc2-94f1-7e2e-882e-bdc4fb3881a9",
+        "source": "Governance research",
+        "source-id": "GD-39",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A company's model belongs to no tool, and the export is what lets it leave one; it is also what every check and every agent reads today.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A state exported and imported again is the same state, and the exported files pass `companygraph check`. Today the model is that Markdown.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "A vocabulary to describe a company in"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "A vocabulary to describe a company in"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-model-leaves-its-store-as-markdown.md"
+    },
+    {
       "id": "01a1312d-83b6-719e-bff9-46901f2c6476",
       "address": "requirements/a-model-that-does-not-resolve-is-not-served",
       "type": "requirement",
@@ -27771,6 +29965,66 @@
       "path": "model/requirements/a-new-instance-passes-its-checks-on-its-first-day.md"
     },
     {
+      "id": "01a13dc2-94f1-74b8-b710-e1b987fc8345",
+      "address": "requirements/a-page-is-checked-as-it-is-written-by-the-gate-s-own-checks",
+      "type": "requirement",
+      "name": "A page is checked as it is written by the gate's own checks",
+      "tagline": "A page is checked while it is written, by the same checker and the same schemas as the gate it will pass.",
+      "fields": {
+        "id": "01a13dc2-94f1-74b8-b710-e1b987fc8345",
+        "source": "Governance research",
+        "source-id": "GD-16",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A writer who meets a failure only at the gate writes against the schema all day without seeing it, and a different checker in the editor would hold the page to a different model.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "Before the change is proposed, an editor shows the failure the gate would report for the same page. Today the editor plugin, which bundles the checker at the instance's release, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks while a file is edited"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks while a file is edited"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-page-is-checked-as-it-is-written-by-the-gate-s-own-checks.md"
+    },
+    {
       "id": "01a1312c-d8ca-7860-838e-396197f5aeba",
       "address": "requirements/a-person-s-documents-are-used-only-under-that-person-s-consent",
       "type": "requirement",
@@ -27961,6 +30215,129 @@
       "path": "model/requirements/a-pin-is-moved-only-by-its-owner.md"
     },
     {
+      "id": "01a13dc2-94f1-743b-b7f0-e3675d868409",
+      "address": "requirements/a-pin-that-is-behind-is-reported",
+      "type": "requirement",
+      "name": "A pin that is behind is reported",
+      "tagline": "Every pin a consumer holds can be listed with how far it is behind what it pins.",
+      "fields": {
+        "id": "01a13dc2-94f1-743b-b7f0-e3675d868409",
+        "source": "Governance research",
+        "source-id": "GD-26",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A pin moves only on purpose, so whoever decides needs to see which are behind; a pin nobody sees is drift nobody chose.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "One command lists each consumer's pins and how far each is behind. Today `companygraph pins` and the family report meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "A repository is held to one form and told which pins are behind"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "A repository is held to one form and told which pins are behind"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-pin-that-is-behind-is-reported.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7d4b-9185-87bb28e1832d",
+      "address": "requirements/a-published-page-is-checked-against-the-state-it-names",
+      "type": "requirement",
+      "name": "A published page is checked against the state it names",
+      "tagline": "Every page published from a model is checked against what the state it names would draw.",
+      "fields": {
+        "id": "01a13dc2-94f1-7d4b-9185-87bb28e1832d",
+        "source": "Governance research",
+        "source-id": "GD-31",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "The model is corrected first"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A page edited by hand, or drawn from another state, says something the model does not, and the model is corrected first and the page drawn again.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A page whose content differs from what its named state draws fails its site's check. Today `pages:check` and `build:check` in each site's required `verify` job meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "The vocabulary on the web"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "The vocabulary on the web"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-published-page-is-checked-against-the-state-it-names.md"
+    },
+    {
       "id": "01a1312d-4501-7e47-abc4-8b179c53d140",
       "address": "requirements/a-question-is-answered-in-the-language-of-its-words",
       "type": "requirement",
@@ -28141,6 +30518,66 @@
       ],
       "owner": null,
       "path": "model/requirements/a-refusal-carries-a-code-a-program-can-read.md"
+    },
+    {
+      "id": "01a13dc2-94f1-74ed-b43a-8fa44bf9c1a3",
+      "address": "requirements/a-released-vocabulary-never-changes",
+      "type": "requirement",
+      "name": "A released vocabulary never changes",
+      "tagline": "A release of the vocabulary, core or a pack, never changes once it is made.",
+      "fields": {
+        "id": "01a13dc2-94f1-74ed-b43a-8fa44bf9c1a3",
+        "source": "Governance research",
+        "source-id": "GD-24",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "An instance adopts a release by naming it, and a release that moved would change the rules a model is held to without the model deciding.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "An attempt by anyone but the Owner to move or delete a released version is refused. Today a tag, held by the release-tag ruleset, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "A vocabulary to describe a company in"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "A vocabulary to describe a company in"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/a-released-vocabulary-never-changes.md"
     },
     {
       "id": "01a13135-072e-7d81-b46c-60b805711072",
@@ -28417,6 +30854,190 @@
       ],
       "owner": null,
       "path": "model/requirements/a-visitor-is-told-before-the-first-message-that-an-agent-answers.md"
+    },
+    {
+      "id": "01a13dc2-94f1-77c5-bd14-dbce6627127f",
+      "address": "requirements/an-adopted-schema-changed-in-place-fails-the-check",
+      "type": "requirement",
+      "name": "An adopted schema changed in place fails the check",
+      "tagline": "A schema changed inside an instance after the instance adopted it fails the instance's check.",
+      "fields": {
+        "id": "01a13dc2-94f1-77c5-bd14-dbce6627127f",
+        "source": "Governance research",
+        "source-id": "GD-25",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "An instance is held to the release it adopted only while its copy of that release is the release, and a schema edited in place would hold the model to rules nobody released.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "One character changed in an adopted schema makes the check fail and name the file. Today the hash per file in the manifest, compared on every run, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/an-adopted-schema-changed-in-place-fails-the-check.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7829-beb6-ec20183bf56b",
+      "address": "requirements/an-agent-applies-a-change-only-on-its-operator-s-word",
+      "type": "requirement",
+      "name": "An agent applies a change only on its operator's word",
+      "tagline": "An agent applies a change to the model only on its operator's word for that change.",
+      "fields": {
+        "id": "01a13dc2-94f1-7829-beb6-ec20183bf56b",
+        "source": "Governance research",
+        "source-id": "GD-22",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "The Owner's word merges",
+          "A refusal is not carried out by another session"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Agents write the model and a person approves every change to it; an agent that could apply on its own would approve its own work.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "An agent's attempt to apply a change without its operator's word for that change, in that conversation, is refused, whatever another agent asks. Today the agent harness's permission layer meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "An agent does the work no script can, by the skills an instance ships"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "An agent does the work no script can, by the skills an instance ships"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/an-agent-applies-a-change-only-on-its-operator-s-word.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7a54-b549-f05bf31dd536",
+      "address": "requirements/an-agent-works-on-a-model-through-the-skills-it-ships",
+      "type": "requirement",
+      "name": "An agent works on a model through the skills it ships",
+      "tagline": "Every skill an instance ships runs against any state of the model, wherever the model is kept.",
+      "fields": {
+        "id": "01a13dc2-94f1-7a54-b549-f05bf31dd536",
+        "source": "Governance research",
+        "source-id": "GD-40",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The agent pass, the procedures and the judge do the work no script can, and a store they cannot read leaves that work undone.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "`companygraph-validate` runs against a state of the model and reports what it reports on the files. Today the skills read the files of a clone.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "An agent does the work no script can, by the skills an instance ships"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "An agent does the work no script can, by the skills an instance ships"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/an-agent-works-on-a-model-through-the-skills-it-ships.md"
     },
     {
       "id": "01a1312c-9a9a-739b-917c-93031643590f",
@@ -29088,6 +31709,129 @@
       "path": "model/requirements/an-instance-may-make-its-own-ids-under-a-declared-pattern.md"
     },
     {
+      "id": "01a13dc2-94f1-7a36-8756-8dfcd1fdcb88",
+      "address": "requirements/any-past-state-can-be-read-whole",
+      "type": "requirement",
+      "name": "Any past state can be read whole",
+      "tagline": "Any state a model has had can be read whole, by its id, for as long as the model exists.",
+      "fields": {
+        "id": "01a13dc2-94f1-7a36-8756-8dfcd1fdcb88",
+        "source": "Governance research",
+        "source-id": "GD-02",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A site and a server draw the model at the state they pin, and a check compares a change with the state it started from; both read a state that is no longer the latest.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A state from a year before is read by its id, and the checker finds in it what it found then. Today a checkout of a commit meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/any-past-state-can-be-read-whole.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7333-bbee-5add1e1f9244",
+      "address": "requirements/applying-a-change-keeps-its-author",
+      "type": "requirement",
+      "name": "Applying a change keeps its author",
+      "tagline": "Applying a change keeps the author it was made with.",
+      "fields": {
+        "id": "01a13dc2-94f1-7333-bbee-5add1e1f9244",
+        "source": "Governance research",
+        "source-id": "GD-10",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "A commit keeps the author it was made with"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "An author replaced by whoever applied the change would let a change made under a wrong identity reach the model looking correct, and would hide which seat did the work.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "An applied change shows the seat that made it, and apart from it the account that applied it. Today merging only with a merge commit, with squash and rebase turned off, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/applying-a-change-keeps-its-author.md"
+    },
+    {
       "id": "01a1312e-2118-7f51-b253-d0e63d79b3b4",
       "address": "requirements/completion-offers-only-the-names-the-scope-holds",
       "type": "requirement",
@@ -29177,6 +31921,189 @@
       ],
       "owner": null,
       "path": "model/requirements/completion-offers-only-the-names-the-scope-holds.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7048-a23d-a118911279f7",
+      "address": "requirements/every-applied-state-has-an-id-that-names-its-content",
+      "type": "requirement",
+      "name": "Every applied state has an id that names its content",
+      "tagline": "Every state of a model that changes were applied to has an id that names exactly that content and never any other.",
+      "fields": {
+        "id": "01a13dc2-94f1-7048-a23d-a118911279f7",
+        "source": "Governance research",
+        "source-id": "GD-01",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A pin, a served answer and a published page each say which state of the model they come from, and that is worth something only while the name always means the same content.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "Two reads of one state's id return the same content, byte for byte, at any later time, and a state that differs by one byte has another id. Today a git commit and its hash meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/every-applied-state-has-an-id-that-names-its-content.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7da6-a8c7-975fe347bb2a",
+      "address": "requirements/every-change-says-who-made-it-and-in-which-work",
+      "type": "requirement",
+      "name": "Every change says who made it and in which work",
+      "tagline": "Every change records its author, the person accountable for it, its time and the process, phase and track it was made in.",
+      "fields": {
+        "id": "01a13dc2-94f1-7da6-a8c7-975fe347bb2a",
+        "source": "Governance research",
+        "source-id": "GD-05",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "A commit keeps the author it was made with"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The seat check holds an author to a seat its phase lists, and a later reader asks who made a change and in which work; neither can be answered from a change that does not say.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A change without an author, a process or a phase is refused, and every applied change shows all of them. Today a commit's author, committer, date and trailers meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/every-change-says-who-made-it-and-in-which-work.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7ade-8355-8190f03c4780",
+      "address": "requirements/every-pass-of-the-gate-can-be-counted-by-week",
+      "type": "requirement",
+      "name": "Every pass of the gate can be counted by week",
+      "tagline": "Every change applied, every required check gone past and every change of rights is kept in a log a scheduled job can read by week.",
+      "fields": {
+        "id": "01a13dc2-94f1-7ade-8355-8190f03c4780",
+        "source": "Governance research",
+        "source-id": "GD-35",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The KPIs that measure the gate, Merges Past Their Checks and Change Fail Rate, are counted from that log and from nothing else.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A job that reads only the log counts a week's applied changes and the checks gone past as the KPI reports them. Today GitHub's audit log and rule suites, read by the weekly `kpi` workflow, meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/every-pass-of-the-gate-can-be-counted-by-week.md"
     },
     {
       "id": "01a1312c-8b85-7881-89ea-ded665d4a36f",
@@ -29271,6 +32198,129 @@
       ],
       "owner": null,
       "path": "model/requirements/every-surface-says-what-the-model-says-and-nothing-more.md"
+    },
+    {
+      "id": "01a13dc2-94f1-702e-9a74-988be5ac748a",
+      "address": "requirements/going-past-a-required-check-is-recorded",
+      "type": "requirement",
+      "name": "Going past a required check is recorded",
+      "tagline": "Every change applied while a required check had not passed is recorded with the check it went past and the account that applied it.",
+      "fields": {
+        "id": "01a13dc2-94f1-702e-9a74-988be5ac748a",
+        "source": "Governance research",
+        "source-id": "GD-21",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A gate an admin can pass stays honest only where every pass is counted, and Merges Past Their Checks counts them.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "Every change of a week applied past a required check can be listed with that check and that account. Today GitHub's rule suites meet it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/going-past-a-required-check-is-recorded.md"
+    },
+    {
+      "id": "01a13dc2-94f1-74fe-bffd-6a45f0cf0173",
+      "address": "requirements/no-applied-state-is-rewritten",
+      "type": "requirement",
+      "name": "No applied state is rewritten",
+      "tagline": "A state that changes were applied to is never rewritten or deleted.",
+      "fields": {
+        "id": "01a13dc2-94f1-74fe-bffd-6a45f0cf0173",
+        "source": "Governance research",
+        "source-id": "GD-04",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "What is cited from outside the model is not rewritten"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Pins, answers and pages cite states by id, and a rewritten state leaves each of those citations pointing at something that now says another thing.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "An attempt to rewrite or delete a past state is refused and the refusal is recorded. Today the ruleset's refusal of a force push and of a deletion meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/no-applied-state-is-rewritten.md"
     },
     {
       "id": "01a1312d-a32d-711b-bcd8-29582f3f4110",
@@ -29546,6 +32596,129 @@
       "path": "model/requirements/nothing-a-company-writes-passes-through-us.md"
     },
     {
+      "id": "01a13dc2-94f1-7503-b64f-723146b6b28a",
+      "address": "requirements/only-named-accounts-apply-a-change",
+      "type": "requirement",
+      "name": "Only named accounts apply a change",
+      "tagline": "A change is applied only by an account the company names for it.",
+      "fields": {
+        "id": "01a13dc2-94f1-7503-b64f-723146b6b28a",
+        "source": "Governance research",
+        "source-id": "GD-20",
+        "kind": "functional",
+        "modality": "must",
+        "follows": [
+          "The Owner's word merges"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Applying a change is what makes it the model's, and who may do that is the company's decision.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "An account that may propose a change is refused when it applies one. Today the push restriction to the Owner's account meets it in an organization's repositories.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/only-named-accounts-apply-a-change.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7c38-908e-ae0d7baa4bd0",
+      "address": "requirements/the-model-changes-only-by-applying-a-change",
+      "type": "requirement",
+      "name": "The model changes only by applying a change",
+      "tagline": "The current state of a model changes only when a change is applied to it, never by a direct write.",
+      "fields": {
+        "id": "01a13dc2-94f1-7c38-908e-ae0d7baa4bd0",
+        "source": "Governance research",
+        "source-id": "GD-19",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Every guarantee the gate gives holds only for the changes that pass through it.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A direct write to the current state is refused for every account. Today the ruleset's pull request rule meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "Checks an instance runs"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "Checks an instance runs"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/the-model-changes-only-by-applying-a-change.md"
+    },
+    {
       "id": "01a1312c-c913-7d77-a07c-82a1f20adbc0",
       "address": "requirements/the-pages-leave-the-machine-only-on-the-owner-s-yes",
       "type": "requirement",
@@ -29726,6 +32899,186 @@
       ],
       "owner": null,
       "path": "model/requirements/the-question-is-kept-and-the-answer-is-not.md"
+    },
+    {
+      "id": "01a13dc2-94f1-74d3-835e-75498a9df9cc",
+      "address": "requirements/the-same-content-is-stored-the-same-way",
+      "type": "requirement",
+      "name": "The same content is stored the same way",
+      "tagline": "Two writers who make the same change store the same state, whichever editor each used.",
+      "fields": {
+        "id": "01a13dc2-94f1-74d3-835e-75498a9df9cc",
+        "source": "Governance research",
+        "source-id": "GD-18",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A difference that is only form hides the change a reviewer has to read, and sets two writers disagreeing about nothing.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "The same edit made in two editors produces no difference between the two states. Today the one Markdown form, held by `companygraph form`, meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "A repository is held to one form and told which pins are behind"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "feature",
+                "A repository is held to one form and told which pins are behind"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/the-same-content-is-stored-the-same-way.md"
+    },
+    {
+      "id": "01a13dc2-94f1-7dae-8f43-257cf487aba1",
+      "address": "requirements/two-edits-of-one-entity-are-never-merged-silently",
+      "type": "requirement",
+      "name": "Two edits of one entity are never merged silently",
+      "tagline": "Where two changes edit the same part of one entity, the second is refused until someone resolves the conflict.",
+      "fields": {
+        "id": "01a13dc2-94f1-7dae-8f43-257cf487aba1",
+        "source": "Governance research",
+        "source-id": "GD-09",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "An edit lost without a word is a fact the model held and no longer holds, and nobody decided to drop it.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "Two changes edit one field of one entity, and the second cannot be applied until the conflict is resolved by hand. Today git's merge conflict meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/two-edits-of-one-entity-are-never-merged-silently.md"
+    },
+    {
+      "id": "01a13dc2-94f1-79ee-8a16-270799bad647",
+      "address": "requirements/who-may-read-a-model-is-set-for-each-model",
+      "type": "requirement",
+      "name": "Who may read a model is set for each model",
+      "tagline": "Each model can be read by exactly the accounts its company sets, by anyone where the model is published.",
+      "fields": {
+        "id": "01a13dc2-94f1-79ee-8a16-270799bad647",
+        "source": "Governance research",
+        "source-id": "GD-23",
+        "kind": "functional",
+        "modality": "must"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A company publishes one model and keeps another private, and that is never the store's to decide.",
+          "tables": []
+        },
+        {
+          "heading": "Fit criterion",
+          "text": "A model set private cannot be read by an account outside it, and a published one is read without an account. Today a repository's visibility meets it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity"
+              ],
+              "rows": [
+                [
+                  "product",
+                  "CompanyGraph Core"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity"
+            ],
+            "rows": [
+              [
+                "product",
+                "CompanyGraph Core"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/requirements/who-may-read-a-model-is-set-for-each-model.md"
     },
     {
       "id": "01a129b3-683e-7ded-8558-d06b9d4a95bc",
@@ -30121,6 +33474,59 @@
       "path": "model/rules/a-refusal-is-not-carried-out-by-another-session.md"
     },
     {
+      "id": "01a13b7b-6d05-7eef-9306-263d23c415c1",
+      "address": "rules/a-secret-is-never-written-into-a-repository",
+      "type": "rule",
+      "name": "A secret is never written into a repository",
+      "tagline": "No key, token or password is committed to any of our repositories, in a file, a commit message or a test fixture; a secret lives in the store of the workflow or the service that reads it.",
+      "fields": {
+        "id": "01a13b7b-6d05-7eef-9306-263d23c415c1",
+        "source": "Local",
+        "modality": "must not"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Our repositories are public, so whatever is pushed is published the moment it reaches GitHub, and it stays in the history after a later commit removes it. A secret that reached a repository can only be rotated, never taken back, and everything it opened stays open until it is. For the same reason a secret is never printed, not even to check it: a value that reaches a transcript has to be rotated as well.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/a-secret-is-never-written-into-a-repository.md"
+    },
+    {
       "id": "01a0fd96-9ca4-705d-921e-246153fb78c3",
       "address": "rules/a-state-is-read-again-before-it-is-relied-on",
       "type": "rule",
@@ -30309,6 +33715,27 @@
       ],
       "owner": null,
       "path": "model/rules/a-visitor-is-told-an-agent-answers.md"
+    },
+    {
+      "id": "01a13b7e-ed11-797f-9afe-997a7bc6c0e0",
+      "address": "rules/a-worktree-is-removed-only-once-its-plan-is-done",
+      "type": "rule",
+      "name": "A worktree is removed only once its plan is done",
+      "tagline": "A worktree that holds a plan's ledger is not removed before every task of that plan is done, even when its pull request has merged.",
+      "fields": {
+        "id": "01a13b7e-ed11-797f-9afe-997a7bc6c0e0",
+        "source": "Local",
+        "modality": "must not"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A plan's ledger, its briefs and its task reports live in the worktree under `.superpowers/`, which git ignores, and `git worktree remove` deletes ignored files without asking, with or without `--force`, so nothing brings them back. A merged pull request does not finish a plan: a plan can carry tasks in other repositories that are still owed. Three ledgers were lost this way in September 2026, twice in one day.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/a-worktree-is-removed-only-once-its-plan-is-done.md"
     },
     {
       "id": "01a0fd96-abab-74bc-a803-f6ddc5037b3e",
@@ -30741,6 +34168,27 @@
       "path": "model/rules/one-session-holds-a-piece-of-shared-work.md"
     },
     {
+      "id": "01a13dc7-765f-71f5-9e7b-2f5e1bf6c484",
+      "address": "rules/personal-data-stays-out-of-every-model",
+      "type": "rule",
+      "name": "Personal data stays out of every model",
+      "tagline": "No model holds personal data about anyone but its owner describing themselves and the people who consented to be described in it.",
+      "fields": {
+        "id": "01a13dc7-765f-71f5-9e7b-2f5e1bf6c484",
+        "source": "Local",
+        "modality": "must not"
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A model is published, read by agents and visitors, and kept in a history that never forgets a state, so personal data written into it could never be taken back. The records a company keeps about the people it serves, its customers, guests, patients and visitors, belong in the systems the model describes and never in the model itself; the model says that such a system holds them and what it does with them. The owner describing themselves, and a person who consented to a profile, chose to be in it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/personal-data-stays-out-of-every-model.md"
+    },
+    {
       "id": "01a0fd96-c9dc-79ab-a01b-c3ca0d85da4f",
       "address": "rules/the-model-is-corrected-first",
       "type": "rule",
@@ -30964,6 +34412,30 @@
       ],
       "owner": null,
       "path": "model/rules/the-owner-s-word-merges.md"
+    },
+    {
+      "id": "01a13b77-bb31-78a7-a807-d0c7bb58f458",
+      "address": "rules/what-is-cited-from-outside-the-model-is-not-rewritten",
+      "type": "rule",
+      "name": "What is cited from outside the model is not rewritten",
+      "tagline": "Once on the default branch, an entity's id, a decision's text and a label on a page are not changed, because a link, a commit or a test outside the model may already cite them.",
+      "fields": {
+        "id": "01a13b77-bb31-78a7-a807-d0c7bb58f458",
+        "source": "Local",
+        "modality": "must not",
+        "serves": [
+          "A company's model belongs to no tool, and any graph database can hold it"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "An outside system holds on to what it cites: a graph node to an entity's id, a commit or a later decision to a decision as it was decided, a test or a line of code to the label of a scenario, a step or an invariant. Each is the only handle that citation has, and a rewrite leaves it pointing at something that now says another thing, with nothing to tell whoever cited it. So an id stays with its entity, a decision that no longer stands is closed by its status and one dated sentence instead of being edited, and a label stays with the item it was given to and is never given to another.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/what-is-cited-from-outside-the-model-is-not-rewritten.md"
     },
     {
       "id": "01a0ccd4-cfb0-7ce5-ba91-f0ac3509ff30",
@@ -32033,6 +35505,20 @@
       ],
       "owner": null,
       "path": "model/services/mcp-endpoint.md"
+    },
+    {
+      "id": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "address": "sources/governance-research",
+      "type": "source",
+      "name": "Governance research",
+      "tagline": "The research of October 14 and 15, 2026 on governance as data, kept in this repository under `docs/research/`: an inventory of every check the family runs, where it runs and on which level, and the requirements any store of a model must meet for those checks to keep governing it. It labels each requirement GD-01 to GD-40, and a requirement drawn from it carries that label as `source-id`. Nothing syncs from it: a requirement drawn from it is corrected on its page in this model, and the research stays the dated record it was drawn from.",
+      "fields": {
+        "id": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+        "url": "https://github.com/companygraph/mental-model/tree/main/docs/research"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/sources/governance-research.md"
     },
     {
       "id": "01a0c152-e370-7dbf-b79c-07c40a85b742",
@@ -48844,6 +52330,946 @@
       "from": "01a13351-9b49-75ee-aa52-6603ff561f19",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+      "to": "01a0c220-5148-792f-9a49-fddd3af9ef72",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Contribution"
+      }
+    },
+    {
+      "from": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+      "to": "01a0fd97-30fd-785b-a1f9-18021203cd55",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b55-e0e9-728c-9668-c07ae3c505f4",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b55-e0e9-728c-9668-c07ae3c505f4",
+      "to": "01a0c220-5148-792f-9a49-fddd3af9ef72",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Contribution"
+      }
+    },
+    {
+      "from": "01a13b55-e0e9-728c-9668-c07ae3c505f4",
+      "to": "01a0fd97-30fd-785b-a1f9-18021203cd55",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b55-e0e9-728c-9668-c07ae3c505f4",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b60-837c-72ae-8285-e9410ccc7309",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b60-837c-72ae-8285-e9410ccc7309",
+      "to": "01a0fd97-30fd-785b-a1f9-18021203cd55",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b60-837c-72ae-8285-e9410ccc7309",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b64-5acc-7b29-a65e-6b7fa3148c60",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b64-5acc-7b29-a65e-6b7fa3148c60",
+      "to": "01a0fd96-9ca4-705d-921e-246153fb78c3",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b64-5acc-7b29-a65e-6b7fa3148c60",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b77-bb31-78a7-a807-d0c7bb58f458",
+      "to": "01a0ee26-c790-7cd2-9d34-008324cbeb63",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b77-bb31-78a7-a807-d0c7bb58f458",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b79-d51c-7efd-8b19-5597bc976422",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b79-d51c-7efd-8b19-5597bc976422",
+      "to": "01a0c220-5148-792f-9a49-fddd3af9ef72",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Contribution"
+      }
+    },
+    {
+      "from": "01a13b79-d51c-7efd-8b19-5597bc976422",
+      "to": "01a13b77-bb31-78a7-a807-d0c7bb58f458",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b79-d51c-7efd-8b19-5597bc976422",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b7b-6d05-7eef-9306-263d23c415c1",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+      "to": "01a0c202-d668-7d80-ae12-05181a537989",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+      "to": "01a0c220-5148-792f-9a49-fddd3af9ef72",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Contribution"
+      }
+    },
+    {
+      "from": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+      "to": "01a13b7b-6d05-7eef-9306-263d23c415c1",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b7d-2a08-7bd2-935a-50934c8f5325",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b7e-ed11-797f-9afe-997a7bc6c0e0",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b7f-fa1b-74f3-8ee2-8a56f2fe59b7",
+      "to": "01a0c202-d668-7d80-ae12-05181a537989",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b7f-fa1b-74f3-8ee2-8a56f2fe59b7",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13b7f-fa1b-74f3-8ee2-8a56f2fe59b7",
+      "to": "01a13b7e-ed11-797f-9afe-997a7bc6c0e0",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13b7f-fa1b-74f3-8ee2-8a56f2fe59b7",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c57-a736-701f-82fe-16707e678abd",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13c57-a736-701f-82fe-16707e678abd",
+      "to": "01a0fd96-d8d5-7673-8274-8b2b6e3eca58",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c57-a736-701f-82fe-16707e678abd",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c59-d659-7288-bfea-c0f3869a7db4",
+      "to": "01a0ccd4-cfb0-7d87-9782-f5f5b46df8e3",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Answering"
+      }
+    },
+    {
+      "from": "01a13c59-d659-7288-bfea-c0f3869a7db4",
+      "to": "01a0fd96-bad6-7d95-bd28-1417f1c11a22",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c59-d659-7288-bfea-c0f3869a7db4",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+      "to": "01a0c202-d668-7e1a-b698-ec58b8cdf4b2",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+      "to": "01a0c220-5148-792f-9a49-fddd3af9ef72",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Contribution"
+      }
+    },
+    {
+      "from": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+      "to": "01a0fd97-0436-744d-bcc5-ada708012187",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+      "to": "01a0c202-d668-725c-a1b4-6a988641be13",
+      "via": "performed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c5b-07ab-79ca-9235-fe766297ad4f",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c5e-3775-7125-84d5-c4be1eedaf2c",
+      "to": "01a0c220-5148-7563-b79e-338d0d73da14",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Feature request"
+      }
+    },
+    {
+      "from": "01a13c5e-3775-7125-84d5-c4be1eedaf2c",
+      "to": "01a0fd97-2203-7db0-9cd2-178d18d78d1b",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c5e-3775-7125-84d5-c4be1eedaf2c",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "performed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a13c5e-3775-7125-84d5-c4be1eedaf2c",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13d2d-35ed-7aa9-a6e7-9715c2fa1218",
+      "to": "01a0c202-d668-7b80-b58a-02ac1f56beea",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a13d2d-35ed-7aa9-a6e7-9715c2fa1218",
+      "to": "01a0fd97-1344-7d55-9868-594f8077ba03",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13d2d-35ed-7aa9-a6e7-9715c2fa1218",
+      "to": "01a0c202-d668-71f7-9ba0-748183347313",
+      "via": "performed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a13d2d-35ed-7aa9-a6e7-9715c2fa1218",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+      "to": "01a0c202-d668-725c-a1b4-6a988641be13",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "seat",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+      "to": "01a0c202-d668-7722-9894-987c9ecf030c",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "seat",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+      "to": "01a0fadf-b1c5-7c45-b1a5-f4f9e18831f4",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "seat",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+      "to": "01a0fd96-8e3d-79cc-b913-f3b1da3294bd",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13d34-8b29-75d6-ae44-a6c299aa56c4",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-702e-9a74-988be5ac748a",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-702e-9a74-988be5ac748a",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7048-a23d-a118911279f7",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7048-a23d-a118911279f7",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-721a-93d1-87cf36b7f413",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-721a-93d1-87cf36b7f413",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7333-bbee-5add1e1f9244",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7333-bbee-5add1e1f9244",
+      "to": "01a0fd96-e705-7d3a-ab46-88386ce7dc3b",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7333-bbee-5add1e1f9244",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-743b-b7f0-e3675d868409",
+      "to": "01a0fb73-abe0-792f-b857-e185354274c8",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-743b-b7f0-e3675d868409",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-74b8-b710-e1b987fc8345",
+      "to": "01a0c29a-9610-7739-b7be-8876aaef6540",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-74b8-b710-e1b987fc8345",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-74d3-835e-75498a9df9cc",
+      "to": "01a0fb73-abe0-792f-b857-e185354274c8",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-74d3-835e-75498a9df9cc",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-74d8-9f42-d037407ef6b1",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-74d8-9f42-d037407ef6b1",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-74ed-b43a-8fa44bf9c1a3",
+      "to": "01a0c29a-9610-7734-a1d5-ca54efa03c05",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-74ed-b43a-8fa44bf9c1a3",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-74fe-bffd-6a45f0cf0173",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-74fe-bffd-6a45f0cf0173",
+      "to": "01a13b77-bb31-78a7-a807-d0c7bb58f458",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-74fe-bffd-6a45f0cf0173",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7503-b64f-723146b6b28a",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7503-b64f-723146b6b28a",
+      "to": "01a0fd97-30fd-785b-a1f9-18021203cd55",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7503-b64f-723146b6b28a",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-75b7-9702-f61b6cf69db0",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-75b7-9702-f61b6cf69db0",
+      "to": "01a13b7b-6d05-7eef-9306-263d23c415c1",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-75b7-9702-f61b6cf69db0",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-772c-95c9-1ed962c28c65",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-772c-95c9-1ed962c28c65",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-77c5-bd14-dbce6627127f",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-77c5-bd14-dbce6627127f",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7829-beb6-ec20183bf56b",
+      "to": "01a0ee28-9868-7bf5-9995-08d074d598cf",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7829-beb6-ec20183bf56b",
+      "to": "01a0fd96-8e3d-79cc-b913-f3b1da3294bd",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7829-beb6-ec20183bf56b",
+      "to": "01a0fd97-30fd-785b-a1f9-18021203cd55",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7829-beb6-ec20183bf56b",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-79ee-8a16-270799bad647",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-79ee-8a16-270799bad647",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7a36-8756-8dfcd1fdcb88",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7a36-8756-8dfcd1fdcb88",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7a46-a9b3-552f13563afe",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7a46-a9b3-552f13563afe",
+      "to": "01a0fd96-7fa8-7fa9-ae24-15a7f5d08ca2",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7a46-a9b3-552f13563afe",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7a54-b549-f05bf31dd536",
+      "to": "01a0ee28-9868-7bf5-9995-08d074d598cf",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7a54-b549-f05bf31dd536",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7ade-8355-8190f03c4780",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7ade-8355-8190f03c4780",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7bd6-ab2d-41d4fb568509",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7bd6-ab2d-41d4fb568509",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7c38-908e-ae0d7baa4bd0",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7c38-908e-ae0d7baa4bd0",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7d37-a822-5fbf43cdab35",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7d37-a822-5fbf43cdab35",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7d4b-9185-87bb28e1832d",
+      "to": "01a0c29a-9610-7475-9d42-df639029335a",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7d4b-9185-87bb28e1832d",
+      "to": "01a0fd96-c9dc-79ab-a01b-c3ca0d85da4f",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7d4b-9185-87bb28e1832d",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7da6-a8c7-975fe347bb2a",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7da6-a8c7-975fe347bb2a",
+      "to": "01a0fd96-e705-7d3a-ab46-88386ce7dc3b",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7da6-a8c7-975fe347bb2a",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7dae-8f43-257cf487aba1",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7dae-8f43-257cf487aba1",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7e08-830f-158210d64e95",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7e08-830f-158210d64e95",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7e26-8f77-d0a1671dba58",
+      "to": "01a0c29a-9610-7863-a9a5-c9d2ef01c3ff",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7e26-8f77-d0a1671dba58",
+      "to": "01a0fd96-9ca4-705d-921e-246153fb78c3",
+      "via": "follows",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7e26-8f77-d0a1671dba58",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7e2e-882e-bdc4fb3881a9",
+      "to": "01a0c29a-9610-7734-a1d5-ca54efa03c05",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "feature"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7e2e-882e-bdc4fb3881a9",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc2-94f1-7ef6-b0a1-702d8ac34b7e",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "product"
+      }
+    },
+    {
+      "from": "01a13dc2-94f1-7ef6-b0a1-702d8ac34b7e",
+      "to": "01a13ddc-36f1-7b49-8ca3-9863d2be7cb4",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dc7-765f-71f5-9e7b-2f5e1bf6c484",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd1-b506-7f46-8068-743a54710f49",
+      "to": "01a13dc7-765f-71f5-9e7b-2f5e1bf6c484",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd1-b506-7f46-8068-743a54710f49",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "performed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd1-b506-7f46-8068-743a54710f49",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd7-fc77-7058-aa34-086986674292",
+      "to": "01a0c29a-9610-7a57-9c2f-0d41d78c5ae5",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "product",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a13dd7-fc77-7058-aa34-086986674292",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd7-fc77-7058-aa34-086986674292",
+      "to": "01a0dd52-bc30-709c-9bbf-490d8a8458d6",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd7-fc77-7058-aa34-086986674292",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd7-fc77-7058-aa34-086986674292",
+      "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a13dd7-fc77-7058-aa34-086986674292",
+      "to": "01a0c1d6-f408-750f-a4c2-51a5ffe23686",
+      "via": "upholds",
       "attrs": {}
     }
   ],
