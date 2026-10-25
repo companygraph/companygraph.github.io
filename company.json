@@ -1,5 +1,5 @@
 {
-  "commit": "2c4f7b0b1b19df27019e5055445f57d926ec553e",
+  "commit": "7418e064051b94c15cb635f427d5235395912e9e",
   "core": "0.69.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -12290,6 +12290,21 @@
       "path": "model/concepts/pin.md"
     },
     {
+      "id": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "address": "concepts/reader",
+      "type": "concept",
+      "name": "Reader",
+      "tagline": "A person the owner has invited to sign in to the chat, who holds an account at id.blust.ch and may choose the model that answers within the roles granted to them; anyone who asks without signing in is a visitor.",
+      "fields": {
+        "id": "01a170fc-3404-7344-90e0-2a8052da76b7",
+        "source": "Local",
+        "domain": "Core"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/concepts/reader.md"
+    },
+    {
       "id": "01a0c2a7-ffa8-7030-9fbb-2baaa6c3715f",
       "address": "concepts/reference",
       "type": "concept",
@@ -14814,6 +14829,102 @@
       "path": "model/data-objects/question-log.md"
     },
     {
+      "id": "01a170fc-42fd-7d47-b431-384023193267",
+      "address": "data-objects/reader-account",
+      "type": "data-object",
+      "name": "Reader account",
+      "tagline": "A user of ZITADEL at id.blust.ch: the reader's name and email address and the roles granted to them on this site, created by the owner in its console, since accounts are by invitation only.",
+      "fields": {
+        "id": "01a170fc-42fd-7d47-b431-384023193267",
+        "source": "Local",
+        "realizes": "Reader"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "How accounts are made and roles granted",
+                  "https://github.com/robertblust/id-blust-ch"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "How accounts are made and roles granted",
+                "https://github.com/robertblust/id-blust-ch"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-objects/reader-account.md"
+    },
+    {
+      "id": "01a170fc-526e-7513-a7a5-24a2b33d5b1c",
+      "address": "data-objects/reader-s-month",
+      "type": "data-object",
+      "name": "Reader's month",
+      "tagline": "One Firestore document per signed-in reader who has sent a message, `chat-readers/<key>`, holding the month it counts and what the reader's answers cost in it, where the key is the token's `sub` signed with the deployment's secret, so the document holds nothing id.blust.ch would recognize.",
+      "fields": {
+        "id": "01a170fc-526e-7513-a7a5-24a2b33d5b1c",
+        "source": "Local",
+        "realizes": "Reader"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "How a reader's month is kept",
+                  "https://github.com/companygraph/chat-server/blob/main/README.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "How a reader's month is kept",
+                "https://github.com/companygraph/chat-server/blob/main/README.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-objects/reader-s-month.md"
+    },
+    {
       "id": "01a12590-0c79-750e-820f-b0a8daa484f4",
       "address": "data-objects/repository",
       "type": "data-object",
@@ -14963,7 +15074,7 @@
       "address": "data-processors/google-cloud",
       "type": "data-processor",
       "name": "Google Cloud",
-      "tagline": "Runs the chat service and the MCP server in its Zürich region, and keeps the chat's log of questions there.",
+      "tagline": "Runs the chat service and the MCP server in its Zurich region and keeps there the chat's log of questions and each signed-in reader's month; the readers' accounts are kept in the same region by blust.ch's identity service, id.blust.ch.",
       "fields": {
         "id": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
         "source": "Local",
@@ -25026,6 +25137,68 @@
       "path": "model/processing-activities/answering-in-the-chat.md"
     },
     {
+      "id": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+      "address": "processing-activities/counting-a-reader-s-month",
+      "type": "processing-activity",
+      "name": "Counting a reader's month",
+      "tagline": "Counting what a signed-in reader's answers cost in the month, so that no reader spends more of the chat's month than their own share.",
+      "fields": {
+        "id": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+        "source": "Local",
+        "legal-basis": "legitimate-interests",
+        "retention": "Only the month last counted, which the reader's first message of a new month replaces",
+        "surfaces": [
+          "chat.companygraph.io chat"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Data subjects",
+          "text": "- Readers who sign in to the chat and send a message",
+          "tables": []
+        },
+        {
+          "heading": "Personal data",
+          "text": "- What the reader's answers cost this month, kept under a key made from their account that the chat cannot turn back into it",
+          "tables": []
+        },
+        {
+          "heading": "Processors",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Processor",
+                "Receives"
+              ],
+              "rows": [
+                [
+                  "Google Cloud",
+                  "What the reader's answers cost this month, in its Zurich region, under a key the chat cannot turn back into the account"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Processor",
+              "Receives"
+            ],
+            "rows": [
+              [
+                "Google Cloud",
+                "What the reader's answers cost this month, in its Zurich region, under a key the chat cannot turn back into the account"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processing-activities/counting-a-reader-s-month.md"
+    },
+    {
       "id": "01a107ed-732a-7be1-897e-430f5ba1db1c",
       "address": "processing-activities/keeping-the-chat-s-questions",
       "type": "processing-activity",
@@ -25048,7 +25221,7 @@
         },
         {
           "heading": "Personal data",
-          "text": "- The question a visitor sent, kept without their address and without the answer",
+          "text": "- The question a visitor sent, kept without their address, their sign-in or the answer",
           "tables": []
         },
         {
@@ -25086,6 +25259,68 @@
       ],
       "owner": null,
       "path": "model/processing-activities/keeping-the-chat-s-questions.md"
+    },
+    {
+      "id": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "address": "processing-activities/signing-a-reader-in",
+      "type": "processing-activity",
+      "name": "Signing a reader in",
+      "tagline": "Letting a reader the owner has invited sign in to the chat, so that it knows which models the reader may choose.",
+      "fields": {
+        "id": "01a170fb-ba87-7085-ae07-293856cfea54",
+        "source": "Local",
+        "legal-basis": "legitimate-interests",
+        "retention": "As long as the reader's account at id.blust.ch exists",
+        "surfaces": [
+          "chat.companygraph.io chat"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Data subjects",
+          "text": "- Readers the owner has invited to sign in to the chat",
+          "tables": []
+        },
+        {
+          "heading": "Personal data",
+          "text": "- The reader's name and email address, which their account at id.blust.ch holds\n- The roles granted to the reader, which name the models they may choose\n- The tokens the sign-in issues, kept in the reader's browser, and the access token each message carries to the chat, which checks it",
+          "tables": []
+        },
+        {
+          "heading": "Processors",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Processor",
+                "Receives"
+              ],
+              "rows": [
+                [
+                  "Google Cloud",
+                  "The reader's name, email address and roles, held by id.blust.ch in its Zurich region, and the access token each message carries"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Processor",
+              "Receives"
+            ],
+            "rows": [
+              [
+                "Google Cloud",
+                "The reader's name, email address and roles, held by id.blust.ch in its Zurich region, and the access token each message carries"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processing-activities/signing-a-reader-in.md"
     },
     {
       "id": "01a12458-0ac7-7d6f-a60a-ee7a5a1ba149",
@@ -35555,6 +35790,26 @@
       "path": "model/stored-items/chat.md"
     },
     {
+      "id": "01a170fb-9bcf-7ca4-bb3a-a51ba8fd1811",
+      "address": "stored-items/chat-choice",
+      "type": "stored-item",
+      "name": "chat-choice",
+      "tagline": "The model and the effort the signed-in reader chose for the chat's answers.",
+      "fields": {
+        "id": "01a170fb-9bcf-7ca4-bb3a-a51ba8fd1811",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "strictly-necessary",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "chat.companygraph.io chat"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-choice.md"
+    },
+    {
       "id": "01a107ef-ef6b-724b-ba7c-c05175c6e98c",
       "address": "stored-items/chat-facts",
       "type": "stored-item",
@@ -35591,6 +35846,46 @@
       "sections": [],
       "owner": null,
       "path": "model/stored-items/chat-pictures.md"
+    },
+    {
+      "id": "01a170fb-aad7-72a4-afc8-f0979e1d13f3",
+      "address": "stored-items/chat-pkce",
+      "type": "stored-item",
+      "name": "chat-pkce",
+      "tagline": "The secret that proves a sign-in was started in this tab, its state and the page it started from, kept only for the trip to the login at id.blust.ch and back.",
+      "fields": {
+        "id": "01a170fb-aad7-72a4-afc8-f0979e1d13f3",
+        "source": "Local",
+        "mechanism": "session-storage",
+        "necessity": "strictly-necessary",
+        "surfaces": [
+          "chat.companygraph.io chat"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-pkce.md"
+    },
+    {
+      "id": "01a170fb-8ccb-7c81-8f85-d047943fc525",
+      "address": "stored-items/chat-signin",
+      "type": "stored-item",
+      "name": "chat-signin",
+      "tagline": "The access token and the ID token from the reader's sign-in at id.blust.ch, so that each message to the chat carries the access token.",
+      "fields": {
+        "id": "01a170fb-8ccb-7c81-8f85-d047943fc525",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "strictly-necessary",
+        "duration": "Until the reader signs out, the chat refuses the token or the visitor clears it",
+        "surfaces": [
+          "chat.companygraph.io chat"
+        ],
+        "activity": "Signing a reader in"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-signin.md"
     },
     {
       "id": "01a107ef-d0af-7bfc-b402-b3bdf7d3af7e",
@@ -36263,6 +36558,13 @@
                   "",
                   "",
                   "HTTPS"
+                ],
+                [
+                  "id.blust.ch",
+                  "OpenID Connect",
+                  "",
+                  "",
+                  "HTTPS"
                 ]
               ]
             }
@@ -36297,6 +36599,13 @@
                 "",
                 "",
                 "HTTPS"
+              ],
+              [
+                "id.blust.ch",
+                "OpenID Connect",
+                "",
+                "",
+                "HTTPS"
               ]
             ]
           }
@@ -36317,6 +36626,11 @@
                   "Conversation",
                   "Question log",
                   "writes"
+                ],
+                [
+                  "Reader",
+                  "Reader's month",
+                  "writes"
                 ]
               ]
             }
@@ -36332,6 +36646,11 @@
               [
                 "Conversation",
                 "Question log",
+                "writes"
+              ],
+              [
+                "Reader",
+                "Reader's month",
                 "writes"
               ]
             ]
@@ -36784,6 +37103,95 @@
       ],
       "owner": null,
       "path": "model/systems/github-pages.md"
+    },
+    {
+      "id": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "address": "systems/id-blust-ch",
+      "type": "system",
+      "name": "id.blust.ch",
+      "tagline": "Signs readers in to the chat with ZITADEL, the identity service blust.ch runs at id.blust.ch in Google Cloud's Zurich region, by invitation only, and issues the token from which the chat server reads the models a reader may choose.",
+      "fields": {
+        "id": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+        "source": "Local",
+        "kind": "SaaS",
+        "owner": "Owner",
+        "processor": "Google Cloud",
+        "serves": [
+          "Answering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Reader",
+                  "Reader account",
+                  "master"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Reader",
+                "Reader account",
+                "master"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The service's source, infrastructure and the owner's steps",
+                  "https://github.com/robertblust/id-blust-ch"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The service's source, infrastructure and the owner's steps",
+                "https://github.com/robertblust/id-blust-ch"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/id-blust-ch.md"
     },
     {
       "id": "01a1256e-8662-7925-9097-a884e87a2658",
@@ -49785,10 +50193,30 @@
     },
     {
       "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "OpenID Connect",
+        "Service": "",
+        "Carries": "",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
       "to": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
       "via": "Holds.Concept",
       "attrs": {
         "Data object": "01a12590-2b1d-758d-a75f-605949596608",
+        "Access": "writes"
+      }
+    },
+    {
+      "from": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "to": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a170fc-526e-7513-a7a5-24a2b33d5b1c",
         "Access": "writes"
       }
     },
@@ -53270,6 +53698,163 @@
       "from": "01a13dd7-fc77-7058-aa34-086986674292",
       "to": "01a0c1d6-f408-750f-a4c2-51a5ffe23686",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-8ccb-7c81-8f85-d047943fc525",
+      "to": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "via": "activity",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-8ccb-7c81-8f85-d047943fc525",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-8ccb-7c81-8f85-d047943fc525",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-9bcf-7ca4-bb3a-a51ba8fd1811",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-9bcf-7ca4-bb3a-a51ba8fd1811",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-aad7-72a4-afc8-f0979e1d13f3",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-aad7-72a4-afc8-f0979e1d13f3",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The reader's name, email address and roles, held by id.blust.ch in its Zurich region, and the access token each message carries"
+      }
+    },
+    {
+      "from": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "What the reader's answers cost this month, in its Zurich region, under a key the chat cannot turn back into the account"
+      }
+    },
+    {
+      "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "to": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a170fc-42fd-7d47-b431-384023193267",
+        "Access": "master"
+      }
+    },
+    {
+      "from": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "to": "01a1256e-7726-7a24-8893-05b527b55325",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "to": "01a0c29a-9610-7d3a-a3de-244a58f09307",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-42fd-7d47-b431-384023193267",
+      "to": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-42fd-7d47-b431-384023193267",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-526e-7513-a7a5-24a2b33d5b1c",
+      "to": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "via": "realizes",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fc-526e-7513-a7a5-24a2b33d5b1c",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
       "attrs": {}
     }
   ],
