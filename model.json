@@ -1,5 +1,5 @@
 {
-  "commit": "4088f5a1d23be63f43953ed1eae5eb1740f6eb8d",
+  "commit": "0ac1a6a611182eff8d3e60c2cb5745536bce5fb3",
   "root": "Meta-model",
   "rootId": null,
   "types": [
@@ -10527,6 +10527,12 @@
                   "No",
                   "array of ref → rule",
                   "The company's rules this requirement carries into the product, each the H1 of a file in `rules/`"
+                ],
+                [
+                  "`realization`",
+                  "No",
+                  "ref → requirement-realization",
+                  "How far the requirement is realized, the H1 of a file in `requirement-realizations/`"
                 ]
               ]
             }
@@ -10575,6 +10581,12 @@
                 "No",
                 "array of ref → rule",
                 "The company's rules this requirement carries into the product, each the H1 of a file in `rules/`"
+              ],
+              [
+                "`realization`",
+                "No",
+                "ref → requirement-realization",
+                "How far the requirement is realized, the H1 of a file in `requirement-realizations/`"
               ]
             ]
           }
@@ -10617,9 +10629,19 @@
                   "Table. The features, products and use cases the requirement is about, at least one; its columns are declared below."
                 ],
                 [
+                  "`## Realization`",
+                  "No",
+                  "What is realized and what is missing, measured against `## Fit criterion`"
+                ],
+                [
+                  "`## Evidence`",
+                  "No",
+                  "Table. What satisfies or verifies the realization, each at the commit it was seen at; its columns are declared below."
+                ],
+                [
                   "`## References`",
                   "No",
-                  "Table. The specification it was drawn from, the standard behind it, the test that proves it; its columns are declared below."
+                  "Table. The specification it was drawn from, the standard behind it; its columns are declared below."
                 ]
               ]
             },
@@ -10643,6 +10665,35 @@
                   "Yes",
                   "ref → by Type",
                   "The feature, product or use case, by its canonical name"
+                ]
+              ]
+            },
+            {
+              "caption": "`## Evidence` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "What the row is: a file, a test, a recorded run"
+                ],
+                [
+                  "`Shows`",
+                  "Yes",
+                  "enum",
+                  "`satisfies` or `verifies`. The row builds the requirement, or it observes what the fit criterion observes (SysML)."
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is, a permalink at the commit it was seen at"
                 ]
               ]
             },
@@ -10704,9 +10755,19 @@
                 "Table. The features, products and use cases the requirement is about, at least one; its columns are declared below."
               ],
               [
+                "`## Realization`",
+                "No",
+                "What is realized and what is missing, measured against `## Fit criterion`"
+              ],
+              [
+                "`## Evidence`",
+                "No",
+                "Table. What satisfies or verifies the realization, each at the commit it was seen at; its columns are declared below."
+              ],
+              [
                 "`## References`",
                 "No",
-                "Table. The specification it was drawn from, the standard behind it, the test that proves it; its columns are declared below."
+                "Table. The specification it was drawn from, the standard behind it; its columns are declared below."
               ]
             ]
           }
@@ -10718,7 +10779,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The tagline says one thing, so that a product could be shown to meet it or to miss it; a statement that joins two with \"and\" is two requirements.\n- The tagline says what, not how: it names no component, library or vendor unless `kind` is `constraint`.\n- `modality` is the strength the tagline states, and a tagline that says \"must not\" carries `must`.\n- `## Fit criterion` names what is observed and what counts as met, with the measure and the conditions it is taken under where it is a quantity; \"works well\" is no criterion.\n- `kind` is `quality` where `## Fit criterion` measures how well the product does something rather than whether it does it.\n- `## Applies to` names the narrowest subject that carries the requirement: a feature where one feature does, a product where every feature of it does.\n- `follows` names a rule only where the requirement exists because of it.\n- `## Why` says the need, not the solution.\n- `source-id`, on a page drawn from a specification, is the label the specification gives it, so a test that cites the label still finds the page.\n- The page holds no priority, status, release or date; each moves, and a References row says where they are kept.\n- The page writes names and prose in American English (R14).",
+          "text": "- The tagline says one thing, so that a product could be shown to meet it or to miss it; a statement that joins two with \"and\" is two requirements.\n- The tagline says what, not how: it names no component, library or vendor unless `kind` is `constraint`.\n- `modality` is the strength the tagline states, and a tagline that says \"must not\" carries `must`.\n- `## Fit criterion` names what is observed and what counts as met, with the measure and the conditions it is taken under where it is a quantity; \"works well\" is no criterion.\n- `kind` is `quality` where `## Fit criterion` measures how well the product does something rather than whether it does it.\n- `## Applies to` names the narrowest subject that carries the requirement: a feature where one feature does, a product where every feature of it does.\n- `follows` names a rule only where the requirement exists because of it.\n- `## Why` says the need, not the solution.\n- `source-id`, on a page drawn from a specification, is the label the specification gives it, so a test that cites the label still finds the page.\n- The page holds no priority, status, release or date, since each moves, and a References row says where they are kept. `realization` is the one value on the page that moves, and `## Evidence` is what shows it.\n- `## Realization` and `## Evidence` stand only on a page that names a `realization`.\n- `URL`, in `## Evidence`, is a permalink at a commit, never a branch.\n- `## Evidence`, on a page that names a `realization`, holds the test that verifies it, and `## References` holds the documents the requirement was drawn from.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -10729,6 +10790,210 @@
       ],
       "owner": null,
       "path": "packs/requirements/requirement-schema.md"
+    },
+    {
+      "id": "01a17b6e-5dff-7a17-99e4-333034d24b3d",
+      "address": "requirements/requirement-realization",
+      "type": "requirements",
+      "name": "Requirement Realization Schema",
+      "tagline": "Required structure for requirement realization files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The level's place on the scale, rising with how far a requirement at it is realized. Spaced in tens so a level can be added without renumbering the others."
+                ],
+                [
+                  "`evidence`",
+                  "Yes",
+                  "enum",
+                  "`none`, `satisfies` or `verifies`. What a requirement at this level must show in its `## Evidence`: nothing; at least one row, of either kind; or at least one row whose `Shows` is `verifies` (SysML's satisfy and verify)."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The level's place on the scale, rising with how far a requirement at it is realized. Spaced in tens so a level can be added without renumbering the others."
+              ],
+              [
+                "`evidence`",
+                "Yes",
+                "enum",
+                "`none`, `satisfies` or `verifies`. What a requirement at this level must show in its `## Evidence`: nothing; at least one row, of either kind; or at least one row whose `Shows` is `verifies` (SysML's satisfy and verify)."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every requirement realized to this level references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the level means"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "What a requirement at this level has realized, what moves it into the level and out of it, and what a reader may rely on while it is there"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the level; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a scale, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every requirement realized to this level references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the level means"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "What a requirement at this level has realized, what moves it into the level and out of it, and what a reader may rely on while it is there"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the level; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A level answers \"how far is this realized, and what shows it?\" for whoever relies on the product meeting a requirement, measured against its fit criterion. It is not a status, and how far the specification answers the requirement is derived from the decisions and questions that name it. A page names the level it has reached, so what each level licenses a reader to rely on is written once here rather than guessed from a word.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` says what a page at this level has realized, what moves a page into the level and out of it, and what a reader may rely on while it is there.\n- `evidence` is the least a page at this level must show.\n- The H1 names how far a page at the level is realized, `Built`, `Verified`, and never a verdict on the work.\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/requirement-realizations/*.md`\n\nA requirement realization owns nothing and nothing owns it, so it is a file, and every requirement realized to it names it in `realization`. It sits at the container root beside `requirements/`, as `decision-statuses/` sits beside `decisions/`, because the levels belong to the instance and not to one page.\n\nThe set is the instance's own. Which levels a company tells apart, whether it separates built from shown, whether it has a level for part of a requirement, is a fact about the company, and a level arriving later is one file here, not a release of the meta-model.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/requirements/requirement-realization-schema.md"
     },
     {
       "id": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
@@ -10798,6 +11063,12 @@
                   "No",
                   "array of ref → use-case",
                   "The subordinate use cases its steps call, each the H1 of another file in `use-cases/` (UML include)"
+                ],
+                [
+                  "`realization`",
+                  "No",
+                  "ref → use-case-realization",
+                  "How far the use case is realized, the H1 of a file in `use-case-realizations/`"
                 ]
               ]
             }
@@ -10858,6 +11129,12 @@
                 "No",
                 "array of ref → use-case",
                 "The subordinate use cases its steps call, each the H1 of another file in `use-cases/` (UML include)"
+              ],
+              [
+                "`realization`",
+                "No",
+                "ref → use-case-realization",
+                "How far the use case is realized, the H1 of a file in `use-case-realizations/`"
               ]
             ]
           }
@@ -10918,6 +11195,16 @@
                   "`## Success guarantees`",
                   "Yes",
                   "Bulleted. What holds when the goal is reached, one item each"
+                ],
+                [
+                  "`## Realization`",
+                  "No",
+                  "What is realized and what is missing, measured against its scenario, extensions and guarantees"
+                ],
+                [
+                  "`## Evidence`",
+                  "No",
+                  "Table. What satisfies or verifies the realization, each at the commit it was seen at; its columns are declared below."
                 ],
                 [
                   "`## References`",
@@ -11008,6 +11295,35 @@
               ]
             },
             {
+              "caption": "`## Evidence` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "What the row is: a file, a test, a recorded run"
+                ],
+                [
+                  "`Shows`",
+                  "Yes",
+                  "enum",
+                  "`satisfies` or `verifies`. The row builds the use case, or it observes what the scenario and guarantees observe (SysML)."
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is, a permalink at the commit it was seen at"
+                ]
+              ]
+            },
+            {
               "caption": "`## References` is a table with these columns:",
               "columns": [
                 "Column",
@@ -11085,6 +11401,16 @@
                 "Bulleted. What holds when the goal is reached, one item each"
               ],
               [
+                "`## Realization`",
+                "No",
+                "What is realized and what is missing, measured against its scenario, extensions and guarantees"
+              ],
+              [
+                "`## Evidence`",
+                "No",
+                "Table. What satisfies or verifies the realization, each at the commit it was seen at; its columns are declared below."
+              ],
+              [
                 "`## References`",
                 "No",
                 "Table. What a reader can open to learn more about the use case; its columns are declared below."
@@ -11099,7 +11425,7 @@
         },
         {
           "heading": "Writing rules",
-          "text": "- The H1 is the primary actor's goal as a short active verb phrase, `Download an invoice`, and never a screen or a feature's name.\n- The tagline says what the primary actor wants and what they have when it is done, in their words.\n- `level` is `user goal` where the primary actor gets the goal done in one sitting and goes away content; a goal that gathers several of those is a summary, and one that no actor would stop after is a subfunction.\n- `primary-actor` names a seat where the company has one for whoever has the goal, and otherwise the actor as the company calls them: `Customer`, `Payment provider`.\n- `## Stakeholders and interests` names every party whose interest the use case must protect, the primary actor among them, and each Interest says what the party needs, not what it does.\n- Each row of `## Main success scenario` is one actor doing one thing that moves toward the goal; a condition is an extension, never a step.\n- `Action`, in a step that calls a subordinate use case, names that use case by its H1, and every use case in `includes` is named so in some step.\n- `includes` names use cases at the page's `level` or below, in the order `level` lists them: a summary may call a user goal, and a subfunction calls no summary.\n- `Condition`, in `## Extensions`, is something the system can detect, not something an actor feels.\n- `## Minimal guarantees` hold however the use case ends, an extension that gives up included, and `## Success guarantees` only when the goal is reached.\n- `Action` names an aggregate, an invariant or an event, where a step needs one, in words: they are another pack's types, and the page draws no edge to them.\n- The page writes names and prose in American English (R14).",
+          "text": "- The H1 is the primary actor's goal as a short active verb phrase, `Download an invoice`, and never a screen or a feature's name.\n- The tagline says what the primary actor wants and what they have when it is done, in their words.\n- `level` is `user goal` where the primary actor gets the goal done in one sitting and goes away content; a goal that gathers several of those is a summary, and one that no actor would stop after is a subfunction.\n- `primary-actor` names a seat where the company has one for whoever has the goal, and otherwise the actor as the company calls them: `Customer`, `Payment provider`.\n- `## Stakeholders and interests` names every party whose interest the use case must protect, the primary actor among them, and each Interest says what the party needs, not what it does.\n- Each row of `## Main success scenario` is one actor doing one thing that moves toward the goal; a condition is an extension, never a step.\n- `Action`, in a step that calls a subordinate use case, names that use case by its H1, and every use case in `includes` is named so in some step.\n- `includes` names use cases at the page's `level` or below, in the order `level` lists them: a summary may call a user goal, and a subfunction calls no summary.\n- `Condition`, in `## Extensions`, is something the system can detect, not something an actor feels.\n- `## Minimal guarantees` hold however the use case ends, an extension that gives up included, and `## Success guarantees` only when the goal is reached.\n- `Action` names an aggregate, an invariant or an event, where a step needs one, in words: they are another pack's types, and the page draws no edge to them.\n- `realization` is the one value on the page that moves, and `## Evidence` is what shows it.\n- `## Realization` and `## Evidence` stand only on a page that names a `realization`.\n- `URL`, in `## Evidence`, is a permalink at a commit, never a branch.\n- The page writes names and prose in American English (R14).",
           "tables": []
         },
         {
@@ -11110,6 +11436,210 @@
       ],
       "owner": null,
       "path": "packs/requirements/use-case-schema.md"
+    },
+    {
+      "id": "01a17b6e-5e35-7b41-9700-5a5d856ad527",
+      "address": "requirements/use-case-realization",
+      "type": "requirements",
+      "name": "Use Case Realization Schema",
+      "tagline": "Required structure for use case realization files.",
+      "fields": {},
+      "sections": [
+        {
+          "heading": "Frontmatter",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Field",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`id`",
+                  "Yes",
+                  "string",
+                  "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+                ],
+                [
+                  "`source`",
+                  "Yes",
+                  "ref → source",
+                  "Where this page's facts are mastered, the H1 of a file in `sources/`"
+                ],
+                [
+                  "`source-id`",
+                  "No",
+                  "string",
+                  "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+                ],
+                [
+                  "`rank`",
+                  "Yes",
+                  "number",
+                  "The level's place on the scale, rising with how far a use case at it is realized. Spaced in tens so a level can be added without renumbering the others."
+                ],
+                [
+                  "`evidence`",
+                  "Yes",
+                  "enum",
+                  "`none`, `satisfies` or `verifies`. What a use case at this level must show in its `## Evidence`: nothing; at least one row, of either kind; or at least one row whose `Shows` is `verifies` (SysML's satisfy and verify)."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Field",
+              "Required",
+              "Type",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`id`",
+                "Yes",
+                "string",
+                "What identifies this entity for as long as it exists, in the format `model/identifier.md` declares (R18)"
+              ],
+              [
+                "`source`",
+                "Yes",
+                "ref → source",
+                "Where this page's facts are mastered, the H1 of a file in `sources/`"
+              ],
+              [
+                "`source-id`",
+                "No",
+                "string",
+                "The identifier this page has in its source. Absent when the source has none, as a repository does not."
+              ],
+              [
+                "`rank`",
+                "Yes",
+                "number",
+                "The level's place on the scale, rising with how far a use case at it is realized. Spaced in tens so a level can be added without renumbering the others."
+              ],
+              [
+                "`evidence`",
+                "Yes",
+                "enum",
+                "`none`, `satisfies` or `verifies`. What a use case at this level must show in its `## Evidence`: nothing; at least one row, of either kind; or at least one row whose `Shows` is `verifies` (SysML's satisfy and verify)."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Sections",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Section",
+                "Required",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`# [Label]`",
+                  "Yes",
+                  "The canonical name. Every use case realized to this level references this exact string."
+                ],
+                [
+                  "`> [Summary]`",
+                  "Yes",
+                  "One-paragraph summary of what the level means"
+                ],
+                [
+                  "`## What it means`",
+                  "Yes",
+                  "What a use case at this level has realized, what moves it into the level and out of it, and what a reader may rely on while it is there"
+                ],
+                [
+                  "`## References`",
+                  "No",
+                  "Table. What a reader can open to learn more about the level; its columns are declared below."
+                ]
+              ]
+            },
+            {
+              "caption": "`## References` is a table with these columns:",
+              "columns": [
+                "Column",
+                "Required",
+                "Type",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "`What`",
+                  "Yes",
+                  "string",
+                  "The kind of document — a scale, a standard"
+                ],
+                [
+                  "`URL`",
+                  "Yes",
+                  "string",
+                  "Where it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Section",
+              "Required",
+              "Description"
+            ],
+            "rows": [
+              [
+                "`# [Label]`",
+                "Yes",
+                "The canonical name. Every use case realized to this level references this exact string."
+              ],
+              [
+                "`> [Summary]`",
+                "Yes",
+                "One-paragraph summary of what the level means"
+              ],
+              [
+                "`## What it means`",
+                "Yes",
+                "What a use case at this level has realized, what moves it into the level and out of it, and what a reader may rely on while it is there"
+              ],
+              [
+                "`## References`",
+                "No",
+                "Table. What a reader can open to learn more about the level; its columns are declared below."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Purpose",
+          "text": "A level answers \"how far is this realized, and what shows it?\" for whoever relies on the product meeting a use case, measured against its scenario, extensions and guarantees. It is not a status, and how far the specification answers the use case is derived from the decisions and questions that name it. A page names the level it has reached, so what each level licenses a reader to rely on is written once here rather than guessed from a word.",
+          "tables": []
+        },
+        {
+          "heading": "Writing rules",
+          "text": "- `## What it means` says what a page at this level has realized, what moves a page into the level and out of it, and what a reader may rely on while it is there.\n- `evidence` is the least a page at this level must show.\n- The H1 names how far a page at the level is realized, `Main scenario runs`, `Runs end to end`, and never a verdict on the work.\n- The page writes names and prose in American English (R14).",
+          "tables": []
+        },
+        {
+          "heading": "File Location",
+          "text": "`model/use-case-realizations/*.md`\n\nA use case realization owns nothing and nothing owns it, so it is a file, and every use case realized to it names it in `realization`. It sits at the container root beside `use-cases/`, as `decision-statuses/` sits beside `decisions/`, because the levels belong to the instance and not to one page.\n\nThe set is the instance's own. Which levels a company tells apart, whether it separates built from shown, whether it tells a main scenario that runs from one whose extensions run too, is a fact about the company, and a level arriving later is one file here, not a release of the meta-model.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "packs/requirements/use-case-realization-schema.md"
     },
     {
       "id": "01a0f94d-fa63-7c7e-8af5-b2d7e5b870cf",
@@ -13701,6 +14231,15 @@
       "label": "source"
     },
     {
+      "from": "01a17b6e-5dff-7a17-99e4-333034d24b3d",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
       "from": "01a12af5-ba03-7c84-98a2-79c3c0928b4c",
       "to": "01a0fb19-951b-79e6-aaf4-dfd05c5bdc60",
       "via": "follows",
@@ -13711,6 +14250,24 @@
     },
     {
       "from": "01a12af5-ba03-7c84-98a2-79c3c0928b4c",
+      "to": "01a17b6e-5dff-7a17-99e4-333034d24b3d",
+      "via": "realization",
+      "attrs": {
+        "type": "ref → requirement-realization"
+      },
+      "label": "realization"
+    },
+    {
+      "from": "01a12af5-ba03-7c84-98a2-79c3c0928b4c",
+      "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
+      "via": "source",
+      "attrs": {
+        "type": "ref → source"
+      },
+      "label": "source"
+    },
+    {
+      "from": "01a17b6e-5e35-7b41-9700-5a5d856ad527",
       "to": "01a03a36-9dc8-749f-a36f-4d922c5d16a8",
       "via": "source",
       "attrs": {
@@ -13762,6 +14319,15 @@
         "type": "ref? → seat"
       },
       "label": "primary-actor"
+    },
+    {
+      "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",
+      "to": "01a17b6e-5e35-7b41-9700-5a5d856ad527",
+      "via": "realization",
+      "attrs": {
+        "type": "ref → use-case-realization"
+      },
+      "label": "realization"
     },
     {
       "from": "01a12af5-b9cd-7a47-aec7-4fe31d66d287",

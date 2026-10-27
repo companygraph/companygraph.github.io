@@ -1,6 +1,6 @@
 {
-  "commit": "4088f5a1d23be63f43953ed1eae5eb1740f6eb8d",
-  "core": "0.69.0",
+  "commit": "0ac1a6a611182eff8d3e60c2cb5745536bce5fb3",
+  "core": "0.70.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -185,6 +185,12 @@
       "singular": false
     },
     {
+      "type": "requirement-realization",
+      "folder": "requirement-realizations",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "risk",
       "folder": "risks",
       "owner": null,
@@ -265,6 +271,12 @@
     {
       "type": "use-case",
       "folder": "use-cases",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "use-case-realization",
+      "folder": "use-case-realizations",
       "owner": null,
       "singular": false
     },
@@ -4427,6 +4439,72 @@
       "path": "example/model/questions/who-split-billing-out-of-the-monolith.md"
     },
     {
+      "id": "01a17b7c-3a25-710d-b211-d64e9e435345",
+      "address": "requirement-realizations/built",
+      "type": "requirement-realization",
+      "name": "Built",
+      "tagline": "The requirement is built, and no test yet observes what its fit criterion observes.",
+      "fields": {
+        "id": "01a17b7c-3a25-710d-b211-d64e9e435345",
+        "source": "Local",
+        "rank": "20",
+        "evidence": "satisfies"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A requirement is Built when the product has the code that meets it and the page shows where, in at least one `## Evidence` row. A page enters the level when that row is added, moves up to Verified when a test observes the fit criterion, and moves down to Not started when the code is removed. While a requirement is Built, a reader may rely on the behavior being there and not on its staying so, because nothing yet fails when it stops.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/requirement-realizations/built.md"
+    },
+    {
+      "id": "01a17b7c-3a64-732e-a3e2-8f638c3f3ff2",
+      "address": "requirement-realizations/not-started",
+      "type": "requirement-realization",
+      "name": "Not started",
+      "tagline": "Nothing in the product meets the requirement yet.",
+      "fields": {
+        "id": "01a17b7c-3a64-732e-a3e2-8f638c3f3ff2",
+        "source": "Local",
+        "rank": "10",
+        "evidence": "none"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A requirement is Not started when no code meets it, and its page needs no `## Evidence`. A page enters the level when the requirement is written and leaves it when code that meets the requirement is built and a row that satisfies it is added. While a requirement is Not started, a reader may not rely on the product meeting it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/requirement-realizations/not-started.md"
+    },
+    {
+      "id": "01a17b7c-39ea-749b-954b-59c39fb1be17",
+      "address": "requirement-realizations/verified",
+      "type": "requirement-realization",
+      "name": "Verified",
+      "tagline": "The requirement is built, and a test observes what its fit criterion observes.",
+      "fields": {
+        "id": "01a17b7c-39ea-749b-954b-59c39fb1be17",
+        "source": "Local",
+        "rank": "30",
+        "evidence": "verifies"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A requirement is Verified when it is built and at least one test or recorded run observes what its fit criterion observes. A page enters the level when an `## Evidence` row shows `verifies`, and leaves it when that test is removed or no longer observes the fit criterion. While a requirement is Verified, a reader may rely on the product meeting it as long as the test passes.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/requirement-realizations/verified.md"
+    },
+    {
       "id": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
       "address": "requirements/a-copy-is-the-invoice-as-issued",
       "type": "requirement",
@@ -4436,7 +4514,8 @@
         "id": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
         "source": "Local",
         "kind": "functional",
-        "modality": "must"
+        "modality": "must",
+        "realization": "Built"
       },
       "sections": [
         {
@@ -4477,6 +4556,47 @@
               [
                 "use-case",
                 "Download an invoice"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Realization",
+          "text": "A downloaded copy is rendered from the stored issued invoice, so it does not follow later changes to the invoice's lines. No test yet downloads a copy again after a credit note.",
+          "tables": []
+        },
+        {
+          "heading": "Evidence",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "Shows",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Invoice rendering from the stored issue",
+                  "satisfies",
+                  "https://example.org/billing-service/blob/3f2a9c1/src/invoices/render.ts"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "Shows",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Invoice rendering from the stored issue",
+                "satisfies",
+                "https://example.org/billing-service/blob/3f2a9c1/src/invoices/render.ts"
               ]
             ]
           }
@@ -5243,6 +5363,72 @@
       "path": "example/model/systems/invoice-mailer.md"
     },
     {
+      "id": "01a17b8e-0a61-7da5-90bd-7b421db1b2cc",
+      "address": "use-case-realizations/main-scenario-runs",
+      "type": "use-case-realization",
+      "name": "Main scenario runs",
+      "tagline": "The main success scenario runs from the trigger to the goal, and the use case does not yet run end to end.",
+      "fields": {
+        "id": "01a17b8e-0a61-7da5-90bd-7b421db1b2cc",
+        "source": "Local",
+        "rank": "20",
+        "evidence": "satisfies"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A use case is at Main scenario runs when the product has the code for every step of its main success scenario and the page shows where, in at least one `## Evidence` row. It stays at the level until every extension is built and a test walks the scenario as well. A page enters the level when the last step is built, moves up to Runs end to end when the last extension is built and a test walks the scenario, and moves down to Not started when a step is removed. While a use case is at this level, a reader may rely on the goal being reached when nothing goes wrong, and not on what `## Realization` names as missing.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/use-case-realizations/main-scenario-runs.md"
+    },
+    {
+      "id": "01a17b8e-0a98-7c35-8952-3016e0a011a9",
+      "address": "use-case-realizations/not-started",
+      "type": "use-case-realization",
+      "name": "Not started",
+      "tagline": "At least one step of the main success scenario is not built yet.",
+      "fields": {
+        "id": "01a17b8e-0a98-7c35-8952-3016e0a011a9",
+        "source": "Local",
+        "rank": "10",
+        "evidence": "none"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A use case is Not started while some step of its main success scenario has no code behind it, and its page needs no `## Evidence`. A page enters the level when the use case is written and leaves it when the last step of the main success scenario is built and a row that satisfies it is added. While a use case is Not started, a reader may not rely on the primary actor reaching the goal.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/use-case-realizations/not-started.md"
+    },
+    {
+      "id": "01a17b8e-0a28-77f9-bb61-29b5265b908a",
+      "address": "use-case-realizations/runs-end-to-end",
+      "type": "use-case-realization",
+      "name": "Runs end to end",
+      "tagline": "The main success scenario and every extension run, and a test walks the scenario and observes its guarantees.",
+      "fields": {
+        "id": "01a17b8e-0a28-77f9-bb61-29b5265b908a",
+        "source": "Local",
+        "rank": "30",
+        "evidence": "verifies"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A use case Runs end to end when every step of its main success scenario and every extension is built, and at least one test or recorded run walks the scenario and observes what its success guarantees promise. A page enters the level when the last of the two is in place, every extension built and an `## Evidence` row that shows `verifies`, and moves down to Main scenario runs when an extension is removed or the test no longer walks the scenario. While a use case Runs end to end, a reader may rely on every way it can go, as its page tells them.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "example/model/use-case-realizations/runs-end-to-end.md"
+    },
+    {
       "id": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
       "address": "use-cases/download-an-invoice",
       "type": "use-case",
@@ -5259,7 +5445,8 @@
         ],
         "includes": [
           "Find an invoice"
-        ]
+        ],
+        "realization": "Main scenario runs"
       },
       "sections": [
         {
@@ -5418,6 +5605,57 @@
           "heading": "Success guarantees",
           "text": "- The payer holds a copy that matches what the Invoice Page showed on the day the invoice was issued.",
           "tables": []
+        },
+        {
+          "heading": "Realization",
+          "text": "Every step of the main success scenario runs, step 1 as far as Find an invoice does, which names no realization of its own. Extension 1a runs too: a payer whose billing period is still open is told when it closes. Extension 3a is not built, so a copy of an invoice with a credit note against it does not yet name the credit note beside it.",
+          "tables": []
+        },
+        {
+          "heading": "Evidence",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "Shows",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Download of an issued invoice",
+                  "satisfies",
+                  "https://example.org/invoice-page/blob/8c41d07/src/download.ts"
+                ],
+                [
+                  "Test that walks the main success scenario",
+                  "verifies",
+                  "https://example.org/invoice-page/blob/8c41d07/test/download.test.ts"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "Shows",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Download of an issued invoice",
+                "satisfies",
+                "https://example.org/invoice-page/blob/8c41d07/src/download.ts"
+              ],
+              [
+                "Test that walks the main success scenario",
+                "verifies",
+                "https://example.org/invoice-page/blob/8c41d07/test/download.test.ts"
+              ]
+            ]
+          }
         }
       ],
       "owner": null,
@@ -7655,6 +7893,12 @@
     },
     {
       "from": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
+      "to": "01a17b8e-0a61-7da5-90bd-7b421db1b2cc",
+      "via": "realization",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-39b2-7ea6-994a-d246d4ab6825",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
@@ -7675,6 +7919,48 @@
     },
     {
       "from": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
+      "to": "01a17b7c-3a25-710d-b211-d64e9e435345",
+      "via": "realization",
+      "attrs": {}
+    },
+    {
+      "from": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a17b7c-39ea-749b-954b-59c39fb1be17",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a17b7c-3a25-710d-b211-d64e9e435345",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a17b7c-3a64-732e-a3e2-8f638c3f3ff2",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a17b8e-0a28-77f9-bb61-29b5265b908a",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a17b8e-0a61-7da5-90bd-7b421db1b2cc",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a17b8e-0a98-7c35-8952-3016e0a011a9",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
