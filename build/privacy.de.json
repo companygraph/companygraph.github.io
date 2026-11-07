@@ -98,5 +98,17 @@
   {
     "en": "That the reader signs in to id.blust.ch, only when they choose to sign in with Google",
     "de": "Dass Sie sich bei id.blust.ch anmelden, nur wenn Sie die Anmeldung mit Google wählen"
+  },
+  {
+    "en": "The name of the chat host the visitor chose with `/backend`, so that the next question goes to the same cloud",
+    "de": "Der Name des Chat-Hosts, den Sie mit `/backend` gewählt haben, damit die nächste Frage an dieselbe Cloud geht"
+  },
+  {
+    "en": "The messages and the visitor's address, on the way to the answer, when the visitor chose the chat on Azure",
+    "de": "Die Nachrichten und Ihre IP-Adresse, während die Antwort entsteht – wenn Sie Azure als Chat-Host gewählt haben"
+  },
+  {
+    "en": "The question and whether the model could answer it, kept in its Switzerland North region with the weekly report made from them, when the visitor chose the chat on Azure",
+    "de": "Die Frage und ob das Modell sie beantworten konnte, aufbewahrt in der Azure-Region Schweiz Nord, zusammen mit dem wöchentlichen Bericht, der aus den Fragen entsteht – wenn Sie Azure als Chat-Host gewählt haben"
   }
 ]
