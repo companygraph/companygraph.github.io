@@ -1,6 +1,6 @@
 {
-  "commit": "9d63a78fab07b9ba704478571a63cb9746c507d1",
-  "core": "0.70.0",
+  "commit": "507dbcbe988b223daeb1e7181093c4ed534535cb",
+  "core": "0.71.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
   "types": [
@@ -14401,12 +14401,15 @@
         "mode": "automated",
         "enforces": [
           "The Owner's word merges"
+        ],
+        "compensated-by": [
+          "An agent's permissions refuse a merge it was not given"
         ]
       },
       "sections": [
         {
           "heading": "How it is carried out",
-          "text": "GitHub's branch protection on each repository's default branch, on every push and every merge into it: it restricts who may push to the Owner's account, so a member of the organization, who holds write access through its base permission, can push a branch and open a pull request and is refused the merge. The protection holds nothing else; the pull request and the checks are what Main takes a change only through a green, current pull request holds. It is set as branch protection and not as a rule of the ruleset, because a ruleset lets only its bypass actors past such a rule, which would turn every merge the Owner makes into a bypass that Merges Past Their Checks counts. An agent working under the Owner's account passes it, so what holds an agent to the Owner's word is An agent's permissions refuse a merge it was not given.",
+          "text": "GitHub's branch protection on each repository's default branch, on every push and every merge into it: it restricts who may push to the Owner's account, so a member of the organization, who holds write access through its base permission, can push a branch and open a pull request and is refused the merge. The protection holds nothing else; the pull request and the checks are what Main takes a change only through a green, current pull request holds. It is set as branch protection and not as a rule of the ruleset, because a ruleset lets only its bypass actors past such a rule, which would turn every merge the Owner makes into a bypass that Merges Past Their Checks counts. An agent working under the Owner's account passes it, so a merge an agent attempts is held to the Owner's word by the agent's permission layer and not by this control.",
           "tables": []
         },
         {
@@ -57109,6 +57112,12 @@
         "Type": "phase",
         "Owner": "Contribution"
       }
+    },
+    {
+      "from": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
+      "to": "01a0ffcb-8a4c-7a08-b84a-358d83c1e9a8",
+      "via": "compensated-by",
+      "attrs": {}
     },
     {
       "from": "01a13b44-b87e-7d94-87ed-b6dee6d92385",
