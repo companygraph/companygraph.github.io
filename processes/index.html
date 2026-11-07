@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2ICm5Qzi48jto4Nqf81bD24cZADfD8SxldaBX8nhlrY=' 'sha256-QzXD/2Z8aOXMW/7VPM/xSqE7B7KYtgwmVfR69kSdtC0=' 'sha256-f+J7k1bqf+5dcsu3sri8dABAotTgRUOAXL+ElmXVN8I=' 'sha256-rLTEOYbiKk6088FQKtfrTbPzFETr/SpZQpbBKTUmlmA=' 'sha256-wLbt3QOffMmXzm6pfOgWCxl3jqWvHRswkmSqmt0frV8='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://chat.companygraph.io https://id.blust.ch; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2ICm5Qzi48jto4Nqf81bD24cZADfD8SxldaBX8nhlrY=' 'sha256-QzXD/2Z8aOXMW/7VPM/xSqE7B7KYtgwmVfR69kSdtC0=' 'sha256-f+J7k1bqf+5dcsu3sri8dABAotTgRUOAXL+ElmXVN8I=' 'sha256-rLTEOYbiKk6088FQKtfrTbPzFETr/SpZQpbBKTUmlmA=' 'sha256-wLbt3QOffMmXzm6pfOgWCxl3jqWvHRswkmSqmt0frV8='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://chat.companygraph.io https://id.blust.ch https://chat.azure.companygraph.io; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Processes — CompanyGraph</title>
 <meta id="metadesc" name="description" content="CompanyGraph's processes and the seats they name: an AI agent holds most of the seats, and every gate is approved by a seat a person holds.">
@@ -836,6 +836,6 @@
 </script>
 
 <!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
-<script src="../chat.js" data-chat="https://chat.companygraph.io/chat" data-issuer="https://id.blust.ch" data-client="396565550655875440" data-org="396565550404217200" data-project="396565550420994416" data-model="/" data-questions="/company.json" data-questions-de="/questions.de.json"></script>
+<script src="../chat.js" data-chat="https://chat.companygraph.io/chat" data-chat-backends="google=https://chat.companygraph.io/chat azure=https://chat.azure.companygraph.io/chat" data-issuer="https://id.blust.ch" data-client="396565550655875440" data-org="396565550404217200" data-project="396565550420994416" data-model="/" data-questions="/company.json" data-questions-de="/questions.de.json"></script>
 </body>
 </html>
