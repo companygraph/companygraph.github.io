@@ -1,5 +1,5 @@
 {
-  "commit": "507dbcbe988b223daeb1e7181093c4ed534535cb",
+  "commit": "7aec8870795ca3c221ea1b1af56c593d8943676a",
   "core": "0.71.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -12728,7 +12728,7 @@
       "sections": [
         {
           "heading": "How it is carried out",
-          "text": "The deploy job that mcp.companygraph.io's workflow calls from the MCP server, on every push to main, once Terraform has applied: it calls the live server's own `list_types` tool, reads the commit every answer names under `model`, and fails unless it is the commit `source.json` pins. A deploy that applied cleanly but left an earlier revision serving, or one built from another commit, then turns the run red instead of reading as done.",
+          "text": "The deploy job that mcp.companygraph.io's workflow calls from the MCP server, on every push to main, once Terraform has applied: it calls the live server's own `list_types` tool, reads the commit every answer names under `model`, and fails unless it is the commit `source.json` pins. A deploy that applied cleanly but left an earlier revision serving, or one built from another commit, then turns the run red instead of reading as done. The deploy of mcp.azure.companygraph.io asks the same of its server, from the same release's Azure workflow.",
           "tables": []
         },
         {
@@ -12785,6 +12785,10 @@
                 [
                   "The workflow that calls it",
                   "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/deploy.yml"
+                ],
+                [
+                  "The workflow that calls it on Azure",
+                  "https://github.com/companygraph/mcp-azure-companygraph-io/blob/main/.github/workflows/deploy.yml"
                 ]
               ]
             }
@@ -12803,6 +12807,10 @@
               [
                 "The workflow that calls it",
                 "https://github.com/companygraph/mcp-companygraph-io/blob/main/.github/workflows/deploy.yml"
+              ],
+              [
+                "The workflow that calls it on Azure",
+                "https://github.com/companygraph/mcp-azure-companygraph-io/blob/main/.github/workflows/deploy.yml"
               ]
             ]
           }
@@ -15280,6 +15288,74 @@
       ],
       "owner": null,
       "path": "model/data-processors/google-cloud.md"
+    },
+    {
+      "id": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "address": "data-processors/microsoft-azure",
+      "type": "data-processor",
+      "name": "Microsoft Azure",
+      "tagline": "Runs the second copies of the chat service and the MCP server in its Switzerland North region and keeps there the chat's log of questions and its meter; no reader signs in on this copy, so no account and no reader's month is kept here.",
+      "fields": {
+        "id": "01a1b576-f8e4-7c86-9550-243ff339844b",
+        "source": "Local",
+        "legal-name": "Microsoft Ireland Operations Limited",
+        "countries": [
+          "CH"
+        ],
+        "sub-processor-authorization": "general"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Products and Services Data Protection Addendum",
+                  "https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA"
+                ],
+                [
+                  "Sub-processor list",
+                  "https://aka.ms/subprocessor"
+                ],
+                [
+                  "Microsoft's GDPR commitments",
+                  "https://learn.microsoft.com/legal/gdpr"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Products and Services Data Protection Addendum",
+                "https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA"
+              ],
+              [
+                "Sub-processor list",
+                "https://aka.ms/subprocessor"
+              ],
+              [
+                "Microsoft's GDPR commitments",
+                "https://learn.microsoft.com/legal/gdpr"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-processors/microsoft-azure.md"
     },
     {
       "id": "01a107de-42df-7ec1-ab8f-49d478a1abc2",
@@ -18717,7 +18793,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "The MCP server and the chat server run here as containers on Cloud Run, reached at mcp.companygraph.io and chat.companygraph.io, and the Site build's pages are served here by GitHub Pages at companygraph.io. CompanyGraph's own seats deploy to it by merging to the repository that pins what runs: a merge to mcp-companygraph-io builds and releases the servers, a merge to companygraph.github.io publishes the site. Nobody deploys to it by hand, and nothing runs here that a merge did not put there. It holds the public model at one pinned commit, and the Question log the chat writes, which is what real visitors asked and the only data here that is anyone's. A developer's machine, where a server runs against a checkout before a change ships, is not it, and no test stage stands between the two.",
+          "text": "The MCP server and the chat server run here as containers on Cloud Run, reached at mcp.companygraph.io and chat.companygraph.io, and the Site build's pages are served here by GitHub Pages at companygraph.io. The same two servers run here a second time, as containers on Azure Container Apps in Microsoft Azure's Switzerland North region, reached at mcp.azure.companygraph.io and chat.azure.companygraph.io, which a merge to mcp-azure-companygraph-io deploys the same way. CompanyGraph's own seats deploy to it by merging to the repository that pins what runs: a merge to mcp-companygraph-io builds and releases the servers, a merge to companygraph.github.io publishes the site. Nobody deploys to it by hand, and nothing runs here that a merge did not put there. It holds the public model at one pinned commit, and the Question log the chat writes, which is what real visitors asked and the only data here that is anyone's. A developer's machine, where a server runs against a checkout before a change ships, is not it, and no test stage stands between the two.",
           "tables": []
         },
         {
@@ -18746,6 +18822,14 @@
                 [
                   "The MCP server's page",
                   "https://mcp.companygraph.io"
+                ],
+                [
+                  "The pipeline that deploys the servers on Azure",
+                  "https://github.com/companygraph/mcp-azure-companygraph-io/blob/main/.github/workflows/deploy.yml"
+                ],
+                [
+                  "The MCP server on Azure's page",
+                  "https://mcp.azure.companygraph.io"
                 ]
               ]
             }
@@ -18772,6 +18856,14 @@
               [
                 "The MCP server's page",
                 "https://mcp.companygraph.io"
+              ],
+              [
+                "The pipeline that deploys the servers on Azure",
+                "https://github.com/companygraph/mcp-azure-companygraph-io/blob/main/.github/workflows/deploy.yml"
+              ],
+              [
+                "The MCP server on Azure's page",
+                "https://mcp.azure.companygraph.io"
               ]
             ]
           }
@@ -21665,7 +21757,7 @@
       "sections": [
         {
           "heading": "How it is measured",
-          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nThe deployments of a calendar month in UTC that were followed, before the next planned change to the same surface or package, by a revert, a fix or a re-pin made because of them, divided by all deployments of that month. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io and companygraph/mcp-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. A failure is what a visitor, an agent or a check against the live surface met, or what an instance that installed the release met, not a workflow run that failed before publishing anything.",
+          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish, and the mcp.azure.companygraph.io MCP server and the chat.azure.companygraph.io chat, which mcp-azure-companygraph-io's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nThe deployments of a calendar month in UTC that were followed, before the next planned change to the same surface or package, by a revert, a fix or a re-pin made because of them, divided by all deployments of that month. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io, companygraph/mcp-companygraph-io and companygraph/mcp-azure-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's and mcp-azure-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. A failure is what a visitor, an agent or a check against the live surface met, or what an instance that installed the release met, not a workflow run that failed before publishing anything.",
           "tables": []
         },
         {
@@ -21729,7 +21821,7 @@
       "sections": [
         {
           "heading": "How it is measured",
-          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nFor each deployment, the time from the earliest commit it carries that no earlier deployment carried to the moment it is live, or for a release, published; a change to the model counts from its commit in companygraph/mental-model to the deployment of the re-pin that carries it. The value is the median over the deployments of a calendar month in UTC, read from the merges to `main` and their times in the GitHub history of companygraph/companygraph.github.io and companygraph/mcp-companygraph-io, from `pages-build-deployment` runs for the site and mcp-companygraph-io's `deploy` and `chat` runs on `main`, and, for a release, from the commit history and GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin.",
+          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish, and the mcp.azure.companygraph.io MCP server and the chat.azure.companygraph.io chat, which mcp-azure-companygraph-io's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nFor each deployment, the time from the earliest commit it carries that no earlier deployment carried to the moment it is live, or for a release, published; a change to the model counts from its commit in companygraph/mental-model to the deployment of the re-pin that carries it. The value is the median over the deployments of a calendar month in UTC, read from the merges to `main` and their times in the GitHub history of companygraph/companygraph.github.io, companygraph/mcp-companygraph-io and companygraph/mcp-azure-companygraph-io, from `pages-build-deployment` runs for the site and mcp-companygraph-io's and mcp-azure-companygraph-io's `deploy` and `chat` runs on `main`, and, for a release, from the commit history and GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin.",
           "tables": []
         },
         {
@@ -21793,7 +21885,7 @@
       "sections": [
         {
           "heading": "How it is measured",
-          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nThe number of deployments in an ISO week, Monday midnight UTC to the next. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io and companygraph/mcp-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. A workflow run that failed and published nothing is not a deployment.",
+          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish, and the mcp.azure.companygraph.io MCP server and the chat.azure.companygraph.io chat, which mcp-azure-companygraph-io's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nThe number of deployments in an ISO week, Monday midnight UTC to the next. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io, companygraph/mcp-companygraph-io and companygraph/mcp-azure-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's and mcp-azure-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. A workflow run that failed and published nothing is not a deployment.",
           "tables": []
         },
         {
@@ -21857,7 +21949,7 @@
       "sections": [
         {
           "heading": "How it is measured",
-          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nThe deployments of a calendar month in UTC made because something in production was wrong or an installed release was broken, a revert, a hotfix, an emergency re-pin or an unplanned patch release, divided by all deployments of that month. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io and companygraph/mcp-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. Whether a deployment is rework is read from why it was made, which its pull request says, not from its size.",
+          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish, and the mcp.azure.companygraph.io MCP server and the chat.azure.companygraph.io chat, which mcp-azure-companygraph-io's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nThe deployments of a calendar month in UTC made because something in production was wrong or an installed release was broken, a revert, a hotfix, an emergency re-pin or an unplanned patch release, divided by all deployments of that month. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io, companygraph/mcp-companygraph-io and companygraph/mcp-azure-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's and mcp-azure-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. Whether a deployment is rework is read from why it was made, which its pull request says, not from its size.",
           "tables": []
         },
         {
@@ -21921,7 +22013,7 @@
       "sections": [
         {
           "heading": "How it is measured",
-          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nFor each failed deployment, as Change Fail Rate counts them, the time from that deployment going live to the deployment that restores the surface going live, whether a revert, a fix, a re-pin to an earlier release or the release that supersedes a failed one being published. The value is the median over a calendar quarter in UTC. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io and companygraph/mcp-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. A failure no deployment caused, a provider's outage, is not counted.",
+          "text": "A deployment is a merge to `main` in a repository whose workflows publish one of this model's surfaces — the companygraph.io website, which GitHub Pages publishes, and the mcp.companygraph.io MCP server and the chat.companygraph.io chat, which that repository's deploy and chat workflows publish, and the mcp.azure.companygraph.io MCP server and the chat.azure.companygraph.io chat, which mcp-azure-companygraph-io's deploy and chat workflows publish — and a release of meta-model, mcp-server, chat-server or the Obsidian plugin, because a release is what someone adopting CompanyGraph installs. A merge counts once, however many of its workflows publish. The MCP Registry listing, republished when the MCP server's repository tags a release, is not a deployment.\n\nFor each failed deployment, as Change Fail Rate counts them, the time from that deployment going live to the deployment that restores the surface going live, whether a revert, a fix, a re-pin to an earlier release or the release that supersedes a failed one being published. The value is the median over a calendar quarter in UTC. Deployments and their times are read from the merges to `main` in the GitHub history of companygraph/companygraph.github.io, companygraph/mcp-companygraph-io and companygraph/mcp-azure-companygraph-io; their publishing runs are GitHub Pages' own `pages-build-deployment` runs for the site and mcp-companygraph-io's and mcp-azure-companygraph-io's `deploy` and `chat` workflow runs on `main`; a release is read from the GitHub releases of companygraph/meta-model, companygraph/mcp-server, companygraph/chat-server and companygraph/obsidian-plugin. A failure no deployment caused, a provider's outage, is not counted.",
           "tables": []
         },
         {
@@ -25214,7 +25306,8 @@
         "legal-basis": "legitimate-interests",
         "retention": "The conversation is kept only in the visitor's browser tab and ends when the tab closes",
         "surfaces": [
-          "chat.companygraph.io chat"
+          "chat.companygraph.io chat",
+          "chat.azure.companygraph.io chat"
         ]
       },
       "sections": [
@@ -25244,6 +25337,10 @@
                   "The messages and the visitor's address, on the way to the answer"
                 ],
                 [
+                  "Microsoft Azure",
+                  "The messages and the visitor's address, on the way to the answer, when the visitor chose the chat on Azure"
+                ],
+                [
                   "Anthropic",
                   "The message and the earlier messages of the same conversation"
                 ],
@@ -25264,6 +25361,10 @@
               [
                 "Google Cloud",
                 "The messages and the visitor's address, on the way to the answer"
+              ],
+              [
+                "Microsoft Azure",
+                "The messages and the visitor's address, on the way to the answer, when the visitor chose the chat on Azure"
               ],
               [
                 "Anthropic",
@@ -25354,7 +25455,8 @@
         "legal-basis": "legitimate-interests",
         "retention": "Ninety days, and the weekly report made from the questions is gone before any question it holds",
         "surfaces": [
-          "chat.companygraph.io chat"
+          "chat.companygraph.io chat",
+          "chat.azure.companygraph.io chat"
         ]
       },
       "sections": [
@@ -25382,6 +25484,10 @@
                 [
                   "Google Cloud",
                   "The question and whether the model could answer it, kept in its Zürich region with the weekly report made from them"
+                ],
+                [
+                  "Microsoft Azure",
+                  "The question and whether the model could answer it, kept in its Switzerland North region with the weekly report made from them, when the visitor chose the chat on Azure"
                 ]
               ]
             }
@@ -25396,6 +25502,10 @@
               [
                 "Google Cloud",
                 "The question and whether the model could answer it, kept in its Zürich region with the weekly report made from them"
+              ],
+              [
+                "Microsoft Azure",
+                "The question and whether the model could answer it, kept in its Switzerland North region with the weekly report made from them, when the visitor chose the chat on Azure"
               ]
             ]
           }
@@ -26267,6 +26377,12 @@
                   "one running now"
                 ],
                 [
+                  "surface",
+                  "mcp.azure.companygraph.io MCP server",
+                  "",
+                  "a second one running, on Azure"
+                ],
+                [
                   "decision",
                   "The server only reads, and answers at one named commit",
                   "",
@@ -26301,6 +26417,12 @@
                 "mcp.companygraph.io MCP server",
                 "",
                 "one running now"
+              ],
+              [
+                "surface",
+                "mcp.azure.companygraph.io MCP server",
+                "",
+                "a second one running, on Azure"
               ],
               [
                 "decision",
@@ -27628,6 +27750,12 @@
                 ],
                 [
                   "data-processor",
+                  "Microsoft Azure",
+                  "",
+                  "who runs the chat and keeps the questions once Azure is chosen"
+                ],
+                [
+                  "data-processor",
                   "TypeSafe",
                   "",
                   "who checks the answer"
@@ -27673,6 +27801,12 @@
                 "Google Cloud",
                 "",
                 "who runs the chat and keeps the questions"
+              ],
+              [
+                "data-processor",
+                "Microsoft Azure",
+                "",
+                "who runs the chat and keeps the questions once Azure is chosen"
               ],
               [
                 "data-processor",
@@ -28250,6 +28384,12 @@
                   "that it reads this model"
                 ],
                 [
+                  "surface",
+                  "chat.azure.companygraph.io chat",
+                  "",
+                  "that a visitor may choose it with /backend, and that it reads the same model"
+                ],
+                [
                   "requirement",
                   "A visitor is told before the first message that an agent answers",
                   "",
@@ -28284,6 +28424,12 @@
                 "chat.companygraph.io chat",
                 "",
                 "that it reads this model"
+              ],
+              [
+                "surface",
+                "chat.azure.companygraph.io chat",
+                "",
+                "that a visitor may choose it with /backend, and that it reads the same model"
               ],
               [
                 "requirement",
@@ -35497,7 +35643,7 @@
         },
         {
           "heading": "Realization",
-          "text": "A deployment of the server is its own repository calling the release's workflow with its `deployment.json`, which names its Google Cloud project, billing account, region and domain, and the image is built and pushed to that project's registry; the model is read from the company's own repository at the pinned commit. A deployment of the chat names its host and its model host in `chat.json`, and the language model is reached through the company's own Vertex project or through an Anthropic organization's workload-identity federation that `chat.json` names, whose shape the release's `deploy-config.test.mjs` checks; sign-in names the company's own identity issuer. The code of the two servers contains no address of a host the makers run except links in the pages' footers, and the only outbound reads are GitHub's raw files, the language model and the cloud's own log and storage. No test records the requests a running deployment makes.",
+          "text": "A deployment of the server is its own repository calling the release's workflow with its `deployment.json`, which names its Google Cloud project, billing account, region and domain, and the image is built and pushed to that project's registry; the model is read from the company's own repository at the pinned commit. A deployment on Azure names its tenant, subscription, resource group and location in the same file instead, and the image goes to that resource group's registry. A deployment of the chat names its host and its model host in `chat.json`, and the language model is reached through the company's own Vertex project or through an Anthropic organization's workload-identity federation that `chat.json` names, whose shape the release's `deploy-config.test.mjs` checks; sign-in names the company's own identity issuer. The code of the two servers contains no address of a host the makers run except links in the pages' footers, and the only outbound reads are GitHub's raw files, the language model and the cloud's own log and storage. No test records the requests a running deployment makes.",
           "tables": []
         },
         {
@@ -35521,6 +35667,11 @@
                   "`chat/chat.json`",
                   "satisfies",
                   "https://github.com/companygraph/mcp-companygraph-io/blob/868854216c611db2ff536820d04f45b463b19c08/chat/chat.json"
+                ],
+                [
+                  "`deployment.json` on Azure",
+                  "satisfies",
+                  "https://github.com/companygraph/mcp-azure-companygraph-io/blob/9f6f01834bd1678b45a2ce4abae5af737d83a67f/deployment.json"
                 ],
                 [
                   "`test/deploy-config.test.mjs`",
@@ -35547,6 +35698,11 @@
                 "`chat/chat.json`",
                 "satisfies",
                 "https://github.com/companygraph/mcp-companygraph-io/blob/868854216c611db2ff536820d04f45b463b19c08/chat/chat.json"
+              ],
+              [
+                "`deployment.json` on Azure",
+                "satisfies",
+                "https://github.com/companygraph/mcp-azure-companygraph-io/blob/9f6f01834bd1678b45a2ce4abae5af737d83a67f/deployment.json"
               ],
               [
                 "`test/deploy-config.test.mjs`",
@@ -38601,12 +38757,13 @@
       "address": "services/chat-answer",
       "type": "service",
       "name": "Chat answer",
-      "tagline": "The answer to a visitor's question, streamed as events to the chat panel on companygraph.io's pages, with each claim naming the entity it rests on and marked where that evidence does not carry it.",
+      "tagline": "The answer to a visitor's question, streamed as events to the chat panel on companygraph.io's pages from whichever of the two chat servers the panel is set to, with each claim naming the entity it rests on and, from the chat server on Google, marked where that evidence does not carry it.",
       "fields": {
         "id": "01a1256f-1047-724c-8a50-8ad8dc06b622",
         "source": "Local",
         "provided-by": [
-          "Chat server"
+          "Chat server",
+          "Chat server on Azure"
         ],
         "realizes": [
           "A visitor asks the model",
@@ -38655,12 +38812,13 @@
       "address": "services/mcp-endpoint",
       "type": "service",
       "name": "MCP endpoint",
-      "tagline": "The Model Context Protocol endpoint at mcp.companygraph.io/mcp, where any agent client, and the chat, lists the types CompanyGraph's model declares, reads its entities and searches it, without signing in.",
+      "tagline": "The Model Context Protocol endpoint at mcp.companygraph.io/mcp, and a second time at mcp.azure.companygraph.io/mcp, where any agent client, and the chat, lists the types CompanyGraph's model declares, reads its entities and searches it, without signing in.",
       "fields": {
         "id": "01a1256f-009b-7dca-b327-76f8b78a27cf",
         "source": "Local",
         "provided-by": [
-          "MCP server"
+          "MCP server",
+          "MCP server on Azure"
         ],
         "realizes": [
           "An agent reads the model"
@@ -38750,6 +38908,27 @@
       "sections": [],
       "owner": null,
       "path": "model/stored-items/chat.md"
+    },
+    {
+      "id": "01a1b5b2-088b-7885-b193-2e0b02b75df8",
+      "address": "stored-items/chat-backend",
+      "type": "stored-item",
+      "name": "chat-backend",
+      "tagline": "The name of the chat host the visitor chose with `/backend`, so that the next question goes to the same cloud.",
+      "fields": {
+        "id": "01a1b5b2-088b-7885-b193-2e0b02b75df8",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "strictly-necessary",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "chat.companygraph.io chat",
+          "chat.azure.companygraph.io chat"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-backend.md"
     },
     {
       "id": "01a170fb-9bcf-7ca4-bb3a-a51ba8fd1811",
@@ -39276,6 +39455,29 @@
       "path": "model/strategies/read-only-server-strategy.md"
     },
     {
+      "id": "01a1b577-540e-720a-8250-ae07b487f362",
+      "address": "surfaces/chat-azure-companygraph-io-chat",
+      "type": "surface",
+      "name": "chat.azure.companygraph.io chat",
+      "tagline": "The chat a visitor reaches on companygraph.io once they have chosen Azure with `/backend`, answered from what the mcp.azure.companygraph.io MCP server says at its pinned commit, and the page a person reaches at the same address.",
+      "fields": {
+        "id": "01a1b577-540e-720a-8250-ae07b487f362",
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/mcp-azure-companygraph-io",
+        "url": "https://chat.azure.companygraph.io"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Endpoint** — `/chat` on this address, which a page of companygraph.io posts a visitor's conversation to once the visitor chose this chat, and which answers it as a stream of events.\n- **Answer** — the text a language model writes from what the MCP server's tools returned for the visitor's question, in the language of the visitor's message, naming the entity each claim rests on; no claim is marked, because this chat checks no answer.\n- **From the model** — a link to each entity a tool returned on its own, opening it on the model page of companygraph.io.\n- **Refusals** — the sentences a visitor reads instead of an answer when the day's or the month's share is spent, when one address has sent too many messages in an hour, when the host does not answer or when the chat is switched off.\n- **Page** — what a browser gets at the chat's own address: the host's name, the vision's and the identity's taglines, the paths and the events the endpoint answers, the fence that bounds what it spends, and the commit of the model it answers from.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/chat-azure-companygraph-io-chat.md"
+    },
+    {
       "id": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
       "address": "surfaces/chat-companygraph-io-chat",
       "type": "surface",
@@ -39314,7 +39516,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **CLI** — the one command an instance is made and kept from: what each pick of its menu does, and how the command is run from a release.\n- **Processes** — each process's phases as a board of the seats that own, execute, support and approve each, and the profiles that hold those seats, drawn from `company.json`.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, and nothing kept beside the model, drawn from `company.json`.\n- **Model** — the vocabulary, drawn: every core type with its schema, as a graph from a pinned commit of core.\n- **Example** — one company, drawn: the fictional company the vocabulary's example describes, as a graph from the same commit.\n- **Talks** — the introduction talk, narrated in both languages with a PDF, and the questions it ends on.\n- **Billing** — how consulting would be counted if it ever were, what is free and stays so, and the ways to charge that were refused and why.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full from the model's data processors, processing activities and stored items.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
+          "text": "- **Landing graph** — this company's own model, drawn as a graph from `company.json`.\n- **CLI** — the one command an instance is made and kept from: what each pick of its menu does, and how the command is run from a release.\n- **Processes** — each process's phases as a board of the seats that own, execute, support and approve each, and the profiles that hold those seats, drawn from `company.json`.\n- **Principles** — the vision and the values, drawn from `company.json`.\n- **Surfaces** — every surface the model records, with how each is made and what makes it, and nothing kept beside the model, drawn from `company.json`.\n- **Model** — the vocabulary, drawn: every core type with its schema, as a graph from a pinned commit of core.\n- **Example** — one company, drawn: the fictional company the vocabulary's example describes, as a graph from the same commit.\n- **Talks** — the introduction talk, narrated in both languages with a PDF, and the questions it ends on.\n- **Billing** — how consulting would be counted if it ever were, what is free and stays so, and the ways to charge that were refused and why.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full from the model's data processors, processing activities and stored items.\n- **company.json** — this model parsed at the commit the site pins, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.companygraph.io chat, or by the chat.azure.companygraph.io chat once the reader chose it with `/backend` on the panel's command line.\n- **Structured data** — the organization, the software and the datasets each page describes to a crawler.",
           "tables": []
         },
         {
@@ -39357,6 +39559,29 @@
       ],
       "owner": null,
       "path": "model/surfaces/linkedin-company-page.md"
+    },
+    {
+      "id": "01a1b577-44e8-7657-8db2-5ed0f0e945f6",
+      "address": "surfaces/mcp-azure-companygraph-io-mcp-server",
+      "type": "surface",
+      "name": "mcp.azure.companygraph.io MCP server",
+      "tagline": "The mcp.companygraph.io MCP server a second time, on Azure: the server an agent connects to for answers about what we know, and the page a person reaches at the same address, reading the same pinned commit of our model and adding nothing to it, kept running as the standing proof that the server runs on a second cloud.",
+      "fields": {
+        "id": "01a1b577-44e8-7657-8db2-5ed0f0e945f6",
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/mcp-azure-companygraph-io",
+        "url": "https://mcp.azure.companygraph.io"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a client is given. No registry listing points at it; the listing's remote is the server on Google.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — listing the types, describing a schema, what the types declare about each other and what they constrain, the rules the model is held to and the checks that hold it, listing and returning entities, finding evidence, searching and fetching, over every entity in the model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a protocol endpoint without a client: the identity's name, the vision's and the identity's taglines, the address to give a client, every tool with what it returns, and the commit the answers are read from.\n- **Structured data** — the organization and the endpoint that the page describes to a crawler, with the organization's addresses from the identity's `## Also at`.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/mcp-azure-companygraph-io-mcp-server.md"
     },
     {
       "id": "01a0c3b4-d010-7fcd-a4e1-90b221586523",
@@ -39469,6 +39694,60 @@
       ],
       "owner": null,
       "path": "model/system-kinds/saas.md"
+    },
+    {
+      "id": "01a1b577-0890-715a-b569-263672b000c0",
+      "address": "systems/azure-container-apps",
+      "type": "system",
+      "name": "Azure Container Apps",
+      "tagline": "Runs the second copies of the MCP server and the chat server as containers in Microsoft Azure's Switzerland North region, deployed to by CompanyGraph's own seats on every merge to the repository that pins them, and scaled to nothing between requests.",
+      "fields": {
+        "id": "01a1b577-0890-715a-b569-263672b000c0",
+        "source": "Local",
+        "kind": "Platform",
+        "owner": "Owner",
+        "processor": "Microsoft Azure",
+        "serves": [
+          "Answering"
+        ],
+        "environment": "Production"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://learn.microsoft.com/azure/container-apps/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://learn.microsoft.com/azure/container-apps/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/azure-container-apps.md"
     },
     {
       "id": "01a1256e-95a8-7252-a79b-d83322045bb1",
@@ -39669,6 +39948,168 @@
       ],
       "owner": null,
       "path": "model/systems/chat-server.md"
+    },
+    {
+      "id": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "address": "systems/chat-server-on-azure",
+      "type": "system",
+      "name": "Chat server on Azure",
+      "tagline": "Answers the questions a visitor sends once the chat on companygraph.io is set to Azure, from what the MCP server on Azure returns, has a language model write each answer, reached by a federated identity and no key, and logs each question it answers or refuses; it checks no answer and signs no reader in.",
+      "fields": {
+        "id": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+        "source": "Local",
+        "kind": "Deployment",
+        "owner": "Owner",
+        "processor": "Microsoft Azure",
+        "part-of": "Azure Container Apps",
+        "environment": "Production"
+      },
+      "sections": [
+        {
+          "heading": "Connects to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "System",
+                "As",
+                "Service",
+                "Carries",
+                "Via"
+              ],
+              "rows": [
+                [
+                  "MCP server on Azure",
+                  "Streamable HTTP",
+                  "MCP endpoint",
+                  "Entity",
+                  "HTTPS"
+                ],
+                [
+                  "Claude API",
+                  "Messages API",
+                  "",
+                  "",
+                  "HTTPS"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "System",
+              "As",
+              "Service",
+              "Carries",
+              "Via"
+            ],
+            "rows": [
+              [
+                "MCP server on Azure",
+                "Streamable HTTP",
+                "MCP endpoint",
+                "Entity",
+                "HTTPS"
+              ],
+              [
+                "Claude API",
+                "Messages API",
+                "",
+                "",
+                "HTTPS"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Conversation",
+                  "Question log",
+                  "writes"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Conversation",
+                "Question log",
+                "writes"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The server's source and documentation",
+                  "https://github.com/companygraph/chat-server"
+                ],
+                [
+                  "The interface the chat answers over",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ],
+                [
+                  "The deployment's pins, configuration and infrastructure",
+                  "https://github.com/companygraph/mcp-azure-companygraph-io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The server's source and documentation",
+                "https://github.com/companygraph/chat-server"
+              ],
+              [
+                "The interface the chat answers over",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ],
+              [
+                "The deployment's pins, configuration and infrastructure",
+                "https://github.com/companygraph/mcp-azure-companygraph-io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/chat-server-on-azure.md"
     },
     {
       "id": "01a1256e-e202-757e-8a03-e1c9e58b174a",
@@ -40200,6 +40641,96 @@
       "path": "model/systems/id-blust-ch.md"
     },
     {
+      "id": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "address": "systems/log-analytics",
+      "type": "system",
+      "name": "Log Analytics",
+      "tagline": "Keeps the lines the chat server on Azure writes in Microsoft Azure's Switzerland North region, the questions among them in a workspace of their own for ninety days, which the deployment's analyst identity reads for the weekly report and the owner reads by a grant made once.",
+      "fields": {
+        "id": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+        "source": "Local",
+        "kind": "Platform",
+        "owner": "Owner",
+        "processor": "Microsoft Azure",
+        "serves": [
+          "Answering"
+        ],
+        "environment": "Production"
+      },
+      "sections": [
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Conversation",
+                  "Question log",
+                  "writes"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Conversation",
+                "Question log",
+                "writes"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The vendor's documentation",
+                  "https://learn.microsoft.com/azure/azure-monitor/logs/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The vendor's documentation",
+                "https://learn.microsoft.com/azure/azure-monitor/logs/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/log-analytics.md"
+    },
+    {
       "id": "01a1256e-8662-7925-9097-a884e87a2658",
       "address": "systems/mcp-server",
       "type": "system",
@@ -40338,6 +40869,146 @@
       ],
       "owner": null,
       "path": "model/systems/mcp-server.md"
+    },
+    {
+      "id": "01a1b577-269a-7233-a962-871949ca2242",
+      "address": "systems/mcp-server-on-azure",
+      "type": "system",
+      "name": "MCP server on Azure",
+      "tagline": "Answers questions about CompanyGraph's own model, read at the same pinned commit as the MCP server when its image is built and not live, over the Model Context Protocol at mcp.azure.companygraph.io, for any agent that connects and for the chat server on Azure: the standing proof that the server runs on a second cloud.",
+      "fields": {
+        "id": "01a1b577-269a-7233-a962-871949ca2242",
+        "source": "Local",
+        "kind": "Deployment",
+        "owner": "Owner",
+        "processor": "Microsoft Azure",
+        "part-of": "Azure Container Apps",
+        "environment": "Production"
+      },
+      "sections": [
+        {
+          "heading": "Connects to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "System",
+                "As",
+                "Service",
+                "Carries",
+                "Via"
+              ],
+              "rows": [
+                [
+                  "GitHub",
+                  "the instance's repository, at image build",
+                  "",
+                  "Instance",
+                  "HTTPS"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "System",
+              "As",
+              "Service",
+              "Carries",
+              "Via"
+            ],
+            "rows": [
+              [
+                "GitHub",
+                "the instance's repository, at image build",
+                "",
+                "Instance",
+                "HTTPS"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Holds",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Data object",
+                "Access"
+              ],
+              "rows": [
+                [
+                  "Instance",
+                  "Snapshot",
+                  "reads"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Data object",
+              "Access"
+            ],
+            "rows": [
+              [
+                "Instance",
+                "Snapshot",
+                "reads"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The server's source and documentation",
+                  "https://github.com/companygraph/mcp-server"
+                ],
+                [
+                  "The deployment's pins, configuration and infrastructure",
+                  "https://github.com/companygraph/mcp-azure-companygraph-io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The server's source and documentation",
+                "https://github.com/companygraph/mcp-server"
+              ],
+              [
+                "The deployment's pins, configuration and infrastructure",
+                "https://github.com/companygraph/mcp-azure-companygraph-io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/mcp-server-on-azure.md"
     },
     {
       "id": "01a17189-2fb8-7d50-bdc0-ea3c0261d4e8",
@@ -41392,6 +42063,10 @@
                 [
                   "The chat this model answers at",
                   "https://chat.companygraph.io/"
+                ],
+                [
+                  "The same chat on Azure",
+                  "https://chat.azure.companygraph.io/"
                 ]
               ]
             }
@@ -41414,6 +42089,10 @@
               [
                 "The chat this model answers at",
                 "https://chat.companygraph.io/"
+              ],
+              [
+                "The same chat on Azure",
+                "https://chat.azure.companygraph.io/"
               ]
             ]
           }
@@ -43526,6 +44205,10 @@
                 [
                   "The deployment that serves this model",
                   "https://github.com/companygraph/mcp-companygraph-io"
+                ],
+                [
+                  "The deployment that serves it a second time, on Azure",
+                  "https://github.com/companygraph/mcp-azure-companygraph-io"
                 ]
               ]
             }
@@ -43548,6 +44231,10 @@
               [
                 "The deployment that serves this model",
                 "https://github.com/companygraph/mcp-companygraph-io"
+              ],
+              [
+                "The deployment that serves it a second time, on Azure",
+                "https://github.com/companygraph/mcp-azure-companygraph-io"
               ]
             ]
           }
@@ -43866,6 +44553,10 @@
                 [
                   "The server this model answers at",
                   "https://mcp.companygraph.io/"
+                ],
+                [
+                  "The same server on Azure",
+                  "https://mcp.azure.companygraph.io/"
                 ]
               ]
             }
@@ -43884,6 +44575,10 @@
               [
                 "The server this model answers at",
                 "https://mcp.companygraph.io/"
+              ],
+              [
+                "The same server on Azure",
+                "https://mcp.azure.companygraph.io/"
               ]
             ]
           }
@@ -48164,6 +48859,16 @@
     },
     {
       "from": "01a0d451-1230-7bd6-adc8-debd9665daec",
+      "to": "01a1b577-44e8-7657-8db2-5ed0f0e945f6",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "a second one running, on Azure"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7bd6-adc8-debd9665daec",
       "to": "01a0de43-dea8-714f-9558-2ac442dd590c",
       "via": "kind",
       "attrs": {}
@@ -48212,6 +48917,16 @@
         "Type": "requirement",
         "Owner": "",
         "For": "that a visitor is told an agent answers"
+      }
+    },
+    {
+      "from": "01a0d451-1230-7d66-a407-71d753da2755",
+      "to": "01a1b577-540e-720a-8250-ae07b487f362",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "that a visitor may choose it with /backend, and that it reads the same model"
       }
     },
     {
@@ -53505,6 +54220,14 @@
     },
     {
       "from": "01a107ec-5eb5-78b1-9fbf-4190fc846e44",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The messages and the visitor's address, on the way to the answer, when the visitor chose the chat on Azure"
+      }
+    },
+    {
+      "from": "01a107ec-5eb5-78b1-9fbf-4190fc846e44",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -53512,6 +54235,12 @@
     {
       "from": "01a107ec-5eb5-78b1-9fbf-4190fc846e44",
       "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a107ec-5eb5-78b1-9fbf-4190fc846e44",
+      "to": "01a1b577-540e-720a-8250-ae07b487f362",
       "via": "surfaces",
       "attrs": {}
     },
@@ -53525,6 +54254,14 @@
     },
     {
       "from": "01a107ed-732a-7be1-897e-430f5ba1db1c",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The question and whether the model could answer it, kept in its Switzerland North region with the weekly report made from them, when the visitor chose the chat on Azure"
+      }
+    },
+    {
+      "from": "01a107ed-732a-7be1-897e-430f5ba1db1c",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -53532,6 +54269,12 @@
     {
       "from": "01a107ed-732a-7be1-897e-430f5ba1db1c",
       "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a107ed-732a-7be1-897e-430f5ba1db1c",
+      "to": "01a1b577-540e-720a-8250-ae07b487f362",
       "via": "surfaces",
       "attrs": {}
     },
@@ -54518,6 +55261,12 @@
     },
     {
       "from": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+      "to": "01a1b577-269a-7233-a962-871949ca2242",
+      "via": "provided-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-009b-7dca-b327-76f8b78a27cf",
       "to": "01a0c29a-9610-7599-88be-da45e0941d77",
       "via": "realizes",
       "attrs": {}
@@ -54531,6 +55280,12 @@
     {
       "from": "01a1256f-1047-724c-8a50-8ad8dc06b622",
       "to": "01a1256e-95a8-7252-a79b-d83322045bb1",
+      "via": "provided-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a1256f-1047-724c-8a50-8ad8dc06b622",
+      "to": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
       "via": "provided-by",
       "attrs": {}
     },
@@ -56919,6 +57674,16 @@
     },
     {
       "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "For": "who runs the chat and keeps the questions once Azure is chosen"
+      }
+    },
+    {
+      "from": "01a13351-9a78-7a5b-b0f3-09875bcb7f40",
       "to": "01a0de43-dea8-772b-9fb1-8301ca6f2bfd",
       "via": "kind",
       "attrs": {}
@@ -58473,6 +59238,246 @@
       "from": "01a17bea-defb-7981-b508-5c9c4cbb8b3e",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-0890-715a-b569-263672b000c0",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-0890-715a-b569-263672b000c0",
+      "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-0890-715a-b569-263672b000c0",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-0890-715a-b569-263672b000c0",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-0890-715a-b569-263672b000c0",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-0890-715a-b569-263672b000c0",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-2b1d-758d-a75f-605949596608",
+        "Access": "writes"
+      }
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a1256e-6753-7f8e-bb52-acb594077fbe",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a0ccd4-cfb0-782a-a360-4d14ec035b92",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-17b2-7aa4-a64e-05f9de923d39",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a1256e-d242-7df9-8f04-c0aed47a1c12",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "the instance's repository, at image build",
+        "Service": "",
+        "Carries": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a0c2a7-ffa8-7986-8fbe-c785f2c74afe",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-1b8b-7246-9275-8a7b98436b7b",
+        "Access": "reads"
+      }
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a1b577-0890-715a-b569-263672b000c0",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-269a-7233-a962-871949ca2242",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a1256e-e202-757e-8a03-e1c9e58b174a",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "Messages API",
+        "Service": "",
+        "Carries": "",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a1b577-269a-7233-a962-871949ca2242",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "Streamable HTTP",
+        "Service": "01a1256f-009b-7dca-b327-76f8b78a27cf",
+        "Carries": "01a0c2a7-ffa8-7a7a-a98a-0c5aed378ea7",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a1258f-fcca-7ab8-8b47-980bef2270bd",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a12590-2b1d-758d-a75f-605949596608",
+        "Access": "writes"
+      }
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a12eb2-fad9-752e-a440-0a85a6867456",
+      "via": "environment",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a1b577-0890-715a-b569-263672b000c0",
+      "via": "part-of",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-44e8-7657-8db2-5ed0f0e945f6",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b577-540e-720a-8250-ae07b487f362",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b5b2-088b-7885-b193-2e0b02b75df8",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b5b2-088b-7885-b193-2e0b02b75df8",
+      "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a1b5b2-088b-7885-b193-2e0b02b75df8",
+      "to": "01a1b577-540e-720a-8250-ae07b487f362",
+      "via": "surfaces",
       "attrs": {}
     }
   ],
