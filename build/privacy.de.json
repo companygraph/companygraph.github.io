@@ -108,7 +108,15 @@
     "de": "Die Nachrichten und Ihre IP-Adresse, während die Antwort entsteht – wenn Sie Azure als Chat-Host gewählt haben"
   },
   {
+    "en": "What the reader's answers cost this month, in its Switzerland North region, under a key the chat cannot turn back into the account, when the reader chose the chat on Azure",
+    "de": "Was die Antworten an Sie in diesem Monat kosten, aufbewahrt in der Azure-Region Schweiz Nord unter einem Schlüssel, aus dem der Chat nicht auf das Konto zurückschliessen kann – wenn Sie Azure als Chat-Host gewählt haben"
+  },
+  {
     "en": "The question and whether the model could answer it, kept in its Switzerland North region with the weekly report made from them, when the visitor chose the chat on Azure",
     "de": "Die Frage und ob das Modell sie beantworten konnte, aufbewahrt in der Azure-Region Schweiz Nord, zusammen mit dem wöchentlichen Bericht, der aus den Fragen entsteht – wenn Sie Azure als Chat-Host gewählt haben"
+  },
+  {
+    "en": "The access token each message carries, when the reader chose the chat on Azure",
+    "de": "Das Zugriffstoken, das mit jeder Nachricht mitgeschickt wird – wenn Sie Azure als Chat-Host gewählt haben"
   }
 ]

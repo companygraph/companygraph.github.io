@@ -1,5 +1,5 @@
 {
-  "commit": "7aec8870795ca3c221ea1b1af56c593d8943676a",
+  "commit": "14501e04b9bfaa8bc40dd47feb483b9254b9188a",
   "core": "0.71.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -25393,7 +25393,8 @@
         "legal-basis": "legitimate-interests",
         "retention": "Only the month last counted, which the reader's first message of a new month replaces",
         "surfaces": [
-          "chat.companygraph.io chat"
+          "chat.companygraph.io chat",
+          "chat.azure.companygraph.io chat"
         ]
       },
       "sections": [
@@ -25421,6 +25422,10 @@
                 [
                   "Google Cloud",
                   "What the reader's answers cost this month, in its Zurich region, under a key the chat cannot turn back into the account"
+                ],
+                [
+                  "Microsoft Azure",
+                  "What the reader's answers cost this month, in its Switzerland North region, under a key the chat cannot turn back into the account, when the reader chose the chat on Azure"
                 ]
               ]
             }
@@ -25435,6 +25440,10 @@
               [
                 "Google Cloud",
                 "What the reader's answers cost this month, in its Zurich region, under a key the chat cannot turn back into the account"
+              ],
+              [
+                "Microsoft Azure",
+                "What the reader's answers cost this month, in its Switzerland North region, under a key the chat cannot turn back into the account, when the reader chose the chat on Azure"
               ]
             ]
           }
@@ -25526,7 +25535,8 @@
         "legal-basis": "legitimate-interests",
         "retention": "As long as the reader's account at id.blust.ch exists",
         "surfaces": [
-          "chat.companygraph.io chat"
+          "chat.companygraph.io chat",
+          "chat.azure.companygraph.io chat"
         ]
       },
       "sections": [
@@ -25558,6 +25568,10 @@
                 [
                   "Google",
                   "That the reader signs in to id.blust.ch, only when they choose to sign in with Google"
+                ],
+                [
+                  "Microsoft Azure",
+                  "The access token each message carries, when the reader chose the chat on Azure"
                 ]
               ]
             }
@@ -25576,6 +25590,10 @@
               [
                 "Google",
                 "That the reader signs in to id.blust.ch, only when they choose to sign in with Google"
+              ],
+              [
+                "Microsoft Azure",
+                "The access token each message carries, when the reader chose the chat on Azure"
               ]
             ]
           }
@@ -39954,7 +39972,7 @@
       "address": "systems/chat-server-on-azure",
       "type": "system",
       "name": "Chat server on Azure",
-      "tagline": "Answers the questions a visitor sends once the chat on companygraph.io is set to Azure, from what the MCP server on Azure returns, has a language model write each answer, reached by a federated identity and no key, and logs each question it answers or refuses; it checks no answer and signs no reader in.",
+      "tagline": "Answers the questions a visitor sends once the chat on companygraph.io is set to Azure, from what the MCP server on Azure returns, has a language model write each answer, reached by a federated identity and no key, and logs each question it answers or refuses; it checks no answer.",
       "fields": {
         "id": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
         "source": "Local",
@@ -39992,6 +40010,13 @@
                   "",
                   "",
                   "HTTPS"
+                ],
+                [
+                  "id.blust.ch",
+                  "OpenID Connect",
+                  "",
+                  "",
+                  "HTTPS"
                 ]
               ]
             }
@@ -40019,6 +40044,13 @@
                 "",
                 "",
                 "HTTPS"
+              ],
+              [
+                "id.blust.ch",
+                "OpenID Connect",
+                "",
+                "",
+                "HTTPS"
               ]
             ]
           }
@@ -40039,6 +40071,11 @@
                   "Conversation",
                   "Question log",
                   "writes"
+                ],
+                [
+                  "Reader",
+                  "Reader's month",
+                  "writes"
                 ]
               ]
             }
@@ -40054,6 +40091,11 @@
               [
                 "Conversation",
                 "Question log",
+                "writes"
+              ],
+              [
+                "Reader",
+                "Reader's month",
                 "writes"
               ]
             ]
@@ -59046,6 +59088,14 @@
     },
     {
       "from": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The access token each message carries, when the reader chose the chat on Azure"
+      }
+    },
+    {
+      "from": "01a170fb-ba87-7085-ae07-293856cfea54",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -59053,6 +59103,12 @@
     {
       "from": "01a170fb-ba87-7085-ae07-293856cfea54",
       "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-ba87-7085-ae07-293856cfea54",
+      "to": "01a1b577-540e-720a-8250-ae07b487f362",
       "via": "surfaces",
       "attrs": {}
     },
@@ -59066,6 +59122,14 @@
     },
     {
       "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+      "to": "01a1b576-f8e4-7c86-9550-243ff339844b",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "What the reader's answers cost this month, in its Switzerland North region, under a key the chat cannot turn back into the account, when the reader chose the chat on Azure"
+      }
+    },
+    {
+      "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
@@ -59073,6 +59137,12 @@
     {
       "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
       "to": "01a0c9f6-5458-7276-aae9-86088e4eb1e0",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a170fb-c9b6-7fcc-9069-ddcc57c98e26",
+      "to": "01a1b577-540e-720a-8250-ae07b487f362",
       "via": "surfaces",
       "attrs": {}
     },
@@ -59396,6 +59466,17 @@
     },
     {
       "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
+      "via": "Connects to.System",
+      "attrs": {
+        "As": "OpenID Connect",
+        "Service": "",
+        "Carries": "",
+        "Via": "HTTPS"
+      }
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
       "to": "01a1b577-269a-7233-a962-871949ca2242",
       "via": "Connects to.System",
       "attrs": {
@@ -59411,6 +59492,15 @@
       "via": "Holds.Concept",
       "attrs": {
         "Data object": "01a12590-2b1d-758d-a75f-605949596608",
+        "Access": "writes"
+      }
+    },
+    {
+      "from": "01a1b577-35b9-7c33-8f5b-3e50bff16675",
+      "to": "01a170fc-3404-7344-90e0-2a8052da76b7",
+      "via": "Holds.Concept",
+      "attrs": {
+        "Data object": "01a170fc-526e-7513-a7a5-24a2b33d5b1c",
         "Access": "writes"
       }
     },
