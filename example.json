@@ -1,6 +1,6 @@
 {
-  "commit": "0ac1a6a611182eff8d3e60c2cb5745536bce5fb3",
-  "core": "0.70.0",
+  "commit": "64af953390962c799cfec6aaa87c05e9f628b86f",
+  "core": "0.71.0",
   "root": "Beacon Systems",
   "rootId": "01a04c7b-6b80-7021-b82c-bfedcb24827f",
   "types": [
@@ -1145,6 +1145,71 @@
       "path": "example/model/concepts/usage-record.md"
     },
     {
+      "id": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+      "address": "controls/an-unapproved-merge-is-read-before-it-ships",
+      "type": "control",
+      "name": "An unapproved merge is read before it ships",
+      "tagline": "Every change merged without a second person's approval is read by one before it ships.",
+      "fields": {
+        "id": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+        "source": "Local",
+        "kind": "detective",
+        "mode": "manual",
+        "mitigates": [
+          "An unreviewed change reaches customers"
+        ],
+        "enforces": [
+          "A change is reviewed before it ships"
+        ],
+        "performed-by": "Reviewer"
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "In Release, once the branch is merged and before the release is tagged, the Reviewer lists the pull requests merged to the default branch without an approving review from someone other than their author, from the repository host's pull request reviews, and reads each against what was asked; a finding holds the tag until it is settled.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Release",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Release",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "example/model/controls/an-unapproved-merge-is-read-before-it-ships.md"
+    },
+    {
       "id": "01a0fb1b-b534-79e9-a261-eda408034315",
       "address": "controls/main-requires-a-review",
       "type": "control",
@@ -1160,12 +1225,15 @@
         ],
         "enforces": [
           "A change is reviewed before it ships"
+        ],
+        "compensated-by": [
+          "An unapproved merge is read before it ships"
         ]
       },
       "sections": [
         {
           "heading": "How it is carried out",
-          "text": "A branch protection rule on the default branch requires one approving review before any pull request merges, and dismisses an approval when new commits are pushed after it.",
+          "text": "A branch protection rule on the default branch requires one approving review before any pull request merges, and dismisses an approval when new commits are pushed after it. A repository admin can merge past the protection, and for that change the protection holds nothing until the merge is read after it lands.",
           "tables": []
         },
         {
@@ -7264,6 +7332,12 @@
     },
     {
       "from": "01a0fb1b-b534-79e9-a261-eda408034315",
+      "to": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+      "via": "compensated-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fb1b-b534-79e9-a261-eda408034315",
       "to": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
       "via": "enforces",
       "attrs": {}
@@ -7925,6 +7999,39 @@
     },
     {
       "from": "01a12b01-3a22-74e6-b405-dd48a35f2da8",
+      "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+      "to": "01a0a8c7-74d8-7361-97d6-5f56164eff80",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+      "to": "01a0fb1b-b4ff-7020-8a63-e80de5bbcc7f",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+      "to": "01a0fb1b-b4c9-7a12-b0d3-9c98579ccb26",
+      "via": "mitigates",
+      "attrs": {}
+    },
+    {
+      "from": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
+      "to": "01a0a6b8-7e80-74e2-8c05-e4518d7679c9",
+      "via": "performed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a14d30-995e-7487-a2b5-5fe1388f8b88",
       "to": "01a03a3a-5eb8-7ba4-a6bd-79f024667d98",
       "via": "source",
       "attrs": {}
