@@ -1,5 +1,5 @@
 {
-  "commit": "7f2c77f8d1dbb4c0bb0ba58a55fcf6f4e057b897",
+  "commit": "0e1b5557e4d2038742ad5e7d1ced91f9fb5b81ba",
   "core": "0.71.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -15407,7 +15407,7 @@
       "address": "data-processors/microsoft-azure",
       "type": "data-processor",
       "name": "Microsoft Azure",
-      "tagline": "Runs the second copies of the chat service and the MCP server in its Switzerland North region and keeps there the chat's log of questions and its meter; no reader signs in on this copy, so no account and no reader's month is kept here.",
+      "tagline": "Runs the second copies of the chat service and the MCP server in its Switzerland North region and keeps there the chat's log of questions, its meter and the month of each reader who signs in on this copy, under a key the chat cannot turn back into the account; the reader's account stays at id.blust.ch, and this copy only checks the token each of their messages carries.",
       "fields": {
         "id": "01a1b576-f8e4-7c86-9550-243ff339844b",
         "source": "Local",
