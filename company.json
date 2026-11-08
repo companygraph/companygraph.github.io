@@ -1,5 +1,5 @@
 {
-  "commit": "0e1b5557e4d2038742ad5e7d1ced91f9fb5b81ba",
+  "commit": "7f39dc09c8417fe1b7ec6d6ade78ccb58b2a57e4",
   "core": "0.71.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -15097,7 +15097,7 @@
       "address": "data-processors/google",
       "type": "data-processor",
       "name": "Google",
-      "tagline": "Signs a reader the owner has invited in to id.blust.ch with their Google account, when the reader chooses Sign in with Google, and tells id.blust.ch the account's id, its verified email address and its profile; it may process the sign-in in any country it chooses.",
+      "tagline": "Signs a reader the owner has invited in to id.blust.ch with their Google account, when the reader chooses Sign in with Google, and tells id.blust.ch the account's id, its profile and its email address, with whether Google verified it; it may process the sign-in in any country it chooses.",
       "fields": {
         "id": "01a17189-20d3-72b5-a14f-392a82f9f2c0",
         "source": "Local",
@@ -15294,7 +15294,7 @@
       "address": "data-processors/microsoft",
       "type": "data-processor",
       "name": "Microsoft",
-      "tagline": "Signs a reader the owner has invited in to id.blust.ch with their Microsoft account, a personal one or one their organization gives them, when the reader chooses Sign in with Microsoft, and tells id.blust.ch the account's id, its name and the email address the account names; it may process the sign-in in any country it chooses.",
+      "tagline": "Signs a reader the owner has invited in to id.blust.ch with their Microsoft account, a personal one or one their organization gives them, when the reader chooses Sign in with Microsoft, and tells id.blust.ch the account's id, its name and the email address the account names and, for a sign-in not yet linked to an account there, whether the account is a personal one or which domains the reader's organization has verified with Microsoft, an answer id.blust.ch asks for with that sign-in's access token, uses only to decide whether to link the account and keeps nowhere; it may process the sign-in in any country it chooses.",
       "fields": {
         "id": "01a1b756-0cf1-7006-b161-4faaae00aafd",
         "source": "Local",
@@ -25660,7 +25660,7 @@
         },
         {
           "heading": "Personal data",
-          "text": "- The reader's name and email address, which their account at id.blust.ch holds\n- The roles granted to the reader, which name the models they may choose\n- For a reader who signs in with Google, the link to their Google account, its id and email address, which their account at id.blust.ch keeps until the link or the account is removed\n- For a reader who signs in with Microsoft, the link to their Microsoft account, its id and the email address it names, which their account at id.blust.ch keeps until the link or the account is removed\n- The tokens the sign-in issues, kept in the reader's browser, and the access token each message carries to the chat, which checks it",
+          "text": "- The reader's name and email address, which their account at id.blust.ch holds\n- The roles granted to the reader, which name the models they may choose\n- For a reader who signs in with Google, the link to their Google account, its id and email address, which their account at id.blust.ch keeps until the link or the account is removed\n- For a reader who signs in with Microsoft, the link to their Microsoft account, its id and the email address it names, which their account at id.blust.ch keeps until the link or the account is removed\n- For a reader who signs in with Microsoft while that account is not yet linked, whether it is a personal account or which domains their organization has verified with Microsoft, an answer id.blust.ch's link check asks Microsoft for with that sign-in's access token, uses only to decide whether to link the account and keeps nowhere\n- The tokens the sign-in issues, kept in the reader's browser, and the access token each message carries to the chat, which checks it",
           "tables": []
         },
         {
@@ -25676,7 +25676,7 @@
               "rows": [
                 [
                   "Google Cloud",
-                  "The reader's name, email address and roles, and the link to their Google or Microsoft account where they made one, held by id.blust.ch in its Zurich region, and the access token each message carries"
+                  "The reader's name, email address and roles, and the link to their Google or Microsoft account where they made one, held by id.blust.ch in its Zurich region, and the access token each message carries; also what the link check reads of each sign-in with Google or Microsoft, in the same region and kept nowhere"
                 ],
                 [
                   "Google",
@@ -25684,7 +25684,7 @@
                 ],
                 [
                   "Microsoft",
-                  "That the reader signs in to id.blust.ch, only when they choose to sign in with Microsoft"
+                  "That the reader signs in to id.blust.ch, only when they choose to sign in with Microsoft, and, while that account is not yet linked, the access token of that sign-in, with which the link check asks Microsoft about the account and its organization"
                 ],
                 [
                   "Microsoft Azure",
@@ -25702,7 +25702,7 @@
             "rows": [
               [
                 "Google Cloud",
-                "The reader's name, email address and roles, and the link to their Google or Microsoft account where they made one, held by id.blust.ch in its Zurich region, and the access token each message carries"
+                "The reader's name, email address and roles, and the link to their Google or Microsoft account where they made one, held by id.blust.ch in its Zurich region, and the access token each message carries; also what the link check reads of each sign-in with Google or Microsoft, in the same region and kept nowhere"
               ],
               [
                 "Google",
@@ -25710,7 +25710,7 @@
               ],
               [
                 "Microsoft",
-                "That the reader signs in to id.blust.ch, only when they choose to sign in with Microsoft"
+                "That the reader signs in to id.blust.ch, only when they choose to sign in with Microsoft, and, while that account is not yet linked, the access token of that sign-in, with which the link check asks Microsoft about the account and its organization"
               ],
               [
                 "Microsoft Azure",
@@ -40675,7 +40675,7 @@
       "address": "systems/id-blust-ch",
       "type": "system",
       "name": "id.blust.ch",
-      "tagline": "Signs readers in to the chat with ZITADEL, the identity service blust.ch runs at id.blust.ch in Google Cloud's Zurich region, by invitation only, and issues the token from which the chat server reads the models a reader may choose.",
+      "tagline": "Signs readers in to the chat with ZITADEL, the identity service blust.ch runs at id.blust.ch in Google Cloud's Zurich region, by invitation only, and issues the token from which the chat server reads the models a reader may choose. Beside ZITADEL, in the same region, blust.ch runs the link check, a small service of its own that ZITADEL calls after every sign-in with Google or Microsoft: it links that account to an existing one by its address only where the provider proved the address and exactly one account holds it with its address verified, and it keeps nothing and logs no address and no token.",
       "fields": {
         "id": "01a170fc-24c4-74ba-ab0f-d11cbe495b24",
         "source": "Local",
@@ -41192,7 +41192,7 @@
       "address": "systems/sign-in-with-google",
       "type": "system",
       "name": "Sign in with Google",
-      "tagline": "Signs a reader in with their Google account when the reader chooses it on the login of id.blust.ch, and returns to id.blust.ch the account's id, its verified email address and its profile, from which id.blust.ch finds the account the owner made for that address; it opens no account of its own.",
+      "tagline": "Signs a reader in with their Google account when the reader chooses it on the login of id.blust.ch, and returns to id.blust.ch the account's id, its profile and its email address with Google's own flag for whether that address is verified; it opens no account of its own. When the reader signs in with it and the Google account is not yet linked, id.blust.ch's link check links it to the account the owner made for that address, but only where Google's flag proves the address and exactly one account at id.blust.ch holds it and has it verified; once linked, later sign-ins find the link. Where the link check makes none, the reader makes the link when they accept their invitation, or the owner makes it at their request.",
       "fields": {
         "id": "01a17189-2fb8-7d50-bdc0-ea3c0261d4e8",
         "source": "Local",
@@ -41222,6 +41222,10 @@
                 [
                   "How id.blust.ch is set up for it",
                   "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/google.tf"
+                ],
+                [
+                  "How id.blust.ch links it to an account by the address",
+                  "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/link-check.tf"
                 ]
               ]
             }
@@ -41240,6 +41244,10 @@
               [
                 "How id.blust.ch is set up for it",
                 "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/google.tf"
+              ],
+              [
+                "How id.blust.ch links it to an account by the address",
+                "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/link-check.tf"
               ]
             ]
           }
@@ -41253,7 +41261,7 @@
       "address": "systems/sign-in-with-microsoft",
       "type": "system",
       "name": "Sign in with Microsoft",
-      "tagline": "Signs a reader in with their Microsoft account, a personal one or one their organization gives them, when the reader chooses it on the login of id.blust.ch, and returns to id.blust.ch the account's id, its name and the email address the account names; id.blust.ch signs the reader in only where that account is already linked to the account the owner made for them, a link the reader makes when they accept their invitation or the owner makes at their request, and never by the address; it opens no account of its own.",
+      "tagline": "Signs a reader in with their Microsoft account, a personal one or one their organization gives them, when the reader chooses it on the login of id.blust.ch, and returns to id.blust.ch the account's id, its name and the email address the account names; it opens no account of its own. id.blust.ch signs the reader in where that Microsoft account is linked to the account the owner made for them. Because an organization's directory may give a user any address, id.blust.ch's link check makes that link by the address only where Microsoft proves the address is the reader's — a personal account's, which Microsoft verified itself, or one on a domain the reader's own organization has verified with Microsoft — and exactly one account at id.blust.ch holds that address and has it verified. Where the link check makes none, the reader makes the link when they accept their invitation, or the owner makes it at their request.",
       "fields": {
         "id": "01a1b756-0d29-725a-a052-e1f70ace5bc6",
         "source": "Local",
@@ -41283,6 +41291,10 @@
                 [
                   "How id.blust.ch is set up for it",
                   "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/microsoft.tf"
+                ],
+                [
+                  "How id.blust.ch links it to an account by the address",
+                  "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/link-check.tf"
                 ]
               ]
             }
@@ -41301,6 +41313,10 @@
               [
                 "How id.blust.ch is set up for it",
                 "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/microsoft.tf"
+              ],
+              [
+                "How id.blust.ch links it to an account by the address",
+                "https://github.com/robertblust/id-blust-ch/blob/main/zitadel/link-check.tf"
               ]
             ]
           }
@@ -59271,7 +59287,7 @@
       "to": "01a107e8-e5b5-7adf-97e6-c0264f27d6f8",
       "via": "Processors.Processor",
       "attrs": {
-        "Receives": "The reader's name, email address and roles, and the link to their Google or Microsoft account where they made one, held by id.blust.ch in its Zurich region, and the access token each message carries"
+        "Receives": "The reader's name, email address and roles, and the link to their Google or Microsoft account where they made one, held by id.blust.ch in its Zurich region, and the access token each message carries; also what the link check reads of each sign-in with Google or Microsoft, in the same region and kept nowhere"
       }
     },
     {
@@ -59295,7 +59311,7 @@
       "to": "01a1b756-0cf1-7006-b161-4faaae00aafd",
       "via": "Processors.Processor",
       "attrs": {
-        "Receives": "That the reader signs in to id.blust.ch, only when they choose to sign in with Microsoft"
+        "Receives": "That the reader signs in to id.blust.ch, only when they choose to sign in with Microsoft, and, while that account is not yet linked, the access token of that sign-in, with which the link check asks Microsoft about the account and its organization"
       }
     },
     {
