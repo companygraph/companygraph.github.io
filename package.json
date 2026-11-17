@@ -32,6 +32,6 @@
     "@robertblust/design": "github:robertblust/design#v0.165.0",
     "companygraph-mcp-server": "github:companygraph/mcp-server#v0.75.3",
     "pdf-lib": "^1.17.1",
-    "playwright": "^1.65.0"
+    "playwright": "^1.65.1"
   }
 }
