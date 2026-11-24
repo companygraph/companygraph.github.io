@@ -1,5 +1,5 @@
 {
-  "commit": "123cba2e16f69d6d56578f60377589315a780b40",
+  "commit": "566d8760eec65b8570f4477a706c69f0a97eddb0",
   "core": "0.71.0",
   "root": "CompanyGraph",
   "rootId": "01a0c152-e370-71a3-8bba-4bf6458989e1",
@@ -12391,7 +12391,7 @@
       "address": "concepts/release",
       "type": "concept",
       "name": "Release",
-      "tagline": "A version of the vocabulary fixed under a tag, with notes saying what changed for whoever takes it, what breaks and how to take it; the tag is the whole of it, and nothing is published anywhere else.",
+      "tagline": "A version of the vocabulary fixed under a tag, with notes saying what changed for whoever takes it, what breaks and how to take it; the tag is the release, and the package npm holds at the same version is published from it and from nothing else.",
       "fields": {
         "id": "01a0c2a7-ffa8-7577-a994-0e0200c78552",
         "source": "Local",
@@ -17581,6 +17581,190 @@
       "path": "model/decisions/2026-our-sessions-are-not-trained-on.md"
     },
     {
+      "id": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "address": "decisions/2026-packages-published-to-npm",
+      "type": "decision",
+      "name": "A package another company builds on is published to npm from its tag",
+      "tagline": "A release is still its tag, and the meta-model, the MCP server and the chat server are published from that tag to npm under the `@companygraph` scope by the release itself, through trusted publishing and with no token, so a company whose package manager refuses dependencies from git takes them by version.",
+      "fields": {
+        "id": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+        "source": "Local",
+        "decided": "2026-11-24",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Adoption is not taxed"
+        ],
+        "supersedes": [
+          "A release is its tag, and nothing we make is published to a registry"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether the three packages other companies build on stay reachable only by a tag in git. It had to be decided in November 2026, when the first company building on them moved its desktop app to a package manager that refuses dependencies from git for supply-chain reasons, those a dependency brings in included, so a tag stopped being something it could take.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Publish nothing; a consumer vendors the packages or keeps a fork",
+                  "Every consumer whose tooling refuses git carries our code in its own repository and takes each release by hand."
+                ],
+                [
+                  "The consumer publishes the packages under its own name",
+                  "Our packages reach other companies under a name we do not hold, from a release we did not make, and can differ from the tag."
+                ],
+                [
+                  "Publish with a token held in CI",
+                  "One more secret to keep, and the way a stolen token publishes a version nobody reviewed."
+                ],
+                [
+                  "Publish to GitHub Packages",
+                  "A consumer has to authenticate to install even a public package there, and point its package manager at a second registry for one scope."
+                ],
+                [
+                  "Publish everything we make, the design system and the Obsidian plugin too",
+                  "Nobody takes those through a package manager, and an entry no consumer needs is one more thing to keep in step."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Publish nothing; a consumer vendors the packages or keeps a fork",
+                "Every consumer whose tooling refuses git carries our code in its own repository and takes each release by hand."
+              ],
+              [
+                "The consumer publishes the packages under its own name",
+                "Our packages reach other companies under a name we do not hold, from a release we did not make, and can differ from the tag."
+              ],
+              [
+                "Publish with a token held in CI",
+                "One more secret to keep, and the way a stolen token publishes a version nobody reviewed."
+              ],
+              [
+                "Publish to GitHub Packages",
+                "A consumer has to authenticate to install even a public package there, and point its package manager at a second registry for one scope."
+              ],
+              [
+                "Publish everything we make, the design system and the Obsidian plugin too",
+                "Nobody takes those through a package manager, and an entry no consumer needs is one more thing to keep in step."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The call it replaces turned on three costs: a publish token held in CI, a package that could differ from what was reviewed, and two ways to take one release. Trusted publishing removes the token: npm accepts a version only from the workflow GitHub vouches for, run at the tag. None of the three packages has a build step, so what is published is the files at the tag, and the provenance npm records names the commit they came from. The two ways remain, and they cannot disagree, because a version on npm is made only by the tag of the same version. That call held \"for as long as a tag carries everything a consumer takes from a release\", and for a consumer whose package manager refuses git it no longer does.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "A release of the three packages is still a tag with its notes, and publishing it is a job the tag runs, not a step anyone takes; tags are the owner's alone, so only the owner starts one. The owner holds the `companygraph` organization on npm, and all three packages refuse tokens. A consumer takes a release by tag or by version and gets the same files either way. The packages take each other from npm, because a dependency from git inside a package brings back what the consumer's package manager refuses. Everything else we make stays a tag and nothing more. For the call to stay right, a package must stay without a build step, or build in the publishing job from the tag alone, and no version may reach npm except from its tag.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Release",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Release",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The rule in the shared conventions",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "npm's trusted publishing",
+                  "https://docs.npmjs.com/trusted-publishers"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The rule in the shared conventions",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "npm's trusted publishing",
+                "https://docs.npmjs.com/trusted-publishers"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-packages-published-to-npm.md"
+    },
+    {
       "id": "01a107f3-304f-7047-8b13-1ec5c0097c23",
       "address": "decisions/2026-privacy-page-built-from-the-model",
       "type": "decision",
@@ -18064,7 +18248,7 @@
         "source": "Local",
         "decided": "2026-09-04",
         "kind": "Architecture",
-        "status": "Standing",
+        "status": "Revised",
         "by": "Owner"
       },
       "sections": [
@@ -40044,6 +40228,210 @@
       "path": "model/surfaces/mcp-registry-listing.md"
     },
     {
+      "id": "01a20eda-c885-759e-b0ef-c43751826c31",
+      "address": "surfaces/npm-listing-of-the-chat-server",
+      "type": "surface",
+      "name": "npm listing of the chat server",
+      "tagline": "The page a developer finds when they search npm for the chat server: the package a release published from its tag, with how to install it and where it came from.",
+      "fields": {
+        "id": "01a20eda-c885-759e-b0ef-c43751826c31",
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/chat-server",
+        "url": "https://www.npmjs.com/package/@companygraph/chat-server"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Readme** — the chat server's README at the version shown.\n- **Install** — the command that adds the package by its name.\n- **Version** — the newest version, which the newest release published.\n- **Provenance** — the repository, the commit and the workflow run a version was built from.\n- **Repository** — the GitHub repository the package's `repository` field names.\n- **License** — the license the package declares.\n- **Versions** — every version published, each one a release's tag.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- Every version after the first carries a provenance statement naming a commit of companygraph/chat-server and the run of `.github/workflows/publish.yml` that published it.\n- The newest version is the newest release on GitHub, or a release whose publish run is waiting for the owner.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "npm's trusted publishing",
+                  "https://docs.npmjs.com/trusted-publishers"
+                ],
+                [
+                  "npm's provenance statements",
+                  "https://docs.npmjs.com/generating-provenance-statements"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "npm's trusted publishing",
+                "https://docs.npmjs.com/trusted-publishers"
+              ],
+              [
+                "npm's provenance statements",
+                "https://docs.npmjs.com/generating-provenance-statements"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/npm-listing-of-the-chat-server.md"
+    },
+    {
+      "id": "01a20eda-c83d-75a4-b092-1958349eedc1",
+      "address": "surfaces/npm-listing-of-the-mcp-server",
+      "type": "surface",
+      "name": "npm listing of the MCP server",
+      "tagline": "The page a developer finds when they search npm for the MCP server: the package a release published from its tag, with how to install it and where it came from.",
+      "fields": {
+        "id": "01a20eda-c83d-75a4-b092-1958349eedc1",
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/mcp-server",
+        "url": "https://www.npmjs.com/package/@companygraph/mcp-server"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Readme** — the MCP server's README at the version shown.\n- **Install** — the command that adds the package by its name.\n- **Version** — the newest version, which the newest release published.\n- **Provenance** — the repository, the commit and the workflow run a version was built from.\n- **Repository** — the GitHub repository the package's `repository` field names.\n- **License** — the license the package declares.\n- **Versions** — every version published, each one a release's tag.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- Every version after the first carries a provenance statement naming a commit of companygraph/mcp-server and the run of `.github/workflows/publish.yml` that published it.\n- The newest version is the newest release on GitHub, or a release whose publish run is waiting for the owner.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "npm's trusted publishing",
+                  "https://docs.npmjs.com/trusted-publishers"
+                ],
+                [
+                  "npm's provenance statements",
+                  "https://docs.npmjs.com/generating-provenance-statements"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "npm's trusted publishing",
+                "https://docs.npmjs.com/trusted-publishers"
+              ],
+              [
+                "npm's provenance statements",
+                "https://docs.npmjs.com/generating-provenance-statements"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/npm-listing-of-the-mcp-server.md"
+    },
+    {
+      "id": "01a20eda-c7f5-7d50-a0ed-5d9b14325125",
+      "address": "surfaces/npm-listing-of-the-meta-model",
+      "type": "surface",
+      "name": "npm listing of the meta-model",
+      "tagline": "The page a developer finds when they search npm for the meta-model: the package a release published from its tag, with how to install it and where it came from.",
+      "fields": {
+        "id": "01a20eda-c7f5-7d50-a0ed-5d9b14325125",
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/companygraph/meta-model",
+        "url": "https://www.npmjs.com/package/@companygraph/meta-model"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Readme** — the meta-model's README at the version shown.\n- **Install** — the command that adds the package by its name.\n- **Version** — the newest version, which the newest release published.\n- **Provenance** — the repository, the commit and the workflow run a version was built from.\n- **Repository** — the GitHub repository the package's `repository` field names.\n- **License** — the license the package declares.\n- **Versions** — every version published, each one a release's tag.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- Every version after the first carries a provenance statement naming a commit of companygraph/meta-model and the run of `.github/workflows/publish.yml` that published it.\n- The newest version is the newest release on GitHub, or a release whose publish run is waiting for the owner.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "npm's trusted publishing",
+                  "https://docs.npmjs.com/trusted-publishers"
+                ],
+                [
+                  "npm's provenance statements",
+                  "https://docs.npmjs.com/generating-provenance-statements"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "npm's trusted publishing",
+                "https://docs.npmjs.com/trusted-publishers"
+              ],
+              [
+                "npm's provenance statements",
+                "https://docs.npmjs.com/generating-provenance-statements"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/npm-listing-of-the-meta-model.md"
+    },
+    {
       "id": "01a1256e-57e2-7acc-a706-3177ef8b8dac",
       "address": "system-kinds/deployment",
       "type": "system-kind",
@@ -51047,7 +51435,7 @@
     },
     {
       "from": "01a0f0b5-1390-73e6-94f7-d3b510a3dff4",
-      "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
+      "to": "01a0dd52-bc30-758e-b6d3-e7d5a97e7ea3",
       "via": "status",
       "attrs": {}
     },
@@ -60260,6 +60648,70 @@
     },
     {
       "from": "01a1bfd6-a6e3-785b-8152-baa0587c85fe",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0c2a7-ffa8-7577-a994-0e0200c78552",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0c202-d668-762c-9cde-906f08564df0",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0dd52-bc30-709c-9bbf-490d8a8458d6",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0dd52-bc30-778b-bfae-a5537c1aa209",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0f0b5-1390-73e6-94f7-d3b510a3dff4",
+      "via": "supersedes",
+      "attrs": {}
+    },
+    {
+      "from": "01a20e3d-f0cd-7b1a-a311-2bdbf8c93597",
+      "to": "01a0c1d6-f408-7169-9c29-264eba3008b2",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "01a20eda-c7f5-7d50-a0ed-5d9b14325125",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a20eda-c83d-75a4-b092-1958349eedc1",
+      "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a20eda-c885-759e-b0ef-c43751826c31",
       "to": "01a0c152-e370-7dbf-b79c-07c40a85b742",
       "via": "source",
       "attrs": {}
