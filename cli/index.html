@@ -274,9 +274,9 @@
   .steps pre + p{margin-top:.8rem}
   .steps code{font-size:.88em; color:var(--ink); background:var(--raise);
        border:1px solid var(--rule); border-radius:5px; padding:.05em .35em; white-space:nowrap}
-  /* A whole command quoted in a step is wider than a phone; it breaks where it must rather
-     than take the page sideways. */
-  .steps p code{white-space:normal; overflow-wrap:anywhere}
+  /* A whole command quoted in a step or in the note is wider than a phone; it breaks where it
+     must rather than take the page sideways. */
+  .steps p code, .note code{white-space:normal; overflow-wrap:anywhere}
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
