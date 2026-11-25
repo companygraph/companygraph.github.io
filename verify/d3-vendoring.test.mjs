@@ -3,7 +3,7 @@
 // beside stage.css and stage.js, because more than one page loads it.
 //
 // This is the whole of what was verify/instance.test.mjs. The other 21 tests were the instance
-// parser's, and they moved with the parser into companygraph-meta-model; a file called
+// parser's, and they moved with the parser into companygraph/meta-model; a file called
 // instance.test.mjs that tests d3 is how this repository's dependabot.yml came to describe the
 // wrong file. What is left is not a claim about a parser at all — it is site infrastructure,
 // and the name says so.

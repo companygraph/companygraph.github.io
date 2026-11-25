@@ -136,7 +136,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # After npm ci, and this is not cosmetic: build/build.mjs imports the parser from
-      # companygraph-meta-model, which is not on disk until then. Left above npm ci it fails
+      # @companygraph/meta-model, which is not on disk until then. Left above npm ci it fails
       # every push with ERR_MODULE_NOT_FOUND, and a local run cannot catch that, because
       # node_modules is already on the machine.
       - name: The artifacts still match the pinned commit
