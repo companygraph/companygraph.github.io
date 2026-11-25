@@ -16,10 +16,11 @@
 // target needs. No tarball, so nothing to untar, and no dependency. GITHUB_TOKEN is sent if
 // present and never printed.
 //
-// The parser comes from `companygraph-meta-model`, pinned by tag — the same repository this
-// script fetches `core/` and `example/` from, and the repository that defines the conventions
-// the parser implements. That is the point of it living there: its CI fails if it cites a rule
-// `core/CONVENTIONS.md` does not define, which nothing could check while the two were apart.
+// The parser comes from `@companygraph/meta-model`, pinned at a version and published from the
+// same repository this script fetches `core/` and `example/` from, the repository that defines
+// the conventions the parser implements. That is the point of it living there: its CI fails if
+// it cites a rule `core/CONVENTIONS.md` does not define, which nothing could check while the two
+// were apart.
 // (The data above is still pinned separately, by commit SHA in `source.json`. Moving that onto
 // the package too is a change of its own — a SHA is invisible to Dependabot, so a model change
 // reaches this site with no tripwire at all.)
@@ -27,10 +28,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { parseInstance, parseSchemas } from "companygraph-meta-model/instance";
+import { parseInstance, parseSchemas } from "@companygraph/meta-model/instance";
 import { readSchemas } from "./schemas.mjs";
-import { buildSnapshot } from "companygraph-mcp-server/snapshot";
-import { diagram } from "companygraph-mcp-server/diagram";
+import { buildSnapshot } from "@companygraph/mcp-server/snapshot";
+import { diagram } from "@companygraph/mcp-server/diagram";
 import { TALK_PICTURES, pictureOf, pictureJson } from "./talk-pictures.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));

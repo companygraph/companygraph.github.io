@@ -1,9 +1,9 @@
 {
   "pins": [
     { "kind": "conventions", "file": "conventions.json", "repo": "robertblust/conventions" },
-    { "kind": "npm-tag", "file": "package.json", "repo": "companygraph/meta-model", "after": ["npm run build", "npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] },
+    { "kind": "npm-version", "file": "package.json", "repo": "companygraph/meta-model", "after": ["npm run build", "npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] },
     { "kind": "npm-tag", "file": "package.json", "repo": "robertblust/design", "after": ["npm run design", "npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] },
-    { "kind": "npm-tag", "file": "package.json", "repo": "companygraph/mcp-server", "after": ["npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] },
+    { "kind": "npm-version", "file": "package.json", "repo": "companygraph/mcp-server", "after": ["npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] },
     { "kind": "source-commit", "file": "source.json", "repo": "companygraph/meta-model", "after": ["npm run build", "npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] },
     { "kind": "source-commit", "file": "source.json", "repo": "companygraph/mental-model", "after": ["npm run build", "npm run pages", "npm run pictures", "npm run pages", "npm run og", "npm run sitemap"] }
   ],
